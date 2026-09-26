@@ -74,6 +74,8 @@ func (l *parserLexer) Lex(lval *pgSymType) int {
 		lval.str = tok.Str
 	case ICONST:
 		lval.ival = tok.Ival
+	case PARAM:
+		lval.ival = tok.Ival
 	case FCONST, SCONST, BCONST, XCONST:
 		lval.str = tok.Str
 	case Op:
