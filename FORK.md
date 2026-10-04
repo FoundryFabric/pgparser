@@ -8,3 +8,4 @@ upstream ships the fix.
 | patch | file | pinned by |
 |---|---|---|
 | PARAM carries its `$N` number into the grammar's semantic value (every `ParamRef.Number` was 0) | `parser/parse.go` | `TestLexCarriesParamNumber` |
+| Identifiers of 64+ bytes, quoted or not, are truncated to at most 63 bytes on a UTF-8 character boundary (pg_mbcliplen), and each truncation is reported via `Lexer.Truncations` / `ParseWithTruncations` | `parser/lexer.go`, `parser/parse.go` | `TestLexerTruncatesIdentifiers`, `TestParseWithTruncationsReportsInSourceOrder` |

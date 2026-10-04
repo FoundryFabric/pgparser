@@ -231,16 +231,24 @@ func (e *ParseError) Error() string {
 
 // Parse parses the given SQL input and returns a list of statements.
 func Parse(input string) (*nodes.List, error) {
+	list, _, err := ParseWithTruncations(input)
+	return list, err
+}
+
+// ParseWithTruncations is Parse that also returns every identifier truncation
+// the lexer made, in source order, including those scanned before an error.
+func ParseWithTruncations(input string) (*nodes.List, []IdentTruncation, error) {
 	lexer := newParserLexer(input)
 	ret := pgParse(lexer)
+	truncations := lexer.lexer.Truncations
 
 	if lexer.err != nil {
-		return nil, lexer.err
+		return nil, truncations, lexer.err
 	}
 
 	if ret != 0 {
-		return nil, &ParseError{Message: fmt.Sprintf("parse error (ret=%d)", ret), Position: lexer.lexer.pos}
+		return nil, truncations, &ParseError{Message: fmt.Sprintf("parse error (ret=%d)", ret), Position: lexer.lexer.pos}
 	}
 
-	return lexer.result, nil
+	return lexer.result, truncations, nil
 }
