@@ -3,8 +3,6 @@
 
 package parser
 
-import "strings"
-
 // KeywordCategory represents the PostgreSQL keyword category.
 type KeywordCategory int
 
@@ -14,7 +12,6 @@ const (
 	TypeFuncNameKeyword
 	ReservedKeyword
 )
-
 
 // Keyword represents a PostgreSQL keyword.
 type Keyword struct {
@@ -528,9 +525,8 @@ var keywordMap = func() map[string]*Keyword {
 	return m
 }()
 
-// LookupKeyword looks up a keyword by name (case-insensitive).
-// Returns nil if not found.
+// LookupKeyword looks up a keyword by name, ignoring ASCII case only, as
+// PostgreSQL's ScanKeywordLookup does. Returns nil if not found.
 func LookupKeyword(name string) *Keyword {
-	return keywordMap[strings.ToLower(name)]
+	return keywordMap[downcase(name)]
 }
-

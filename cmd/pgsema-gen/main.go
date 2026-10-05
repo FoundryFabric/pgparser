@@ -10,7 +10,6 @@ import (
 	"fmt"
 	"os"
 	"regexp"
-	"strings"
 )
 
 var (
@@ -42,10 +41,10 @@ const (
 
 // Keyword represents a PostgreSQL keyword.
 type Keyword struct {
-	Name     string          // keyword text (lowercase)
-	Token    string          // token name in grammar
-	Category KeywordCategory
-	BareLable bool           // can be used as bare label
+	Name      string // keyword text (lowercase)
+	Token     string // token name in grammar
+	Category  KeywordCategory
+	BareLable bool // can be used as bare label
 }
 
 func generateKeywords(kwlistPath, outDir string) error {
@@ -133,16 +132,13 @@ func generateKeywords(kwlistPath, outDir string) error {
 	fmt.Fprintln(f, "")
 
 	// Write lookup function
-	fmt.Fprintln(f, "// LookupKeyword looks up a keyword by name (case-insensitive).")
-	fmt.Fprintln(f, "// Returns nil if not found.")
+	fmt.Fprintln(f, "// LookupKeyword looks up a keyword by name, ignoring ASCII case only, as")
+	fmt.Fprintln(f, "// PostgreSQL's ScanKeywordLookup does. Returns nil if not found.")
 	fmt.Fprintln(f, "func LookupKeyword(name string) *Keyword {")
-	fmt.Fprintln(f, "\treturn keywordMap[strings.ToLower(name)]")
+	fmt.Fprintln(f, "\treturn keywordMap[downcase(name)]")
 	fmt.Fprintln(f, "}")
-	fmt.Fprintln(f, "")
 
-	// Need to add strings import
-	// Re-read and add import
-	return addImport(outPath, "strings")
+	return nil
 }
 
 func parseKwlist(path string) ([]Keyword, error) {
@@ -191,29 +187,4 @@ func parseKwlist(path string) ([]Keyword, error) {
 	}
 
 	return keywords, scanner.Err()
-}
-
-func addImport(path, pkg string) error {
-	content, err := os.ReadFile(path)
-	if err != nil {
-		return err
-	}
-
-	// Find "package parser" line and add import after it
-	lines := strings.Split(string(content), "\n")
-	var result []string
-	for i, line := range lines {
-		result = append(result, line)
-		if strings.HasPrefix(line, "package ") {
-			// Add import after package line
-			result = append(result, "")
-			result = append(result, fmt.Sprintf("import %q", pkg))
-			// Skip the existing empty line if any
-			if i+1 < len(lines) && lines[i+1] == "" {
-				continue
-			}
-		}
-	}
-
-	return os.WriteFile(path, []byte(strings.Join(result, "\n")), 0644)
 }

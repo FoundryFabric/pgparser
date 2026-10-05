@@ -111,6 +111,10 @@ type Lexer struct {
 
 	// Error handling
 	Err error
+
+	// noticeHandler, when non-nil, receives each notice the lexer raises, in
+	// source order. Only Parse sets it, from WithNoticeHandler.
+	noticeHandler func(Notice)
 }
 
 // BackslashQuote values
@@ -257,7 +261,7 @@ func (l *Lexer) lexInitial() Token {
 		}
 		// Just 'U&' without quote - return 'u' as identifier
 		l.pos++
-		ident := l.downcase("u")
+		ident := downcase("u")
 		return Token{Type: lex_IDENT, Str: ident, Loc: l.start}
 	}
 
@@ -640,7 +644,7 @@ func (l *Lexer) lexQuoteContinue() Token {
 		}
 
 		// It's an identifier
-		return Token{Type: lex_IDENT, Str: decoded, Loc: l.start}
+		return Token{Type: lex_IDENT, Str: l.truncateIdentifier(decoded), Loc: l.start}
 	default:
 		return Token{Type: lex_SCONST, Str: str, Loc: l.start}
 	}
@@ -703,7 +707,7 @@ func (l *Lexer) lexDelimitedIdent() Token {
 				l.Err = fmt.Errorf("zero-length delimited identifier")
 				return Token{Type: lex_EOF, Loc: l.start}
 			}
-			return Token{Type: lex_IDENT, Str: str, Loc: l.start}
+			return Token{Type: lex_IDENT, Str: l.truncateIdentifier(str), Loc: l.start}
 		}
 
 		l.literalbuf.WriteByte(ch)
@@ -1064,19 +1068,92 @@ func (l *Lexer) lexIdent() Token {
 	}
 
 	// Convert to lowercase for non-keywords
-	ident = l.downcase(ident)
+	ident = downcase(ident)
 
-	// Truncate if too long
-	if len(ident) >= 63 { // NAMEDATALEN
-		ident = ident[:63]
-	}
-
-	return Token{Type: lex_IDENT, Str: ident, Loc: l.start}
+	return Token{Type: lex_IDENT, Str: l.truncateIdentifier(ident), Loc: l.start}
 }
 
-// downcase converts an identifier to lowercase.
-func (l *Lexer) downcase(s string) string {
-	return strings.ToLower(s)
+// namedatalen is PostgreSQL's NAMEDATALEN; identifiers keep at most
+// namedatalen-1 bytes.
+const namedatalen = 64
+
+// truncateIdentifier mirrors PostgreSQL's truncate_identifier: an identifier
+// of namedatalen bytes or more is clipped on a character boundary
+// (pg_mbcliplen) to at most namedatalen-1 bytes, and the clip is reported as
+// NOTICE 42622 (ERRCODE_NAME_TOO_LONG) with PostgreSQL's message text.
+func (l *Lexer) truncateIdentifier(ident string) string {
+	if len(ident) < namedatalen {
+		return ident
+	}
+	truncated := ident[:mbcliplen(ident, namedatalen-1)]
+	if l.noticeHandler != nil {
+		l.noticeHandler(Notice{
+			Code:    "42622",
+			Message: fmt.Sprintf("identifier \"%s\" will be truncated to \"%s\"", ident, truncated),
+		})
+	}
+	return truncated
+}
+
+// mbcliplen mirrors pg_mbcliplen for UTF-8: the byte length of the longest
+// prefix of whole characters, each sized by its lead byte as pg_utf_mblen
+// does, that fits in limit bytes.
+func mbcliplen(s string, limit int) int {
+	n := 0
+	for n < len(s) {
+		w := utf8MbLen(s[n])
+		if n+w > limit {
+			break
+		}
+		n += w
+	}
+	return n
+}
+
+// utf8MbLen mirrors pg_utf_mblen: a character's byte length from its lead
+// byte, with any byte that cannot lead a sequence counting as one.
+func utf8MbLen(b byte) int {
+	switch {
+	case b&0x80 == 0:
+		return 1
+	case b&0xe0 == 0xc0:
+		return 2
+	case b&0xf0 == 0xe0:
+		return 3
+	case b&0xf8 == 0xf0:
+		return 4
+	default:
+		return 1
+	}
+}
+
+// downcase mirrors PostgreSQL's downcase_identifier in a multibyte encoding
+// such as UTF-8: only ASCII 'A'..'Z' are lowercased, every other byte is
+// kept, so the byte length never changes. s is returned as is when it has no
+// ASCII uppercase letter.
+func downcase(s string) string {
+	i := 0
+	for i < len(s) && !isASCIIUpper(s[i]) {
+		i++
+	}
+	if i == len(s) {
+		return s
+	}
+	var b strings.Builder
+	b.Grow(len(s))
+	b.WriteString(s[:i])
+	for ; i < len(s); i++ {
+		c := s[i]
+		if isASCIIUpper(c) {
+			c += 'a' - 'A'
+		}
+		b.WriteByte(c)
+	}
+	return b.String()
+}
+
+func isASCIIUpper(c byte) bool {
+	return c >= 'A' && c <= 'Z'
 }
 
 // Character classification functions

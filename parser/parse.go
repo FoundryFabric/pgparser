@@ -229,9 +229,37 @@ func (e *ParseError) Error() string {
 	return e.Message
 }
 
+// Notice is a non-error message PostgreSQL would send while parsing, such as
+// NOTICE 42622 for a truncated identifier. Like PostgreSQL's, it carries no
+// position.
+type Notice struct {
+	Code    string // SQLSTATE
+	Message string // PostgreSQL's message text
+}
+
+// Option configures Parse.
+type Option func(*config)
+
+type config struct {
+	noticeHandler func(Notice)
+}
+
+// WithNoticeHandler makes Parse call f with each notice, in source order,
+// including notices raised before a parse error. Without it notices are
+// dropped; the parse itself is the same either way.
+func WithNoticeHandler(f func(Notice)) Option {
+	return func(c *config) { c.noticeHandler = f }
+}
+
 // Parse parses the given SQL input and returns a list of statements.
-func Parse(input string) (*nodes.List, error) {
+func Parse(input string, opts ...Option) (*nodes.List, error) {
+	var cfg config
+	for _, opt := range opts {
+		opt(&cfg)
+	}
+
 	lexer := newParserLexer(input)
+	lexer.lexer.noticeHandler = cfg.noticeHandler
 	ret := pgParse(lexer)
 
 	if lexer.err != nil {
