@@ -230,19 +230,18 @@ func (e *ParseError) Error() string {
 }
 
 // Notice is a non-error message PostgreSQL would send while parsing, such as
-// NOTICE 42622 for a truncated identifier.
+// NOTICE 42622 for a truncated identifier. Like PostgreSQL's, it carries no
+// position.
 type Notice struct {
-	Code     string // SQLSTATE
-	Message  string // PostgreSQL's message text
-	Location int    // byte offset in the input of the token that raised it
+	Code    string // SQLSTATE
+	Message string // PostgreSQL's message text
 }
 
 // Option configures Parse.
 type Option func(*config)
 
 type config struct {
-	noticeHandler             func(Notice)
-	standardConformingStrings bool
+	noticeHandler func(Notice)
 }
 
 // WithNoticeHandler makes Parse call f with each notice, in source order,
@@ -252,23 +251,15 @@ func WithNoticeHandler(f func(Notice)) Option {
 	return func(c *config) { c.noticeHandler = f }
 }
 
-// WithStandardConformingStrings sets the standard_conforming_strings setting
-// the lexer assumes (default on). When off, backslash is an escape in plain
-// '...' strings, as in E'...'.
-func WithStandardConformingStrings(on bool) Option {
-	return func(c *config) { c.standardConformingStrings = on }
-}
-
 // Parse parses the given SQL input and returns a list of statements.
 func Parse(input string, opts ...Option) (*nodes.List, error) {
-	cfg := config{standardConformingStrings: true}
+	var cfg config
 	for _, opt := range opts {
 		opt(&cfg)
 	}
 
 	lexer := newParserLexer(input)
-	lexer.lexer.NoticeHandler = cfg.noticeHandler
-	lexer.lexer.StandardConformingStrings = cfg.standardConformingStrings
+	lexer.lexer.noticeHandler = cfg.noticeHandler
 	ret := pgParse(lexer)
 
 	if lexer.err != nil {

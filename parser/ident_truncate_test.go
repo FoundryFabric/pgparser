@@ -9,18 +9,17 @@ import (
 )
 
 // truncNotice is the Notice PostgreSQL 16's truncate_identifier raises.
-func truncNotice(original, truncated string, loc int) Notice {
+func truncNotice(original, truncated string) Notice {
 	return Notice{
-		Code:     "42622",
-		Message:  `identifier "` + original + `" will be truncated to "` + truncated + `"`,
-		Location: loc,
+		Code:    "42622",
+		Message: `identifier "` + original + `" will be truncated to "` + truncated + `"`,
 	}
 }
 
 // TestLexerTruncatesIdentifiers pins PostgreSQL 16's truncate_identifier: an
 // identifier of NAMEDATALEN (64) bytes or more, quoted or not, is clipped to
 // at most 63 bytes on a UTF-8 character boundary (pg_mbcliplen), and each
-// clip is reported to the lexer's NoticeHandler. Unquoted identifiers are
+// clip is reported to the lexer's notice handler. Unquoted identifiers are
 // downcased first.
 func TestLexerTruncatesIdentifiers(t *testing.T) {
 	a := func(n int) string { return strings.Repeat("a", n) }
@@ -55,7 +54,7 @@ func TestLexerTruncatesIdentifiers(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			var got []Notice
 			lexer := NewLexer(tt.input)
-			lexer.NoticeHandler = func(n Notice) { got = append(got, n) }
+			lexer.noticeHandler = func(n Notice) { got = append(got, n) }
 			tok := lexer.NextToken()
 			if tok.Type != lex_IDENT {
 				t.Fatalf("expected token type IDENT, got %d (err %v)", tok.Type, lexer.Err)
@@ -65,7 +64,7 @@ func TestLexerTruncatesIdentifiers(t *testing.T) {
 			}
 			var want []Notice
 			if tt.truncated {
-				want = []Notice{truncNotice(tt.original, tt.want, 0)}
+				want = []Notice{truncNotice(tt.original, tt.want)}
 			}
 			if !reflect.DeepEqual(got, want) {
 				t.Errorf("notices = %+v, want %+v", got, want)
@@ -75,7 +74,7 @@ func TestLexerTruncatesIdentifiers(t *testing.T) {
 }
 
 // TestLexerTruncatesWithoutNoticeHandler pins that truncation does not depend
-// on a handler being set: a nil NoticeHandler still clips, and does not panic.
+// on a handler being set: a nil notice handler still clips, and does not panic.
 func TestLexerTruncatesWithoutNoticeHandler(t *testing.T) {
 	lexer := NewLexer(`"` + strings.Repeat("é", 40) + `"`)
 	tok := lexer.NextToken()
@@ -85,8 +84,8 @@ func TestLexerTruncatesWithoutNoticeHandler(t *testing.T) {
 }
 
 // TestParseNoticesInSourceOrder pins that WithNoticeHandler receives one
-// notice per truncated identifier, in source order, each at its token's byte
-// offset, and that the parse tree carries the truncated names.
+// notice per truncated identifier, in source order, with no position, and
+// that the parse tree carries the truncated names.
 func TestParseNoticesInSourceOrder(t *testing.T) {
 	col := strings.Repeat("C", 70)
 	tbl := strings.Repeat("é", 40)
@@ -99,9 +98,9 @@ func TestParseNoticesInSourceOrder(t *testing.T) {
 		t.Fatalf("Parse: %v", err)
 	}
 	want := []Notice{
-		truncNotice(strings.Repeat("c", 70), strings.Repeat("c", 63), strings.Index(sql, col)),
-		truncNotice(sch, strings.Repeat("s", 63), strings.Index(sql, sch)),
-		truncNotice(tbl, strings.Repeat("é", 31), strings.Index(sql, `"`+tbl)),
+		truncNotice(strings.Repeat("c", 70), strings.Repeat("c", 63)),
+		truncNotice(sch, strings.Repeat("s", 63)),
+		truncNotice(tbl, strings.Repeat("é", 31)),
 	}
 	if !reflect.DeepEqual(got, want) {
 		t.Errorf("notices = %+v\nwant %+v", got, want)
@@ -134,7 +133,7 @@ func TestParseNoticesBeforeError(t *testing.T) {
 	if err == nil {
 		t.Fatal("Parse: expected a syntax error")
 	}
-	want := []Notice{truncNotice(ident, ident[:63], len("SELECT "))}
+	want := []Notice{truncNotice(ident, ident[:63])}
 	if !reflect.DeepEqual(got, want) {
 		t.Errorf("notices = %+v, want %+v", got, want)
 	}
@@ -151,7 +150,7 @@ func TestParseNoticeBoundary(t *testing.T) {
 		}
 		var want []Notice
 		if n == 64 {
-			want = []Notice{truncNotice(ident, ident[:63], len("SELECT 1 AS "))}
+			want = []Notice{truncNotice(ident, ident[:63])}
 		}
 		if !reflect.DeepEqual(got, want) {
 			t.Errorf("%d bytes: notices = %+v, want %+v", n, got, want)
@@ -169,7 +168,7 @@ func TestParseMultibyteNotice(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Parse: %v", err)
 	}
-	want := []Notice{truncNotice(ident, ident[:62], len("SELECT 1 AS "))}
+	want := []Notice{truncNotice(ident, ident[:62])}
 	if !reflect.DeepEqual(got, want) {
 		t.Errorf("notices = %+v, want %+v", got, want)
 	}
@@ -197,32 +196,5 @@ func TestParseWithoutNoticeHandler(t *testing.T) {
 	}
 	if !reflect.DeepEqual(plain, observed) {
 		t.Errorf("trees differ:\nplain    %#v\nobserved %#v", plain, observed)
-	}
-}
-
-// TestParseStandardConformingStrings pins WithStandardConformingStrings:
-// on (the default) a backslash in '...' is literal; off, it is an escape as
-// in E'...'.
-func TestParseStandardConformingStrings(t *testing.T) {
-	tests := []struct {
-		name string
-		opts []Option
-		want string
-	}{
-		{"default on", nil, `a\nb`},
-		{"explicit on", []Option{WithStandardConformingStrings(true)}, `a\nb`},
-		{"off", []Option{WithStandardConformingStrings(false)}, "a\nb"},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			list, err := Parse(`SELECT 'a\nb'`, tt.opts...)
-			if err != nil {
-				t.Fatalf("Parse: %v", err)
-			}
-			c := list.Items[0].(*nodes.SelectStmt).TargetList.Items[0].(*nodes.ResTarget).Val.(*nodes.A_Const)
-			if got := c.Val.(*nodes.String).Str; got != tt.want {
-				t.Errorf("string = %q, want %q", got, tt.want)
-			}
-		})
 	}
 }

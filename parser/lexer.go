@@ -112,9 +112,9 @@ type Lexer struct {
 	// Error handling
 	Err error
 
-	// NoticeHandler, when non-nil, receives each notice the lexer raises, in
-	// source order. Parse sets it from WithNoticeHandler.
-	NoticeHandler func(Notice)
+	// noticeHandler, when non-nil, receives each notice the lexer raises, in
+	// source order. Only Parse sets it, from WithNoticeHandler.
+	noticeHandler func(Notice)
 }
 
 // BackslashQuote values
@@ -1086,11 +1086,10 @@ func (l *Lexer) truncateIdentifier(ident string) string {
 		return ident
 	}
 	truncated := ident[:mbcliplen(ident, namedatalen-1)]
-	if l.NoticeHandler != nil {
-		l.NoticeHandler(Notice{
-			Code:     "42622",
-			Message:  fmt.Sprintf("identifier \"%s\" will be truncated to \"%s\"", ident, truncated),
-			Location: l.start,
+	if l.noticeHandler != nil {
+		l.noticeHandler(Notice{
+			Code:    "42622",
+			Message: fmt.Sprintf("identifier \"%s\" will be truncated to \"%s\"", ident, truncated),
 		})
 	}
 	return truncated
