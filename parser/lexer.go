@@ -112,17 +112,9 @@ type Lexer struct {
 	// Error handling
 	Err error
 
-	// Truncations lists, in source order, each identifier this lexer shortened.
-	Truncations []IdentTruncation
-}
-
-// IdentTruncation is one identifier shortened to NAMEDATALEN-1 bytes, which
-// PostgreSQL reports as NOTICE 42622 `identifier "Original" will be truncated
-// to "Truncated"`. Original is downcased when the identifier was unquoted.
-type IdentTruncation struct {
-	Original  string
-	Truncated string
-	Loc       int // byte offset of the identifier's token
+	// NoticeHandler, when non-nil, receives each notice the lexer raises, in
+	// source order. Parse sets it from WithNoticeHandler.
+	NoticeHandler func(Notice)
 }
 
 // BackslashQuote values
@@ -1087,13 +1079,20 @@ const namedatalen = 64
 
 // truncateIdentifier mirrors PostgreSQL's truncate_identifier: an identifier
 // of namedatalen bytes or more is clipped on a character boundary
-// (pg_mbcliplen) to at most namedatalen-1 bytes, and the clip is recorded.
+// (pg_mbcliplen) to at most namedatalen-1 bytes, and the clip is reported as
+// NOTICE 42622 (ERRCODE_NAME_TOO_LONG) with PostgreSQL's message text.
 func (l *Lexer) truncateIdentifier(ident string) string {
 	if len(ident) < namedatalen {
 		return ident
 	}
 	truncated := ident[:mbcliplen(ident, namedatalen-1)]
-	l.Truncations = append(l.Truncations, IdentTruncation{Original: ident, Truncated: truncated, Loc: l.start})
+	if l.NoticeHandler != nil {
+		l.NoticeHandler(Notice{
+			Code:     "42622",
+			Message:  fmt.Sprintf("identifier \"%s\" will be truncated to \"%s\"", ident, truncated),
+			Location: l.start,
+		})
+	}
 	return truncated
 }
 

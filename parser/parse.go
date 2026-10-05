@@ -229,26 +229,55 @@ func (e *ParseError) Error() string {
 	return e.Message
 }
 
-// Parse parses the given SQL input and returns a list of statements.
-func Parse(input string) (*nodes.List, error) {
-	list, _, err := ParseWithTruncations(input)
-	return list, err
+// Notice is a non-error message PostgreSQL would send while parsing, such as
+// NOTICE 42622 for a truncated identifier.
+type Notice struct {
+	Code     string // SQLSTATE
+	Message  string // PostgreSQL's message text
+	Location int    // byte offset in the input of the token that raised it
 }
 
-// ParseWithTruncations is Parse that also returns every identifier truncation
-// the lexer made, in source order, including those scanned before an error.
-func ParseWithTruncations(input string) (*nodes.List, []IdentTruncation, error) {
+// Option configures Parse.
+type Option func(*config)
+
+type config struct {
+	noticeHandler             func(Notice)
+	standardConformingStrings bool
+}
+
+// WithNoticeHandler makes Parse call f with each notice, in source order,
+// including notices raised before a parse error. Without it notices are
+// dropped; the parse itself is the same either way.
+func WithNoticeHandler(f func(Notice)) Option {
+	return func(c *config) { c.noticeHandler = f }
+}
+
+// WithStandardConformingStrings sets the standard_conforming_strings setting
+// the lexer assumes (default on). When off, backslash is an escape in plain
+// '...' strings, as in E'...'.
+func WithStandardConformingStrings(on bool) Option {
+	return func(c *config) { c.standardConformingStrings = on }
+}
+
+// Parse parses the given SQL input and returns a list of statements.
+func Parse(input string, opts ...Option) (*nodes.List, error) {
+	cfg := config{standardConformingStrings: true}
+	for _, opt := range opts {
+		opt(&cfg)
+	}
+
 	lexer := newParserLexer(input)
+	lexer.lexer.NoticeHandler = cfg.noticeHandler
+	lexer.lexer.StandardConformingStrings = cfg.standardConformingStrings
 	ret := pgParse(lexer)
-	truncations := lexer.lexer.Truncations
 
 	if lexer.err != nil {
-		return nil, truncations, lexer.err
+		return nil, lexer.err
 	}
 
 	if ret != 0 {
-		return nil, truncations, &ParseError{Message: fmt.Sprintf("parse error (ret=%d)", ret), Position: lexer.lexer.pos}
+		return nil, &ParseError{Message: fmt.Sprintf("parse error (ret=%d)", ret), Position: lexer.lexer.pos}
 	}
 
-	return lexer.result, truncations, nil
+	return lexer.result, nil
 }
