@@ -261,7 +261,7 @@ func (l *Lexer) lexInitial() Token {
 		}
 		// Just 'U&' without quote - return 'u' as identifier
 		l.pos++
-		ident := l.downcase("u")
+		ident := downcase("u")
 		return Token{Type: lex_IDENT, Str: ident, Loc: l.start}
 	}
 
@@ -1068,7 +1068,7 @@ func (l *Lexer) lexIdent() Token {
 	}
 
 	// Convert to lowercase for non-keywords
-	ident = l.downcase(ident)
+	ident = downcase(ident)
 
 	return Token{Type: lex_IDENT, Str: l.truncateIdentifier(ident), Loc: l.start}
 }
@@ -1127,9 +1127,33 @@ func utf8MbLen(b byte) int {
 	}
 }
 
-// downcase converts an identifier to lowercase.
-func (l *Lexer) downcase(s string) string {
-	return strings.ToLower(s)
+// downcase mirrors PostgreSQL's downcase_identifier in a multibyte encoding
+// such as UTF-8: only ASCII 'A'..'Z' are lowercased, every other byte is
+// kept, so the byte length never changes. s is returned as is when it has no
+// ASCII uppercase letter.
+func downcase(s string) string {
+	i := 0
+	for i < len(s) && !isASCIIUpper(s[i]) {
+		i++
+	}
+	if i == len(s) {
+		return s
+	}
+	var b strings.Builder
+	b.Grow(len(s))
+	b.WriteString(s[:i])
+	for ; i < len(s); i++ {
+		c := s[i]
+		if isASCIIUpper(c) {
+			c += 'a' - 'A'
+		}
+		b.WriteByte(c)
+	}
+	return b.String()
+}
+
+func isASCIIUpper(c byte) bool {
+	return c >= 'A' && c <= 'Z'
 }
 
 // Character classification functions
