@@ -1,7 +1,7 @@
 // Package parser provides the public API for parsing PostgreSQL SQL.
 package parser
 
-//go:generate goyacc -o parser.go -p pg gram.y
+//go:generate go run golang.org/x/tools/cmd/goyacc@v0.40.0 -o parser.go -p pg gram.y
 
 import (
 	"fmt"
@@ -72,6 +72,10 @@ func (l *parserLexer) Lex(lval *pgSymType) int {
 		// Replace current token based on lookahead
 		tokType = l.applyLookahead(tokType, nextTokType)
 	}
+
+	// A token's location is its first byte, as Bison's @N is in PostgreSQL's
+	// gram.y; a nonterminal inherits its first symbol's.
+	lval.loc = nodes.ParseLoc(tok.Loc)
 
 	// Set semantic values based on token type
 	switch tokType {

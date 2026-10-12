@@ -31,6 +31,7 @@ import (
 	grpclause  *GroupClause    // for GROUP BY clause
 	keyaction  *KeyAction      // for FK key_action
 	keyactions *KeyActions     // for FK key_actions
+	loc        nodes.ParseLoc  // a token's byte offset, Token.Loc; a nonterminal's is its first symbol's, as Bison's @$ (goyacc copies $1 into $$ before each action)
 }
 
 // Token types from the lexer
@@ -1081,11 +1082,11 @@ InsertStmt:
 insert_target:
 	qualified_name
 		{
-			$$ = makeRangeVar($1)
+			$$ = makeRangeVar($1, $<loc>1)
 		}
 	| qualified_name AS ColId
 		{
-			rv := makeRangeVar($1)
+			rv := makeRangeVar($1, $<loc>1)
 			rv.(*nodes.RangeVar).Alias = &nodes.Alias{Aliasname: $3}
 			$$ = rv
 		}
@@ -1380,7 +1381,7 @@ relation_expr_opt_alias:
 CreateStmt:
 	CREATE OptTemp TABLE qualified_name '(' OptTableElementList ')' OptInherit OptPartitionSpec OptAccessMethod OptWith OnCommitOption OptTableSpace
 		{
-			rv := makeRangeVar($4)
+			rv := makeRangeVar($4, $<loc>4)
 			rv.(*nodes.RangeVar).Relpersistence = relpersistenceForTemp($2)
 			$$ = &nodes.CreateStmt{
 				Relation:       rv.(*nodes.RangeVar),
@@ -1395,7 +1396,7 @@ CreateStmt:
 		}
 	| CREATE OptTemp TABLE IF_P NOT EXISTS qualified_name '(' OptTableElementList ')' OptInherit OptPartitionSpec OptAccessMethod OptWith OnCommitOption OptTableSpace
 		{
-			rv := makeRangeVar($7)
+			rv := makeRangeVar($7, $<loc>7)
 			rv.(*nodes.RangeVar).Relpersistence = relpersistenceForTemp($2)
 			$$ = &nodes.CreateStmt{
 				Relation:       rv.(*nodes.RangeVar),
@@ -1411,9 +1412,9 @@ CreateStmt:
 		}
 	| CREATE OptTemp TABLE qualified_name PARTITION OF qualified_name ForValues OptPartitionSpec OptAccessMethod OptWith OnCommitOption OptTableSpace
 		{
-			rv := makeRangeVar($4)
+			rv := makeRangeVar($4, $<loc>4)
 			rv.(*nodes.RangeVar).Relpersistence = relpersistenceForTemp($2)
-			inh := makeRangeVar($7)
+			inh := makeRangeVar($7, $<loc>7)
 			$$ = &nodes.CreateStmt{
 				Relation:       rv.(*nodes.RangeVar),
 				InhRelations:   makeList(inh),
@@ -1427,9 +1428,9 @@ CreateStmt:
 		}
 	| CREATE OptTemp TABLE IF_P NOT EXISTS qualified_name PARTITION OF qualified_name ForValues OptPartitionSpec OptAccessMethod OptWith OnCommitOption OptTableSpace
 		{
-			rv := makeRangeVar($7)
+			rv := makeRangeVar($7, $<loc>7)
 			rv.(*nodes.RangeVar).Relpersistence = relpersistenceForTemp($2)
-			inh := makeRangeVar($10)
+			inh := makeRangeVar($10, $<loc>10)
 			$$ = &nodes.CreateStmt{
 				Relation:       rv.(*nodes.RangeVar),
 				InhRelations:   makeList(inh),
@@ -1444,9 +1445,9 @@ CreateStmt:
 		}
 	| CREATE OptTemp TABLE qualified_name PARTITION OF qualified_name '(' TypedTableElementList ')' ForValues OptPartitionSpec OptAccessMethod OptWith OnCommitOption OptTableSpace
 		{
-			rv := makeRangeVar($4)
+			rv := makeRangeVar($4, $<loc>4)
 			rv.(*nodes.RangeVar).Relpersistence = relpersistenceForTemp($2)
-			inh := makeRangeVar($7)
+			inh := makeRangeVar($7, $<loc>7)
 			$$ = &nodes.CreateStmt{
 				Relation:       rv.(*nodes.RangeVar),
 				TableElts:      $9,
@@ -1461,9 +1462,9 @@ CreateStmt:
 		}
 	| CREATE OptTemp TABLE IF_P NOT EXISTS qualified_name PARTITION OF qualified_name '(' TypedTableElementList ')' ForValues OptPartitionSpec OptAccessMethod OptWith OnCommitOption OptTableSpace
 		{
-			rv := makeRangeVar($7)
+			rv := makeRangeVar($7, $<loc>7)
 			rv.(*nodes.RangeVar).Relpersistence = relpersistenceForTemp($2)
-			inh := makeRangeVar($10)
+			inh := makeRangeVar($10, $<loc>10)
 			$$ = &nodes.CreateStmt{
 				Relation:       rv.(*nodes.RangeVar),
 				TableElts:      $12,
@@ -1480,7 +1481,7 @@ CreateStmt:
 	/* CREATE TABLE OF typename */
 	| CREATE OptTemp TABLE qualified_name OF any_name OptTypedTableElementList OptAccessMethod OptWith OnCommitOption OptTableSpace
 		{
-			rv := makeRangeVar($4)
+			rv := makeRangeVar($4, $<loc>4)
 			rv.(*nodes.RangeVar).Relpersistence = relpersistenceForTemp($2)
 			tn := makeTypeNameFromNameList($6).(*nodes.TypeName)
 			$$ = &nodes.CreateStmt{
@@ -1495,7 +1496,7 @@ CreateStmt:
 		}
 	| CREATE OptTemp TABLE IF_P NOT EXISTS qualified_name OF any_name OptTypedTableElementList OptAccessMethod OptWith OnCommitOption OptTableSpace
 		{
-			rv := makeRangeVar($7)
+			rv := makeRangeVar($7, $<loc>7)
 			rv.(*nodes.RangeVar).Relpersistence = relpersistenceForTemp($2)
 			tn := makeTypeNameFromNameList($9).(*nodes.TypeName)
 			$$ = &nodes.CreateStmt{
@@ -1742,13 +1743,13 @@ TableLikeClause:
 	LIKE qualified_name
 		{
 			$$ = &nodes.TableLikeClause{
-				Relation: makeRangeVar($2).(*nodes.RangeVar),
+				Relation: makeRangeVar($2, $<loc>2).(*nodes.RangeVar),
 			}
 		}
 	| LIKE qualified_name TableLikeOptionList
 		{
 			$$ = &nodes.TableLikeClause{
-				Relation: makeRangeVar($2).(*nodes.RangeVar),
+				Relation: makeRangeVar($2, $<loc>2).(*nodes.RangeVar),
 				Options:  uint32($3),
 			}
 		}
@@ -1933,7 +1934,7 @@ ColConstraintElem:
 		}
 	| REFERENCES qualified_name opt_column_list key_match key_actions ConstraintAttributeSpec
 		{
-			rv := makeRangeVar($2)
+			rv := makeRangeVar($2, $<loc>2)
 			n := &nodes.Constraint{
 				Contype:        nodes.CONSTR_FOREIGN,
 				Pktable:        rv.(*nodes.RangeVar),
@@ -2101,7 +2102,7 @@ ConstraintElem:
 		}
 	| FOREIGN KEY '(' columnList ')' REFERENCES qualified_name opt_column_list key_match key_actions ConstraintAttributeSpec
 		{
-			rv := makeRangeVar($7)
+			rv := makeRangeVar($7, $<loc>7)
 			n := &nodes.Constraint{
 				Contype:        nodes.CONSTR_FOREIGN,
 				FkAttrs:        $4,
@@ -2249,7 +2250,7 @@ AlterTableStmt:
 		}
 	| ALTER INDEX qualified_name alter_table_cmds
 		{
-			rv := makeRangeVarFromAnyName($3)
+			rv := makeRangeVarFromAnyName($3, $<loc>3)
 			$$ = &nodes.AlterTableStmt{
 				Relation: rv,
 				Cmds:     $4,
@@ -2258,7 +2259,7 @@ AlterTableStmt:
 		}
 	| ALTER INDEX IF_P EXISTS qualified_name alter_table_cmds
 		{
-			rv := makeRangeVarFromAnyName($5)
+			rv := makeRangeVarFromAnyName($5, $<loc>5)
 			$$ = &nodes.AlterTableStmt{
 				Relation:   rv,
 				Cmds:       $6,
@@ -2268,8 +2269,8 @@ AlterTableStmt:
 		}
 	| ALTER INDEX qualified_name ATTACH PARTITION qualified_name
 		{
-			rvIdx := makeRangeVarFromAnyName($3)
-			rvPart := makeRangeVar($6)
+			rvIdx := makeRangeVarFromAnyName($3, $<loc>3)
+			rvPart := makeRangeVar($6, $<loc>6)
 			cmd := &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_AttachPartition),
 				Def:     &nodes.PartitionCmd{
@@ -2284,7 +2285,7 @@ AlterTableStmt:
 		}
 	| ALTER SEQUENCE qualified_name alter_table_cmds
 		{
-			rv := makeRangeVarFromAnyName($3)
+			rv := makeRangeVarFromAnyName($3, $<loc>3)
 			$$ = &nodes.AlterTableStmt{
 				Relation: rv,
 				Cmds:     $4,
@@ -2293,7 +2294,7 @@ AlterTableStmt:
 		}
 	| ALTER SEQUENCE IF_P EXISTS qualified_name alter_table_cmds
 		{
-			rv := makeRangeVarFromAnyName($5)
+			rv := makeRangeVarFromAnyName($5, $<loc>5)
 			$$ = &nodes.AlterTableStmt{
 				Relation:   rv,
 				Cmds:       $6,
@@ -2303,7 +2304,7 @@ AlterTableStmt:
 		}
 	| ALTER VIEW qualified_name alter_table_cmds
 		{
-			rv := makeRangeVarFromAnyName($3)
+			rv := makeRangeVarFromAnyName($3, $<loc>3)
 			$$ = &nodes.AlterTableStmt{
 				Relation: rv,
 				Cmds:     $4,
@@ -2312,7 +2313,7 @@ AlterTableStmt:
 		}
 	| ALTER VIEW IF_P EXISTS qualified_name alter_table_cmds
 		{
-			rv := makeRangeVarFromAnyName($5)
+			rv := makeRangeVarFromAnyName($5, $<loc>5)
 			$$ = &nodes.AlterTableStmt{
 				Relation:   rv,
 				Cmds:       $6,
@@ -2322,7 +2323,7 @@ AlterTableStmt:
 		}
 	| ALTER MATERIALIZED VIEW qualified_name alter_table_cmds
 		{
-			rv := makeRangeVarFromAnyName($4)
+			rv := makeRangeVarFromAnyName($4, $<loc>4)
 			$$ = &nodes.AlterTableStmt{
 				Relation: rv,
 				Cmds:     $5,
@@ -2331,7 +2332,7 @@ AlterTableStmt:
 		}
 	| ALTER MATERIALIZED VIEW IF_P EXISTS qualified_name alter_table_cmds
 		{
-			rv := makeRangeVarFromAnyName($6)
+			rv := makeRangeVarFromAnyName($6, $<loc>6)
 			$$ = &nodes.AlterTableStmt{
 				Relation:   rv,
 				Cmds:       $7,
@@ -2685,7 +2686,7 @@ alter_table_cmd:
 	/* INHERIT / NO INHERIT */
 	| INHERIT qualified_name
 		{
-			rv := makeRangeVar($2)
+			rv := makeRangeVar($2, $<loc>2)
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_AddInherit),
 				Def:     rv,
@@ -2693,7 +2694,7 @@ alter_table_cmd:
 		}
 	| NO INHERIT qualified_name
 		{
-			rv := makeRangeVar($3)
+			rv := makeRangeVar($3, $<loc>3)
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_DropInherit),
 				Def:     rv,
@@ -2702,7 +2703,7 @@ alter_table_cmd:
 	/* ATTACH / DETACH PARTITION */
 	| ATTACH PARTITION qualified_name ForValues
 		{
-			rv := makeRangeVar($3)
+			rv := makeRangeVar($3, $<loc>3)
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_AttachPartition),
 				Def:     &nodes.PartitionCmd{
@@ -2713,7 +2714,7 @@ alter_table_cmd:
 		}
 	| DETACH PARTITION qualified_name
 		{
-			rv := makeRangeVar($3)
+			rv := makeRangeVar($3, $<loc>3)
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_DetachPartition),
 				Def:     &nodes.PartitionCmd{
@@ -2723,7 +2724,7 @@ alter_table_cmd:
 		}
 	| DETACH PARTITION qualified_name CONCURRENTLY
 		{
-			rv := makeRangeVar($3)
+			rv := makeRangeVar($3, $<loc>3)
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_DetachPartition),
 				Def:     &nodes.PartitionCmd{
@@ -2734,7 +2735,7 @@ alter_table_cmd:
 		}
 	| DETACH PARTITION qualified_name FINALIZE
 		{
-			rv := makeRangeVar($3)
+			rv := makeRangeVar($3, $<loc>3)
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_DetachPartitionFinalize),
 				Def:     &nodes.PartitionCmd{
@@ -2998,7 +2999,7 @@ alter_table_cmd:
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetStatistics),
 				Name:    $3,
-				Def:     makeIntConst($6),
+				Def:     makeIntConst($6, -1),
 			}
 		}
 	| ALTER ColId SET STATISTICS SignedIconst
@@ -3006,7 +3007,7 @@ alter_table_cmd:
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetStatistics),
 				Name:    $2,
-				Def:     makeIntConst($5),
+				Def:     makeIntConst($5, -1),
 			}
 		}
 	| ALTER COLUMN Iconst SET STATISTICS SignedIconst
@@ -3014,7 +3015,7 @@ alter_table_cmd:
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetStatistics),
 				Num:     int16($3),
-				Def:     makeIntConst($6),
+				Def:     makeIntConst($6, -1),
 			}
 		}
 	| ALTER Iconst SET STATISTICS SignedIconst
@@ -3022,7 +3023,7 @@ alter_table_cmd:
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetStatistics),
 				Num:     int16($2),
-				Def:     makeIntConst($5),
+				Def:     makeIntConst($5, -1),
 			}
 		}
 	/* SET COMPRESSION */
@@ -3322,7 +3323,7 @@ RenameStmt:
 	/* RENAME INDEX */
 	| ALTER INDEX qualified_name RENAME TO name
 		{
-			rv := makeRangeVarFromAnyName($3)
+			rv := makeRangeVarFromAnyName($3, $<loc>3)
 			$$ = &nodes.RenameStmt{
 				RenameType: nodes.OBJECT_INDEX,
 				Relation:   rv,
@@ -3331,7 +3332,7 @@ RenameStmt:
 		}
 	| ALTER INDEX IF_P EXISTS qualified_name RENAME TO name
 		{
-			rv := makeRangeVarFromAnyName($5)
+			rv := makeRangeVarFromAnyName($5, $<loc>5)
 			$$ = &nodes.RenameStmt{
 				RenameType: nodes.OBJECT_INDEX,
 				Relation:   rv,
@@ -3342,7 +3343,7 @@ RenameStmt:
 	/* RENAME SEQUENCE */
 	| ALTER SEQUENCE qualified_name RENAME TO name
 		{
-			rv := makeRangeVarFromAnyName($3)
+			rv := makeRangeVarFromAnyName($3, $<loc>3)
 			$$ = &nodes.RenameStmt{
 				RenameType: nodes.OBJECT_SEQUENCE,
 				Relation:   rv,
@@ -3351,7 +3352,7 @@ RenameStmt:
 		}
 	| ALTER SEQUENCE IF_P EXISTS qualified_name RENAME TO name
 		{
-			rv := makeRangeVarFromAnyName($5)
+			rv := makeRangeVarFromAnyName($5, $<loc>5)
 			$$ = &nodes.RenameStmt{
 				RenameType: nodes.OBJECT_SEQUENCE,
 				Relation:   rv,
@@ -3362,7 +3363,7 @@ RenameStmt:
 	/* RENAME VIEW */
 	| ALTER VIEW qualified_name RENAME TO name
 		{
-			rv := makeRangeVarFromAnyName($3)
+			rv := makeRangeVarFromAnyName($3, $<loc>3)
 			$$ = &nodes.RenameStmt{
 				RenameType: nodes.OBJECT_VIEW,
 				Relation:   rv,
@@ -3371,7 +3372,7 @@ RenameStmt:
 		}
 	| ALTER VIEW IF_P EXISTS qualified_name RENAME TO name
 		{
-			rv := makeRangeVarFromAnyName($5)
+			rv := makeRangeVarFromAnyName($5, $<loc>5)
 			$$ = &nodes.RenameStmt{
 				RenameType: nodes.OBJECT_VIEW,
 				Relation:   rv,
@@ -3381,7 +3382,7 @@ RenameStmt:
 		}
 	| ALTER VIEW qualified_name RENAME COLUMN ColId TO name
 		{
-			rv := makeRangeVarFromAnyName($3)
+			rv := makeRangeVarFromAnyName($3, $<loc>3)
 			$$ = &nodes.RenameStmt{
 				RenameType:   nodes.OBJECT_COLUMN,
 				RelationType: nodes.OBJECT_VIEW,
@@ -3392,7 +3393,7 @@ RenameStmt:
 		}
 	| ALTER VIEW qualified_name RENAME ColId TO name
 		{
-			rv := makeRangeVarFromAnyName($3)
+			rv := makeRangeVarFromAnyName($3, $<loc>3)
 			$$ = &nodes.RenameStmt{
 				RenameType:   nodes.OBJECT_COLUMN,
 				RelationType: nodes.OBJECT_VIEW,
@@ -3404,7 +3405,7 @@ RenameStmt:
 	/* RENAME MATERIALIZED VIEW */
 	| ALTER MATERIALIZED VIEW qualified_name RENAME TO name
 		{
-			rv := makeRangeVarFromAnyName($4)
+			rv := makeRangeVarFromAnyName($4, $<loc>4)
 			$$ = &nodes.RenameStmt{
 				RenameType: nodes.OBJECT_MATVIEW,
 				Relation:   rv,
@@ -3413,7 +3414,7 @@ RenameStmt:
 		}
 	| ALTER MATERIALIZED VIEW IF_P EXISTS qualified_name RENAME TO name
 		{
-			rv := makeRangeVarFromAnyName($6)
+			rv := makeRangeVarFromAnyName($6, $<loc>6)
 			$$ = &nodes.RenameStmt{
 				RenameType: nodes.OBJECT_MATVIEW,
 				Relation:   rv,
@@ -3423,7 +3424,7 @@ RenameStmt:
 		}
 	| ALTER MATERIALIZED VIEW qualified_name RENAME COLUMN ColId TO name
 		{
-			rv := makeRangeVarFromAnyName($4)
+			rv := makeRangeVarFromAnyName($4, $<loc>4)
 			$$ = &nodes.RenameStmt{
 				RenameType:   nodes.OBJECT_COLUMN,
 				RelationType: nodes.OBJECT_MATVIEW,
@@ -3434,7 +3435,7 @@ RenameStmt:
 		}
 	| ALTER MATERIALIZED VIEW qualified_name RENAME ColId TO name
 		{
-			rv := makeRangeVarFromAnyName($4)
+			rv := makeRangeVarFromAnyName($4, $<loc>4)
 			$$ = &nodes.RenameStmt{
 				RenameType:   nodes.OBJECT_COLUMN,
 				RelationType: nodes.OBJECT_MATVIEW,
@@ -3554,7 +3555,7 @@ RenameStmt:
 			$$ = &nodes.RenameStmt{
 				RenameType:   nodes.OBJECT_ATTRIBUTE,
 				RelationType: nodes.OBJECT_TYPE,
-				Relation:     makeRangeVarFromAnyName($3),
+				Relation:     makeRangeVarFromAnyName($3, $<loc>3),
 				Subname:      $6,
 				Newname:      $8,
 				Behavior:     nodes.DropBehavior($9),
@@ -3692,7 +3693,7 @@ RenameStmt:
 		{
 			$$ = &nodes.RenameStmt{
 				RenameType: nodes.OBJECT_RULE,
-				Relation:   makeRangeVarFromAnyName($5),
+				Relation:   makeRangeVarFromAnyName($5, $<loc>5),
 				Subname:    $3,
 				Newname:    $8,
 			}
@@ -3702,7 +3703,7 @@ RenameStmt:
 		{
 			$$ = &nodes.RenameStmt{
 				RenameType: nodes.OBJECT_TRIGGER,
-				Relation:   makeRangeVarFromAnyName($5),
+				Relation:   makeRangeVarFromAnyName($5, $<loc>5),
 				Subname:    $3,
 				Newname:    $8,
 			}
@@ -3730,7 +3731,7 @@ RenameStmt:
 		{
 			$$ = &nodes.RenameStmt{
 				RenameType: nodes.OBJECT_POLICY,
-				Relation:   makeRangeVarFromAnyName($5),
+				Relation:   makeRangeVarFromAnyName($5, $<loc>5),
 				Subname:    $3,
 				Newname:    $8,
 			}
@@ -4327,7 +4328,7 @@ ViewStmt:
 	CREATE OptTemp VIEW qualified_name opt_column_list opt_reloptions
 	AS SelectStmt opt_check_option
 		{
-			rv := makeRangeVar($4).(*nodes.RangeVar)
+			rv := makeRangeVar($4, $<loc>4).(*nodes.RangeVar)
 			rv.Relpersistence = relpersistenceForTemp($2)
 			$$ = &nodes.ViewStmt{
 				View:            rv,
@@ -4340,7 +4341,7 @@ ViewStmt:
 	| CREATE OR REPLACE OptTemp VIEW qualified_name opt_column_list opt_reloptions
 	AS SelectStmt opt_check_option
 		{
-			rv := makeRangeVar($6).(*nodes.RangeVar)
+			rv := makeRangeVar($6, $<loc>6).(*nodes.RangeVar)
 			rv.Relpersistence = relpersistenceForTemp($4)
 			$$ = &nodes.ViewStmt{
 				View:            rv,
@@ -4354,7 +4355,7 @@ ViewStmt:
 	| CREATE OptTemp RECURSIVE VIEW qualified_name '(' columnList ')' opt_reloptions
 	AS SelectStmt opt_check_option
 		{
-			rv := makeRangeVar($5).(*nodes.RangeVar)
+			rv := makeRangeVar($5, $<loc>5).(*nodes.RangeVar)
 			rv.Relpersistence = relpersistenceForTemp($2)
 			/* Create a WITH RECURSIVE CTE wrapper */
 			cte := &nodes.CommonTableExpr{
@@ -4371,7 +4372,7 @@ ViewStmt:
 				Location: -1,
 			}
 			rt := &nodes.ResTarget{Val: cr, Location: -1}
-			fromRv := &nodes.RangeVar{Relname: rv.Relname, Inh: true, Relpersistence: 'p'}
+			fromRv := &nodes.RangeVar{Relname: rv.Relname, Inh: true, Relpersistence: 'p', Location: -1}
 			sel := &nodes.SelectStmt{
 				TargetList: makeList(rt),
 				FromClause: makeList(fromRv),
@@ -4388,7 +4389,7 @@ ViewStmt:
 	| CREATE OR REPLACE OptTemp RECURSIVE VIEW qualified_name '(' columnList ')' opt_reloptions
 	AS SelectStmt opt_check_option
 		{
-			rv := makeRangeVar($7).(*nodes.RangeVar)
+			rv := makeRangeVar($7, $<loc>7).(*nodes.RangeVar)
 			rv.Relpersistence = relpersistenceForTemp($4)
 			cte := &nodes.CommonTableExpr{
 				Ctename:      rv.Relname,
@@ -4404,7 +4405,7 @@ ViewStmt:
 				Location: -1,
 			}
 			rt := &nodes.ResTarget{Val: cr, Location: -1}
-			fromRv := &nodes.RangeVar{Relname: rv.Relname, Inh: true, Relpersistence: 'p'}
+			fromRv := &nodes.RangeVar{Relname: rv.Relname, Inh: true, Relpersistence: 'p', Location: -1}
 			sel := &nodes.SelectStmt{
 				TargetList: makeList(rt),
 				FromClause: makeList(fromRv),
@@ -6791,7 +6792,7 @@ schema_stmt:
 CreateSeqStmt:
 	CREATE OptTemp SEQUENCE qualified_name OptSeqOptList
 		{
-			rv := makeRangeVar($4)
+			rv := makeRangeVar($4, $<loc>4)
 			rv.(*nodes.RangeVar).Relpersistence = relpersistenceForTemp($2)
 			$$ = &nodes.CreateSeqStmt{
 				Sequence: rv.(*nodes.RangeVar),
@@ -6800,7 +6801,7 @@ CreateSeqStmt:
 		}
 	| CREATE OptTemp SEQUENCE IF_P NOT EXISTS qualified_name OptSeqOptList
 		{
-			rv := makeRangeVar($7)
+			rv := makeRangeVar($7, $<loc>7)
 			rv.(*nodes.RangeVar).Relpersistence = relpersistenceForTemp($2)
 			$$ = &nodes.CreateSeqStmt{
 				Sequence:    rv.(*nodes.RangeVar),
@@ -6813,7 +6814,7 @@ CreateSeqStmt:
 AlterSeqStmt:
 	ALTER SEQUENCE qualified_name SeqOptList
 		{
-			rv := makeRangeVar($3)
+			rv := makeRangeVar($3, $<loc>3)
 			$$ = &nodes.AlterSeqStmt{
 				Sequence: rv.(*nodes.RangeVar),
 				Options:  $4,
@@ -6821,7 +6822,7 @@ AlterSeqStmt:
 		}
 	| ALTER SEQUENCE IF_P EXISTS qualified_name SeqOptList
 		{
-			rv := makeRangeVar($5)
+			rv := makeRangeVar($5, $<loc>5)
 			$$ = &nodes.AlterSeqStmt{
 				Sequence:  rv.(*nodes.RangeVar),
 				Options:   $6,
@@ -6946,7 +6947,7 @@ alter_identity_column_option:
 		}
 	| SET GENERATED generated_when
 		{
-			$$ = makeDefElem("generated", makeIntConst($3))
+			$$ = makeDefElem("generated", makeIntConst($3, -1))
 		}
 	;
 
@@ -7116,7 +7117,7 @@ AlterCompositeTypeStmt:
 		{
 			rv := &nodes.RangeVar{
 				Inh:     true,
-				Location: -1,
+				Location: $<loc>3,
 			}
 			/* Convert any_name to schema.rel */
 			names := $3
@@ -7364,7 +7365,7 @@ CompositeTypeStmt:
 	CREATE TYPE_P any_name AS '(' OptTableFuncElementList ')'
 		{
 			$$ = &nodes.CompositeTypeStmt{
-				Typevar:    makeRangeVarFromAnyName($3),
+				Typevar:    makeRangeVarFromAnyName($3, $<loc>3),
 				Coldeflist: $6,
 			}
 		}
@@ -7984,8 +7985,8 @@ opt_cycle_clause:
 			$$ = &nodes.CTECycleClause{
 				CycleColList:     $2,
 				CycleMarkColumn:  $4,
-				CycleMarkValue:   makeBoolAConst(1),
-				CycleMarkDefault: makeBoolAConst(0),
+				CycleMarkValue:   makeBoolAConst(1, -1),
+				CycleMarkDefault: makeBoolAConst(0, -1),
 				CyclePathColumn:  $6,
 				Location:         -1,
 			}
@@ -8010,15 +8011,15 @@ into_clause:
 	;
 
 OptTempTableName:
-	TEMPORARY opt_table qualified_name  { rv := makeRangeVar($3); rv.(*nodes.RangeVar).Relpersistence = 't'; $$ = rv }
-	| TEMP opt_table qualified_name     { rv := makeRangeVar($3); rv.(*nodes.RangeVar).Relpersistence = 't'; $$ = rv }
-	| LOCAL TEMPORARY opt_table qualified_name  { rv := makeRangeVar($4); rv.(*nodes.RangeVar).Relpersistence = 't'; $$ = rv }
-	| LOCAL TEMP opt_table qualified_name  { rv := makeRangeVar($4); rv.(*nodes.RangeVar).Relpersistence = 't'; $$ = rv }
-	| GLOBAL TEMPORARY opt_table qualified_name  { rv := makeRangeVar($4); rv.(*nodes.RangeVar).Relpersistence = 't'; $$ = rv }
-	| GLOBAL TEMP opt_table qualified_name  { rv := makeRangeVar($4); rv.(*nodes.RangeVar).Relpersistence = 't'; $$ = rv }
-	| UNLOGGED opt_table qualified_name  { rv := makeRangeVar($3); rv.(*nodes.RangeVar).Relpersistence = 'u'; $$ = rv }
-	| TABLE qualified_name  { $$ = makeRangeVar($2) }
-	| qualified_name        { $$ = makeRangeVar($1) }
+	TEMPORARY opt_table qualified_name  { rv := makeRangeVar($3, $<loc>3); rv.(*nodes.RangeVar).Relpersistence = 't'; $$ = rv }
+	| TEMP opt_table qualified_name     { rv := makeRangeVar($3, $<loc>3); rv.(*nodes.RangeVar).Relpersistence = 't'; $$ = rv }
+	| LOCAL TEMPORARY opt_table qualified_name  { rv := makeRangeVar($4, $<loc>4); rv.(*nodes.RangeVar).Relpersistence = 't'; $$ = rv }
+	| LOCAL TEMP opt_table qualified_name  { rv := makeRangeVar($4, $<loc>4); rv.(*nodes.RangeVar).Relpersistence = 't'; $$ = rv }
+	| GLOBAL TEMPORARY opt_table qualified_name  { rv := makeRangeVar($4, $<loc>4); rv.(*nodes.RangeVar).Relpersistence = 't'; $$ = rv }
+	| GLOBAL TEMP opt_table qualified_name  { rv := makeRangeVar($4, $<loc>4); rv.(*nodes.RangeVar).Relpersistence = 't'; $$ = rv }
+	| UNLOGGED opt_table qualified_name  { rv := makeRangeVar($3, $<loc>3); rv.(*nodes.RangeVar).Relpersistence = 'u'; $$ = rv }
+	| TABLE qualified_name  { $$ = makeRangeVar($2, $<loc>2) }
+	| qualified_name        { $$ = makeRangeVar($1, $<loc>1) }
 	;
 
 target_list:
@@ -8057,7 +8058,8 @@ target_el:
 		{
 			$$ = &nodes.ResTarget{
 				Val: &nodes.ColumnRef{
-					Fields: &nodes.List{Items: []nodes.Node{&nodes.A_Star{}}},
+					Fields:   &nodes.List{Items: []nodes.Node{&nodes.A_Star{}}},
+					Location: $<loc>1,
 				},
 			}
 		}
@@ -8274,23 +8276,23 @@ join_using_alias:
 relation_expr:
 	qualified_name
 		{
-			$$ = makeRangeVar($1)
+			$$ = makeRangeVar($1, $<loc>1)
 		}
 	| qualified_name '*'
 		{
-			rv := makeRangeVar($1)
+			rv := makeRangeVar($1, $<loc>1)
 			rv.(*nodes.RangeVar).Inh = true
 			$$ = rv
 		}
 	| ONLY qualified_name
 		{
-			rv := makeRangeVar($2)
+			rv := makeRangeVar($2, $<loc>2)
 			rv.(*nodes.RangeVar).Inh = false
 			$$ = rv
 		}
 	| ONLY '(' qualified_name ')'
 		{
-			rv := makeRangeVar($3)
+			rv := makeRangeVar($3, $<loc>3)
 			rv.(*nodes.RangeVar).Inh = false
 			$$ = rv
 		}
@@ -8589,14 +8591,14 @@ limit_clause:
 	| FETCH first_or_next row_or_rows ONLY
 		{
 			$$ = &SelectLimit{
-				LimitCount:  makeIntConst(1),
+				LimitCount:  makeIntConst(1, -1),
 				LimitOption: nodes.LIMIT_OPTION_COUNT,
 			}
 		}
 	| FETCH first_or_next row_or_rows WITH TIES
 		{
 			$$ = &SelectLimit{
-				LimitCount:  makeIntConst(1),
+				LimitCount:  makeIntConst(1, -1),
 				LimitOption: nodes.LIMIT_OPTION_WITH_TIES,
 			}
 		}
@@ -8624,7 +8626,7 @@ select_limit_value:
 	| ALL
 		{
 			/* LIMIT ALL is represented as a NULL constant */
-			$$ = &nodes.A_Const{Isnull: true}
+			$$ = &nodes.A_Const{Isnull: true, Location: $<loc>1}
 		}
 	;
 
@@ -8640,7 +8642,7 @@ select_fetch_first_value:
 		}
 	| '-' c_expr
 		{
-			$$ = doNegate($2)
+			$$ = doNegate($2, $<loc>1)
 		}
 	;
 
@@ -8701,59 +8703,59 @@ a_expr:
 	c_expr { $$ = $1 }
 	| a_expr '+' a_expr
 		{
-			$$ = makeAExpr(nodes.AEXPR_OP, "+", $1, $3)
+			$$ = makeAExpr(nodes.AEXPR_OP, "+", $1, $3, $<loc>2)
 		}
 	| a_expr '-' a_expr
 		{
-			$$ = makeAExpr(nodes.AEXPR_OP, "-", $1, $3)
+			$$ = makeAExpr(nodes.AEXPR_OP, "-", $1, $3, $<loc>2)
 		}
 	| a_expr '*' a_expr
 		{
-			$$ = makeAExpr(nodes.AEXPR_OP, "*", $1, $3)
+			$$ = makeAExpr(nodes.AEXPR_OP, "*", $1, $3, $<loc>2)
 		}
 	| a_expr '/' a_expr
 		{
-			$$ = makeAExpr(nodes.AEXPR_OP, "/", $1, $3)
+			$$ = makeAExpr(nodes.AEXPR_OP, "/", $1, $3, $<loc>2)
 		}
 	| a_expr '%' a_expr
 		{
-			$$ = makeAExpr(nodes.AEXPR_OP, "%", $1, $3)
+			$$ = makeAExpr(nodes.AEXPR_OP, "%", $1, $3, $<loc>2)
 		}
 	| a_expr '^' a_expr
 		{
-			$$ = makeAExpr(nodes.AEXPR_OP, "^", $1, $3)
+			$$ = makeAExpr(nodes.AEXPR_OP, "^", $1, $3, $<loc>2)
 		}
 	| a_expr '<' a_expr
 		{
-			$$ = makeAExpr(nodes.AEXPR_OP, "<", $1, $3)
+			$$ = makeAExpr(nodes.AEXPR_OP, "<", $1, $3, $<loc>2)
 		}
 	| a_expr '>' a_expr
 		{
-			$$ = makeAExpr(nodes.AEXPR_OP, ">", $1, $3)
+			$$ = makeAExpr(nodes.AEXPR_OP, ">", $1, $3, $<loc>2)
 		}
 	| a_expr '=' a_expr
 		{
-			$$ = makeAExpr(nodes.AEXPR_OP, "=", $1, $3)
+			$$ = makeAExpr(nodes.AEXPR_OP, "=", $1, $3, $<loc>2)
 		}
 	| a_expr LESS_EQUALS a_expr
 		{
-			$$ = makeAExpr(nodes.AEXPR_OP, "<=", $1, $3)
+			$$ = makeAExpr(nodes.AEXPR_OP, "<=", $1, $3, $<loc>2)
 		}
 	| a_expr GREATER_EQUALS a_expr
 		{
-			$$ = makeAExpr(nodes.AEXPR_OP, ">=", $1, $3)
+			$$ = makeAExpr(nodes.AEXPR_OP, ">=", $1, $3, $<loc>2)
 		}
 	| a_expr NOT_EQUALS a_expr
 		{
-			$$ = makeAExpr(nodes.AEXPR_OP, "<>", $1, $3)
+			$$ = makeAExpr(nodes.AEXPR_OP, "<>", $1, $3, $<loc>2)
 		}
 	| a_expr qual_Op a_expr				%prec Op
 		{
-			$$ = makeAExprFromList(nodes.AEXPR_OP, $2, $1, $3)
+			$$ = makeAExprFromList(nodes.AEXPR_OP, $2, $1, $3, $<loc>2)
 		}
 	| qual_Op a_expr					%prec Op
 		{
-			$$ = makeAExprFromList(nodes.AEXPR_OP, $1, nil, $2)
+			$$ = makeAExprFromList(nodes.AEXPR_OP, $1, nil, $2, $<loc>1)
 		}
 	| a_expr AND a_expr
 		{
@@ -8843,11 +8845,11 @@ a_expr:
 		}
 	| a_expr IS DISTINCT FROM a_expr           %prec IS
 		{
-			$$ = makeAExpr(nodes.AEXPR_DISTINCT, "=", $1, $5)
+			$$ = makeAExpr(nodes.AEXPR_DISTINCT, "=", $1, $5, $<loc>2)
 		}
 	| a_expr IS NOT DISTINCT FROM a_expr       %prec IS
 		{
-			$$ = makeAExpr(nodes.AEXPR_NOT_DISTINCT, "=", $1, $6)
+			$$ = makeAExpr(nodes.AEXPR_NOT_DISTINCT, "=", $1, $6, $<loc>2)
 		}
 	| row OVERLAPS row
 		{
@@ -8867,7 +8869,7 @@ a_expr:
 				Funcname:       makeFuncName("overlaps"),
 				Args:           args,
 				FuncFormat:     int(nodes.COERCE_SQL_SYNTAX),
-				Location:       -1,
+				Location:       $<loc>2,
 			}
 		}
 	| a_expr IS DOCUMENT_P                             %prec IS
@@ -8908,41 +8910,41 @@ a_expr:
 		{
 			$$ = &nodes.FuncCall{
 				Funcname:   makeFuncName("pg_catalog", "is_normalized"),
-				Args:       makeList2($1, makeStringConst($3)),
+				Args:       makeList2($1, makeStringConst($3, $<loc>3)),
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
-				Location:   -1,
+				Location:   $<loc>2,
 			}
 		}
 	| a_expr IS NOT unicode_normal_form NORMALIZED                %prec IS
 		{
 			$$ = makeNotExpr(&nodes.FuncCall{
 				Funcname:   makeFuncName("pg_catalog", "is_normalized"),
-				Args:       makeList2($1, makeStringConst($4)),
+				Args:       makeList2($1, makeStringConst($4, $<loc>4)),
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
-				Location:   -1,
+				Location:   $<loc>2,
 			})
 		}
 	| a_expr IS NORMALIZED                                        %prec IS
 		{
 			$$ = &nodes.FuncCall{
 				Funcname:   makeFuncName("pg_catalog", "is_normalized"),
-				Args:       makeList2($1, makeStringConst("NFC")),
+				Args:       makeList2($1, makeStringConst("NFC", -1)),
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
-				Location:   -1,
+				Location:   $<loc>2,
 			}
 		}
 	| a_expr IS NOT NORMALIZED                                    %prec IS
 		{
 			$$ = makeNotExpr(&nodes.FuncCall{
 				Funcname:   makeFuncName("pg_catalog", "is_normalized"),
-				Args:       makeList2($1, makeStringConst("NFC")),
+				Args:       makeList2($1, makeStringConst("NFC", -1)),
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
-				Location:   -1,
+				Location:   $<loc>2,
 			})
 		}
 	| a_expr LIKE a_expr                              %prec LIKE
 		{
-			$$ = makeAExpr(nodes.AEXPR_LIKE, "~~", $1, $3)
+			$$ = makeAExpr(nodes.AEXPR_LIKE, "~~", $1, $3, $<loc>2)
 		}
 	| a_expr LIKE a_expr ESCAPE a_expr                 %prec LIKE
 		{
@@ -8950,13 +8952,13 @@ a_expr:
 				Funcname:   makeFuncName("pg_catalog", "like_escape"),
 				Args:       makeList2($3, $5),
 				FuncFormat: int(nodes.COERCE_EXPLICIT_CALL),
-				Location:   -1,
+				Location:   $<loc>2,
 			}
-			$$ = makeAExpr(nodes.AEXPR_LIKE, "~~", $1, esc)
+			$$ = makeAExpr(nodes.AEXPR_LIKE, "~~", $1, esc, $<loc>2)
 		}
 	| a_expr NOT_LA LIKE a_expr                        %prec NOT_LA
 		{
-			$$ = makeAExpr(nodes.AEXPR_LIKE, "!~~", $1, $4)
+			$$ = makeAExpr(nodes.AEXPR_LIKE, "!~~", $1, $4, $<loc>2)
 		}
 	| a_expr NOT_LA LIKE a_expr ESCAPE a_expr          %prec NOT_LA
 		{
@@ -8964,13 +8966,13 @@ a_expr:
 				Funcname:   makeFuncName("pg_catalog", "like_escape"),
 				Args:       makeList2($4, $6),
 				FuncFormat: int(nodes.COERCE_EXPLICIT_CALL),
-				Location:   -1,
+				Location:   $<loc>2,
 			}
-			$$ = makeAExpr(nodes.AEXPR_LIKE, "!~~", $1, esc)
+			$$ = makeAExpr(nodes.AEXPR_LIKE, "!~~", $1, esc, $<loc>2)
 		}
 	| a_expr ILIKE a_expr                              %prec ILIKE
 		{
-			$$ = makeAExpr(nodes.AEXPR_ILIKE, "~~*", $1, $3)
+			$$ = makeAExpr(nodes.AEXPR_ILIKE, "~~*", $1, $3, $<loc>2)
 		}
 	| a_expr ILIKE a_expr ESCAPE a_expr                %prec ILIKE
 		{
@@ -8978,13 +8980,13 @@ a_expr:
 				Funcname:   makeFuncName("pg_catalog", "like_escape"),
 				Args:       makeList2($3, $5),
 				FuncFormat: int(nodes.COERCE_EXPLICIT_CALL),
-				Location:   -1,
+				Location:   $<loc>2,
 			}
-			$$ = makeAExpr(nodes.AEXPR_ILIKE, "~~*", $1, esc)
+			$$ = makeAExpr(nodes.AEXPR_ILIKE, "~~*", $1, esc, $<loc>2)
 		}
 	| a_expr NOT_LA ILIKE a_expr                       %prec NOT_LA
 		{
-			$$ = makeAExpr(nodes.AEXPR_ILIKE, "!~~*", $1, $4)
+			$$ = makeAExpr(nodes.AEXPR_ILIKE, "!~~*", $1, $4, $<loc>2)
 		}
 	| a_expr NOT_LA ILIKE a_expr ESCAPE a_expr         %prec NOT_LA
 		{
@@ -8992,9 +8994,9 @@ a_expr:
 				Funcname:   makeFuncName("pg_catalog", "like_escape"),
 				Args:       makeList2($4, $6),
 				FuncFormat: int(nodes.COERCE_EXPLICIT_CALL),
-				Location:   -1,
+				Location:   $<loc>2,
 			}
-			$$ = makeAExpr(nodes.AEXPR_ILIKE, "!~~*", $1, esc)
+			$$ = makeAExpr(nodes.AEXPR_ILIKE, "!~~*", $1, esc, $<loc>2)
 		}
 	| a_expr SIMILAR TO a_expr                         %prec SIMILAR
 		{
@@ -9002,9 +9004,9 @@ a_expr:
 				Funcname:   makeFuncName("pg_catalog", "similar_to_escape"),
 				Args:       makeList($4),
 				FuncFormat: int(nodes.COERCE_EXPLICIT_CALL),
-				Location:   -1,
+				Location:   $<loc>2,
 			}
-			$$ = makeAExpr(nodes.AEXPR_SIMILAR, "~", $1, esc)
+			$$ = makeAExpr(nodes.AEXPR_SIMILAR, "~", $1, esc, $<loc>2)
 		}
 	| a_expr SIMILAR TO a_expr ESCAPE a_expr           %prec SIMILAR
 		{
@@ -9012,9 +9014,9 @@ a_expr:
 				Funcname:   makeFuncName("pg_catalog", "similar_to_escape"),
 				Args:       makeList2($4, $6),
 				FuncFormat: int(nodes.COERCE_EXPLICIT_CALL),
-				Location:   -1,
+				Location:   $<loc>2,
 			}
-			$$ = makeAExpr(nodes.AEXPR_SIMILAR, "~", $1, esc)
+			$$ = makeAExpr(nodes.AEXPR_SIMILAR, "~", $1, esc, $<loc>2)
 		}
 	| a_expr NOT_LA SIMILAR TO a_expr                  %prec NOT_LA
 		{
@@ -9022,9 +9024,9 @@ a_expr:
 				Funcname:   makeFuncName("pg_catalog", "similar_to_escape"),
 				Args:       makeList($5),
 				FuncFormat: int(nodes.COERCE_EXPLICIT_CALL),
-				Location:   -1,
+				Location:   $<loc>2,
 			}
-			$$ = makeAExpr(nodes.AEXPR_SIMILAR, "!~", $1, esc)
+			$$ = makeAExpr(nodes.AEXPR_SIMILAR, "!~", $1, esc, $<loc>2)
 		}
 	| a_expr NOT_LA SIMILAR TO a_expr ESCAPE a_expr    %prec NOT_LA
 		{
@@ -9032,37 +9034,37 @@ a_expr:
 				Funcname:   makeFuncName("pg_catalog", "similar_to_escape"),
 				Args:       makeList2($5, $7),
 				FuncFormat: int(nodes.COERCE_EXPLICIT_CALL),
-				Location:   -1,
+				Location:   $<loc>2,
 			}
-			$$ = makeAExpr(nodes.AEXPR_SIMILAR, "!~", $1, esc)
+			$$ = makeAExpr(nodes.AEXPR_SIMILAR, "!~", $1, esc, $<loc>2)
 		}
 	| a_expr BETWEEN opt_asymmetric b_expr AND a_expr  %prec BETWEEN
 		{
 			$$ = makeAExpr(nodes.AEXPR_BETWEEN, "BETWEEN", $1,
-				&nodes.List{Items: []nodes.Node{$4, $6}})
+				&nodes.List{Items: []nodes.Node{$4, $6}}, $<loc>2)
 		}
 	| a_expr NOT_LA BETWEEN opt_asymmetric b_expr AND a_expr %prec NOT_LA
 		{
 			$$ = makeAExpr(nodes.AEXPR_NOT_BETWEEN, "NOT BETWEEN", $1,
-				&nodes.List{Items: []nodes.Node{$5, $7}})
+				&nodes.List{Items: []nodes.Node{$5, $7}}, $<loc>2)
 		}
 	| a_expr BETWEEN SYMMETRIC b_expr AND a_expr       %prec BETWEEN
 		{
 			$$ = makeAExpr(nodes.AEXPR_BETWEEN_SYM, "BETWEEN SYMMETRIC", $1,
-				&nodes.List{Items: []nodes.Node{$4, $6}})
+				&nodes.List{Items: []nodes.Node{$4, $6}}, $<loc>2)
 		}
 	| a_expr NOT_LA BETWEEN SYMMETRIC b_expr AND a_expr %prec NOT_LA
 		{
 			$$ = makeAExpr(nodes.AEXPR_NOT_BETWEEN_SYM, "NOT BETWEEN SYMMETRIC", $1,
-				&nodes.List{Items: []nodes.Node{$5, $7}})
+				&nodes.List{Items: []nodes.Node{$5, $7}}, $<loc>2)
 		}
 	| a_expr IN_P '(' expr_list ')'
 		{
-			$$ = makeAExpr(nodes.AEXPR_IN, "=", $1, makeListNode($4))
+			$$ = makeAExpr(nodes.AEXPR_IN, "=", $1, makeListNode($4), $<loc>2)
 		}
 	| a_expr NOT_LA IN_P '(' expr_list ')'             %prec NOT_LA
 		{
-			$$ = makeAExpr(nodes.AEXPR_IN, "<>", $1, makeListNode($5))
+			$$ = makeAExpr(nodes.AEXPR_IN, "<>", $1, makeListNode($5), $<loc>2)
 		}
 	| a_expr IN_P select_with_parens
 		{
@@ -9100,7 +9102,7 @@ a_expr:
 			if $3 == int64(nodes.ALL_SUBLINK) {
 				kind = nodes.AEXPR_OP_ALL
 			}
-			$$ = makeAExprFromList(kind, $2, $1, $5)
+			$$ = makeAExprFromList(kind, $2, $1, $5, $<loc>2)
 		}
 	| UNIQUE opt_unique_null_treatment select_with_parens
 		{
@@ -9121,7 +9123,7 @@ a_expr:
 				Funcname:   makeFuncName("pg_catalog", "timezone"),
 				Args:       makeList2($5, $1),
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
-				Location:   -1,
+				Location:   $<loc>2,
 			}
 		}
 	| a_expr AT LOCAL                                  %prec AT
@@ -9130,7 +9132,7 @@ a_expr:
 				Funcname:   makeFuncName("pg_catalog", "timezone"),
 				Args:       makeList($1),
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
-				Location:   -1,
+				Location:   $<loc>2,
 			}
 		}
 	| DEFAULT
@@ -9160,7 +9162,7 @@ a_expr:
 			$$ = &nodes.TypeCast{
 				Arg:      $1,
 				TypeName: $3,
-				Location: -1,
+				Location: $<loc>2,
 			}
 		}
 	| '+' a_expr %prec UMINUS
@@ -9169,7 +9171,7 @@ a_expr:
 		}
 	| '-' a_expr %prec UMINUS
 		{
-			$$ = doNegate($2)
+			$$ = doNegate($2, $<loc>1)
 		}
 	;
 
@@ -9345,67 +9347,67 @@ b_expr:
 	c_expr { $$ = $1 }
 	| b_expr '+' b_expr
 		{
-			$$ = makeAExpr(nodes.AEXPR_OP, "+", $1, $3)
+			$$ = makeAExpr(nodes.AEXPR_OP, "+", $1, $3, $<loc>2)
 		}
 	| b_expr '-' b_expr
 		{
-			$$ = makeAExpr(nodes.AEXPR_OP, "-", $1, $3)
+			$$ = makeAExpr(nodes.AEXPR_OP, "-", $1, $3, $<loc>2)
 		}
 	| b_expr '*' b_expr
 		{
-			$$ = makeAExpr(nodes.AEXPR_OP, "*", $1, $3)
+			$$ = makeAExpr(nodes.AEXPR_OP, "*", $1, $3, $<loc>2)
 		}
 	| b_expr '/' b_expr
 		{
-			$$ = makeAExpr(nodes.AEXPR_OP, "/", $1, $3)
+			$$ = makeAExpr(nodes.AEXPR_OP, "/", $1, $3, $<loc>2)
 		}
 	| b_expr '%' b_expr
 		{
-			$$ = makeAExpr(nodes.AEXPR_OP, "%", $1, $3)
+			$$ = makeAExpr(nodes.AEXPR_OP, "%", $1, $3, $<loc>2)
 		}
 	| b_expr '^' b_expr
 		{
-			$$ = makeAExpr(nodes.AEXPR_OP, "^", $1, $3)
+			$$ = makeAExpr(nodes.AEXPR_OP, "^", $1, $3, $<loc>2)
 		}
 	| b_expr '<' b_expr
 		{
-			$$ = makeAExpr(nodes.AEXPR_OP, "<", $1, $3)
+			$$ = makeAExpr(nodes.AEXPR_OP, "<", $1, $3, $<loc>2)
 		}
 	| b_expr '>' b_expr
 		{
-			$$ = makeAExpr(nodes.AEXPR_OP, ">", $1, $3)
+			$$ = makeAExpr(nodes.AEXPR_OP, ">", $1, $3, $<loc>2)
 		}
 	| b_expr '=' b_expr
 		{
-			$$ = makeAExpr(nodes.AEXPR_OP, "=", $1, $3)
+			$$ = makeAExpr(nodes.AEXPR_OP, "=", $1, $3, $<loc>2)
 		}
 	| b_expr LESS_EQUALS b_expr
 		{
-			$$ = makeAExpr(nodes.AEXPR_OP, "<=", $1, $3)
+			$$ = makeAExpr(nodes.AEXPR_OP, "<=", $1, $3, $<loc>2)
 		}
 	| b_expr GREATER_EQUALS b_expr
 		{
-			$$ = makeAExpr(nodes.AEXPR_OP, ">=", $1, $3)
+			$$ = makeAExpr(nodes.AEXPR_OP, ">=", $1, $3, $<loc>2)
 		}
 	| b_expr NOT_EQUALS b_expr
 		{
-			$$ = makeAExpr(nodes.AEXPR_OP, "<>", $1, $3)
+			$$ = makeAExpr(nodes.AEXPR_OP, "<>", $1, $3, $<loc>2)
 		}
 	| b_expr qual_Op b_expr					%prec Op
 		{
-			$$ = makeAExprFromList(nodes.AEXPR_OP, $2, $1, $3)
+			$$ = makeAExprFromList(nodes.AEXPR_OP, $2, $1, $3, $<loc>2)
 		}
 	| qual_Op b_expr						%prec Op
 		{
-			$$ = makeAExprFromList(nodes.AEXPR_OP, $1, nil, $2)
+			$$ = makeAExprFromList(nodes.AEXPR_OP, $1, nil, $2, $<loc>1)
 		}
 	| b_expr IS DISTINCT FROM b_expr		%prec IS
 		{
-			$$ = makeAExpr(nodes.AEXPR_DISTINCT, "=", $1, $5)
+			$$ = makeAExpr(nodes.AEXPR_DISTINCT, "=", $1, $5, $<loc>2)
 		}
 	| b_expr IS NOT DISTINCT FROM b_expr	%prec IS
 		{
-			$$ = makeAExpr(nodes.AEXPR_NOT_DISTINCT, "=", $1, $6)
+			$$ = makeAExpr(nodes.AEXPR_NOT_DISTINCT, "=", $1, $6, $<loc>2)
 		}
 	| b_expr IS DOCUMENT_P					%prec IS
 		{
@@ -9428,7 +9430,7 @@ b_expr:
 			$$ = &nodes.TypeCast{
 				Arg:      $1,
 				TypeName: $3,
-				Location: -1,
+				Location: $<loc>2,
 			}
 		}
 	| '+' b_expr %prec UMINUS
@@ -9437,7 +9439,7 @@ b_expr:
 		}
 	| '-' b_expr %prec UMINUS
 		{
-			$$ = doNegate($2)
+			$$ = doNegate($2, $<loc>1)
 		}
 	;
 
@@ -9448,7 +9450,7 @@ c_expr:
 		{
 			p := &nodes.ParamRef{
 				Number:   int($1),
-				Location: -1,
+				Location: $<loc>1,
 			}
 			if $2 != nil {
 				$$ = &nodes.A_Indirection{
@@ -9706,12 +9708,14 @@ func_application:
 		{
 			$$ = &nodes.FuncCall{
 				Funcname: $1,
+				Location: $<loc>1,
 			}
 		}
 	| func_name '(' func_arg_list opt_sort_clause ')'
 		{
 			n := &nodes.FuncCall{
 				Funcname: $1,
+				Location: $<loc>1,
 				Args:     $3,
 			}
 			if $4 != nil {
@@ -9723,6 +9727,7 @@ func_application:
 		{
 			$$ = &nodes.FuncCall{
 				Funcname:     $1,
+				Location:     $<loc>1,
 				Args:         makeList($4),
 				FuncVariadic: true,
 				AggOrder:     $5,
@@ -9732,6 +9737,7 @@ func_application:
 		{
 			$$ = &nodes.FuncCall{
 				Funcname:     $1,
+				Location:     $<loc>1,
 				Args:         appendList($3, $6),
 				FuncVariadic: true,
 				AggOrder:     $7,
@@ -9741,6 +9747,7 @@ func_application:
 		{
 			$$ = &nodes.FuncCall{
 				Funcname: $1,
+				Location: $<loc>1,
 				AggStar:  true,
 			}
 		}
@@ -9748,6 +9755,7 @@ func_application:
 		{
 			$$ = &nodes.FuncCall{
 				Funcname:    $1,
+				Location:    $<loc>1,
 				Args:        $4,
 				AggDistinct: true,
 				AggOrder:    $5,
@@ -9757,6 +9765,7 @@ func_application:
 		{
 			n := &nodes.FuncCall{
 				Funcname: $1,
+				Location: $<loc>1,
 				Args:     $4,
 			}
 			if $5 != nil {
@@ -9778,7 +9787,7 @@ func_expr_common_subexpr:
 				Funcname:   makeFuncName("pg_catalog", "pg_collation_for"),
 				Args:       makeList($4),
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 		}
 	| CURRENT_DATE
@@ -9834,7 +9843,7 @@ func_expr_common_subexpr:
 			$$ = &nodes.FuncCall{
 				Funcname:   makeFuncName("pg_catalog", "system_user"),
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 		}
 	| USER
@@ -9851,11 +9860,11 @@ func_expr_common_subexpr:
 		}
 	| CAST '(' a_expr AS Typename ')'
 		{
-			$$ = makeTypeCast($3, $5)
+			$$ = makeTypeCast($3, $5, $<loc>1)
 		}
 	| NULLIF '(' a_expr ',' a_expr ')'
 		{
-			$$ = makeAExpr(nodes.AEXPR_NULLIF, "=", $3, $5)
+			$$ = makeAExpr(nodes.AEXPR_NULLIF, "=", $3, $5, $<loc>1)
 		}
 	| COALESCE '(' expr_list ')'
 		{
@@ -9886,7 +9895,7 @@ func_expr_common_subexpr:
 				Funcname:   makeFuncName("pg_catalog", "extract"),
 				Args:       $3,
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 		}
 	| NORMALIZE '(' a_expr ')'
@@ -9895,16 +9904,16 @@ func_expr_common_subexpr:
 				Funcname:   makeFuncName("pg_catalog", "normalize"),
 				Args:       makeList($3),
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 		}
 	| NORMALIZE '(' a_expr ',' unicode_normal_form ')'
 		{
 			$$ = &nodes.FuncCall{
 				Funcname:   makeFuncName("pg_catalog", "normalize"),
-				Args:       makeList2($3, makeStringConst($5)),
+				Args:       makeList2($3, makeStringConst($5, $<loc>5)),
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 		}
 	| OVERLAY '(' overlay_list ')'
@@ -9913,7 +9922,7 @@ func_expr_common_subexpr:
 				Funcname:   makeFuncName("pg_catalog", "overlay"),
 				Args:       $3,
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 		}
 	| OVERLAY '(' func_arg_list_opt ')'
@@ -9922,7 +9931,7 @@ func_expr_common_subexpr:
 				Funcname:   makeFuncName("overlay"),
 				Args:       $3,
 				FuncFormat: int(nodes.COERCE_EXPLICIT_CALL),
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 		}
 	| POSITION '(' position_list ')'
@@ -9931,7 +9940,7 @@ func_expr_common_subexpr:
 				Funcname:   makeFuncName("pg_catalog", "position"),
 				Args:       $3,
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 		}
 	| SUBSTRING '(' substr_list ')'
@@ -9940,7 +9949,7 @@ func_expr_common_subexpr:
 				Funcname:   makeFuncName("pg_catalog", "substring"),
 				Args:       $3,
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 		}
 	| SUBSTRING '(' func_arg_list_opt ')'
@@ -9949,7 +9958,7 @@ func_expr_common_subexpr:
 				Funcname:   makeFuncName("substring"),
 				Args:       $3,
 				FuncFormat: int(nodes.COERCE_EXPLICIT_CALL),
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 		}
 	| TREAT '(' a_expr AS Typename ')'
@@ -9967,7 +9976,7 @@ func_expr_common_subexpr:
 				Funcname:   makeFuncName("pg_catalog", funcName),
 				Args:       makeList($3),
 				FuncFormat: int(nodes.COERCE_EXPLICIT_CALL),
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 		}
 	| TRIM '(' BOTH trim_list ')'
@@ -9976,7 +9985,7 @@ func_expr_common_subexpr:
 				Funcname:   makeFuncName("pg_catalog", "btrim"),
 				Args:       $4,
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 		}
 	| TRIM '(' LEADING trim_list ')'
@@ -9985,7 +9994,7 @@ func_expr_common_subexpr:
 				Funcname:   makeFuncName("pg_catalog", "ltrim"),
 				Args:       $4,
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 		}
 	| TRIM '(' TRAILING trim_list ')'
@@ -9994,7 +10003,7 @@ func_expr_common_subexpr:
 				Funcname:   makeFuncName("pg_catalog", "rtrim"),
 				Args:       $4,
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 		}
 	| TRIM '(' trim_list ')'
@@ -10003,7 +10012,7 @@ func_expr_common_subexpr:
 				Funcname:   makeFuncName("pg_catalog", "btrim"),
 				Args:       $3,
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 		}
 	| GROUPING '(' expr_list ')'
@@ -10064,7 +10073,7 @@ func_expr_common_subexpr:
 				Funcname:   makeFuncName("pg_catalog", "xmlexists"),
 				Args:       makeList2($3, $4),
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 		}
 	| XMLFOREST '(' xml_attribute_list ')'
@@ -10079,7 +10088,7 @@ func_expr_common_subexpr:
 		{
 			x := &nodes.XmlExpr{
 				Op:       nodes.IS_XMLPARSE,
-				Args:     makeList2($4, makeBoolAConst($5)),
+				Args:     makeList2($4, makeBoolAConst($5, -1)),
 				Xmloption: nodes.XmlOptionType($3),
 				Location: -1,
 			}
@@ -10128,7 +10137,7 @@ func_expr_common_subexpr:
 				Funcname:   makeFuncName("pg_catalog", "json_object"),
 				Args:       $3,
 				FuncFormat: int(nodes.COERCE_EXPLICIT_CALL),
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 		}
 	| JSON_OBJECT '(' json_name_and_value_list json_object_constructor_null_clause_opt
@@ -10246,7 +10255,7 @@ func_expr_common_subexpr:
 		{
 			$$ = &nodes.FuncCall{
 				Funcname:   makeFuncName("merge_action"),
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 		}
 	;
@@ -10257,7 +10266,7 @@ func_expr_common_subexpr:
 extract_list:
 	extract_arg FROM a_expr
 		{
-			$$ = makeList2(makeStringConst($1), $3)
+			$$ = makeList2(makeStringConst($1, $<loc>1), $3)
 		}
 	;
 
@@ -10315,7 +10324,7 @@ substr_list:
 		{
 			$$ = &nodes.List{Items: []nodes.Node{
 				$1,
-				makeIntConst(1),
+				makeIntConst(1, -1),
 				$3,
 			}}
 		}
@@ -10355,18 +10364,18 @@ xml_root_version:
 	VERSION_P a_expr
 		{ $$ = $2 }
 	| VERSION_P NO VALUE_P
-		{ $$ = makeNullAConst() }
+		{ $$ = makeNullAConst(-1) }
 	;
 
 opt_xml_root_standalone:
 	',' STANDALONE_P YES_P
-		{ $$ = makeIntConst(int64(nodes.XML_STANDALONE_YES)) }
+		{ $$ = makeIntConst(int64(nodes.XML_STANDALONE_YES), -1) }
 	| ',' STANDALONE_P NO
-		{ $$ = makeIntConst(int64(nodes.XML_STANDALONE_NO)) }
+		{ $$ = makeIntConst(int64(nodes.XML_STANDALONE_NO), -1) }
 	| ',' STANDALONE_P NO VALUE_P
-		{ $$ = makeIntConst(int64(nodes.XML_STANDALONE_NO_VALUE)) }
+		{ $$ = makeIntConst(int64(nodes.XML_STANDALONE_NO_VALUE), -1) }
 	| /* EMPTY */
-		{ $$ = makeIntConst(int64(nodes.XML_STANDALONE_OMITTED)) }
+		{ $$ = makeIntConst(int64(nodes.XML_STANDALONE_OMITTED), -1) }
 	;
 
 xml_attributes:
@@ -10910,7 +10919,7 @@ json_table_column_definition:
 			$$ = &nodes.JsonTableColumn{
 				Coltype: nodes.JTC_NESTED,
 				Pathspec: &nodes.JsonTablePathSpec{
-					String:   makeStringConst($3),
+					String:   makeStringConst($3, -1),
 					Name:     $4,
 					Location: -1,
 				},
@@ -10924,7 +10933,7 @@ json_table_column_path_clause_opt:
 	PATH Sconst
 		{
 			$$ = &nodes.JsonTablePathSpec{
-				String:   makeStringConst($2),
+				String:   makeStringConst($2, -1),
 				Location: -1,
 			}
 		}
@@ -11021,7 +11030,8 @@ columnref:
 	ColId
 		{
 			$$ = &nodes.ColumnRef{
-				Fields: &nodes.List{Items: []nodes.Node{&nodes.String{Str: $1}}},
+				Fields:   &nodes.List{Items: []nodes.Node{&nodes.String{Str: $1}}},
+				Location: $<loc>1,
 			}
 		}
 	| ColId indirection
@@ -11030,7 +11040,7 @@ columnref:
 			// If indirection contains A_Indices (subscripts), split the list.
 			// Field selections before the first subscript go into ColumnRef.Fields,
 			// everything from the first subscript onward goes into A_Indirection.
-			c := &nodes.ColumnRef{}
+			c := &nodes.ColumnRef{Location: $<loc>1}
 			nfields := 0
 			var indirList *nodes.List
 			if $2 != nil {
@@ -11130,41 +11140,41 @@ attrs:
 AexprConst:
 	Iconst
 		{
-			$$ = &nodes.A_Const{Val: &nodes.Integer{Ival: $1}}
+			$$ = &nodes.A_Const{Val: &nodes.Integer{Ival: $1}, Location: $<loc>1}
 		}
 	| FCONST
 		{
-			$$ = &nodes.A_Const{Val: &nodes.Float{Fval: $1}}
+			$$ = &nodes.A_Const{Val: &nodes.Float{Fval: $1}, Location: $<loc>1}
 		}
 	| Sconst
 		{
-			$$ = &nodes.A_Const{Val: &nodes.String{Str: $1}}
+			$$ = &nodes.A_Const{Val: &nodes.String{Str: $1}, Location: $<loc>1}
 		}
 	| BCONST
 		{
-			$$ = &nodes.A_Const{Val: &nodes.BitString{Bsval: $1}}
+			$$ = &nodes.A_Const{Val: &nodes.BitString{Bsval: $1}, Location: $<loc>1}
 		}
 	| XCONST
 		{
-			$$ = &nodes.A_Const{Val: &nodes.BitString{Bsval: $1}}
+			$$ = &nodes.A_Const{Val: &nodes.BitString{Bsval: $1}, Location: $<loc>1}
 		}
 	| TRUE_P
 		{
-			$$ = &nodes.A_Const{Val: &nodes.Boolean{Boolval: true}}
+			$$ = &nodes.A_Const{Val: &nodes.Boolean{Boolval: true}, Location: $<loc>1}
 		}
 	| FALSE_P
 		{
-			$$ = &nodes.A_Const{Val: &nodes.Boolean{Boolval: false}}
+			$$ = &nodes.A_Const{Val: &nodes.Boolean{Boolval: false}, Location: $<loc>1}
 		}
 	| NULL_P
 		{
-			$$ = &nodes.A_Const{Isnull: true}
+			$$ = &nodes.A_Const{Isnull: true, Location: $<loc>1}
 		}
 	| func_name Sconst
 		{
 			/* generic type 'literal' syntax */
 			t := makeTypeNameFromNameList($1).(*nodes.TypeName)
-			$$ = makeStringConstCast($2, t)
+			$$ = makeStringConstCast($2, $<loc>2, t)
 		}
 	| func_name '(' func_arg_list opt_sort_clause ')' Sconst
 		{
@@ -11173,11 +11183,11 @@ AexprConst:
 			if $3 != nil {
 				t.Typmods = $3
 			}
-			$$ = makeStringConstCast($6, t)
+			$$ = makeStringConstCast($6, $<loc>6, t)
 		}
 	| ConstTypename Sconst
 		{
-			$$ = makeStringConstCast($2, $1)
+			$$ = makeStringConstCast($2, $<loc>2, $1)
 		}
 	| ConstInterval Sconst opt_interval
 		{
@@ -11185,13 +11195,13 @@ AexprConst:
 			if $3 != nil {
 				t.Typmods = $3
 			}
-			$$ = makeStringConstCast($2, t)
+			$$ = makeStringConstCast($2, $<loc>2, t)
 		}
 	| ConstInterval '(' Iconst ')' Sconst
 		{
 			t := $1
-			t.Typmods = makeList2(makeIntConst(int64(nodes.INTERVAL_FULL_RANGE)), makeIntConst($3))
-			$$ = makeStringConstCast($5, t)
+			t.Typmods = makeList2(makeIntConst(int64(nodes.INTERVAL_FULL_RANGE), -1), makeIntConst($3, $<loc>3))
+			$$ = makeStringConstCast($5, $<loc>5, t)
 		}
 	;
 
@@ -11359,7 +11369,7 @@ SimpleTypename:
 	| ConstInterval '(' Iconst ')'
 		{
 			$$ = $1
-			$$.Typmods = makeList2(makeIntConst(int64(nodes.INTERVAL_FULL_RANGE)), makeIntConst($3))
+			$$.Typmods = makeList2(makeIntConst(int64(nodes.INTERVAL_FULL_RANGE), -1), makeIntConst($3, $<loc>3))
 		}
 	| BOOLEAN_P       { $$ = makeTypeName("bool") }
 	| JSON            { $$ = makeTypeName("json") }
@@ -11560,7 +11570,7 @@ BitWithoutLength:
 				$$ = makeTypeName("varbit")
 			} else {
 				$$ = makeTypeName("bit")
-				$$.Typmods = makeList(makeIntConst(1))
+				$$.Typmods = makeList(makeIntConst(1, -1))
 			}
 		}
 	;
@@ -11688,7 +11698,7 @@ ConstDatetime:
 			} else {
 				$$ = makeTypeName("timestamp")
 			}
-			$$.Typmods = makeList(makeIntConst($3))
+			$$.Typmods = makeList(makeIntConst($3, $<loc>3))
 		}
 	| TIMESTAMP opt_timezone
 		{
@@ -11705,7 +11715,7 @@ ConstDatetime:
 			} else {
 				$$ = makeTypeName("time")
 			}
-			$$.Typmods = makeList(makeIntConst($3))
+			$$.Typmods = makeList(makeIntConst($3, $<loc>3))
 		}
 	| TIME opt_timezone
 		{
@@ -11732,47 +11742,47 @@ opt_timezone:
 
 opt_interval:
 	YEAR_P
-		{ $$ = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_YEAR))) }
+		{ $$ = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_YEAR), $<loc>1)) }
 	| MONTH_P
-		{ $$ = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_MONTH))) }
+		{ $$ = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_MONTH), $<loc>1)) }
 	| DAY_P
-		{ $$ = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_DAY))) }
+		{ $$ = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_DAY), $<loc>1)) }
 	| HOUR_P
-		{ $$ = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_HOUR))) }
+		{ $$ = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_HOUR), $<loc>1)) }
 	| MINUTE_P
-		{ $$ = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_MINUTE))) }
+		{ $$ = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_MINUTE), $<loc>1)) }
 	| interval_second
 		{ $$ = $1 }
 	| YEAR_P TO MONTH_P
 		{
-			$$ = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_YEAR | nodes.INTERVAL_MASK_MONTH)))
+			$$ = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_YEAR | nodes.INTERVAL_MASK_MONTH), $<loc>1))
 		}
 	| DAY_P TO HOUR_P
 		{
-			$$ = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_DAY | nodes.INTERVAL_MASK_HOUR)))
+			$$ = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_DAY | nodes.INTERVAL_MASK_HOUR), $<loc>1))
 		}
 	| DAY_P TO MINUTE_P
 		{
-			$$ = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_DAY | nodes.INTERVAL_MASK_HOUR | nodes.INTERVAL_MASK_MINUTE)))
+			$$ = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_DAY | nodes.INTERVAL_MASK_HOUR | nodes.INTERVAL_MASK_MINUTE), $<loc>1))
 		}
 	| DAY_P TO interval_second
 		{
 			$$ = $3
-			$$.Items[0] = makeIntConst(int64(nodes.INTERVAL_MASK_DAY | nodes.INTERVAL_MASK_HOUR | nodes.INTERVAL_MASK_MINUTE | nodes.INTERVAL_MASK_SECOND))
+			$$.Items[0] = makeIntConst(int64(nodes.INTERVAL_MASK_DAY | nodes.INTERVAL_MASK_HOUR | nodes.INTERVAL_MASK_MINUTE | nodes.INTERVAL_MASK_SECOND), $<loc>1)
 		}
 	| HOUR_P TO MINUTE_P
 		{
-			$$ = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_HOUR | nodes.INTERVAL_MASK_MINUTE)))
+			$$ = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_HOUR | nodes.INTERVAL_MASK_MINUTE), $<loc>1))
 		}
 	| HOUR_P TO interval_second
 		{
 			$$ = $3
-			$$.Items[0] = makeIntConst(int64(nodes.INTERVAL_MASK_HOUR | nodes.INTERVAL_MASK_MINUTE | nodes.INTERVAL_MASK_SECOND))
+			$$.Items[0] = makeIntConst(int64(nodes.INTERVAL_MASK_HOUR | nodes.INTERVAL_MASK_MINUTE | nodes.INTERVAL_MASK_SECOND), $<loc>1)
 		}
 	| MINUTE_P TO interval_second
 		{
 			$$ = $3
-			$$.Items[0] = makeIntConst(int64(nodes.INTERVAL_MASK_MINUTE | nodes.INTERVAL_MASK_SECOND))
+			$$.Items[0] = makeIntConst(int64(nodes.INTERVAL_MASK_MINUTE | nodes.INTERVAL_MASK_SECOND), $<loc>1)
 		}
 	| /* EMPTY */
 		{ $$ = nil }
@@ -11781,11 +11791,11 @@ opt_interval:
 interval_second:
 	SECOND_P
 		{
-			$$ = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_SECOND)))
+			$$ = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_SECOND), $<loc>1))
 		}
 	| SECOND_P '(' Iconst ')'
 		{
-			$$ = makeList2(makeIntConst(int64(nodes.INTERVAL_MASK_SECOND)), makeIntConst($3))
+			$$ = makeList2(makeIntConst(int64(nodes.INTERVAL_MASK_SECOND), $<loc>1), makeIntConst($3, $<loc>3))
 		}
 	;
 
@@ -11951,11 +11961,11 @@ constraints_set_mode:
 qualified_name_list:
 	qualified_name
 		{
-			$$ = makeList(makeRangeVar($1))
+			$$ = makeList(makeRangeVar($1, $<loc>1))
 		}
 	| qualified_name_list ',' qualified_name
 		{
-			$$ = appendList($1, makeRangeVar($3))
+			$$ = appendList($1, makeRangeVar($3, $<loc>3))
 		}
 	;
 
@@ -12077,7 +12087,7 @@ set_rest_more:
 			$$ = &nodes.VariableSetStmt{
 				Kind: nodes.VAR_SET_VALUE,
 				Name: "search_path",
-				Args: makeList(makeStringConst($2)),
+				Args: makeList(makeStringConst($2, $<loc>2)),
 			}
 		}
 	| NAMES opt_encoding
@@ -12087,7 +12097,7 @@ set_rest_more:
 				Name: "client_encoding",
 			}
 			if $2 != "" {
-				n.Args = makeList(makeStringConst($2))
+				n.Args = makeList(makeStringConst($2, $<loc>2))
 			} else {
 				n.Kind = nodes.VAR_SET_DEFAULT
 			}
@@ -12098,7 +12108,7 @@ set_rest_more:
 			$$ = &nodes.VariableSetStmt{
 				Kind: nodes.VAR_SET_VALUE,
 				Name: "role",
-				Args: makeList(makeStringConst($2)),
+				Args: makeList(makeStringConst($2, $<loc>2)),
 			}
 		}
 	| SESSION AUTHORIZATION NonReservedWord_or_Sconst
@@ -12106,7 +12116,7 @@ set_rest_more:
 			$$ = &nodes.VariableSetStmt{
 				Kind: nodes.VAR_SET_VALUE,
 				Name: "session_authorization",
-				Args: makeList(makeStringConst($3)),
+				Args: makeList(makeStringConst($3, $<loc>3)),
 			}
 		}
 	| SESSION AUTHORIZATION DEFAULT
@@ -12127,7 +12137,7 @@ set_rest_more:
 			$$ = &nodes.VariableSetStmt{
 				Kind: nodes.VAR_SET_VALUE,
 				Name: "xmloption",
-				Args: makeList(makeStringConst(val)),
+				Args: makeList(makeStringConst(val, $<loc>3)),
 			}
 		}
 	| TRANSACTION SNAPSHOT Sconst
@@ -12135,7 +12145,7 @@ set_rest_more:
 			$$ = &nodes.VariableSetStmt{
 				Kind: nodes.VAR_SET_MULTI,
 				Name: "TRANSACTION SNAPSHOT",
-				Args: makeList(makeStringConst($3)),
+				Args: makeList(makeStringConst($3, $<loc>3)),
 			}
 		}
 	;
@@ -12165,26 +12175,26 @@ var_list:
 var_value:
 	opt_boolean_or_string
 		{
-			$$ = makeStringConst($1)
+			$$ = makeStringConst($1, $<loc>1)
 		}
 	| NumericOnly
 		{
-			$$ = &nodes.A_Const{Val: $1}
+			$$ = &nodes.A_Const{Val: $1, Location: $<loc>1}
 		}
 	;
 
 zone_value:
 	Sconst
 		{
-			$$ = makeStringConst($1)
+			$$ = makeStringConst($1, $<loc>1)
 		}
 	| IDENT
 		{
-			$$ = makeStringConst($1)
+			$$ = makeStringConst($1, $<loc>1)
 		}
 	| NumericOnly
 		{
-			$$ = &nodes.A_Const{Val: $1}
+			$$ = &nodes.A_Const{Val: $1, Location: $<loc>1}
 		}
 	| DEFAULT
 		{
@@ -12212,23 +12222,23 @@ iso_level:
 transaction_mode_item:
 	ISOLATION LEVEL iso_level
 		{
-			$$ = makeDefElem("transaction_isolation", makeStringConst($3))
+			$$ = makeDefElem("transaction_isolation", makeStringConst($3, $<loc>3))
 		}
 	| READ ONLY
 		{
-			$$ = makeDefElem("transaction_read_only", makeIntConst(1))
+			$$ = makeDefElem("transaction_read_only", makeIntConst(1, $<loc>1))
 		}
 	| READ WRITE
 		{
-			$$ = makeDefElem("transaction_read_only", makeIntConst(0))
+			$$ = makeDefElem("transaction_read_only", makeIntConst(0, $<loc>1))
 		}
 	| DEFERRABLE
 		{
-			$$ = makeDefElem("transaction_deferrable", makeIntConst(1))
+			$$ = makeDefElem("transaction_deferrable", makeIntConst(1, $<loc>1))
 		}
 	| NOT DEFERRABLE
 		{
-			$$ = makeDefElem("transaction_deferrable", makeIntConst(0))
+			$$ = makeDefElem("transaction_deferrable", makeIntConst(0, $<loc>1))
 		}
 	;
 
@@ -12600,7 +12610,7 @@ vacuum_relation:
 	qualified_name opt_column_list
 		{
 			$$ = &nodes.VacuumRelation{
-				Relation: makeRangeVar($1).(*nodes.RangeVar),
+				Relation: makeRangeVar($1, $<loc>1).(*nodes.RangeVar),
 				VaCols:   $2,
 			}
 		}
@@ -12632,7 +12642,7 @@ ClusterStmt:
 	CLUSTER '(' utility_option_list ')' qualified_name cluster_index_specification
 		{
 			$$ = &nodes.ClusterStmt{
-				Relation: makeRangeVar($5).(*nodes.RangeVar),
+				Relation: makeRangeVar($5, $<loc>5).(*nodes.RangeVar),
 				Indexname: $6,
 				Params:   $3,
 			}
@@ -12646,7 +12656,7 @@ ClusterStmt:
 	| CLUSTER opt_verbose qualified_name cluster_index_specification
 		{
 			n := &nodes.ClusterStmt{
-				Relation: makeRangeVar($3).(*nodes.RangeVar),
+				Relation: makeRangeVar($3, $<loc>3).(*nodes.RangeVar),
 				Indexname: $4,
 			}
 			if $2 {
@@ -12666,7 +12676,7 @@ ClusterStmt:
 	| CLUSTER opt_verbose name ON qualified_name
 		{
 			n := &nodes.ClusterStmt{
-				Relation:  makeRangeVar($5).(*nodes.RangeVar),
+				Relation:  makeRangeVar($5, $<loc>5).(*nodes.RangeVar),
 				Indexname: $3,
 			}
 			if $2 {
@@ -12692,7 +12702,7 @@ ReindexStmt:
 		{
 			n := &nodes.ReindexStmt{
 				Kind:     nodes.ReindexObjectType($3),
-				Relation: makeRangeVar($5).(*nodes.RangeVar),
+				Relation: makeRangeVar($5, $<loc>5).(*nodes.RangeVar),
 				Params:   $2,
 			}
 			if $4 {
@@ -13817,7 +13827,7 @@ CreateTrigStmt:
 				Replace:        $2,
 				IsConstraint:   false,
 				Trigname:        $4,
-				Relation:        makeRangeVarFromAnyName($8),
+				Relation:        makeRangeVarFromAnyName($8, $<loc>8),
 				Funcname:        $14,
 				Args:            $16,
 				Row:             $10,
@@ -13851,7 +13861,7 @@ CreateTrigStmt:
 				Replace:        $2,
 				IsConstraint:   true,
 				Trigname:        $5,
-				Relation:        makeRangeVarFromAnyName($9),
+				Relation:        makeRangeVarFromAnyName($9, $<loc>9),
 				Funcname:        $18,
 				Args:            $20,
 				Row:             true,
@@ -14024,7 +14034,7 @@ TriggerFuncArg:
 
 OptConstrFromTable:
 	FROM qualified_name
-		{ $$ = makeRangeVar($2) }
+		{ $$ = makeRangeVar($2, $<loc>2) }
 	| /* EMPTY */
 		{ $$ = nil }
 	;
@@ -14139,7 +14149,7 @@ RuleStmt:
 		{
 			$$ = &nodes.RuleStmt{
 				Replace:     $2,
-				Relation:    makeRangeVarFromAnyName($9),
+				Relation:    makeRangeVarFromAnyName($9, $<loc>9),
 				Rulename:    $4,
 				WhereClause: $10,
 				Event:       nodes.CmdType($7),
@@ -14504,7 +14514,7 @@ CreateForeignTableStmt:
 	  '(' OptTableElementList ')'
 	  OptInherit SERVER name create_generic_options
 		{
-			rv := makeRangeVar($4)
+			rv := makeRangeVar($4, $<loc>4)
 			rv.(*nodes.RangeVar).Relpersistence = 'p'
 			$$ = &nodes.CreateForeignTableStmt{
 				Base: nodes.CreateStmt{
@@ -14521,7 +14531,7 @@ CreateForeignTableStmt:
 	  '(' OptTableElementList ')'
 	  OptInherit SERVER name create_generic_options
 		{
-			rv := makeRangeVar($7)
+			rv := makeRangeVar($7, $<loc>7)
 			rv.(*nodes.RangeVar).Relpersistence = 'p'
 			$$ = &nodes.CreateForeignTableStmt{
 				Base: nodes.CreateStmt{
@@ -14538,8 +14548,8 @@ CreateForeignTableStmt:
 	  PARTITION OF qualified_name OptTypedTableElementList ForValues
 	  SERVER name create_generic_options
 		{
-			rv := makeRangeVar($4)
-			inh := makeRangeVar($7)
+			rv := makeRangeVar($4, $<loc>4)
+			inh := makeRangeVar($7, $<loc>7)
 			rv.(*nodes.RangeVar).Relpersistence = 'p'
 			$$ = &nodes.CreateForeignTableStmt{
 				Base: nodes.CreateStmt{
@@ -14557,8 +14567,8 @@ CreateForeignTableStmt:
 	  PARTITION OF qualified_name OptTypedTableElementList ForValues
 	  SERVER name create_generic_options
 		{
-			rv := makeRangeVar($7)
-			inh := makeRangeVar($10)
+			rv := makeRangeVar($7, $<loc>7)
+			inh := makeRangeVar($10, $<loc>10)
 			rv.(*nodes.RangeVar).Relpersistence = 'p'
 			$$ = &nodes.CreateForeignTableStmt{
 				Base: nodes.CreateStmt{
@@ -15016,7 +15026,7 @@ CreatePolicyStmt:
 		{
 			$$ = &nodes.CreatePolicyStmt{
 				PolicyName: $3,
-				Table:      makeRangeVarFromAnyName($5),
+				Table:      makeRangeVarFromAnyName($5, $<loc>5),
 				Permissive: $6,
 				CmdName:    $7,
 				Roles:      $8,
@@ -15032,7 +15042,7 @@ AlterPolicyStmt:
 		{
 			$$ = &nodes.AlterPolicyStmt{
 				PolicyName: $3,
-				Table:      makeRangeVarFromAnyName($5),
+				Table:      makeRangeVarFromAnyName($5, $<loc>5),
 				Roles:      $6,
 				Qual:       $7,
 				WithCheck:  $8,
@@ -15386,7 +15396,7 @@ AlterObjectDependsStmt:
 		{
 			$$ = &nodes.AlterObjectDependsStmt{
 				ObjectType: nodes.OBJECT_TRIGGER,
-				Relation:   makeRangeVarFromAnyName($5),
+				Relation:   makeRangeVarFromAnyName($5, $<loc>5),
 				Object:     makeList(&nodes.String{Str: $3}),
 				Extname:    &nodes.String{Str: $10},
 				Remove:     $6,
@@ -15396,7 +15406,7 @@ AlterObjectDependsStmt:
 		{
 			$$ = &nodes.AlterObjectDependsStmt{
 				ObjectType: nodes.OBJECT_MATVIEW,
-				Relation:   makeRangeVarFromAnyName($4),
+				Relation:   makeRangeVarFromAnyName($4, $<loc>4),
 				Extname:    &nodes.String{Str: $9},
 				Remove:     $5,
 			}
@@ -15405,7 +15415,7 @@ AlterObjectDependsStmt:
 		{
 			$$ = &nodes.AlterObjectDependsStmt{
 				ObjectType: nodes.OBJECT_INDEX,
-				Relation:   makeRangeVarFromAnyName($3),
+				Relation:   makeRangeVarFromAnyName($3, $<loc>3),
 				Extname:    &nodes.String{Str: $8},
 				Remove:     $4,
 			}
@@ -15573,7 +15583,7 @@ AlterObjectSchemaStmt:
 		}
 	| ALTER SEQUENCE qualified_name SET SCHEMA name
 		{
-			rv := makeRangeVarFromAnyName($3)
+			rv := makeRangeVarFromAnyName($3, $<loc>3)
 			$$ = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_SEQUENCE,
 				Relation:   rv,
@@ -15582,7 +15592,7 @@ AlterObjectSchemaStmt:
 		}
 	| ALTER SEQUENCE IF_P EXISTS qualified_name SET SCHEMA name
 		{
-			rv := makeRangeVarFromAnyName($5)
+			rv := makeRangeVarFromAnyName($5, $<loc>5)
 			$$ = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_SEQUENCE,
 				Relation:   rv,
@@ -15592,7 +15602,7 @@ AlterObjectSchemaStmt:
 		}
 	| ALTER VIEW qualified_name SET SCHEMA name
 		{
-			rv := makeRangeVarFromAnyName($3)
+			rv := makeRangeVarFromAnyName($3, $<loc>3)
 			$$ = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_VIEW,
 				Relation:   rv,
@@ -15601,7 +15611,7 @@ AlterObjectSchemaStmt:
 		}
 	| ALTER VIEW IF_P EXISTS qualified_name SET SCHEMA name
 		{
-			rv := makeRangeVarFromAnyName($5)
+			rv := makeRangeVarFromAnyName($5, $<loc>5)
 			$$ = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_VIEW,
 				Relation:   rv,
@@ -15611,7 +15621,7 @@ AlterObjectSchemaStmt:
 		}
 	| ALTER MATERIALIZED VIEW qualified_name SET SCHEMA name
 		{
-			rv := makeRangeVarFromAnyName($4)
+			rv := makeRangeVarFromAnyName($4, $<loc>4)
 			$$ = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_MATVIEW,
 				Relation:   rv,
@@ -15620,7 +15630,7 @@ AlterObjectSchemaStmt:
 		}
 	| ALTER MATERIALIZED VIEW IF_P EXISTS qualified_name SET SCHEMA name
 		{
-			rv := makeRangeVarFromAnyName($6)
+			rv := makeRangeVarFromAnyName($6, $<loc>6)
 			$$ = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_MATVIEW,
 				Relation:   rv,
@@ -16681,7 +16691,7 @@ CreateAsStmt:
 create_as_target:
 	qualified_name opt_column_list OptAccessMethod OptWith OnCommitOption OptTableSpace
 		{
-			rv := makeRangeVarFromAnyName($1)
+			rv := makeRangeVarFromAnyName($1, $<loc>1)
 			$$ = &nodes.IntoClause{
 				Rel:            rv,
 				ColNames:       $2,
@@ -16739,7 +16749,7 @@ CreateMatViewStmt:
 create_mv_target:
 	qualified_name opt_column_list OptAccessMethod opt_reloptions OptTableSpace
 		{
-			rv := makeRangeVarFromAnyName($1)
+			rv := makeRangeVarFromAnyName($1, $<loc>1)
 			$$ = &nodes.IntoClause{
 				Rel:            rv,
 				ColNames:       $2,
@@ -16759,7 +16769,7 @@ create_mv_target:
 RefreshMatViewStmt:
 	REFRESH MATERIALIZED VIEW opt_concurrently qualified_name opt_with_data
 		{
-			rv := makeRangeVarFromAnyName($5)
+			rv := makeRangeVarFromAnyName($5, $<loc>5)
 			$$ = &nodes.RefreshMatViewStmt{
 				Concurrent: $4,
 				Relation:   rv,
@@ -17341,8 +17351,8 @@ func makeListNode(l *nodes.List) nodes.Node {
 	return l
 }
 
-func makeRangeVar(names *nodes.List) nodes.Node {
-	rv := &nodes.RangeVar{Inh: true, Relpersistence: 'p'}
+func makeRangeVar(names *nodes.List, location nodes.ParseLoc) nodes.Node {
+	rv := &nodes.RangeVar{Inh: true, Relpersistence: 'p', Location: location}
 	if names != nil && len(names.Items) > 0 {
 		switch len(names.Items) {
 		case 1:
@@ -17365,18 +17375,19 @@ func makeRangeVarList(nameList *nodes.List) *nodes.List {
 	}
 	result := &nodes.List{}
 	for _, item := range nameList.Items {
-		rv := makeRangeVar(item.(*nodes.List))
+		rv := makeRangeVar(item.(*nodes.List), -1)
 		result.Items = append(result.Items, rv)
 	}
 	return result
 }
 
-func makeAExpr(kind nodes.A_Expr_Kind, op string, lexpr, rexpr nodes.Node) nodes.Node {
+func makeAExpr(kind nodes.A_Expr_Kind, op string, lexpr, rexpr nodes.Node, location nodes.ParseLoc) nodes.Node {
 	return &nodes.A_Expr{
-		Kind:  kind,
-		Name:  &nodes.List{Items: []nodes.Node{&nodes.String{Str: op}}},
-		Lexpr: lexpr,
-		Rexpr: rexpr,
+		Kind:     kind,
+		Name:     &nodes.List{Items: []nodes.Node{&nodes.String{Str: op}}},
+		Lexpr:    lexpr,
+		Rexpr:    rexpr,
+		Location: location,
 	}
 }
 
@@ -17394,9 +17405,11 @@ func makeNameListAsAnyNameList(names *nodes.List) *nodes.List {
 	return result
 }
 
-func makeStringConstCast(s string, typeName *nodes.TypeName) nodes.Node {
+// makeStringConstCast is PostgreSQL's: the constant at location, cast with
+// no location of its own.
+func makeStringConstCast(s string, location nodes.ParseLoc, typeName *nodes.TypeName) nodes.Node {
 	return &nodes.TypeCast{
-		Arg:      &nodes.A_Const{Val: &nodes.String{Str: s}},
+		Arg:      makeStringConst(s, location),
 		TypeName: typeName,
 		Location: -1,
 	}
@@ -17415,12 +17428,13 @@ func parsePartitionStrategy(strategy string) string {
 	}
 }
 
-func makeAExprFromList(kind nodes.A_Expr_Kind, name *nodes.List, lexpr, rexpr nodes.Node) nodes.Node {
+func makeAExprFromList(kind nodes.A_Expr_Kind, name *nodes.List, lexpr, rexpr nodes.Node, location nodes.ParseLoc) nodes.Node {
 	return &nodes.A_Expr{
-		Kind:  kind,
-		Name:  name,
-		Lexpr: lexpr,
-		Rexpr: rexpr,
+		Kind:     kind,
+		Name:     name,
+		Lexpr:    lexpr,
+		Rexpr:    rexpr,
+		Location: location,
 	}
 }
 
@@ -17442,9 +17456,12 @@ func makeBetweenArgs(lower, upper nodes.Node) nodes.Node {
 	return &nodes.List{Items: []nodes.Node{lower, upper}}
 }
 
-func doNegate(n nodes.Node) nodes.Node {
+// doNegate is PostgreSQL's: a negated numeric constant takes the minus
+// sign's location; anything else is a unary minus at location.
+func doNegate(n nodes.Node, location nodes.ParseLoc) nodes.Node {
 	// For numeric constants, negate in place
 	if ac, ok := n.(*nodes.A_Const); ok {
+		ac.Location = location
 		if i, ok := ac.Val.(*nodes.Integer); ok {
 			i.Ival = -i.Ival
 			return n
@@ -17459,7 +17476,7 @@ func doNegate(n nodes.Node) nodes.Node {
 		}
 	}
 	// Otherwise, create unary minus expression
-	return makeAExpr(nodes.AEXPR_OP, "-", nil, n)
+	return makeAExpr(nodes.AEXPR_OP, "-", nil, n, location)
 }
 
 func concatLists(a, b *nodes.List) *nodes.List {
@@ -17491,23 +17508,23 @@ func makeTypeName(typeName string) *nodes.TypeName {
 	}
 }
 
-func makeIntConst(val int64) nodes.Node {
-	return &nodes.A_Const{Val: &nodes.Integer{Ival: val}}
+func makeIntConst(val int64, location nodes.ParseLoc) nodes.Node {
+	return &nodes.A_Const{Val: &nodes.Integer{Ival: val}, Location: location}
 }
 
-func makeStringConst(str string) nodes.Node {
-	return &nodes.A_Const{Val: &nodes.String{Str: str}}
+func makeStringConst(str string, location nodes.ParseLoc) nodes.Node {
+	return &nodes.A_Const{Val: &nodes.String{Str: str}, Location: location}
 }
 
-func makeBoolAConst(val int64) nodes.Node {
+func makeBoolAConst(val int64, location nodes.ParseLoc) nodes.Node {
 	if val != 0 {
-		return &nodes.A_Const{Val: &nodes.String{Str: "t"}}
+		return &nodes.A_Const{Val: &nodes.String{Str: "t"}, Location: location}
 	}
-	return &nodes.A_Const{Val: &nodes.String{Str: "f"}}
+	return &nodes.A_Const{Val: &nodes.String{Str: "f"}, Location: location}
 }
 
-func makeNullAConst() nodes.Node {
-	return &nodes.A_Const{Isnull: true}
+func makeNullAConst(location nodes.ParseLoc) nodes.Node {
+	return &nodes.A_Const{Isnull: true, Location: location}
 }
 
 func makeNotExpr(expr nodes.Node) nodes.Node {
@@ -17636,8 +17653,8 @@ func makeSQLValueFunction(op nodes.SVFOp, typmod int) nodes.Node {
 }
 
 // makeTypeCast creates a TypeCast node.
-func makeTypeCast(arg nodes.Node, typeName *nodes.TypeName) nodes.Node {
-	return &nodes.TypeCast{Arg: arg, TypeName: typeName, Location: -1}
+func makeTypeCast(arg nodes.Node, typeName *nodes.TypeName, location nodes.ParseLoc) nodes.Node {
+	return &nodes.TypeCast{Arg: arg, TypeName: typeName, Location: location}
 }
 
 // roleSpecOrNil safely casts a node to *nodes.RoleSpec, returning nil if the node is nil.
@@ -17841,11 +17858,11 @@ func intToString(val int64) string {
 
 // makeRangeVarFromAnyName creates a RangeVar from a qualified name list (list of String nodes).
 // It handles 1-part (name), 2-part (schema.name), and 3-part (catalog.schema.name) names.
-func makeRangeVarFromAnyName(names *nodes.List) *nodes.RangeVar {
+func makeRangeVarFromAnyName(names *nodes.List, location nodes.ParseLoc) *nodes.RangeVar {
 	rv := &nodes.RangeVar{
 		Inh:            true,
 		Relpersistence: 'p',
-		Location:       -1,
+		Location:       location,
 	}
 	if names == nil {
 		return rv
