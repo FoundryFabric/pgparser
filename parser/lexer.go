@@ -65,7 +65,6 @@ const (
 	stateXDOLQ              // dollar-quoted strings
 	stateXUI                // quoted identifier with Unicode escapes
 	stateXUS                // quoted string with Unicode escapes
-	stateXEU                // Unicode surrogate pair in extended quoted string
 )
 
 // Token represents a lexical token.
@@ -91,9 +90,6 @@ type Lexer struct {
 	// Dollar quote delimiter
 	dolqstart string
 
-	// Unicode surrogate handling
-	utf16FirstPart rune
-
 	// Comment nesting depth
 	xcdepth int
 
@@ -109,7 +105,9 @@ type Lexer struct {
 	// Location tracking
 	savedLoc int
 
-	// Error handling
+	// Err is the first error the lexer met, a *ParseError carrying
+	// PostgreSQL's SQLSTATE, message and position. The lexer returns EOF from
+	// then on, as PostgreSQL's scanner stops at its first error.
 	Err error
 
 	// noticeHandler, when non-nil, receives each notice the lexer raises, in
@@ -161,15 +159,12 @@ func (l *Lexer) NextToken() Token {
 			return l.lexQuotedString()
 		case stateXQS:
 			return l.lexQuoteContinue()
-		case stateXEU:
-			return l.lexUnicodeSurrogate()
 		case stateXD, stateXUI:
 			return l.lexDelimitedIdent()
 		case stateXDOLQ:
 			return l.lexDollarQuote()
 		default:
-			l.Err = fmt.Errorf("unknown lexer state: %d", l.state)
-			return Token{Type: lex_EOF, Loc: l.start}
+			return l.failAt("XX000", fmt.Sprintf("unknown lexer state: %d", l.state), l.start, "")
 		}
 	}
 }
@@ -244,8 +239,7 @@ func (l *Lexer) lexInitial() Token {
 	if (ch == 'u' || ch == 'U') && l.pos+1 < len(l.input) && l.input[l.pos+1] == '&' {
 		if l.pos+2 < len(l.input) && l.input[l.pos+2] == '\'' {
 			if !l.StandardConformingStrings {
-				l.Err = fmt.Errorf("unsafe use of string constant with Unicode escapes")
-				return Token{Type: lex_EOF, Loc: l.start}
+				return l.failAt("0A000", "unsafe use of string constant with Unicode escapes", l.start, "")
 			}
 			l.pos += 3
 			l.state = stateXUS
@@ -407,8 +401,7 @@ func (l *Lexer) lexComment() {
 	}
 
 	// Reached EOF inside comment
-	l.Err = fmt.Errorf("unterminated /* comment")
-	l.state = stateInitial
+	l.failNear("unterminated /* comment", l.start)
 }
 
 // lexBitOrHexString handles B'...' and X'...' strings.
@@ -426,12 +419,9 @@ func (l *Lexer) lexBitOrHexString() Token {
 	}
 
 	if l.state == stateXB {
-		l.Err = fmt.Errorf("unterminated bit string literal")
-	} else {
-		l.Err = fmt.Errorf("unterminated hexadecimal string literal")
+		return l.failNear("unterminated bit string literal", l.start)
 	}
-	l.state = stateInitial
-	return Token{Type: lex_EOF, Loc: l.start}
+	return l.failNear("unterminated hexadecimal string literal", l.start)
 }
 
 // lexQuotedString handles '...' E'...' and U&'...' strings.
@@ -457,7 +447,9 @@ func (l *Lexer) lexQuotedString() Token {
 		// For extended strings, handle escape sequences
 		if l.state == stateXE && ch == '\\' && l.pos+1 < len(l.input) {
 			l.pos++
-			l.handleEscapeSequence()
+			if !l.handleEscapeSequence() {
+				return Token{Type: lex_EOF, Loc: l.start}
+			}
 			continue
 		}
 
@@ -465,17 +457,13 @@ func (l *Lexer) lexQuotedString() Token {
 		l.pos++
 	}
 
-	l.Err = fmt.Errorf("unterminated quoted string")
-	l.state = stateInitial
-	return Token{Type: lex_EOF, Loc: l.start}
+	return l.failNear("unterminated quoted string", l.start)
 }
 
-// handleEscapeSequence processes escape sequences in E'...' strings.
-func (l *Lexer) handleEscapeSequence() {
-	if l.pos >= len(l.input) {
-		return
-	}
-
+// handleEscapeSequence processes escape sequences in E'...' strings, with
+// l.pos just past the backslash. It is false when the escape is refused, the
+// error recorded.
+func (l *Lexer) handleEscapeSequence() bool {
 	ch := l.input[l.pos]
 	l.pos++
 
@@ -511,25 +499,75 @@ func (l *Lexer) handleEscapeSequence() {
 		} else {
 			l.literalbuf.WriteByte('x')
 		}
-	case 'u':
-		// Unicode escape: \uXXXX
-		if l.pos+3 < len(l.input) {
-			val := l.scanHex(4)
-			l.writeUnicodeChar(rune(val))
-		} else {
-			l.literalbuf.WriteByte('u')
-		}
-	case 'U':
-		// Unicode escape: \UXXXXXXXX
-		if l.pos+7 < len(l.input) {
-			val := l.scanHex(8)
-			l.writeUnicodeChar(rune(val))
-		} else {
-			l.literalbuf.WriteByte('U')
-		}
+	case 'u', 'U':
+		return l.unicodeEscape()
 	default:
 		l.literalbuf.WriteByte(ch)
 	}
+	return true
+}
+
+// unicodeEscape reads a \uXXXX or \UXXXXXXXX escape, and a UTF-16 surrogate
+// pair written as two of them, with l.pos just past the u or U. It mirrors
+// scan.l's xeunicode, xeunicodefail and xeu rules and addunicode.
+func (l *Lexer) unicodeEscape() bool {
+	esc := l.pos - 2
+	c, ok := l.scanUnicodeEscape(esc)
+	if !ok {
+		return false
+	}
+	if isUTF16SurrogateFirst(c) {
+		// xeu: the next thing must be an escape holding the second half.
+		second := l.pos
+		if second+1 >= len(l.input) || l.input[second] != '\\' || (l.input[second+1] != 'u' && l.input[second+1] != 'U') {
+			l.pos = min(second+1, len(l.input))
+			l.failNear("invalid Unicode surrogate pair", second)
+			return false
+		}
+		l.pos += 2
+		low, ok := l.scanUnicodeEscape(second)
+		if !ok {
+			return false
+		}
+		if !isUTF16SurrogateSecond(low) {
+			l.failNear("invalid Unicode surrogate pair", second)
+			return false
+		}
+		c = surrogateToCodepoint(c, low)
+	} else if isUTF16SurrogateSecond(c) {
+		l.failNear("invalid Unicode surrogate pair", esc)
+		return false
+	}
+	if c == 0 || c > unicode.MaxRune {
+		l.failNear("invalid Unicode escape value", esc)
+		return false
+	}
+	l.writeUnicodeChar(c)
+	return true
+}
+
+// scanUnicodeEscape reads the hex digits of the escape at esc, 4 after \u and
+// 8 after \U, with l.pos at the first. Fewer is 22025, as xeunicodefail.
+func (l *Lexer) scanUnicodeEscape(esc int) (rune, bool) {
+	n := 4
+	if l.input[esc+1] == 'U' {
+		n = 8
+	}
+	if l.pos+n > len(l.input) || !allHex(l.input[l.pos:l.pos+n]) {
+		l.failAt("22025", "invalid Unicode escape", esc, "Unicode escapes must be \\uXXXX or \\UXXXXXXXX.")
+		return 0, false
+	}
+	return rune(l.scanHex(n)), true
+}
+
+// allHex is true when every byte of s is a hex digit.
+func allHex(s string) bool {
+	for i := 0; i < len(s); i++ {
+		if !isHexDigit(s[i]) {
+			return false
+		}
+	}
+	return true
 }
 
 // scanOctal scans an octal escape sequence.
@@ -619,9 +657,8 @@ func (l *Lexer) lexQuoteContinue() Token {
 		}
 
 		// Decode the string using the determined escape char
-		decoded, err := l.decodeUnicodeString(str, escapeChar)
-		if err != nil {
-			l.Err = err
+		decoded, ok := l.decodeUnicodeString(str, byte(escapeChar), l.start)
+		if !ok {
 			return Token{Type: lex_EOF, Loc: l.start}
 		}
 
@@ -637,9 +674,8 @@ func (l *Lexer) lexQuoteContinue() Token {
 		}
 
 		// Decode the string using the determined escape char
-		decoded, err := l.decodeUnicodeString(str, escapeChar)
-		if err != nil {
-			l.Err = err
+		decoded, ok := l.decodeUnicodeString(str, byte(escapeChar), l.start)
+		if !ok {
 			return Token{Type: lex_EOF, Loc: l.start}
 		}
 
@@ -648,34 +684,6 @@ func (l *Lexer) lexQuoteContinue() Token {
 	default:
 		return Token{Type: lex_SCONST, Str: str, Loc: l.start}
 	}
-}
-
-// lexUnicodeSurrogate handles Unicode surrogate pairs in E'...' strings.
-func (l *Lexer) lexUnicodeSurrogate() Token {
-	// Looking for the second part of a surrogate pair
-	if l.pos+1 < len(l.input) && l.input[l.pos] == '\\' {
-		l.pos++
-		ch := l.input[l.pos]
-		if ch == 'u' || ch == 'U' {
-			l.pos++
-			n := 4
-			if ch == 'U' {
-				n = 8
-			}
-			val := l.scanHex(n)
-			// Combine surrogate pair
-			if isUTF16SurrogateSecond(rune(val)) {
-				combined := surrogateToCodepoint(l.utf16FirstPart, rune(val))
-				l.writeUnicodeChar(combined)
-				l.state = stateXE
-				return l.NextToken()
-			}
-		}
-	}
-
-	l.Err = fmt.Errorf("invalid Unicode surrogate pair")
-	l.state = stateInitial
-	return Token{Type: lex_EOF, Loc: l.start}
 }
 
 // lexDelimitedIdent handles "..." identifiers.
@@ -704,8 +712,7 @@ func (l *Lexer) lexDelimitedIdent() Token {
 
 			str := l.literalbuf.String()
 			if str == "" {
-				l.Err = fmt.Errorf("zero-length delimited identifier")
-				return Token{Type: lex_EOF, Loc: l.start}
+				return l.failNear("zero-length delimited identifier", l.start)
 			}
 			return Token{Type: lex_IDENT, Str: l.truncateIdentifier(str), Loc: l.start}
 		}
@@ -714,9 +721,7 @@ func (l *Lexer) lexDelimitedIdent() Token {
 		l.pos++
 	}
 
-	l.Err = fmt.Errorf("unterminated quoted identifier")
-	l.state = stateInitial
-	return Token{Type: lex_EOF, Loc: l.start}
+	return l.failNear("unterminated quoted identifier", l.start)
 }
 
 // lexDollarQuote handles $tag$...$tag$ strings.
@@ -738,9 +743,7 @@ func (l *Lexer) lexDollarQuote() Token {
 		l.pos++
 	}
 
-	l.Err = fmt.Errorf("unterminated dollar-quoted string")
-	l.state = stateInitial
-	return Token{Type: lex_EOF, Loc: l.start}
+	return l.failNear("unterminated dollar-quoted string", l.start)
 }
 
 // scanDollarTag scans and returns a dollar tag ($...$) if present.
@@ -797,8 +800,8 @@ func (l *Lexer) lexParam() Token {
 
 	// Check for trailing junk
 	if l.pos < len(l.input) && isIdentStart(l.input[l.pos]) {
-		l.Err = fmt.Errorf("trailing junk after parameter")
-		return Token{Type: lex_EOF, Loc: l.start}
+		l.pos = l.identEnd(l.pos)
+		return l.failNear("trailing junk after parameter", l.start)
 	}
 
 	val, _ := strconv.ParseInt(l.input[start:l.pos], 10, 64)
@@ -867,67 +870,69 @@ func (l *Lexer) lexOperator() Token {
 	}
 
 	if len(op) >= 63 { // NAMEDATALEN
-		l.Err = fmt.Errorf("operator too long")
-		return Token{Type: lex_EOF, Loc: l.start}
+		return l.failNear("operator too long", l.start)
 	}
 
 	return Token{Type: lex_Op, Str: op, Loc: l.start}
 }
 
-// lexNumber handles integer and floating-point literals.
+// lexNumber handles integer and numeric literals as scan.l's decinteger,
+// numeric and real rules do, with their fail and junk rules: an underscore
+// only separates two digits, and a literal followed by an identifier is
+// trailing junk.
 func (l *Lexer) lexNumber() Token {
 	start := l.pos
 
 	// Check for hex, octal, or binary prefix
 	if l.input[l.pos] == '0' && l.pos+1 < len(l.input) {
-		next := l.input[l.pos+1]
-		if next == 'x' || next == 'X' {
-			return l.lexHexNumber()
-		}
-		if next == 'o' || next == 'O' {
-			return l.lexOctalNumber()
-		}
-		if next == 'b' || next == 'B' {
-			return l.lexBinaryNumber()
+		switch l.input[l.pos+1] {
+		case 'x', 'X':
+			return l.lexRadixNumber(16, isHexDigit, "invalid hexadecimal integer")
+		case 'o', 'O':
+			return l.lexRadixNumber(8, isOctalDigit, "invalid octal integer")
+		case 'b', 'B':
+			return l.lexRadixNumber(2, isBinaryDigit, "invalid binary integer")
 		}
 	}
 
-	// Decimal integer or numeric
-	l.scanDecDigits()
+	// Decimal integer, unless the literal starts with its decimal point
+	if l.input[l.pos] != '.' {
+		l.pos = scanDigits(l.input, l.pos, isDigit)
+	}
 
 	isFloat := false
 
-	// Check for decimal point
-	if l.pos < len(l.input) && l.input[l.pos] == '.' {
-		// Check for .. (DOT_DOT)
-		if l.pos+1 < len(l.input) && l.input[l.pos+1] == '.' {
-			// Return the integer part, let .. be handled separately
-			goto done
-		}
+	// Decimal point, unless it starts .. (numericfail: the integer is
+	// returned and .. lexed next)
+	if l.pos < len(l.input) && l.input[l.pos] == '.' && (l.pos+1 >= len(l.input) || l.input[l.pos+1] != '.') {
 		l.pos++
-		l.scanDecDigits()
+		if l.pos < len(l.input) && isDigit(l.input[l.pos]) {
+			l.pos = scanDigits(l.input, l.pos, isDigit)
+		}
 		isFloat = true
 	}
 
-	// Check for exponent
+	// Exponent; a sign with no digit after it is realfail
 	if l.pos < len(l.input) && (l.input[l.pos] == 'e' || l.input[l.pos] == 'E') {
-		l.pos++
-		if l.pos < len(l.input) && (l.input[l.pos] == '+' || l.input[l.pos] == '-') {
-			l.pos++
+		p := l.pos + 1
+		signed := p < len(l.input) && (l.input[p] == '+' || l.input[p] == '-')
+		if signed {
+			p++
 		}
-		if l.pos >= len(l.input) || !isDigit(l.input[l.pos]) {
-			l.Err = fmt.Errorf("trailing junk after numeric literal")
-			return Token{Type: lex_EOF, Loc: l.start}
+		switch {
+		case p < len(l.input) && isDigit(l.input[p]):
+			l.pos = scanDigits(l.input, p, isDigit)
+			isFloat = true
+		case signed:
+			l.pos = p
+			return l.failNear("trailing junk after numeric literal", start)
 		}
-		l.scanDecDigits()
-		isFloat = true
 	}
 
-done:
-	// Check for trailing identifier
+	// A literal followed by an identifier is junk
 	if l.pos < len(l.input) && isIdentStart(l.input[l.pos]) {
-		l.Err = fmt.Errorf("trailing junk after numeric literal")
-		return Token{Type: lex_EOF, Loc: l.start}
+		l.pos = l.identEnd(l.pos)
+		return l.failNear("trailing junk after numeric literal", start)
 	}
 
 	numStr := l.input[start:l.pos]
@@ -948,101 +953,62 @@ done:
 	return Token{Type: lex_ICONST, Ival: val, Str: numStr, Loc: l.start}
 }
 
-// scanDecDigits scans decimal digits with optional underscores.
-func (l *Lexer) scanDecDigits() {
-	for l.pos < len(l.input) {
-		ch := l.input[l.pos]
-		if isDigit(ch) || ch == '_' {
-			l.pos++
-		} else {
-			break
+// scanDigits is the end of the integer at p, whose first byte is a digit:
+// digits, each optionally preceded by one underscore, as scan.l's
+// {digit}(_?{digit})*.
+func scanDigits(s string, p int, digit func(byte) bool) int {
+	p++
+	for p < len(s) {
+		switch {
+		case digit(s[p]):
+			p++
+		case s[p] == '_' && p+1 < len(s) && digit(s[p+1]):
+			p += 2
+		default:
+			return p
 		}
 	}
+	return p
 }
 
-// lexHexNumber handles 0x... hex integers.
-func (l *Lexer) lexHexNumber() Token {
+// identEnd is the end of the identifier starting at p: an identifier start
+// byte and the identifier bytes after it.
+func (l *Lexer) identEnd(p int) int {
+	p++
+	for p < len(l.input) && isIdentCont(l.input[p]) {
+		p++
+	}
+	return p
+}
+
+// lexRadixNumber handles 0x, 0o and 0b integers as scan.l's hexinteger,
+// octinteger and bininteger rules do: 0x(_?{hexdigit})+. A prefix with no
+// digit is the fail rule's error (0x, 0x_), unless the identifier after the
+// 0 runs longer, which is decinteger_junk, as flex takes the longest match.
+func (l *Lexer) lexRadixNumber(base int, digit func(byte) bool, invalid string) Token {
 	start := l.pos
-	l.pos += 2 // skip 0x
-
-	if l.pos >= len(l.input) || (!isHexDigit(l.input[l.pos]) && l.input[l.pos] != '_') {
-		l.Err = fmt.Errorf("invalid hexadecimal integer")
-		return Token{Type: lex_EOF, Loc: l.start}
+	p := start + 2
+	if p < len(l.input) && l.input[p] == '_' {
+		p++
 	}
-
-	for l.pos < len(l.input) && (isHexDigit(l.input[l.pos]) || l.input[l.pos] == '_') {
-		l.pos++
+	valid := p < len(l.input) && digit(l.input[p])
+	if valid {
+		p = scanDigits(l.input, p, digit)
 	}
+	l.pos = p
 
-	if l.pos < len(l.input) && isIdentStart(l.input[l.pos]) {
-		l.Err = fmt.Errorf("trailing junk after numeric literal")
-		return Token{Type: lex_EOF, Loc: l.start}
+	if junk := l.identEnd(start + 1); junk > l.pos {
+		l.pos = junk
+		return l.failNear("trailing junk after numeric literal", start)
+	}
+	if !valid {
+		return l.failNear(invalid, start)
 	}
 
 	numStr := l.input[start:l.pos]
 	numStr = strings.ReplaceAll(numStr, "_", "")
 
-	val, err := strconv.ParseInt(numStr[2:], 16, 64)
-	if err != nil {
-		return Token{Type: lex_FCONST, Str: numStr, Loc: l.start}
-	}
-
-	return Token{Type: lex_ICONST, Ival: val, Str: numStr, Loc: l.start}
-}
-
-// lexOctalNumber handles 0o... octal integers.
-func (l *Lexer) lexOctalNumber() Token {
-	start := l.pos
-	l.pos += 2 // skip 0o
-
-	if l.pos >= len(l.input) || (!isOctalDigit(l.input[l.pos]) && l.input[l.pos] != '_') {
-		l.Err = fmt.Errorf("invalid octal integer")
-		return Token{Type: lex_EOF, Loc: l.start}
-	}
-
-	for l.pos < len(l.input) && (isOctalDigit(l.input[l.pos]) || l.input[l.pos] == '_') {
-		l.pos++
-	}
-
-	if l.pos < len(l.input) && isIdentStart(l.input[l.pos]) {
-		l.Err = fmt.Errorf("trailing junk after numeric literal")
-		return Token{Type: lex_EOF, Loc: l.start}
-	}
-
-	numStr := l.input[start:l.pos]
-	numStr = strings.ReplaceAll(numStr, "_", "")
-
-	val, err := strconv.ParseInt(numStr[2:], 8, 64)
-	if err != nil {
-		return Token{Type: lex_FCONST, Str: numStr, Loc: l.start}
-	}
-
-	return Token{Type: lex_ICONST, Ival: val, Str: numStr, Loc: l.start}
-}
-
-// lexBinaryNumber handles 0b... binary integers.
-func (l *Lexer) lexBinaryNumber() Token {
-	start := l.pos
-	l.pos += 2 // skip 0b
-
-	if l.pos >= len(l.input) || (!isBinaryDigit(l.input[l.pos]) && l.input[l.pos] != '_') {
-		l.Err = fmt.Errorf("invalid binary integer")
-		return Token{Type: lex_EOF, Loc: l.start}
-	}
-
-	for l.pos < len(l.input) && (isBinaryDigit(l.input[l.pos]) || l.input[l.pos] == '_') {
-		l.pos++
-	}
-
-	if l.pos < len(l.input) && isIdentStart(l.input[l.pos]) {
-		l.Err = fmt.Errorf("trailing junk after numeric literal")
-		return Token{Type: lex_EOF, Loc: l.start}
-	}
-
-	numStr := l.input[start:l.pos]
-	numStr = strings.ReplaceAll(numStr, "_", "")
-
-	val, err := strconv.ParseInt(numStr[2:], 2, 64)
+	val, err := strconv.ParseInt(numStr[2:], base, 64)
 	if err != nil {
 		return Token{Type: lex_FCONST, Str: numStr, Loc: l.start}
 	}
@@ -1323,60 +1289,92 @@ func (l *Lexer) skipWhitespaceAndComments() {
 	}
 }
 
-// decodeUnicodeString decodes a U& string with the given escape character.
-func (l *Lexer) decodeUnicodeString(s string, escape rune) (string, error) {
+// decodeUnicodeString decodes the body s of a U& string or identifier that
+// starts at at, as parser.c's str_udeescape does. PostgreSQL reports an error
+// at at+3+i, i the offset in s of the escape it refuses (the 3 is U&').
+func (l *Lexer) decodeUnicodeString(s string, escape byte, at int) (string, bool) {
 	var buf strings.Builder
-	runes := []rune(s)
-	n := len(runes)
-
-	for i := 0; i < n; i++ {
-		r := runes[i]
-
-		if r == escape {
-			if i+1 >= n {
-				return "", fmt.Errorf("invalid Unicode escape sequence at end of string")
+	var pairFirst rune
+	i := 0
+	for i < len(s) {
+		if s[i] != escape {
+			if pairFirst != 0 {
+				return "", l.badUnicode("invalid Unicode surrogate pair", at+3+i, "")
 			}
-
-			next := runes[i+1]
-
-			// Escaped escape char
-			if next == escape {
-				buf.WriteRune(escape)
-				i++
-				continue
-			}
-
-			// + indicates 6-digit hex
-			if next == '+' {
-				if i+8 > n {
-					return "", fmt.Errorf("invalid Unicode escape sequence")
-				}
-				hexStr := string(runes[i+2 : i+8])
-				val, err := strconv.ParseInt(hexStr, 16, 32)
-				if err != nil {
-					return "", fmt.Errorf("invalid Unicode escape sequence: %v", err)
-				}
-				buf.WriteRune(rune(val))
-				i += 7
-				continue
-			}
-
-			// Otherwise 4-digit hex
-			if i+5 > n {
-				return "", fmt.Errorf("invalid Unicode escape sequence")
-			}
-			hexStr := string(runes[i+1 : i+5])
-			val, err := strconv.ParseInt(hexStr, 16, 32)
-			if err != nil {
-				return "", fmt.Errorf("invalid Unicode escape sequence: %v", err)
-			}
-			buf.WriteRune(rune(val))
-			i += 4
+			buf.WriteByte(s[i])
+			i++
 			continue
 		}
-
-		buf.WriteRune(r)
+		var c int64
+		var n int
+		switch {
+		case i+1 < len(s) && s[i+1] == escape:
+			if pairFirst != 0 {
+				return "", l.badUnicode("invalid Unicode surrogate pair", at+3+i, "")
+			}
+			buf.WriteByte(escape)
+			i += 2
+			continue
+		case i+5 <= len(s) && allHex(s[i+1:i+5]):
+			c, _ = strconv.ParseInt(s[i+1:i+5], 16, 32)
+			n = 5
+		case i+8 <= len(s) && s[i+1] == '+' && allHex(s[i+2:i+8]):
+			c, _ = strconv.ParseInt(s[i+2:i+8], 16, 32)
+			n = 8
+		default:
+			return "", l.badUnicode("invalid Unicode escape", at+3+i, "Unicode escapes must be \\XXXX or \\+XXXXXX.")
+		}
+		r := rune(c)
+		if r == 0 || r > unicode.MaxRune {
+			return "", l.badUnicode("invalid Unicode escape value", at+3+i, "")
+		}
+		switch {
+		case pairFirst != 0 && isUTF16SurrogateSecond(r):
+			r = surrogateToCodepoint(pairFirst, r)
+			pairFirst = 0
+		case pairFirst != 0 || isUTF16SurrogateSecond(r):
+			return "", l.badUnicode("invalid Unicode surrogate pair", at+3+i, "")
+		}
+		if isUTF16SurrogateFirst(r) {
+			pairFirst = r
+		} else {
+			buf.WriteRune(r)
+		}
+		i += n
 	}
+	if pairFirst != 0 {
+		return "", l.badUnicode("invalid Unicode surrogate pair", at+3+len(s), "")
+	}
+	return buf.String(), true
+}
 
-	return buf.String(), nil
+// badUnicode records a U& escape error, 42601 with no "at or near" text as
+// parser.c reports it, and is false.
+func (l *Lexer) badUnicode(message string, at int, hint string) bool {
+	l.failAt(codeSyntaxError, message, at, hint)
+	return false
+}
+
+// failNear records message as scan.l's yyerror reports it, followed by the
+// text from at to the scanner's position ("at or near"), or by "at end of
+// input" when at is the end, and ends the token stream.
+func (l *Lexer) failNear(message string, at int) Token {
+	if at >= len(l.input) {
+		message += " at end of input"
+	} else {
+		message += " at or near \"" + l.input[at:l.pos] + "\""
+	}
+	return l.failAt(codeSyntaxError, message, at, "")
+}
+
+// failAt records the lexer's first error, at the 0-based offset at, and ends
+// the token stream: the lexer returns EOF from here on, as PostgreSQL's
+// scanner stops at its first error.
+func (l *Lexer) failAt(code, message string, at int, hint string) Token {
+	if l.Err == nil {
+		l.Err = &ParseError{Code: code, Message: message, Hint: hint, Position: at}
+	}
+	l.state = stateInitial
+	l.pos = len(l.input)
+	return Token{Type: lex_EOF, Loc: at}
 }

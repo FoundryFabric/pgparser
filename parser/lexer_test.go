@@ -380,10 +380,10 @@ func TestLexerErrors(t *testing.T) {
 		input string
 		err   string
 	}{
-		{"'unterminated", "unterminated quoted string"},
-		{`"unterminated`, "unterminated quoted identifier"},
-		{"/* unterminated", "unterminated /* comment"},
-		{"$$unterminated", "unterminated dollar-quoted string"},
+		{"'unterminated", `unterminated quoted string at or near "'unterminated"`},
+		{`"unterminated`, `unterminated quoted identifier at or near ""unterminated"`},
+		{"/* unterminated", `unterminated /* comment at or near "/* unterminated"`},
+		{"$$unterminated", `unterminated dollar-quoted string at or near "$$unterminated"`},
 	}
 
 	for _, tt := range tests {

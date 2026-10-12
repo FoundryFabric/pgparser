@@ -1,7 +1,7 @@
 // Package parser provides the public API for parsing PostgreSQL SQL.
 package parser
 
-//go:generate goyacc -o parser.go -p pg gram.y
+//go:generate go run golang.org/x/tools/cmd/goyacc@v0.40.0 -o parser.go -p pg gram.y
 
 import (
 	"fmt"
@@ -20,6 +20,10 @@ type parserLexer struct {
 	lexer  *Lexer
 	result *nodes.List
 	err    error
+
+	// lastLoc is the Loc of the token Lex returned last: the one the grammar
+	// refuses when it calls Error.
+	lastLoc int
 
 	// One-token lookahead for NOT_LA, NULLS_LA, WITH_LA, FORMAT_LA.
 	// PostgreSQL's parser.c uses this to disambiguate tokens based on context.
@@ -52,6 +56,7 @@ func (l *parserLexer) Lex(lval *pgSymType) int {
 		tok = l.lexer.NextToken()
 		tokType = l.mapTokenType(tok)
 	}
+	l.lastLoc = tok.Loc
 
 	// Check if this token needs lookahead-based replacement
 	if l.needsLookahead(tokType) {
@@ -67,6 +72,10 @@ func (l *parserLexer) Lex(lval *pgSymType) int {
 		// Replace current token based on lookahead
 		tokType = l.applyLookahead(tokType, nextTokType)
 	}
+
+	// A token's location is its first byte, as Bison's @N is in PostgreSQL's
+	// gram.y; a nonterminal inherits its first symbol's.
+	lval.loc = nodes.ParseLoc(tok.Loc)
 
 	// Set semantic values based on token type
 	switch tokType {
@@ -146,11 +155,13 @@ func (l *parserLexer) applyLookahead(curToken, nextToken int) int {
 	return curToken
 }
 
-// Error implements pgLexer.Error
+// Error implements pgLexer.Error. The grammar refuses the token Lex
+// returned last, so the error is at that token, as PostgreSQL's is.
 func (l *parserLexer) Error(s string) {
 	l.err = &ParseError{
+		Code:     codeSyntaxError,
 		Message:  s,
-		Position: l.lexer.pos,
+		Position: l.lastLoc,
 	}
 }
 
@@ -219,11 +230,25 @@ func (l *parserLexer) mapTokenType(tok Token) int {
 	return tok.Type
 }
 
-// ParseError represents a parse error with position information.
+// ParseError is a statement PostgreSQL refuses while scanning or parsing it,
+// with the SQLSTATE, message, hint and position PostgreSQL reports.
 type ParseError struct {
-	Message  string
+	// Code is the SQLSTATE: 42601 (syntax_error) for a token the grammar
+	// refuses and for most scanner errors, 22025 (invalid_escape_sequence)
+	// for an incomplete \u or \U escape, 0A000 for a U& string while
+	// standard_conforming_strings is off.
+	Code    string
+	Message string
+	// Hint is PostgreSQL's HINT for the error, or empty.
+	Hint string
+	// Position is the 0-based byte offset of the error in the input: the
+	// first byte of the token it is at or near, len(input) at end of input.
+	// PostgreSQL reports it 1-based, as the ErrorResponse's P field.
 	Position int
 }
+
+// codeSyntaxError is SQLSTATE 42601, syntax_error.
+const codeSyntaxError = "42601"
 
 func (e *ParseError) Error() string {
 	return e.Message
@@ -262,12 +287,19 @@ func Parse(input string, opts ...Option) (*nodes.List, error) {
 	lexer.lexer.noticeHandler = cfg.noticeHandler
 	ret := pgParse(lexer)
 
+	// A scanner error ends the token stream, so it comes before any syntax
+	// error the grammar raises at the end of the stream; PostgreSQL raises it
+	// first too, when the scanner reaches it.
+	if lexer.lexer.Err != nil {
+		return nil, lexer.lexer.Err
+	}
+
 	if lexer.err != nil {
 		return nil, lexer.err
 	}
 
 	if ret != 0 {
-		return nil, &ParseError{Message: fmt.Sprintf("parse error (ret=%d)", ret), Position: lexer.lexer.pos}
+		return nil, &ParseError{Code: codeSyntaxError, Message: fmt.Sprintf("parse error (ret=%d)", ret), Position: lexer.lastLoc}
 	}
 
 	return lexer.result, nil
