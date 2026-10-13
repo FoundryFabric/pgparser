@@ -138,3 +138,27 @@ func TestParseErrorPositionIsTheRefusedToken(t *testing.T) {
 		}
 	}
 }
+
+// TestParseRefusesLimitComma: PostgreSQL 16's grammar refuses LIMIT #,# with
+// 42601 and a HINT, at the LIMIT keyword (verified against 16.4: position
+// 17 for the first statement), rather than reading it as OFFSET and LIMIT.
+func TestParseRefusesLimitComma(t *testing.T) {
+	for _, c := range []struct {
+		sql      string
+		position int // 1-based, as PostgreSQL 16 answered
+	}{
+		{"SELECT a FROM t LIMIT 1, 2", 17},
+		{"select a from t where a > 1   limit $1, $2 for update", 31},
+		{"(select 1 limit 1, 2) union select 2", 11},
+	} {
+		_, err := Parse(c.sql)
+		var pe *ParseError
+		if !errors.As(err, &pe) || pe.Code != "42601" || pe.Message != "LIMIT #,# syntax is not supported" ||
+			pe.Hint != "Use separate LIMIT and OFFSET clauses." || pe.Position+1 != c.position {
+			t.Errorf("Parse(%q) = %#v, want 42601 LIMIT #,# at %d", c.sql, err, c.position)
+		}
+	}
+	if _, err := Parse("SELECT a FROM t LIMIT 2 OFFSET 1"); err != nil {
+		t.Errorf("LIMIT and OFFSET as separate clauses: %v", err)
+	}
+}
