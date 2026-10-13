@@ -8566,13 +8566,10 @@ limit_clause:
 		}
 	| LIMIT select_limit_value ',' select_offset_value
 		{
-			/* PostgreSQL disallows this syntax with an error, but we parse it.
-			 * The LIMIT #,# syntax is deprecated. */
-			$$ = &SelectLimit{
-				LimitOffset: $2,
-				LimitCount:  $4,
-				LimitOption: nodes.LIMIT_OPTION_COUNT,
-			}
+			/* PostgreSQL 16 refuses LIMIT #,# at the LIMIT keyword. */
+			grammarError(pglex, codeSyntaxError, "LIMIT #,# syntax is not supported",
+				"Use separate LIMIT and OFFSET clauses.", $<loc>1)
+			return 1
 		}
 	| FETCH first_or_next select_fetch_first_value row_or_rows ONLY
 		{
@@ -17308,6 +17305,16 @@ const (
 )
 
 // Helper functions called from grammar actions
+
+// grammarError records an error a grammar action raises, as an ereport in
+// PostgreSQL's gram.y does, with its SQLSTATE, message, hint and 0-based
+// position. The action then ends the parse, as ereport's longjmp does, so the
+// first error stands.
+func grammarError(lex pgLexer, code, message, hint string, loc nodes.ParseLoc) {
+	if pl, ok := lex.(*parserLexer); ok && pl.err == nil {
+		pl.err = &ParseError{Code: code, Message: message, Hint: hint, Position: int(loc)}
+	}
+}
 
 // setParseResult stores the parse result in the lexer.
 func setParseResult(lex pgLexer, result *nodes.List) {
