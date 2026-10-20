@@ -65,6 +65,10 @@ const (
 	stateXDOLQ              // dollar-quoted strings
 	stateXUI                // quoted identifier with Unicode escapes
 	stateXUS                // quoted string with Unicode escapes
+
+	// numLexerStates counts the states above; it is not a state.
+	// TestLexerEveryStateAnswersEndOfInput walks them all.
+	numLexerStates
 )
 
 // Token represents a lexical token.
@@ -140,19 +144,12 @@ func NewLexer(input string) *Lexer {
 
 // NextToken returns the next token from the input.
 func (l *Lexer) NextToken() Token {
+	// Every state answers the end of the input itself: lexInitial returns
+	// EOF, lexQuoteContinue the completed literal, and the rest the error
+	// for what they leave unterminated, as scan.l's <<EOF>> rules do. A
+	// literal or comment whose opening is the last byte of the input
+	// reaches here with nothing after it, and must still be refused.
 	for {
-		if l.pos >= len(l.input) {
-			// At EOF - if we're in a string state, that's an error
-			// If we're in quote-stop state, return the completed string
-			if l.state == stateXQS {
-				return l.lexQuoteContinue()
-			}
-			if l.state == stateXC { // "/*" ends the input: unterminated
-				l.lexComment()
-			}
-			return Token{Type: lex_EOF, Loc: l.pos}
-		}
-
 		switch l.state {
 		case stateInitial:
 			l.start = l.pos

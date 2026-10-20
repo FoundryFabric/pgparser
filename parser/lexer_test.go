@@ -356,7 +356,8 @@ func TestLexerOperatorRunIsLinear(t *testing.T) {
 	}
 }
 
-// refToken is a token refLex expects: position, text and type.
+// refToken is a token refLex expects: position, text (a literal's value)
+// and type.
 type refToken struct {
 	loc  int
 	text string
@@ -364,9 +365,10 @@ type refToken struct {
 }
 
 // refLex is a plain reference lexer for TestLexerOperatorMatchesReference's
-// alphabet (whitespace, comments, "::", ":=", ':', identifiers, digits,
-// operators), applying the operator rule per token with no caching. It returns
-// the tokens and the expected error's 0-based position and message, or -1.
+// alphabet (whitespace, comments, '' strings, "" identifiers, "::", ":=", ':',
+// identifiers, digits, operators), applying the operator rule per token with
+// no caching. It returns the tokens and the expected error's 0-based position
+// and message, or -1.
 func refLex(s string) ([]refToken, int, string) {
 	isLetter := func(c byte) bool { return c >= 'a' && c <= 'z' }
 	isDigit := func(c byte) bool { return c >= '0' && c <= '9' }
@@ -396,6 +398,70 @@ func refLex(s string) ([]refToken, int, string) {
 			for p < len(s) && s[p] != '\n' {
 				p++
 			}
+		case c == '\'':
+			var val strings.Builder
+			q := p + 1
+			for {
+				if q >= len(s) {
+					return toks, p, `unterminated quoted string at or near "` + s[p:] + `"`
+				}
+				if s[q] != '\'' {
+					val.WriteByte(s[q])
+					q++
+					continue
+				}
+				if q+1 < len(s) && s[q+1] == '\'' {
+					val.WriteByte('\'')
+					q += 2
+					continue
+				}
+				q++
+				// whitespace holding a newline, then a quote, continues it
+				r, newline := q, false
+				for r < len(s) {
+					if s[r] == ' ' || s[r] == '\n' {
+						newline = newline || s[r] == '\n'
+						r++
+					} else if strings.HasPrefix(s[r:], "--") {
+						for r < len(s) && s[r] != '\n' {
+							r++
+						}
+					} else {
+						break
+					}
+				}
+				if !newline || r >= len(s) || s[r] != '\'' {
+					break
+				}
+				q = r + 1
+			}
+			toks, p = append(toks, refToken{p, val.String(), lex_SCONST}), q
+		case c == '"':
+			var val strings.Builder
+			q := p + 1
+			for {
+				if q >= len(s) {
+					return toks, p, `unterminated quoted identifier at or near "` + s[p:] + `"`
+				}
+				if s[q] == '"' && q+1 < len(s) && s[q+1] == '"' {
+					val.WriteByte('"')
+					q += 2
+				} else if s[q] == '"' {
+					q++
+					break
+				} else {
+					val.WriteByte(s[q])
+					q++
+				}
+			}
+			if val.Len() == 0 {
+				return toks, p, `zero-length delimited identifier at or near "` + s[p:q] + `"`
+			}
+			ident := val.String()
+			if len(ident) >= 64 { // ASCII: truncated to 63 bytes
+				ident = ident[:63]
+			}
+			toks, p = append(toks, refToken{p, ident, lex_IDENT}), q
 		case strings.HasPrefix(s[p:], "::"):
 			toks, p = append(toks, refToken{p, "::", lex_TYPECAST}), p+2
 		case strings.HasPrefix(s[p:], ":="):
@@ -459,11 +525,13 @@ func refLex(s string) ([]refToken, int, string) {
 }
 
 // TestLexerOperatorMatchesReference compares the lexer with refLex on seeded
-// random strings: same tokens and same error.
+// random strings, often ending in an open quote or "/*": same tokens and same
+// error.
 func TestLexerOperatorMatchesReference(t *testing.T) {
 	pieces := []string{
 		"~", "!", "@", "#", "^", "&", "|", "`", "?", "%", "+", "-", "*", "/", "<", ">", "=",
-		"/", "*", "-", "+", " ", "\n", "a", "b", "1", ":", "/**/", "/*+-*/", "--x\n", "<>", "::", "+-", "<<",
+		"/", "*", "-", "+", " ", "\n", "a", "c", "1", ":", "/**/", "/*+-*/", "--x\n", "<>", "::", "+-", "<<",
+		"'", "'", "''", "\"", "\"",
 	}
 	rng := rand.New(rand.NewSource(20261020))
 	count := 50_000
@@ -485,7 +553,7 @@ func TestLexerOperatorMatchesReference(t *testing.T) {
 		lexer := NewLexer(s)
 		var got []refToken
 		for tok := lexer.NextToken(); tok.Type != lex_EOF; tok = lexer.NextToken() {
-			got = append(got, refToken{tok.Loc, s[tok.Loc:min(lexer.pos, len(s))], tok.Type})
+			got = append(got, refToken{tok.Loc, tok.Str, tok.Type})
 		}
 		var pe *ParseError
 		switch {
@@ -663,6 +731,36 @@ func TestLexerLocation(t *testing.T) {
 	tok = lexer.NextToken()
 	if tok.Loc != 7 {
 		t.Errorf("expected foo location 7, got %d", tok.Loc)
+	}
+}
+
+// TestLexerEveryStateAnswersEndOfInput puts the lexer in each of its states
+// at the end of the input. The initial state returns EOF and the quote-stop
+// state its completed literal; every other state is inside a literal or
+// comment, which the end leaves unterminated, so it must report an error of
+// its own. A state added without a case in NextToken fails here with the
+// "unknown lexer state" error.
+func TestLexerEveryStateAnswersEndOfInput(t *testing.T) {
+	for state := LexerState(0); state < numLexerStates; state++ {
+		lexer := NewLexer("x")
+		lexer.pos, lexer.state = 1, state
+		tok := lexer.NextToken()
+		var pe *ParseError
+		switch {
+		case state == stateInitial:
+			if tok.Type != lex_EOF || lexer.Err != nil {
+				t.Errorf("state %d at the end: %+v, %v; want EOF", state, tok, lexer.Err)
+			}
+		case state == stateXQS:
+			if tok.Type != lex_SCONST || lexer.Err != nil {
+				t.Errorf("state %d at the end: %+v, %v; want the completed literal", state, tok, lexer.Err)
+			}
+		case !errors.As(lexer.Err, &pe) || pe.Code == "XX000" || !strings.HasPrefix(pe.Message, "unterminated "):
+			t.Errorf("state %d at the end: %+v, %v; want an unterminated-literal error", state, tok, lexer.Err)
+		}
+		if next := lexer.NextToken(); next.Type != lex_EOF {
+			t.Errorf("state %d: after the end, %+v; want EOF", state, next)
+		}
 	}
 }
 
