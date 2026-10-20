@@ -174,6 +174,7 @@ import (
 %type <ival>  for_locking_strength opt_nowait_or_skip
 %type <list>  locked_rels_list
 %type <node>   offset_clause select_limit_value select_offset_value select_fetch_first_value
+%type <node>   I_or_F_const
 %type <ival>   sub_type
 %type <list>   subquery_Op
 %type <node>   case_expr when_clause case_default case_arg
@@ -8642,13 +8643,26 @@ select_offset_value:
 
 select_fetch_first_value:
 	c_expr { $$ = $1 }
-	| '+' c_expr
+	| '+' I_or_F_const
 		{
-			$$ = $2
+			$$ = makeAExpr(nodes.AEXPR_OP, "+", nil, $2, $<loc>1)
 		}
-	| '-' c_expr
+	| '-' I_or_F_const
 		{
 			$$ = doNegate($2, $<loc>1)
+		}
+	;
+
+/* A signed FETCH FIRST or OFFSET count takes a number after its sign, not
+ * an expression, as PostgreSQL's grammar does. */
+I_or_F_const:
+	Iconst
+		{
+			$$ = &nodes.A_Const{Val: &nodes.Integer{Ival: $1}, Location: $<loc>1}
+		}
+	| FCONST
+		{
+			$$ = &nodes.A_Const{Val: &nodes.Float{Fval: $1}, Location: $<loc>1}
 		}
 	;
 

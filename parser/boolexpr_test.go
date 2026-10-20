@@ -379,6 +379,82 @@ func TestUnaryPlusIsKept(t *testing.T) {
 	}
 }
 
+// TestSignedFetchCountIsAConstant pins a signed FETCH FIRST or SQL OFFSET
+// count to PostgreSQL 16's rule: the sign takes a number, not an
+// expression; plus is kept as an operator and minus folds into the
+// constant. Read as for TestUnaryPlusIsKept, from PostgreSQL 16.15's raw
+// tree of the same SELECT (2026-10-20). The refusals of +x, -x, +(1) and
+// + 'a' are pinned in TestParseErrorPositionIsTheRefusedToken.
+func TestSignedFetchCountIsAConstant(t *testing.T) {
+	cases := []struct{ sql, offset, count string }{
+		{"select 1 from nosuch_q fetch first +2 rows only", "<>", "+@35(<>,int:2@36)"},
+		{"select 1 from nosuch_q fetch first +2.5 rows only", "<>", "+@35(<>,float:2.5@36)"},
+		{"select 1 from nosuch_q order by 1 offset +3 rows fetch next +1 row with ties", "+@41(<>,int:3@42)", "+@60(<>,int:1@61)"},
+		{"select 1 from nosuch_q offset -3 rows fetch first -2.5 rows only", "int:-3@30", "float:-2.5@50"},
+		{"select 1 from nosuch_q fetch first x rows only", "<>", "x@35"},
+	}
+	for _, c := range cases {
+		sel := selectOf(t, c.sql)
+		if got := exprShape(sel.LimitOffset); got != c.offset {
+			t.Errorf("%q: offset %s, want %s (PostgreSQL 16)", c.sql, got, c.offset)
+		}
+		if got := exprShape(sel.LimitCount); got != c.count {
+			t.Errorf("%q: count %s, want %s (PostgreSQL 16)", c.sql, got, c.count)
+		}
+	}
+}
+
+// stmtOf is the first statement of a parse, unwrapped from its RawStmt.
+func stmtOf(stmts *nodes.List) nodes.Node {
+	n := stmts.Items[0]
+	if raw, ok := n.(*nodes.RawStmt); ok {
+		n = raw.Stmt
+	}
+	return n
+}
+
+// TestNumericOnlyFoldsPlus pins the places PostgreSQL 16's grammar folds a
+// sign into a number rather than building an operator: NumericOnly
+// (sequence options) and SignedIconst (SET STATISTICS). A leading plus
+// leaves the number, and NumericOnly's minus over a Float keeps a Float,
+// int64's least value included (the Integer fold is doNegate's, in
+// expressions only); PostgreSQL 16.15's raw tree has 5, 1.5, the Float
+// -9223372036854775808 and 5.
+func TestNumericOnlyFoldsPlus(t *testing.T) {
+	stmts, err := Parse("create sequence s minvalue +5 increment -9223372036854775808 maxvalue +1.5")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var got []string
+	for _, o := range stmtOf(stmts).(*nodes.CreateSeqStmt).Options.Items {
+		switch v := o.(*nodes.DefElem).Arg.(type) {
+		case *nodes.Integer:
+			got = append(got, fmt.Sprintf("int:%d", v.Ival))
+		case *nodes.Float:
+			got = append(got, "float:"+v.Fval)
+		default:
+			got = append(got, fmt.Sprintf("%T", v))
+		}
+	}
+	if want := []string{"int:5", "float:-9223372036854775808", "float:1.5"}; !reflect.DeepEqual(got, want) {
+		t.Errorf("sequence options %v, want %v", got, want)
+	}
+	stmts, err = Parse("alter table t alter column a set statistics +5")
+	if err != nil {
+		t.Fatal(err)
+	}
+	def := stmtOf(stmts).(*nodes.AlterTableStmt).Cmds.Items[0].(*nodes.AlterTableCmd).Def
+	// The fork wraps the number in an unlocated A_Const (PostgreSQL 17's
+	// set_statistics_value shape; 16 has the bare Integer); either way the
+	// plus is folded, not an operator.
+	if ac, ok := def.(*nodes.A_Const); ok {
+		def = ac.Val
+	}
+	if i, ok := def.(*nodes.Integer); !ok || i.Ival != 5 {
+		t.Errorf("set statistics +5: %#v, want Integer 5", def)
+	}
+}
+
 // TestNegatedLiteralShape pins minus over a constant: a number is folded
 // into a constant at the minus sign, as PostgreSQL 16 does, parenthesised
 // or not, and a string is not (it is an operator, though PostgreSQL still
@@ -432,6 +508,14 @@ func TestNegatedLiteralShape(t *testing.T) {
 		// -- starts a comment, so this is the constant 1 on the next line;
 		// with a space it is a double negation.
 		{"select --1\n 1, - -1", []string{"int:1@12", "int:1@15"}},
+		// Upper case one past the least stays a Float; leading zeros do not
+		// change the value, so they fold too (PostgreSQL: Floats with the
+		// literal's text).
+		{"select -0X8000000000000001, -00009223372036854775808, -0x0008000000000000000", []string{
+			"float:-0X8000000000000001@7",
+			"int:-9223372036854775808@28",
+			"int:-9223372036854775808@54",
+		}},
 		// A double negation that does not fit stays a Float with the
 		// decimal text: PostgreSQL keeps the inner literal's own text
 		// (0x8000000000000000).

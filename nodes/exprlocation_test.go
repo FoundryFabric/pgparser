@@ -357,7 +357,7 @@ func corpusStatements(t testing.TB) []string {
 // invariantCounts is how many nodes checkInvariants asserted on.
 type invariantCounts struct {
 	connectives, nots, nullTests, located, spineChecked, spineEqual, mergeChecked int
-	prefixOps, negatives, targets                                                 int
+	prefixOps, prefixPlus, negatives, targets                                     int
 }
 
 // checkInvariants asserts, over every node of a parsed statement:
@@ -466,6 +466,9 @@ func checkNode(sql string, n nodes.Node, word func(nodes.ParseLoc) string, fail 
 		if e.Kind == nodes.AEXPR_OP && e.Lexpr == nil && e.Name.Len() == 1 {
 			if op := e.Name.Items[0].(*nodes.String).Str; op == "+" || op == "-" {
 				c.prefixOps++
+				if op == "+" {
+					c.prefixPlus++
+				}
 				if l := int(e.Location); l < 0 || l >= len(sql) || sql[l] != op[0] {
 					fail("prefix %s at %d is not at a %s", op, e.Location, op)
 				}
@@ -660,12 +663,12 @@ func TestInvariantsOverCorpus(t *testing.T) {
 	t.Logf("%d statements checked (%d rejected by the parser, skipped): %d AND/OR, %d NOT, %d NullTest asserted; "+
 		"%d connective arguments checked for a merged-in connective; %d nodes with a known ExprLocation, "+
 		"%d of them over a first operand (%d required to start exactly there); "+
-		"%d prefix +/-, %d negative constants, %d ResTargets asserted",
+		"%d prefix +/- (%d of them +), %d negative constants, %d ResTargets asserted",
 		checked, rejected, c.connectives, c.nots, c.nullTests, c.mergeChecked, c.located, c.spineChecked, c.spineEqual,
-		c.prefixOps, c.negatives, c.targets)
+		c.prefixOps, c.prefixPlus, c.negatives, c.targets)
 	if checked < 1000 || c.connectives < 100 || c.nots < 50 || c.nullTests < 100 || c.mergeChecked < 100 ||
 		c.located < 10000 || c.spineChecked < 1000 || c.spineEqual < 1000 ||
-		c.prefixOps < 100 || c.negatives < 100 || c.targets < 1000 {
+		c.prefixOps < 100 || c.prefixPlus < 20 || c.negatives < 100 || c.targets < 1000 {
 		t.Errorf("corpus too small to mean anything: %+v over %d statements", c, checked)
 	}
 }

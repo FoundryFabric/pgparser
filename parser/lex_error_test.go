@@ -151,6 +151,14 @@ func TestParseErrorPositionIsTheRefusedToken(t *testing.T) {
 		{"select 1 from t where not and a", 27},
 		{"select 1 from t where a and not", 32},
 		{"select +", 9},
+		// A signed FETCH FIRST or SQL OFFSET count is a number, as in
+		// PostgreSQL 16, which refuses these at the same positions.
+		{"select 1 fetch first +x rows only", 23},
+		{"select 1 fetch first -x rows only", 23},
+		{"select 1 fetch first +(1) rows only", 23},
+		{"select 1 fetch first + 'a' rows only", 24},
+		{"select 1 offset +x rows", 20},
+		{"select 1 offset - (2) rows", 23},
 		{"insert into t (", 16},
 		{"insert into t (a,) values (1)", 18},
 	} {
