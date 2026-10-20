@@ -98,10 +98,49 @@ func TestBoolExprShapeIsPostgreSQLs(t *testing.T) {
 		{"select 1 from t where j is not json or y is not document", "or@36(not@22(_),not@41(_))"},
 		{"select 1 from t where   (x  is   null) and   a", "and@39(isnull@28(x),a)"},
 		{"select 1 from t where 'é' = j and a and x isnull", "and@31(_,a,isnull@43(x))"},
+		// Must NOT flatten: the right operand, a different connective, or a
+		// NOT on the left. Read from PostgreSQL 16.15's RAW tree ("create
+		// view v as <stmt>" over a missing relation, whose debug_print_parse
+		// is logged before analysis), 2026-10-20; every row above was
+		// re-checked the same way.
+		{"select 1 from t where a and b or c", "or@30(and@24(a,b),c)"},
+		{"select 1 from t where a or b and c", "or@24(a,and@29(b,c))"},
+		{"select 1 from t where (a or b) and c", "and@31(or@25(a,b),c)"},
+		{"select 1 from t where not not a", "not@22(not@26(a))"},
+		{"select 1 from t where not a and b", "and@28(not@22(a),b)"},
+		{"select 1 from t where (not a) and (not b) and c", "and@30(not@23(a),not@35(b),c)"},
+		{"select 1 from t where a and (b or c) and d", "and@24(a,or@31(b,c),d)"},
+		{"select 1 from t where (a and b) or (c and d)", "or@32(and@25(a,b),and@38(c,d))"},
+		{"select 1 from t where not (not a and b)", "not@22(and@33(not@27(a),b))"},
 	}
 	for _, c := range cases {
 		if got := boolShape(selectOf(t, c.sql).WhereClause); got != c.want {
 			t.Errorf("%q\n got %s\nwant %s (PostgreSQL 16)", c.sql, got, c.want)
+		}
+	}
+}
+
+// TestBoolExprArgListsAreNotShared pins that extending a chain never
+// reaches a BoolExpr it does not own: in "(a and b), (c and d) and e" the
+// first target keeps exactly (a, b) after the second is built and extended,
+// and the two argument lists do not share storage.
+func TestBoolExprArgListsAreNotShared(t *testing.T) {
+	sel := selectOf(t, "select (a and b), (c and d) and e, (f or g) or h, i and j")
+	targets := sel.TargetList.Items
+	want := []string{"and@10(a,b)", "and@21(c,d,e)", "or@38(f,g,h)", "and@52(i,j)"} // PostgreSQL 16.15's raw tree
+	var lists [][]nodes.Node
+	for i, rt := range targets {
+		val := rt.(*nodes.ResTarget).Val
+		if got := boolShape(val); got != want[i] {
+			t.Errorf("target %d is %s, want %s", i, got, want[i])
+		}
+		lists = append(lists, val.(*nodes.BoolExpr).Args.Items)
+	}
+	for i := range lists {
+		for j := range lists {
+			if i != j && &lists[i][0] == &lists[j][0] {
+				t.Errorf("targets %d and %d share an argument array", i, j)
+			}
 		}
 	}
 }

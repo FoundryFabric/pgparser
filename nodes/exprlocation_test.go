@@ -2,11 +2,16 @@ package nodes_test
 
 import (
 	"fmt"
+	"os"
+	"path/filepath"
+	"reflect"
+	"sort"
 	"strings"
 	"testing"
 
 	"github.com/pgplex/pgparser/nodes"
 	"github.com/pgplex/pgparser/parser"
+	"github.com/pgplex/pgparser/parser/pgregress"
 )
 
 // lastTarget is the last target of a single SELECT.
@@ -154,8 +159,22 @@ func TestExprLocationRules(t *testing.T) {
 		{"RowExpr own only", &nodes.RowExpr{Args: list(at(1)), Location: 4}, 4},
 		{"List", list(at(-1), &nodes.A_Const{Location: -1}, at(6)), 6},
 		{"empty List", list(), -1},
+		{"List of only unlocated members", list(&nodes.A_Const{Location: -1}, at(-1)), -1},
+		// PostgreSQL's list rule: the first member that HAS a location, so a
+		// leading member known to be unlocated is skipped.
+		{"List skips an unlocated member", list(&nodes.A_Const{Location: -1}, at(6)), 6},
 		{"nil List", (*nodes.List)(nil), -1},
 		{"unlisted kind", &nodes.String{Str: "s"}, -1},
+		// Nodes that are not expressions are unknown, never a panic, even
+		// one with a Location field.
+		{"String", &nodes.String{Str: "s"}, -1},
+		{"Integer", &nodes.Integer{Ival: 3}, -1},
+		{"SelectStmt", &nodes.SelectStmt{}, -1},
+		{"RangeVar", &nodes.RangeVar{Location: 3}, -1},
+		{"ResTarget", &nodes.ResTarget{Val: at(3), Location: 3}, -1},
+		{"unknown leftmost leaf deep in a located spine", deepSpine(100, &nodes.XmlExpr{Location: 0}), -1},
+		{"located leftmost leaf deep in a located spine", deepSpine(100, at(0)), 0},
+		{"unlocated leftmost leaf deep in a located spine", deepSpine(100, at(-1)), 1},
 		{"unlisted kind under an operator", &nodes.A_Expr{Lexpr: &nodes.XmlExpr{Location: 1}, Location: 5}, -1},
 		{"unlisted kind first in AND", &nodes.BoolExpr{Args: list(&nodes.XmlExpr{}, at(7)), Location: 9}, -1},
 		{"unlisted kind after a located arg", &nodes.BoolExpr{Args: list(at(2), &nodes.XmlExpr{}), Location: 9}, 2},
@@ -184,6 +203,40 @@ func TestExprLocationRules(t *testing.T) {
 			t.Errorf("%s: ExprLocation = %d, want %d", c.name, got, c.want)
 		}
 	}
+}
+
+// deepSpine nests leaf as the first operand of depth located nodes,
+// cycling through every kind that walks into its first operand, each
+// located at byte 1 or later: A_Expr, BoolExpr, NullTest, BooleanTest,
+// SubLink, CollateClause, TypeCast, NamedArgExpr, A_Indirection, FuncCall.
+func deepSpine(depth int, leaf nodes.Node) nodes.Node {
+	n := leaf
+	for i := 0; i < depth; i++ {
+		loc := nodes.ParseLoc(1 + i)
+		switch i % 10 {
+		case 0:
+			n = &nodes.A_Expr{Lexpr: n, Location: loc}
+		case 1:
+			n = &nodes.BoolExpr{Boolop: nodes.AND_EXPR, Args: &nodes.List{Items: []nodes.Node{n, &nodes.ColumnRef{Location: 900}}}, Location: loc}
+		case 2:
+			n = &nodes.NullTest{Arg: n, Location: loc}
+		case 3:
+			n = &nodes.BooleanTest{Arg: n, Location: loc}
+		case 4:
+			n = &nodes.SubLink{Testexpr: n, Location: loc}
+		case 5:
+			n = &nodes.CollateClause{Arg: n, Location: loc}
+		case 6:
+			n = &nodes.TypeCast{Arg: n, TypeName: &nodes.TypeName{Location: -1}, Location: loc}
+		case 7:
+			n = &nodes.NamedArgExpr{Arg: n, Location: loc}
+		case 8:
+			n = &nodes.A_Indirection{Arg: n}
+		case 9:
+			n = &nodes.FuncCall{Args: &nodes.List{Items: []nodes.Node{n}}, Location: loc + 1000}
+		}
+	}
+	return n
 }
 
 // TestExprLocationTypedNil pins that a typed nil of every kind with a rule
@@ -225,4 +278,277 @@ func TestExprLocationLongChains(t *testing.T) {
 	if allocs := testing.AllocsPerRun(10, func() { nodes.ExprLocation(expr) }); allocs != 0 {
 		t.Errorf("ExprLocation allocates %.0f times per call", allocs)
 	}
+}
+
+// TestExprLocationDeepChains pins that 10,000 nested NOTs and a 10,000-deep
+// left spine of alternating AND/OR (each level parenthesised, so nothing
+// flattens) parse and answer without exhausting the stack.
+func TestExprLocationDeepChains(t *testing.T) {
+	const n = 10000
+	nots := "select 'é', " + strings.Repeat("not ", n) + "a"
+	if got, want := nodes.ExprLocation(lastTarget(t, nots).Val), strings.Index(nots, "not"); got != want {
+		t.Errorf("%d NOTs: ExprLocation %d, want %d", n, got, want)
+	}
+	var sb strings.Builder
+	sb.WriteString("select 'é', ")
+	sb.WriteString(strings.Repeat("(", n))
+	sb.WriteString("a0")
+	for i := 1; i <= n; i++ {
+		fmt.Fprintf(&sb, " %s a%d)", [2]string{"and", "or"}[i%2], i)
+	}
+	spine := sb.String()
+	expr := lastTarget(t, spine).Val
+	depth := 0
+	for be, ok := expr.(*nodes.BoolExpr); ok; be, ok = be.Args.Items[0].(*nodes.BoolExpr) {
+		if be.Args.Len() != 2 {
+			t.Fatalf("level %d has %d arguments; alternating connectives must not merge", depth, be.Args.Len())
+		}
+		depth++
+	}
+	if depth != n {
+		t.Errorf("left spine is %d deep, want %d", depth, n)
+	}
+	if got, want := nodes.ExprLocation(expr), strings.Index(spine, "a0"); got != want {
+		t.Errorf("%d-deep spine: ExprLocation %d, want %d", n, got, want)
+	}
+}
+
+// corpusStatements is every statement of the repository's SQL corpora
+// (PostgreSQL's regression SQL under parser/pgregress and the grammar
+// fixtures under tests/grammar), psql variables replaced as TestPGRegress
+// replaces them.
+func corpusStatements(t testing.TB) []string {
+	t.Helper()
+	var files []string
+	for _, glob := range []string{"../parser/pgregress/testdata/sql/*.sql", "../tests/grammar/sql/*.sql"} {
+		m, err := filepath.Glob(glob)
+		if err != nil {
+			t.Fatal(err)
+		}
+		files = append(files, m...)
+	}
+	if len(files) == 0 {
+		t.Fatal("no corpus files found")
+	}
+	sort.Strings(files)
+	var out []string
+	for _, f := range files {
+		content, err := os.ReadFile(f)
+		if err != nil {
+			t.Fatal(err)
+		}
+		for _, st := range pgregress.ExtractStatements(filepath.Base(f), content) {
+			sql := st.SQL
+			if st.HasPsqlVar {
+				sql, _ = pgregress.ReplacePsqlVariables(sql)
+			}
+			out = append(out, sql)
+		}
+	}
+	return out
+}
+
+// invariantCounts is how many nodes checkInvariants asserted on.
+type invariantCounts struct {
+	connectives, nots, nullTests, located int
+}
+
+// checkInvariants asserts, over every node of a parsed statement:
+//   - an AND/OR BoolExpr is at the text AND/OR, and its first argument is
+//     never the same connective (a left chain is always flat);
+//   - a NOT is at NOT, at the IS of IS NOT DOCUMENT/NORMALIZED, or at its
+//     IS NOT JSON operand;
+//   - a NullTest is at IS, ISNULL or NOTNULL;
+//   - ExprLocation of every node is -1 or a byte of the statement that is
+//     not whitespace, no later than the node's own location, and no later
+//     than ExprLocation of the first operand it walks into.
+func checkInvariants(t testing.TB, sql string, root nodes.Node, c *invariantCounts) {
+	t.Helper()
+	word := func(loc nodes.ParseLoc) string {
+		i := int(loc)
+		if i < 0 || i >= len(sql) {
+			return ""
+		}
+		j := i
+		for j < len(sql) && (sql[j] == '_' || sql[j] >= 'a' && sql[j] <= 'z' || sql[j] >= 'A' && sql[j] <= 'Z' || sql[j] >= '0' && sql[j] <= '9') {
+			j++
+		}
+		return strings.ToLower(sql[i:j])
+	}
+	fail := func(format string, args ...any) {
+		t.Helper()
+		t.Errorf("%q: "+format, append([]any{sql}, args...)...)
+	}
+	var walk func(v reflect.Value)
+	walk = func(v reflect.Value) {
+		switch v.Kind() { //nolint:exhaustive // only the kinds that can carry a Node
+		case reflect.Ptr, reflect.Interface:
+			if v.IsNil() {
+				return
+			}
+			if n, ok := v.Interface().(nodes.Node); ok && v.Kind() == reflect.Ptr {
+				checkNode(sql, n, word, fail, c)
+			}
+			walk(v.Elem())
+		case reflect.Struct:
+			for i := 0; i < v.NumField(); i++ {
+				walk(v.Field(i))
+			}
+		case reflect.Slice:
+			for i := 0; i < v.Len(); i++ {
+				walk(v.Index(i))
+			}
+		}
+	}
+	walk(reflect.ValueOf(root))
+}
+
+func checkNode(sql string, n nodes.Node, word func(nodes.ParseLoc) string, fail func(string, ...any), c *invariantCounts) {
+	switch e := n.(type) {
+	case *nodes.BoolExpr:
+		switch e.Boolop {
+		case nodes.AND_EXPR, nodes.OR_EXPR:
+			c.connectives++
+			want := [...]string{"and", "or"}[e.Boolop]
+			if w := word(e.Location); w != want {
+				fail("%s BoolExpr at %d reads %q", want, e.Location, w)
+			}
+			if first, ok := e.Args.Items[0].(*nodes.BoolExpr); ok && first.Boolop == e.Boolop {
+				fail("%s BoolExpr at %d has a %s as its first argument: the chain is not flat", want, e.Location, want)
+			}
+		case nodes.NOT_EXPR:
+			c.nots++
+			w := word(e.Location)
+			jp, isJSON := e.Args.Items[0].(*nodes.JsonIsPredicate)
+			if w != "not" && w != "is" && !(isJSON && jp.Location == e.Location) {
+				fail("NOT BoolExpr at %d reads %q", e.Location, w)
+			}
+		}
+	case *nodes.NullTest:
+		c.nullTests++
+		if w := word(e.Location); w != "is" && w != "isnull" && w != "notnull" {
+			fail("NullTest at %d reads %q", e.Location, w)
+		}
+	}
+	loc := nodes.ExprLocation(n)
+	if loc < 0 {
+		return
+	}
+	c.located++
+	if loc >= len(sql) {
+		fail("ExprLocation(%T) = %d, past the end", n, loc)
+		return
+	}
+	if strings.ContainsRune(" \t\n\r\f\v", rune(sql[loc])) {
+		fail("ExprLocation(%T) = %d is whitespace", n, loc)
+	}
+	own, first := ownAndFirst(n)
+	if own >= 0 && loc > own {
+		fail("ExprLocation(%T) = %d is after its own location %d", n, loc, own)
+	}
+	if first != nil {
+		if fl := nodes.ExprLocation(first); fl >= 0 && loc > fl {
+			fail("ExprLocation(%T) = %d is after its first operand's %d", n, loc, fl)
+		}
+	}
+}
+
+// ownAndFirst is a node's own location (-1 if it has none) and the first
+// operand ExprLocation walks into (nil if none).
+func ownAndFirst(n nodes.Node) (int, nodes.Node) {
+	first := func(l *nodes.List) nodes.Node {
+		if l == nil || len(l.Items) == 0 {
+			return nil
+		}
+		return l.Items[0]
+	}
+	switch e := n.(type) {
+	case *nodes.A_Expr:
+		return int(e.Location), e.Lexpr
+	case *nodes.BoolExpr:
+		return int(e.Location), first(e.Args)
+	case *nodes.NullTest:
+		return int(e.Location), e.Arg
+	case *nodes.BooleanTest:
+		return int(e.Location), e.Arg
+	case *nodes.SubLink:
+		return int(e.Location), e.Testexpr
+	case *nodes.CollateClause:
+		return int(e.Location), e.Arg
+	case *nodes.NamedArgExpr:
+		return int(e.Location), e.Arg
+	case *nodes.TypeCast:
+		return int(e.Location), e.Arg
+	case *nodes.A_Indirection:
+		return -1, e.Arg
+	case *nodes.FuncCall:
+		return int(e.Location), first(e.Args)
+	case *nodes.A_Const:
+		return int(e.Location), nil
+	case *nodes.ColumnRef:
+		return int(e.Location), nil
+	}
+	return -1, nil
+}
+
+// TestInvariantsOverCorpus parses every statement of the repository's SQL
+// corpora and checks checkInvariants over each tree. Only statements the
+// parser rejects are skipped.
+func TestInvariantsOverCorpus(t *testing.T) {
+	var c invariantCounts
+	checked, rejected := 0, 0
+	for _, sql := range corpusStatements(t) {
+		stmts, err := parser.Parse(sql)
+		if err != nil {
+			rejected++
+			continue
+		}
+		checked++
+		checkInvariants(t, sql, stmts, &c)
+	}
+	t.Logf("%d statements checked (%d rejected by the parser, skipped): %d AND/OR, %d NOT, %d NullTest asserted; %d nodes with a known ExprLocation",
+		checked, rejected, c.connectives, c.nots, c.nullTests, c.located)
+	if checked < 1000 || c.connectives < 100 || c.nullTests < 100 {
+		t.Errorf("corpus too small to mean anything: %d statements, %d connectives, %d NullTests", checked, c.connectives, c.nullTests)
+	}
+}
+
+// FuzzExprLocation parses arbitrary text, seeded from the SQL corpora, and
+// checks that nothing panics and checkInvariants holds for whatever parses.
+func FuzzExprLocation(f *testing.F) {
+	for _, sql := range corpusStatements(f) {
+		f.Add(sql)
+	}
+	f.Fuzz(func(t *testing.T, sql string) {
+		// The lexer's operator scan is super-linear (about cubic) in the
+		// operator's length, on origin/ff too: 4,000 '+' take ~12s. That
+		// defect is outside ExprLocation, so inputs that reach it are
+		// skipped rather than reported as hangs.
+		if longestOperatorRun(sql) >= 100 {
+			return
+		}
+		stmts, err := parser.Parse(sql)
+		if err != nil {
+			return
+		}
+		var c invariantCounts
+		checkInvariants(t, sql, stmts, &c)
+	})
+}
+
+// longestOperatorRun is the length of the longest run of operator
+// characters in sql.
+func longestOperatorRun(sql string) int {
+	longest, run := 0, 0
+	for i := 0; i < len(sql); i++ {
+		if strings.IndexByte("+-*/<>=~!@#%^&|`?", sql[i]) >= 0 {
+			run++
+			if run > longest {
+				longest = run
+			}
+		} else {
+			run = 0
+		}
+	}
+	return longest
 }
