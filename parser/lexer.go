@@ -107,6 +107,9 @@ type Lexer struct {
 
 	// opRun lets lexOperator lex a run of operator characters in linear time.
 	opRun opRun
+	// opScanSteps counts the input positions lexOperator's scans examine.
+	// Only tests read it, to check that lexing a run is linear in its length.
+	opScanSteps int
 
 	// Err is the first error the lexer met, a *ParseError carrying
 	// PostgreSQL's SQLSTATE, message and position. The lexer returns EOF from
@@ -822,7 +825,7 @@ func (l *Lexer) lexParam() Token {
 // bounded number of times and lexing the run is linear in its length.
 type opRun struct {
 	end  int // the end of the run; 0 before the first run
-	from int // the latest token start in the run; the fields below hold for it
+	from int // the latest token start in the run; comment and special hold for it
 
 	// comment is the first position after from at which "/*" or "--" begins
 	// inside the run, or end when there is none.
@@ -846,19 +849,25 @@ type opRun struct {
 func (l *Lexer) lexOperator() Token {
 	start := l.pos
 	r := &l.opRun
+	// A token start only moves forward, so start < r.from cannot happen
+	// today; it rebuilds the run rather than trust caches found from a later
+	// start, should a lookahead ever rewind into a run.
 	if start < r.from || start >= r.end {
 		end := start
 		for end < len(l.input) && isOpChar(l.input[end]) {
 			end++
+			l.opScanSteps++
 		}
 		*r = opRun{end: end, from: start, comment: -1, special: -1, trimEnd: -1}
 	}
 	r.from = start
 
-	// lexInitial took a comment that begins at start, so a cut is after it.
+	// A comment cannot begin at start (lexInitial would have taken it), so
+	// the search for a cut begins at start+1.
 	if r.comment <= start {
 		r.comment = r.end
 		for q := start + 1; q+1 < r.end; q++ {
+			l.opScanSteps++
 			if c := l.input[q]; (c == '/' && l.input[q+1] == '*') || (c == '-' && l.input[q+1] == '-') {
 				r.comment = q
 				break
@@ -871,6 +880,7 @@ func (l *Lexer) lexOperator() Token {
 		if r.special < start {
 			r.special = r.end
 			for q := start; q < r.end; q++ {
+				l.opScanSteps++
 				if isOpSpecial(l.input[q]) {
 					r.special = q
 					break
@@ -881,6 +891,7 @@ func (l *Lexer) lexOperator() Token {
 			if r.trimEnd != end {
 				r.trimEnd, r.keep = end, -1
 				for q := end - 1; q >= start; q-- {
+					l.opScanSteps++
 					if !isPlusMinus(l.input[q]) {
 						r.keep = q
 						break

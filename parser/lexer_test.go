@@ -1,6 +1,8 @@
 package parser
 
 import (
+	"errors"
+	"math/rand"
 	"slices"
 	"strings"
 	"testing"
@@ -99,10 +101,10 @@ func TestLexerDelimitedIdentifiers(t *testing.T) {
 
 func TestLexerNumbers(t *testing.T) {
 	tests := []struct {
-		input   string
-		tokType int
-		ival    int64
-		str     string
+		input    string
+		tokType  int
+		ival     int64
+		str      string
 	}{
 		{"0", lex_ICONST, 0, "0"},
 		{"42", lex_ICONST, 42, "42"},
@@ -149,12 +151,12 @@ func TestLexerStrings(t *testing.T) {
 	}{
 		{"'hello'", lex_SCONST, "hello"},
 		{"'hello world'", lex_SCONST, "hello world"},
-		{"'it''s'", lex_SCONST, "it's"},                  // escaped quote
-		{"''", lex_SCONST, ""},                           // empty string
+		{"'it''s'", lex_SCONST, "it's"},      // escaped quote
+		{"''", lex_SCONST, ""},               // empty string
 		{"E'hello\\nworld'", lex_SCONST, "hello\nworld"}, // escape string
 		{"E'tab\\there'", lex_SCONST, "tab\there"},
-		{"B'101'", lex_BCONST, "b101"}, // bit string
-		{"X'FF'", lex_XCONST, "xFF"},   // hex string
+		{"B'101'", lex_BCONST, "b101"},       // bit string
+		{"X'FF'", lex_XCONST, "xFF"},         // hex string
 	}
 
 	for _, tt := range tests {
@@ -262,6 +264,10 @@ func TestLexerOperatorRules(t *testing.T) {
 		{"?-", []string{"?-"}},
 		{"@+-+-", []string{"@+-+-"}},
 		{"+-@", []string{"+-@"}},
+		// a later token of the run, after a comment cut, needs a fresh search
+		// for a qualifying character, and a fresh trim
+		{"@-/**/+-", []string{"@-", "+", "-"}},       // with @- defined: select 5 @-/**/+- 1 = 6
+		{"+-/**/<<+", []string{"+", "-", "<<", "+"}}, // with prefix << defined: select 1 +-/**/<<+ 1 = 2
 		// a comment begins inside the run
 		{"*-- x\n", []string{"*"}},           // select 2 *-- x\n 3 = 6
 		{"*/* x */", []string{"*"}},          // select 2 */* x */ 3 = 6
@@ -296,50 +302,121 @@ func TestLexerOperatorRules(t *testing.T) {
 }
 
 // lexPlusRun lexes "select 1 " followed by n '+' and " 1", failing t unless
-// every '+' is its own token, and reports how long it took. With a budget it
-// stops at the first token that ends past it, so a slow lexer fails rather
-// than hangs.
-func lexPlusRun(t *testing.T, n int, budget time.Duration) time.Duration {
+// every '+' is its own token, and returns the positions lexOperator's scans
+// examined. It is a wall-clock backstop as well: it fails once lexing has
+// taken longer than budget, checked every 1024 tokens and at the end.
+func lexPlusRun(t *testing.T, n int, budget time.Duration) int {
 	t.Helper()
 	lexer := NewLexer("select 1 " + strings.Repeat("+", n) + " 1")
-	plus := 0
+	plus, tokens := 0, 0
 	begin := time.Now()
 	for tok := lexer.NextToken(); tok.Type != lex_EOF; tok = lexer.NextToken() {
 		if tok.Type == '+' {
 			plus++
 		}
-		if budget > 0 && time.Since(begin) > budget {
-			t.Fatalf("lexing a run of %d '+' took over %v (at token %d)", n, budget, plus)
+		if tokens++; tokens%1024 == 0 && time.Since(begin) > budget {
+			t.Fatalf("lexing a run of %d '+' took over %v (at token %d)", n, budget, tokens)
 		}
 	}
-	took := time.Since(begin)
+	if took := time.Since(begin); took > budget {
+		t.Fatalf("lexing a run of %d '+' took %v, over %v", n, took, budget)
+	}
 	if lexer.Err != nil || plus != n {
 		t.Fatalf("a run of %d '+' lexed as %d '+' tokens, error %v", n, plus, lexer.Err)
 	}
-	return took
+	return lexer.opScanSteps
 }
 
 // TestLexerOperatorRunIsLinear guards the lexer against an operator run that
 // takes super-linear time: one short statement could tie up a CPU, as a run
 // of 4,000 '+' took 12 seconds when each token rescanned the rest of the run.
-// A run of 100,000 lexes in about a millisecond; the budget is a second. Then
-// the time for 4n must stay within 10x the time for n (linear is 4x,
-// quadratic 16x), taking the fastest of several runs to shed noise.
+// It counts work rather than time: the positions lexOperator examines for a
+// run of 4n must stay within 4 times those for n, plus a constant. The runs
+// are short so that a quadratic or cubic lexer fails here in about a second
+// rather than hanging. Then a run of 100,000, which lexes in about a
+// millisecond, must lex within a second of wall clock, as a backstop.
 func TestLexerOperatorRunIsLinear(t *testing.T) {
-	lexPlusRun(t, 100_000, time.Second)
-
-	fastest := func(n int) time.Duration {
-		best := time.Duration(1 << 62)
-		for i := 0; i < 5; i++ {
-			best = min(best, lexPlusRun(t, n, time.Second))
-		}
-		return best
-	}
-	const n = 50_000
-	small, large := fastest(n), fastest(4*n)
-	if large > 10*small {
-		t.Errorf("lexing a run of %d '+' took %v, %.1fx the %v for %d: want linear growth (4x)",
+	const n = 500
+	small, large := lexPlusRun(t, n, time.Minute), lexPlusRun(t, 4*n, time.Minute)
+	if large > 4*small+64 {
+		t.Fatalf("lexing a run of %d '+' examined %d positions, %.1fx the %d for %d: want linear growth (4x)",
 			4*n, large, float64(large)/float64(small), small, n)
+	}
+	lexPlusRun(t, 100_000, time.Second)
+}
+
+// refOperatorEnd is scan.l's operator rule written out plainly, for
+// TestLexerOperatorMatchesReference: the end of the operator token that
+// begins at p in s, found afresh from p.
+func refOperatorEnd(s string, p int) int {
+	e := p
+	for e < len(s) && isOpChar(s[e]) {
+		e++
+	}
+	run := s[p:e]
+	n := len(run)
+	if i := strings.Index(run, "/*"); i >= 0 {
+		n = i
+	}
+	if i := strings.Index(run, "--"); i >= 0 && i < n {
+		n = i
+	}
+	if n > 1 && isPlusMinus(run[n-1]) && !strings.ContainsAny(run[:n], "~!@#^&|`?%") {
+		for n > 1 && isPlusMinus(run[n-1]) {
+			n--
+		}
+	}
+	return p + n
+}
+
+// TestLexerOperatorMatchesReference compares every operator token the lexer
+// returns, and every "operator too long" it refuses, with refOperatorEnd over
+// seeded random strings of operator characters, comment pieces, whitespace,
+// letters and digits.
+func TestLexerOperatorMatchesReference(t *testing.T) {
+	pieces := []string{
+		"~", "!", "@", "#", "^", "&", "|", "`", "?", "%", "+", "-", "*", "/", "<", ">", "=",
+		"/", "*", "-", "+", " ", "\n", "a", "b", "1", ":", "/**/", "/*+-*/", "--x\n", "<>", "::", "+-", "<<",
+	}
+	rng := rand.New(rand.NewSource(20261020))
+	count := 50_000
+	if testing.Short() {
+		count = 10_000
+	}
+	refused := 0
+	for i := 0; i < count; i++ {
+		var b strings.Builder
+		for k := rng.Intn(30); k > 0; k-- {
+			b.WriteString(pieces[rng.Intn(len(pieces))])
+		}
+		if rng.Intn(10) == 0 { // reach NAMEDATALEN
+			b.WriteString(strings.Repeat(pieces[rng.Intn(17)], 60+rng.Intn(10)))
+		}
+		s := b.String()
+		lexer := NewLexer(s)
+		for tok := lexer.NextToken(); tok.Type != lex_EOF; tok = lexer.NextToken() {
+			if !isOpChar(s[tok.Loc]) {
+				continue
+			}
+			want := s[tok.Loc:refOperatorEnd(s, tok.Loc)]
+			if tok.Str != want {
+				t.Fatalf("lexing %q: the operator at %d is %q, want %q", s, tok.Loc, tok.Str, want)
+			}
+			if len(want) >= namedatalen {
+				t.Fatalf("lexing %q: the operator %q at %d is not refused as too long", s, want, tok.Loc)
+			}
+		}
+		var pe *ParseError
+		if errors.As(lexer.Err, &pe) && strings.HasPrefix(pe.Message, "operator too long") {
+			if want := s[pe.Position:refOperatorEnd(s, pe.Position)]; len(want) < namedatalen ||
+				pe.Message != `operator too long at or near "`+want+`"` {
+				t.Fatalf("lexing %q: %q at %d, want the operator %q", s, pe.Message, pe.Position, want)
+			}
+			refused++
+		}
+	}
+	if refused == 0 {
+		t.Errorf("no string reached an operator of %d bytes", namedatalen)
 	}
 }
 
