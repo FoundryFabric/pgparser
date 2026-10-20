@@ -8756,25 +8756,26 @@ a_expr:
 		}
 	| a_expr AND a_expr
 		{
-			$$ = makeBoolExpr(nodes.AND_EXPR, $1, $3)
+			$$ = makeAndExpr($1, $3, $<loc>2)
 		}
 	| a_expr OR a_expr
 		{
-			$$ = makeBoolExpr(nodes.OR_EXPR, $1, $3)
+			$$ = makeOrExpr($1, $3, $<loc>2)
 		}
 	| NOT a_expr
 		{
-			$$ = makeBoolExpr(nodes.NOT_EXPR, $2, nil)
+			$$ = makeNotExpr($2, $<loc>1)
 		}
 	| NOT_LA a_expr							%prec NOT
 		{
-			$$ = makeBoolExpr(nodes.NOT_EXPR, $2, nil)
+			$$ = makeNotExpr($2, $<loc>1)
 		}
 	| a_expr IS NULL_P
 		{
 			$$ = &nodes.NullTest{
 				Arg:         $1,
 				Nulltesttype: nodes.IS_NULL,
+				Location:     $<loc>2,
 			}
 		}
 	| a_expr IS NOT NULL_P
@@ -8782,6 +8783,7 @@ a_expr:
 			$$ = &nodes.NullTest{
 				Arg:         $1,
 				Nulltesttype: nodes.IS_NOT_NULL,
+				Location:     $<loc>2,
 			}
 		}
 	| a_expr IS TRUE_P
@@ -8789,6 +8791,7 @@ a_expr:
 			$$ = &nodes.BooleanTest{
 				Arg:          $1,
 				Booltesttype: nodes.IS_TRUE,
+				Location:     $<loc>2,
 			}
 		}
 	| a_expr IS FALSE_P
@@ -8796,6 +8799,7 @@ a_expr:
 			$$ = &nodes.BooleanTest{
 				Arg:          $1,
 				Booltesttype: nodes.IS_FALSE,
+				Location:     $<loc>2,
 			}
 		}
 	| a_expr IS NOT TRUE_P                     %prec IS
@@ -8803,6 +8807,7 @@ a_expr:
 			$$ = &nodes.BooleanTest{
 				Arg:          $1,
 				Booltesttype: nodes.IS_NOT_TRUE,
+				Location:     $<loc>2,
 			}
 		}
 	| a_expr IS NOT FALSE_P                    %prec IS
@@ -8810,6 +8815,7 @@ a_expr:
 			$$ = &nodes.BooleanTest{
 				Arg:          $1,
 				Booltesttype: nodes.IS_NOT_FALSE,
+				Location:     $<loc>2,
 			}
 		}
 	| a_expr IS UNKNOWN                        %prec IS
@@ -8817,6 +8823,7 @@ a_expr:
 			$$ = &nodes.BooleanTest{
 				Arg:          $1,
 				Booltesttype: nodes.IS_UNKNOWN,
+				Location:     $<loc>2,
 			}
 		}
 	| a_expr IS NOT UNKNOWN                    %prec IS
@@ -8824,6 +8831,7 @@ a_expr:
 			$$ = &nodes.BooleanTest{
 				Arg:          $1,
 				Booltesttype: nodes.IS_NOT_UNKNOWN,
+				Location:     $<loc>2,
 			}
 		}
 	| a_expr ISNULL
@@ -8831,6 +8839,7 @@ a_expr:
 			$$ = &nodes.NullTest{
 				Arg:          $1,
 				Nulltesttype: nodes.IS_NULL,
+				Location:     $<loc>2,
 			}
 		}
 	| a_expr NOTNULL
@@ -8838,6 +8847,7 @@ a_expr:
 			$$ = &nodes.NullTest{
 				Arg:          $1,
 				Nulltesttype: nodes.IS_NOT_NULL,
+				Location:     $<loc>2,
 			}
 		}
 	| a_expr IS DISTINCT FROM a_expr           %prec IS
@@ -8883,7 +8893,7 @@ a_expr:
 				Op:       nodes.IS_DOCUMENT,
 				Args:     makeList($1),
 				Location: -1,
-			})
+			}, $<loc>2)
 		}
 	| a_expr IS json_predicate_type_constraint json_key_uniqueness_constraint_opt   %prec IS
 		{
@@ -8901,7 +8911,7 @@ a_expr:
 				ItemType:   nodes.JsonValueType($4),
 				UniqueKeys: $5 != 0,
 				Location:   -1,
-			})
+			}, $<loc>1)
 		}
 	| a_expr IS unicode_normal_form NORMALIZED                    %prec IS
 		{
@@ -8919,7 +8929,7 @@ a_expr:
 				Args:       makeList2($1, makeStringConst($4, $<loc>4)),
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
 				Location:   $<loc>2,
-			})
+			}, $<loc>2)
 		}
 	| a_expr IS NORMALIZED                                        %prec IS
 		{
@@ -8937,7 +8947,7 @@ a_expr:
 				Args:       makeList2($1, makeStringConst("NFC", -1)),
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
 				Location:   $<loc>2,
-			})
+			}, $<loc>2)
 		}
 	| a_expr LIKE a_expr                              %prec LIKE
 		{
@@ -9069,7 +9079,7 @@ a_expr:
 				SubLinkType: int(nodes.ANY_SUBLINK),
 				Testexpr:    $1,
 				Subselect:   $3,
-				Location:    -1,
+				Location:    $<loc>2,
 			}
 		}
 	| a_expr NOT_LA IN_P select_with_parens            %prec NOT_LA
@@ -9078,9 +9088,9 @@ a_expr:
 				SubLinkType: int(nodes.ANY_SUBLINK),
 				Testexpr:    $1,
 				Subselect:   $4,
-				Location:    -1,
+				Location:    $<loc>2,
 			}
-			$$ = makeBoolExpr(nodes.NOT_EXPR, sublink, nil)
+			$$ = makeNotExpr(sublink, $<loc>2)
 		}
 	| a_expr subquery_Op sub_type select_with_parens %prec Op
 		{
@@ -9089,7 +9099,7 @@ a_expr:
 				Testexpr:    $1,
 				OperName:    $2,
 				Subselect:   $4,
-				Location:    -1,
+				Location:    $<loc>2,
 			}
 		}
 	| a_expr subquery_Op sub_type '(' a_expr ')' %prec Op
@@ -9217,7 +9227,7 @@ case_expr:
 				Arg:       $2,
 				Args:      $3,
 				Defresult: $4,
-				Location:  -1,
+				Location:  $<loc>1,
 			}
 		}
 	;
@@ -9265,20 +9275,20 @@ array_expr:
 		{
 			$$ = &nodes.A_ArrayExpr{
 				Elements: $2,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| '[' array_expr_list ']'
 		{
 			$$ = &nodes.A_ArrayExpr{
 				Elements: $2,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| '[' ']'
 		{
 			$$ = &nodes.A_ArrayExpr{
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	;
@@ -9310,7 +9320,7 @@ row:
 			$$ = &nodes.RowExpr{
 				Args:     $1,
 				RowFormat: nodes.COERCE_IMPLICIT_CAST,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	;
@@ -9321,14 +9331,14 @@ explicit_row:
 			$$ = &nodes.RowExpr{
 				Args:     $3,
 				RowFormat: nodes.COERCE_EXPLICIT_CALL,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| ROW '(' ')'
 		{
 			$$ = &nodes.RowExpr{
 				RowFormat: nodes.COERCE_EXPLICIT_CALL,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	;
@@ -9420,7 +9430,7 @@ b_expr:
 				Op:       nodes.IS_DOCUMENT,
 				Args:     makeList($1),
 				Location: -1,
-			})
+			}, $<loc>2)
 		}
 	| b_expr TYPECAST Typename
 		{
@@ -9475,7 +9485,7 @@ c_expr:
 			$$ = &nodes.SubLink{
 				SubLinkType: int(nodes.EXPR_SUBLINK),
 				Subselect:   $1,
-				Location:    -1,
+				Location:    $<loc>1,
 			}
 		}
 	| select_with_parens indirection
@@ -9483,7 +9493,7 @@ c_expr:
 			sublink := &nodes.SubLink{
 				SubLinkType: int(nodes.EXPR_SUBLINK),
 				Subselect:   $1,
-				Location:    -1,
+				Location:    $<loc>1,
 			}
 			$$ = &nodes.A_Indirection{
 				Arg:         sublink,
@@ -9495,7 +9505,7 @@ c_expr:
 			$$ = &nodes.SubLink{
 				SubLinkType: int(nodes.EXISTS_SUBLINK),
 				Subselect:   $2,
-				Location:    -1,
+				Location:    $<loc>1,
 			}
 		}
 	| case_expr { $$ = $1 }
@@ -9504,12 +9514,16 @@ c_expr:
 			$$ = &nodes.SubLink{
 				SubLinkType: int(nodes.ARRAY_SUBLINK),
 				Subselect:   $2,
-				Location:    -1,
+				Location:    $<loc>1,
 			}
 		}
 	| ARRAY array_expr
 		{
-			$$ = $2
+			// The outermost array is at ARRAY, as in PostgreSQL 16; the
+			// nested ones stay at their '['.
+			arr := $2.(*nodes.A_ArrayExpr)
+			arr.Location = $<loc>1
+			$$ = arr
 		}
 	| explicit_row
 		{
@@ -9520,7 +9534,7 @@ c_expr:
 			$$ = &nodes.RowExpr{
 				Args:     $1,
 				RowFormat: nodes.COERCE_IMPLICIT_CAST,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	;
@@ -17445,18 +17459,31 @@ func makeAExprFromList(kind nodes.A_Expr_Kind, name *nodes.List, lexpr, rexpr no
 	}
 }
 
-func makeBoolExpr(boolop nodes.BoolExprType, arg1, arg2 nodes.Node) nodes.Node {
-	be := &nodes.BoolExpr{
-		Boolop: boolop,
-		Args:   &nodes.List{},
+// makeAndExpr and makeOrExpr build a connective at the operator's location.
+// When the left operand is already the same connective its argument list is
+// extended instead, so a chain arrives as one BoolExpr however long it is,
+// as in PostgreSQL 16: "a AND b AND c" and "(a AND b) AND c" are one AND of
+// three, while "a AND (b AND c)" keeps its inner AND, since only the left
+// operand is inspected. The extended node keeps its first operator's
+// location.
+func makeAndExpr(lexpr, rexpr nodes.Node, location nodes.ParseLoc) nodes.Node {
+	return makeConnective(nodes.AND_EXPR, lexpr, rexpr, location)
+}
+
+func makeOrExpr(lexpr, rexpr nodes.Node, location nodes.ParseLoc) nodes.Node {
+	return makeConnective(nodes.OR_EXPR, lexpr, rexpr, location)
+}
+
+func makeConnective(boolop nodes.BoolExprType, lexpr, rexpr nodes.Node, location nodes.ParseLoc) nodes.Node {
+	if be, ok := lexpr.(*nodes.BoolExpr); ok && be.Boolop == boolop && be.Args != nil {
+		be.Args.Items = append(be.Args.Items, rexpr)
+		return be
 	}
-	if arg1 != nil {
-		be.Args.Items = append(be.Args.Items, arg1)
+	return &nodes.BoolExpr{
+		Boolop:   boolop,
+		Args:     &nodes.List{Items: []nodes.Node{lexpr, rexpr}},
+		Location: location,
 	}
-	if arg2 != nil {
-		be.Args.Items = append(be.Args.Items, arg2)
-	}
-	return be
 }
 
 func makeBetweenArgs(lower, upper nodes.Node) nodes.Node {
@@ -17534,11 +17561,14 @@ func makeNullAConst(location nodes.ParseLoc) nodes.Node {
 	return &nodes.A_Const{Isnull: true, Location: location}
 }
 
-func makeNotExpr(expr nodes.Node) nodes.Node {
+// makeNotExpr builds NOT at the location PostgreSQL 16 gives it: the NOT
+// keyword, or for "x NOT IN (subquery)" and the IS NOT predicates the token
+// the grammar names. A NOT is never merged with another.
+func makeNotExpr(expr nodes.Node, location nodes.ParseLoc) nodes.Node {
 	return &nodes.BoolExpr{
-		Boolop: nodes.NOT_EXPR,
-		Args:   &nodes.List{Items: []nodes.Node{expr}},
-		Location: -1,
+		Boolop:   nodes.NOT_EXPR,
+		Args:     &nodes.List{Items: []nodes.Node{expr}},
+		Location: location,
 	}
 }
 
