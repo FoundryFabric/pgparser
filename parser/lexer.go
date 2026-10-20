@@ -149,6 +149,9 @@ func (l *Lexer) NextToken() Token {
 			if l.state == stateXQS {
 				return l.lexQuoteContinue()
 			}
+			if l.state == stateXC { // "/*" ends the input: unterminated
+				l.lexComment()
+			}
 			return Token{Type: lex_EOF, Loc: l.pos}
 		}
 

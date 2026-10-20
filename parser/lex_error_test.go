@@ -45,6 +45,8 @@ var lexErrorCases = []struct {
 	{"select $$abc", "42601", 8, `unterminated dollar-quoted string at or near "$$abc"`, ""},
 	{`select "abc`, "42601", 8, `unterminated quoted identifier at or near ""abc"`, ""},
 	{"select 1 /* x", "42601", 10, `unterminated /* comment at or near "/* x"`, ""},
+	{"select 1 /*", "42601", 10, `unterminated /* comment at or near "/*"`, ""},
+	{"select 1 +/*", "42601", 11, `unterminated /* comment at or near "/*"`, ""},
 	{"select B'01", "42601", 8, `unterminated bit string literal at or near "B'01"`, ""},
 	{"select X'0f", "42601", 8, `unterminated hexadecimal string literal at or near "X'0f"`, ""},
 	{`select ""`, "42601", 8, `zero-length delimited identifier at or near """"`, ""},
