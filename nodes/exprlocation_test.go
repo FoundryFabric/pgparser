@@ -350,7 +350,7 @@ func corpusStatements(t testing.TB) []string {
 
 // invariantCounts is how many nodes checkInvariants asserted on.
 type invariantCounts struct {
-	connectives, nots, nullTests, located int
+	connectives, nots, nullTests, located, spineChecked, spineEqual, mergeChecked int
 }
 
 // checkInvariants asserts, over every node of a parsed statement:
@@ -359,9 +359,18 @@ type invariantCounts struct {
 //   - a NOT is at NOT, at the IS of IS NOT DOCUMENT/NORMALIZED, or at its
 //     IS NOT JSON operand;
 //   - a NullTest is at IS, ISNULL or NOTNULL;
+//   - an AND never holds an argument the text joins with OR, nor an OR one
+//     joined with AND: no argument after the first is directly preceded
+//     (past whitespace and '(') by the other connective;
 //   - ExprLocation of every node is -1 or a byte of the statement that is
 //     not whitespace, no later than the node's own location, and no later
-//     than ExprLocation of the first operand it walks into.
+//     than ExprLocation of the first operand it walks into;
+//   - a node with a known ExprLocation and a first operand has a first
+//     operand of a kind ExprLocation has a rule for (otherwise the node's
+//     answer would be an operator's offset, after the real start), and
+//     where the node's own token always follows that operand (AND/OR,
+//     IS [NOT] NULL, IS TRUE and the like, x IN/op ANY (...), COLLATE, a
+//     subscript, an infix operator) its start IS the operand's start.
 func checkInvariants(t testing.TB, sql string, root nodes.Node, c *invariantCounts) {
 	t.Helper()
 	word := func(loc nodes.ParseLoc) string {
@@ -416,6 +425,17 @@ func checkNode(sql string, n nodes.Node, word func(nodes.ParseLoc) string, fail 
 			if first, ok := e.Args.Items[0].(*nodes.BoolExpr); ok && first.Boolop == e.Boolop {
 				fail("%s BoolExpr at %d has a %s as its first argument: the chain is not flat", want, e.Location, want)
 			}
+			other := [...]string{"or", "and"}[e.Boolop]
+			for i, a := range e.Args.Items[1:] {
+				al := nodes.ExprLocation(a)
+				if al < 0 {
+					continue
+				}
+				c.mergeChecked++
+				if precedingWord(sql, al) == other {
+					fail("%s BoolExpr at %d: argument %d (at %d) is joined by %s, a different connective merged in", want, e.Location, i+1, al, other)
+				}
+			}
 		case nodes.NOT_EXPR:
 			c.nots++
 			w := word(e.Location)
@@ -446,11 +466,70 @@ func checkNode(sql string, n nodes.Node, word func(nodes.ParseLoc) string, fail 
 	if own >= 0 && loc > own {
 		fail("ExprLocation(%T) = %d is after its own location %d", n, loc, own)
 	}
-	if first != nil {
-		if fl := nodes.ExprLocation(first); fl >= 0 && loc > fl {
-			fail("ExprLocation(%T) = %d is after its first operand's %d", n, loc, fl)
+	if first == nil || reflect.ValueOf(first).IsNil() {
+		return
+	}
+	c.spineChecked++
+	if !hasRule(first) {
+		fail("ExprLocation(%T) = %d over a first operand %T that has no rule: an operator's offset, not the start", n, loc, first)
+		return
+	}
+	fl := nodes.ExprLocation(first)
+	if fl >= 0 && loc > fl {
+		fail("ExprLocation(%T) = %d is after its first operand's %d", n, loc, fl)
+	}
+	if fl >= 0 && ownFollowsFirst(n) {
+		c.spineEqual++
+		if loc != fl {
+			fail("ExprLocation(%T) = %d, but its own token follows its first operand, which starts at %d", n, loc, fl)
 		}
 	}
+}
+
+// hasRule reports whether ExprLocation has a rule for n's kind; a kind
+// without one makes every expression over it unknown.
+func hasRule(n nodes.Node) bool {
+	switch n.(type) {
+	case *nodes.A_Const, *nodes.ColumnRef, *nodes.ParamRef, *nodes.A_ArrayExpr, *nodes.CaseExpr,
+		*nodes.RowExpr, *nodes.CoalesceExpr, *nodes.MinMaxExpr, *nodes.GroupingFunc,
+		*nodes.SQLValueFunction, *nodes.SetToDefault, *nodes.JsonIsPredicate, *nodes.A_Expr,
+		*nodes.NullTest, *nodes.BooleanTest, *nodes.SubLink, *nodes.CollateClause,
+		*nodes.NamedArgExpr, *nodes.A_Indirection, *nodes.TypeCast, *nodes.BoolExpr,
+		*nodes.FuncCall, *nodes.List:
+		return true
+	}
+	return false
+}
+
+// ownFollowsFirst reports whether n's own token always comes after its
+// first operand in the text, so that n starts exactly where that operand
+// does. NOT, CAST, a typed literal, NULLIF, a function name and a named
+// argument come first instead, and x AT TIME ZONE z is timezone(z, x), at
+// AT, before its first argument z.
+func ownFollowsFirst(n nodes.Node) bool {
+	switch e := n.(type) {
+	case *nodes.BoolExpr:
+		return e.Boolop != nodes.NOT_EXPR
+	case *nodes.A_Expr:
+		return e.Kind != nodes.AEXPR_NULLIF
+	case *nodes.NullTest, *nodes.BooleanTest, *nodes.SubLink, *nodes.CollateClause, *nodes.A_Indirection:
+		return true
+	}
+	return false
+}
+
+// precedingWord is the lower-cased word that ends just before loc, past
+// whitespace and opening parentheses; "" when anything else is there.
+func precedingWord(sql string, loc int) string {
+	i := loc - 1
+	for i >= 0 && (sql[i] == '(' || strings.IndexByte(" \t\n\r\f\v", sql[i]) >= 0) {
+		i--
+	}
+	j := i + 1
+	for i >= 0 && (sql[i] >= 'a' && sql[i] <= 'z' || sql[i] >= 'A' && sql[i] <= 'Z') {
+		i--
+	}
+	return strings.ToLower(sql[i+1 : j])
 }
 
 // ownAndFirst is a node's own location (-1 if it has none) and the first
@@ -506,10 +585,13 @@ func TestInvariantsOverCorpus(t *testing.T) {
 		checked++
 		checkInvariants(t, sql, stmts, &c)
 	}
-	t.Logf("%d statements checked (%d rejected by the parser, skipped): %d AND/OR, %d NOT, %d NullTest asserted; %d nodes with a known ExprLocation",
-		checked, rejected, c.connectives, c.nots, c.nullTests, c.located)
-	if checked < 1000 || c.connectives < 100 || c.nullTests < 100 {
-		t.Errorf("corpus too small to mean anything: %d statements, %d connectives, %d NullTests", checked, c.connectives, c.nullTests)
+	t.Logf("%d statements checked (%d rejected by the parser, skipped): %d AND/OR, %d NOT, %d NullTest asserted; "+
+		"%d connective arguments checked for a merged-in connective; %d nodes with a known ExprLocation, "+
+		"%d of them over a first operand (%d required to start exactly there)",
+		checked, rejected, c.connectives, c.nots, c.nullTests, c.mergeChecked, c.located, c.spineChecked, c.spineEqual)
+	if checked < 1000 || c.connectives < 100 || c.nots < 50 || c.nullTests < 100 || c.mergeChecked < 100 ||
+		c.located < 10000 || c.spineChecked < 1000 || c.spineEqual < 1000 {
+		t.Errorf("corpus too small to mean anything: %+v over %d statements", c, checked)
 	}
 }
 
@@ -522,8 +604,9 @@ func FuzzExprLocation(f *testing.F) {
 	f.Fuzz(func(t *testing.T, sql string) {
 		// The lexer's operator scan is super-linear (about cubic) in the
 		// operator's length, on origin/ff too: 4,000 '+' take ~12s. That
-		// defect is outside ExprLocation, so inputs that reach it are
-		// skipped rather than reported as hangs.
+		// defect is outside ExprLocation and is being fixed separately
+		// (branch fix/operator-lexing-linear on ff); until it lands, inputs
+		// that reach it are skipped rather than reported as hangs.
 		if longestOperatorRun(sql) >= 100 {
 			return
 		}
