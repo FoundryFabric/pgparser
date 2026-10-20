@@ -105,6 +105,9 @@ type Lexer struct {
 	// Location tracking
 	savedLoc int
 
+	// opRun lets lexOperator lex a run of operator characters in linear time.
+	opRun opRun
+
 	// Err is the first error the lexer met, a *ParseError carrying
 	// PostgreSQL's SQLSTATE, message and position. The lexer returns EOF from
 	// then on, as PostgreSQL's scanner stops at its first error.
@@ -808,45 +811,88 @@ func (l *Lexer) lexParam() Token {
 	return Token{Type: lex_PARAM, Ival: val, Loc: l.start}
 }
 
-// lexOperator handles operator tokens.
+// opRun is what lexOperator has learned about the run of operator characters
+// it last scanned. A run of n characters can lex as up to n tokens (a run of
+// '+' is n unary pluses), and each token is PostgreSQL's operator rule applied
+// to the rest of the run, so scanning that rest afresh for every token is
+// quadratic and, with the trailing +/- trim scanning back for a qualifying
+// character once per character it trims, cubic. Each field below is instead
+// found once and reused while it still holds for a later start: a token start
+// only moves forward through a run, so every position of the run is examined a
+// bounded number of times and lexing the run is linear in its length.
+type opRun struct {
+	end  int // the end of the run; 0 before the first run
+	from int // the latest token start in the run; the fields below hold for it
+
+	// comment is the first position after from at which "/*" or "--" begins
+	// inside the run, or end when there is none.
+	comment int
+	// special is the first position at or after from holding one of
+	// ~ ! @ # ^ & | ` ? %, which keeps a trailing + or - in the operator, or
+	// end when there is none.
+	special int
+	// trimEnd is the untrimmed token end keep was found for, and keep the last
+	// position before trimEnd, at or after the start it was found from, that
+	// is not + or -: -1 when every one is.
+	trimEnd, keep int
+}
+
+// lexOperator applies scan.l's operator rule at l.pos: the token is the
+// maximal run of operator characters, cut where "/*" or "--" begins a comment
+// inside it; then, unless it holds one of ~ ! @ # ^ & | ` ? %, every trailing
+// + and - is trimmed (keeping at least one character), for SQL compatibility.
+// An operator of NAMEDATALEN (64) bytes or more is an error, as in
+// PostgreSQL. The rest of the run is lexed by the following tokens.
 func (l *Lexer) lexOperator() Token {
 	start := l.pos
-
-	for l.pos < len(l.input) && isOpChar(l.input[l.pos]) {
-		l.pos++
-	}
-
-	op := l.input[start:l.pos]
-
-	// Check for embedded comment start
-	if idx := strings.Index(op, "/*"); idx > 0 {
-		l.pos = start + idx
-		op = op[:idx]
-	}
-	if idx := strings.Index(op, "--"); idx > 0 && (idx < len(op)-1 || idx < strings.Index(op, "/*")) {
-		if strings.Index(op, "/*") < 0 || idx < strings.Index(op, "/*") {
-			l.pos = start + idx
-			op = op[:idx]
+	r := &l.opRun
+	if start < r.from || start >= r.end {
+		end := start
+		for end < len(l.input) && isOpChar(l.input[end]) {
+			end++
 		}
+		*r = opRun{end: end, from: start, comment: -1, special: -1, trimEnd: -1}
 	}
+	r.from = start
 
-	// For SQL compatibility, strip trailing + or - unless preceded by special chars
-	for len(op) > 1 && (op[len(op)-1] == '+' || op[len(op)-1] == '-') {
-		hasSpecial := false
-		for i := len(op) - 2; i >= 0; i-- {
-			c := op[i]
-			if c == '~' || c == '!' || c == '@' || c == '#' || c == '^' ||
-				c == '&' || c == '|' || c == '`' || c == '?' || c == '%' {
-				hasSpecial = true
+	// lexInitial took a comment that begins at start, so a cut is after it.
+	if r.comment <= start {
+		r.comment = r.end
+		for q := start + 1; q+1 < r.end; q++ {
+			if c := l.input[q]; (c == '/' && l.input[q+1] == '*') || (c == '-' && l.input[q+1] == '-') {
+				r.comment = q
 				break
 			}
 		}
-		if hasSpecial {
-			break
-		}
-		op = op[:len(op)-1]
-		l.pos--
 	}
+	end := r.comment
+
+	if end-start > 1 && isPlusMinus(l.input[end-1]) {
+		if r.special < start {
+			r.special = r.end
+			for q := start; q < r.end; q++ {
+				if isOpSpecial(l.input[q]) {
+					r.special = q
+					break
+				}
+			}
+		}
+		if r.special >= end { // nothing qualifies: trim every trailing + and -
+			if r.trimEnd != end {
+				r.trimEnd, r.keep = end, -1
+				for q := end - 1; q >= start; q-- {
+					if !isPlusMinus(l.input[q]) {
+						r.keep = q
+						break
+					}
+				}
+			}
+			end = max(r.keep, start) + 1
+		}
+	}
+
+	l.pos = end
+	op := l.input[start:end]
 
 	// Single-char ops that should be returned as their char value
 	if len(op) == 1 && isSelf(op[0]) {
@@ -869,7 +915,7 @@ func (l *Lexer) lexOperator() Token {
 		}
 	}
 
-	if len(op) >= 63 { // NAMEDATALEN
+	if len(op) >= namedatalen {
 		return l.failNear("operator too long", l.start)
 	}
 
@@ -1202,6 +1248,20 @@ func isSelfOnly(ch byte) bool {
 	// Characters that are ONLY self-delimiting (not part of operators)
 	return ch == ',' || ch == '(' || ch == ')' || ch == '[' || ch == ']' ||
 		ch == '.' || ch == ';' || ch == ':'
+}
+
+// isPlusMinus reports whether ch is + or -, which an operator may not end in
+// unless it holds a character isOpSpecial accepts.
+func isPlusMinus(ch byte) bool {
+	return ch == '+' || ch == '-'
+}
+
+// isOpSpecial reports whether ch is one of the operator characters that are
+// not SQL-standard operator characters (scan.l's check before trimming a
+// trailing + or -).
+func isOpSpecial(ch byte) bool {
+	return ch == '~' || ch == '!' || ch == '@' || ch == '#' || ch == '^' ||
+		ch == '&' || ch == '|' || ch == '`' || ch == '?' || ch == '%'
 }
 
 func isOpChar(ch byte) bool {

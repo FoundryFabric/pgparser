@@ -1,8 +1,10 @@
 package parser
 
 import (
+	"slices"
 	"strings"
 	"testing"
+	"time"
 )
 
 func TestLexerKeywords(t *testing.T) {
@@ -97,10 +99,10 @@ func TestLexerDelimitedIdentifiers(t *testing.T) {
 
 func TestLexerNumbers(t *testing.T) {
 	tests := []struct {
-		input    string
-		tokType  int
-		ival     int64
-		str      string
+		input   string
+		tokType int
+		ival    int64
+		str     string
 	}{
 		{"0", lex_ICONST, 0, "0"},
 		{"42", lex_ICONST, 42, "42"},
@@ -147,12 +149,12 @@ func TestLexerStrings(t *testing.T) {
 	}{
 		{"'hello'", lex_SCONST, "hello"},
 		{"'hello world'", lex_SCONST, "hello world"},
-		{"'it''s'", lex_SCONST, "it's"},      // escaped quote
-		{"''", lex_SCONST, ""},               // empty string
+		{"'it''s'", lex_SCONST, "it's"},                  // escaped quote
+		{"''", lex_SCONST, ""},                           // empty string
 		{"E'hello\\nworld'", lex_SCONST, "hello\nworld"}, // escape string
 		{"E'tab\\there'", lex_SCONST, "tab\there"},
-		{"B'101'", lex_BCONST, "b101"},       // bit string
-		{"X'FF'", lex_XCONST, "xFF"},         // hex string
+		{"B'101'", lex_BCONST, "b101"}, // bit string
+		{"X'FF'", lex_XCONST, "xFF"},   // hex string
 	}
 
 	for _, tt := range tests {
@@ -230,6 +232,126 @@ func TestLexerOperators(t *testing.T) {
 				t.Errorf("expected str %q, got %q", tt.str, tok.Str)
 			}
 		})
+	}
+}
+
+// TestLexerOperatorRules pins scan.l's operator rule: an operator is the
+// maximal run of operator characters, cut where "/*" or "--" begins a comment
+// inside it, and with every trailing + and - trimmed unless it holds one of
+// ~ ! @ # ^ & | ` ? %. The rest of the run lexes as the following tokens. Each
+// case was checked against PostgreSQL 16.15 (2026-10-20) as the comment says:
+// the value of "select 1 <ops> 1", or the operator its 42883 error names.
+func TestLexerOperatorRules(t *testing.T) {
+	tests := []struct {
+		input string
+		want  []string // the tokens, comments dropped
+	}{
+		// trailing + and - trimmed when nothing qualifies
+		{"+-", []string{"+", "-"}},                                              // 1 +- 1 = 0
+		{"+-+-", []string{"+", "-", "+", "-"}},                                  // 1 +-+- 1 = 2
+		{"<+", []string{"<", "+"}},                                              // 1 <+ 1 = f
+		{"<=+", []string{"<=", "+"}},                                            // 1 <=+ 1 = t
+		{"<>-", []string{"<>", "-"}},                                            // 1 <>- 1 = t
+		{strings.Repeat("<", 63) + "+", []string{strings.Repeat("<", 63), "+"}}, // 42883 names the 63 <
+		// a qualifying character anywhere keeps them
+		{"@-", []string{"@-"}},
+		{"~+", []string{"~+"}},
+		{"!=-", []string{"!=-"}},
+		{"%-", []string{"%-"}},
+		{"^-", []string{"^-"}},
+		{"?-", []string{"?-"}},
+		{"@+-+-", []string{"@+-+-"}},
+		{"+-@", []string{"+-@"}},
+		// a comment begins inside the run
+		{"*-- x\n", []string{"*"}},           // select 2 *-- x\n 3 = 6
+		{"*/* x */", []string{"*"}},          // select 2 */* x */ 3 = 6
+		{"+/*x*/+", []string{"+", "+"}},      // 1 +/*x*/+ 1 = 2
+		{"*/*--*/", []string{"*"}},           // 1 */*--*/ 1 = 1: the earlier start wins
+		{"*--/*\n", []string{"*"}},           // 1 *--/*\n 1 = 1
+		{"+--~\n", []string{"+"}},            // 1 +--~\n 1 = 2: the ~ is in the comment
+		{"-+/**/@", []string{"-", "+", "@"}}, // 1 -+/**/@ 1 = 0
+		{"<-->", []string{"<"}},              // select 1 <--> 1: syntax error at end of input
+		{"~~~~~~~~~~--" + strings.Repeat("~", 70) + "\n", []string{"~~~~~~~~~~"}},
+		{strings.Repeat("+", 70) + "/*x*/~", append(strings.Split(strings.Repeat("+", 70), ""), "~")}, // = -1
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.input, func(t *testing.T) {
+			lexer := NewLexer(tt.input)
+			var got []string
+			for tok := lexer.NextToken(); tok.Type != lex_EOF; tok = lexer.NextToken() {
+				got = append(got, tok.Str)
+				if len(tok.Str) == 1 && isSelf(tok.Str[0]) && tok.Type != int(tok.Str[0]) {
+					t.Errorf("%q lexed as type %d, want the character token %d", tok.Str, tok.Type, tok.Str[0])
+				}
+			}
+			if lexer.Err != nil {
+				t.Fatalf("lexing %q: %v", tt.input, lexer.Err)
+			}
+			if !slices.Equal(got, tt.want) {
+				t.Errorf("lexing %q = %q, want %q", tt.input, got, tt.want)
+			}
+		})
+	}
+}
+
+// lexPlusRun lexes "select 1 " followed by n '+' and " 1", failing t unless
+// every '+' is its own token, and reports how long it took. With a budget it
+// stops at the first token that ends past it, so a slow lexer fails rather
+// than hangs.
+func lexPlusRun(t *testing.T, n int, budget time.Duration) time.Duration {
+	t.Helper()
+	lexer := NewLexer("select 1 " + strings.Repeat("+", n) + " 1")
+	plus := 0
+	begin := time.Now()
+	for tok := lexer.NextToken(); tok.Type != lex_EOF; tok = lexer.NextToken() {
+		if tok.Type == '+' {
+			plus++
+		}
+		if budget > 0 && time.Since(begin) > budget {
+			t.Fatalf("lexing a run of %d '+' took over %v (at token %d)", n, budget, plus)
+		}
+	}
+	took := time.Since(begin)
+	if lexer.Err != nil || plus != n {
+		t.Fatalf("a run of %d '+' lexed as %d '+' tokens, error %v", n, plus, lexer.Err)
+	}
+	return took
+}
+
+// TestLexerOperatorRunIsLinear guards the lexer against an operator run that
+// takes super-linear time: one short statement could tie up a CPU, as a run
+// of 4,000 '+' took 12 seconds when each token rescanned the rest of the run.
+// A run of 100,000 lexes in about a millisecond; the budget is a second. Then
+// the time for 4n must stay within 10x the time for n (linear is 4x,
+// quadratic 16x), taking the fastest of several runs to shed noise.
+func TestLexerOperatorRunIsLinear(t *testing.T) {
+	lexPlusRun(t, 100_000, time.Second)
+
+	fastest := func(n int) time.Duration {
+		best := time.Duration(1 << 62)
+		for i := 0; i < 5; i++ {
+			best = min(best, lexPlusRun(t, n, time.Second))
+		}
+		return best
+	}
+	const n = 50_000
+	small, large := fastest(n), fastest(4*n)
+	if large > 10*small {
+		t.Errorf("lexing a run of %d '+' took %v, %.1fx the %v for %d: want linear growth (4x)",
+			4*n, large, float64(large)/float64(small), small, n)
+	}
+}
+
+// BenchmarkLexOperatorRun lexes a run of 100,000 '+', one token per '+'.
+func BenchmarkLexOperatorRun(b *testing.B) {
+	input := "select jsonb_" + strings.Repeat("+", 100_000)
+	b.SetBytes(int64(len(input)))
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		lexer := NewLexer(input)
+		for lexer.NextToken().Type != lex_EOF {
+		}
 	}
 }
 
