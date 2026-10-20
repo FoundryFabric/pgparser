@@ -9,6 +9,9 @@ package parser
 
 import (
 	"fmt"
+	"math"
+	"strconv"
+
 	"github.com/pgplex/pgparser/nodes"
 )
 
@@ -1140,6 +1143,7 @@ insert_column_item:
 			$$ = &nodes.ResTarget{
 				Name:        $1,
 				Indirection: $2,
+				Location:    $<loc>1,
 			}
 		}
 	;
@@ -1298,6 +1302,7 @@ set_target:
 			$$ = &nodes.ResTarget{
 				Name:        $1,
 				Indirection: $2,
+				Location:    $<loc>1,
 			}
 		}
 	;
@@ -8037,21 +8042,24 @@ target_el:
 	a_expr AS ColLabel
 		{
 			$$ = &nodes.ResTarget{
-				Name: $3,
-				Val:  $1,
+				Name:     $3,
+				Val:      $1,
+				Location: $<loc>1,
 			}
 		}
 	| a_expr IDENT
 		{
 			$$ = &nodes.ResTarget{
-				Name: $2,
-				Val:  $1,
+				Name:     $2,
+				Val:      $1,
+				Location: $<loc>1,
 			}
 		}
 	| a_expr
 		{
 			$$ = &nodes.ResTarget{
-				Val: $1,
+				Val:      $1,
+				Location: $<loc>1,
 			}
 		}
 	| '*'
@@ -8061,6 +8069,7 @@ target_el:
 					Fields:   &nodes.List{Items: []nodes.Node{&nodes.A_Star{}}},
 					Location: $<loc>1,
 				},
+				Location: $<loc>1,
 			}
 		}
 	;
@@ -9174,7 +9183,7 @@ a_expr:
 		}
 	| '+' a_expr %prec UMINUS
 		{
-			$$ = $2
+			$$ = makeAExpr(nodes.AEXPR_OP, "+", nil, $2, $<loc>1)
 		}
 	| '-' a_expr %prec UMINUS
 		{
@@ -9442,7 +9451,7 @@ b_expr:
 		}
 	| '+' b_expr %prec UMINUS
 		{
-			$$ = $2
+			$$ = makeAExpr(nodes.AEXPR_OP, "+", nil, $2, $<loc>1)
 		}
 	| '-' b_expr %prec UMINUS
 		{
@@ -10406,14 +10415,14 @@ xml_attribute_el:
 			$$ = &nodes.ResTarget{
 				Name:     $3,
 				Val:      $1,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| a_expr
 		{
 			$$ = &nodes.ResTarget{
 				Val:      $1,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	;
@@ -10573,14 +10582,14 @@ xml_namespace_el:
 			$$ = &nodes.ResTarget{
 				Name:     $3,
 				Val:      $1,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| DEFAULT b_expr
 		{
 			$$ = &nodes.ResTarget{
 				Val:      $2,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	;
@@ -17502,25 +17511,33 @@ func makeBetweenArgs(lower, upper nodes.Node) nodes.Node {
 }
 
 // doNegate is PostgreSQL's: a negated numeric constant takes the minus
-// sign's location; anything else is a unary minus at location.
+// sign's location; anything else is a unary minus at location. A Float
+// whose negation fits int64 becomes an Integer (int64's least value is
+// scanned as a Float, its magnitude being one past int64's greatest), and
+// negating that Integer gives the Float back, as int64 cannot hold its
+// magnitude.
 func doNegate(n nodes.Node, location nodes.ParseLoc) nodes.Node {
-	// For numeric constants, negate in place
 	if ac, ok := n.(*nodes.A_Const); ok {
+		// PostgreSQL moves any constant to the minus sign, a string
+		// included, before it decides whether to fold.
 		ac.Location = location
-		if i, ok := ac.Val.(*nodes.Integer); ok {
-			i.Ival = -i.Ival
-			return n
-		}
-		if f, ok := ac.Val.(*nodes.Float); ok {
-			if f.Fval[0] == '-' {
-				f.Fval = f.Fval[1:]
+		switch v := ac.Val.(type) {
+		case *nodes.Integer:
+			if v.Ival == math.MinInt64 {
+				ac.Val = &nodes.Float{Fval: strconv.FormatUint(1<<63, 10)}
 			} else {
-				f.Fval = "-" + f.Fval
+				v.Ival = -v.Ival
 			}
-			return n
+			return ac
+		case *nodes.Float:
+			if i, ok := integerLiteral(v.Fval, true); ok {
+				ac.Val = &nodes.Integer{Ival: i}
+			} else {
+				doNegateFloat(v)
+			}
+			return ac
 		}
 	}
-	// Otherwise, create unary minus expression
 	return makeAExpr(nodes.AEXPR_OP, "-", nil, n, location)
 }
 

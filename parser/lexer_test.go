@@ -1,6 +1,7 @@
 package parser
 
 import (
+	"strings"
 	"testing"
 )
 
@@ -113,6 +114,12 @@ func TestLexerNumbers(t *testing.T) {
 		{".5", lex_FCONST, 0, ".5"},
 		{"1e10", lex_FCONST, 0, "1e10"},
 		{"1.5e-3", lex_FCONST, 0, "1.5e-3"},
+		{"0X1F", lex_ICONST, 31, "0X1F"},
+		{"9223372036854775807", lex_ICONST, 9223372036854775807, "9223372036854775807"},
+		{"0x7FFF_FFFF_FFFF_FFFF", lex_ICONST, 9223372036854775807, "0x7FFFFFFFFFFFFFFF"},
+		{"9223372036854775808", lex_FCONST, 0, "9223372036854775808"},
+		{"0x8000000000000000", lex_FCONST, 0, "0x8000000000000000"},
+		{"0b1" + strings.Repeat("0", 63), lex_FCONST, 0, "0b1" + strings.Repeat("0", 63)},
 	}
 
 	for _, tt := range tests {
@@ -401,5 +408,52 @@ func TestLexerErrors(t *testing.T) {
 				t.Errorf("expected error %q, got %q", tt.err, lexer.Err.Error())
 			}
 		})
+	}
+}
+
+// TestIntegerLiteral pins the reading of an integer literal's text that the
+// scanner and doNegate share: each radix, either case of prefix, up to
+// int64's greatest value and, negated, its least; anything else (too
+// large, a decimal, an exponent, a sign already present, a bare prefix) is
+// not an integer.
+func TestIntegerLiteral(t *testing.T) {
+	const least = -9223372036854775808
+	for _, c := range []struct {
+		text     string
+		negative bool
+		want     int64
+		ok       bool
+	}{
+		{"0", false, 0, true},
+		{"0", true, 0, true},
+		{"42", true, -42, true},
+		{"0x1f", false, 31, true},
+		{"0XFF", true, -255, true},
+		{"0o17", false, 15, true},
+		{"0O17", true, -15, true},
+		{"0b101", false, 5, true},
+		{"0B101", true, -5, true},
+		{"9223372036854775807", false, 9223372036854775807, true},
+		{"9223372036854775808", false, 0, false},
+		{"9223372036854775808", true, least, true},
+		{"0x8000000000000000", true, least, true},
+		{"0o1000000000000000000000", true, least, true},
+		{"0b1" + strings.Repeat("0", 63), true, least, true},
+		{"9223372036854775809", true, 0, false},
+		{"0x8000000000000001", true, 0, false},
+		{"1.5", true, 0, false},
+		{"1e3", true, 0, false},
+		{".5", false, 0, false},
+		{"-1", true, 0, false},
+		{"+1", false, 0, false},
+		{"0x", false, 0, false},
+		{"0x-1", false, 0, false},
+		{"0b2", false, 0, false},
+		{"", false, 0, false},
+	} {
+		got, ok := integerLiteral(c.text, c.negative)
+		if got != c.want || ok != c.ok {
+			t.Errorf("integerLiteral(%q, %v) = %d, %v; want %d, %v", c.text, c.negative, got, ok, c.want, c.ok)
+		}
 	}
 }

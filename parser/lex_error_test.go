@@ -150,6 +150,9 @@ func TestParseErrorPositionIsTheRefusedToken(t *testing.T) {
 		{"select 1 from t where a and b or", 33},
 		{"select 1 from t where not and a", 27},
 		{"select 1 from t where a and not", 32},
+		{"select +", 9},
+		{"insert into t (", 16},
+		{"insert into t (a,) values (1)", 18},
 	} {
 		_, err := Parse(c.sql)
 		var pe *ParseError

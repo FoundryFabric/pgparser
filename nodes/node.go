@@ -38,6 +38,17 @@ func (l *List) Len() int {
 	return len(l.Items)
 }
 
+// Elems returns the list's members, or nil for a nil list, so an absent
+// list (an optional clause the statement omits) ranges as an empty one.
+// The slice is the list's own: appending to it or setting a member
+// changes the list.
+func (l *List) Elems() []Node {
+	if l == nil {
+		return nil
+	}
+	return l.Items
+}
+
 // IntList represents a list of integers.
 type IntList struct {
 	Items []int
