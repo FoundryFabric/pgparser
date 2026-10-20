@@ -4607,7 +4607,7 @@ func_type:
 			names := prependList(&nodes.String{Str: $1}, $2)
 			tn := makeTypeNameFromNameList(names).(*nodes.TypeName)
 			tn.PctType = true
-			tn.Location = -1
+			tn.Location = $<loc>1
 			$$ = tn
 		}
 	| SETOF type_function_name attrs '%' TYPE_P
@@ -4616,7 +4616,7 @@ func_type:
 			tn := makeTypeNameFromNameList(names).(*nodes.TypeName)
 			tn.PctType = true
 			tn.Setof = true
-			tn.Location = -1
+			tn.Location = $<loc>2
 			$$ = tn
 		}
 	;

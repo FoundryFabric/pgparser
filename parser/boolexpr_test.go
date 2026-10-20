@@ -190,6 +190,14 @@ func TestExprNodeLocationsArePostgreSQLs(t *testing.T) {
 		{"select nosuch(1) 'x'", "TypeName", []nodes.ParseLoc{7}},
 		{"select 1::public.nosuch(2)", "TypeName", []nodes.ParseLoc{10}},
 		{"create table q (c nosuch)", "TypeName", []nodes.ParseLoc{18}},
+		// Typed literals and %TYPE, read from PostgreSQL 16.15's raw tree
+		// (debug_print_parse of a utility statement, which is logged before
+		// analysis): the type name's first token, after SETOF for SETOF.
+		{"select  interval '1 day'", "TypeName", []nodes.ParseLoc{8}},
+		{"select  int '1', timestamp(3) 'x'", "TypeName", []nodes.ParseLoc{8, 17}},
+		{"create function nosuch_f(p nosuch_t.c%TYPE, q int[], r setof text) returns nosuch_t.c%TYPE language sql as 'select 1'",
+			"TypeName", []nodes.ParseLoc{27, 46, 61, 75}},
+		{"create function nosuch_f(p int) returns setof  nosuch_t.c%TYPE language sql as 'select 1'", "TypeName", []nodes.ParseLoc{27, 47}},
 	}
 	for _, c := range cases {
 		stmts, err := Parse(c.sql)

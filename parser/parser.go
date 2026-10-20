@@ -23391,7 +23391,7 @@ pgdefault:
 			names := prependList(&nodes.String{Str: pgDollar[1].str}, pgDollar[2].list)
 			tn := makeTypeNameFromNameList(names).(*nodes.TypeName)
 			tn.PctType = true
-			tn.Location = -1
+			tn.Location = pgDollar[1].loc
 			pgVAL.typename = tn
 		}
 	case 611:
@@ -23402,7 +23402,7 @@ pgdefault:
 			tn := makeTypeNameFromNameList(names).(*nodes.TypeName)
 			tn.PctType = true
 			tn.Setof = true
-			tn.Location = -1
+			tn.Location = pgDollar[2].loc
 			pgVAL.typename = tn
 		}
 	case 612:
