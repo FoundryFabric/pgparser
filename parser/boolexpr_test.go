@@ -45,8 +45,8 @@ func boolShape(n nodes.Node) string {
 	return sb.String()
 }
 
-// whereOf is the WHERE clause of a single SELECT.
-func whereOf(t *testing.T, sql string) nodes.Node {
+// selectOf is the parsed single SELECT.
+func selectOf(t *testing.T, sql string) *nodes.SelectStmt {
 	t.Helper()
 	stmts, err := Parse(sql)
 	if err != nil {
@@ -56,7 +56,7 @@ func whereOf(t *testing.T, sql string) nodes.Node {
 	if raw, ok := n.(*nodes.RawStmt); ok {
 		n = raw.Stmt
 	}
-	return n.(*nodes.SelectStmt).WhereClause
+	return n.(*nodes.SelectStmt)
 }
 
 // TestBoolExprShapeIsPostgreSQLs pins the raw tree of AND/OR/NOT chains and
@@ -100,7 +100,7 @@ func TestBoolExprShapeIsPostgreSQLs(t *testing.T) {
 		{"select 1 from t where 'é' = j and a and x isnull", "and@31(_,a,isnull@43(x))"},
 	}
 	for _, c := range cases {
-		if got := boolShape(whereOf(t, c.sql)); got != c.want {
+		if got := boolShape(selectOf(t, c.sql).WhereClause); got != c.want {
 			t.Errorf("%q\n got %s\nwant %s (PostgreSQL 16)", c.sql, got, c.want)
 		}
 	}
@@ -119,7 +119,7 @@ func TestLongAndChainIsOneBoolExpr(t *testing.T) {
 			fmt.Fprintf(&sb, " %s c%d", op, i)
 		}
 		sql := sb.String()
-		be, ok := whereOf(t, sql).(*nodes.BoolExpr)
+		be, ok := selectOf(t, sql).WhereClause.(*nodes.BoolExpr)
 		if !ok {
 			t.Fatalf("%s chain: WHERE is not a BoolExpr", op)
 		}
@@ -141,9 +141,10 @@ func TestLongAndChainIsOneBoolExpr(t *testing.T) {
 	}
 }
 
-// TestExprNodeLocationsArePostgreSQLs pins SubLink, CaseExpr, A_ArrayExpr
-// and RowExpr locations (byte offsets) to PostgreSQL 16.15's, read the same
-// way as TestBoolExprShapeIsPostgreSQLs (2026-10-20): a sublink at its
+// TestExprNodeLocationsArePostgreSQLs pins the locations (byte offsets) of
+// the other node kinds this fork locates to PostgreSQL 16.15's, read the
+// same way as TestBoolExprShapeIsPostgreSQLs (2026-10-20) unless a row says
+// otherwise: a sublink at its
 // operator ("x IN", "x NOT IN", "x = ANY") or its first token ('(',
 // EXISTS, ARRAY), CASE at CASE, ARRAY[...] at ARRAY with each nested
 // [...] at its '[', ROW(...) at ROW and (a, b) at its '('.
@@ -164,6 +165,31 @@ func TestExprNodeLocationsArePostgreSQLs(t *testing.T) {
 		{"select (select array[1])[1], array(select 1), array[]::int[] from t", "A_ArrayExpr", []nodes.ParseLoc{15, 46}},
 		{"select 'é', array[x] from t", "A_ArrayExpr", []nodes.ParseLoc{13}},
 		{"select row(1, 2), row(), (1, 2, 3) from t", "RowExpr", []nodes.ParseLoc{7, 18, 25}},
+		// The second patch's kinds, read the same way: COALESCE, GREATEST,
+		// LEAST, GROUPING, SQL value functions and named arguments at their
+		// first token, COLLATE at COLLATE, IS [NOT] JSON at its operand.
+		{"select coalesce(b, 1), greatest(b, 2), least(b, 3) from t", "CoalesceExpr", []nodes.ParseLoc{7}},
+		{"select coalesce(b, 1), greatest(b, 2), least(b, 3) from t", "MinMaxExpr", []nodes.ParseLoc{23, 39}},
+		{"select  current_date, current_timestamp(2), localtime, current_user, session_user, current_schema from t",
+			"SQLValueFunction", []nodes.ParseLoc{8, 22, 44, 55, 69, 83}},
+		{"select b from t group by b having grouping(b) = 0", "GroupingFunc", []nodes.ParseLoc{34}},
+		{"select x collate \"C\", x   collate \"POSIX\" = x from t", "CollateClause", []nodes.ParseLoc{9, 26}},
+		{"select x is json, x is not json object from t", "JsonIsPredicate", []nodes.ParseLoc{7, 18}},
+		{"select make_interval(days => b), make_interval(hours := 2) from t", "NamedArgExpr", []nodes.ParseLoc{21, 47}},
+		// DEFAULT at itself, as gram.y's @1 (analysis replaces it, so the
+		// oracle cannot show it).
+		{"insert into t values (1,  default)", "SetToDefault", []nodes.ParseLoc{26}},
+		// TypeName at its first token: each is where PostgreSQL 16 reports
+		// 'type "nosuch" does not exist' (position minus one).
+		{"select nosuch 'x'", "TypeName", []nodes.ParseLoc{7}},
+		{"select 'x'::nosuch", "TypeName", []nodes.ParseLoc{12}},
+		{"select   cast('x' as  nosuch)", "TypeName", []nodes.ParseLoc{22}},
+		{"select 1::nosuch[]", "TypeName", []nodes.ParseLoc{10}},
+		{"select 1::nosuch array[3]", "TypeName", []nodes.ParseLoc{10}},
+		{"select pg_catalog.nosuch 'x'", "TypeName", []nodes.ParseLoc{7}},
+		{"select nosuch(1) 'x'", "TypeName", []nodes.ParseLoc{7}},
+		{"select 1::public.nosuch(2)", "TypeName", []nodes.ParseLoc{10}},
+		{"create table q (c nosuch)", "TypeName", []nodes.ParseLoc{18}},
 	}
 	for _, c := range cases {
 		stmts, err := Parse(c.sql)

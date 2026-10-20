@@ -9,8 +9,8 @@ import (
 	"github.com/pgplex/pgparser/parser"
 )
 
-// targetExpr is the expression of the last target of a single SELECT.
-func targetExpr(t *testing.T, sql string) nodes.Node {
+// lastTarget is the last target of a single SELECT.
+func lastTarget(t *testing.T, sql string) *nodes.ResTarget {
 	t.Helper()
 	stmts, err := parser.Parse(sql)
 	if err != nil {
@@ -21,15 +21,22 @@ func targetExpr(t *testing.T, sql string) nodes.Node {
 		n = raw.Stmt
 	}
 	targets := n.(*nodes.SelectStmt).TargetList.Items
-	return targets[len(targets)-1].(*nodes.ResTarget).Val
+	return targets[len(targets)-1].(*nodes.ResTarget)
 }
 
 // TestExprLocationIsWhereTheExpressionStarts pins ExprLocation over parsed
 // expressions of every kind it knows: each is the last target of "select
 // 'é', <expr>", so the expression starts after a two-byte character and
 // the answer is a byte offset (PostgreSQL's locations are byte offsets
-// too; a client counting characters converts). want is the text the
-// expression starts with, found in the statement.
+// too; a client counting characters converts). starts is the text the
+// expression starts with, found in the statement, or "" for -1.
+//
+// Every row but the typed literals and the XmlExpr ones was checked
+// against PostgreSQL 16.15 (2026-10-20): "select point '(1,1)' union select
+// <expr>" fails with its caret at exprLocation of <expr>. A typed literal is
+// analysed into a constant that keeps the literal's own location, so that
+// oracle shows the literal; the raw tree's rule gives the type name. The
+// XmlExpr rows are -1 where PostgreSQL knows the start.
 func TestExprLocationIsWhereTheExpressionStarts(t *testing.T) {
 	cases := []struct{ expr, starts string }{
 		{"42", "42"},
@@ -68,14 +75,42 @@ func TestExprLocationIsWhereTheExpressionStarts(t *testing.T) {
 		{"row(x, y)", "row"},
 		{"(x, y, z)", "(x"},
 		{"x is true and y is null or not z", "x"},
+		// A left operand of a kind with its own rule, or now located: each
+		// was the operator's offset, after the start.
+		{"a[1] = 2", "a"},
+		{"(a).f = 1", "a"},
+		{"(x).a::int", "x"},
+		{"x collate \"C\" = y", "x"},
+		{"b::text collate \"C\"", "b"},
+		{"coalesce(a, b) = 1", "coalesce"},
+		{"coalesce(a, b) and c", "coalesce"},
+		{"greatest(a, b) > 1", "greatest"},
+		{"least(a, 2)", "least"},
+		{"current_date = x", "current_date"},
+		{"x is json and c", "x"},
+		{"not x is not json", "not"},
+		{"f(a => 1) + 1", "f"},
+		// A typed literal starts at its type name, as PostgreSQL's raw
+		// TypeCast rule (leftmost of cast, type name and argument) gives.
+		{"date '2020-01-01'", "date"},
+		{"int '1' + 1", "int"},
+		{"interval(2) '1 day'", "interval"},
+		{"pg_catalog.text 'x' || 'y'", "pg_catalog"},
+		// An operand whose kind has no rule (XmlExpr) makes the start
+		// unknown rather than the operator's offset.
+		{"y is not document", ""},
+		{"xmlconcat(y) is null", ""},
+		{"xmlconcat(y) and c", ""},
 	}
 	for _, c := range cases {
 		sql := "select 'é', " + c.expr
-		want := strings.Index(sql, c.starts)
-		if want < 0 {
-			t.Fatalf("%q does not contain %q", sql, c.starts)
+		want := -1
+		if c.starts != "" {
+			if want = strings.Index(sql, c.starts); want < 0 {
+				t.Fatalf("%q does not contain %q", sql, c.starts)
+			}
 		}
-		if got := nodes.ExprLocation(targetExpr(t, sql)); got != want {
+		if got := nodes.ExprLocation(lastTarget(t, sql).Val); got != want {
 			t.Errorf("ExprLocation(%s) = %d, want %d (%q)", c.expr, got, want, c.starts)
 		}
 	}
@@ -117,15 +152,58 @@ func TestExprLocationRules(t *testing.T) {
 		{"A_ArrayExpr own only", &nodes.A_ArrayExpr{Elements: list(at(1)), Location: 4}, 4},
 		{"CaseExpr own only", &nodes.CaseExpr{Arg: at(1), Location: 4}, 4},
 		{"RowExpr own only", &nodes.RowExpr{Args: list(at(1)), Location: 4}, 4},
-		{"List", list(at(-1), &nodes.String{Str: "s"}, at(6)), 6},
+		{"List", list(at(-1), &nodes.A_Const{Location: -1}, at(6)), 6},
 		{"empty List", list(), -1},
 		{"nil List", (*nodes.List)(nil), -1},
 		{"unlisted kind", &nodes.String{Str: "s"}, -1},
-		{"unlisted kind under an operator", &nodes.A_Expr{Lexpr: &nodes.String{Str: "s"}, Location: 5}, 5},
+		{"unlisted kind under an operator", &nodes.A_Expr{Lexpr: &nodes.XmlExpr{Location: 1}, Location: 5}, -1},
+		{"unlisted kind first in AND", &nodes.BoolExpr{Args: list(&nodes.XmlExpr{}, at(7)), Location: 9}, -1},
+		{"unlisted kind after a located arg", &nodes.BoolExpr{Args: list(at(2), &nodes.XmlExpr{}), Location: 9}, 2},
+		{"unlisted kind first in a List", list(&nodes.XmlExpr{}, at(6)), -1},
+		{"unlisted kind in a nested List", list(list(at(-1)), list(&nodes.XmlExpr{}), at(6)), -1},
+		{"A_Indirection", &nodes.A_Indirection{Arg: at(4)}, 4},
+		{"CollateClause", &nodes.CollateClause{Arg: at(4), Location: 6}, 4},
+		{"CollateClause unknown arg", &nodes.CollateClause{Arg: at(-1), Location: 6}, 6},
+		{"NamedArgExpr", &nodes.NamedArgExpr{Arg: at(9), Location: 2}, 2},
+		{"CoalesceExpr", &nodes.CoalesceExpr{Args: list(at(1)), Location: 4}, 4},
+		{"MinMaxExpr", &nodes.MinMaxExpr{Args: list(at(1)), Location: 4}, 4},
+		{"GroupingFunc", &nodes.GroupingFunc{Args: list(at(1)), Location: 4}, 4},
+		{"SQLValueFunction", &nodes.SQLValueFunction{Location: 4}, 4},
+		{"SetToDefault", &nodes.SetToDefault{Location: 4}, 4},
+		{"JsonIsPredicate", &nodes.JsonIsPredicate{Expr: at(1), Location: 4}, 4},
+		// A typed nil is absent, as a nil pointer is in PostgreSQL.
+		{"typed nil BoolExpr", (*nodes.BoolExpr)(nil), -1},
+		{"typed nil A_Expr", (*nodes.A_Expr)(nil), -1},
+		{"typed nil A_Const", (*nodes.A_Const)(nil), -1},
+		{"typed nil operand", &nodes.A_Expr{Lexpr: (*nodes.ColumnRef)(nil), Location: 5}, 5},
+		{"typed nil arg", &nodes.BoolExpr{Args: list((*nodes.FuncCall)(nil), at(3)), Location: 1}, 1},
+		{"typed nil under indirection", &nodes.NullTest{Arg: &nodes.A_Indirection{Arg: (*nodes.TypeCast)(nil)}, Location: 8}, 8},
 	}
 	for _, c := range cases {
 		if got := nodes.ExprLocation(c.n); got != c.want {
 			t.Errorf("%s: ExprLocation = %d, want %d", c.name, got, c.want)
+		}
+	}
+}
+
+// TestExprLocationTypedNil pins that a typed nil of every kind with a rule
+// is absent, never dereferenced, both alone and as an operand.
+func TestExprLocationTypedNil(t *testing.T) {
+	for _, n := range []nodes.Node{
+		(*nodes.A_Const)(nil), (*nodes.ColumnRef)(nil), (*nodes.ParamRef)(nil),
+		(*nodes.A_ArrayExpr)(nil), (*nodes.CaseExpr)(nil), (*nodes.RowExpr)(nil),
+		(*nodes.CoalesceExpr)(nil), (*nodes.MinMaxExpr)(nil), (*nodes.GroupingFunc)(nil),
+		(*nodes.SQLValueFunction)(nil), (*nodes.SetToDefault)(nil), (*nodes.JsonIsPredicate)(nil),
+		(*nodes.A_Expr)(nil), (*nodes.NullTest)(nil), (*nodes.BooleanTest)(nil),
+		(*nodes.SubLink)(nil), (*nodes.CollateClause)(nil), (*nodes.NamedArgExpr)(nil),
+		(*nodes.A_Indirection)(nil), (*nodes.TypeCast)(nil), (*nodes.BoolExpr)(nil),
+		(*nodes.FuncCall)(nil), (*nodes.List)(nil),
+	} {
+		if got := nodes.ExprLocation(n); got != -1 {
+			t.Errorf("ExprLocation(%T(nil)) = %d, want -1", n, got)
+		}
+		if got := nodes.ExprLocation(&nodes.A_Expr{Lexpr: n, Location: 5}); got != 5 {
+			t.Errorf("ExprLocation(A_Expr{Lexpr: %T(nil)}) = %d, want 5", n, got)
 		}
 	}
 }
@@ -140,7 +218,7 @@ func TestExprLocationLongChains(t *testing.T) {
 		fmt.Fprintf(&sb, " + c%d", i)
 	}
 	sql := sb.String()
-	expr := targetExpr(t, sql)
+	expr := lastTarget(t, sql).Val
 	if got, want := nodes.ExprLocation(expr), strings.Index(sql, "c0"); got != want {
 		t.Errorf("%d-term + chain: ExprLocation %d, want %d", n, got, want)
 	}
