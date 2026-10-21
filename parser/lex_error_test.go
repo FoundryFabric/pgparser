@@ -2,6 +2,7 @@ package parser
 
 import (
 	"errors"
+	"strings"
 	"testing"
 )
 
@@ -44,6 +45,8 @@ var lexErrorCases = []struct {
 	{"select $$abc", "42601", 8, `unterminated dollar-quoted string at or near "$$abc"`, ""},
 	{`select "abc`, "42601", 8, `unterminated quoted identifier at or near ""abc"`, ""},
 	{"select 1 /* x", "42601", 10, `unterminated /* comment at or near "/* x"`, ""},
+	{"select 1 /*", "42601", 10, `unterminated /* comment at or near "/*"`, ""},
+	{"select 1 +/*", "42601", 11, `unterminated /* comment at or near "/*"`, ""},
 	{"select B'01", "42601", 8, `unterminated bit string literal at or near "B'01"`, ""},
 	{"select X'0f", "42601", 8, `unterminated hexadecimal string literal at or near "X'0f"`, ""},
 	{`select ""`, "42601", 8, `zero-length delimited identifier at or near """"`, ""},
@@ -70,6 +73,12 @@ var lexErrorCases = []struct {
 	{`select U&'\D800\\'`, "42601", 16, "invalid Unicode surrogate pair", ""},
 	{`select U&'\DC00'`, "42601", 11, "invalid Unicode surrogate pair", ""},
 	{`select U&"\zz"`, "42601", 11, "invalid Unicode escape", `Unicode escapes must be \XXXX or \+XXXXXX.`},
+	// operators of 64 bytes or more, after the comment cut and +/- trim
+	{"select 1 " + strings.Repeat("~", 64) + " 1", "42601", 10, `operator too long at or near "` + strings.Repeat("~", 64) + `"`, ""},
+	{"select 1, 2 " + strings.Repeat("~", 64), "42601", 13, `operator too long at or near "` + strings.Repeat("~", 64) + `"`, ""},
+	{"select 1 " + strings.Repeat("~", 62) + "++ 1", "42601", 10, `operator too long at or near "` + strings.Repeat("~", 62) + `++"`, ""},
+	{"select 1 " + strings.Repeat("<", 64) + "++ 1", "42601", 10, `operator too long at or near "` + strings.Repeat("<", 64) + `"`, ""},
+	{"select 1 " + strings.Repeat("+", 70) + "~ 1", "42601", 10, `operator too long at or near "` + strings.Repeat("+", 70) + `~"`, ""},
 }
 
 // TestParseReportsLexerErrors pins each scanner error to PostgreSQL 16's

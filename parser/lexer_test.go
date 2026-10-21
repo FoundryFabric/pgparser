@@ -1,8 +1,12 @@
 package parser
 
 import (
+	"errors"
+	"math/rand"
+	"slices"
 	"strings"
 	"testing"
+	"time"
 )
 
 func TestLexerKeywords(t *testing.T) {
@@ -230,6 +234,286 @@ func TestLexerOperators(t *testing.T) {
 				t.Errorf("expected str %q, got %q", tt.str, tok.Str)
 			}
 		})
+	}
+}
+
+// TestLexerOperatorRules pins scan.l's operator rule (see lexOperator). Each
+// case matches PostgreSQL 16: the value of "select 1 <ops> 1", or the
+// operator its 42883 error names.
+func TestLexerOperatorRules(t *testing.T) {
+	tests := []struct {
+		input string
+		want  []string // the tokens, comments dropped
+	}{
+		// trailing + and - trimmed when nothing qualifies
+		{"+-", []string{"+", "-"}},                                              // 1 +- 1 = 0
+		{"+-+-", []string{"+", "-", "+", "-"}},                                  // 1 +-+- 1 = 2
+		{"<+", []string{"<", "+"}},                                              // 1 <+ 1 = f
+		{"<=+", []string{"<=", "+"}},                                            // 1 <=+ 1 = t
+		{"<>-", []string{"<>", "-"}},                                            // 1 <>- 1 = t
+		{strings.Repeat("<", 63) + "+", []string{strings.Repeat("<", 63), "+"}}, // 42883 names the 63 <
+		// a qualifying character anywhere keeps them
+		{"@-", []string{"@-"}},
+		{"~+", []string{"~+"}},
+		{"!=-", []string{"!=-"}},
+		{"%-", []string{"%-"}},
+		{"^-", []string{"^-"}},
+		{"?-", []string{"?-"}},
+		{"@+-+-", []string{"@+-+-"}},
+		{"+-@", []string{"+-@"}},
+		// after a comment cut, the next token re-searches and re-trims
+		{"@-/**/+-", []string{"@-", "+", "-"}},       // with @- defined: select 5 @-/**/+- 1 = 6
+		{"+-/**/<<+", []string{"+", "-", "<<", "+"}}, // with prefix << defined: select 1 +-/**/<<+ 1 = 2
+		// a comment begins inside the run
+		{"*-- x\n", []string{"*"}},           // select 2 *-- x\n 3 = 6
+		{"*/* x */", []string{"*"}},          // select 2 */* x */ 3 = 6
+		{"+/*x*/+", []string{"+", "+"}},      // 1 +/*x*/+ 1 = 2
+		{"*/*--*/", []string{"*"}},           // 1 */*--*/ 1 = 1: the earlier start wins
+		{"*--/*\n", []string{"*"}},           // 1 *--/*\n 1 = 1
+		{"+--~\n", []string{"+"}},            // 1 +--~\n 1 = 2: the ~ is in the comment
+		{"-+/**/@", []string{"-", "+", "@"}}, // 1 -+/**/@ 1 = 0
+		{"<-->", []string{"<"}},              // select 1 <--> 1: syntax error at end of input
+		{"~~~~~~~~~~--" + strings.Repeat("~", 70) + "\n", []string{"~~~~~~~~~~"}},
+		{strings.Repeat("+", 70) + "/*x*/~", append(strings.Split(strings.Repeat("+", 70), ""), "~")}, // = -1
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.input, func(t *testing.T) {
+			lexer := NewLexer(tt.input)
+			var got []string
+			for tok := lexer.NextToken(); tok.Type != lex_EOF; tok = lexer.NextToken() {
+				got = append(got, tok.Str)
+				if len(tok.Str) == 1 && isSelf(tok.Str[0]) && tok.Type != int(tok.Str[0]) {
+					t.Errorf("%q lexed as type %d, want the character token %d", tok.Str, tok.Type, tok.Str[0])
+				}
+			}
+			if lexer.Err != nil {
+				t.Fatalf("lexing %q: %v", tt.input, lexer.Err)
+			}
+			if !slices.Equal(got, tt.want) {
+				t.Errorf("lexing %q = %q, want %q", tt.input, got, tt.want)
+			}
+		})
+	}
+}
+
+// opScanStepsFor lexes "select 1 " + n '+' + " 1", checks each '+' is its own
+// token, and returns lexOperator's scan steps.
+func opScanStepsFor(t *testing.T, n int) int {
+	t.Helper()
+	lexer := NewLexer("select 1 " + strings.Repeat("+", n) + " 1")
+	plus := 0
+	for tok := lexer.NextToken(); tok.Type != lex_EOF; tok = lexer.NextToken() {
+		if tok.Type == '+' {
+			plus++
+		}
+	}
+	if lexer.Err != nil || plus != n {
+		t.Fatalf("a run of %d '+' lexed as %d '+' tokens, error %v", n, plus, lexer.Err)
+	}
+	return lexer.opScanSteps
+}
+
+// TestLexerOperatorRunIsLinear guards against a super-linear operator run
+// (4,000 '+' once took 12 seconds). The guard is a deadline: 1,000,000 '+'
+// lex in ~20ms (~200ms under -race) and must finish within 2s; a goroutine
+// makes a slow lexer fail rather than hang. The step count checks the caches:
+// steps for 2,000 must stay within 4x those for 500, plus a constant.
+func TestLexerOperatorRunIsLinear(t *testing.T) {
+	const n = 500
+	if small, large := opScanStepsFor(t, n), opScanStepsFor(t, 4*n); large > 4*small+64 {
+		t.Fatalf("lexing a run of %d '+' examined %d positions, %.1fx the %d for %d: want linear growth (4x)",
+			4*n, large, float64(large)/float64(small), small, n)
+	}
+
+	const run, budget = 1_000_000, 2 * time.Second
+	type result struct {
+		plus int
+		err  error
+	}
+	done := make(chan result, 1)
+	begin := time.Now()
+	go func() {
+		lexer := NewLexer("select 1 " + strings.Repeat("+", run) + " 1")
+		plus := 0
+		for tok := lexer.NextToken(); tok.Type != lex_EOF; tok = lexer.NextToken() {
+			if tok.Type == '+' {
+				plus++
+			}
+		}
+		done <- result{plus, lexer.Err}
+	}()
+	timer := time.NewTimer(budget)
+	defer timer.Stop()
+	select {
+	case r := <-done:
+		if r.err != nil || r.plus != run {
+			t.Fatalf("a run of %d '+' lexed as %d '+' tokens, error %v", run, r.plus, r.err)
+		}
+		t.Logf("a run of %d '+' lexed in %v", run, time.Since(begin))
+	case <-timer.C:
+		t.Fatalf("lexing a run of %d '+' took over %v", run, budget)
+	}
+}
+
+// refToken is a token refLex expects: position, text and type.
+type refToken struct {
+	loc  int
+	text string
+	typ  int
+}
+
+// refLex is a plain reference lexer for TestLexerOperatorMatchesReference's
+// alphabet (whitespace, comments, "::", ":=", ':', identifiers, digits,
+// operators), applying the operator rule per token with no caching. It returns
+// the tokens and the expected error's 0-based position and message, or -1.
+func refLex(s string) ([]refToken, int, string) {
+	isLetter := func(c byte) bool { return c >= 'a' && c <= 'z' }
+	isDigit := func(c byte) bool { return c >= '0' && c <= '9' }
+	var toks []refToken
+	for p := 0; p < len(s); {
+		c := s[p]
+		switch {
+		case c == ' ' || c == '\n':
+			p++
+		case strings.HasPrefix(s[p:], "/*"):
+			depth, q := 1, p+2
+			for q < len(s) && depth > 0 {
+				switch {
+				case strings.HasPrefix(s[q:], "/*"):
+					depth, q = depth+1, q+2
+				case strings.HasPrefix(s[q:], "*/"):
+					depth, q = depth-1, q+2
+				default:
+					q++
+				}
+			}
+			if depth > 0 {
+				return toks, p, `unterminated /* comment at or near "` + s[p:] + `"`
+			}
+			p = q
+		case strings.HasPrefix(s[p:], "--"):
+			for p < len(s) && s[p] != '\n' {
+				p++
+			}
+		case strings.HasPrefix(s[p:], "::"):
+			toks, p = append(toks, refToken{p, "::", lex_TYPECAST}), p+2
+		case strings.HasPrefix(s[p:], ":="):
+			toks, p = append(toks, refToken{p, ":=", lex_COLON_EQUALS}), p+2
+		case c == ':':
+			toks, p = append(toks, refToken{p, ":", ':'}), p+1
+		case isLetter(c):
+			q := p
+			for q < len(s) && (isLetter(s[q]) || isDigit(s[q])) {
+				q++
+			}
+			toks, p = append(toks, refToken{p, s[p:q], lex_IDENT}), q
+		case isDigit(c):
+			q := p
+			for q < len(s) && isDigit(s[q]) {
+				q++
+			}
+			if q < len(s) && isLetter(s[q]) {
+				for q < len(s) && (isLetter(s[q]) || isDigit(s[q])) {
+					q++
+				}
+				return toks, p, `trailing junk after numeric literal at or near "` + s[p:q] + `"`
+			}
+			toks, p = append(toks, refToken{p, s[p:q], lex_ICONST}), q
+		default: // an operator character
+			q := p
+			for q < len(s) && strings.IndexByte("~!@#^&|`?%+-*/<>=", s[q]) >= 0 {
+				q++
+			}
+			op := s[p:q]
+			if i := strings.Index(op, "/*"); i >= 0 {
+				op = op[:i]
+			}
+			if i := strings.Index(op, "--"); i >= 0 {
+				op = op[:i]
+			}
+			if !strings.ContainsAny(op, "~!@#^&|`?%") {
+				for len(op) > 1 && (op[len(op)-1] == '+' || op[len(op)-1] == '-') {
+					op = op[:len(op)-1]
+				}
+			}
+			typ := lex_Op
+			switch {
+			case len(op) == 1 && strings.Contains("+-*/%^<>=", op):
+				typ = int(op[0])
+			case op == "<=":
+				typ = lex_LESS_EQUALS
+			case op == ">=":
+				typ = lex_GREATER_EQUALS
+			case op == "=>":
+				typ = lex_EQUALS_GREATER
+			case op == "<>" || op == "!=":
+				typ = lex_NOT_EQUALS
+			case len(op) >= 64:
+				return toks, p, `operator too long at or near "` + op + `"`
+			}
+			toks, p = append(toks, refToken{p, op, typ}), p+len(op)
+		}
+	}
+	return toks, -1, ""
+}
+
+// TestLexerOperatorMatchesReference compares the lexer with refLex on seeded
+// random strings: same tokens and same error.
+func TestLexerOperatorMatchesReference(t *testing.T) {
+	pieces := []string{
+		"~", "!", "@", "#", "^", "&", "|", "`", "?", "%", "+", "-", "*", "/", "<", ">", "=",
+		"/", "*", "-", "+", " ", "\n", "a", "b", "1", ":", "/**/", "/*+-*/", "--x\n", "<>", "::", "+-", "<<",
+	}
+	rng := rand.New(rand.NewSource(20261020))
+	count := 50_000
+	if testing.Short() {
+		count = 10_000
+	}
+	refused := 0
+	for i := 0; i < count; i++ {
+		var b strings.Builder
+		for k := rng.Intn(30); k > 0; k-- {
+			b.WriteString(pieces[rng.Intn(len(pieces))])
+		}
+		if rng.Intn(10) == 0 { // reach NAMEDATALEN
+			b.WriteString(strings.Repeat(pieces[rng.Intn(17)], 60+rng.Intn(10)))
+		}
+		s := b.String()
+		want, errAt, errMsg := refLex(s)
+
+		lexer := NewLexer(s)
+		var got []refToken
+		for tok := lexer.NextToken(); tok.Type != lex_EOF; tok = lexer.NextToken() {
+			got = append(got, refToken{tok.Loc, s[tok.Loc:min(lexer.pos, len(s))], tok.Type})
+		}
+		var pe *ParseError
+		switch {
+		case errAt < 0 && lexer.Err != nil:
+			t.Fatalf("lexing %q: %v, want no error", s, lexer.Err)
+		case errAt >= 0 && (!errors.As(lexer.Err, &pe) || pe.Position != errAt || pe.Message != errMsg):
+			t.Fatalf("lexing %q: error %v, want %q at %d", s, lexer.Err, errMsg, errAt)
+		case !slices.Equal(got, want):
+			t.Fatalf("lexing %q:\n got %v\nwant %v", s, got, want)
+		}
+		if strings.HasPrefix(errMsg, "operator too long") {
+			refused++
+		}
+	}
+	if refused == 0 {
+		t.Errorf("no string reached an operator of %d bytes", namedatalen)
+	}
+}
+
+// BenchmarkLexOperatorRun lexes a run of 100,000 '+', one token per '+'.
+func BenchmarkLexOperatorRun(b *testing.B) {
+	input := "select jsonb_" + strings.Repeat("+", 100_000)
+	b.SetBytes(int64(len(input)))
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		lexer := NewLexer(input)
+		for lexer.NextToken().Type != lex_EOF {
+		}
 	}
 }
 
