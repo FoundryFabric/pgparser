@@ -1,6 +1,8 @@
 package parsertest
 
 import (
+	"fmt"
+	"strings"
 	"testing"
 
 	"github.com/pgplex/pgparser/nodes"
@@ -457,5 +459,79 @@ func TestParseArrayInWhere(t *testing.T) {
 	}
 	if ivRight.Ival != 5 {
 		t.Errorf("expected right side value 5, got %d", ivRight.Ival)
+	}
+}
+
+// indirectionShape is "<arg kind>[<elements>]", an
+// element being i (index), s (slice) or a field name.
+func indirectionShape(arg nodes.Node, indirection *nodes.List) string {
+	var parts []string
+	for _, el := range indirection.Elems() {
+		switch e := el.(type) {
+		case *nodes.A_Indices:
+			if e.IsSlice {
+				parts = append(parts, "s")
+			} else {
+				parts = append(parts, "i")
+			}
+		case *nodes.String:
+			parts = append(parts, e.Str)
+		default:
+			parts = append(parts, fmt.Sprintf("%T", el))
+		}
+	}
+	kind := fmt.Sprintf("%T", arg)
+	return strings.TrimPrefix(kind, "*nodes.") + "[" + strings.Join(parts, " ") + "]"
+}
+
+// TestParseIndirectionIsOneList pins that a chain of subscripts and field
+// selections after a parenthesised expression, a parameter or a subquery is
+// one A_Indirection holding every element in order, as PostgreSQL 16's
+// opt_indirection and indirection build it: the fork's a_expr '[' a_expr ']'
+// rule, which PostgreSQL has not, must not take the second subscript.
+func TestParseIndirectionIsOneList(t *testing.T) {
+	for _, c := range []struct{ sql, want string }{
+		{"select (x)[1][2]", "ColumnRef[i i]"},
+		{"select (x).a[1]", "ColumnRef[a i]"},
+		{"select (x)[1].b", "ColumnRef[i b]"},
+		{"select (x)[1:2][3]", "ColumnRef[s i]"},
+		{"select (x).a.b[1][2].c", "ColumnRef[a b i i c]"},
+		{"select $1[1][2]", "ParamRef[i i]"},
+		{"select (select 1)[1][2]", "SubLink[i i]"},
+	} {
+		result, err := parser.Parse(c.sql)
+		if err != nil {
+			t.Errorf("%s: %v", c.sql, err)
+			continue
+		}
+		val := result.Items[0].(*nodes.SelectStmt).TargetList.Items[0].(*nodes.ResTarget).Val
+		ind, ok := val.(*nodes.A_Indirection)
+		if !ok {
+			t.Errorf("%s: %T, want *nodes.A_Indirection", c.sql, val)
+			continue
+		}
+		if got := indirectionShape(ind.Arg, ind.Indirection); got != c.want {
+			t.Errorf("%s: %s, want %s", c.sql, got, c.want)
+		}
+	}
+	for _, c := range []struct{ sql, want string }{
+		{"update t set a[1][2] = 1", "<nil>[i i]"},
+		{"insert into t (a[1].b) values (1)", "<nil>[i b]"},
+	} {
+		result, err := parser.Parse(c.sql)
+		if err != nil {
+			t.Errorf("%s: %v", c.sql, err)
+			continue
+		}
+		var target *nodes.ResTarget
+		switch s := result.Items[0].(type) {
+		case *nodes.UpdateStmt:
+			target = s.TargetList.Items[0].(*nodes.ResTarget)
+		case *nodes.InsertStmt:
+			target = s.Cols.Items[0].(*nodes.ResTarget)
+		}
+		if got := indirectionShape(nil, target.Indirection); got != c.want {
+			t.Errorf("%s: %s, want %s", c.sql, got, c.want)
+		}
 	}
 }

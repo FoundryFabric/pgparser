@@ -9491,7 +9491,7 @@ c_expr:
 				$$ = p
 			}
 		}
-	| '(' a_expr ')' opt_indirection
+	| '(' a_expr ')' opt_indirection %prec UMINUS
 		{
 			if $4 != nil {
 				$$ = &nodes.A_Indirection{
@@ -11155,9 +11155,20 @@ opt_slice_bound:
 	| /* EMPTY */ { $$ = nil }
 	;
 
+/*
+ * Left-recursive from an empty list, as PostgreSQL 16's: after '(' a_expr ')'
+ * the empty list is reduced before the next token is read, so a parse that
+ * fills the stack there (pgMaxDepth) stops at the same token as PostgreSQL's.
+ * c_expr's '(' a_expr ')' opt_indirection takes UMINUS's precedence, below
+ * '[', so a '[' extends the list rather than reducing to the a_expr '['
+ * rule PostgreSQL has not: (x)[1][2] is one A_Indirection of two indices.
+ */
 opt_indirection:
-	indirection { $$ = $1 }
-	| /* EMPTY */ { $$ = nil }
+	/* EMPTY */ { $$ = nil }
+	| opt_indirection indirection_el
+		{
+			$$ = appendList($1, $2)
+		}
 	;
 
 attrs:

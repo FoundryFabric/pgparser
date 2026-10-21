@@ -110,6 +110,9 @@ type Lexer struct {
 
 	// Location tracking
 	savedLoc int
+	// litEnd is the offset just past the closing quote of the last quoted
+	// literal, before the whitespace lexQuoteContinue looks past.
+	litEnd int
 
 	opRun opRun
 	// opScanSteps counts positions lexOperator examines; only tests read it.
@@ -189,6 +192,16 @@ func (l *Lexer) NextToken() Token {
 			return l.failAt("XX000", fmt.Sprintf("unknown lexer state: %d", l.state), l.start, "")
 		}
 	}
+}
+
+// tokenEnd is the offset just past the text of the token NextToken returned
+// last: the scanner's position, or for a quoted literal its closing quote,
+// as the text PostgreSQL's "at or near" quotes ends there.
+func (l *Lexer) tokenEnd() int {
+	if l.litEnd > l.start {
+		return l.litEnd
+	}
+	return l.pos
 }
 
 // again is what a state returns when it has produced no token but changed
@@ -629,6 +642,7 @@ func (l *Lexer) writeUnicodeChar(r rune) {
 
 // lexQuoteContinue handles quote continuation (string literal spanning lines).
 func (l *Lexer) lexQuoteContinue() Token {
+	l.litEnd = l.pos
 	// Check if there's whitespace with newline followed by quote
 	// SQL requires at least one newline in the whitespace to continue a string
 	hasNewline := false
