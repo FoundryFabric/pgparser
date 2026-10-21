@@ -237,6 +237,19 @@ func TestExprNodeLocationsArePostgreSQLs(t *testing.T) {
 		{"create function nosuch_f(p nosuch_t.c%TYPE, q int[], r setof text) returns nosuch_t.c%TYPE language sql as 'select 1'",
 			"TypeName", []nodes.ParseLoc{27, 46, 61, 75}},
 		{"create function nosuch_f(p int) returns setof  nosuch_t.c%TYPE language sql as 'select 1'", "TypeName", []nodes.ParseLoc{27, 47}},
+		// ResTarget at its column name (INSERT's column list, UPDATE's SET,
+		// a multi-column SET's members) or at its expression's first token
+		// (a target or RETURNING item, XMLATTRIBUTES and XMLNAMESPACES), DEFAULT
+		// for a default namespace; read from the raw trees of CREATE RULE
+		// ... DO INSTEAD <statement> and CREATE TEMP VIEW, with the prefix
+		// subtracted. Byte offsets: é is two bytes.
+		{`insert into t (a, b.c, d[1], "Qé", é) values (1,2,3,4,5)`, "ResTarget", []nodes.ParseLoc{15, 18, 23, 29, 36}},
+		{"insert into t (/*c*/ a,\n  -- x\n  b) values (1,2)", "ResTarget", []nodes.ParseLoc{21, 33}},
+		{`update t set a = 1, b.c = 2, (d, "é"[2]) = (3, 4)`, "ResTarget", []nodes.ParseLoc{13, 20, 30, 33}},
+		{"insert into t default values returning  a, b as c, d e, *", "ResTarget", []nodes.ParseLoc{40, 43, 51, 56}},
+		{"select xmlelement(name e, xmlattributes(a as b, c)) from t", "ResTarget", []nodes.ParseLoc{7, 40, 48}},
+		{"select x.* from nosuch_q, xmltable(xmlnamespaces('u' as a, default 'w'), '/r' passing y columns c int) x",
+			"ResTarget", []nodes.ParseLoc{7, 49, 59}},
 	}
 	for _, c := range cases {
 		stmts, err := Parse(c.sql)
@@ -245,6 +258,272 @@ func TestExprNodeLocationsArePostgreSQLs(t *testing.T) {
 		}
 		if got := locationsOf(stmts, c.kind); !reflect.DeepEqual(got, c.want) {
 			t.Errorf("%q: %s at %v, PostgreSQL 16 says %v", c.sql, c.kind, got, c.want)
+		}
+	}
+}
+
+// exprShape renders a raw expression with its locations: an operator is
+// "op@loc(left,right)" with "<>" for an absent left operand, a constant is
+// "int:v@loc", "float:text@loc" or "str:text@loc", AND/OR/NOT is
+// "and@loc(args)", a cast is "cast@loc(arg)", a list is "[members]", a
+// column reference is
+// "name@loc" and anything else is "_".
+func exprShape(n nodes.Node) string {
+	var sb strings.Builder
+	var walk func(n nodes.Node)
+	walk = func(n nodes.Node) {
+		switch e := n.(type) {
+		case nil:
+			sb.WriteString("<>")
+		case *nodes.A_Expr:
+			fmt.Fprintf(&sb, "%s@%d(", e.Name.Items[0].(*nodes.String).Str, e.Location)
+			walk(e.Lexpr)
+			sb.WriteByte(',')
+			walk(e.Rexpr)
+			sb.WriteByte(')')
+		case *nodes.A_Const:
+			switch v := e.Val.(type) {
+			case *nodes.Integer:
+				fmt.Fprintf(&sb, "int:%d", v.Ival)
+			case *nodes.Float:
+				fmt.Fprintf(&sb, "float:%s", v.Fval)
+			case *nodes.String:
+				fmt.Fprintf(&sb, "str:%s", v.Str)
+			default:
+				sb.WriteByte('_')
+			}
+			fmt.Fprintf(&sb, "@%d", e.Location)
+		case *nodes.BoolExpr:
+			fmt.Fprintf(&sb, "%s@%d(", [...]string{"and", "or", "not"}[e.Boolop], e.Location)
+			for i, a := range e.Args.Items {
+				if i > 0 {
+					sb.WriteByte(',')
+				}
+				walk(a)
+			}
+			sb.WriteByte(')')
+		case *nodes.TypeCast:
+			fmt.Fprintf(&sb, "cast@%d(", e.Location)
+			walk(e.Arg)
+			sb.WriteByte(')')
+		case *nodes.List:
+			sb.WriteByte('[')
+			for i, a := range e.Items {
+				if i > 0 {
+					sb.WriteByte(',')
+				}
+				walk(a)
+			}
+			sb.WriteByte(']')
+		case *nodes.ColumnRef:
+			fmt.Fprintf(&sb, "%s@%d", e.Fields.Items[len(e.Fields.Items)-1].(*nodes.String).Str, e.Location)
+		default:
+			sb.WriteByte('_')
+		}
+	}
+	walk(n)
+	return sb.String()
+}
+
+// targetShapes is exprShape of each target of the single SELECT sql.
+func targetShapes(t *testing.T, sql string) []string {
+	t.Helper()
+	var out []string
+	for _, rt := range selectOf(t, sql).TargetList.Items {
+		out = append(out, exprShape(rt.(*nodes.ResTarget).Val))
+	}
+	return out
+}
+
+// TestUnaryPlusIsKept pins that unary plus is an operator in the raw tree,
+// as PostgreSQL 16 builds it: an A_Expr named "+" with no left operand, at
+// the plus sign, over constants too (+1 is not folded; only minus folds a
+// constant). It was dropped, so +'abc' and +true parsed as 'abc' and true,
+// which PostgreSQL refuses ("operator does not exist: + boolean"). Each
+// want was read from PostgreSQL 16.15's debug_print_parse of CREATE TEMP
+// VIEW v AS <the same SELECT> FROM nosuch_q, whose raw tree is logged
+// before the missing table fails it, with the 22-byte prefix subtracted
+// (verified 2026-10-20).
+func TestUnaryPlusIsKept(t *testing.T) {
+	cases := []struct {
+		sql  string
+		want []string
+	}{
+		{"select +x, + +x, -+x, +(a and b), +1, a + +b, +a*b, +a::int", []string{
+			"+@7(<>,x@8)",
+			"+@11(<>,+@13(<>,x@14))",
+			"-@17(<>,+@18(<>,x@19))",
+			"+@22(<>,and@26(a@24,b@30))",
+			"+@34(<>,int:1@35)",
+			"+@40(a@38,+@42(<>,b@43))",
+			"*@48(+@46(<>,a@47),b@49)",
+			"+@52(<>,cast@54(a@53))",
+		}},
+		{"select + -1, -+1, - - 1", []string{"+@7(<>,int:-1@9)", "-@13(<>,+@14(<>,int:1@15))", "int:1@18"}},
+		{"select +'abc'", []string{"+@7(<>,str:abc@8)"}},
+		// BETWEEN's lower bound is a b_expr, whose unary plus is kept too.
+		{"select x between +a and b, x between - +1 and 2", []string{
+			"BETWEEN@9(x@7,[+@17(<>,a@18),b@24])",
+			"BETWEEN@29(x@27,[-@37(<>,+@39(<>,int:1@40)),int:2@46])",
+		}},
+	}
+	for _, c := range cases {
+		if got := targetShapes(t, c.sql); !reflect.DeepEqual(got, c.want) {
+			t.Errorf("%q\n got %v\nwant %v (PostgreSQL 16)", c.sql, got, c.want)
+		}
+	}
+	for _, sql := range []string{"select +", "select (+)", "select + from t"} {
+		if _, err := Parse(sql); err == nil {
+			t.Errorf("Parse(%q) accepted a plus with no operand", sql)
+		}
+	}
+}
+
+// TestSignedFetchCountIsAConstant pins a signed FETCH FIRST or SQL OFFSET
+// count to PostgreSQL 16's rule: the sign takes a number, not an
+// expression; plus is kept as an operator and minus folds into the
+// constant. Read as for TestUnaryPlusIsKept, from PostgreSQL 16.15's raw
+// tree of the same SELECT (2026-10-20). The refusals of +x, -x, +(1) and
+// + 'a' are pinned in TestParseErrorPositionIsTheRefusedToken.
+func TestSignedFetchCountIsAConstant(t *testing.T) {
+	cases := []struct{ sql, offset, count string }{
+		{"select 1 from nosuch_q fetch first +2 rows only", "<>", "+@35(<>,int:2@36)"},
+		{"select 1 from nosuch_q fetch first +2.5 rows only", "<>", "+@35(<>,float:2.5@36)"},
+		{"select 1 from nosuch_q order by 1 offset +3 rows fetch next +1 row with ties", "+@41(<>,int:3@42)", "+@60(<>,int:1@61)"},
+		{"select 1 from nosuch_q offset -3 rows fetch first -2.5 rows only", "int:-3@30", "float:-2.5@50"},
+		{"select 1 from nosuch_q fetch first x rows only", "<>", "x@35"},
+	}
+	for _, c := range cases {
+		sel := selectOf(t, c.sql)
+		if got := exprShape(sel.LimitOffset); got != c.offset {
+			t.Errorf("%q: offset %s, want %s (PostgreSQL 16)", c.sql, got, c.offset)
+		}
+		if got := exprShape(sel.LimitCount); got != c.count {
+			t.Errorf("%q: count %s, want %s (PostgreSQL 16)", c.sql, got, c.count)
+		}
+	}
+}
+
+// stmtOf is the first statement of a parse, unwrapped from its RawStmt.
+func stmtOf(stmts *nodes.List) nodes.Node {
+	n := stmts.Items[0]
+	if raw, ok := n.(*nodes.RawStmt); ok {
+		n = raw.Stmt
+	}
+	return n
+}
+
+// TestNumericOnlyFoldsPlus pins the places PostgreSQL 16's grammar folds a
+// sign into a number rather than building an operator: NumericOnly
+// (sequence options) and SignedIconst (SET STATISTICS). A leading plus
+// leaves the number, and NumericOnly's minus over a Float keeps a Float,
+// int64's least value included (the Integer fold is doNegate's, in
+// expressions only); PostgreSQL 16.15's raw tree has 5, 1.5, the Float
+// -9223372036854775808 and 5.
+func TestNumericOnlyFoldsPlus(t *testing.T) {
+	stmts, err := Parse("create sequence s minvalue +5 increment -9223372036854775808 maxvalue +1.5")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var got []string
+	for _, o := range stmtOf(stmts).(*nodes.CreateSeqStmt).Options.Items {
+		switch v := o.(*nodes.DefElem).Arg.(type) {
+		case *nodes.Integer:
+			got = append(got, fmt.Sprintf("int:%d", v.Ival))
+		case *nodes.Float:
+			got = append(got, "float:"+v.Fval)
+		default:
+			got = append(got, fmt.Sprintf("%T", v))
+		}
+	}
+	if want := []string{"int:5", "float:-9223372036854775808", "float:1.5"}; !reflect.DeepEqual(got, want) {
+		t.Errorf("sequence options %v, want %v", got, want)
+	}
+	stmts, err = Parse("alter table t alter column a set statistics +5")
+	if err != nil {
+		t.Fatal(err)
+	}
+	def := stmtOf(stmts).(*nodes.AlterTableStmt).Cmds.Items[0].(*nodes.AlterTableCmd).Def
+	// The fork wraps the number in an unlocated A_Const (PostgreSQL 17's
+	// set_statistics_value shape; 16 has the bare Integer); either way the
+	// plus is folded, not an operator.
+	if ac, ok := def.(*nodes.A_Const); ok {
+		def = ac.Val
+	}
+	if i, ok := def.(*nodes.Integer); !ok || i.Ival != 5 {
+		t.Errorf("set statistics +5: %#v, want Integer 5", def)
+	}
+}
+
+// TestNegatedLiteralShape pins minus over a constant: a number is folded
+// into a constant at the minus sign, as PostgreSQL 16 does, parenthesised
+// or not, and a string is not (it is an operator, though PostgreSQL still
+// moves the string to the minus sign). Where the negation of an integer
+// literal fits int64 the constant is an Integer: int64's least value in
+// every radix, which the scanner reads as a Float because its magnitude
+// does not fit. That is this fork's shape, not PostgreSQL's: PostgreSQL's
+// Integer is int32-sized, its raw tree keeps every one of these as a Float
+// with the literal's text, and analysis (make_const) reads the int8. One
+// past the least value, a positive magnitude, a decimal or an exponent
+// stays a Float; negating the least Integer again gives back a Float, as
+// int64 cannot hold its magnitude. Locations and the Float texts were read
+// as for TestUnaryPlusIsKept; the int rows are Floats with the same text
+// in PostgreSQL.
+func TestNegatedLiteralShape(t *testing.T) {
+	cases := []struct {
+		sql  string
+		want []string
+	}{
+		{"select -9223372036854775808, -0x8000000000000000, -0o1000000000000000000000, " +
+			"-0b1000000000000000000000000000000000000000000000000000000000000000, -9_223_372_036_854_775_808", []string{
+			"int:-9223372036854775808@7",
+			"int:-9223372036854775808@29",
+			"int:-9223372036854775808@50",
+			"int:-9223372036854775808@77",
+			"int:-9223372036854775808@146",
+		}},
+		{"select -9223372036854775809, -0x8000000000000001, 9223372036854775808, - 9223372036854775808, " +
+			"- -1, -(9223372036854775808), -(1), -1.5, -1e3, -'1', - -9223372036854775808", []string{
+			"float:-9223372036854775809@7",
+			"float:-0x8000000000000001@29",
+			"float:9223372036854775808@50",
+			"int:-9223372036854775808@71",
+			"int:1@94",
+			"int:-9223372036854775808@100",
+			"int:-1@124",
+			"float:-1.5@130",
+			"float:-1e3@136",
+			"-@142(<>,str:1@142)",
+			"float:9223372036854775808@148",
+		}},
+		// Upper-case radix prefixes, and the greatest int64 either way.
+		{"select -0X8000000000000000, -0O1000000000000000000000, -0B1" + strings.Repeat("0", 63) +
+			", -9223372036854775807, 9223372036854775807", []string{
+			"int:-9223372036854775808@7",
+			"int:-9223372036854775808@28",
+			"int:-9223372036854775808@55",
+			"int:-9223372036854775807@124",
+			"int:9223372036854775807@146",
+		}},
+		// -- starts a comment, so this is the constant 1 on the next line;
+		// with a space it is a double negation.
+		{"select --1\n 1, - -1", []string{"int:1@12", "int:1@15"}},
+		// Upper case one past the least stays a Float; leading zeros do not
+		// change the value, so they fold too (PostgreSQL: Floats with the
+		// literal's text).
+		{"select -0X8000000000000001, -00009223372036854775808, -0x0008000000000000000", []string{
+			"float:-0X8000000000000001@7",
+			"int:-9223372036854775808@28",
+			"int:-9223372036854775808@54",
+		}},
+		// A double negation that does not fit stays a Float with the
+		// decimal text: PostgreSQL keeps the inner literal's own text
+		// (0x8000000000000000).
+		{"select - -0x8000000000000000", []string{"float:9223372036854775808@7"}},
+	}
+	for _, c := range cases {
+		if got := targetShapes(t, c.sql); !reflect.DeepEqual(got, c.want) {
+			t.Errorf("%q\n got %v\nwant %v", c.sql, got, c.want)
 		}
 	}
 }

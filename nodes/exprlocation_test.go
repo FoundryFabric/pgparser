@@ -52,6 +52,12 @@ func TestExprLocationIsWhereTheExpressionStarts(t *testing.T) {
 		{"x + y * z", "x"},
 		{"1 + 2 + 3 + 4", "1"},
 		{"- x", "-"},
+		// Unary plus is an operator at its sign, as in PostgreSQL; it was
+		// dropped from the tree, which put +x one byte late, at x.
+		{"+x", "+"},
+		{"+ +x", "+"},
+		{"+a * b", "+"},
+		{"a + +b", "a"},
 		{"x is distinct from y", "x"},
 		{"x and y and z", "x"},
 		{"x or y and z", "x"},
@@ -351,6 +357,7 @@ func corpusStatements(t testing.TB) []string {
 // invariantCounts is how many nodes checkInvariants asserted on.
 type invariantCounts struct {
 	connectives, nots, nullTests, located, spineChecked, spineEqual, mergeChecked int
+	prefixOps, prefixPlus, negatives, targets                                     int
 }
 
 // checkInvariants asserts, over every node of a parsed statement:
@@ -362,6 +369,12 @@ type invariantCounts struct {
 //   - an AND never holds an argument the text joins with OR, nor an OR one
 //     joined with AND: no argument after the first is directly preceded
 //     (past whitespace and '(') by the other connective;
+//   - a prefix + or - (an A_Expr with no left operand) is at its sign, and
+//     a located negative constant at its minus sign;
+//   - a ResTarget is located, except the -1 PostgreSQL also gives the
+//     targets of TABLE t and a recursive view: an INSERT column (a name
+//     and no value) at its name, quoted or not, and any other no later
+//     than its value's ExprLocation;
 //   - ExprLocation of every node is -1 or a byte of the statement that is
 //     not whitespace, no later than the node's own location, and no later
 //     than ExprLocation of the first operand it walks into;
@@ -449,6 +462,36 @@ func checkNode(sql string, n nodes.Node, word func(nodes.ParseLoc) string, fail 
 		if w := word(e.Location); w != "is" && w != "isnull" && w != "notnull" {
 			fail("NullTest at %d reads %q", e.Location, w)
 		}
+	case *nodes.A_Expr:
+		if e.Kind == nodes.AEXPR_OP && e.Lexpr == nil && e.Name.Len() == 1 {
+			if op := e.Name.Items[0].(*nodes.String).Str; op == "+" || op == "-" {
+				c.prefixOps++
+				if op == "+" {
+					c.prefixPlus++
+				}
+				if l := int(e.Location); l < 0 || l >= len(sql) || sql[l] != op[0] {
+					fail("prefix %s at %d is not at a %s", op, e.Location, op)
+				}
+			}
+		}
+	case *nodes.A_Const:
+		negative := false
+		switch v := e.Val.(type) {
+		case *nodes.Integer:
+			negative = v.Ival < 0
+		case *nodes.Float:
+			negative = strings.HasPrefix(v.Fval, "-")
+		}
+		// A constant the grammar builds unlocated (SET STATISTICS -1) is
+		// unknown, not wrong.
+		if negative && e.Location >= 0 {
+			c.negatives++
+			if l := int(e.Location); l >= len(sql) || sql[l] != '-' {
+				fail("negative constant at %d is not at a minus sign", e.Location)
+			}
+		}
+	case *nodes.ResTarget:
+		checkResTarget(sql, e, fail, c)
 	}
 	loc := nodes.ExprLocation(n)
 	if loc < 0 {
@@ -532,6 +575,38 @@ func precedingWord(sql string, loc int) string {
 	return strings.ToLower(sql[i+1 : j])
 }
 
+// checkResTarget is checkNode's rule for a ResTarget.
+func checkResTarget(sql string, e *nodes.ResTarget, fail func(string, ...any), c *invariantCounts) {
+	l := int(e.Location)
+	if l < 0 {
+		if cr, ok := e.Val.(*nodes.ColumnRef); !ok || cr.Location >= 0 {
+			fail("ResTarget %q is not located", e.Name)
+		}
+		return
+	}
+	c.targets++
+	// No statement starts with a target, so 0 is the unset zero value.
+	if l == 0 {
+		fail("ResTarget %q is at 0, the unset value", e.Name)
+		return
+	}
+	if l >= len(sql) || strings.ContainsRune(" \t\n\r\f\v", rune(sql[l])) {
+		fail("ResTarget %q at %d is not at a token", e.Name, l)
+		return
+	}
+	if e.Val == nil {
+		rest := sql[l:]
+		quoted := rest[0] == '"' || len(rest) > 1 && (rest[0] == 'U' || rest[0] == 'u') && rest[1] == '&'
+		if !quoted && !strings.HasPrefix(strings.ToLower(rest), strings.ToLower(e.Name)) {
+			fail("INSERT column %q at %d is not at its name", e.Name, l)
+		}
+		return
+	}
+	if vl := nodes.ExprLocation(e.Val); vl >= 0 && l > vl {
+		fail("ResTarget %q at %d is after its value's start %d", e.Name, l, vl)
+	}
+}
+
 // ownAndFirst is a node's own location (-1 if it has none) and the first
 // operand ExprLocation walks into (nil if none).
 func ownAndFirst(n nodes.Node) (int, nodes.Node) {
@@ -587,10 +662,13 @@ func TestInvariantsOverCorpus(t *testing.T) {
 	}
 	t.Logf("%d statements checked (%d rejected by the parser, skipped): %d AND/OR, %d NOT, %d NullTest asserted; "+
 		"%d connective arguments checked for a merged-in connective; %d nodes with a known ExprLocation, "+
-		"%d of them over a first operand (%d required to start exactly there)",
-		checked, rejected, c.connectives, c.nots, c.nullTests, c.mergeChecked, c.located, c.spineChecked, c.spineEqual)
+		"%d of them over a first operand (%d required to start exactly there); "+
+		"%d prefix +/- (%d of them +), %d negative constants, %d ResTargets asserted",
+		checked, rejected, c.connectives, c.nots, c.nullTests, c.mergeChecked, c.located, c.spineChecked, c.spineEqual,
+		c.prefixOps, c.prefixPlus, c.negatives, c.targets)
 	if checked < 1000 || c.connectives < 100 || c.nots < 50 || c.nullTests < 100 || c.mergeChecked < 100 ||
-		c.located < 10000 || c.spineChecked < 1000 || c.spineEqual < 1000 {
+		c.located < 10000 || c.spineChecked < 1000 || c.spineEqual < 1000 ||
+		c.prefixOps < 100 || c.prefixPlus < 20 || c.negatives < 100 || c.targets < 1000 {
 		t.Errorf("corpus too small to mean anything: %+v over %d statements", c, checked)
 	}
 }

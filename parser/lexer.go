@@ -887,11 +887,11 @@ func (l *Lexer) lexNumber() Token {
 	if l.input[l.pos] == '0' && l.pos+1 < len(l.input) {
 		switch l.input[l.pos+1] {
 		case 'x', 'X':
-			return l.lexRadixNumber(16, isHexDigit, "invalid hexadecimal integer")
+			return l.lexRadixNumber(isHexDigit, "invalid hexadecimal integer")
 		case 'o', 'O':
-			return l.lexRadixNumber(8, isOctalDigit, "invalid octal integer")
+			return l.lexRadixNumber(isOctalDigit, "invalid octal integer")
 		case 'b', 'B':
-			return l.lexRadixNumber(2, isBinaryDigit, "invalid binary integer")
+			return l.lexRadixNumber(isBinaryDigit, "invalid binary integer")
 		}
 	}
 
@@ -943,9 +943,8 @@ func (l *Lexer) lexNumber() Token {
 		return Token{Type: lex_FCONST, Str: numStr, Loc: l.start}
 	}
 
-	// Try to parse as integer
-	val, err := strconv.ParseInt(numStr, 10, 64)
-	if err != nil {
+	val, ok := integerLiteral(numStr, false)
+	if !ok {
 		// Too large, treat as float
 		return Token{Type: lex_FCONST, Str: numStr, Loc: l.start}
 	}
@@ -985,7 +984,7 @@ func (l *Lexer) identEnd(p int) int {
 // octinteger and bininteger rules do: 0x(_?{hexdigit})+. A prefix with no
 // digit is the fail rule's error (0x, 0x_), unless the identifier after the
 // 0 runs longer, which is decinteger_junk, as flex takes the longest match.
-func (l *Lexer) lexRadixNumber(base int, digit func(byte) bool, invalid string) Token {
+func (l *Lexer) lexRadixNumber(digit func(byte) bool, invalid string) Token {
 	start := l.pos
 	p := start + 2
 	if p < len(l.input) && l.input[p] == '_' {
@@ -1008,12 +1007,43 @@ func (l *Lexer) lexRadixNumber(base int, digit func(byte) bool, invalid string) 
 	numStr := l.input[start:l.pos]
 	numStr = strings.ReplaceAll(numStr, "_", "")
 
-	val, err := strconv.ParseInt(numStr[2:], base, 64)
-	if err != nil {
+	val, ok := integerLiteral(numStr, false)
+	if !ok {
 		return Token{Type: lex_FCONST, Str: numStr, Loc: l.start}
 	}
 
 	return Token{Type: lex_ICONST, Ival: val, Str: numStr, Loc: l.start}
+}
+
+// integerLiteral is the value of an integer literal's text as the scanner
+// accepted it, underscores removed: decimal digits, or 0x, 0o or 0b (either
+// case) and digits of that radix. negative reads it as the literal's
+// negation, so the least int64 (-9223372036854775808, -0x8000000000000000)
+// has a value although its magnitude does not. ok is false when the value
+// does not fit int64, or the text is not an integer literal (1.5, 1e3).
+func integerLiteral(text string, negative bool) (val int64, ok bool) {
+	base, digits := 10, text
+	if len(text) > 2 && text[0] == '0' {
+		switch text[1] {
+		case 'x', 'X':
+			base, digits = 16, text[2:]
+		case 'o', 'O':
+			base, digits = 8, text[2:]
+		case 'b', 'B':
+			base, digits = 2, text[2:]
+		}
+	}
+	if digits == "" || digits[0] == '+' || digits[0] == '-' {
+		return 0, false
+	}
+	if negative {
+		digits = "-" + digits
+	}
+	val, err := strconv.ParseInt(digits, base, 64)
+	if err != nil {
+		return 0, false
+	}
+	return val, true
 }
 
 // lexIdent handles identifiers and keywords.
