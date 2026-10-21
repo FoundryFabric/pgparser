@@ -487,8 +487,9 @@ func indirectionShape(arg nodes.Node, indirection *nodes.List) string {
 // TestParseIndirectionIsOneList pins that a chain of subscripts and field
 // selections after a parenthesised expression, a parameter or a subquery is
 // one A_Indirection holding every element in order, as PostgreSQL 16's
-// opt_indirection and indirection build it: the fork's a_expr '[' a_expr ']'
-// rule, which PostgreSQL has not, must not take the second subscript.
+// opt_indirection and indirection build it. A subscript on anything else
+// (1[1], now()[1], ARRAY[1,2][1]) is a syntax error, as in PostgreSQL; see
+// TestParseErrorPositionIsTheRefusedToken.
 func TestParseIndirectionIsOneList(t *testing.T) {
 	for _, c := range []struct{ sql, want string }{
 		{"select (x)[1][2]", "ColumnRef[i i]"},
@@ -498,6 +499,12 @@ func TestParseIndirectionIsOneList(t *testing.T) {
 		{"select (x).a.b[1][2].c", "ColumnRef[a b i i c]"},
 		{"select $1[1][2]", "ParamRef[i i]"},
 		{"select (select 1)[1][2]", "SubLink[i i]"},
+		{"select (ARRAY[1,2])[1]", "A_ArrayExpr[i]"},
+		{"select (1+2)[1]", "A_Expr[i]"},
+		{"select x[1]", "ColumnRef[i]"},
+		{"select x[1:2]", "ColumnRef[s]"},
+		{"select x[:2]", "ColumnRef[s]"},
+		{"select x.f[1].g", "ColumnRef[i g]"},
 	} {
 		result, err := parser.Parse(c.sql)
 		if err != nil {

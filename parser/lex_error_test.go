@@ -193,6 +193,12 @@ func TestParseErrorPositionIsTheRefusedToken(t *testing.T) {
 		{"select 1 offset - (2) rows", 23},
 		{"insert into t (", 16},
 		{"insert into t (a,) values (1)", 18},
+		// A subscript follows only a column, a parameter or a parenthesised
+		// expression, as in PostgreSQL 16, which refuses these at the "[".
+		{"SELECT 1[1]", 9},
+		{"SELECT now()[1]", 13},
+		{"SELECT 'a'[1]", 11},
+		{"SELECT ARRAY[1,2][1]", 18},
 	} {
 		_, err := Parse(c.sql)
 		var pe *ParseError

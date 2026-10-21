@@ -9169,24 +9169,6 @@ a_expr:
 		{
 			$$ = &nodes.SetToDefault{Location: $<loc>1}
 		}
-	| a_expr '[' a_expr ']'
-		{
-			$$ = &nodes.A_Indirection{
-				Arg:         $1,
-				Indirection: makeList(&nodes.A_Indices{Uidx: $3}),
-			}
-		}
-	| a_expr '[' opt_slice_bound ':' opt_slice_bound ']'
-		{
-			$$ = &nodes.A_Indirection{
-				Arg: $1,
-				Indirection: makeList(&nodes.A_Indices{
-					IsSlice: true,
-					Lidx:    $3,
-					Uidx:    $5,
-				}),
-			}
-		}
 	| a_expr TYPECAST Typename
 		{
 			$$ = &nodes.TypeCast{
@@ -9491,7 +9473,7 @@ c_expr:
 				$$ = p
 			}
 		}
-	| '(' a_expr ')' opt_indirection %prec UMINUS
+	| '(' a_expr ')' opt_indirection
 		{
 			if $4 != nil {
 				$$ = &nodes.A_Indirection{
@@ -11159,9 +11141,6 @@ opt_slice_bound:
  * Left-recursive from an empty list, as PostgreSQL 16's: after '(' a_expr ')'
  * the empty list is reduced before the next token is read, so a parse that
  * fills the stack there (pgMaxDepth) stops at the same token as PostgreSQL's.
- * c_expr's '(' a_expr ')' opt_indirection takes UMINUS's precedence, below
- * '[', so a '[' extends the list rather than reducing to the a_expr '['
- * rule PostgreSQL has not: (x)[1][2] is one A_Indirection of two indices.
  */
 opt_indirection:
 	/* EMPTY */ { $$ = nil }
