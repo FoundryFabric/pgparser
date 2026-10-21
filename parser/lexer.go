@@ -66,8 +66,7 @@ const (
 	stateXUI                // quoted identifier with Unicode escapes
 	stateXUS                // quoted string with Unicode escapes
 
-	// numLexerStates counts the states above; it is not a state.
-	// TestLexerEveryStateAnswersEndOfInput walks them all.
+	// numLexerStates counts the states above (not a state itself).
 	numLexerStates
 )
 
@@ -144,11 +143,9 @@ func NewLexer(input string) *Lexer {
 
 // NextToken returns the next token from the input.
 func (l *Lexer) NextToken() Token {
-	// Every state answers the end of the input itself: lexInitial returns
-	// EOF, lexQuoteContinue the completed literal, and the rest the error
-	// for what they leave unterminated, as scan.l's <<EOF>> rules do. A
-	// literal or comment whose opening is the last byte of the input
-	// reaches here with nothing after it, and must still be refused.
+	// Each state handles end of input, as scan.l's <<EOF>> rules do:
+	// lexInitial returns EOF, lexQuoteContinue the literal, the rest an
+	// "unterminated" error, even when the opening is the last byte.
 	for {
 		switch l.state {
 		case stateInitial:
