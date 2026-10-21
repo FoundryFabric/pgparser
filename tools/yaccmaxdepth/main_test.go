@@ -35,6 +35,11 @@ func TestPatchUnpatched(t *testing.T) {
 	if bytes.Equal(unpatched, src) {
 		t.Fatal("no check to remove")
 	}
+	header := []byte(" and tools/yaccmaxdepth. DO NOT EDIT.\n")
+	if !bytes.Contains(src[:bytes.IndexByte(src, '\n')+1], header) {
+		t.Fatal("the committed parser's first line does not name yaccmaxdepth")
+	}
+	unpatched = bytes.Replace(unpatched, header, []byte(". DO NOT EDIT.\n"), 1)
 	got, err := patch(unpatched, "pg")
 	if err != nil {
 		t.Fatal(err)
@@ -47,5 +52,8 @@ func TestPatchUnpatched(t *testing.T) {
 	}
 	if _, err := patch(append(append([]byte{}, unpatched...), unpatched...), "pg"); err == nil {
 		t.Fatal("patched a file holding the push twice")
+	}
+	if _, err := patch(unpatched[bytes.IndexByte(unpatched, '\n')+1:], "pg"); err == nil {
+		t.Fatal("patched a file without goyacc's generated-code line")
 	}
 }

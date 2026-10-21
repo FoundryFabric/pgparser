@@ -154,8 +154,10 @@ func NewLexer(input string) *Lexer {
 // returns again() to this loop rather than calling NextToken: Go does not
 // eliminate tail calls, so a call per comment or continuation would grow the
 // stack with the input and overflow it. lexInitial produces no token exactly
-// when it leaves the initial state, so the loop reads the state rather than
-// the token there, which keeps the common path as cheap as a direct return.
+// when it leaves the initial state, so the loop tests the state first there,
+// which keeps the common path nearly as cheap as a direct return; it tests the
+// token too, so a lexInitial that returned again() without a state change
+// would loop rather than hand the parser lex_AGAIN, which it reads as the end.
 func (l *Lexer) NextToken() Token {
 	// Each state handles end of input, as scan.l's <<EOF>> rules do:
 	// lexInitial returns EOF, lexQuoteContinue the literal, the rest an
@@ -165,7 +167,7 @@ func (l *Lexer) NextToken() Token {
 		case stateInitial:
 			l.start = l.pos
 			tok := l.lexInitial()
-			if l.state == stateInitial {
+			if l.state == stateInitial && tok.Type != lex_AGAIN {
 				return tok
 			}
 		case stateXC:
@@ -663,8 +665,10 @@ func (l *Lexer) lexQuoteContinue() Token {
 		}
 	}
 
-	// If we see a quote after whitespace with newline, continue the string
-	if hasNewline && l.pos < len(l.input) && l.input[l.pos] == '\'' {
+	// If we see a quote after whitespace with newline, continue the string.
+	// A U&"..." identifier is never continued: PostgreSQL 16 lexes U&"a",
+	// a newline and 'x' as an identifier and a string.
+	if hasNewline && l.stateBeforeStrStop != stateXUI && l.pos < len(l.input) && l.input[l.pos] == '\'' {
 		l.pos++
 		l.state = l.stateBeforeStrStop
 		return again()

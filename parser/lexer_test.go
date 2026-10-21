@@ -10,9 +10,12 @@ import (
 	"path/filepath"
 	"runtime/debug"
 	"slices"
+	"strconv"
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/pgplex/pgparser/nodes"
 )
 
 func TestLexerKeywords(t *testing.T) {
@@ -850,6 +853,11 @@ func TestIntegerLiteral(t *testing.T) {
 // its inputs instead of starting a child to run them.
 const lexStackChildEnv = "PGPARSER_LEX_STACK_CHILD"
 
+// lexStackParentEnv carries the parent's process ID: a process runs as the
+// child only when it was started by that parent, so a lexStackChildEnv that
+// leaked into a test run's environment fails rather than passing in-process.
+const lexStackParentEnv = "PGPARSER_LEX_STACK_PARENT"
+
 // lexStackMarker is what the child prints once every input has lexed and
 // parsed, so the parent cannot pass on a child that ran no test at all.
 const lexStackMarker = "lexer stack bounded: all inputs lexed"
@@ -861,7 +869,10 @@ const lexStackMarker = "lexer stack bounded: all inputs lexed"
 // overflows that stack. The inputs run in a child process because a stack
 // overflow is fatal: it fails this test rather than killing the suite.
 func TestLexerStackIsBounded(t *testing.T) {
-	if os.Getenv(lexStackChildEnv) == "1" {
+	if _, set := os.LookupEnv(lexStackChildEnv); set {
+		if os.Getenv(lexStackChildEnv) != "1" || os.Getenv(lexStackParentEnv) != strconv.Itoa(os.Getppid()) {
+			t.Fatalf("%s is set but this process was not started by TestLexerStackIsBounded; unset it", lexStackChildEnv)
+		}
 		lexStackChild()
 		return
 	}
@@ -871,7 +882,7 @@ func TestLexerStackIsBounded(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Minute)
 	defer cancel()
 	cmd := exec.CommandContext(ctx, os.Args[0], "-test.run=^TestLexerStackIsBounded$", "-test.count=1", "-test.v")
-	cmd.Env = append(os.Environ(), lexStackChildEnv+"=1")
+	cmd.Env = append(os.Environ(), lexStackChildEnv+"=1", lexStackParentEnv+"="+strconv.Itoa(os.Getpid()))
 	out, err := cmd.CombinedOutput()
 	if ctx.Err() != nil {
 		t.Fatalf("child did not finish in time: %v", ctx.Err())
@@ -948,6 +959,36 @@ func TestLexerNeverReturnsAgain(t *testing.T) {
 	}
 }
 
+// FuzzLexerNeverReturnsAgain requires that lex_AGAIN never leaves NextToken
+// (the parser would read it, being at most 0, as the end of the input and
+// accept a truncated statement), and that Parse does not panic. The seeds
+// reach every state.
+func FuzzLexerNeverReturnsAgain(f *testing.F) {
+	for _, seed := range []string{
+		"select 1", "/* a /* b */ c */ x", "-- c\n1", "'a'\n'b'", "E'\\x41'\n'b'",
+		"B'1'\n'0'", "X'f'", "U&'d\\0061t' UESCAPE '!'", "U&\"a\"\n'x'", "\"a\"\"b\"",
+		"$a$x$a$", "$1 + $2", "1.5e3 .5 0x1F 1_000", "a <= b != c :: int", "'unterminated",
+	} {
+		f.Add(seed)
+	}
+	f.Fuzz(func(t *testing.T, input string) {
+		lexer := NewLexer(input)
+		for i := 0; ; i++ {
+			tok := lexer.NextToken()
+			if tok.Type == lex_AGAIN {
+				t.Fatalf("NextToken returned lex_AGAIN at %d", tok.Loc)
+			}
+			if tok.Type == lex_EOF {
+				break
+			}
+			if i > len(input)+1 {
+				t.Fatalf("more tokens than bytes")
+			}
+		}
+		_, _ = Parse(input)
+	})
+}
+
 // lexCorpus reads every statement file of the PostgreSQL regression corpus.
 func lexCorpus(tb testing.TB) []string {
 	files, err := filepath.Glob("pgregress/testdata/sql/*.sql")
@@ -994,5 +1035,40 @@ func BenchmarkLexContinuations(b *testing.B) {
 		lexer := NewLexer(input)
 		for lexer.NextToken().Type != lex_EOF {
 		}
+	}
+}
+
+// TestLexerUnicodeIdentifierIsNotContinued pins that a U&"..." identifier
+// followed by a newline and a quoted string is an identifier and a string, as
+// PostgreSQL 16 lexes it (2026-10-20: `select U&"a"` newline `'x' as b` is
+// the typed literal a 'x', refused in analysis with 42704 type "a" does not
+// exist). Only a string continues across a newline. A UESCAPE on the next
+// line still applies.
+func TestLexerUnicodeIdentifierIsNotContinued(t *testing.T) {
+	for _, c := range []struct {
+		input string
+		want  []Token
+	}{
+		{"U&\"a\"\n'x'", []Token{{Type: lex_IDENT, Str: "a", Loc: 0}, {Type: lex_SCONST, Str: "x", Loc: 6}}},
+		{"U&\"a\" -- c\n 'x'", []Token{{Type: lex_IDENT, Str: "a", Loc: 0}, {Type: lex_SCONST, Str: "x", Loc: 12}}},
+		{"U&\"!0061\"\nuescape '!'", []Token{{Type: lex_IDENT, Str: "a", Loc: 0}}},
+		{"U&'a'\n'b'", []Token{{Type: lex_USCONST, Str: "ab", Loc: 0}}},
+	} {
+		lexer := NewLexer(c.input)
+		var got []Token
+		for tok := lexer.NextToken(); tok.Type != lex_EOF; tok = lexer.NextToken() {
+			got = append(got, tok)
+		}
+		if lexer.Err != nil || !slices.Equal(got, c.want) {
+			t.Errorf("lexing %q: %v, %v; want %v", c.input, got, lexer.Err, c.want)
+		}
+	}
+	tree, err := Parse("select U&\"a\"\n'x' as b")
+	if err != nil {
+		t.Fatalf("parsing: %v", err)
+	}
+	val := tree.Items[0].(*nodes.SelectStmt).TargetList.Items[0].(*nodes.ResTarget).Val
+	if tc, ok := val.(*nodes.TypeCast); !ok || tc.TypeName == nil {
+		t.Errorf("select U&\"a\" 'x': %T, want the typed literal a 'x'", val)
 	}
 }
