@@ -4607,7 +4607,7 @@ func_type:
 			names := prependList(&nodes.String{Str: $1}, $2)
 			tn := makeTypeNameFromNameList(names).(*nodes.TypeName)
 			tn.PctType = true
-			tn.Location = -1
+			tn.Location = $<loc>1
 			$$ = tn
 		}
 	| SETOF type_function_name attrs '%' TYPE_P
@@ -4616,7 +4616,7 @@ func_type:
 			tn := makeTypeNameFromNameList(names).(*nodes.TypeName)
 			tn.PctType = true
 			tn.Setof = true
-			tn.Location = -1
+			tn.Location = $<loc>2
 			$$ = tn
 		}
 	;
@@ -8756,25 +8756,26 @@ a_expr:
 		}
 	| a_expr AND a_expr
 		{
-			$$ = makeBoolExpr(nodes.AND_EXPR, $1, $3)
+			$$ = makeAndExpr($1, $3, $<loc>2)
 		}
 	| a_expr OR a_expr
 		{
-			$$ = makeBoolExpr(nodes.OR_EXPR, $1, $3)
+			$$ = makeOrExpr($1, $3, $<loc>2)
 		}
 	| NOT a_expr
 		{
-			$$ = makeBoolExpr(nodes.NOT_EXPR, $2, nil)
+			$$ = makeNotExpr($2, $<loc>1)
 		}
 	| NOT_LA a_expr							%prec NOT
 		{
-			$$ = makeBoolExpr(nodes.NOT_EXPR, $2, nil)
+			$$ = makeNotExpr($2, $<loc>1)
 		}
 	| a_expr IS NULL_P
 		{
 			$$ = &nodes.NullTest{
 				Arg:         $1,
 				Nulltesttype: nodes.IS_NULL,
+				Location:     $<loc>2,
 			}
 		}
 	| a_expr IS NOT NULL_P
@@ -8782,6 +8783,7 @@ a_expr:
 			$$ = &nodes.NullTest{
 				Arg:         $1,
 				Nulltesttype: nodes.IS_NOT_NULL,
+				Location:     $<loc>2,
 			}
 		}
 	| a_expr IS TRUE_P
@@ -8789,6 +8791,7 @@ a_expr:
 			$$ = &nodes.BooleanTest{
 				Arg:          $1,
 				Booltesttype: nodes.IS_TRUE,
+				Location:     $<loc>2,
 			}
 		}
 	| a_expr IS FALSE_P
@@ -8796,6 +8799,7 @@ a_expr:
 			$$ = &nodes.BooleanTest{
 				Arg:          $1,
 				Booltesttype: nodes.IS_FALSE,
+				Location:     $<loc>2,
 			}
 		}
 	| a_expr IS NOT TRUE_P                     %prec IS
@@ -8803,6 +8807,7 @@ a_expr:
 			$$ = &nodes.BooleanTest{
 				Arg:          $1,
 				Booltesttype: nodes.IS_NOT_TRUE,
+				Location:     $<loc>2,
 			}
 		}
 	| a_expr IS NOT FALSE_P                    %prec IS
@@ -8810,6 +8815,7 @@ a_expr:
 			$$ = &nodes.BooleanTest{
 				Arg:          $1,
 				Booltesttype: nodes.IS_NOT_FALSE,
+				Location:     $<loc>2,
 			}
 		}
 	| a_expr IS UNKNOWN                        %prec IS
@@ -8817,6 +8823,7 @@ a_expr:
 			$$ = &nodes.BooleanTest{
 				Arg:          $1,
 				Booltesttype: nodes.IS_UNKNOWN,
+				Location:     $<loc>2,
 			}
 		}
 	| a_expr IS NOT UNKNOWN                    %prec IS
@@ -8824,6 +8831,7 @@ a_expr:
 			$$ = &nodes.BooleanTest{
 				Arg:          $1,
 				Booltesttype: nodes.IS_NOT_UNKNOWN,
+				Location:     $<loc>2,
 			}
 		}
 	| a_expr ISNULL
@@ -8831,6 +8839,7 @@ a_expr:
 			$$ = &nodes.NullTest{
 				Arg:          $1,
 				Nulltesttype: nodes.IS_NULL,
+				Location:     $<loc>2,
 			}
 		}
 	| a_expr NOTNULL
@@ -8838,6 +8847,7 @@ a_expr:
 			$$ = &nodes.NullTest{
 				Arg:          $1,
 				Nulltesttype: nodes.IS_NOT_NULL,
+				Location:     $<loc>2,
 			}
 		}
 	| a_expr IS DISTINCT FROM a_expr           %prec IS
@@ -8883,7 +8893,7 @@ a_expr:
 				Op:       nodes.IS_DOCUMENT,
 				Args:     makeList($1),
 				Location: -1,
-			})
+			}, $<loc>2)
 		}
 	| a_expr IS json_predicate_type_constraint json_key_uniqueness_constraint_opt   %prec IS
 		{
@@ -8891,7 +8901,7 @@ a_expr:
 				Expr:       $1,
 				ItemType:   nodes.JsonValueType($3),
 				UniqueKeys: $4 != 0,
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 		}
 	| a_expr IS NOT json_predicate_type_constraint json_key_uniqueness_constraint_opt   %prec IS
@@ -8900,8 +8910,8 @@ a_expr:
 				Expr:       $1,
 				ItemType:   nodes.JsonValueType($4),
 				UniqueKeys: $5 != 0,
-				Location:   -1,
-			})
+				Location:   $<loc>1,
+			}, $<loc>1)
 		}
 	| a_expr IS unicode_normal_form NORMALIZED                    %prec IS
 		{
@@ -8919,7 +8929,7 @@ a_expr:
 				Args:       makeList2($1, makeStringConst($4, $<loc>4)),
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
 				Location:   $<loc>2,
-			})
+			}, $<loc>2)
 		}
 	| a_expr IS NORMALIZED                                        %prec IS
 		{
@@ -8937,7 +8947,7 @@ a_expr:
 				Args:       makeList2($1, makeStringConst("NFC", -1)),
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
 				Location:   $<loc>2,
-			})
+			}, $<loc>2)
 		}
 	| a_expr LIKE a_expr                              %prec LIKE
 		{
@@ -9069,7 +9079,7 @@ a_expr:
 				SubLinkType: int(nodes.ANY_SUBLINK),
 				Testexpr:    $1,
 				Subselect:   $3,
-				Location:    -1,
+				Location:    $<loc>2,
 			}
 		}
 	| a_expr NOT_LA IN_P select_with_parens            %prec NOT_LA
@@ -9078,9 +9088,9 @@ a_expr:
 				SubLinkType: int(nodes.ANY_SUBLINK),
 				Testexpr:    $1,
 				Subselect:   $4,
-				Location:    -1,
+				Location:    $<loc>2,
 			}
-			$$ = makeBoolExpr(nodes.NOT_EXPR, sublink, nil)
+			$$ = makeNotExpr(sublink, $<loc>2)
 		}
 	| a_expr subquery_Op sub_type select_with_parens %prec Op
 		{
@@ -9089,7 +9099,7 @@ a_expr:
 				Testexpr:    $1,
 				OperName:    $2,
 				Subselect:   $4,
-				Location:    -1,
+				Location:    $<loc>2,
 			}
 		}
 	| a_expr subquery_Op sub_type '(' a_expr ')' %prec Op
@@ -9111,7 +9121,7 @@ a_expr:
 			$$ = &nodes.CollateClause{
 				Arg:      $1,
 				Collname: $3,
-				Location: -1,
+				Location: $<loc>2,
 			}
 		}
 	| a_expr AT TIME ZONE a_expr                       %prec AT
@@ -9134,7 +9144,7 @@ a_expr:
 		}
 	| DEFAULT
 		{
-			$$ = &nodes.SetToDefault{Location: -1}
+			$$ = &nodes.SetToDefault{Location: $<loc>1}
 		}
 	| a_expr '[' a_expr ']'
 		{
@@ -9217,7 +9227,7 @@ case_expr:
 				Arg:       $2,
 				Args:      $3,
 				Defresult: $4,
-				Location:  -1,
+				Location:  $<loc>1,
 			}
 		}
 	;
@@ -9265,20 +9275,20 @@ array_expr:
 		{
 			$$ = &nodes.A_ArrayExpr{
 				Elements: $2,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| '[' array_expr_list ']'
 		{
 			$$ = &nodes.A_ArrayExpr{
 				Elements: $2,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| '[' ']'
 		{
 			$$ = &nodes.A_ArrayExpr{
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	;
@@ -9310,7 +9320,7 @@ row:
 			$$ = &nodes.RowExpr{
 				Args:     $1,
 				RowFormat: nodes.COERCE_IMPLICIT_CAST,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	;
@@ -9321,14 +9331,14 @@ explicit_row:
 			$$ = &nodes.RowExpr{
 				Args:     $3,
 				RowFormat: nodes.COERCE_EXPLICIT_CALL,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| ROW '(' ')'
 		{
 			$$ = &nodes.RowExpr{
 				RowFormat: nodes.COERCE_EXPLICIT_CALL,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	;
@@ -9420,7 +9430,7 @@ b_expr:
 				Op:       nodes.IS_DOCUMENT,
 				Args:     makeList($1),
 				Location: -1,
-			})
+			}, $<loc>2)
 		}
 	| b_expr TYPECAST Typename
 		{
@@ -9475,7 +9485,7 @@ c_expr:
 			$$ = &nodes.SubLink{
 				SubLinkType: int(nodes.EXPR_SUBLINK),
 				Subselect:   $1,
-				Location:    -1,
+				Location:    $<loc>1,
 			}
 		}
 	| select_with_parens indirection
@@ -9483,7 +9493,7 @@ c_expr:
 			sublink := &nodes.SubLink{
 				SubLinkType: int(nodes.EXPR_SUBLINK),
 				Subselect:   $1,
-				Location:    -1,
+				Location:    $<loc>1,
 			}
 			$$ = &nodes.A_Indirection{
 				Arg:         sublink,
@@ -9495,7 +9505,7 @@ c_expr:
 			$$ = &nodes.SubLink{
 				SubLinkType: int(nodes.EXISTS_SUBLINK),
 				Subselect:   $2,
-				Location:    -1,
+				Location:    $<loc>1,
 			}
 		}
 	| case_expr { $$ = $1 }
@@ -9504,12 +9514,16 @@ c_expr:
 			$$ = &nodes.SubLink{
 				SubLinkType: int(nodes.ARRAY_SUBLINK),
 				Subselect:   $2,
-				Location:    -1,
+				Location:    $<loc>1,
 			}
 		}
 	| ARRAY array_expr
 		{
-			$$ = $2
+			// The outermost array is at ARRAY, as in PostgreSQL 16; the
+			// nested ones stay at their '['.
+			arr := $2.(*nodes.A_ArrayExpr)
+			arr.Location = $<loc>1
+			$$ = arr
 		}
 	| explicit_row
 		{
@@ -9520,7 +9534,7 @@ c_expr:
 			$$ = &nodes.RowExpr{
 				Args:     $1,
 				RowFormat: nodes.COERCE_IMPLICIT_CAST,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	;
@@ -9789,51 +9803,51 @@ func_expr_common_subexpr:
 		}
 	| CURRENT_DATE
 		{
-			$$ = makeSQLValueFunction(nodes.SVFOP_CURRENT_DATE, -1)
+			$$ = makeSQLValueFunction(nodes.SVFOP_CURRENT_DATE, -1, $<loc>1)
 		}
 	| CURRENT_TIME
 		{
-			$$ = makeSQLValueFunction(nodes.SVFOP_CURRENT_TIME, -1)
+			$$ = makeSQLValueFunction(nodes.SVFOP_CURRENT_TIME, -1, $<loc>1)
 		}
 	| CURRENT_TIME '(' Iconst ')'
 		{
-			$$ = makeSQLValueFunction(nodes.SVFOP_CURRENT_TIME_N, int($3))
+			$$ = makeSQLValueFunction(nodes.SVFOP_CURRENT_TIME_N, int($3), $<loc>1)
 		}
 	| CURRENT_TIMESTAMP
 		{
-			$$ = makeSQLValueFunction(nodes.SVFOP_CURRENT_TIMESTAMP, -1)
+			$$ = makeSQLValueFunction(nodes.SVFOP_CURRENT_TIMESTAMP, -1, $<loc>1)
 		}
 	| CURRENT_TIMESTAMP '(' Iconst ')'
 		{
-			$$ = makeSQLValueFunction(nodes.SVFOP_CURRENT_TIMESTAMP_N, int($3))
+			$$ = makeSQLValueFunction(nodes.SVFOP_CURRENT_TIMESTAMP_N, int($3), $<loc>1)
 		}
 	| LOCALTIME
 		{
-			$$ = makeSQLValueFunction(nodes.SVFOP_LOCALTIME, -1)
+			$$ = makeSQLValueFunction(nodes.SVFOP_LOCALTIME, -1, $<loc>1)
 		}
 	| LOCALTIME '(' Iconst ')'
 		{
-			$$ = makeSQLValueFunction(nodes.SVFOP_LOCALTIME_N, int($3))
+			$$ = makeSQLValueFunction(nodes.SVFOP_LOCALTIME_N, int($3), $<loc>1)
 		}
 	| LOCALTIMESTAMP
 		{
-			$$ = makeSQLValueFunction(nodes.SVFOP_LOCALTIMESTAMP, -1)
+			$$ = makeSQLValueFunction(nodes.SVFOP_LOCALTIMESTAMP, -1, $<loc>1)
 		}
 	| LOCALTIMESTAMP '(' Iconst ')'
 		{
-			$$ = makeSQLValueFunction(nodes.SVFOP_LOCALTIMESTAMP_N, int($3))
+			$$ = makeSQLValueFunction(nodes.SVFOP_LOCALTIMESTAMP_N, int($3), $<loc>1)
 		}
 	| CURRENT_ROLE
 		{
-			$$ = makeSQLValueFunction(nodes.SVFOP_CURRENT_ROLE, -1)
+			$$ = makeSQLValueFunction(nodes.SVFOP_CURRENT_ROLE, -1, $<loc>1)
 		}
 	| CURRENT_USER
 		{
-			$$ = makeSQLValueFunction(nodes.SVFOP_CURRENT_USER, -1)
+			$$ = makeSQLValueFunction(nodes.SVFOP_CURRENT_USER, -1, $<loc>1)
 		}
 	| SESSION_USER
 		{
-			$$ = makeSQLValueFunction(nodes.SVFOP_SESSION_USER, -1)
+			$$ = makeSQLValueFunction(nodes.SVFOP_SESSION_USER, -1, $<loc>1)
 		}
 	| SYSTEM_USER
 		{
@@ -9845,15 +9859,15 @@ func_expr_common_subexpr:
 		}
 	| USER
 		{
-			$$ = makeSQLValueFunction(nodes.SVFOP_USER, -1)
+			$$ = makeSQLValueFunction(nodes.SVFOP_USER, -1, $<loc>1)
 		}
 	| CURRENT_CATALOG
 		{
-			$$ = makeSQLValueFunction(nodes.SVFOP_CURRENT_CATALOG, -1)
+			$$ = makeSQLValueFunction(nodes.SVFOP_CURRENT_CATALOG, -1, $<loc>1)
 		}
 	| CURRENT_SCHEMA
 		{
-			$$ = makeSQLValueFunction(nodes.SVFOP_CURRENT_SCHEMA, -1)
+			$$ = makeSQLValueFunction(nodes.SVFOP_CURRENT_SCHEMA, -1, $<loc>1)
 		}
 	| CAST '(' a_expr AS Typename ')'
 		{
@@ -9867,7 +9881,7 @@ func_expr_common_subexpr:
 		{
 			$$ = &nodes.CoalesceExpr{
 				Args:     $3,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| GREATEST '(' expr_list ')'
@@ -9875,7 +9889,7 @@ func_expr_common_subexpr:
 			$$ = &nodes.MinMaxExpr{
 				Op:       nodes.IS_GREATEST,
 				Args:     $3,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| LEAST '(' expr_list ')'
@@ -9883,7 +9897,7 @@ func_expr_common_subexpr:
 			$$ = &nodes.MinMaxExpr{
 				Op:       nodes.IS_LEAST,
 				Args:     $3,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| EXTRACT '(' extract_list ')'
@@ -10016,7 +10030,7 @@ func_expr_common_subexpr:
 		{
 			$$ = &nodes.GroupingFunc{
 				Args:     $3,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| XMLCONCAT '(' expr_list ')'
@@ -10991,7 +11005,7 @@ func_arg_expr:
 				Name:      $1,
 				Arg:       $3,
 				Argnumber: -1,
-				Location:  -1,
+				Location:  $<loc>1,
 			}
 		}
 	| param_name EQUALS_GREATER a_expr
@@ -11000,7 +11014,7 @@ func_arg_expr:
 				Name:      $1,
 				Arg:       $3,
 				Argnumber: -1,
-				Location:  -1,
+				Location:  $<loc>1,
 			}
 		}
 	;
@@ -11171,12 +11185,14 @@ AexprConst:
 		{
 			/* generic type 'literal' syntax */
 			t := makeTypeNameFromNameList($1).(*nodes.TypeName)
+			t.Location = $<loc>1
 			$$ = makeStringConstCast($2, $<loc>2, t)
 		}
 	| func_name '(' func_arg_list opt_sort_clause ')' Sconst
 		{
 			/* generic syntax with a type modifier */
 			t := makeTypeNameFromNameList($1).(*nodes.TypeName)
+			t.Location = $<loc>1
 			if $3 != nil {
 				t.Typmods = $3
 			}
@@ -11184,11 +11200,13 @@ AexprConst:
 		}
 	| ConstTypename Sconst
 		{
+			$1.Location = $<loc>1
 			$$ = makeStringConstCast($2, $<loc>2, $1)
 		}
 	| ConstInterval Sconst opt_interval
 		{
 			t := $1
+			t.Location = $<loc>1
 			if $3 != nil {
 				t.Typmods = $3
 			}
@@ -11197,6 +11215,7 @@ AexprConst:
 	| ConstInterval '(' Iconst ')' Sconst
 		{
 			t := $1
+			t.Location = $<loc>1
 			t.Typmods = makeList2(makeIntConst(int64(nodes.INTERVAL_FULL_RANGE), -1), makeIntConst($3, $<loc>3))
 			$$ = makeStringConstCast($5, $<loc>5, t)
 		}
@@ -11299,6 +11318,7 @@ Typename:
 	SimpleTypename opt_array_bounds
 		{
 			$$ = $1
+			$$.Location = $<loc>1
 			if $2 != nil {
 				$$.ArrayBounds = $2
 			}
@@ -11306,6 +11326,7 @@ Typename:
 	| SETOF SimpleTypename opt_array_bounds
 		{
 			$$ = $2
+			$$.Location = $<loc>2
 			$$.Setof = true
 			if $3 != nil {
 				$$.ArrayBounds = $3
@@ -11314,22 +11335,26 @@ Typename:
 	| SimpleTypename ARRAY '[' Iconst ']'
 		{
 			$$ = $1
+			$$.Location = $<loc>1
 			$$.ArrayBounds = makeList(&nodes.Integer{Ival: $4})
 		}
 	| SETOF SimpleTypename ARRAY '[' Iconst ']'
 		{
 			$$ = $2
+			$$.Location = $<loc>2
 			$$.Setof = true
 			$$.ArrayBounds = makeList(&nodes.Integer{Ival: $5})
 		}
 	| SimpleTypename ARRAY
 		{
 			$$ = $1
+			$$.Location = $<loc>1
 			$$.ArrayBounds = makeList(&nodes.Integer{Ival: -1})
 		}
 	| SETOF SimpleTypename ARRAY
 		{
 			$$ = $2
+			$$.Location = $<loc>2
 			$$.Setof = true
 			$$.ArrayBounds = makeList(&nodes.Integer{Ival: -1})
 		}
@@ -17445,18 +17470,31 @@ func makeAExprFromList(kind nodes.A_Expr_Kind, name *nodes.List, lexpr, rexpr no
 	}
 }
 
-func makeBoolExpr(boolop nodes.BoolExprType, arg1, arg2 nodes.Node) nodes.Node {
-	be := &nodes.BoolExpr{
-		Boolop: boolop,
-		Args:   &nodes.List{},
+// makeAndExpr and makeOrExpr build a connective at the operator's location.
+// When the left operand is already the same connective its argument list is
+// extended instead, so a chain arrives as one BoolExpr however long it is,
+// as in PostgreSQL 16: "a AND b AND c" and "(a AND b) AND c" are one AND of
+// three, while "a AND (b AND c)" keeps its inner AND, since only the left
+// operand is inspected. The extended node keeps its first operator's
+// location.
+func makeAndExpr(lexpr, rexpr nodes.Node, location nodes.ParseLoc) *nodes.BoolExpr {
+	return makeConnective(nodes.AND_EXPR, lexpr, rexpr, location)
+}
+
+func makeOrExpr(lexpr, rexpr nodes.Node, location nodes.ParseLoc) *nodes.BoolExpr {
+	return makeConnective(nodes.OR_EXPR, lexpr, rexpr, location)
+}
+
+func makeConnective(boolop nodes.BoolExprType, lexpr, rexpr nodes.Node, location nodes.ParseLoc) *nodes.BoolExpr {
+	if be, ok := lexpr.(*nodes.BoolExpr); ok && be.Boolop == boolop && be.Args != nil {
+		be.Args.Items = append(be.Args.Items, rexpr)
+		return be
 	}
-	if arg1 != nil {
-		be.Args.Items = append(be.Args.Items, arg1)
+	return &nodes.BoolExpr{
+		Boolop:   boolop,
+		Args:     &nodes.List{Items: []nodes.Node{lexpr, rexpr}},
+		Location: location,
 	}
-	if arg2 != nil {
-		be.Args.Items = append(be.Args.Items, arg2)
-	}
-	return be
 }
 
 func makeBetweenArgs(lower, upper nodes.Node) nodes.Node {
@@ -17534,11 +17572,14 @@ func makeNullAConst(location nodes.ParseLoc) nodes.Node {
 	return &nodes.A_Const{Isnull: true, Location: location}
 }
 
-func makeNotExpr(expr nodes.Node) nodes.Node {
+// makeNotExpr builds NOT at the location PostgreSQL 16 gives it: the NOT
+// keyword, or for "x NOT IN (subquery)" and the IS NOT predicates the token
+// the grammar names. A NOT is never merged with another.
+func makeNotExpr(expr nodes.Node, location nodes.ParseLoc) *nodes.BoolExpr {
 	return &nodes.BoolExpr{
-		Boolop: nodes.NOT_EXPR,
-		Args:   &nodes.List{Items: []nodes.Node{expr}},
-		Location: -1,
+		Boolop:   nodes.NOT_EXPR,
+		Args:     &nodes.List{Items: []nodes.Node{expr}},
+		Location: location,
 	}
 }
 
@@ -17655,8 +17696,8 @@ func makeFuncName(parts ...string) *nodes.List {
 }
 
 // makeSQLValueFunction creates a SQLValueFunction node.
-func makeSQLValueFunction(op nodes.SVFOp, typmod int) nodes.Node {
-	return &nodes.SQLValueFunction{Op: op, Typmod: int32(typmod), Location: -1}
+func makeSQLValueFunction(op nodes.SVFOp, typmod int, location nodes.ParseLoc) *nodes.SQLValueFunction {
+	return &nodes.SQLValueFunction{Op: op, Typmod: int32(typmod), Location: location}
 }
 
 // makeTypeCast creates a TypeCast node.

@@ -130,6 +130,26 @@ func TestParseErrorPositionIsTheRefusedToken(t *testing.T) {
 		{"select (0x", 9},
 		{"select 1..", 9},
 		{"select 1 with 1", 10}, // WITH reads a token ahead; the error is still at WITH
+		// Malformed AND/OR/NOT/IS chains, in WHERE so no keyword can be read
+		// as a bare column label (PostgreSQL 16 accepts "select a and" as
+		// "a AS and"). Positions from PostgreSQL 16.15, 2026-10-20; origin/ff
+		// answered the same before AND/OR chains were flattened.
+		{"select 1 from t where a and", 28},
+		{"select 1 from t where and a", 23},
+		{"select 1 from t where a and and b", 29},
+		{"select 1 from t where a or", 27},
+		{"select 1 from t where not", 26},
+		{"select 1 from t where a is", 27},
+		{"select 1 from t where a is not", 31},
+		{"select 1 from t where is null", 26},
+		{"select 1 from t where a is not null null", 37},
+		{"select 1 from t where a and or b", 29},
+		{"select 1 from t where a or not", 31},
+		{"select 1 from t where (a and b", 31},
+		{"select 1 from t where a is null is", 35},
+		{"select 1 from t where a and b or", 33},
+		{"select 1 from t where not and a", 27},
+		{"select 1 from t where a and not", 32},
 	} {
 		_, err := Parse(c.sql)
 		var pe *ParseError
