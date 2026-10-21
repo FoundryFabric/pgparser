@@ -105,10 +105,8 @@ type Lexer struct {
 	// Location tracking
 	savedLoc int
 
-	// opRun lets lexOperator lex a run of operator characters in linear time.
 	opRun opRun
-	// opScanSteps counts the input positions lexOperator's scans examine.
-	// Only tests read it, to check that lexing a run is linear in its length.
+	// opScanSteps counts positions lexOperator examines; only tests read it.
 	opScanSteps int
 
 	// Err is the first error the lexer met, a *ParseError carrying
@@ -817,44 +815,30 @@ func (l *Lexer) lexParam() Token {
 	return Token{Type: lex_PARAM, Ival: val, Loc: l.start}
 }
 
-// opRun is what lexOperator has learned about the run of operator characters
-// it last scanned. A run of n characters can lex as up to n tokens (a run of
-// '+' is n unary pluses), and each token is PostgreSQL's operator rule applied
-// to the rest of the run, so scanning that rest afresh for every token is
-// quadratic and, with the trailing +/- trim scanning back for a qualifying
-// character once per character it trims, cubic. Each field below is instead
-// found once and reused while it still holds for a later start: a token start
-// only moves forward through a run, so every position of the run is examined a
-// bounded number of times and lexing the run is linear in its length.
+// opRun caches what lexOperator found in the current operator run. A run of
+// n characters can lex as n tokens, so rescanning it per token is quadratic
+// (cubic with the trailing +/- trim). Token starts only move forward, so each
+// field is found once and reused, and lexing a run is linear.
 type opRun struct {
-	end  int // the end of the run; 0 before the first run
-	from int // the latest token start in the run; comment and special hold for it
+	end  int // end of the run; 0 before the first run
+	from int // latest token start; comment and special are relative to it
 
-	// comment is the first position after from at which "/*" or "--" begins
-	// inside the run, or end when there is none.
-	comment int
-	// special is the first position at or after from holding one of
-	// ~ ! @ # ^ & | ` ? %, which keeps a trailing + or - in the operator, or
-	// end when there is none.
-	special int
-	// trimEnd is the untrimmed token end keep was found for, and keep the last
-	// position before trimEnd, at or after the start it was found from, that
-	// is not + or -: -1 when every one is.
+	comment int // first "/*" or "--" after from, else end
+	special int // first of ~ ! @ # ^ & | ` ? % at or after from, else end
+
+	// keep is the last non-+/- position before trimEnd, or -1 if none.
 	trimEnd, keep int
 }
 
-// lexOperator applies scan.l's operator rule at l.pos: the token is the
-// maximal run of operator characters, cut where "/*" or "--" begins a comment
-// inside it; then, unless it holds one of ~ ! @ # ^ & | ` ? %, every trailing
-// + and - is trimmed (keeping at least one character), for SQL compatibility.
-// An operator of NAMEDATALEN (64) bytes or more is an error, as in
-// PostgreSQL. The rest of the run is lexed by the following tokens.
+// lexOperator applies scan.l's operator rule at l.pos: take the run of
+// operator characters, cut at a "/*" or "--" inside it, then trim trailing
+// + and - unless it holds one of ~ ! @ # ^ & | ` ? % (keeping one character).
+// 64 bytes or more is an error, as in PostgreSQL.
 func (l *Lexer) lexOperator() Token {
 	start := l.pos
 	r := &l.opRun
-	// A token start only moves forward, so start < r.from cannot happen
-	// today; it rebuilds the run rather than trust caches found from a later
-	// start, should a lookahead ever rewind into a run.
+	// start < r.from cannot happen today; rebuild rather than trust the
+	// cache if a lookahead ever rewinds into a run.
 	if start < r.from || start >= r.end {
 		end := start
 		for end < len(l.input) && isOpChar(l.input[end]) {
@@ -865,8 +849,7 @@ func (l *Lexer) lexOperator() Token {
 	}
 	r.from = start
 
-	// A comment cannot begin at start (lexInitial would have taken it), so
-	// the search for a cut begins at start+1.
+	// lexInitial takes a comment at start, so search from start+1.
 	if r.comment <= start {
 		r.comment = r.end
 		for q := start + 1; q+1 < r.end; q++ {
@@ -1264,15 +1247,13 @@ func isSelfOnly(ch byte) bool {
 		ch == '.' || ch == ';' || ch == ':'
 }
 
-// isPlusMinus reports whether ch is + or -, which an operator may not end in
-// unless it holds a character isOpSpecial accepts.
+// isPlusMinus reports whether ch is + or -, which an operator only ends in
+// if it holds an isOpSpecial character.
 func isPlusMinus(ch byte) bool {
 	return ch == '+' || ch == '-'
 }
 
-// isOpSpecial reports whether ch is one of the operator characters that are
-// not SQL-standard operator characters (scan.l's check before trimming a
-// trailing + or -).
+// isOpSpecial reports whether ch is a non-SQL-standard operator character.
 func isOpSpecial(ch byte) bool {
 	return ch == '~' || ch == '!' || ch == '@' || ch == '#' || ch == '^' ||
 		ch == '&' || ch == '|' || ch == '`' || ch == '?' || ch == '%'

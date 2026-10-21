@@ -237,12 +237,9 @@ func TestLexerOperators(t *testing.T) {
 	}
 }
 
-// TestLexerOperatorRules pins scan.l's operator rule: an operator is the
-// maximal run of operator characters, cut where "/*" or "--" begins a comment
-// inside it, and with every trailing + and - trimmed unless it holds one of
-// ~ ! @ # ^ & | ` ? %. The rest of the run lexes as the following tokens. Each
-// case was checked against PostgreSQL 16.15 (2026-10-20) as the comment says:
-// the value of "select 1 <ops> 1", or the operator its 42883 error names.
+// TestLexerOperatorRules pins scan.l's operator rule (see lexOperator). Each
+// case matches PostgreSQL 16: the value of "select 1 <ops> 1", or the
+// operator its 42883 error names.
 func TestLexerOperatorRules(t *testing.T) {
 	tests := []struct {
 		input string
@@ -264,8 +261,7 @@ func TestLexerOperatorRules(t *testing.T) {
 		{"?-", []string{"?-"}},
 		{"@+-+-", []string{"@+-+-"}},
 		{"+-@", []string{"+-@"}},
-		// a later token of the run, after a comment cut, needs a fresh search
-		// for a qualifying character, and a fresh trim
+		// after a comment cut, the next token re-searches and re-trims
 		{"@-/**/+-", []string{"@-", "+", "-"}},       // with @- defined: select 5 @-/**/+- 1 = 6
 		{"+-/**/<<+", []string{"+", "-", "<<", "+"}}, // with prefix << defined: select 1 +-/**/<<+ 1 = 2
 		// a comment begins inside the run
@@ -301,9 +297,8 @@ func TestLexerOperatorRules(t *testing.T) {
 	}
 }
 
-// opScanStepsFor lexes "select 1 " followed by n '+' and " 1", failing t
-// unless every '+' is its own token, and returns the positions lexOperator's
-// scans examined.
+// opScanStepsFor lexes "select 1 " + n '+' + " 1", checks each '+' is its own
+// token, and returns lexOperator's scan steps.
 func opScanStepsFor(t *testing.T, n int) int {
 	t.Helper()
 	lexer := NewLexer("select 1 " + strings.Repeat("+", n) + " 1")
@@ -319,18 +314,11 @@ func opScanStepsFor(t *testing.T, n int) int {
 	return lexer.opScanSteps
 }
 
-// TestLexerOperatorRunIsLinear guards the lexer against an operator run that
-// takes super-linear time: one short statement could tie up a CPU, as a run
-// of 4,000 '+' took 12 seconds when each token rescanned the rest of the run.
-//
-// The deadline is the guard: a run of 1,000,000 '+' lexes in about 20ms (about
-// 200ms under -race), and must finish within 2 seconds wherever the slowness
-// would come from. It lexes in a goroutine so that a slow lexer fails the test
-// at the deadline rather than hanging it; the goroutine is left running then.
-//
-// The step count is a cheap check of lexOperator's caches in particular: the
-// positions its scans examine for a run of 2,000 must stay within 4 times
-// those for 500, plus a constant.
+// TestLexerOperatorRunIsLinear guards against a super-linear operator run
+// (4,000 '+' once took 12 seconds). The guard is a deadline: 1,000,000 '+'
+// lex in ~20ms (~200ms under -race) and must finish within 2s; a goroutine
+// makes a slow lexer fail rather than hang. The step count checks the caches:
+// steps for 2,000 must stay within 4x those for 500, plus a constant.
 func TestLexerOperatorRunIsLinear(t *testing.T) {
 	const n = 500
 	if small, large := opScanStepsFor(t, n), opScanStepsFor(t, 4*n); large > 4*small+64 {
@@ -368,22 +356,17 @@ func TestLexerOperatorRunIsLinear(t *testing.T) {
 	}
 }
 
-// refToken is a token as refLex finds it: where it starts, its text, and the
-// token type the lexer must give it.
+// refToken is a token refLex expects: position, text and type.
 type refToken struct {
 	loc  int
 	text string
 	typ  int
 }
 
-// refLex lexes s from scratch, as scan.l does, for the alphabet
-// TestLexerOperatorMatchesReference draws from: whitespace, nested /* */ and
-// -- comments, "::" and ":=", ':', identifiers of letters and digits, digit
-// runs, and operators. An operator is found by the plain per-token rule: the
-// run of operator characters, cut at the first "/*" or "--" in it, then with
-// every trailing + and - trimmed unless the operator holds ~ ! @ # ^ & | ` ?
-// or %. It returns the tokens, and the error the lexer must stop with: its
-// 0-based position and message, or -1.
+// refLex is a plain reference lexer for TestLexerOperatorMatchesReference's
+// alphabet (whitespace, comments, "::", ":=", ':', identifiers, digits,
+// operators), applying the operator rule per token with no caching. It returns
+// the tokens and the expected error's 0-based position and message, or -1.
 func refLex(s string) ([]refToken, int, string) {
 	isLetter := func(c byte) bool { return c >= 'a' && c <= 'z' }
 	isDigit := func(c byte) bool { return c >= '0' && c <= '9' }
@@ -475,10 +458,8 @@ func refLex(s string) ([]refToken, int, string) {
 	return toks, -1, ""
 }
 
-// TestLexerOperatorMatchesReference lexes seeded random strings of operator
-// characters, comment pieces, whitespace, letters, digits and colons with the
-// lexer and with refLex, and wants the same tokens (position, text and type)
-// and the same error.
+// TestLexerOperatorMatchesReference compares the lexer with refLex on seeded
+// random strings: same tokens and same error.
 func TestLexerOperatorMatchesReference(t *testing.T) {
 	pieces := []string{
 		"~", "!", "@", "#", "^", "&", "|", "`", "?", "%", "+", "-", "*", "/", "<", ">", "=",

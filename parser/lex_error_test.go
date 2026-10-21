@@ -73,8 +73,7 @@ var lexErrorCases = []struct {
 	{`select U&'\D800\\'`, "42601", 16, "invalid Unicode surrogate pair", ""},
 	{`select U&'\DC00'`, "42601", 11, "invalid Unicode surrogate pair", ""},
 	{`select U&"\zz"`, "42601", 11, "invalid Unicode escape", `Unicode escapes must be \XXXX or \+XXXXXX.`},
-	// operators of NAMEDATALEN (64) bytes or more (63 bytes lex; see
-	// TestLexerOperatorRules), measured after the comment cut and the +/- trim
+	// operators of 64 bytes or more, after the comment cut and +/- trim
 	{"select 1 " + strings.Repeat("~", 64) + " 1", "42601", 10, `operator too long at or near "` + strings.Repeat("~", 64) + `"`, ""},
 	{"select 1, 2 " + strings.Repeat("~", 64), "42601", 13, `operator too long at or near "` + strings.Repeat("~", 64) + `"`, ""},
 	{"select 1 " + strings.Repeat("~", 62) + "++ 1", "42601", 10, `operator too long at or near "` + strings.Repeat("~", 62) + `++"`, ""},
