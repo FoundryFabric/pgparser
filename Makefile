@@ -27,10 +27,12 @@ test:
 	go test ./...
 
 # check-parser fails when regenerating parser/parser.go and parser/y.output
-# from parser/gram.y does not reproduce the committed files byte for byte.
+# from parser/gram.y, as go generate does (goyacc, then tools/yaccmaxdepth),
+# does not reproduce the committed files byte for byte.
 check-parser:
 	@tmp=$$(mktemp -d) && cp parser/gram.y $$tmp/ && \
 	(cd $$tmp && $(GOYACC) -o parser.go -p pg gram.y >/dev/null) && \
+	go run ./tools/yaccmaxdepth -p pg $$tmp/parser.go && \
 	if cmp -s parser/parser.go $$tmp/parser.go && cmp -s parser/y.output $$tmp/y.output; then \
 		rm -rf $$tmp; echo "parser/parser.go matches parser/gram.y"; \
 	else \

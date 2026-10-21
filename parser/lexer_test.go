@@ -1,12 +1,21 @@
 package parser
 
 import (
+	"context"
 	"errors"
+	"fmt"
 	"math/rand"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"runtime/debug"
 	"slices"
+	"strconv"
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/pgplex/pgparser/nodes"
 )
 
 func TestLexerKeywords(t *testing.T) {
@@ -837,5 +846,229 @@ func TestIntegerLiteral(t *testing.T) {
 		if got != c.want || ok != c.ok {
 			t.Errorf("integerLiteral(%q, %v) = %d, %v; want %d, %v", c.text, c.negative, got, ok, c.want, c.ok)
 		}
+	}
+}
+
+// lexStackChildEnv names the variable that makes TestLexerStackIsBounded run
+// its inputs instead of starting a child to run them.
+const lexStackChildEnv = "PGPARSER_LEX_STACK_CHILD"
+
+// lexStackParentEnv carries the parent's process ID: a process runs as the
+// child only when it was started by that parent, so a lexStackChildEnv that
+// leaked into a test run's environment fails rather than passing in-process.
+const lexStackParentEnv = "PGPARSER_LEX_STACK_PARENT"
+
+// lexStackMarker is what the child prints once every input has lexed and
+// parsed, so the parent cannot pass on a child that ran no test at all.
+const lexStackMarker = "lexer stack bounded: all inputs lexed"
+
+// TestLexerStackIsBounded lexes and parses 5,000,000 string continuations,
+// 5,000,000 comments and a mix of both with other tokens on an 8 MB stack.
+// A state that reaches the next token by calling NextToken, rather than
+// returning to its loop, recurses once per comment or continuation and
+// overflows that stack. The inputs run in a child process because a stack
+// overflow is fatal: it fails this test rather than killing the suite.
+func TestLexerStackIsBounded(t *testing.T) {
+	if _, set := os.LookupEnv(lexStackChildEnv); set {
+		if os.Getenv(lexStackChildEnv) != "1" || os.Getenv(lexStackParentEnv) != strconv.Itoa(os.Getppid()) {
+			t.Fatalf("%s is set but this process was not started by TestLexerStackIsBounded; unset it", lexStackChildEnv)
+		}
+		lexStackChild()
+		return
+	}
+	if testing.Short() {
+		t.Skip("starts a child process lexing 60 MB")
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Minute)
+	defer cancel()
+	cmd := exec.CommandContext(ctx, os.Args[0], "-test.run=^TestLexerStackIsBounded$", "-test.count=1", "-test.v")
+	cmd.Env = append(os.Environ(), lexStackChildEnv+"=1", lexStackParentEnv+"="+strconv.Itoa(os.Getpid()))
+	out, err := cmd.CombinedOutput()
+	if ctx.Err() != nil {
+		t.Fatalf("child did not finish in time: %v", ctx.Err())
+	}
+	if err != nil || !strings.Contains(string(out), lexStackMarker) {
+		if len(out) > 2000 {
+			out = out[:2000]
+		}
+		t.Fatalf("child failed: %v\n%s", err, out)
+	}
+}
+
+// lexStackChild runs the inputs of TestLexerStackIsBounded on an 8 MB stack
+// and prints lexStackMarker when each lexes to the expected tokens and parses.
+func lexStackChild() {
+	debug.SetMaxStack(8 << 20)
+	const n = 5_000_000
+	fail := func(format string, args ...any) {
+		fmt.Fprintf(os.Stderr, format+"\n", args...)
+		os.Exit(1)
+	}
+	lexAll := func(input string) []Token {
+		lexer := NewLexer(input)
+		var toks []Token
+		for tok := lexer.NextToken(); tok.Type != lex_EOF; tok = lexer.NextToken() {
+			toks = append(toks, tok)
+		}
+		if lexer.Err != nil {
+			fail("lexing: %v", lexer.Err)
+		}
+		return toks
+	}
+
+	continuations := "select 'a'" + strings.Repeat("\n'a'", n-1)
+	if toks := lexAll(continuations); len(toks) != 2 || toks[1].Type != lex_SCONST || toks[1].Str != strings.Repeat("a", n) || toks[1].Loc != 7 {
+		fail("continuations: %d tokens", len(toks))
+	}
+	comments := "select " + strings.Repeat("/**/", n) + " 1"
+	if toks := lexAll(comments); len(toks) != 2 || toks[1].Type != lex_ICONST || toks[1].Loc != 7+4*n+1 {
+		fail("comments: %d tokens", len(toks))
+	}
+	// A mix: each unit is a continued string, a comment, a nested comment, a
+	// line comment and a '+', so states alternate as well as repeat.
+	const unit = "'a'\n'b' /**/ /* /**/ */ -- c\n+ "
+	mixed := "select " + strings.Repeat(unit, n/len(unit)) + "'z'"
+	toks := lexAll(mixed)
+	if want := 1 + 2*(n/len(unit)) + 1; len(toks) != want {
+		fail("mix: %d tokens, want %d", len(toks), want)
+	}
+	for i, tok := range toks[1 : len(toks)-1] {
+		if want := []int{lex_SCONST, '+'}[i%2]; tok.Type != want {
+			fail("mix: token %d is %d, want %d", i+1, tok.Type, want)
+		}
+	}
+	for _, input := range []string{continuations, comments, mixed} {
+		if _, err := Parse(input); err != nil {
+			fail("parsing: %v", err)
+		}
+	}
+	fmt.Println(lexStackMarker)
+}
+
+// TestLexerNeverReturnsAgain lexes the PostgreSQL regression corpus and
+// requires that lex_AGAIN, which a state returns to NextToken's loop, never
+// reaches the caller.
+func TestLexerNeverReturnsAgain(t *testing.T) {
+	for _, input := range lexCorpus(t) {
+		lexer := NewLexer(input)
+		for tok := lexer.NextToken(); tok.Type != lex_EOF; tok = lexer.NextToken() {
+			if tok.Type == lex_AGAIN {
+				t.Fatalf("NextToken returned lex_AGAIN at %d", tok.Loc)
+			}
+		}
+	}
+}
+
+// FuzzLexerNeverReturnsAgain requires that lex_AGAIN never leaves NextToken
+// (the parser would read it, being at most 0, as the end of the input and
+// accept a truncated statement), and that Parse does not panic. The seeds
+// reach every state.
+func FuzzLexerNeverReturnsAgain(f *testing.F) {
+	for _, seed := range []string{
+		"select 1", "/* a /* b */ c */ x", "-- c\n1", "'a'\n'b'", "E'\\x41'\n'b'",
+		"B'1'\n'0'", "X'f'", "U&'d\\0061t' UESCAPE '!'", "U&\"a\"\n'x'", "\"a\"\"b\"",
+		"$a$x$a$", "$1 + $2", "1.5e3 .5 0x1F 1_000", "a <= b != c :: int", "'unterminated",
+	} {
+		f.Add(seed)
+	}
+	f.Fuzz(func(t *testing.T, input string) {
+		lexer := NewLexer(input)
+		for i := 0; ; i++ {
+			tok := lexer.NextToken()
+			if tok.Type == lex_AGAIN {
+				t.Fatalf("NextToken returned lex_AGAIN at %d", tok.Loc)
+			}
+			if tok.Type == lex_EOF {
+				break
+			}
+			if i > len(input)+1 {
+				t.Fatalf("more tokens than bytes")
+			}
+		}
+		_, _ = Parse(input)
+	})
+}
+
+// lexCorpus reads every statement file of the PostgreSQL regression corpus.
+func lexCorpus(tb testing.TB) []string {
+	files, err := filepath.Glob("pgregress/testdata/sql/*.sql")
+	if err != nil || len(files) == 0 {
+		tb.Fatalf("no corpus: %v", err)
+	}
+	inputs := make([]string, 0, len(files))
+	for _, f := range files {
+		data, err := os.ReadFile(f)
+		if err != nil {
+			tb.Fatal(err)
+		}
+		inputs = append(inputs, string(data))
+	}
+	return inputs
+}
+
+// BenchmarkLexCorpus lexes every statement file of the PostgreSQL regression
+// corpus.
+func BenchmarkLexCorpus(b *testing.B) {
+	inputs := lexCorpus(b)
+	var size int64
+	for _, input := range inputs {
+		size += int64(len(input))
+	}
+	b.SetBytes(size)
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		for _, input := range inputs {
+			lexer := NewLexer(input)
+			for lexer.NextToken().Type != lex_EOF {
+			}
+		}
+	}
+}
+
+// BenchmarkLexContinuations lexes 10,000 string continuations and 10,000
+// comments.
+func BenchmarkLexContinuations(b *testing.B) {
+	input := "select 'a'" + strings.Repeat("\n'a'", 10_000) + strings.Repeat("/**/", 10_000)
+	b.SetBytes(int64(len(input)))
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		lexer := NewLexer(input)
+		for lexer.NextToken().Type != lex_EOF {
+		}
+	}
+}
+
+// TestLexerUnicodeIdentifierIsNotContinued pins that a U&"..." identifier
+// followed by a newline and a quoted string is an identifier and a string, as
+// PostgreSQL 16 lexes it (2026-10-20: `select U&"a"` newline `'x' as b` is
+// the typed literal a 'x', refused in analysis with 42704 type "a" does not
+// exist). Only a string continues across a newline. A UESCAPE on the next
+// line still applies.
+func TestLexerUnicodeIdentifierIsNotContinued(t *testing.T) {
+	for _, c := range []struct {
+		input string
+		want  []Token
+	}{
+		{"U&\"a\"\n'x'", []Token{{Type: lex_IDENT, Str: "a", Loc: 0}, {Type: lex_SCONST, Str: "x", Loc: 6}}},
+		{"U&\"a\" -- c\n 'x'", []Token{{Type: lex_IDENT, Str: "a", Loc: 0}, {Type: lex_SCONST, Str: "x", Loc: 12}}},
+		{"U&\"!0061\"\nuescape '!'", []Token{{Type: lex_IDENT, Str: "a", Loc: 0}}},
+		{"U&'a'\n'b'", []Token{{Type: lex_USCONST, Str: "ab", Loc: 0}}},
+	} {
+		lexer := NewLexer(c.input)
+		var got []Token
+		for tok := lexer.NextToken(); tok.Type != lex_EOF; tok = lexer.NextToken() {
+			got = append(got, tok)
+		}
+		if lexer.Err != nil || !slices.Equal(got, c.want) {
+			t.Errorf("lexing %q: %v, %v; want %v", c.input, got, lexer.Err, c.want)
+		}
+	}
+	tree, err := Parse("select U&\"a\"\n'x' as b")
+	if err != nil {
+		t.Fatalf("parsing: %v", err)
+	}
+	val := tree.Items[0].(*nodes.SelectStmt).TargetList.Items[0].(*nodes.ResTarget).Val
+	if tc, ok := val.(*nodes.TypeCast); !ok || tc.TypeName == nil {
+		t.Errorf("select U&\"a\" 'x': %T, want the typed literal a 'x'", val)
 	}
 }

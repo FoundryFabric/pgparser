@@ -2,6 +2,7 @@
 package parser
 
 //go:generate go run golang.org/x/tools/cmd/goyacc@v0.40.0 -o parser.go -p pg gram.y
+//go:generate go run ../tools/yaccmaxdepth -p pg parser.go
 
 import (
 	"fmt"
@@ -22,14 +23,16 @@ type parserLexer struct {
 	err    error
 
 	// lastLoc is the Loc of the token Lex returned last: the one the grammar
-	// refuses when it calls Error.
+	// refuses when it calls Error. lastEnd is the offset just past its text.
 	lastLoc int
+	lastEnd int
 
 	// One-token lookahead for NOT_LA, NULLS_LA, WITH_LA, FORMAT_LA.
 	// PostgreSQL's parser.c uses this to disambiguate tokens based on context.
 	haveLookahead    bool
 	lookaheadToken   Token
 	lookaheadTokType int
+	lookaheadEnd     int
 }
 
 // newParserLexer creates a new lexer adapter for the parser.
@@ -51,10 +54,12 @@ func (l *parserLexer) Lex(lval *pgSymType) int {
 	if l.haveLookahead {
 		tok = l.lookaheadToken
 		tokType = l.lookaheadTokType
+		l.lastEnd = l.lookaheadEnd
 		l.haveLookahead = false
 	} else {
 		tok = l.lexer.NextToken()
 		tokType = l.mapTokenType(tok)
+		l.lastEnd = l.lexer.tokenEnd()
 	}
 	l.lastLoc = tok.Loc
 
@@ -68,6 +73,7 @@ func (l *parserLexer) Lex(lval *pgSymType) int {
 		l.haveLookahead = true
 		l.lookaheadToken = nextTok
 		l.lookaheadTokType = nextTokType
+		l.lookaheadEnd = l.lexer.tokenEnd()
 
 		// Replace current token based on lookahead
 		tokType = l.applyLookahead(tokType, nextTokType)
@@ -163,6 +169,27 @@ func (l *parserLexer) Error(s string) {
 		Message:  s,
 		Position: l.lastLoc,
 	}
+}
+
+// pgMaxDepth is the most states the parse stack holds: Bison's default
+// YYMAXDEPTH, which PostgreSQL 16's parser keeps. goyacc's stack would grow
+// without limit; tools/yaccmaxdepth makes the generated driver refuse the
+// state that would be the pgMaxDepth-th, as Bison does.
+const pgMaxDepth = 10000
+
+// pgStackExhausted reports the parse stack full, as Bison's "memory
+// exhausted" reaches PostgreSQL's scanner_yyerror: 42601 at or near the token
+// the lexer returned last.
+func pgStackExhausted(lex pgLexer) {
+	l, ok := lex.(*parserLexer)
+	if !ok || l.err != nil {
+		return
+	}
+	message := "memory exhausted at end of input"
+	if l.lastLoc < len(l.lexer.input) {
+		message = "memory exhausted at or near \"" + l.lexer.input[l.lastLoc:l.lastEnd] + "\""
+	}
+	l.err = &ParseError{Code: codeSyntaxError, Message: message, Position: l.lastLoc}
 }
 
 // mapTokenType maps lexer token types to parser token types.

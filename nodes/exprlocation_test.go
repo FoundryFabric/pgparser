@@ -286,11 +286,13 @@ func TestExprLocationLongChains(t *testing.T) {
 	}
 }
 
-// TestExprLocationDeepChains pins that 10,000 nested NOTs and a 10,000-deep
+// TestExprLocationDeepChains pins that 9,000 nested NOTs and a 9,000-deep
 // left spine of alternating AND/OR (each level parenthesised, so nothing
-// flattens) parse and answer without exhausting the stack.
+// flattens) parse and answer without exhausting the stack. 10,000 of either
+// fills PostgreSQL 16's parse stack, which the parser refuses as it does
+// (TestParseStackDepthIsPostgreSQLs).
 func TestExprLocationDeepChains(t *testing.T) {
-	const n = 10000
+	const n = 9000
 	nots := "select 'é', " + strings.Repeat("not ", n) + "a"
 	if got, want := nodes.ExprLocation(lastTarget(t, nots).Val), strings.Index(nots, "not"); got != want {
 		t.Errorf("%d NOTs: ExprLocation %d, want %d", n, got, want)

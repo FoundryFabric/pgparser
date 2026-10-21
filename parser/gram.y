@@ -9169,24 +9169,6 @@ a_expr:
 		{
 			$$ = &nodes.SetToDefault{Location: $<loc>1}
 		}
-	| a_expr '[' a_expr ']'
-		{
-			$$ = &nodes.A_Indirection{
-				Arg:         $1,
-				Indirection: makeList(&nodes.A_Indices{Uidx: $3}),
-			}
-		}
-	| a_expr '[' opt_slice_bound ':' opt_slice_bound ']'
-		{
-			$$ = &nodes.A_Indirection{
-				Arg: $1,
-				Indirection: makeList(&nodes.A_Indices{
-					IsSlice: true,
-					Lidx:    $3,
-					Uidx:    $5,
-				}),
-			}
-		}
 	| a_expr TYPECAST Typename
 		{
 			$$ = &nodes.TypeCast{
@@ -11155,9 +11137,17 @@ opt_slice_bound:
 	| /* EMPTY */ { $$ = nil }
 	;
 
+/*
+ * Left-recursive from an empty list, as PostgreSQL 16's: after '(' a_expr ')'
+ * the empty list is reduced before the next token is read, so a parse that
+ * fills the stack there (pgMaxDepth) stops at the same token as PostgreSQL's.
+ */
 opt_indirection:
-	indirection { $$ = $1 }
-	| /* EMPTY */ { $$ = nil }
+	/* EMPTY */ { $$ = nil }
+	| opt_indirection indirection_el
+		{
+			$$ = appendList($1, $2)
+		}
 	;
 
 attrs:

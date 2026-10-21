@@ -193,6 +193,12 @@ func TestParseErrorPositionIsTheRefusedToken(t *testing.T) {
 		{"select 1 offset - (2) rows", 23},
 		{"insert into t (", 16},
 		{"insert into t (a,) values (1)", 18},
+		// A subscript follows only a column, a parameter or a parenthesised
+		// expression, as in PostgreSQL 16, which refuses these at the "[".
+		{"SELECT 1[1]", 9},
+		{"SELECT now()[1]", 13},
+		{"SELECT 'a'[1]", 11},
+		{"SELECT ARRAY[1,2][1]", 18},
 	} {
 		_, err := Parse(c.sql)
 		var pe *ParseError
@@ -223,5 +229,150 @@ func TestParseRefusesLimitComma(t *testing.T) {
 	}
 	if _, err := Parse("SELECT a FROM t LIMIT 2 OFFSET 1"); err != nil {
 		t.Errorf("LIMIT and OFFSET as separate clauses: %v", err)
+	}
+}
+
+// stackDepthShapes generate statements nested n deep, each a shape whose
+// parse stack PostgreSQL 16 fills at its own n: it holds a state per
+// grammar symbol pending, so a NOT costs one and -( two.
+var stackDepthShapes = map[string]func(n int) string{
+	"not":     func(n int) string { return "select " + strings.Repeat("not ", n) + "true" },
+	"neg":     func(n int) string { return "select " + strings.Repeat("-(", n) + "1" + strings.Repeat(")", n) },
+	"negbare": func(n int) string { return "select " + strings.Repeat("- ", n) + "1" },
+	"and": func(n int) string {
+		return "select 1 where " + strings.Repeat("a and (", n) + "a" + strings.Repeat(")", n)
+	},
+	"paren":      func(n int) string { return "select " + strings.Repeat("(1 + ", n) + "1" + strings.Repeat(")", n) },
+	"parenonly":  func(n int) string { return "select " + strings.Repeat("(", n) + "1" + strings.Repeat(")", n) },
+	"subselect":  func(n int) string { return "select " + strings.Repeat("(select ", n) + "1" + strings.Repeat(")", n) },
+	"array":      func(n int) string { return "select " + strings.Repeat("array[", n) + "1" + strings.Repeat("]", n) },
+	"arraymix":   func(n int) string { return "select " + strings.Repeat("array[(", n) + "1" + strings.Repeat(")]", n) },
+	"paren1":     func(n int) string { return "select " + strings.Repeat("(", n) + "1)" },
+	"paren1b":    func(n int) string { return "select " + strings.Repeat("(", n) + "1)[1]" },
+	"paren1x":    func(n int) string { return "select " + strings.Repeat("(", n) + "1) x" },
+	"parenopen":  func(n int) string { return "select " + strings.Repeat("(", n) + "1" },
+	"parenopen2": func(n int) string { return "select " + strings.Repeat("(", n) + "1 + 2" },
+	"notparen":   func(n int) string { return "select " + strings.Repeat("not ", n) + "(true)" },
+	"notstr":     func(n int) string { return "select " + strings.Repeat("not ", n) + "'x'\n'y'  " },
+	"notestr":    func(n int) string { return "select " + strings.Repeat("not ", n) + "E'\\x41' -- c" },
+	"notfunc":    func(n int) string { return "select " + strings.Repeat("not ", n) + "f()" },
+	"notident":   func(n int) string { return "select " + strings.Repeat("not ", n) + "\"Ab\"" },
+}
+
+// TestParseStackDepthIsPostgreSQLs parses each shape of stackDepthShapes at
+// the two deepest n PostgreSQL 16.15 parses and the two shallowest it
+// refuses with 42601 "memory exhausted" (2026-10-20), the parse stack being
+// full at Bison's YYMAXDEPTH of 10,000 states. A refused one must be refused
+// with PostgreSQL's message and 1-based position; an accepted one must not
+// be refused for its depth (some are syntax errors, at end of input, as in
+// PostgreSQL).
+func TestParseStackDepthIsPostgreSQLs(t *testing.T) {
+	for _, c := range []struct {
+		shape   string
+		n       int
+		message string // "" where PostgreSQL parses it
+		pos     int
+	}{
+		{"not", 9994, "", 0},
+		{"not", 9995, "", 0},
+		{"not", 9996, "memory exhausted at or near \"true\"", 39992},
+		{"not", 9997, "memory exhausted at or near \"not\"", 39992},
+		{"neg", 4995, "", 0},
+		{"neg", 4996, "", 0},
+		{"neg", 4997, "memory exhausted at or near \")\"", 10003},
+		{"neg", 4998, "memory exhausted at or near \"1\"", 10004},
+		{"negbare", 9994, "", 0},
+		{"negbare", 9995, "", 0},
+		{"negbare", 9996, "memory exhausted at or near \"1\"", 20000},
+		{"negbare", 9997, "memory exhausted at or near \"-\"", 20000},
+		{"and", 3328, "", 0},
+		{"and", 3329, "", 0},
+		{"and", 3330, "memory exhausted at or near \")\"", 23327},
+		{"and", 3331, "memory exhausted at or near \"(\"", 23332},
+		{"paren", 3330, "", 0},
+		{"paren", 3331, "", 0},
+		{"paren", 3332, "memory exhausted at or near \"1\"", 16668},
+		{"paren", 3333, "memory exhausted at or near \"(\"", 16668},
+		{"parenonly", 9992, "", 0},
+		{"parenonly", 9993, "", 0},
+		{"parenonly", 9994, "memory exhausted at or near \")\"", 10003},
+		{"parenonly", 9995, "memory exhausted at or near \")\"", 10004},
+		{"subselect", 3328, "", 0},
+		{"subselect", 3329, "", 0},
+		{"subselect", 3330, "memory exhausted at or near \")\"", 26649},
+		{"subselect", 3331, "memory exhausted at or near \")\"", 26657},
+		{"array", 4996, "", 0},
+		{"array", 4997, "", 0},
+		{"array", 4998, "memory exhausted at or near \"1\"", 29996},
+		{"array", 4999, "memory exhausted at or near \"array\"", 29996},
+		{"arraymix", 3330, "", 0},
+		{"arraymix", 3331, "", 0},
+		{"arraymix", 3332, "memory exhausted at or near \"1\"", 23332},
+		{"arraymix", 3333, "memory exhausted at or near \"array\"", 23332},
+		{"paren1", 9992, "", 0},
+		{"paren1", 9993, "", 0},
+		{"paren1", 9994, "memory exhausted at or near \")\"", 10003},
+		{"paren1", 9995, "memory exhausted at or near \")\"", 10004},
+		{"paren1b", 9989, "", 0},
+		{"paren1b", 9990, "", 0},
+		{"paren1b", 9991, "memory exhausted at or near \"]\"", 10003},
+		{"paren1b", 9992, "memory exhausted at or near \"1\"", 10003},
+		{"paren1x", 9992, "", 0},
+		{"paren1x", 9993, "", 0},
+		{"paren1x", 9994, "memory exhausted at or near \")\"", 10003},
+		{"paren1x", 9995, "memory exhausted at or near \")\"", 10004},
+		{"parenopen", 9994, "", 0},
+		{"parenopen", 9995, "", 0},
+		{"parenopen", 9996, "memory exhausted at or near \"1\"", 10004},
+		{"parenopen", 9997, "memory exhausted at or near \"(\"", 10004},
+		{"parenopen2", 9992, "", 0},
+		{"parenopen2", 9993, "", 0},
+		{"parenopen2", 9994, "memory exhausted at or near \"2\"", 10006},
+		{"parenopen2", 9995, "memory exhausted at or near \"+\"", 10005},
+		{"notparen", 9991, "", 0},
+		{"notparen", 9992, "", 0},
+		{"notparen", 9993, "memory exhausted at or near \")\"", 39985},
+		{"notparen", 9994, "memory exhausted at or near \")\"", 39989},
+		{"notstr", 9994, "", 0},
+		{"notstr", 9995, "", 0},
+		{"notstr", 9996, "memory exhausted at or near \"'x'\n'y'\"", 39992},
+		{"notstr", 9997, "memory exhausted at or near \"not\"", 39992},
+		{"notestr", 9994, "", 0},
+		{"notestr", 9995, "", 0},
+		{"notestr", 9996, "memory exhausted at or near \"E'\\x41'\"", 39992},
+		{"notestr", 9997, "memory exhausted at or near \"not\"", 39992},
+		{"notfunc", 9991, "", 0},
+		{"notfunc", 9992, "", 0},
+		{"notfunc", 9993, "memory exhausted at end of input", 39983},
+		{"notfunc", 9994, "memory exhausted at or near \")\"", 39986},
+		{"notident", 9994, "", 0},
+		{"notident", 9995, "", 0},
+		{"notident", 9996, "memory exhausted at or near \"\"Ab\"\"", 39992},
+		{"notident", 9997, "memory exhausted at or near \"not\"", 39992},
+	} {
+		sql := stackDepthShapes[c.shape](c.n)
+		_, err := Parse(sql)
+		var pe *ParseError
+		refused := errors.As(err, &pe) && strings.HasPrefix(pe.Message, "memory exhausted")
+		switch {
+		case c.message == "" && refused:
+			t.Errorf("%s %d: %v at %d; PostgreSQL parses it", c.shape, c.n, err, pe.Position+1)
+		case c.message != "" && !refused:
+			t.Errorf("%s %d: %v; want %q", c.shape, c.n, err, c.message)
+		case c.message != "" && (pe.Code != codeSyntaxError || pe.Message != c.message || pe.Position+1 != c.pos || pe.Hint != ""):
+			t.Errorf("%s %d: %s %q at %d; want 42601 %q at %d", c.shape, c.n, pe.Code, pe.Message, pe.Position+1, c.message, c.pos)
+		}
+	}
+}
+
+// TestParseStackDepthIsBounded parses a million nested NOTs: the parse is
+// refused at the 9,997th, as PostgreSQL 16 refuses it, and its stack never
+// holds more than 10,000 states.
+func TestParseStackDepthIsBounded(t *testing.T) {
+	sql := stackDepthShapes["not"](1_000_000)
+	_, err := Parse(sql)
+	var pe *ParseError
+	if want := len("select ") + 4*9996; !errors.As(err, &pe) || pe.Message != `memory exhausted at or near "not"` || pe.Position != want {
+		t.Fatalf("%v; want memory exhausted at %d", err, want)
 	}
 }
