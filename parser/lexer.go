@@ -26,6 +26,9 @@ const nonKeywordTokenBase = 800
 const (
 	// Special tokens
 	lex_EOF = 0
+	// lex_AGAIN is internal to the lexer: a state returns it, through again,
+	// when NextToken must run the next state. NextToken never returns it.
+	lex_AGAIN = -1
 )
 
 // Internal lexer token types for non-keywords.
@@ -142,6 +145,14 @@ func NewLexer(input string) *Lexer {
 }
 
 // NextToken returns the next token from the input.
+//
+// It runs the current state until one produces a token. A state that only
+// moves the lexer on (into a literal or comment, to a continued string)
+// returns again() to this loop rather than calling NextToken: Go does not
+// eliminate tail calls, so a call per comment or continuation would grow the
+// stack with the input and overflow it. lexInitial produces no token exactly
+// when it leaves the initial state, so the loop reads the state rather than
+// the token there, which keeps the common path as cheap as a direct return.
 func (l *Lexer) NextToken() Token {
 	// Each state handles end of input, as scan.l's <<EOF>> rules do:
 	// lexInitial returns EOF, lexQuoteContinue the literal, the rest an
@@ -150,18 +161,28 @@ func (l *Lexer) NextToken() Token {
 		switch l.state {
 		case stateInitial:
 			l.start = l.pos
-			return l.lexInitial()
+			tok := l.lexInitial()
+			if l.state == stateInitial {
+				return tok
+			}
 		case stateXC:
 			l.lexComment()
-			continue
 		case stateXB, stateXH:
-			return l.lexBitOrHexString()
+			if tok := l.lexBitOrHexString(); tok.Type != lex_AGAIN {
+				return tok
+			}
 		case stateXQ, stateXE, stateXUS:
-			return l.lexQuotedString()
+			if tok := l.lexQuotedString(); tok.Type != lex_AGAIN {
+				return tok
+			}
 		case stateXQS:
-			return l.lexQuoteContinue()
+			if tok := l.lexQuoteContinue(); tok.Type != lex_AGAIN {
+				return tok
+			}
 		case stateXD, stateXUI:
-			return l.lexDelimitedIdent()
+			if tok := l.lexDelimitedIdent(); tok.Type != lex_AGAIN {
+				return tok
+			}
 		case stateXDOLQ:
 			return l.lexDollarQuote()
 		default:
@@ -170,7 +191,14 @@ func (l *Lexer) NextToken() Token {
 	}
 }
 
-// lexInitial handles tokens in the initial state.
+// again is what a state returns when it has produced no token but changed
+// the state or position: NextToken runs the state the lexer is now in.
+func again() Token {
+	return Token{Type: lex_AGAIN}
+}
+
+// lexInitial handles tokens in the initial state. It returns again() only
+// after entering another state; skipWhitespace has taken any -- comment.
 func (l *Lexer) lexInitial() Token {
 	l.skipWhitespace()
 	if l.pos >= len(l.input) {
@@ -185,14 +213,7 @@ func (l *Lexer) lexInitial() Token {
 		l.pos += 2
 		l.xcdepth = 0
 		l.state = stateXC
-		// Return to main loop to handle comment
-		return l.NextToken()
-	}
-
-	// Check for SQL comment
-	if ch == '-' && l.pos+1 < len(l.input) && l.input[l.pos+1] == '-' {
-		l.skipLineComment()
-		return l.NextToken()
+		return again()
 	}
 
 	// Bit string: B'...'
@@ -201,7 +222,7 @@ func (l *Lexer) lexInitial() Token {
 		l.state = stateXB
 		l.literalbuf.Reset()
 		l.literalbuf.WriteByte('b')
-		return l.NextToken()
+		return again()
 	}
 
 	// Hex string: X'...'
@@ -210,7 +231,7 @@ func (l *Lexer) lexInitial() Token {
 		l.state = stateXH
 		l.literalbuf.Reset()
 		l.literalbuf.WriteByte('x')
-		return l.NextToken()
+		return again()
 	}
 
 	// National character: N'...' -> treat as NCHAR followed by string
@@ -233,7 +254,7 @@ func (l *Lexer) lexInitial() Token {
 		l.warnOnFirstEscape = false
 		l.sawNonASCII = false
 		l.literalbuf.Reset()
-		return l.NextToken()
+		return again()
 	}
 
 	// Unicode string: U&'...'
@@ -245,14 +266,14 @@ func (l *Lexer) lexInitial() Token {
 			l.pos += 3
 			l.state = stateXUS
 			l.literalbuf.Reset()
-			return l.NextToken()
+			return again()
 		}
 		// Unicode identifier: U&"..."
 		if l.pos+2 < len(l.input) && l.input[l.pos+2] == '"' {
 			l.pos += 3
 			l.state = stateXUI
 			l.literalbuf.Reset()
-			return l.NextToken()
+			return again()
 		}
 		// Just 'U&' without quote - return 'u' as identifier
 		l.pos++
@@ -271,7 +292,7 @@ func (l *Lexer) lexInitial() Token {
 			l.state = stateXE
 		}
 		l.literalbuf.Reset()
-		return l.NextToken()
+		return again()
 	}
 
 	// Double-quoted identifier: "..."
@@ -279,7 +300,7 @@ func (l *Lexer) lexInitial() Token {
 		l.pos++
 		l.state = stateXD
 		l.literalbuf.Reset()
-		return l.NextToken()
+		return again()
 	}
 
 	// Dollar-quoted string: $tag$...$tag$
@@ -288,7 +309,7 @@ func (l *Lexer) lexInitial() Token {
 			l.dolqstart = tag
 			l.state = stateXDOLQ
 			l.literalbuf.Reset()
-			return l.NextToken()
+			return again()
 		}
 		// Check for parameter: $1, $2, etc.
 		if l.pos+1 < len(l.input) && isDigit(l.input[l.pos+1]) {
@@ -413,7 +434,7 @@ func (l *Lexer) lexBitOrHexString() Token {
 			l.pos++
 			l.stateBeforeStrStop = l.state
 			l.state = stateXQS
-			return l.NextToken()
+			return again()
 		}
 		l.literalbuf.WriteByte(ch)
 		l.pos++
@@ -442,7 +463,7 @@ func (l *Lexer) lexQuotedString() Token {
 			l.pos++
 			l.stateBeforeStrStop = l.state
 			l.state = stateXQS
-			return l.NextToken()
+			return again()
 		}
 
 		// For extended strings, handle escape sequences
@@ -632,7 +653,7 @@ func (l *Lexer) lexQuoteContinue() Token {
 	if hasNewline && l.pos < len(l.input) && l.input[l.pos] == '\'' {
 		l.pos++
 		l.state = l.stateBeforeStrStop
-		return l.NextToken()
+		return again()
 	}
 
 	// No continuation - return the completed string
