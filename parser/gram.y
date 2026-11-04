@@ -9254,7 +9254,7 @@ when_clause:
 			$$ = &nodes.CaseWhen{
 				Expr:     $2,
 				Result:   $4,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	;
@@ -11288,9 +11288,9 @@ any_name:
 		{
 			$$ = makeList(&nodes.String{Str: $1})
 		}
-	| ColId '.' any_name
+	| ColId attrs
 		{
-			$$ = prependList(&nodes.String{Str: $1}, $3)
+			$$ = prependList(&nodes.String{Str: $1}, $2)
 		}
 	;
 

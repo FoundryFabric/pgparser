@@ -213,6 +213,7 @@ func TestExprNodeLocationsArePostgreSQLs(t *testing.T) {
 			"SQLValueFunction", []nodes.ParseLoc{8, 22, 44, 55, 69, 83}},
 		{"select b from t group by b having grouping(b) = 0", "GroupingFunc", []nodes.ParseLoc{34}},
 		{"select x collate \"C\", x   collate \"POSIX\" = x from t", "CollateClause", []nodes.ParseLoc{9, 26}},
+		{"select case x when 1 then 2 when 3 then 4 end from t", "CaseWhen", []nodes.ParseLoc{14, 28}},
 		{"select x is json, x is not json object from t", "JsonIsPredicate", []nodes.ParseLoc{7, 18}},
 		{"select make_interval(days => b), make_interval(hours := 2) from t", "NamedArgExpr", []nodes.ParseLoc{21, 47}},
 		// DEFAULT at itself, as gram.y's @1 (analysis replaces it, so the

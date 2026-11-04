@@ -1,6 +1,7 @@
 package parser
 
 import (
+	"errors"
 	"reflect"
 	"testing"
 
@@ -80,6 +81,75 @@ func TestLocationsArePostgreSQLs(t *testing.T) {
 			t.Errorf("%q: %s[%d] is at %d, PostgreSQL 16 says %d", c.sql, c.kind, c.index, got, c.position)
 		}
 	}
+}
+
+// TestParseCollateTakesAQualifiedName is PostgreSQL 16's any_name for a
+// COLLATE: ColId attrs, so a part after a dot is a ColLabel and takes a
+// reserved keyword, and a bare reserved word stays a syntax error.
+func TestParseCollateTakesAQualifiedName(t *testing.T) {
+	for _, c := range []struct {
+		sql      string
+		parts    []string
+		location nodes.ParseLoc
+	}{
+		{"select 'w' collate pg_catalog.default", []string{"pg_catalog", "default"}, 11},
+		{`select 'w' collate "default"`, []string{"default"}, 11},
+		{`select 'w' collate "C"`, []string{"C"}, 11},
+		{"select 'w' collate a.b.c.d", []string{"a", "b", "c", "d"}, 11},
+		{`select x collate pg_catalog."POSIX" from t`, []string{"pg_catalog", "POSIX"}, 9},
+	} {
+		stmts, err := Parse(c.sql)
+		if err != nil {
+			t.Fatalf("Parse(%q): %v", c.sql, err)
+		}
+		clauses := collateClauses(stmts)
+		if len(clauses) != 1 {
+			t.Fatalf("Parse(%q): %d CollateClause nodes, want 1", c.sql, len(clauses))
+		}
+		var got []string
+		for _, item := range clauses[0].Collname.Items {
+			got = append(got, item.(*nodes.String).Str)
+		}
+		if !reflect.DeepEqual(got, c.parts) || clauses[0].Location != c.location {
+			t.Errorf("Parse(%q): COLLATE names %v at %d, want %v at %d",
+				c.sql, got, clauses[0].Location, c.parts, c.location)
+		}
+	}
+	_, err := Parse("select 'w' collate default")
+	var pe *ParseError
+	// PostgreSQL 16 says `syntax error at or near "default"`; the fork's grammar
+	// errors do not name the token yet.
+	if !errors.As(err, &pe) || pe.Code != "42601" || pe.Message != "syntax error" || pe.Position != 19 {
+		t.Errorf("Parse(select 'w' collate default) = %#v, want 42601 syntax error at 19", err)
+	}
+}
+
+// collateClauses is every CollateClause reachable from root.
+func collateClauses(root nodes.Node) []*nodes.CollateClause {
+	var out []*nodes.CollateClause
+	var walk func(v reflect.Value)
+	walk = func(v reflect.Value) {
+		switch v.Kind() { //nolint:exhaustive // only the kinds that can carry a Node
+		case reflect.Ptr, reflect.Interface:
+			if v.IsNil() {
+				return
+			}
+			if c, ok := v.Interface().(*nodes.CollateClause); ok && v.Kind() == reflect.Ptr {
+				out = append(out, c)
+			}
+			walk(v.Elem())
+		case reflect.Struct:
+			for i := 0; i < v.NumField(); i++ {
+				walk(v.Field(i))
+			}
+		case reflect.Slice:
+			for i := 0; i < v.Len(); i++ {
+				walk(v.Index(i))
+			}
+		}
+	}
+	walk(reflect.ValueOf(root))
+	return out
 }
 
 // locationsOf is the Location of every node of the named kind reachable
