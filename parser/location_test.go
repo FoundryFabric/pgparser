@@ -117,10 +117,8 @@ func TestParseCollateTakesAQualifiedName(t *testing.T) {
 	}
 	_, err := Parse("select 'w' collate default")
 	var pe *ParseError
-	// PostgreSQL 16 says `syntax error at or near "default"`; the fork's grammar
-	// errors do not name the token yet.
-	if !errors.As(err, &pe) || pe.Code != "42601" || pe.Message != "syntax error" || pe.Position != 19 {
-		t.Errorf("Parse(select 'w' collate default) = %#v, want 42601 syntax error at 19", err)
+	if !errors.As(err, &pe) || pe.Code != "42601" || pe.Message != `syntax error at or near "default"` || pe.Position != 19 {
+		t.Errorf("Parse(select 'w' collate default) = %#v, want 42601 syntax error at or near \"default\" at 19", err)
 	}
 }
 

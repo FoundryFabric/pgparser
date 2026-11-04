@@ -162,8 +162,16 @@ func (l *parserLexer) applyLookahead(curToken, nextToken int) int {
 }
 
 // Error implements pgLexer.Error. The grammar refuses the token Lex
-// returned last, so the error is at that token, as PostgreSQL's is.
+// returned last, so the error is at that token, as PostgreSQL's is. goyacc's
+// bare "syntax error" names the token as scanner_yyerror does; a grammar
+// action's own message is kept.
 func (l *parserLexer) Error(s string) {
+	if s == "syntax error" {
+		s = "syntax error at end of input"
+		if l.lastLoc < len(l.lexer.input) {
+			s = "syntax error at or near \"" + l.lexer.input[l.lastLoc:l.lastEnd] + "\""
+		}
+	}
 	l.err = &ParseError{
 		Code:     codeSyntaxError,
 		Message:  s,
