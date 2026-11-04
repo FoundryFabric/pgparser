@@ -319,8 +319,8 @@ func TestAnalyzeFailures(t *testing.T) {
 	// =====================================================================
 	// SECTION 2b: SQL CONSTRUCT / KEYWORD HEURISTIC ANALYSIS
 	// =====================================================================
-	// Since the parser only emits generic "syntax error", identify what SQL
-	// constructs/keywords appear in failing statements to guide grammar work.
+	// Identify what SQL constructs/keywords appear in failing statements to
+	// guide grammar work.
 	t.Logf("\n")
 	t.Logf("================================================================")
 	t.Logf("=== SQL CONSTRUCT / KEYWORD PRESENCE IN FAILING STATEMENTS ===")
