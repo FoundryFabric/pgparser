@@ -1,0 +1,4 @@
+# Build output and run results
+/pg16sweep
+*.jsonl
+report.txt
