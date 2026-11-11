@@ -11416,17 +11416,15 @@ GenericType:
 			$$ = &nodes.TypeName{
 				Names:    makeList(&nodes.String{Str: $1}),
 				Typmods:  $2,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
-	| type_function_name '.' attr_name opt_type_modifiers
+	| type_function_name attrs opt_type_modifiers
 		{
-			l := makeList(&nodes.String{Str: $1})
-			l = appendList(l, &nodes.String{Str: $3})
 			$$ = &nodes.TypeName{
-				Names:    l,
-				Typmods:  $4,
-				Location: -1,
+				Names:    prependList(&nodes.String{Str: $1}, $2),
+				Typmods:  $3,
+				Location: $<loc>1,
 			}
 		}
 	;
