@@ -1,0 +1,1018 @@
+{"sql": "drop type a", "pg16After": "42704 type \"a\" does not exist", "types": [{"names": ["a"], "location": 10}], "object": "List(TypeName)", "pg16Name": "a"}
+{"sql": "drop type a.b", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 10}], "object": "List(TypeName)"}
+{"sql": "drop type a.b.c", "pg16After": "0A000 cross-database references are not implemented: a.b.c", "types": [{"names": ["a", "b", "c"], "location": 10}], "object": "List(TypeName)", "pg16Name": "a.b.c"}
+{"sql": "drop type double precision", "pg16After": "2BP01 cannot drop type double precision because it is required by the database system", "types": [{"names": ["pg_catalog", "float8"], "location": 10}], "object": "List(TypeName)"}
+{"sql": "drop type character varying(10)", "pg16After": "2BP01 cannot drop type character varying because it is required by the database system", "types": [{"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 10}], "object": "List(TypeName)"}
+{"sql": "drop type timestamp with time zone", "pg16After": "2BP01 cannot drop type timestamp with time zone because it is required by the database system", "types": [{"names": ["pg_catalog", "timestamptz"], "location": 10}], "object": "List(TypeName)"}
+{"sql": "drop type int4[]", "pg16After": "2BP01 cannot drop type integer[] because it is required by the database system", "types": [{"names": ["int4"], "bounds": [-1], "location": 10}], "object": "List(TypeName)"}
+{"sql": "drop type a.b[1]", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 10}], "object": "List(TypeName)"}
+{"sql": "drop type int4 array", "pg16After": "2BP01 cannot drop type integer[] because it is required by the database system", "types": [{"names": ["int4"], "bounds": [-1], "location": 10}], "object": "List(TypeName)"}
+{"sql": "drop type int4 array[3]", "pg16After": "2BP01 cannot drop type integer[] because it is required by the database system", "types": [{"names": ["int4"], "bounds": [3], "location": 10}], "object": "List(TypeName)"}
+{"sql": "drop type numeric(10,2)", "pg16After": "2BP01 cannot drop type numeric because it is required by the database system", "types": [{"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 10}], "object": "List(TypeName)"}
+{"sql": "drop type setof int4", "pg16After": "2BP01 cannot drop type integer because it is required by the database system", "types": [{"names": ["int4"], "setof": true, "location": 16}], "object": "List(TypeName)"}
+{"sql": "drop type a.b%type", "syntaxError": "syntax error at or near \"%\"", "position": 13}
+{"sql": "drop type interval year to month", "pg16After": "2BP01 cannot drop type interval because it is required by the database system", "types": [{"names": ["pg_catalog", "interval"], "typmods": 1, "location": 10}], "object": "List(TypeName)"}
+{"sql": "drop type bit varying(3)", "pg16After": "2BP01 cannot drop type bit varying because it is required by the database system", "types": [{"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 10}], "object": "List(TypeName)"}
+{"sql": "drop type \"char\"[][]", "pg16After": "2BP01 cannot drop type \"char\"[] because it is required by the database system", "types": [{"names": ["char"], "bounds": [-1, -1], "location": 10}], "object": "List(TypeName)"}
+{"sql": "drop type a.b[", "syntaxError": "syntax error at end of input", "position": 14}
+{"sql": "drop type int4[x]", "syntaxError": "syntax error at or near \"x\"", "position": 15}
+{"sql": "drop type a.", "syntaxError": "syntax error at end of input", "position": 12}
+{"sql": "drop type 1", "syntaxError": "syntax error at or near \"1\"", "position": 10}
+{"sql": "drop type int4[1", "syntaxError": "syntax error at end of input", "position": 16}
+{"sql": "drop type double", "pg16After": "42704 type \"double\" does not exist", "types": [{"names": ["double"], "location": 10}], "object": "List(TypeName)", "pg16Name": "double"}
+{"sql": "drop type a.b.c%type", "syntaxError": "syntax error at or near \"%\"", "position": 15}
+{"sql": "drop type a.*", "syntaxError": "syntax error at or near \"*\"", "position": 12}
+{"sql": "drop type if exists a", "pg16After": "ok", "types": [{"names": ["a"], "location": 20}], "object": "List(TypeName)"}
+{"sql": "drop type if exists a.b", "pg16After": "ok", "types": [{"names": ["a", "b"], "location": 20}], "object": "List(TypeName)"}
+{"sql": "drop type if exists a.b.c", "pg16After": "0A000 cross-database references are not implemented: a.b.c", "types": [{"names": ["a", "b", "c"], "location": 20}], "object": "List(TypeName)", "pg16Name": "a.b.c"}
+{"sql": "drop type if exists double precision", "pg16After": "2BP01 cannot drop type double precision because it is required by the database system", "types": [{"names": ["pg_catalog", "float8"], "location": 20}], "object": "List(TypeName)"}
+{"sql": "drop type if exists character varying(10)", "pg16After": "2BP01 cannot drop type character varying because it is required by the database system", "types": [{"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 20}], "object": "List(TypeName)"}
+{"sql": "drop type if exists timestamp with time zone", "pg16After": "2BP01 cannot drop type timestamp with time zone because it is required by the database system", "types": [{"names": ["pg_catalog", "timestamptz"], "location": 20}], "object": "List(TypeName)"}
+{"sql": "drop type if exists int4[]", "pg16After": "2BP01 cannot drop type integer[] because it is required by the database system", "types": [{"names": ["int4"], "bounds": [-1], "location": 20}], "object": "List(TypeName)"}
+{"sql": "drop type if exists a.b[1]", "pg16After": "ok", "types": [{"names": ["a", "b"], "bounds": [1], "location": 20}], "object": "List(TypeName)"}
+{"sql": "drop type if exists int4 array", "pg16After": "2BP01 cannot drop type integer[] because it is required by the database system", "types": [{"names": ["int4"], "bounds": [-1], "location": 20}], "object": "List(TypeName)"}
+{"sql": "drop type if exists int4 array[3]", "pg16After": "2BP01 cannot drop type integer[] because it is required by the database system", "types": [{"names": ["int4"], "bounds": [3], "location": 20}], "object": "List(TypeName)"}
+{"sql": "drop type if exists numeric(10,2)", "pg16After": "2BP01 cannot drop type numeric because it is required by the database system", "types": [{"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 20}], "object": "List(TypeName)"}
+{"sql": "drop type if exists setof int4", "pg16After": "2BP01 cannot drop type integer because it is required by the database system", "types": [{"names": ["int4"], "setof": true, "location": 26}], "object": "List(TypeName)"}
+{"sql": "drop type if exists a.b%type", "syntaxError": "syntax error at or near \"%\"", "position": 23}
+{"sql": "drop type if exists interval year to month", "pg16After": "2BP01 cannot drop type interval because it is required by the database system", "types": [{"names": ["pg_catalog", "interval"], "typmods": 1, "location": 20}], "object": "List(TypeName)"}
+{"sql": "drop type if exists bit varying(3)", "pg16After": "2BP01 cannot drop type bit varying because it is required by the database system", "types": [{"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 20}], "object": "List(TypeName)"}
+{"sql": "drop type if exists \"char\"[][]", "pg16After": "2BP01 cannot drop type \"char\"[] because it is required by the database system", "types": [{"names": ["char"], "bounds": [-1, -1], "location": 20}], "object": "List(TypeName)"}
+{"sql": "drop type if exists a.b[", "syntaxError": "syntax error at end of input", "position": 24}
+{"sql": "drop type if exists int4[x]", "syntaxError": "syntax error at or near \"x\"", "position": 25}
+{"sql": "drop type if exists a.", "syntaxError": "syntax error at end of input", "position": 22}
+{"sql": "drop type if exists 1", "syntaxError": "syntax error at or near \"1\"", "position": 20}
+{"sql": "drop type if exists int4[1", "syntaxError": "syntax error at end of input", "position": 26}
+{"sql": "drop type if exists double", "pg16After": "ok", "types": [{"names": ["double"], "location": 20}], "object": "List(TypeName)"}
+{"sql": "drop type if exists a.b.c%type", "syntaxError": "syntax error at or near \"%\"", "position": 25}
+{"sql": "drop type if exists a.*", "syntaxError": "syntax error at or near \"*\"", "position": 22}
+{"sql": "drop type a, int4 cascade", "pg16After": "42704 type \"a\" does not exist", "types": [{"names": ["a"], "location": 10}, {"names": ["int4"], "location": 13}], "object": "List(TypeName,TypeName)", "pg16Name": "a"}
+{"sql": "drop type a.b, int4 cascade", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 10}, {"names": ["int4"], "location": 15}], "object": "List(TypeName,TypeName)"}
+{"sql": "drop type a.b.c, int4 cascade", "pg16After": "0A000 cross-database references are not implemented: a.b.c", "types": [{"names": ["a", "b", "c"], "location": 10}, {"names": ["int4"], "location": 17}], "object": "List(TypeName,TypeName)", "pg16Name": "a.b.c"}
+{"sql": "drop type double precision, int4 cascade", "pg16After": "2BP01 cannot drop type double precision because it is required by the database system", "types": [{"names": ["pg_catalog", "float8"], "location": 10}, {"names": ["int4"], "location": 28}], "object": "List(TypeName,TypeName)"}
+{"sql": "drop type character varying(10), int4 cascade", "pg16After": "2BP01 cannot drop type character varying because it is required by the database system", "types": [{"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 10}, {"names": ["int4"], "location": 33}], "object": "List(TypeName,TypeName)"}
+{"sql": "drop type timestamp with time zone, int4 cascade", "pg16After": "2BP01 cannot drop type timestamp with time zone because it is required by the database system", "types": [{"names": ["pg_catalog", "timestamptz"], "location": 10}, {"names": ["int4"], "location": 36}], "object": "List(TypeName,TypeName)"}
+{"sql": "drop type int4[], int4 cascade", "pg16After": "2BP01 cannot drop type integer[] because it is required by the database system", "types": [{"names": ["int4"], "bounds": [-1], "location": 10}, {"names": ["int4"], "location": 18}], "object": "List(TypeName,TypeName)"}
+{"sql": "drop type a.b[1], int4 cascade", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 10}, {"names": ["int4"], "location": 18}], "object": "List(TypeName,TypeName)"}
+{"sql": "drop type int4 array, int4 cascade", "pg16After": "2BP01 cannot drop type integer[] because it is required by the database system", "types": [{"names": ["int4"], "bounds": [-1], "location": 10}, {"names": ["int4"], "location": 22}], "object": "List(TypeName,TypeName)"}
+{"sql": "drop type int4 array[3], int4 cascade", "pg16After": "2BP01 cannot drop type integer[] because it is required by the database system", "types": [{"names": ["int4"], "bounds": [3], "location": 10}, {"names": ["int4"], "location": 25}], "object": "List(TypeName,TypeName)"}
+{"sql": "drop type numeric(10,2), int4 cascade", "pg16After": "2BP01 cannot drop type numeric because it is required by the database system", "types": [{"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 10}, {"names": ["int4"], "location": 25}], "object": "List(TypeName,TypeName)"}
+{"sql": "drop type setof int4, int4 cascade", "pg16After": "2BP01 cannot drop type integer because it is required by the database system", "types": [{"names": ["int4"], "setof": true, "location": 16}, {"names": ["int4"], "location": 22}], "object": "List(TypeName,TypeName)"}
+{"sql": "drop type a.b%type, int4 cascade", "syntaxError": "syntax error at or near \"%\"", "position": 13}
+{"sql": "drop type interval year to month, int4 cascade", "pg16After": "2BP01 cannot drop type interval because it is required by the database system", "types": [{"names": ["pg_catalog", "interval"], "typmods": 1, "location": 10}, {"names": ["int4"], "location": 34}], "object": "List(TypeName,TypeName)"}
+{"sql": "drop type bit varying(3), int4 cascade", "pg16After": "2BP01 cannot drop type bit varying because it is required by the database system", "types": [{"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 10}, {"names": ["int4"], "location": 26}], "object": "List(TypeName,TypeName)"}
+{"sql": "drop type \"char\"[][], int4 cascade", "pg16After": "2BP01 cannot drop type \"char\"[] because it is required by the database system", "types": [{"names": ["char"], "bounds": [-1, -1], "location": 10}, {"names": ["int4"], "location": 22}], "object": "List(TypeName,TypeName)"}
+{"sql": "drop type a.b[, int4 cascade", "syntaxError": "syntax error at or near \",\"", "position": 14}
+{"sql": "drop type int4[x], int4 cascade", "syntaxError": "syntax error at or near \"x\"", "position": 15}
+{"sql": "drop type a., int4 cascade", "syntaxError": "syntax error at or near \",\"", "position": 12}
+{"sql": "drop type 1, int4 cascade", "syntaxError": "syntax error at or near \"1\"", "position": 10}
+{"sql": "drop type int4[1, int4 cascade", "syntaxError": "syntax error at or near \",\"", "position": 16}
+{"sql": "drop type double, int4 cascade", "pg16After": "42704 type \"double\" does not exist", "types": [{"names": ["double"], "location": 10}, {"names": ["int4"], "location": 18}], "object": "List(TypeName,TypeName)", "pg16Name": "double"}
+{"sql": "drop type a.b.c%type, int4 cascade", "syntaxError": "syntax error at or near \"%\"", "position": 15}
+{"sql": "drop type a.*, int4 cascade", "syntaxError": "syntax error at or near \"*\"", "position": 12}
+{"sql": "drop domain a", "pg16After": "42704 type \"a\" does not exist", "types": [{"names": ["a"], "location": 12}], "object": "List(TypeName)", "pg16Name": "a"}
+{"sql": "drop domain a.b", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 12}], "object": "List(TypeName)"}
+{"sql": "drop domain a.b.c", "pg16After": "0A000 cross-database references are not implemented: a.b.c", "types": [{"names": ["a", "b", "c"], "location": 12}], "object": "List(TypeName)", "pg16Name": "a.b.c"}
+{"sql": "drop domain double precision", "pg16After": "42809 \"pg_catalog.float8\" is not a domain", "types": [{"names": ["pg_catalog", "float8"], "location": 12}], "object": "List(TypeName)"}
+{"sql": "drop domain character varying(10)", "pg16After": "42809 \"pg_catalog.varchar\" is not a domain", "types": [{"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 12}], "object": "List(TypeName)"}
+{"sql": "drop domain timestamp with time zone", "pg16After": "42809 \"pg_catalog.timestamptz\" is not a domain", "types": [{"names": ["pg_catalog", "timestamptz"], "location": 12}], "object": "List(TypeName)"}
+{"sql": "drop domain int4[]", "pg16After": "42809 \"int4[]\" is not a domain", "types": [{"names": ["int4"], "bounds": [-1], "location": 12}], "object": "List(TypeName)"}
+{"sql": "drop domain a.b[1]", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 12}], "object": "List(TypeName)"}
+{"sql": "drop domain int4 array", "pg16After": "42809 \"int4[]\" is not a domain", "types": [{"names": ["int4"], "bounds": [-1], "location": 12}], "object": "List(TypeName)"}
+{"sql": "drop domain int4 array[3]", "pg16After": "42809 \"int4[]\" is not a domain", "types": [{"names": ["int4"], "bounds": [3], "location": 12}], "object": "List(TypeName)"}
+{"sql": "drop domain numeric(10,2)", "pg16After": "42809 \"pg_catalog.numeric\" is not a domain", "types": [{"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 12}], "object": "List(TypeName)"}
+{"sql": "drop domain setof int4", "pg16After": "42809 \"int4\" is not a domain", "types": [{"names": ["int4"], "setof": true, "location": 18}], "object": "List(TypeName)"}
+{"sql": "drop domain a.b%type", "syntaxError": "syntax error at or near \"%\"", "position": 15}
+{"sql": "drop domain interval year to month", "pg16After": "42809 \"pg_catalog.interval\" is not a domain", "types": [{"names": ["pg_catalog", "interval"], "typmods": 1, "location": 12}], "object": "List(TypeName)"}
+{"sql": "drop domain bit varying(3)", "pg16After": "42809 \"pg_catalog.varbit\" is not a domain", "types": [{"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 12}], "object": "List(TypeName)"}
+{"sql": "drop domain \"char\"[][]", "pg16After": "42809 \"char[]\" is not a domain", "types": [{"names": ["char"], "bounds": [-1, -1], "location": 12}], "object": "List(TypeName)"}
+{"sql": "drop domain a.b[", "syntaxError": "syntax error at end of input", "position": 16}
+{"sql": "drop domain int4[x]", "syntaxError": "syntax error at or near \"x\"", "position": 17}
+{"sql": "drop domain a.", "syntaxError": "syntax error at end of input", "position": 14}
+{"sql": "drop domain 1", "syntaxError": "syntax error at or near \"1\"", "position": 12}
+{"sql": "drop domain int4[1", "syntaxError": "syntax error at end of input", "position": 18}
+{"sql": "drop domain double", "pg16After": "42704 type \"double\" does not exist", "types": [{"names": ["double"], "location": 12}], "object": "List(TypeName)", "pg16Name": "double"}
+{"sql": "drop domain a.b.c%type", "syntaxError": "syntax error at or near \"%\"", "position": 17}
+{"sql": "drop domain a.*", "syntaxError": "syntax error at or near \"*\"", "position": 14}
+{"sql": "drop domain if exists a restrict", "pg16After": "ok", "types": [{"names": ["a"], "location": 22}], "object": "List(TypeName)"}
+{"sql": "drop domain if exists a.b restrict", "pg16After": "ok", "types": [{"names": ["a", "b"], "location": 22}], "object": "List(TypeName)"}
+{"sql": "drop domain if exists a.b.c restrict", "pg16After": "0A000 cross-database references are not implemented: a.b.c", "types": [{"names": ["a", "b", "c"], "location": 22}], "object": "List(TypeName)", "pg16Name": "a.b.c"}
+{"sql": "drop domain if exists double precision restrict", "pg16After": "42809 \"pg_catalog.float8\" is not a domain", "types": [{"names": ["pg_catalog", "float8"], "location": 22}], "object": "List(TypeName)"}
+{"sql": "drop domain if exists character varying(10) restrict", "pg16After": "42809 \"pg_catalog.varchar\" is not a domain", "types": [{"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 22}], "object": "List(TypeName)"}
+{"sql": "drop domain if exists timestamp with time zone restrict", "pg16After": "42809 \"pg_catalog.timestamptz\" is not a domain", "types": [{"names": ["pg_catalog", "timestamptz"], "location": 22}], "object": "List(TypeName)"}
+{"sql": "drop domain if exists int4[] restrict", "pg16After": "42809 \"int4[]\" is not a domain", "types": [{"names": ["int4"], "bounds": [-1], "location": 22}], "object": "List(TypeName)"}
+{"sql": "drop domain if exists a.b[1] restrict", "pg16After": "ok", "types": [{"names": ["a", "b"], "bounds": [1], "location": 22}], "object": "List(TypeName)"}
+{"sql": "drop domain if exists int4 array restrict", "pg16After": "42809 \"int4[]\" is not a domain", "types": [{"names": ["int4"], "bounds": [-1], "location": 22}], "object": "List(TypeName)"}
+{"sql": "drop domain if exists int4 array[3] restrict", "pg16After": "42809 \"int4[]\" is not a domain", "types": [{"names": ["int4"], "bounds": [3], "location": 22}], "object": "List(TypeName)"}
+{"sql": "drop domain if exists numeric(10,2) restrict", "pg16After": "42809 \"pg_catalog.numeric\" is not a domain", "types": [{"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 22}], "object": "List(TypeName)"}
+{"sql": "drop domain if exists setof int4 restrict", "pg16After": "42809 \"int4\" is not a domain", "types": [{"names": ["int4"], "setof": true, "location": 28}], "object": "List(TypeName)"}
+{"sql": "drop domain if exists a.b%type restrict", "syntaxError": "syntax error at or near \"%\"", "position": 25}
+{"sql": "drop domain if exists interval year to month restrict", "pg16After": "42809 \"pg_catalog.interval\" is not a domain", "types": [{"names": ["pg_catalog", "interval"], "typmods": 1, "location": 22}], "object": "List(TypeName)"}
+{"sql": "drop domain if exists bit varying(3) restrict", "pg16After": "42809 \"pg_catalog.varbit\" is not a domain", "types": [{"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 22}], "object": "List(TypeName)"}
+{"sql": "drop domain if exists \"char\"[][] restrict", "pg16After": "42809 \"char[]\" is not a domain", "types": [{"names": ["char"], "bounds": [-1, -1], "location": 22}], "object": "List(TypeName)"}
+{"sql": "drop domain if exists a.b[ restrict", "syntaxError": "syntax error at or near \"restrict\"", "position": 27}
+{"sql": "drop domain if exists int4[x] restrict", "syntaxError": "syntax error at or near \"x\"", "position": 27}
+{"sql": "drop domain if exists a. restrict", "pg16After": "ok", "types": [{"names": ["a", "restrict"], "location": 22}], "object": "List(TypeName)"}
+{"sql": "drop domain if exists 1 restrict", "syntaxError": "syntax error at or near \"1\"", "position": 22}
+{"sql": "drop domain if exists int4[1 restrict", "syntaxError": "syntax error at or near \"restrict\"", "position": 29}
+{"sql": "drop domain if exists double restrict", "pg16After": "ok", "types": [{"names": ["double"], "location": 22}], "object": "List(TypeName)"}
+{"sql": "drop domain if exists a.b.c%type restrict", "syntaxError": "syntax error at or near \"%\"", "position": 27}
+{"sql": "drop domain if exists a.* restrict", "syntaxError": "syntax error at or near \"*\"", "position": 24}
+{"sql": "comment on type a is 'x'", "pg16After": "42704 type \"a\" does not exist", "types": [{"names": ["a"], "location": 16}], "object": "TypeName", "pg16Name": "a"}
+{"sql": "comment on type a.b is 'x'", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 16}], "object": "TypeName"}
+{"sql": "comment on type a.b.c is 'x'", "pg16After": "0A000 cross-database references are not implemented: a.b.c", "types": [{"names": ["a", "b", "c"], "location": 16}], "object": "TypeName", "pg16Name": "a.b.c"}
+{"sql": "comment on type double precision is 'x'", "pg16After": "ok", "types": [{"names": ["pg_catalog", "float8"], "location": 16}], "object": "TypeName"}
+{"sql": "comment on type character varying(10) is 'x'", "pg16After": "ok", "types": [{"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 16}], "object": "TypeName"}
+{"sql": "comment on type timestamp with time zone is 'x'", "pg16After": "ok", "types": [{"names": ["pg_catalog", "timestamptz"], "location": 16}], "object": "TypeName"}
+{"sql": "comment on type int4[] is 'x'", "pg16After": "ok", "types": [{"names": ["int4"], "bounds": [-1], "location": 16}], "object": "TypeName"}
+{"sql": "comment on type a.b[1] is 'x'", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 16}], "object": "TypeName"}
+{"sql": "comment on type int4 array is 'x'", "pg16After": "ok", "types": [{"names": ["int4"], "bounds": [-1], "location": 16}], "object": "TypeName"}
+{"sql": "comment on type int4 array[3] is 'x'", "pg16After": "ok", "types": [{"names": ["int4"], "bounds": [3], "location": 16}], "object": "TypeName"}
+{"sql": "comment on type numeric(10,2) is 'x'", "pg16After": "ok", "types": [{"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 16}], "object": "TypeName"}
+{"sql": "comment on type setof int4 is 'x'", "pg16After": "ok", "types": [{"names": ["int4"], "setof": true, "location": 22}], "object": "TypeName"}
+{"sql": "comment on type a.b%type is 'x'", "syntaxError": "syntax error at or near \"%\"", "position": 19}
+{"sql": "comment on type interval year to month is 'x'", "pg16After": "ok", "types": [{"names": ["pg_catalog", "interval"], "typmods": 1, "location": 16}], "object": "TypeName"}
+{"sql": "comment on type bit varying(3) is 'x'", "pg16After": "ok", "types": [{"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 16}], "object": "TypeName"}
+{"sql": "comment on type \"char\"[][] is 'x'", "pg16After": "ok", "types": [{"names": ["char"], "bounds": [-1, -1], "location": 16}], "object": "TypeName"}
+{"sql": "comment on type a.b[ is 'x'", "syntaxError": "syntax error at or near \"is\"", "position": 21}
+{"sql": "comment on type int4[x] is 'x'", "syntaxError": "syntax error at or near \"x\"", "position": 21}
+{"sql": "comment on type a. is 'x'", "syntaxError": "syntax error at or near \"'x'\"", "position": 22}
+{"sql": "comment on type 1 is 'x'", "syntaxError": "syntax error at or near \"1\"", "position": 16}
+{"sql": "comment on type int4[1 is 'x'", "syntaxError": "syntax error at or near \"is\"", "position": 23}
+{"sql": "comment on type double is 'x'", "pg16After": "42704 type \"double\" does not exist", "types": [{"names": ["double"], "location": 16}], "object": "TypeName", "pg16Name": "double"}
+{"sql": "comment on type a.b.c%type is 'x'", "syntaxError": "syntax error at or near \"%\"", "position": 21}
+{"sql": "comment on type a.* is 'x'", "syntaxError": "syntax error at or near \"*\"", "position": 18}
+{"sql": "comment on domain a is 'x'", "pg16After": "42704 type \"a\" does not exist", "types": [{"names": ["a"], "location": 18}], "object": "TypeName", "pg16Name": "a"}
+{"sql": "comment on domain a.b is 'x'", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 18}], "object": "TypeName"}
+{"sql": "comment on domain a.b.c is 'x'", "pg16After": "0A000 cross-database references are not implemented: a.b.c", "types": [{"names": ["a", "b", "c"], "location": 18}], "object": "TypeName", "pg16Name": "a.b.c"}
+{"sql": "comment on domain double precision is 'x'", "pg16After": "42809 \"pg_catalog.float8\" is not a domain", "types": [{"names": ["pg_catalog", "float8"], "location": 18}], "object": "TypeName"}
+{"sql": "comment on domain character varying(10) is 'x'", "pg16After": "42809 \"pg_catalog.varchar\" is not a domain", "types": [{"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 18}], "object": "TypeName"}
+{"sql": "comment on domain timestamp with time zone is 'x'", "pg16After": "42809 \"pg_catalog.timestamptz\" is not a domain", "types": [{"names": ["pg_catalog", "timestamptz"], "location": 18}], "object": "TypeName"}
+{"sql": "comment on domain int4[] is 'x'", "pg16After": "42809 \"int4[]\" is not a domain", "types": [{"names": ["int4"], "bounds": [-1], "location": 18}], "object": "TypeName"}
+{"sql": "comment on domain a.b[1] is 'x'", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 18}], "object": "TypeName"}
+{"sql": "comment on domain int4 array is 'x'", "pg16After": "42809 \"int4[]\" is not a domain", "types": [{"names": ["int4"], "bounds": [-1], "location": 18}], "object": "TypeName"}
+{"sql": "comment on domain int4 array[3] is 'x'", "pg16After": "42809 \"int4[]\" is not a domain", "types": [{"names": ["int4"], "bounds": [3], "location": 18}], "object": "TypeName"}
+{"sql": "comment on domain numeric(10,2) is 'x'", "pg16After": "42809 \"pg_catalog.numeric\" is not a domain", "types": [{"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 18}], "object": "TypeName"}
+{"sql": "comment on domain setof int4 is 'x'", "pg16After": "42809 \"int4\" is not a domain", "types": [{"names": ["int4"], "setof": true, "location": 24}], "object": "TypeName"}
+{"sql": "comment on domain a.b%type is 'x'", "syntaxError": "syntax error at or near \"%\"", "position": 21}
+{"sql": "comment on domain interval year to month is 'x'", "pg16After": "42809 \"pg_catalog.interval\" is not a domain", "types": [{"names": ["pg_catalog", "interval"], "typmods": 1, "location": 18}], "object": "TypeName"}
+{"sql": "comment on domain bit varying(3) is 'x'", "pg16After": "42809 \"pg_catalog.varbit\" is not a domain", "types": [{"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 18}], "object": "TypeName"}
+{"sql": "comment on domain \"char\"[][] is 'x'", "pg16After": "42809 \"char[]\" is not a domain", "types": [{"names": ["char"], "bounds": [-1, -1], "location": 18}], "object": "TypeName"}
+{"sql": "comment on domain a.b[ is 'x'", "syntaxError": "syntax error at or near \"is\"", "position": 23}
+{"sql": "comment on domain int4[x] is 'x'", "syntaxError": "syntax error at or near \"x\"", "position": 23}
+{"sql": "comment on domain a. is 'x'", "syntaxError": "syntax error at or near \"'x'\"", "position": 24}
+{"sql": "comment on domain 1 is 'x'", "syntaxError": "syntax error at or near \"1\"", "position": 18}
+{"sql": "comment on domain int4[1 is 'x'", "syntaxError": "syntax error at or near \"is\"", "position": 25}
+{"sql": "comment on domain double is 'x'", "pg16After": "42704 type \"double\" does not exist", "types": [{"names": ["double"], "location": 18}], "object": "TypeName", "pg16Name": "double"}
+{"sql": "comment on domain a.b.c%type is 'x'", "syntaxError": "syntax error at or near \"%\"", "position": 23}
+{"sql": "comment on domain a.* is 'x'", "syntaxError": "syntax error at or near \"*\"", "position": 20}
+{"sql": "security label on type a is 'x'", "pg16After": "22023 no security label providers have been loaded", "types": [{"names": ["a"], "location": 23}], "object": "TypeName"}
+{"sql": "security label on type a.b is 'x'", "pg16After": "22023 no security label providers have been loaded", "types": [{"names": ["a", "b"], "location": 23}], "object": "TypeName"}
+{"sql": "security label on type a.b.c is 'x'", "pg16After": "22023 no security label providers have been loaded", "types": [{"names": ["a", "b", "c"], "location": 23}], "object": "TypeName"}
+{"sql": "security label on type double precision is 'x'", "pg16After": "22023 no security label providers have been loaded", "types": [{"names": ["pg_catalog", "float8"], "location": 23}], "object": "TypeName"}
+{"sql": "security label on type character varying(10) is 'x'", "pg16After": "22023 no security label providers have been loaded", "types": [{"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 23}], "object": "TypeName"}
+{"sql": "security label on type timestamp with time zone is 'x'", "pg16After": "22023 no security label providers have been loaded", "types": [{"names": ["pg_catalog", "timestamptz"], "location": 23}], "object": "TypeName"}
+{"sql": "security label on type int4[] is 'x'", "pg16After": "22023 no security label providers have been loaded", "types": [{"names": ["int4"], "bounds": [-1], "location": 23}], "object": "TypeName"}
+{"sql": "security label on type a.b[1] is 'x'", "pg16After": "22023 no security label providers have been loaded", "types": [{"names": ["a", "b"], "bounds": [1], "location": 23}], "object": "TypeName"}
+{"sql": "security label on type int4 array is 'x'", "pg16After": "22023 no security label providers have been loaded", "types": [{"names": ["int4"], "bounds": [-1], "location": 23}], "object": "TypeName"}
+{"sql": "security label on type int4 array[3] is 'x'", "pg16After": "22023 no security label providers have been loaded", "types": [{"names": ["int4"], "bounds": [3], "location": 23}], "object": "TypeName"}
+{"sql": "security label on type numeric(10,2) is 'x'", "pg16After": "22023 no security label providers have been loaded", "types": [{"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 23}], "object": "TypeName"}
+{"sql": "security label on type setof int4 is 'x'", "pg16After": "22023 no security label providers have been loaded", "types": [{"names": ["int4"], "setof": true, "location": 29}], "object": "TypeName"}
+{"sql": "security label on type a.b%type is 'x'", "syntaxError": "syntax error at or near \"%\"", "position": 26}
+{"sql": "security label on type interval year to month is 'x'", "pg16After": "22023 no security label providers have been loaded", "types": [{"names": ["pg_catalog", "interval"], "typmods": 1, "location": 23}], "object": "TypeName"}
+{"sql": "security label on type bit varying(3) is 'x'", "pg16After": "22023 no security label providers have been loaded", "types": [{"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 23}], "object": "TypeName"}
+{"sql": "security label on type \"char\"[][] is 'x'", "pg16After": "22023 no security label providers have been loaded", "types": [{"names": ["char"], "bounds": [-1, -1], "location": 23}], "object": "TypeName"}
+{"sql": "security label on type a.b[ is 'x'", "syntaxError": "syntax error at or near \"is\"", "position": 28}
+{"sql": "security label on type int4[x] is 'x'", "syntaxError": "syntax error at or near \"x\"", "position": 28}
+{"sql": "security label on type a. is 'x'", "syntaxError": "syntax error at or near \"'x'\"", "position": 29}
+{"sql": "security label on type 1 is 'x'", "syntaxError": "syntax error at or near \"1\"", "position": 23}
+{"sql": "security label on type int4[1 is 'x'", "syntaxError": "syntax error at or near \"is\"", "position": 30}
+{"sql": "security label on type double is 'x'", "pg16After": "22023 no security label providers have been loaded", "types": [{"names": ["double"], "location": 23}], "object": "TypeName"}
+{"sql": "security label on type a.b.c%type is 'x'", "syntaxError": "syntax error at or near \"%\"", "position": 28}
+{"sql": "security label on type a.* is 'x'", "syntaxError": "syntax error at or near \"*\"", "position": 25}
+{"sql": "security label for p on domain a is 'x'", "pg16After": "22023 security label provider \"p\" is not loaded", "types": [{"names": ["a"], "location": 31}], "object": "TypeName"}
+{"sql": "security label for p on domain a.b is 'x'", "pg16After": "22023 security label provider \"p\" is not loaded", "types": [{"names": ["a", "b"], "location": 31}], "object": "TypeName"}
+{"sql": "security label for p on domain a.b.c is 'x'", "pg16After": "22023 security label provider \"p\" is not loaded", "types": [{"names": ["a", "b", "c"], "location": 31}], "object": "TypeName"}
+{"sql": "security label for p on domain double precision is 'x'", "pg16After": "22023 security label provider \"p\" is not loaded", "types": [{"names": ["pg_catalog", "float8"], "location": 31}], "object": "TypeName"}
+{"sql": "security label for p on domain character varying(10) is 'x'", "pg16After": "22023 security label provider \"p\" is not loaded", "types": [{"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 31}], "object": "TypeName"}
+{"sql": "security label for p on domain timestamp with time zone is 'x'", "pg16After": "22023 security label provider \"p\" is not loaded", "types": [{"names": ["pg_catalog", "timestamptz"], "location": 31}], "object": "TypeName"}
+{"sql": "security label for p on domain int4[] is 'x'", "pg16After": "22023 security label provider \"p\" is not loaded", "types": [{"names": ["int4"], "bounds": [-1], "location": 31}], "object": "TypeName"}
+{"sql": "security label for p on domain a.b[1] is 'x'", "pg16After": "22023 security label provider \"p\" is not loaded", "types": [{"names": ["a", "b"], "bounds": [1], "location": 31}], "object": "TypeName"}
+{"sql": "security label for p on domain int4 array is 'x'", "pg16After": "22023 security label provider \"p\" is not loaded", "types": [{"names": ["int4"], "bounds": [-1], "location": 31}], "object": "TypeName"}
+{"sql": "security label for p on domain int4 array[3] is 'x'", "pg16After": "22023 security label provider \"p\" is not loaded", "types": [{"names": ["int4"], "bounds": [3], "location": 31}], "object": "TypeName"}
+{"sql": "security label for p on domain numeric(10,2) is 'x'", "pg16After": "22023 security label provider \"p\" is not loaded", "types": [{"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 31}], "object": "TypeName"}
+{"sql": "security label for p on domain setof int4 is 'x'", "pg16After": "22023 security label provider \"p\" is not loaded", "types": [{"names": ["int4"], "setof": true, "location": 37}], "object": "TypeName"}
+{"sql": "security label for p on domain a.b%type is 'x'", "syntaxError": "syntax error at or near \"%\"", "position": 34}
+{"sql": "security label for p on domain interval year to month is 'x'", "pg16After": "22023 security label provider \"p\" is not loaded", "types": [{"names": ["pg_catalog", "interval"], "typmods": 1, "location": 31}], "object": "TypeName"}
+{"sql": "security label for p on domain bit varying(3) is 'x'", "pg16After": "22023 security label provider \"p\" is not loaded", "types": [{"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 31}], "object": "TypeName"}
+{"sql": "security label for p on domain \"char\"[][] is 'x'", "pg16After": "22023 security label provider \"p\" is not loaded", "types": [{"names": ["char"], "bounds": [-1, -1], "location": 31}], "object": "TypeName"}
+{"sql": "security label for p on domain a.b[ is 'x'", "syntaxError": "syntax error at or near \"is\"", "position": 36}
+{"sql": "security label for p on domain int4[x] is 'x'", "syntaxError": "syntax error at or near \"x\"", "position": 36}
+{"sql": "security label for p on domain a. is 'x'", "syntaxError": "syntax error at or near \"'x'\"", "position": 37}
+{"sql": "security label for p on domain 1 is 'x'", "syntaxError": "syntax error at or near \"1\"", "position": 31}
+{"sql": "security label for p on domain int4[1 is 'x'", "syntaxError": "syntax error at or near \"is\"", "position": 38}
+{"sql": "security label for p on domain double is 'x'", "pg16After": "22023 security label provider \"p\" is not loaded", "types": [{"names": ["double"], "location": 31}], "object": "TypeName"}
+{"sql": "security label for p on domain a.b.c%type is 'x'", "syntaxError": "syntax error at or near \"%\"", "position": 36}
+{"sql": "security label for p on domain a.* is 'x'", "syntaxError": "syntax error at or near \"*\"", "position": 33}
+{"sql": "drop cast (a as int)", "pg16After": "42704 type \"a\" does not exist", "types": [{"names": ["a"], "location": 11}, {"names": ["pg_catalog", "int4"], "location": 16}], "object": "List(List(TypeName,TypeName))", "pg16Name": "a"}
+{"sql": "drop cast (a.b as int)", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 11}, {"names": ["pg_catalog", "int4"], "location": 18}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast (a.b.c as int)", "pg16After": "0A000 cross-database references are not implemented: a.b.c", "types": [{"names": ["a", "b", "c"], "location": 11}, {"names": ["pg_catalog", "int4"], "location": 20}], "object": "List(List(TypeName,TypeName))", "pg16Name": "a.b.c"}
+{"sql": "drop cast (double precision as int)", "pg16After": "2BP01 cannot drop cast from double precision to integer because it is required by the database system", "types": [{"names": ["pg_catalog", "float8"], "location": 11}, {"names": ["pg_catalog", "int4"], "location": 31}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast (character varying(10) as int)", "pg16After": "42704 cast from type character varying to type integer does not exist", "types": [{"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 11}, {"names": ["pg_catalog", "int4"], "location": 36}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast (timestamp with time zone as int)", "pg16After": "42704 cast from type timestamp with time zone to type integer does not exist", "types": [{"names": ["pg_catalog", "timestamptz"], "location": 11}, {"names": ["pg_catalog", "int4"], "location": 39}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast (int4[] as int)", "pg16After": "42704 cast from type integer[] to type integer does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 11}, {"names": ["pg_catalog", "int4"], "location": 21}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast (a.b[1] as int)", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 11}, {"names": ["pg_catalog", "int4"], "location": 21}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast (int4 array as int)", "pg16After": "42704 cast from type integer[] to type integer does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 11}, {"names": ["pg_catalog", "int4"], "location": 25}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast (int4 array[3] as int)", "pg16After": "42704 cast from type integer[] to type integer does not exist", "types": [{"names": ["int4"], "bounds": [3], "location": 11}, {"names": ["pg_catalog", "int4"], "location": 28}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast (numeric(10,2) as int)", "pg16After": "2BP01 cannot drop cast from numeric to integer because it is required by the database system", "types": [{"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 11}, {"names": ["pg_catalog", "int4"], "location": 28}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast (setof int4 as int)", "pg16After": "42704 cast from type integer to type integer does not exist", "types": [{"names": ["int4"], "setof": true, "location": 17}, {"names": ["pg_catalog", "int4"], "location": 25}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast (a.b%type as int)", "syntaxError": "syntax error at or near \"%\"", "position": 14}
+{"sql": "drop cast (interval year to month as int)", "pg16After": "42704 cast from type interval to type integer does not exist", "types": [{"names": ["pg_catalog", "interval"], "typmods": 1, "location": 11}, {"names": ["pg_catalog", "int4"], "location": 37}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast (bit varying(3) as int)", "pg16After": "42704 cast from type bit varying to type integer does not exist", "types": [{"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 11}, {"names": ["pg_catalog", "int4"], "location": 29}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast (\"char\"[][] as int)", "pg16After": "42704 cast from type \"char\"[] to type integer does not exist", "types": [{"names": ["char"], "bounds": [-1, -1], "location": 11}, {"names": ["pg_catalog", "int4"], "location": 25}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast (a.b[ as int)", "syntaxError": "syntax error at or near \"as\"", "position": 16}
+{"sql": "drop cast (int4[x] as int)", "syntaxError": "syntax error at or near \"x\"", "position": 16}
+{"sql": "drop cast (a. as int)", "syntaxError": "syntax error at or near \"int\"", "position": 17}
+{"sql": "drop cast (1 as int)", "syntaxError": "syntax error at or near \"1\"", "position": 11}
+{"sql": "drop cast (int4[1 as int)", "syntaxError": "syntax error at or near \"as\"", "position": 18}
+{"sql": "drop cast (double as int)", "pg16After": "42704 type \"double\" does not exist", "types": [{"names": ["double"], "location": 11}, {"names": ["pg_catalog", "int4"], "location": 21}], "object": "List(List(TypeName,TypeName))", "pg16Name": "double"}
+{"sql": "drop cast (a.b.c%type as int)", "syntaxError": "syntax error at or near \"%\"", "position": 16}
+{"sql": "drop cast (a.* as int)", "syntaxError": "syntax error at or near \"*\"", "position": 13}
+{"sql": "drop cast if exists (int as a)", "pg16After": "ok", "types": [{"names": ["pg_catalog", "int4"], "location": 21}, {"names": ["a"], "location": 28}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast if exists (int as a.b)", "pg16After": "ok", "types": [{"names": ["pg_catalog", "int4"], "location": 21}, {"names": ["a", "b"], "location": 28}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast if exists (int as a.b.c)", "pg16After": "0A000 cross-database references are not implemented: a.b.c", "types": [{"names": ["pg_catalog", "int4"], "location": 21}, {"names": ["a", "b", "c"], "location": 28}], "object": "List(List(TypeName,TypeName))", "pg16Name": "a.b.c"}
+{"sql": "drop cast if exists (int as double precision)", "pg16After": "2BP01 cannot drop cast from integer to double precision because it is required by the database system", "types": [{"names": ["pg_catalog", "int4"], "location": 21}, {"names": ["pg_catalog", "float8"], "location": 28}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast if exists (int as character varying(10))", "pg16After": "ok", "types": [{"names": ["pg_catalog", "int4"], "location": 21}, {"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 28}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast if exists (int as timestamp with time zone)", "pg16After": "ok", "types": [{"names": ["pg_catalog", "int4"], "location": 21}, {"names": ["pg_catalog", "timestamptz"], "location": 28}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast if exists (int as int4[])", "pg16After": "ok", "types": [{"names": ["pg_catalog", "int4"], "location": 21}, {"names": ["int4"], "bounds": [-1], "location": 28}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast if exists (int as a.b[1])", "pg16After": "ok", "types": [{"names": ["pg_catalog", "int4"], "location": 21}, {"names": ["a", "b"], "bounds": [1], "location": 28}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast if exists (int as int4 array)", "pg16After": "ok", "types": [{"names": ["pg_catalog", "int4"], "location": 21}, {"names": ["int4"], "bounds": [-1], "location": 28}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast if exists (int as int4 array[3])", "pg16After": "ok", "types": [{"names": ["pg_catalog", "int4"], "location": 21}, {"names": ["int4"], "bounds": [3], "location": 28}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast if exists (int as numeric(10,2))", "pg16After": "2BP01 cannot drop cast from integer to numeric because it is required by the database system", "types": [{"names": ["pg_catalog", "int4"], "location": 21}, {"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 28}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast if exists (int as setof int4)", "pg16After": "ok", "types": [{"names": ["pg_catalog", "int4"], "location": 21}, {"names": ["int4"], "setof": true, "location": 34}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast if exists (int as a.b%type)", "syntaxError": "syntax error at or near \"%\"", "position": 31}
+{"sql": "drop cast if exists (int as interval year to month)", "pg16After": "ok", "types": [{"names": ["pg_catalog", "int4"], "location": 21}, {"names": ["pg_catalog", "interval"], "typmods": 1, "location": 28}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast if exists (int as bit varying(3))", "pg16After": "ok", "types": [{"names": ["pg_catalog", "int4"], "location": 21}, {"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 28}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast if exists (int as \"char\"[][])", "pg16After": "ok", "types": [{"names": ["pg_catalog", "int4"], "location": 21}, {"names": ["char"], "bounds": [-1, -1], "location": 28}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast if exists (int as a.b[)", "syntaxError": "syntax error at or near \")\"", "position": 32}
+{"sql": "drop cast if exists (int as int4[x])", "syntaxError": "syntax error at or near \"x\"", "position": 33}
+{"sql": "drop cast if exists (int as a.)", "syntaxError": "syntax error at or near \")\"", "position": 30}
+{"sql": "drop cast if exists (int as 1)", "syntaxError": "syntax error at or near \"1\"", "position": 28}
+{"sql": "drop cast if exists (int as int4[1)", "syntaxError": "syntax error at or near \")\"", "position": 34}
+{"sql": "drop cast if exists (int as double)", "pg16After": "ok", "types": [{"names": ["pg_catalog", "int4"], "location": 21}, {"names": ["double"], "location": 28}], "object": "List(List(TypeName,TypeName))"}
+{"sql": "drop cast if exists (int as a.b.c%type)", "syntaxError": "syntax error at or near \"%\"", "position": 33}
+{"sql": "drop cast if exists (int as a.*)", "syntaxError": "syntax error at or near \"*\"", "position": 30}
+{"sql": "create cast (a as int) without function", "pg16After": "42704 type \"a\" does not exist", "types": [{"names": ["a"], "location": 13}, {"names": ["pg_catalog", "int4"], "location": 18}], "pg16Name": "a"}
+{"sql": "create cast (a.b as int) without function", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 13}, {"names": ["pg_catalog", "int4"], "location": 20}]}
+{"sql": "create cast (a.b.c as int) without function", "pg16After": "0A000 cross-database references are not implemented: a.b.c", "types": [{"names": ["a", "b", "c"], "location": 13}, {"names": ["pg_catalog", "int4"], "location": 22}], "pg16Name": "a.b.c"}
+{"sql": "create cast (double precision as int) without function", "pg16After": "42P17 source and target data types are not physically compatible", "types": [{"names": ["pg_catalog", "float8"], "location": 13}, {"names": ["pg_catalog", "int4"], "location": 33}]}
+{"sql": "create cast (character varying(10) as int) without function", "pg16After": "42P17 source and target data types are not physically compatible", "types": [{"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 13}, {"names": ["pg_catalog", "int4"], "location": 38}]}
+{"sql": "create cast (timestamp with time zone as int) without function", "pg16After": "42P17 source and target data types are not physically compatible", "types": [{"names": ["pg_catalog", "timestamptz"], "location": 13}, {"names": ["pg_catalog", "int4"], "location": 41}]}
+{"sql": "create cast (int4[] as int) without function", "pg16After": "42P17 source and target data types are not physically compatible", "types": [{"names": ["int4"], "bounds": [-1], "location": 13}, {"names": ["pg_catalog", "int4"], "location": 23}]}
+{"sql": "create cast (a.b[1] as int) without function", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 13}, {"names": ["pg_catalog", "int4"], "location": 23}]}
+{"sql": "create cast (int4 array as int) without function", "pg16After": "42P17 source and target data types are not physically compatible", "types": [{"names": ["int4"], "bounds": [-1], "location": 13}, {"names": ["pg_catalog", "int4"], "location": 27}]}
+{"sql": "create cast (int4 array[3] as int) without function", "pg16After": "42P17 source and target data types are not physically compatible", "types": [{"names": ["int4"], "bounds": [3], "location": 13}, {"names": ["pg_catalog", "int4"], "location": 30}]}
+{"sql": "create cast (numeric(10,2) as int) without function", "pg16After": "42P17 source and target data types are not physically compatible", "types": [{"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 13}, {"names": ["pg_catalog", "int4"], "location": 30}]}
+{"sql": "create cast (setof int4 as int) without function", "pg16After": "42P17 source data type and target data type are the same", "types": [{"names": ["int4"], "setof": true, "location": 19}, {"names": ["pg_catalog", "int4"], "location": 27}]}
+{"sql": "create cast (a.b%type as int) without function", "syntaxError": "syntax error at or near \"%\"", "position": 16}
+{"sql": "create cast (interval year to month as int) without function", "pg16After": "42P17 source and target data types are not physically compatible", "types": [{"names": ["pg_catalog", "interval"], "typmods": 1, "location": 13}, {"names": ["pg_catalog", "int4"], "location": 39}]}
+{"sql": "create cast (bit varying(3) as int) without function", "pg16After": "42P17 source and target data types are not physically compatible", "types": [{"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 13}, {"names": ["pg_catalog", "int4"], "location": 31}]}
+{"sql": "create cast (\"char\"[][] as int) without function", "pg16After": "42P17 source and target data types are not physically compatible", "types": [{"names": ["char"], "bounds": [-1, -1], "location": 13}, {"names": ["pg_catalog", "int4"], "location": 27}]}
+{"sql": "create cast (a.b[ as int) without function", "syntaxError": "syntax error at or near \"as\"", "position": 18}
+{"sql": "create cast (int4[x] as int) without function", "syntaxError": "syntax error at or near \"x\"", "position": 18}
+{"sql": "create cast (a. as int) without function", "syntaxError": "syntax error at or near \"int\"", "position": 19}
+{"sql": "create cast (1 as int) without function", "syntaxError": "syntax error at or near \"1\"", "position": 13}
+{"sql": "create cast (int4[1 as int) without function", "syntaxError": "syntax error at or near \"as\"", "position": 20}
+{"sql": "create cast (double as int) without function", "pg16After": "42704 type \"double\" does not exist", "types": [{"names": ["double"], "location": 13}, {"names": ["pg_catalog", "int4"], "location": 23}], "pg16Name": "double"}
+{"sql": "create cast (a.b.c%type as int) without function", "syntaxError": "syntax error at or near \"%\"", "position": 18}
+{"sql": "create cast (a.* as int) without function", "syntaxError": "syntax error at or near \"*\"", "position": 15}
+{"sql": "comment on cast (int as a) is 'x'", "pg16After": "42704 type \"a\" does not exist", "types": [{"names": ["pg_catalog", "int4"], "location": 17}, {"names": ["a"], "location": 24}], "object": "List(TypeName,TypeName)", "pg16Name": "a"}
+{"sql": "comment on cast (int as a.b) is 'x'", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["pg_catalog", "int4"], "location": 17}, {"names": ["a", "b"], "location": 24}], "object": "List(TypeName,TypeName)"}
+{"sql": "comment on cast (int as a.b.c) is 'x'", "pg16After": "0A000 cross-database references are not implemented: a.b.c", "types": [{"names": ["pg_catalog", "int4"], "location": 17}, {"names": ["a", "b", "c"], "location": 24}], "object": "List(TypeName,TypeName)", "pg16Name": "a.b.c"}
+{"sql": "comment on cast (int as double precision) is 'x'", "pg16After": "ok", "types": [{"names": ["pg_catalog", "int4"], "location": 17}, {"names": ["pg_catalog", "float8"], "location": 24}], "object": "List(TypeName,TypeName)"}
+{"sql": "comment on cast (int as character varying(10)) is 'x'", "pg16After": "42704 cast from type integer to type character varying does not exist", "types": [{"names": ["pg_catalog", "int4"], "location": 17}, {"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 24}], "object": "List(TypeName,TypeName)"}
+{"sql": "comment on cast (int as timestamp with time zone) is 'x'", "pg16After": "42704 cast from type integer to type timestamp with time zone does not exist", "types": [{"names": ["pg_catalog", "int4"], "location": 17}, {"names": ["pg_catalog", "timestamptz"], "location": 24}], "object": "List(TypeName,TypeName)"}
+{"sql": "comment on cast (int as int4[]) is 'x'", "pg16After": "42704 cast from type integer to type integer[] does not exist", "types": [{"names": ["pg_catalog", "int4"], "location": 17}, {"names": ["int4"], "bounds": [-1], "location": 24}], "object": "List(TypeName,TypeName)"}
+{"sql": "comment on cast (int as a.b[1]) is 'x'", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["pg_catalog", "int4"], "location": 17}, {"names": ["a", "b"], "bounds": [1], "location": 24}], "object": "List(TypeName,TypeName)"}
+{"sql": "comment on cast (int as int4 array) is 'x'", "pg16After": "42704 cast from type integer to type integer[] does not exist", "types": [{"names": ["pg_catalog", "int4"], "location": 17}, {"names": ["int4"], "bounds": [-1], "location": 24}], "object": "List(TypeName,TypeName)"}
+{"sql": "comment on cast (int as int4 array[3]) is 'x'", "pg16After": "42704 cast from type integer to type integer[] does not exist", "types": [{"names": ["pg_catalog", "int4"], "location": 17}, {"names": ["int4"], "bounds": [3], "location": 24}], "object": "List(TypeName,TypeName)"}
+{"sql": "comment on cast (int as numeric(10,2)) is 'x'", "pg16After": "ok", "types": [{"names": ["pg_catalog", "int4"], "location": 17}, {"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 24}], "object": "List(TypeName,TypeName)"}
+{"sql": "comment on cast (int as setof int4) is 'x'", "pg16After": "42704 cast from type integer to type integer does not exist", "types": [{"names": ["pg_catalog", "int4"], "location": 17}, {"names": ["int4"], "setof": true, "location": 30}], "object": "List(TypeName,TypeName)"}
+{"sql": "comment on cast (int as a.b%type) is 'x'", "syntaxError": "syntax error at or near \"%\"", "position": 27}
+{"sql": "comment on cast (int as interval year to month) is 'x'", "pg16After": "42704 cast from type integer to type interval does not exist", "types": [{"names": ["pg_catalog", "int4"], "location": 17}, {"names": ["pg_catalog", "interval"], "typmods": 1, "location": 24}], "object": "List(TypeName,TypeName)"}
+{"sql": "comment on cast (int as bit varying(3)) is 'x'", "pg16After": "42704 cast from type integer to type bit varying does not exist", "types": [{"names": ["pg_catalog", "int4"], "location": 17}, {"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 24}], "object": "List(TypeName,TypeName)"}
+{"sql": "comment on cast (int as \"char\"[][]) is 'x'", "pg16After": "42704 cast from type integer to type \"char\"[] does not exist", "types": [{"names": ["pg_catalog", "int4"], "location": 17}, {"names": ["char"], "bounds": [-1, -1], "location": 24}], "object": "List(TypeName,TypeName)"}
+{"sql": "comment on cast (int as a.b[) is 'x'", "syntaxError": "syntax error at or near \")\"", "position": 28}
+{"sql": "comment on cast (int as int4[x]) is 'x'", "syntaxError": "syntax error at or near \"x\"", "position": 29}
+{"sql": "comment on cast (int as a.) is 'x'", "syntaxError": "syntax error at or near \")\"", "position": 26}
+{"sql": "comment on cast (int as 1) is 'x'", "syntaxError": "syntax error at or near \"1\"", "position": 24}
+{"sql": "comment on cast (int as int4[1) is 'x'", "syntaxError": "syntax error at or near \")\"", "position": 30}
+{"sql": "comment on cast (int as double) is 'x'", "pg16After": "42704 type \"double\" does not exist", "types": [{"names": ["pg_catalog", "int4"], "location": 17}, {"names": ["double"], "location": 24}], "object": "List(TypeName,TypeName)", "pg16Name": "double"}
+{"sql": "comment on cast (int as a.b.c%type) is 'x'", "syntaxError": "syntax error at or near \"%\"", "position": 29}
+{"sql": "comment on cast (int as a.*) is 'x'", "syntaxError": "syntax error at or near \"*\"", "position": 26}
+{"sql": "alter extension e add type a", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a"], "location": 27}], "object": "TypeName"}
+{"sql": "alter extension e add type a.b", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a", "b"], "location": 27}], "object": "TypeName"}
+{"sql": "alter extension e add type a.b.c", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a", "b", "c"], "location": 27}], "object": "TypeName"}
+{"sql": "alter extension e add type double precision", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "float8"], "location": 27}], "object": "TypeName"}
+{"sql": "alter extension e add type character varying(10)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 27}], "object": "TypeName"}
+{"sql": "alter extension e add type timestamp with time zone", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "timestamptz"], "location": 27}], "object": "TypeName"}
+{"sql": "alter extension e add type int4[]", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 27}], "object": "TypeName"}
+{"sql": "alter extension e add type a.b[1]", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 27}], "object": "TypeName"}
+{"sql": "alter extension e add type int4 array", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 27}], "object": "TypeName"}
+{"sql": "alter extension e add type int4 array[3]", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["int4"], "bounds": [3], "location": 27}], "object": "TypeName"}
+{"sql": "alter extension e add type numeric(10,2)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 27}], "object": "TypeName"}
+{"sql": "alter extension e add type setof int4", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["int4"], "setof": true, "location": 33}], "object": "TypeName"}
+{"sql": "alter extension e add type a.b%type", "syntaxError": "syntax error at or near \"%\"", "position": 30}
+{"sql": "alter extension e add type interval year to month", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "interval"], "typmods": 1, "location": 27}], "object": "TypeName"}
+{"sql": "alter extension e add type bit varying(3)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 27}], "object": "TypeName"}
+{"sql": "alter extension e add type \"char\"[][]", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["char"], "bounds": [-1, -1], "location": 27}], "object": "TypeName"}
+{"sql": "alter extension e add type a.b[", "syntaxError": "syntax error at end of input", "position": 31}
+{"sql": "alter extension e add type int4[x]", "syntaxError": "syntax error at or near \"x\"", "position": 32}
+{"sql": "alter extension e add type a.", "syntaxError": "syntax error at end of input", "position": 29}
+{"sql": "alter extension e add type 1", "syntaxError": "syntax error at or near \"1\"", "position": 27}
+{"sql": "alter extension e add type int4[1", "syntaxError": "syntax error at end of input", "position": 33}
+{"sql": "alter extension e add type double", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["double"], "location": 27}], "object": "TypeName"}
+{"sql": "alter extension e add type a.b.c%type", "syntaxError": "syntax error at or near \"%\"", "position": 32}
+{"sql": "alter extension e add type a.*", "syntaxError": "syntax error at or near \"*\"", "position": 29}
+{"sql": "alter extension e drop domain a", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a"], "location": 30}], "object": "TypeName"}
+{"sql": "alter extension e drop domain a.b", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a", "b"], "location": 30}], "object": "TypeName"}
+{"sql": "alter extension e drop domain a.b.c", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a", "b", "c"], "location": 30}], "object": "TypeName"}
+{"sql": "alter extension e drop domain double precision", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "float8"], "location": 30}], "object": "TypeName"}
+{"sql": "alter extension e drop domain character varying(10)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 30}], "object": "TypeName"}
+{"sql": "alter extension e drop domain timestamp with time zone", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "timestamptz"], "location": 30}], "object": "TypeName"}
+{"sql": "alter extension e drop domain int4[]", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 30}], "object": "TypeName"}
+{"sql": "alter extension e drop domain a.b[1]", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 30}], "object": "TypeName"}
+{"sql": "alter extension e drop domain int4 array", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 30}], "object": "TypeName"}
+{"sql": "alter extension e drop domain int4 array[3]", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["int4"], "bounds": [3], "location": 30}], "object": "TypeName"}
+{"sql": "alter extension e drop domain numeric(10,2)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 30}], "object": "TypeName"}
+{"sql": "alter extension e drop domain setof int4", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["int4"], "setof": true, "location": 36}], "object": "TypeName"}
+{"sql": "alter extension e drop domain a.b%type", "syntaxError": "syntax error at or near \"%\"", "position": 33}
+{"sql": "alter extension e drop domain interval year to month", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "interval"], "typmods": 1, "location": 30}], "object": "TypeName"}
+{"sql": "alter extension e drop domain bit varying(3)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 30}], "object": "TypeName"}
+{"sql": "alter extension e drop domain \"char\"[][]", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["char"], "bounds": [-1, -1], "location": 30}], "object": "TypeName"}
+{"sql": "alter extension e drop domain a.b[", "syntaxError": "syntax error at end of input", "position": 34}
+{"sql": "alter extension e drop domain int4[x]", "syntaxError": "syntax error at or near \"x\"", "position": 35}
+{"sql": "alter extension e drop domain a.", "syntaxError": "syntax error at end of input", "position": 32}
+{"sql": "alter extension e drop domain 1", "syntaxError": "syntax error at or near \"1\"", "position": 30}
+{"sql": "alter extension e drop domain int4[1", "syntaxError": "syntax error at end of input", "position": 36}
+{"sql": "alter extension e drop domain double", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["double"], "location": 30}], "object": "TypeName"}
+{"sql": "alter extension e drop domain a.b.c%type", "syntaxError": "syntax error at or near \"%\"", "position": 35}
+{"sql": "alter extension e drop domain a.*", "syntaxError": "syntax error at or near \"*\"", "position": 32}
+{"sql": "alter extension e add cast (a as int)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a"], "location": 28}, {"names": ["pg_catalog", "int4"], "location": 33}], "object": "List(TypeName,TypeName)"}
+{"sql": "alter extension e add cast (a.b as int)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a", "b"], "location": 28}, {"names": ["pg_catalog", "int4"], "location": 35}], "object": "List(TypeName,TypeName)"}
+{"sql": "alter extension e add cast (a.b.c as int)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a", "b", "c"], "location": 28}, {"names": ["pg_catalog", "int4"], "location": 37}], "object": "List(TypeName,TypeName)"}
+{"sql": "alter extension e add cast (double precision as int)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "float8"], "location": 28}, {"names": ["pg_catalog", "int4"], "location": 48}], "object": "List(TypeName,TypeName)"}
+{"sql": "alter extension e add cast (character varying(10) as int)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 28}, {"names": ["pg_catalog", "int4"], "location": 53}], "object": "List(TypeName,TypeName)"}
+{"sql": "alter extension e add cast (timestamp with time zone as int)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "timestamptz"], "location": 28}, {"names": ["pg_catalog", "int4"], "location": 56}], "object": "List(TypeName,TypeName)"}
+{"sql": "alter extension e add cast (int4[] as int)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 28}, {"names": ["pg_catalog", "int4"], "location": 38}], "object": "List(TypeName,TypeName)"}
+{"sql": "alter extension e add cast (a.b[1] as int)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 28}, {"names": ["pg_catalog", "int4"], "location": 38}], "object": "List(TypeName,TypeName)"}
+{"sql": "alter extension e add cast (int4 array as int)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 28}, {"names": ["pg_catalog", "int4"], "location": 42}], "object": "List(TypeName,TypeName)"}
+{"sql": "alter extension e add cast (int4 array[3] as int)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["int4"], "bounds": [3], "location": 28}, {"names": ["pg_catalog", "int4"], "location": 45}], "object": "List(TypeName,TypeName)"}
+{"sql": "alter extension e add cast (numeric(10,2) as int)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 28}, {"names": ["pg_catalog", "int4"], "location": 45}], "object": "List(TypeName,TypeName)"}
+{"sql": "alter extension e add cast (setof int4 as int)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["int4"], "setof": true, "location": 34}, {"names": ["pg_catalog", "int4"], "location": 42}], "object": "List(TypeName,TypeName)"}
+{"sql": "alter extension e add cast (a.b%type as int)", "syntaxError": "syntax error at or near \"%\"", "position": 31}
+{"sql": "alter extension e add cast (interval year to month as int)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "interval"], "typmods": 1, "location": 28}, {"names": ["pg_catalog", "int4"], "location": 54}], "object": "List(TypeName,TypeName)"}
+{"sql": "alter extension e add cast (bit varying(3) as int)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 28}, {"names": ["pg_catalog", "int4"], "location": 46}], "object": "List(TypeName,TypeName)"}
+{"sql": "alter extension e add cast (\"char\"[][] as int)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["char"], "bounds": [-1, -1], "location": 28}, {"names": ["pg_catalog", "int4"], "location": 42}], "object": "List(TypeName,TypeName)"}
+{"sql": "alter extension e add cast (a.b[ as int)", "syntaxError": "syntax error at or near \"as\"", "position": 33}
+{"sql": "alter extension e add cast (int4[x] as int)", "syntaxError": "syntax error at or near \"x\"", "position": 33}
+{"sql": "alter extension e add cast (a. as int)", "syntaxError": "syntax error at or near \"int\"", "position": 34}
+{"sql": "alter extension e add cast (1 as int)", "syntaxError": "syntax error at or near \"1\"", "position": 28}
+{"sql": "alter extension e add cast (int4[1 as int)", "syntaxError": "syntax error at or near \"as\"", "position": 35}
+{"sql": "alter extension e add cast (double as int)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["double"], "location": 28}, {"names": ["pg_catalog", "int4"], "location": 38}], "object": "List(TypeName,TypeName)"}
+{"sql": "alter extension e add cast (a.b.c%type as int)", "syntaxError": "syntax error at or near \"%\"", "position": 33}
+{"sql": "alter extension e add cast (a.* as int)", "syntaxError": "syntax error at or near \"*\"", "position": 30}
+{"sql": "alter extension e drop transform for a language l", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a"], "location": 37}], "object": "List(TypeName,String)"}
+{"sql": "alter extension e drop transform for a.b language l", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a", "b"], "location": 37}], "object": "List(TypeName,String)"}
+{"sql": "alter extension e drop transform for a.b.c language l", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a", "b", "c"], "location": 37}], "object": "List(TypeName,String)"}
+{"sql": "alter extension e drop transform for double precision language l", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "float8"], "location": 37}], "object": "List(TypeName,String)"}
+{"sql": "alter extension e drop transform for character varying(10) language l", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 37}], "object": "List(TypeName,String)"}
+{"sql": "alter extension e drop transform for timestamp with time zone language l", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "timestamptz"], "location": 37}], "object": "List(TypeName,String)"}
+{"sql": "alter extension e drop transform for int4[] language l", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 37}], "object": "List(TypeName,String)"}
+{"sql": "alter extension e drop transform for a.b[1] language l", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 37}], "object": "List(TypeName,String)"}
+{"sql": "alter extension e drop transform for int4 array language l", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 37}], "object": "List(TypeName,String)"}
+{"sql": "alter extension e drop transform for int4 array[3] language l", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["int4"], "bounds": [3], "location": 37}], "object": "List(TypeName,String)"}
+{"sql": "alter extension e drop transform for numeric(10,2) language l", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 37}], "object": "List(TypeName,String)"}
+{"sql": "alter extension e drop transform for setof int4 language l", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["int4"], "setof": true, "location": 43}], "object": "List(TypeName,String)"}
+{"sql": "alter extension e drop transform for a.b%type language l", "syntaxError": "syntax error at or near \"%\"", "position": 40}
+{"sql": "alter extension e drop transform for interval year to month language l", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "interval"], "typmods": 1, "location": 37}], "object": "List(TypeName,String)"}
+{"sql": "alter extension e drop transform for bit varying(3) language l", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 37}], "object": "List(TypeName,String)"}
+{"sql": "alter extension e drop transform for \"char\"[][] language l", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["char"], "bounds": [-1, -1], "location": 37}], "object": "List(TypeName,String)"}
+{"sql": "alter extension e drop transform for a.b[ language l", "syntaxError": "syntax error at or near \"language\"", "position": 42}
+{"sql": "alter extension e drop transform for int4[x] language l", "syntaxError": "syntax error at or near \"x\"", "position": 42}
+{"sql": "alter extension e drop transform for a. language l", "syntaxError": "syntax error at or near \"l\"", "position": 49}
+{"sql": "alter extension e drop transform for 1 language l", "syntaxError": "syntax error at or near \"1\"", "position": 37}
+{"sql": "alter extension e drop transform for int4[1 language l", "syntaxError": "syntax error at or near \"language\"", "position": 44}
+{"sql": "alter extension e drop transform for double language l", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["double"], "location": 37}], "object": "List(TypeName,String)"}
+{"sql": "alter extension e drop transform for a.b.c%type language l", "syntaxError": "syntax error at or near \"%\"", "position": 42}
+{"sql": "alter extension e drop transform for a.* language l", "syntaxError": "syntax error at or near \"*\"", "position": 39}
+{"sql": "create transform for a language l (from sql with function f(internal))", "pg16After": "42704 type \"a\" does not exist", "types": [{"names": ["a"], "location": 21}, {"names": ["internal"], "location": 60}], "pg16Name": "a"}
+{"sql": "create transform for a.b language l (from sql with function f(internal))", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 21}, {"names": ["internal"], "location": 62}]}
+{"sql": "create transform for a.b.c language l (from sql with function f(internal))", "pg16After": "0A000 cross-database references are not implemented: a.b.c", "types": [{"names": ["a", "b", "c"], "location": 21}, {"names": ["internal"], "location": 64}], "pg16Name": "a.b.c"}
+{"sql": "create transform for double precision language l (from sql with function f(internal))", "pg16After": "42704 language \"l\" does not exist", "types": [{"names": ["pg_catalog", "float8"], "location": 21}, {"names": ["internal"], "location": 75}]}
+{"sql": "create transform for character varying(10) language l (from sql with function f(internal))", "pg16After": "42704 language \"l\" does not exist", "types": [{"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 21}, {"names": ["internal"], "location": 80}]}
+{"sql": "create transform for timestamp with time zone language l (from sql with function f(internal))", "pg16After": "42704 language \"l\" does not exist", "types": [{"names": ["pg_catalog", "timestamptz"], "location": 21}, {"names": ["internal"], "location": 83}]}
+{"sql": "create transform for int4[] language l (from sql with function f(internal))", "pg16After": "42704 language \"l\" does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 21}, {"names": ["internal"], "location": 65}]}
+{"sql": "create transform for a.b[1] language l (from sql with function f(internal))", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 21}, {"names": ["internal"], "location": 65}]}
+{"sql": "create transform for int4 array language l (from sql with function f(internal))", "pg16After": "42704 language \"l\" does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 21}, {"names": ["internal"], "location": 69}]}
+{"sql": "create transform for int4 array[3] language l (from sql with function f(internal))", "pg16After": "42704 language \"l\" does not exist", "types": [{"names": ["int4"], "bounds": [3], "location": 21}, {"names": ["internal"], "location": 72}]}
+{"sql": "create transform for numeric(10,2) language l (from sql with function f(internal))", "pg16After": "42704 language \"l\" does not exist", "types": [{"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 21}, {"names": ["internal"], "location": 72}]}
+{"sql": "create transform for setof int4 language l (from sql with function f(internal))", "pg16After": "42704 language \"l\" does not exist", "types": [{"names": ["int4"], "setof": true, "location": 27}, {"names": ["internal"], "location": 69}]}
+{"sql": "create transform for a.b%type language l (from sql with function f(internal))", "syntaxError": "syntax error at or near \"%\"", "position": 24}
+{"sql": "create transform for interval year to month language l (from sql with function f(internal))", "pg16After": "42704 language \"l\" does not exist", "types": [{"names": ["pg_catalog", "interval"], "typmods": 1, "location": 21}, {"names": ["internal"], "location": 81}]}
+{"sql": "create transform for bit varying(3) language l (from sql with function f(internal))", "pg16After": "42704 language \"l\" does not exist", "types": [{"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 21}, {"names": ["internal"], "location": 73}]}
+{"sql": "create transform for \"char\"[][] language l (from sql with function f(internal))", "pg16After": "42704 language \"l\" does not exist", "types": [{"names": ["char"], "bounds": [-1, -1], "location": 21}, {"names": ["internal"], "location": 69}]}
+{"sql": "create transform for a.b[ language l (from sql with function f(internal))", "syntaxError": "syntax error at or near \"language\"", "position": 26}
+{"sql": "create transform for int4[x] language l (from sql with function f(internal))", "syntaxError": "syntax error at or near \"x\"", "position": 26}
+{"sql": "create transform for a. language l (from sql with function f(internal))", "syntaxError": "syntax error at or near \"l\"", "position": 33}
+{"sql": "create transform for 1 language l (from sql with function f(internal))", "syntaxError": "syntax error at or near \"1\"", "position": 21}
+{"sql": "create transform for int4[1 language l (from sql with function f(internal))", "syntaxError": "syntax error at or near \"language\"", "position": 28}
+{"sql": "create transform for double language l (from sql with function f(internal))", "pg16After": "42704 type \"double\" does not exist", "types": [{"names": ["double"], "location": 21}, {"names": ["internal"], "location": 65}], "pg16Name": "double"}
+{"sql": "create transform for a.b.c%type language l (from sql with function f(internal))", "syntaxError": "syntax error at or near \"%\"", "position": 26}
+{"sql": "create transform for a.* language l (from sql with function f(internal))", "syntaxError": "syntax error at or near \"*\"", "position": 23}
+{"sql": "drop transform if exists for a language l", "pg16After": "ok", "types": [{"names": ["a"], "location": 29}], "object": "List(List(TypeName,String))"}
+{"sql": "drop transform if exists for a.b language l", "pg16After": "ok", "types": [{"names": ["a", "b"], "location": 29}], "object": "List(List(TypeName,String))"}
+{"sql": "drop transform if exists for a.b.c language l", "pg16After": "0A000 cross-database references are not implemented: a.b.c", "types": [{"names": ["a", "b", "c"], "location": 29}], "object": "List(List(TypeName,String))", "pg16Name": "a.b.c"}
+{"sql": "drop transform if exists for double precision language l", "pg16After": "ok", "types": [{"names": ["pg_catalog", "float8"], "location": 29}], "object": "List(List(TypeName,String))"}
+{"sql": "drop transform if exists for character varying(10) language l", "pg16After": "ok", "types": [{"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 29}], "object": "List(List(TypeName,String))"}
+{"sql": "drop transform if exists for timestamp with time zone language l", "pg16After": "ok", "types": [{"names": ["pg_catalog", "timestamptz"], "location": 29}], "object": "List(List(TypeName,String))"}
+{"sql": "drop transform if exists for int4[] language l", "pg16After": "ok", "types": [{"names": ["int4"], "bounds": [-1], "location": 29}], "object": "List(List(TypeName,String))"}
+{"sql": "drop transform if exists for a.b[1] language l", "pg16After": "ok", "types": [{"names": ["a", "b"], "bounds": [1], "location": 29}], "object": "List(List(TypeName,String))"}
+{"sql": "drop transform if exists for int4 array language l", "pg16After": "ok", "types": [{"names": ["int4"], "bounds": [-1], "location": 29}], "object": "List(List(TypeName,String))"}
+{"sql": "drop transform if exists for int4 array[3] language l", "pg16After": "ok", "types": [{"names": ["int4"], "bounds": [3], "location": 29}], "object": "List(List(TypeName,String))"}
+{"sql": "drop transform if exists for numeric(10,2) language l", "pg16After": "ok", "types": [{"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 29}], "object": "List(List(TypeName,String))"}
+{"sql": "drop transform if exists for setof int4 language l", "pg16After": "ok", "types": [{"names": ["int4"], "setof": true, "location": 35}], "object": "List(List(TypeName,String))"}
+{"sql": "drop transform if exists for a.b%type language l", "syntaxError": "syntax error at or near \"%\"", "position": 32}
+{"sql": "drop transform if exists for interval year to month language l", "pg16After": "ok", "types": [{"names": ["pg_catalog", "interval"], "typmods": 1, "location": 29}], "object": "List(List(TypeName,String))"}
+{"sql": "drop transform if exists for bit varying(3) language l", "pg16After": "ok", "types": [{"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 29}], "object": "List(List(TypeName,String))"}
+{"sql": "drop transform if exists for \"char\"[][] language l", "pg16After": "ok", "types": [{"names": ["char"], "bounds": [-1, -1], "location": 29}], "object": "List(List(TypeName,String))"}
+{"sql": "drop transform if exists for a.b[ language l", "syntaxError": "syntax error at or near \"language\"", "position": 34}
+{"sql": "drop transform if exists for int4[x] language l", "syntaxError": "syntax error at or near \"x\"", "position": 34}
+{"sql": "drop transform if exists for a. language l", "syntaxError": "syntax error at or near \"l\"", "position": 41}
+{"sql": "drop transform if exists for 1 language l", "syntaxError": "syntax error at or near \"1\"", "position": 29}
+{"sql": "drop transform if exists for int4[1 language l", "syntaxError": "syntax error at or near \"language\"", "position": 36}
+{"sql": "drop transform if exists for double language l", "pg16After": "ok", "types": [{"names": ["double"], "location": 29}], "object": "List(List(TypeName,String))"}
+{"sql": "drop transform if exists for a.b.c%type language l", "syntaxError": "syntax error at or near \"%\"", "position": 34}
+{"sql": "drop transform if exists for a.* language l", "syntaxError": "syntax error at or near \"*\"", "position": 31}
+{"sql": "comment on transform for a language l is 'x'", "pg16After": "42704 type \"a\" does not exist", "types": [{"names": ["a"], "location": 25}], "object": "List(TypeName,String)", "pg16Name": "a"}
+{"sql": "comment on transform for a.b language l is 'x'", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 25}], "object": "List(TypeName,String)"}
+{"sql": "comment on transform for a.b.c language l is 'x'", "pg16After": "0A000 cross-database references are not implemented: a.b.c", "types": [{"names": ["a", "b", "c"], "location": 25}], "object": "List(TypeName,String)", "pg16Name": "a.b.c"}
+{"sql": "comment on transform for double precision language l is 'x'", "pg16After": "42704 language \"l\" does not exist", "types": [{"names": ["pg_catalog", "float8"], "location": 25}], "object": "List(TypeName,String)"}
+{"sql": "comment on transform for character varying(10) language l is 'x'", "pg16After": "42704 language \"l\" does not exist", "types": [{"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 25}], "object": "List(TypeName,String)"}
+{"sql": "comment on transform for timestamp with time zone language l is 'x'", "pg16After": "42704 language \"l\" does not exist", "types": [{"names": ["pg_catalog", "timestamptz"], "location": 25}], "object": "List(TypeName,String)"}
+{"sql": "comment on transform for int4[] language l is 'x'", "pg16After": "42704 language \"l\" does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 25}], "object": "List(TypeName,String)"}
+{"sql": "comment on transform for a.b[1] language l is 'x'", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 25}], "object": "List(TypeName,String)"}
+{"sql": "comment on transform for int4 array language l is 'x'", "pg16After": "42704 language \"l\" does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 25}], "object": "List(TypeName,String)"}
+{"sql": "comment on transform for int4 array[3] language l is 'x'", "pg16After": "42704 language \"l\" does not exist", "types": [{"names": ["int4"], "bounds": [3], "location": 25}], "object": "List(TypeName,String)"}
+{"sql": "comment on transform for numeric(10,2) language l is 'x'", "pg16After": "42704 language \"l\" does not exist", "types": [{"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 25}], "object": "List(TypeName,String)"}
+{"sql": "comment on transform for setof int4 language l is 'x'", "pg16After": "42704 language \"l\" does not exist", "types": [{"names": ["int4"], "setof": true, "location": 31}], "object": "List(TypeName,String)"}
+{"sql": "comment on transform for a.b%type language l is 'x'", "syntaxError": "syntax error at or near \"%\"", "position": 28}
+{"sql": "comment on transform for interval year to month language l is 'x'", "pg16After": "42704 language \"l\" does not exist", "types": [{"names": ["pg_catalog", "interval"], "typmods": 1, "location": 25}], "object": "List(TypeName,String)"}
+{"sql": "comment on transform for bit varying(3) language l is 'x'", "pg16After": "42704 language \"l\" does not exist", "types": [{"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 25}], "object": "List(TypeName,String)"}
+{"sql": "comment on transform for \"char\"[][] language l is 'x'", "pg16After": "42704 language \"l\" does not exist", "types": [{"names": ["char"], "bounds": [-1, -1], "location": 25}], "object": "List(TypeName,String)"}
+{"sql": "comment on transform for a.b[ language l is 'x'", "syntaxError": "syntax error at or near \"language\"", "position": 30}
+{"sql": "comment on transform for int4[x] language l is 'x'", "syntaxError": "syntax error at or near \"x\"", "position": 30}
+{"sql": "comment on transform for a. language l is 'x'", "syntaxError": "syntax error at or near \"l\"", "position": 37}
+{"sql": "comment on transform for 1 language l is 'x'", "syntaxError": "syntax error at or near \"1\"", "position": 25}
+{"sql": "comment on transform for int4[1 language l is 'x'", "syntaxError": "syntax error at or near \"language\"", "position": 32}
+{"sql": "comment on transform for double language l is 'x'", "pg16After": "42704 type \"double\" does not exist", "types": [{"names": ["double"], "location": 25}], "object": "List(TypeName,String)", "pg16Name": "double"}
+{"sql": "comment on transform for a.b.c%type language l is 'x'", "syntaxError": "syntax error at or near \"%\"", "position": 30}
+{"sql": "comment on transform for a.* language l is 'x'", "syntaxError": "syntax error at or near \"*\"", "position": 27}
+{"sql": "create operator class c for type a using btree as storage int4", "pg16After": "42704 type \"a\" does not exist", "types": [{"names": ["a"], "location": 33}, {"names": ["int4"], "location": 58}], "pg16Name": "a"}
+{"sql": "create operator class c for type a.b using btree as storage int4", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 33}, {"names": ["int4"], "location": 60}]}
+{"sql": "create operator class c for type a.b.c using btree as storage int4", "pg16After": "0A000 cross-database references are not implemented: a.b.c", "types": [{"names": ["a", "b", "c"], "location": 33}, {"names": ["int4"], "location": 62}], "pg16Name": "a.b.c"}
+{"sql": "create operator class c for type double precision using btree as storage int4", "pg16After": "42P17 storage type cannot be different from data type for access method \"btree\"", "types": [{"names": ["pg_catalog", "float8"], "location": 33}, {"names": ["int4"], "location": 73}]}
+{"sql": "create operator class c for type character varying(10) using btree as storage int4", "pg16After": "42P17 storage type cannot be different from data type for access method \"btree\"", "types": [{"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 33}, {"names": ["int4"], "location": 78}]}
+{"sql": "create operator class c for type timestamp with time zone using btree as storage int4", "pg16After": "42P17 storage type cannot be different from data type for access method \"btree\"", "types": [{"names": ["pg_catalog", "timestamptz"], "location": 33}, {"names": ["int4"], "location": 81}]}
+{"sql": "create operator class c for type int4[] using btree as storage int4", "pg16After": "42P17 storage type cannot be different from data type for access method \"btree\"", "types": [{"names": ["int4"], "bounds": [-1], "location": 33}, {"names": ["int4"], "location": 63}]}
+{"sql": "create operator class c for type a.b[1] using btree as storage int4", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 33}, {"names": ["int4"], "location": 63}]}
+{"sql": "create operator class c for type int4 array using btree as storage int4", "pg16After": "42P17 storage type cannot be different from data type for access method \"btree\"", "types": [{"names": ["int4"], "bounds": [-1], "location": 33}, {"names": ["int4"], "location": 67}]}
+{"sql": "create operator class c for type int4 array[3] using btree as storage int4", "pg16After": "42P17 storage type cannot be different from data type for access method \"btree\"", "types": [{"names": ["int4"], "bounds": [3], "location": 33}, {"names": ["int4"], "location": 70}]}
+{"sql": "create operator class c for type numeric(10,2) using btree as storage int4", "pg16After": "42P17 storage type cannot be different from data type for access method \"btree\"", "types": [{"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 33}, {"names": ["int4"], "location": 70}]}
+{"sql": "create operator class c for type setof int4 using btree as storage int4", "pg16After": "ok", "types": [{"names": ["int4"], "setof": true, "location": 39}, {"names": ["int4"], "location": 67}]}
+{"sql": "create operator class c for type a.b%type using btree as storage int4", "syntaxError": "syntax error at or near \"%\"", "position": 36}
+{"sql": "create operator class c for type interval year to month using btree as storage int4", "pg16After": "42P17 storage type cannot be different from data type for access method \"btree\"", "types": [{"names": ["pg_catalog", "interval"], "typmods": 1, "location": 33}, {"names": ["int4"], "location": 79}]}
+{"sql": "create operator class c for type bit varying(3) using btree as storage int4", "pg16After": "42P17 storage type cannot be different from data type for access method \"btree\"", "types": [{"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 33}, {"names": ["int4"], "location": 71}]}
+{"sql": "create operator class c for type \"char\"[][] using btree as storage int4", "pg16After": "42P17 storage type cannot be different from data type for access method \"btree\"", "types": [{"names": ["char"], "bounds": [-1, -1], "location": 33}, {"names": ["int4"], "location": 67}]}
+{"sql": "create operator class c for type a.b[ using btree as storage int4", "syntaxError": "syntax error at or near \"using\"", "position": 38}
+{"sql": "create operator class c for type int4[x] using btree as storage int4", "syntaxError": "syntax error at or near \"x\"", "position": 38}
+{"sql": "create operator class c for type a. using btree as storage int4", "syntaxError": "syntax error at or near \"btree\"", "position": 42}
+{"sql": "create operator class c for type 1 using btree as storage int4", "syntaxError": "syntax error at or near \"1\"", "position": 33}
+{"sql": "create operator class c for type int4[1 using btree as storage int4", "syntaxError": "syntax error at or near \"using\"", "position": 40}
+{"sql": "create operator class c for type double using btree as storage int4", "pg16After": "42704 type \"double\" does not exist", "types": [{"names": ["double"], "location": 33}, {"names": ["int4"], "location": 63}], "pg16Name": "double"}
+{"sql": "create operator class c for type a.b.c%type using btree as storage int4", "syntaxError": "syntax error at or near \"%\"", "position": 38}
+{"sql": "create operator class c for type a.* using btree as storage int4", "syntaxError": "syntax error at or near \"*\"", "position": 35}
+{"sql": "create operator class c for type int4 using btree as storage a", "pg16After": "42704 type \"a\" does not exist", "types": [{"names": ["int4"], "location": 33}, {"names": ["a"], "location": 61}], "pg16Name": "a"}
+{"sql": "create operator class c for type int4 using btree as storage a.b", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["int4"], "location": 33}, {"names": ["a", "b"], "location": 61}]}
+{"sql": "create operator class c for type int4 using btree as storage a.b.c", "pg16After": "0A000 cross-database references are not implemented: a.b.c", "types": [{"names": ["int4"], "location": 33}, {"names": ["a", "b", "c"], "location": 61}], "pg16Name": "a.b.c"}
+{"sql": "create operator class c for type int4 using btree as storage double precision", "pg16After": "42P17 storage type cannot be different from data type for access method \"btree\"", "types": [{"names": ["int4"], "location": 33}, {"names": ["pg_catalog", "float8"], "location": 61}]}
+{"sql": "create operator class c for type int4 using btree as storage character varying(10)", "pg16After": "42P17 storage type cannot be different from data type for access method \"btree\"", "types": [{"names": ["int4"], "location": 33}, {"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 61}]}
+{"sql": "create operator class c for type int4 using btree as storage timestamp with time zone", "pg16After": "42P17 storage type cannot be different from data type for access method \"btree\"", "types": [{"names": ["int4"], "location": 33}, {"names": ["pg_catalog", "timestamptz"], "location": 61}]}
+{"sql": "create operator class c for type int4 using btree as storage int4[]", "pg16After": "42P17 storage type cannot be different from data type for access method \"btree\"", "types": [{"names": ["int4"], "location": 33}, {"names": ["int4"], "bounds": [-1], "location": 61}]}
+{"sql": "create operator class c for type int4 using btree as storage a.b[1]", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["int4"], "location": 33}, {"names": ["a", "b"], "bounds": [1], "location": 61}]}
+{"sql": "create operator class c for type int4 using btree as storage int4 array", "pg16After": "42P17 storage type cannot be different from data type for access method \"btree\"", "types": [{"names": ["int4"], "location": 33}, {"names": ["int4"], "bounds": [-1], "location": 61}]}
+{"sql": "create operator class c for type int4 using btree as storage int4 array[3]", "pg16After": "42P17 storage type cannot be different from data type for access method \"btree\"", "types": [{"names": ["int4"], "location": 33}, {"names": ["int4"], "bounds": [3], "location": 61}]}
+{"sql": "create operator class c for type int4 using btree as storage numeric(10,2)", "pg16After": "42P17 storage type cannot be different from data type for access method \"btree\"", "types": [{"names": ["int4"], "location": 33}, {"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 61}]}
+{"sql": "create operator class c for type int4 using btree as storage setof int4", "pg16After": "ok", "types": [{"names": ["int4"], "location": 33}, {"names": ["int4"], "setof": true, "location": 67}]}
+{"sql": "create operator class c for type int4 using btree as storage a.b%type", "syntaxError": "syntax error at or near \"%\"", "position": 64}
+{"sql": "create operator class c for type int4 using btree as storage interval year to month", "pg16After": "42P17 storage type cannot be different from data type for access method \"btree\"", "types": [{"names": ["int4"], "location": 33}, {"names": ["pg_catalog", "interval"], "typmods": 1, "location": 61}]}
+{"sql": "create operator class c for type int4 using btree as storage bit varying(3)", "pg16After": "42P17 storage type cannot be different from data type for access method \"btree\"", "types": [{"names": ["int4"], "location": 33}, {"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 61}]}
+{"sql": "create operator class c for type int4 using btree as storage \"char\"[][]", "pg16After": "42P17 storage type cannot be different from data type for access method \"btree\"", "types": [{"names": ["int4"], "location": 33}, {"names": ["char"], "bounds": [-1, -1], "location": 61}]}
+{"sql": "create operator class c for type int4 using btree as storage a.b[", "syntaxError": "syntax error at end of input", "position": 65}
+{"sql": "create operator class c for type int4 using btree as storage int4[x]", "syntaxError": "syntax error at or near \"x\"", "position": 66}
+{"sql": "create operator class c for type int4 using btree as storage a.", "syntaxError": "syntax error at end of input", "position": 63}
+{"sql": "create operator class c for type int4 using btree as storage 1", "syntaxError": "syntax error at or near \"1\"", "position": 61}
+{"sql": "create operator class c for type int4 using btree as storage int4[1", "syntaxError": "syntax error at end of input", "position": 67}
+{"sql": "create operator class c for type int4 using btree as storage double", "pg16After": "42704 type \"double\" does not exist", "types": [{"names": ["int4"], "location": 33}, {"names": ["double"], "location": 61}], "pg16Name": "double"}
+{"sql": "create operator class c for type int4 using btree as storage a.b.c%type", "syntaxError": "syntax error at or near \"%\"", "position": 66}
+{"sql": "create operator class c for type int4 using btree as storage a.*", "syntaxError": "syntax error at or near \"*\"", "position": 63}
+{"sql": "create aggregate ag(a) (sfunc = f, stype = int4)", "pg16After": "42704 type a does not exist", "types": [{"names": ["a"], "location": 20}, {"names": ["f"], "location": 32}, {"names": ["int4"], "location": 43}]}
+{"sql": "create aggregate ag(a.b) (sfunc = f, stype = int4)", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 20}, {"names": ["f"], "location": 34}, {"names": ["int4"], "location": 45}]}
+{"sql": "create aggregate ag(a.b.c) (sfunc = f, stype = int4)", "pg16After": "0A000 cross-database references are not implemented: a.b.c", "types": [{"names": ["a", "b", "c"], "location": 20}, {"names": ["f"], "location": 36}, {"names": ["int4"], "location": 47}], "pg16Name": "a.b.c"}
+{"sql": "create aggregate ag(double precision) (sfunc = f, stype = int4)", "pg16After": "42883 function f(integer, double precision) does not exist", "types": [{"names": ["pg_catalog", "float8"], "location": 20}, {"names": ["f"], "location": 47}, {"names": ["int4"], "location": 58}]}
+{"sql": "create aggregate ag(character varying(10)) (sfunc = f, stype = int4)", "pg16After": "42883 function f(integer, character varying) does not exist", "types": [{"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 20}, {"names": ["f"], "location": 52}, {"names": ["int4"], "location": 63}]}
+{"sql": "create aggregate ag(timestamp with time zone) (sfunc = f, stype = int4)", "pg16After": "42883 function f(integer, timestamp with time zone) does not exist", "types": [{"names": ["pg_catalog", "timestamptz"], "location": 20}, {"names": ["f"], "location": 55}, {"names": ["int4"], "location": 66}]}
+{"sql": "create aggregate ag(int4[]) (sfunc = f, stype = int4)", "pg16After": "42883 function f(integer, integer[]) does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 20}, {"names": ["f"], "location": 37}, {"names": ["int4"], "location": 48}]}
+{"sql": "create aggregate ag(a.b[1]) (sfunc = f, stype = int4)", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 20}, {"names": ["f"], "location": 37}, {"names": ["int4"], "location": 48}]}
+{"sql": "create aggregate ag(int4 array) (sfunc = f, stype = int4)", "pg16After": "42883 function f(integer, integer[]) does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 20}, {"names": ["f"], "location": 41}, {"names": ["int4"], "location": 52}]}
+{"sql": "create aggregate ag(int4 array[3]) (sfunc = f, stype = int4)", "pg16After": "42883 function f(integer, integer[]) does not exist", "types": [{"names": ["int4"], "bounds": [3], "location": 20}, {"names": ["f"], "location": 44}, {"names": ["int4"], "location": 55}]}
+{"sql": "create aggregate ag(numeric(10,2)) (sfunc = f, stype = int4)", "pg16After": "42883 function f(integer, numeric) does not exist", "types": [{"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 20}, {"names": ["f"], "location": 44}, {"names": ["int4"], "location": 55}]}
+{"sql": "create aggregate ag(setof int4) (sfunc = f, stype = int4)", "pg16After": "42P13 aggregates cannot accept set arguments", "types": [{"names": ["int4"], "setof": true, "location": 26}, {"names": ["f"], "location": 41}, {"names": ["int4"], "location": 52}]}
+{"sql": "create aggregate ag(a.b%type) (sfunc = f, stype = int4)", "pg16After": "42P01 relation \"a\" does not exist", "types": [{"names": ["a", "b"], "pctType": true, "location": 20}, {"names": ["f"], "location": 39}, {"names": ["int4"], "location": 50}]}
+{"sql": "create aggregate ag(interval year to month) (sfunc = f, stype = int4)", "pg16After": "42883 function f(integer, interval) does not exist", "types": [{"names": ["pg_catalog", "interval"], "typmods": 1, "location": 20}, {"names": ["f"], "location": 53}, {"names": ["int4"], "location": 64}]}
+{"sql": "create aggregate ag(bit varying(3)) (sfunc = f, stype = int4)", "pg16After": "42883 function f(integer, bit varying) does not exist", "types": [{"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 20}, {"names": ["f"], "location": 45}, {"names": ["int4"], "location": 56}]}
+{"sql": "create aggregate ag(\"char\"[][]) (sfunc = f, stype = int4)", "pg16After": "42883 function f(integer, \"char\"[]) does not exist", "types": [{"names": ["char"], "bounds": [-1, -1], "location": 20}, {"names": ["f"], "location": 41}, {"names": ["int4"], "location": 52}]}
+{"sql": "create aggregate ag(a.b[) (sfunc = f, stype = int4)", "syntaxError": "syntax error at or near \")\"", "position": 24}
+{"sql": "create aggregate ag(int4[x]) (sfunc = f, stype = int4)", "syntaxError": "syntax error at or near \"x\"", "position": 25}
+{"sql": "create aggregate ag(a.) (sfunc = f, stype = int4)", "syntaxError": "syntax error at or near \")\"", "position": 22}
+{"sql": "create aggregate ag(1) (sfunc = f, stype = int4)", "syntaxError": "syntax error at or near \"1\"", "position": 20}
+{"sql": "create aggregate ag(int4[1) (sfunc = f, stype = int4)", "syntaxError": "syntax error at or near \")\"", "position": 26}
+{"sql": "create aggregate ag(double) (sfunc = f, stype = int4)", "pg16After": "42704 type double does not exist", "types": [{"names": ["double"], "location": 20}, {"names": ["f"], "location": 37}, {"names": ["int4"], "location": 48}], "pg16Name": "double"}
+{"sql": "create aggregate ag(a.b.c%type) (sfunc = f, stype = int4)", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b", "c"], "pctType": true, "location": 20}, {"names": ["f"], "location": 41}, {"names": ["int4"], "location": 52}]}
+{"sql": "create aggregate ag(a.*) (sfunc = f, stype = int4)", "syntaxError": "syntax error at or near \"*\"", "position": 22}
+{"sql": "drop function f(a)", "pg16After": "42704 type \"a\" does not exist", "types": [{"names": ["a"], "location": 16}], "object": "List(ObjectWithArgs)", "pg16Name": "a"}
+{"sql": "drop function f(a.b)", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 16}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop function f(a.b.c)", "pg16After": "0A000 cross-database references are not implemented: a.b.c", "types": [{"names": ["a", "b", "c"], "location": 16}], "object": "List(ObjectWithArgs)", "pg16Name": "a.b.c"}
+{"sql": "drop function f(double precision)", "pg16After": "42883 function f(double precision) does not exist", "types": [{"names": ["pg_catalog", "float8"], "location": 16}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop function f(character varying(10))", "pg16After": "42883 function f(character varying) does not exist", "types": [{"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 16}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop function f(timestamp with time zone)", "pg16After": "42883 function f(timestamp with time zone) does not exist", "types": [{"names": ["pg_catalog", "timestamptz"], "location": 16}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop function f(int4[])", "pg16After": "42883 function f(integer[]) does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 16}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop function f(a.b[1])", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 16}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop function f(int4 array)", "pg16After": "42883 function f(integer[]) does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 16}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop function f(int4 array[3])", "pg16After": "42883 function f(integer[]) does not exist", "types": [{"names": ["int4"], "bounds": [3], "location": 16}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop function f(numeric(10,2))", "pg16After": "42883 function f(numeric) does not exist", "types": [{"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 16}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop function f(setof int4)", "pg16After": "42883 function f(integer) does not exist", "types": [{"names": ["int4"], "setof": true, "location": 22}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop function f(a.b%type)", "pg16After": "42P01 relation \"a\" does not exist", "types": [{"names": ["a", "b"], "pctType": true, "location": 16}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop function f(interval year to month)", "pg16After": "42883 function f(interval) does not exist", "types": [{"names": ["pg_catalog", "interval"], "typmods": 1, "location": 16}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop function f(bit varying(3))", "pg16After": "42883 function f(bit varying) does not exist", "types": [{"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 16}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop function f(\"char\"[][])", "pg16After": "42883 function f(\"char\"[]) does not exist", "types": [{"names": ["char"], "bounds": [-1, -1], "location": 16}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop function f(a.b[)", "syntaxError": "syntax error at or near \")\"", "position": 20}
+{"sql": "drop function f(int4[x])", "syntaxError": "syntax error at or near \"x\"", "position": 21}
+{"sql": "drop function f(a.)", "syntaxError": "syntax error at or near \")\"", "position": 18}
+{"sql": "drop function f(1)", "syntaxError": "syntax error at or near \"1\"", "position": 16}
+{"sql": "drop function f(int4[1)", "syntaxError": "syntax error at or near \")\"", "position": 22}
+{"sql": "drop function f(double)", "pg16After": "42704 type \"double\" does not exist", "types": [{"names": ["double"], "location": 16}], "object": "List(ObjectWithArgs)", "pg16Name": "double"}
+{"sql": "drop function f(a.b.c%type)", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b", "c"], "pctType": true, "location": 16}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop function f(a.*)", "syntaxError": "syntax error at or near \"*\"", "position": 18}
+{"sql": "comment on function f(int4, a) is 'x'", "pg16After": "42704 type \"a\" does not exist", "types": [{"names": ["int4"], "location": 22}, {"names": ["a"], "location": 28}], "object": "ObjectWithArgs", "pg16Name": "a"}
+{"sql": "comment on function f(int4, a.b) is 'x'", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["int4"], "location": 22}, {"names": ["a", "b"], "location": 28}], "object": "ObjectWithArgs"}
+{"sql": "comment on function f(int4, a.b.c) is 'x'", "pg16After": "0A000 cross-database references are not implemented: a.b.c", "types": [{"names": ["int4"], "location": 22}, {"names": ["a", "b", "c"], "location": 28}], "object": "ObjectWithArgs", "pg16Name": "a.b.c"}
+{"sql": "comment on function f(int4, double precision) is 'x'", "pg16After": "42883 function f(integer, double precision) does not exist", "types": [{"names": ["int4"], "location": 22}, {"names": ["pg_catalog", "float8"], "location": 28}], "object": "ObjectWithArgs"}
+{"sql": "comment on function f(int4, character varying(10)) is 'x'", "pg16After": "42883 function f(integer, character varying) does not exist", "types": [{"names": ["int4"], "location": 22}, {"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 28}], "object": "ObjectWithArgs"}
+{"sql": "comment on function f(int4, timestamp with time zone) is 'x'", "pg16After": "42883 function f(integer, timestamp with time zone) does not exist", "types": [{"names": ["int4"], "location": 22}, {"names": ["pg_catalog", "timestamptz"], "location": 28}], "object": "ObjectWithArgs"}
+{"sql": "comment on function f(int4, int4[]) is 'x'", "pg16After": "42883 function f(integer, integer[]) does not exist", "types": [{"names": ["int4"], "location": 22}, {"names": ["int4"], "bounds": [-1], "location": 28}], "object": "ObjectWithArgs"}
+{"sql": "comment on function f(int4, a.b[1]) is 'x'", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["int4"], "location": 22}, {"names": ["a", "b"], "bounds": [1], "location": 28}], "object": "ObjectWithArgs"}
+{"sql": "comment on function f(int4, int4 array) is 'x'", "pg16After": "42883 function f(integer, integer[]) does not exist", "types": [{"names": ["int4"], "location": 22}, {"names": ["int4"], "bounds": [-1], "location": 28}], "object": "ObjectWithArgs"}
+{"sql": "comment on function f(int4, int4 array[3]) is 'x'", "pg16After": "42883 function f(integer, integer[]) does not exist", "types": [{"names": ["int4"], "location": 22}, {"names": ["int4"], "bounds": [3], "location": 28}], "object": "ObjectWithArgs"}
+{"sql": "comment on function f(int4, numeric(10,2)) is 'x'", "pg16After": "42883 function f(integer, numeric) does not exist", "types": [{"names": ["int4"], "location": 22}, {"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 28}], "object": "ObjectWithArgs"}
+{"sql": "comment on function f(int4, setof int4) is 'x'", "pg16After": "42883 function f(integer, integer) does not exist", "types": [{"names": ["int4"], "location": 22}, {"names": ["int4"], "setof": true, "location": 34}], "object": "ObjectWithArgs"}
+{"sql": "comment on function f(int4, a.b%type) is 'x'", "pg16After": "42P01 relation \"a\" does not exist", "types": [{"names": ["int4"], "location": 22}, {"names": ["a", "b"], "pctType": true, "location": 28}], "object": "ObjectWithArgs"}
+{"sql": "comment on function f(int4, interval year to month) is 'x'", "pg16After": "42883 function f(integer, interval) does not exist", "types": [{"names": ["int4"], "location": 22}, {"names": ["pg_catalog", "interval"], "typmods": 1, "location": 28}], "object": "ObjectWithArgs"}
+{"sql": "comment on function f(int4, bit varying(3)) is 'x'", "pg16After": "42883 function f(integer, bit varying) does not exist", "types": [{"names": ["int4"], "location": 22}, {"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 28}], "object": "ObjectWithArgs"}
+{"sql": "comment on function f(int4, \"char\"[][]) is 'x'", "pg16After": "42883 function f(integer, \"char\"[]) does not exist", "types": [{"names": ["int4"], "location": 22}, {"names": ["char"], "bounds": [-1, -1], "location": 28}], "object": "ObjectWithArgs"}
+{"sql": "comment on function f(int4, a.b[) is 'x'", "syntaxError": "syntax error at or near \")\"", "position": 32}
+{"sql": "comment on function f(int4, int4[x]) is 'x'", "syntaxError": "syntax error at or near \"x\"", "position": 33}
+{"sql": "comment on function f(int4, a.) is 'x'", "syntaxError": "syntax error at or near \")\"", "position": 30}
+{"sql": "comment on function f(int4, 1) is 'x'", "syntaxError": "syntax error at or near \"1\"", "position": 28}
+{"sql": "comment on function f(int4, int4[1) is 'x'", "syntaxError": "syntax error at or near \")\"", "position": 34}
+{"sql": "comment on function f(int4, double) is 'x'", "pg16After": "42704 type \"double\" does not exist", "types": [{"names": ["int4"], "location": 22}, {"names": ["double"], "location": 28}], "object": "ObjectWithArgs", "pg16Name": "double"}
+{"sql": "comment on function f(int4, a.b.c%type) is 'x'", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["int4"], "location": 22}, {"names": ["a", "b", "c"], "pctType": true, "location": 28}], "object": "ObjectWithArgs"}
+{"sql": "comment on function f(int4, a.*) is 'x'", "syntaxError": "syntax error at or near \"*\"", "position": 30}
+{"sql": "drop operator + (a, int4)", "pg16After": "42704 type \"a\" does not exist", "types": [{"names": ["a"], "location": 17}, {"names": ["int4"], "location": 20}], "object": "List(ObjectWithArgs)", "pg16Name": "a"}
+{"sql": "drop operator + (a.b, int4)", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 17}, {"names": ["int4"], "location": 22}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop operator + (a.b.c, int4)", "pg16After": "0A000 cross-database references are not implemented: a.b.c", "types": [{"names": ["a", "b", "c"], "location": 17}, {"names": ["int4"], "location": 24}], "object": "List(ObjectWithArgs)", "pg16Name": "a.b.c"}
+{"sql": "drop operator + (double precision, int4)", "pg16After": "42883 operator does not exist: double precision + integer", "types": [{"names": ["pg_catalog", "float8"], "location": 17}, {"names": ["int4"], "location": 35}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop operator + (character varying(10), int4)", "pg16After": "42883 operator does not exist: character varying + integer", "types": [{"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 17}, {"names": ["int4"], "location": 40}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop operator + (timestamp with time zone, int4)", "pg16After": "42883 operator does not exist: timestamp with time zone + integer", "types": [{"names": ["pg_catalog", "timestamptz"], "location": 17}, {"names": ["int4"], "location": 43}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop operator + (int4[], int4)", "pg16After": "42883 operator does not exist: integer[] + integer", "types": [{"names": ["int4"], "bounds": [-1], "location": 17}, {"names": ["int4"], "location": 25}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop operator + (a.b[1], int4)", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 17}, {"names": ["int4"], "location": 25}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop operator + (int4 array, int4)", "pg16After": "42883 operator does not exist: integer[] + integer", "types": [{"names": ["int4"], "bounds": [-1], "location": 17}, {"names": ["int4"], "location": 29}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop operator + (int4 array[3], int4)", "pg16After": "42883 operator does not exist: integer[] + integer", "types": [{"names": ["int4"], "bounds": [3], "location": 17}, {"names": ["int4"], "location": 32}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop operator + (numeric(10,2), int4)", "pg16After": "42883 operator does not exist: numeric + integer", "types": [{"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 17}, {"names": ["int4"], "location": 32}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop operator + (setof int4, int4)", "pg16After": "2BP01 cannot drop operator +(integer,integer) because it is required by the database system", "types": [{"names": ["int4"], "setof": true, "location": 23}, {"names": ["int4"], "location": 29}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop operator + (a.b%type, int4)", "syntaxError": "syntax error at or near \"%\"", "position": 20}
+{"sql": "drop operator + (interval year to month, int4)", "pg16After": "42883 operator does not exist: interval + integer", "types": [{"names": ["pg_catalog", "interval"], "typmods": 1, "location": 17}, {"names": ["int4"], "location": 41}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop operator + (bit varying(3), int4)", "pg16After": "42883 operator does not exist: bit varying + integer", "types": [{"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 17}, {"names": ["int4"], "location": 33}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop operator + (\"char\"[][], int4)", "pg16After": "42883 operator does not exist: \"char\"[] + integer", "types": [{"names": ["char"], "bounds": [-1, -1], "location": 17}, {"names": ["int4"], "location": 29}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop operator + (a.b[, int4)", "syntaxError": "syntax error at or near \",\"", "position": 21}
+{"sql": "drop operator + (int4[x], int4)", "syntaxError": "syntax error at or near \"x\"", "position": 22}
+{"sql": "drop operator + (a., int4)", "syntaxError": "syntax error at or near \",\"", "position": 19}
+{"sql": "drop operator + (1, int4)", "syntaxError": "syntax error at or near \"1\"", "position": 17}
+{"sql": "drop operator + (int4[1, int4)", "syntaxError": "syntax error at or near \",\"", "position": 23}
+{"sql": "drop operator + (double, int4)", "pg16After": "42704 type \"double\" does not exist", "types": [{"names": ["double"], "location": 17}, {"names": ["int4"], "location": 25}], "object": "List(ObjectWithArgs)", "pg16Name": "double"}
+{"sql": "drop operator + (a.b.c%type, int4)", "syntaxError": "syntax error at or near \"%\"", "position": 22}
+{"sql": "drop operator + (a.*, int4)", "syntaxError": "syntax error at or near \"*\"", "position": 19}
+{"sql": "create domain d as a", "pg16After": "42704 type \"a\" does not exist", "types": [{"names": ["a"], "location": 19}], "pg16Name": "a"}
+{"sql": "create domain d as a.b", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 19}]}
+{"sql": "create domain d as a.b.c", "pg16After": "0A000 cross-database references are not implemented: a.b.c", "types": [{"names": ["a", "b", "c"], "location": 19}], "pg16Name": "a.b.c"}
+{"sql": "create domain d as double precision", "pg16After": "ok", "types": [{"names": ["pg_catalog", "float8"], "location": 19}]}
+{"sql": "create domain d as character varying(10)", "pg16After": "ok", "types": [{"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 19}]}
+{"sql": "create domain d as timestamp with time zone", "pg16After": "ok", "types": [{"names": ["pg_catalog", "timestamptz"], "location": 19}]}
+{"sql": "create domain d as int4[]", "pg16After": "ok", "types": [{"names": ["int4"], "bounds": [-1], "location": 19}]}
+{"sql": "create domain d as a.b[1]", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 19}]}
+{"sql": "create domain d as int4 array", "pg16After": "ok", "types": [{"names": ["int4"], "bounds": [-1], "location": 19}]}
+{"sql": "create domain d as int4 array[3]", "pg16After": "ok", "types": [{"names": ["int4"], "bounds": [3], "location": 19}]}
+{"sql": "create domain d as numeric(10,2)", "pg16After": "ok", "types": [{"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 19}]}
+{"sql": "create domain d as setof int4", "pg16After": "ok", "types": [{"names": ["int4"], "setof": true, "location": 25}]}
+{"sql": "create domain d as a.b%type", "syntaxError": "syntax error at or near \"%\"", "position": 22}
+{"sql": "create domain d as interval year to month", "pg16After": "ok", "types": [{"names": ["pg_catalog", "interval"], "typmods": 1, "location": 19}]}
+{"sql": "create domain d as bit varying(3)", "pg16After": "ok", "types": [{"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 19}]}
+{"sql": "create domain d as \"char\"[][]", "pg16After": "ok", "types": [{"names": ["char"], "bounds": [-1, -1], "location": 19}]}
+{"sql": "create domain d as a.b[", "syntaxError": "syntax error at end of input", "position": 23}
+{"sql": "create domain d as int4[x]", "syntaxError": "syntax error at or near \"x\"", "position": 24}
+{"sql": "create domain d as a.", "syntaxError": "syntax error at end of input", "position": 21}
+{"sql": "create domain d as 1", "syntaxError": "syntax error at or near \"1\"", "position": 19}
+{"sql": "create domain d as int4[1", "syntaxError": "syntax error at end of input", "position": 25}
+{"sql": "create domain d as double", "pg16After": "42704 type \"double\" does not exist", "types": [{"names": ["double"], "location": 19}], "pg16Name": "double"}
+{"sql": "create domain d as a.b.c%type", "syntaxError": "syntax error at or near \"%\"", "position": 24}
+{"sql": "create domain d as a.*", "syntaxError": "syntax error at or near \"*\"", "position": 21}
+{"sql": "alter extension e add function f(a)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a"], "location": 33}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e add function f(a.b)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a", "b"], "location": 33}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e add function f(a.b.c)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a", "b", "c"], "location": 33}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e add function f(double precision)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "float8"], "location": 33}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e add function f(character varying(10))", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 33}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e add function f(timestamp with time zone)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "timestamptz"], "location": 33}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e add function f(int4[])", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 33}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e add function f(a.b[1])", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 33}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e add function f(int4 array)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 33}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e add function f(int4 array[3])", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["int4"], "bounds": [3], "location": 33}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e add function f(numeric(10,2))", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "numeric"], "typmods": 2, "location": 33}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e add function f(setof int4)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["int4"], "setof": true, "location": 39}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e add function f(a.b%type)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a", "b"], "pctType": true, "location": 33}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e add function f(interval year to month)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "interval"], "typmods": 1, "location": 33}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e add function f(bit varying(3))", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "varbit"], "typmods": 1, "location": 33}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e add function f(\"char\"[][])", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["char"], "bounds": [-1, -1], "location": 33}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e add function f(a.b[)", "syntaxError": "syntax error at or near \")\"", "position": 37}
+{"sql": "alter extension e add function f(int4[x])", "syntaxError": "syntax error at or near \"x\"", "position": 38}
+{"sql": "alter extension e add function f(a.)", "syntaxError": "syntax error at or near \")\"", "position": 35}
+{"sql": "alter extension e add function f(1)", "syntaxError": "syntax error at or near \"1\"", "position": 33}
+{"sql": "alter extension e add function f(int4[1)", "syntaxError": "syntax error at or near \")\"", "position": 39}
+{"sql": "alter extension e add function f(double)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["double"], "location": 33}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e add function f(a.b.c%type)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a", "b", "c"], "pctType": true, "location": 33}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e add function f(a.*)", "syntaxError": "syntax error at or near \"*\"", "position": 35}
+{"sql": "alter type a.b owner to postgres", "pg16After": "3F000 schema \"a\" does not exist", "types": []}
+{"sql": "alter type double precision owner to postgres", "syntaxError": "syntax error at or near \"precision\"", "position": 18}
+{"sql": "alter type int4[] owner to postgres", "syntaxError": "syntax error at or near \"[\"", "position": 15}
+{"sql": "alter type a.b[1] owner to postgres", "syntaxError": "syntax error at or near \"[\"", "position": 14}
+{"sql": "alter type a.b%type owner to postgres", "syntaxError": "syntax error at or near \"%\"", "position": 14}
+{"sql": "alter type setof int4 owner to postgres", "syntaxError": "syntax error at or near \"int4\"", "position": 17}
+{"sql": "alter type a.b( owner to postgres", "syntaxError": "syntax error at or near \"(\"", "position": 14}
+{"sql": "grant usage on type a.b to public", "pg16After": "3F000 schema \"a\" does not exist", "types": []}
+{"sql": "grant usage on type double precision to public", "syntaxError": "syntax error at or near \"precision\"", "position": 27}
+{"sql": "grant usage on type int4[] to public", "syntaxError": "syntax error at or near \"[\"", "position": 24}
+{"sql": "grant usage on type a.b[1] to public", "syntaxError": "syntax error at or near \"[\"", "position": 23}
+{"sql": "grant usage on type a.b%type to public", "syntaxError": "syntax error at or near \"%\"", "position": 23}
+{"sql": "grant usage on type setof int4 to public", "syntaxError": "syntax error at or near \"int4\"", "position": 26}
+{"sql": "grant usage on type a.b( to public", "syntaxError": "syntax error at or near \"(\"", "position": 23}
+{"sql": "alter domain a.b drop not null", "pg16After": "3F000 schema \"a\" does not exist", "types": []}
+{"sql": "alter domain double precision drop not null", "syntaxError": "syntax error at or near \"precision\"", "position": 20}
+{"sql": "alter domain int4[] drop not null", "syntaxError": "syntax error at or near \"[\"", "position": 17}
+{"sql": "alter domain a.b[1] drop not null", "syntaxError": "syntax error at or near \"[\"", "position": 16}
+{"sql": "alter domain a.b%type drop not null", "syntaxError": "syntax error at or near \"%\"", "position": 16}
+{"sql": "alter domain setof int4 drop not null", "syntaxError": "syntax error at or near \"int4\"", "position": 19}
+{"sql": "alter domain a.b( drop not null", "syntaxError": "syntax error at or near \"(\"", "position": 16}
+{"sql": "alter type a.b rename to y", "pg16After": "3F000 schema \"a\" does not exist", "types": []}
+{"sql": "alter type double precision rename to y", "syntaxError": "syntax error at or near \"precision\"", "position": 18}
+{"sql": "alter type int4[] rename to y", "syntaxError": "syntax error at or near \"[\"", "position": 15}
+{"sql": "alter type a.b[1] rename to y", "syntaxError": "syntax error at or near \"[\"", "position": 14}
+{"sql": "alter type a.b%type rename to y", "syntaxError": "syntax error at or near \"%\"", "position": 14}
+{"sql": "alter type setof int4 rename to y", "syntaxError": "syntax error at or near \"int4\"", "position": 17}
+{"sql": "alter type a.b( rename to y", "syntaxError": "syntax error at or near \"(\"", "position": 14}
+{"sql": "alter type a.b set schema s", "pg16After": "3F000 schema \"a\" does not exist", "types": []}
+{"sql": "alter type double precision set schema s", "syntaxError": "syntax error at or near \"precision\"", "position": 18}
+{"sql": "alter type int4[] set schema s", "syntaxError": "syntax error at or near \"[\"", "position": 15}
+{"sql": "alter type a.b[1] set schema s", "syntaxError": "syntax error at or near \"[\"", "position": 14}
+{"sql": "alter type a.b%type set schema s", "syntaxError": "syntax error at or near \"%\"", "position": 14}
+{"sql": "alter type setof int4 set schema s", "syntaxError": "syntax error at or near \"int4\"", "position": 17}
+{"sql": "alter type a.b( set schema s", "syntaxError": "syntax error at or near \"(\"", "position": 14}
+{"sql": "create domain a.b as int4", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["int4"], "location": 21}]}
+{"sql": "create domain double precision as int4", "syntaxError": "syntax error at or near \"precision\"", "position": 21}
+{"sql": "create domain int4[] as int4", "syntaxError": "syntax error at or near \"[\"", "position": 18}
+{"sql": "create domain a.b[1] as int4", "syntaxError": "syntax error at or near \"[\"", "position": 17}
+{"sql": "create domain a.b%type as int4", "syntaxError": "syntax error at or near \"%\"", "position": 17}
+{"sql": "create domain setof int4 as int4", "syntaxError": "syntax error at or near \"as\"", "position": 25}
+{"sql": "create domain a.b( as int4", "syntaxError": "syntax error at or near \"(\"", "position": 17}
+{"sql": "comment on constraint c on domain a.b is 'x'", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": -1}], "object": "List(TypeName,String)"}
+{"sql": "comment on constraint c on domain double precision is 'x'", "syntaxError": "syntax error at or near \"precision\"", "position": 41}
+{"sql": "comment on constraint c on domain int4[] is 'x'", "syntaxError": "syntax error at or near \"[\"", "position": 38}
+{"sql": "comment on constraint c on domain a.b[1] is 'x'", "syntaxError": "syntax error at or near \"[\"", "position": 37}
+{"sql": "comment on constraint c on domain a.b%type is 'x'", "syntaxError": "syntax error at or near \"%\"", "position": 37}
+{"sql": "comment on constraint c on domain setof int4 is 'x'", "syntaxError": "syntax error at or near \"int4\"", "position": 40}
+{"sql": "comment on constraint c on domain a.b( is 'x'", "syntaxError": "syntax error at or near \"(\"", "position": 37}
+{"sql": "alter operator family f using btree drop function 1 (a.b, int4)", "pg16After": "42704 operator family \"f\" does not exist for access method \"btree\"", "types": [{"names": ["a", "b"], "location": 53}, {"names": ["int4"], "location": 58}]}
+{"sql": "alter operator family f using btree drop function 1 (double precision, int4)", "pg16After": "42704 operator family \"f\" does not exist for access method \"btree\"", "types": [{"names": ["pg_catalog", "float8"], "location": 53}, {"names": ["int4"], "location": 71}]}
+{"sql": "alter operator family f using btree drop function 1 (int4[], int4)", "pg16After": "42704 operator family \"f\" does not exist for access method \"btree\"", "types": [{"names": ["int4"], "bounds": [-1], "location": 53}, {"names": ["int4"], "location": 61}]}
+{"sql": "alter operator family f using btree drop function 1 (a.b[1], int4)", "pg16After": "42704 operator family \"f\" does not exist for access method \"btree\"", "types": [{"names": ["a", "b"], "bounds": [1], "location": 53}, {"names": ["int4"], "location": 61}]}
+{"sql": "alter operator family f using btree drop function 1 (a.b%type, int4)", "syntaxError": "syntax error at or near \"%\"", "position": 56}
+{"sql": "alter operator family f using btree drop function 1 (setof int4, int4)", "pg16After": "42704 operator family \"f\" does not exist for access method \"btree\"", "types": [{"names": ["int4"], "setof": true, "location": 59}, {"names": ["int4"], "location": 65}]}
+{"sql": "alter operator family f using btree drop function 1 (a.b(, int4)", "syntaxError": "syntax error at or near \",\"", "position": 57}
+{"sql": "prepare p(a.b) as select 1", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 10}], "pg16Position": 10}
+{"sql": "prepare p(double precision) as select 1", "pg16After": "ok", "types": [{"names": ["pg_catalog", "float8"], "location": 10}]}
+{"sql": "prepare p(int4[]) as select 1", "pg16After": "42P05 prepared statement \"p\" already exists", "types": [{"names": ["int4"], "bounds": [-1], "location": 10}]}
+{"sql": "prepare p(a.b[1]) as select 1", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 10}], "pg16Position": 10}
+{"sql": "prepare p(a.b%type) as select 1", "syntaxError": "syntax error at or near \"%\"", "position": 13}
+{"sql": "prepare p(setof int4) as select 1", "pg16After": "42P05 prepared statement \"p\" already exists", "types": [{"names": ["int4"], "setof": true, "location": 16}]}
+{"sql": "prepare p(a.b() as select 1", "syntaxError": "syntax error at or near \")\"", "position": 14}
+{"sql": "alter table t alter column c type a.b", "pg16After": "42P01 relation \"t\" does not exist", "types": [{"names": ["a", "b"], "location": 34}]}
+{"sql": "alter table t alter column c type double precision", "pg16After": "42P01 relation \"t\" does not exist", "types": [{"names": ["pg_catalog", "float8"], "location": 34}]}
+{"sql": "alter table t alter column c type int4[]", "pg16After": "42P01 relation \"t\" does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 34}]}
+{"sql": "alter table t alter column c type a.b[1]", "pg16After": "42P01 relation \"t\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 34}]}
+{"sql": "alter table t alter column c type a.b%type", "syntaxError": "syntax error at or near \"%\"", "position": 37}
+{"sql": "alter table t alter column c type setof int4", "pg16After": "42P01 relation \"t\" does not exist", "types": [{"names": ["int4"], "setof": true, "location": 40}]}
+{"sql": "alter table t alter column c type a.b(", "syntaxError": "syntax error at end of input", "position": 38}
+{"sql": "create type t as (a a.b)", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 20}]}
+{"sql": "create type t as (a double precision)", "pg16After": "ok", "types": [{"names": ["pg_catalog", "float8"], "location": 20}]}
+{"sql": "create type t as (a int4[])", "pg16After": "ok", "types": [{"names": ["int4"], "bounds": [-1], "location": 20}]}
+{"sql": "create type t as (a a.b[1])", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 20}]}
+{"sql": "create type t as (a a.b%type)", "syntaxError": "syntax error at or near \"%\"", "position": 23}
+{"sql": "create type t as (a setof int4)", "pg16After": "42P16 column \"a\" cannot be declared SETOF", "types": [{"names": ["int4"], "setof": true, "location": 26}]}
+{"sql": "create type t as (a a.b()", "syntaxError": "syntax error at or near \")\"", "position": 24}
+{"sql": "alter type t add attribute a a.b", "pg16After": "42P01 relation \"t\" does not exist", "types": [{"names": ["a", "b"], "location": 29}]}
+{"sql": "alter type t add attribute a double precision", "pg16After": "42P01 relation \"t\" does not exist", "types": [{"names": ["pg_catalog", "float8"], "location": 29}]}
+{"sql": "alter type t add attribute a int4[]", "pg16After": "42P01 relation \"t\" does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 29}]}
+{"sql": "alter type t add attribute a a.b[1]", "pg16After": "42P01 relation \"t\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 29}]}
+{"sql": "alter type t add attribute a a.b%type", "syntaxError": "syntax error at or near \"%\"", "position": 32}
+{"sql": "alter type t add attribute a setof int4", "pg16After": "42P01 relation \"t\" does not exist", "types": [{"names": ["int4"], "setof": true, "location": 35}]}
+{"sql": "alter type t add attribute a a.b(", "syntaxError": "syntax error at end of input", "position": 33}
+{"sql": "create function f() returns a.b language sql as 'select 1'", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 28}]}
+{"sql": "create function f() returns double precision language sql as 'select 1'", "pg16After": "ok", "types": [{"names": ["pg_catalog", "float8"], "location": 28}]}
+{"sql": "create function f() returns int4[] language sql as 'select 1'", "pg16After": "42P13 return type mismatch in function declared to return integer[]", "types": [{"names": ["int4"], "bounds": [-1], "location": 28}]}
+{"sql": "create function f() returns a.b[1] language sql as 'select 1'", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 28}]}
+{"sql": "create function f() returns a.b%type language sql as 'select 1'", "pg16After": "42P01 relation \"a\" does not exist", "types": [{"names": ["a", "b"], "pctType": true, "location": 28}]}
+{"sql": "create function f() returns setof int4 language sql as 'select 1'", "pg16After": "ok", "types": [{"names": ["int4"], "setof": true, "location": 34}]}
+{"sql": "create function f() returns a.b( language sql as 'select 1'", "syntaxError": "syntax error at or near \"sql\"", "position": 42}
+{"sql": "drop aggregate ag(a.b)", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 18}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop aggregate ag(double precision)", "pg16After": "42883 aggregate ag(double precision) does not exist", "types": [{"names": ["pg_catalog", "float8"], "location": 18}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop aggregate ag(int4[])", "pg16After": "42883 aggregate ag(integer[]) does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 18}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop aggregate ag(a.b[1])", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 18}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop aggregate ag(a.b%type)", "pg16After": "42P01 relation \"a\" does not exist", "types": [{"names": ["a", "b"], "pctType": true, "location": 18}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop aggregate ag(setof int4)", "pg16After": "42883 aggregate ag(integer) does not exist", "types": [{"names": ["int4"], "setof": true, "location": 24}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop aggregate ag(a.b()", "syntaxError": "syntax error at or near \")\"", "position": 22}
+{"sql": "drop procedure p(a.b)", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 17}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop procedure p(double precision)", "pg16After": "42883 procedure p(double precision) does not exist", "types": [{"names": ["pg_catalog", "float8"], "location": 17}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop procedure p(int4[])", "pg16After": "42883 procedure p(integer[]) does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 17}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop procedure p(a.b[1])", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 17}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop procedure p(a.b%type)", "pg16After": "42P01 relation \"a\" does not exist", "types": [{"names": ["a", "b"], "pctType": true, "location": 17}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop procedure p(setof int4)", "pg16After": "42883 procedure p(integer) does not exist", "types": [{"names": ["int4"], "setof": true, "location": 23}], "object": "List(ObjectWithArgs)"}
+{"sql": "drop procedure p(a.b()", "syntaxError": "syntax error at or near \")\"", "position": 21}
+{"sql": "alter function f(a.b) owner to postgres", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 17}]}
+{"sql": "alter function f(double precision) owner to postgres", "pg16After": "42883 function f(double precision) does not exist", "types": [{"names": ["pg_catalog", "float8"], "location": 17}]}
+{"sql": "alter function f(int4[]) owner to postgres", "pg16After": "42883 function f(integer[]) does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 17}]}
+{"sql": "alter function f(a.b[1]) owner to postgres", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 17}]}
+{"sql": "alter function f(a.b%type) owner to postgres", "pg16After": "42P01 relation \"a\" does not exist", "types": [{"names": ["a", "b"], "pctType": true, "location": 17}]}
+{"sql": "alter function f(setof int4) owner to postgres", "pg16After": "42883 function f(integer) does not exist", "types": [{"names": ["int4"], "setof": true, "location": 23}]}
+{"sql": "alter function f(a.b() owner to postgres", "syntaxError": "syntax error at or near \")\"", "position": 21}
+{"sql": "create sequence s as a.b", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 21}], "pg16Position": 21}
+{"sql": "create sequence s as double precision", "pg16After": "22023 sequence type must be smallint, integer, or bigint", "types": [{"names": ["pg_catalog", "float8"], "location": -1}]}
+{"sql": "create sequence s as int4[]", "syntaxError": "syntax error at or near \"[\"", "position": 25}
+{"sql": "create sequence s as a.b[1]", "syntaxError": "syntax error at or near \"[\"", "position": 24}
+{"sql": "create sequence s as a.b%type", "syntaxError": "syntax error at or near \"%\"", "position": 24}
+{"sql": "create sequence s as setof int4", "syntaxError": "syntax error at or near \"setof\"", "position": 21}
+{"sql": "create sequence s as a.b(", "syntaxError": "syntax error at end of input", "position": 25}
+{"sql": "create operator === (leftarg = a.b, function = f)", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 31}, {"names": ["f"], "location": 47}]}
+{"sql": "create operator === (leftarg = double precision, function = f)", "pg16After": "42P13 operator right argument type must be specified", "types": [{"names": ["pg_catalog", "float8"], "location": 31}, {"names": ["f"], "location": 60}]}
+{"sql": "create operator === (leftarg = int4[], function = f)", "pg16After": "42P13 operator right argument type must be specified", "types": [{"names": ["int4"], "bounds": [-1], "location": 31}, {"names": ["f"], "location": 50}]}
+{"sql": "create operator === (leftarg = a.b[1], function = f)", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 31}, {"names": ["f"], "location": 50}]}
+{"sql": "create operator === (leftarg = a.b%type, function = f)", "pg16After": "42P01 relation \"a\" does not exist", "types": [{"names": ["a", "b"], "pctType": true, "location": 31}, {"names": ["f"], "location": 52}]}
+{"sql": "create operator === (leftarg = setof int4, function = f)", "pg16After": "42P13 SETOF type not allowed for operator argument", "types": [{"names": ["int4"], "setof": true, "location": 37}, {"names": ["f"], "location": 54}]}
+{"sql": "create operator === (leftarg = a.b(, function = f)", "syntaxError": "syntax error at or near \",\"", "position": 35}
+{"sql": "revoke usage on domain a.b from public", "pg16After": "3F000 schema \"a\" does not exist", "types": []}
+{"sql": "revoke usage on domain double precision from public", "syntaxError": "syntax error at or near \"precision\"", "position": 30}
+{"sql": "revoke usage on domain int4[] from public", "syntaxError": "syntax error at or near \"[\"", "position": 27}
+{"sql": "revoke usage on domain a.b[1] from public", "syntaxError": "syntax error at or near \"[\"", "position": 26}
+{"sql": "revoke usage on domain a.b%type from public", "syntaxError": "syntax error at or near \"%\"", "position": 26}
+{"sql": "revoke usage on domain setof int4 from public", "syntaxError": "syntax error at or near \"int4\"", "position": 29}
+{"sql": "revoke usage on domain a.b( from public", "syntaxError": "syntax error at or near \"(\"", "position": 26}
+{"sql": "alter domain a.b owner to postgres", "pg16After": "3F000 schema \"a\" does not exist", "types": []}
+{"sql": "alter domain double precision owner to postgres", "syntaxError": "syntax error at or near \"precision\"", "position": 20}
+{"sql": "alter domain int4[] owner to postgres", "syntaxError": "syntax error at or near \"[\"", "position": 17}
+{"sql": "alter domain a.b[1] owner to postgres", "syntaxError": "syntax error at or near \"[\"", "position": 16}
+{"sql": "alter domain a.b%type owner to postgres", "syntaxError": "syntax error at or near \"%\"", "position": 16}
+{"sql": "alter domain setof int4 owner to postgres", "syntaxError": "syntax error at or near \"int4\"", "position": 19}
+{"sql": "alter domain a.b( owner to postgres", "syntaxError": "syntax error at or near \"(\"", "position": 16}
+{"sql": "create table t of a.b", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": -1}]}
+{"sql": "create table t of double precision", "syntaxError": "syntax error at or near \"precision\"", "position": 25}
+{"sql": "create table t of int4[]", "syntaxError": "syntax error at or near \"[\"", "position": 22}
+{"sql": "create table t of a.b[1]", "syntaxError": "syntax error at or near \"[\"", "position": 21}
+{"sql": "create table t of a.b%type", "syntaxError": "syntax error at or near \"%\"", "position": 21}
+{"sql": "create table t of setof int4", "syntaxError": "syntax error at or near \"int4\"", "position": 24}
+{"sql": "create table t of a.b(", "syntaxError": "syntax error at end of input", "position": 22}
+{"sql": "alter type a.b add value 'x'", "pg16After": "3F000 schema \"a\" does not exist", "types": []}
+{"sql": "alter type double precision add value 'x'", "syntaxError": "syntax error at or near \"precision\"", "position": 18}
+{"sql": "alter type int4[] add value 'x'", "syntaxError": "syntax error at or near \"[\"", "position": 15}
+{"sql": "alter type a.b[1] add value 'x'", "syntaxError": "syntax error at or near \"[\"", "position": 14}
+{"sql": "alter type a.b%type add value 'x'", "syntaxError": "syntax error at or near \"%\"", "position": 14}
+{"sql": "alter type setof int4 add value 'x'", "syntaxError": "syntax error at or near \"int4\"", "position": 17}
+{"sql": "alter type a.b( add value 'x'", "syntaxError": "syntax error at or near \"(\"", "position": 14}
+{"sql": "create cast (int as int) with function f(a.b)", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["pg_catalog", "int4"], "location": 13}, {"names": ["pg_catalog", "int4"], "location": 20}, {"names": ["a", "b"], "location": 41}]}
+{"sql": "create cast (int as int) with function f(double precision)", "pg16After": "42883 function f(double precision) does not exist", "types": [{"names": ["pg_catalog", "int4"], "location": 13}, {"names": ["pg_catalog", "int4"], "location": 20}, {"names": ["pg_catalog", "float8"], "location": 41}]}
+{"sql": "create cast (int as int) with function f(int4[])", "pg16After": "42883 function f(integer[]) does not exist", "types": [{"names": ["pg_catalog", "int4"], "location": 13}, {"names": ["pg_catalog", "int4"], "location": 20}, {"names": ["int4"], "bounds": [-1], "location": 41}]}
+{"sql": "create cast (int as int) with function f(a.b[1])", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["pg_catalog", "int4"], "location": 13}, {"names": ["pg_catalog", "int4"], "location": 20}, {"names": ["a", "b"], "bounds": [1], "location": 41}]}
+{"sql": "create cast (int as int) with function f(a.b%type)", "pg16After": "42P01 relation \"a\" does not exist", "types": [{"names": ["pg_catalog", "int4"], "location": 13}, {"names": ["pg_catalog", "int4"], "location": 20}, {"names": ["a", "b"], "pctType": true, "location": 41}]}
+{"sql": "create cast (int as int) with function f(setof int4)", "pg16After": "42883 function f(integer) does not exist", "types": [{"names": ["pg_catalog", "int4"], "location": 13}, {"names": ["pg_catalog", "int4"], "location": 20}, {"names": ["int4"], "setof": true, "location": 47}]}
+{"sql": "create cast (int as int) with function f(a.b()", "syntaxError": "syntax error at or near \")\"", "position": 45}
+{"sql": "drop type a.b[]", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [-1], "location": 10}], "object": "List(TypeName)"}
+{"sql": "drop type double precision[]", "pg16After": "2BP01 cannot drop type double precision[] because it is required by the database system", "types": [{"names": ["pg_catalog", "float8"], "bounds": [-1], "location": 10}], "object": "List(TypeName)"}
+{"sql": "drop type int4[][]", "pg16After": "2BP01 cannot drop type integer[] because it is required by the database system", "types": [{"names": ["int4"], "bounds": [-1, -1], "location": 10}], "object": "List(TypeName)"}
+{"sql": "drop type a.b[1][]", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1, -1], "location": 10}], "object": "List(TypeName)"}
+{"sql": "drop type a.b%type[]", "syntaxError": "syntax error at or near \"%\"", "position": 13}
+{"sql": "drop type setof int4[]", "pg16After": "2BP01 cannot drop type integer[] because it is required by the database system", "types": [{"names": ["int4"], "bounds": [-1], "setof": true, "location": 16}], "object": "List(TypeName)"}
+{"sql": "drop type a.b([]", "syntaxError": "syntax error at or near \"[\"", "position": 14}
+{"sql": "create aggregate ag(order by a.b) (sfunc = f, stype = int4)", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 29}, {"names": ["f"], "location": 43}, {"names": ["int4"], "location": 54}]}
+{"sql": "create aggregate ag(order by double precision) (sfunc = f, stype = int4)", "pg16After": "42883 function f(integer, double precision) does not exist", "types": [{"names": ["pg_catalog", "float8"], "location": 29}, {"names": ["f"], "location": 56}, {"names": ["int4"], "location": 67}]}
+{"sql": "create aggregate ag(order by int4[]) (sfunc = f, stype = int4)", "pg16After": "42883 function f(integer, integer[]) does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 29}, {"names": ["f"], "location": 46}, {"names": ["int4"], "location": 57}]}
+{"sql": "create aggregate ag(order by a.b[1]) (sfunc = f, stype = int4)", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 29}, {"names": ["f"], "location": 46}, {"names": ["int4"], "location": 57}]}
+{"sql": "create aggregate ag(order by a.b%type) (sfunc = f, stype = int4)", "pg16After": "42P01 relation \"a\" does not exist", "types": [{"names": ["a", "b"], "pctType": true, "location": 29}, {"names": ["f"], "location": 48}, {"names": ["int4"], "location": 59}]}
+{"sql": "create aggregate ag(order by setof int4) (sfunc = f, stype = int4)", "pg16After": "42P13 aggregates cannot accept set arguments", "types": [{"names": ["int4"], "setof": true, "location": 35}, {"names": ["f"], "location": 50}, {"names": ["int4"], "location": 61}]}
+{"sql": "create aggregate ag(order by a.b() (sfunc = f, stype = int4)", "syntaxError": "syntax error at or near \")\"", "position": 33}
+{"sql": "create function f() returns table (a a.b) language sql as 'select 1'", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 37}, {"names": ["pg_catalog", "record"], "location": -1}]}
+{"sql": "create function f() returns table (a double precision) language sql as 'select 1'", "pg16After": "ok", "types": [{"names": ["pg_catalog", "float8"], "location": 37}, {"names": ["pg_catalog", "record"], "location": -1}]}
+{"sql": "create function f() returns table (a int4[]) language sql as 'select 1'", "pg16After": "42P13 return type mismatch in function declared to return integer[]", "types": [{"names": ["int4"], "bounds": [-1], "location": 37}, {"names": ["pg_catalog", "record"], "location": -1}]}
+{"sql": "create function f() returns table (a a.b[1]) language sql as 'select 1'", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 37}, {"names": ["pg_catalog", "record"], "location": -1}]}
+{"sql": "create function f() returns table (a a.b%type) language sql as 'select 1'", "pg16After": "42P01 relation \"a\" does not exist", "types": [{"names": ["a", "b"], "pctType": true, "location": 37}, {"names": ["pg_catalog", "record"], "location": -1}]}
+{"sql": "create function f() returns table (a setof int4) language sql as 'select 1'", "pg16After": "42P13 functions cannot accept set arguments", "types": [{"names": ["int4"], "setof": true, "location": 43}, {"names": ["pg_catalog", "record"], "location": -1}]}
+{"sql": "create function f() returns table (a a.b() language sql as 'select 1'", "syntaxError": "syntax error at or near \")\"", "position": 41}
+{"sql": "create type r as range (subtype = a.b)", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 34}]}
+{"sql": "create type r as range (subtype = double precision)", "pg16After": "ok", "types": [{"names": ["pg_catalog", "float8"], "location": 34}]}
+{"sql": "create type r as range (subtype = int4[])", "pg16After": "ok", "types": [{"names": ["int4"], "bounds": [-1], "location": 34}]}
+{"sql": "create type r as range (subtype = a.b[1])", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 34}]}
+{"sql": "create type r as range (subtype = a.b%type)", "pg16After": "42P01 relation \"a\" does not exist", "types": [{"names": ["a", "b"], "pctType": true, "location": 34}]}
+{"sql": "create type r as range (subtype = setof int4)", "pg16After": "ok", "types": [{"names": ["int4"], "setof": true, "location": 40}]}
+{"sql": "create type r as range (subtype = a.b()", "syntaxError": "syntax error at or near \")\"", "position": 38}
+{"sql": "create operator class c for type int4 using btree as function 1 (a.b, int4) f(int4)", "pg16After": "42883 function f(integer) does not exist", "types": [{"names": ["int4"], "location": 33}, {"names": ["int4"], "location": 78}, {"names": ["a", "b"], "location": 65}, {"names": ["int4"], "location": 70}]}
+{"sql": "create operator class c for type int4 using btree as function 1 (double precision, int4) f(int4)", "pg16After": "42883 function f(integer) does not exist", "types": [{"names": ["int4"], "location": 33}, {"names": ["int4"], "location": 91}, {"names": ["pg_catalog", "float8"], "location": 65}, {"names": ["int4"], "location": 83}]}
+{"sql": "create operator class c for type int4 using btree as function 1 (int4[], int4) f(int4)", "pg16After": "42883 function f(integer) does not exist", "types": [{"names": ["int4"], "location": 33}, {"names": ["int4"], "location": 81}, {"names": ["int4"], "bounds": [-1], "location": 65}, {"names": ["int4"], "location": 73}]}
+{"sql": "create operator class c for type int4 using btree as function 1 (a.b[1], int4) f(int4)", "pg16After": "42883 function f(integer) does not exist", "types": [{"names": ["int4"], "location": 33}, {"names": ["int4"], "location": 81}, {"names": ["a", "b"], "bounds": [1], "location": 65}, {"names": ["int4"], "location": 73}]}
+{"sql": "create operator class c for type int4 using btree as function 1 (a.b%type, int4) f(int4)", "syntaxError": "syntax error at or near \"%\"", "position": 68}
+{"sql": "create operator class c for type int4 using btree as function 1 (setof int4, int4) f(int4)", "pg16After": "42883 function f(integer) does not exist", "types": [{"names": ["int4"], "location": 33}, {"names": ["int4"], "location": 85}, {"names": ["int4"], "setof": true, "location": 71}, {"names": ["int4"], "location": 77}]}
+{"sql": "create operator class c for type int4 using btree as function 1 (a.b(, int4) f(int4)", "syntaxError": "syntax error at or near \",\"", "position": 69}
+{"sql": "alter operator family f using btree add operator 1 < (a.b, int4)", "pg16After": "42704 operator family \"f\" does not exist for access method \"btree\"", "types": [{"names": ["a", "b"], "location": 54}, {"names": ["int4"], "location": 59}]}
+{"sql": "alter operator family f using btree add operator 1 < (double precision, int4)", "pg16After": "42704 operator family \"f\" does not exist for access method \"btree\"", "types": [{"names": ["pg_catalog", "float8"], "location": 54}, {"names": ["int4"], "location": 72}]}
+{"sql": "alter operator family f using btree add operator 1 < (int4[], int4)", "pg16After": "42704 operator family \"f\" does not exist for access method \"btree\"", "types": [{"names": ["int4"], "bounds": [-1], "location": 54}, {"names": ["int4"], "location": 62}]}
+{"sql": "alter operator family f using btree add operator 1 < (a.b[1], int4)", "pg16After": "42704 operator family \"f\" does not exist for access method \"btree\"", "types": [{"names": ["a", "b"], "bounds": [1], "location": 54}, {"names": ["int4"], "location": 62}]}
+{"sql": "alter operator family f using btree add operator 1 < (a.b%type, int4)", "syntaxError": "syntax error at or near \"%\"", "position": 57}
+{"sql": "alter operator family f using btree add operator 1 < (setof int4, int4)", "pg16After": "42704 operator family \"f\" does not exist for access method \"btree\"", "types": [{"names": ["int4"], "setof": true, "location": 60}, {"names": ["int4"], "location": 66}]}
+{"sql": "alter operator family f using btree add operator 1 < (a.b(, int4)", "syntaxError": "syntax error at or near \",\"", "position": 58}
+{"sql": "grant execute on function f(a.b) to public", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 28}]}
+{"sql": "grant execute on function f(double precision) to public", "pg16After": "42883 function f(double precision) does not exist", "types": [{"names": ["pg_catalog", "float8"], "location": 28}]}
+{"sql": "grant execute on function f(int4[]) to public", "pg16After": "42883 function f(integer[]) does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 28}]}
+{"sql": "grant execute on function f(a.b[1]) to public", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 28}]}
+{"sql": "grant execute on function f(a.b%type) to public", "pg16After": "42P01 relation \"a\" does not exist", "types": [{"names": ["a", "b"], "pctType": true, "location": 28}]}
+{"sql": "grant execute on function f(setof int4) to public", "pg16After": "42883 function f(integer) does not exist", "types": [{"names": ["int4"], "setof": true, "location": 34}]}
+{"sql": "grant execute on function f(a.b() to public", "syntaxError": "syntax error at or near \")\"", "position": 32}
+{"sql": "alter routine r(a.b) rename to s", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 16}]}
+{"sql": "alter routine r(double precision) rename to s", "pg16After": "42883 function r(double precision) does not exist", "types": [{"names": ["pg_catalog", "float8"], "location": 16}]}
+{"sql": "alter routine r(int4[]) rename to s", "pg16After": "42883 function r(integer[]) does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 16}]}
+{"sql": "alter routine r(a.b[1]) rename to s", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 16}]}
+{"sql": "alter routine r(a.b%type) rename to s", "pg16After": "42P01 relation \"a\" does not exist", "types": [{"names": ["a", "b"], "pctType": true, "location": 16}]}
+{"sql": "alter routine r(setof int4) rename to s", "pg16After": "42883 function r(integer) does not exist", "types": [{"names": ["int4"], "setof": true, "location": 22}]}
+{"sql": "alter routine r(a.b() rename to s", "syntaxError": "syntax error at or near \")\"", "position": 20}
+{"sql": "alter aggregate ag(a.b) owner to postgres", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 19}]}
+{"sql": "alter aggregate ag(double precision) owner to postgres", "pg16After": "42883 aggregate ag(double precision) does not exist", "types": [{"names": ["pg_catalog", "float8"], "location": 19}]}
+{"sql": "alter aggregate ag(int4[]) owner to postgres", "pg16After": "42883 aggregate ag(integer[]) does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 19}]}
+{"sql": "alter aggregate ag(a.b[1]) owner to postgres", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 19}]}
+{"sql": "alter aggregate ag(a.b%type) owner to postgres", "pg16After": "42P01 relation \"a\" does not exist", "types": [{"names": ["a", "b"], "pctType": true, "location": 19}]}
+{"sql": "alter aggregate ag(setof int4) owner to postgres", "pg16After": "42883 aggregate ag(integer) does not exist", "types": [{"names": ["int4"], "setof": true, "location": 25}]}
+{"sql": "alter aggregate ag(a.b() owner to postgres", "syntaxError": "syntax error at or near \")\"", "position": 23}
+{"sql": "alter extension e drop aggregate ag(a.b)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a", "b"], "location": 36}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e drop aggregate ag(double precision)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "float8"], "location": 36}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e drop aggregate ag(int4[])", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 36}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e drop aggregate ag(a.b[1])", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 36}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e drop aggregate ag(a.b%type)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a", "b"], "pctType": true, "location": 36}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e drop aggregate ag(setof int4)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["int4"], "setof": true, "location": 42}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e drop aggregate ag(a.b()", "syntaxError": "syntax error at or near \")\"", "position": 40}
+{"sql": "alter extension e add operator < (a.b, int4)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a", "b"], "location": 34}, {"names": ["int4"], "location": 39}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e add operator < (double precision, int4)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "float8"], "location": 34}, {"names": ["int4"], "location": 52}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e add operator < (int4[], int4)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 34}, {"names": ["int4"], "location": 42}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e add operator < (a.b[1], int4)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 34}, {"names": ["int4"], "location": 42}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e add operator < (a.b%type, int4)", "syntaxError": "syntax error at or near \"%\"", "position": 37}
+{"sql": "alter extension e add operator < (setof int4, int4)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["int4"], "setof": true, "location": 40}, {"names": ["int4"], "location": 46}], "object": "ObjectWithArgs"}
+{"sql": "alter extension e add operator < (a.b(, int4)", "syntaxError": "syntax error at or near \",\"", "position": 38}
+{"sql": "create procedure p(inout a a.b) language sql as 'select 1'", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 27}]}
+{"sql": "create procedure p(inout a double precision) language sql as 'select 1'", "pg16After": "ok", "types": [{"names": ["pg_catalog", "float8"], "location": 27}]}
+{"sql": "create procedure p(inout a int4[]) language sql as 'select 1'", "pg16After": "42P13 return type mismatch in function declared to return record", "types": [{"names": ["int4"], "bounds": [-1], "location": 27}]}
+{"sql": "create procedure p(inout a a.b[1]) language sql as 'select 1'", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 27}]}
+{"sql": "create procedure p(inout a a.b%type) language sql as 'select 1'", "pg16After": "42P01 relation \"a\" does not exist", "types": [{"names": ["a", "b"], "pctType": true, "location": 27}]}
+{"sql": "create procedure p(inout a setof int4) language sql as 'select 1'", "pg16After": "42P13 procedures cannot accept set arguments", "types": [{"names": ["int4"], "setof": true, "location": 33}]}
+{"sql": "create procedure p(inout a a.b() language sql as 'select 1'", "syntaxError": "syntax error at or near \")\"", "position": 31}
+{"sql": "security label on function f(a.b) is 'x'", "pg16After": "22023 no security label providers have been loaded", "types": [{"names": ["a", "b"], "location": 29}], "object": "ObjectWithArgs"}
+{"sql": "security label on function f(double precision) is 'x'", "pg16After": "22023 no security label providers have been loaded", "types": [{"names": ["pg_catalog", "float8"], "location": 29}], "object": "ObjectWithArgs"}
+{"sql": "security label on function f(int4[]) is 'x'", "pg16After": "22023 no security label providers have been loaded", "types": [{"names": ["int4"], "bounds": [-1], "location": 29}], "object": "ObjectWithArgs"}
+{"sql": "security label on function f(a.b[1]) is 'x'", "pg16After": "22023 no security label providers have been loaded", "types": [{"names": ["a", "b"], "bounds": [1], "location": 29}], "object": "ObjectWithArgs"}
+{"sql": "security label on function f(a.b%type) is 'x'", "pg16After": "22023 no security label providers have been loaded", "types": [{"names": ["a", "b"], "pctType": true, "location": 29}], "object": "ObjectWithArgs"}
+{"sql": "security label on function f(setof int4) is 'x'", "pg16After": "22023 no security label providers have been loaded", "types": [{"names": ["int4"], "setof": true, "location": 35}], "object": "ObjectWithArgs"}
+{"sql": "security label on function f(a.b() is 'x'", "syntaxError": "syntax error at or near \")\"", "position": 33}
+{"sql": "comment on aggregate ag(a.b) is 'x'", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 24}], "object": "ObjectWithArgs"}
+{"sql": "comment on aggregate ag(double precision) is 'x'", "pg16After": "42883 aggregate ag(double precision) does not exist", "types": [{"names": ["pg_catalog", "float8"], "location": 24}], "object": "ObjectWithArgs"}
+{"sql": "comment on aggregate ag(int4[]) is 'x'", "pg16After": "42883 aggregate ag(integer[]) does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 24}], "object": "ObjectWithArgs"}
+{"sql": "comment on aggregate ag(a.b[1]) is 'x'", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 24}], "object": "ObjectWithArgs"}
+{"sql": "comment on aggregate ag(a.b%type) is 'x'", "pg16After": "42P01 relation \"a\" does not exist", "types": [{"names": ["a", "b"], "pctType": true, "location": 24}], "object": "ObjectWithArgs"}
+{"sql": "comment on aggregate ag(setof int4) is 'x'", "pg16After": "42883 aggregate ag(integer) does not exist", "types": [{"names": ["int4"], "setof": true, "location": 30}], "object": "ObjectWithArgs"}
+{"sql": "comment on aggregate ag(a.b() is 'x'", "syntaxError": "syntax error at or near \")\"", "position": 28}
+{"sql": "alter function f(a.b) depends on extension e", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 17}]}
+{"sql": "alter function f(double precision) depends on extension e", "pg16After": "42883 function f(double precision) does not exist", "types": [{"names": ["pg_catalog", "float8"], "location": 17}]}
+{"sql": "alter function f(int4[]) depends on extension e", "pg16After": "42883 function f(integer[]) does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 17}]}
+{"sql": "alter function f(a.b[1]) depends on extension e", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 17}]}
+{"sql": "alter function f(a.b%type) depends on extension e", "pg16After": "42P01 relation \"a\" does not exist", "types": [{"names": ["a", "b"], "pctType": true, "location": 17}]}
+{"sql": "alter function f(setof int4) depends on extension e", "pg16After": "42883 function f(integer) does not exist", "types": [{"names": ["int4"], "setof": true, "location": 23}]}
+{"sql": "alter function f(a.b() depends on extension e", "syntaxError": "syntax error at or near \")\"", "position": 21}
+{"sql": "create table t (c a.b)", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 18}], "pg16Position": 18}
+{"sql": "create table t (c double precision)", "pg16After": "ok", "types": [{"names": ["pg_catalog", "float8"], "location": 18}]}
+{"sql": "create table t (c int4[])", "pg16After": "ok", "types": [{"names": ["int4"], "bounds": [-1], "location": 18}]}
+{"sql": "create table t (c a.b[1])", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 18}], "pg16Position": 18}
+{"sql": "create table t (c a.b%type)", "syntaxError": "syntax error at or near \"%\"", "position": 21}
+{"sql": "create table t (c setof int4)", "pg16After": "42P16 column \"c\" cannot be declared SETOF", "types": [{"names": ["int4"], "setof": true, "location": 24}]}
+{"sql": "create table t (c a.b()", "syntaxError": "syntax error at or near \")\"", "position": 22}
+{"sql": "alter table t add column c a.b", "pg16After": "42P01 relation \"t\" does not exist", "types": [{"names": ["a", "b"], "location": 27}]}
+{"sql": "alter table t add column c double precision", "pg16After": "42P01 relation \"t\" does not exist", "types": [{"names": ["pg_catalog", "float8"], "location": 27}]}
+{"sql": "alter table t add column c int4[]", "pg16After": "42P01 relation \"t\" does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 27}]}
+{"sql": "alter table t add column c a.b[1]", "pg16After": "42P01 relation \"t\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 27}]}
+{"sql": "alter table t add column c a.b%type", "syntaxError": "syntax error at or near \"%\"", "position": 30}
+{"sql": "alter table t add column c setof int4", "pg16After": "42P01 relation \"t\" does not exist", "types": [{"names": ["int4"], "setof": true, "location": 33}]}
+{"sql": "alter table t add column c a.b(", "syntaxError": "syntax error at end of input", "position": 31}
+{"sql": "alter type t alter attribute a type a.b", "pg16After": "42P01 relation \"t\" does not exist", "types": [{"names": ["a", "b"], "location": 36}]}
+{"sql": "alter type t alter attribute a type double precision", "pg16After": "42P01 relation \"t\" does not exist", "types": [{"names": ["pg_catalog", "float8"], "location": 36}]}
+{"sql": "alter type t alter attribute a type int4[]", "pg16After": "42P01 relation \"t\" does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 36}]}
+{"sql": "alter type t alter attribute a type a.b[1]", "pg16After": "42P01 relation \"t\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 36}]}
+{"sql": "alter type t alter attribute a type a.b%type", "syntaxError": "syntax error at or near \"%\"", "position": 39}
+{"sql": "alter type t alter attribute a type setof int4", "pg16After": "42P01 relation \"t\" does not exist", "types": [{"names": ["int4"], "setof": true, "location": 42}]}
+{"sql": "alter type t alter attribute a type a.b(", "syntaxError": "syntax error at end of input", "position": 40}
+{"sql": "comment on operator < (a.b, int4) is 'x'", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 23}, {"names": ["int4"], "location": 28}], "object": "ObjectWithArgs"}
+{"sql": "comment on operator < (double precision, int4) is 'x'", "pg16After": "42883 operator does not exist: double precision < integer", "types": [{"names": ["pg_catalog", "float8"], "location": 23}, {"names": ["int4"], "location": 41}], "object": "ObjectWithArgs"}
+{"sql": "comment on operator < (int4[], int4) is 'x'", "pg16After": "42883 operator does not exist: integer[] < integer", "types": [{"names": ["int4"], "bounds": [-1], "location": 23}, {"names": ["int4"], "location": 31}], "object": "ObjectWithArgs"}
+{"sql": "comment on operator < (a.b[1], int4) is 'x'", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 23}, {"names": ["int4"], "location": 31}], "object": "ObjectWithArgs"}
+{"sql": "comment on operator < (a.b%type, int4) is 'x'", "syntaxError": "syntax error at or near \"%\"", "position": 26}
+{"sql": "comment on operator < (setof int4, int4) is 'x'", "pg16After": "ok", "types": [{"names": ["int4"], "setof": true, "location": 29}, {"names": ["int4"], "location": 35}], "object": "ObjectWithArgs"}
+{"sql": "comment on operator < (a.b(, int4) is 'x'", "syntaxError": "syntax error at or near \",\"", "position": 27}
+{"sql": "create cast (a.b as int4) with inout", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 13}, {"names": ["int4"], "location": 20}]}
+{"sql": "create cast (double precision as int4) with inout", "pg16After": "42710 cast from type double precision to type integer already exists", "types": [{"names": ["pg_catalog", "float8"], "location": 13}, {"names": ["int4"], "location": 33}]}
+{"sql": "create cast (int4[] as int4) with inout", "pg16After": "ok", "types": [{"names": ["int4"], "bounds": [-1], "location": 13}, {"names": ["int4"], "location": 23}]}
+{"sql": "create cast (a.b[1] as int4) with inout", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 13}, {"names": ["int4"], "location": 23}]}
+{"sql": "create cast (a.b%type as int4) with inout", "syntaxError": "syntax error at or near \"%\"", "position": 16}
+{"sql": "create cast (setof int4 as int4) with inout", "pg16After": "42P17 source data type and target data type are the same", "types": [{"names": ["int4"], "setof": true, "location": 19}, {"names": ["int4"], "location": 27}]}
+{"sql": "create cast (a.b( as int4) with inout", "syntaxError": "syntax error at or near \"as\"", "position": 18}
+{"sql": "alter extension e add transform for a.b language l", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a", "b"], "location": 36}], "object": "List(TypeName,String)"}
+{"sql": "alter extension e add transform for double precision language l", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "float8"], "location": 36}], "object": "List(TypeName,String)"}
+{"sql": "alter extension e add transform for int4[] language l", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["int4"], "bounds": [-1], "location": 36}], "object": "List(TypeName,String)"}
+{"sql": "alter extension e add transform for a.b[1] language l", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 36}], "object": "List(TypeName,String)"}
+{"sql": "alter extension e add transform for a.b%type language l", "syntaxError": "syntax error at or near \"%\"", "position": 39}
+{"sql": "alter extension e add transform for setof int4 language l", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["int4"], "setof": true, "location": 42}], "object": "List(TypeName,String)"}
+{"sql": "alter extension e add transform for a.b( language l", "syntaxError": "syntax error at or near \"l\"", "position": 50}
+{"sql": "alter extension e drop cast (int as a.b)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "int4"], "location": 29}, {"names": ["a", "b"], "location": 36}], "object": "List(TypeName,TypeName)"}
+{"sql": "alter extension e drop cast (int as double precision)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "int4"], "location": 29}, {"names": ["pg_catalog", "float8"], "location": 36}], "object": "List(TypeName,TypeName)"}
+{"sql": "alter extension e drop cast (int as int4[])", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "int4"], "location": 29}, {"names": ["int4"], "bounds": [-1], "location": 36}], "object": "List(TypeName,TypeName)"}
+{"sql": "alter extension e drop cast (int as a.b[1])", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "int4"], "location": 29}, {"names": ["a", "b"], "bounds": [1], "location": 36}], "object": "List(TypeName,TypeName)"}
+{"sql": "alter extension e drop cast (int as a.b%type)", "syntaxError": "syntax error at or near \"%\"", "position": 39}
+{"sql": "alter extension e drop cast (int as setof int4)", "pg16After": "42704 extension \"e\" does not exist", "types": [{"names": ["pg_catalog", "int4"], "location": 29}, {"names": ["int4"], "setof": true, "location": 42}], "object": "List(TypeName,TypeName)"}
+{"sql": "alter extension e drop cast (int as a.b()", "syntaxError": "syntax error at or near \")\"", "position": 40}
+{"sql": "security label on type a.b, int4 is 'x'", "syntaxError": "syntax error at or near \",\"", "position": 26}
+{"sql": "security label on type double precision, int4 is 'x'", "syntaxError": "syntax error at or near \",\"", "position": 39}
+{"sql": "security label on type int4[], int4 is 'x'", "syntaxError": "syntax error at or near \",\"", "position": 29}
+{"sql": "security label on type a.b[1], int4 is 'x'", "syntaxError": "syntax error at or near \",\"", "position": 29}
+{"sql": "security label on type a.b%type, int4 is 'x'", "syntaxError": "syntax error at or near \"%\"", "position": 26}
+{"sql": "security label on type setof int4, int4 is 'x'", "syntaxError": "syntax error at or near \",\"", "position": 33}
+{"sql": "security label on type a.b(, int4 is 'x'", "syntaxError": "syntax error at or near \",\"", "position": 27}
+{"sql": "drop type a.b[1], double precision, int4[] cascade", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "bounds": [1], "location": 10}, {"names": ["pg_catalog", "float8"], "location": 18}, {"names": ["int4"], "bounds": [-1], "location": 36}], "object": "List(TypeName,TypeName,TypeName)"}
+{"sql": "drop domain if exists a.b, c[]", "pg16After": "ok", "types": [{"names": ["a", "b"], "location": 22}, {"names": ["c"], "bounds": [-1], "location": 27}], "object": "List(TypeName,TypeName)"}
+{"sql": "drop type a.b.c.d", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "types": [{"names": ["a", "b", "c", "d"], "location": 10}], "object": "List(TypeName)", "pg16Name": "a.b.c.d"}
+{"sql": "drop domain a.b.c.d.e", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d.e", "types": [{"names": ["a", "b", "c", "d", "e"], "location": 12}], "object": "List(TypeName)", "pg16Name": "a.b.c.d.e"}
+{"sql": "comment on type a.b.c.d is 'x'", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "types": [{"names": ["a", "b", "c", "d"], "location": 16}], "object": "TypeName", "pg16Name": "a.b.c.d"}
+{"sql": "drop type int4[][3]", "pg16After": "2BP01 cannot drop type integer[] because it is required by the database system", "types": [{"names": ["int4"], "bounds": [-1, 3], "location": 10}], "object": "List(TypeName)"}
+{"sql": "drop type int4 array[]", "syntaxError": "syntax error at or near \"]\"", "position": 21}
+{"sql": "comment on type setof a is 'x'", "pg16After": "42704 type \"a\" does not exist", "types": [{"names": ["a"], "setof": true, "location": 22}], "object": "TypeName", "pg16Name": "a"}
+{"sql": "drop type", "syntaxError": "syntax error at end of input", "position": 9}
+{"sql": "drop type if exists", "syntaxError": "syntax error at end of input", "position": 19}
+{"sql": "drop type a,", "syntaxError": "syntax error at end of input", "position": 12}
+{"sql": "comment on type is 'x'", "syntaxError": "syntax error at or near \"'x'\"", "position": 19}
+{"sql": "drop cast (int4)", "syntaxError": "syntax error at or near \")\"", "position": 15}
+{"sql": "drop cast (int4 as)", "syntaxError": "syntax error at or near \")\"", "position": 18}
+{"sql": "drop type pg_catalog.\"int4\"", "pg16After": "2BP01 cannot drop type integer because it is required by the database system", "types": [{"names": ["pg_catalog", "int4"], "location": 10}], "object": "List(TypeName)"}
+{"sql": "drop type time(3) with time zone", "pg16After": "2BP01 cannot drop type time with time zone because it is required by the database system", "types": [{"names": ["pg_catalog", "timetz"], "typmods": 1, "location": 10}], "object": "List(TypeName)"}
+{"sql": "drop type float(24)", "pg16After": "2BP01 cannot drop type real because it is required by the database system", "types": [{"names": ["pg_catalog", "float4"], "location": 10}], "object": "List(TypeName)"}
+{"sql": "drop type decimal", "pg16After": "2BP01 cannot drop type numeric because it is required by the database system", "types": [{"names": ["pg_catalog", "numeric"], "location": 10}], "object": "List(TypeName)"}
+{"sql": "drop type json", "pg16After": "2BP01 cannot drop type json because it is required by the database system", "types": [{"names": ["pg_catalog", "json"], "location": 10}], "object": "List(TypeName)"}
+{"sql": "drop type national character varying(3)", "pg16After": "2BP01 cannot drop type character varying because it is required by the database system", "types": [{"names": ["pg_catalog", "varchar"], "typmods": 1, "location": 10}], "object": "List(TypeName)"}
+{"sql": "drop type nchar", "pg16After": "2BP01 cannot drop type character because it is required by the database system", "types": [{"names": ["pg_catalog", "bpchar"], "location": 10}], "object": "List(TypeName)"}
+{"sql": "drop type char varying", "pg16After": "2BP01 cannot drop type character varying because it is required by the database system", "types": [{"names": ["pg_catalog", "varchar"], "location": 10}], "object": "List(TypeName)"}
+{"sql": "comment on domain timestamp(3) without time zone is 'x'", "pg16After": "42809 \"pg_catalog.timestamp\" is not a domain", "types": [{"names": ["pg_catalog", "timestamp"], "typmods": 1, "location": 18}], "object": "TypeName"}
+{"sql": "security label on type a.b[] is 'x'", "pg16After": "22023 no security label providers have been loaded", "types": [{"names": ["a", "b"], "bounds": [-1], "location": 23}], "object": "TypeName"}
