@@ -11,6 +11,7 @@ import (
 	"fmt"
 	"math"
 	"strconv"
+	"strings"
 
 	"github.com/pgplex/pgparser/nodes"
 )
@@ -1141,6 +1142,9 @@ insert_column_list:
 insert_column_item:
 	ColId opt_indirection
 		{
+			if !checkIndirection(pglex, $2) {
+				return 1
+			}
 			$$ = &nodes.ResTarget{
 				Name:        $1,
 				Indirection: $2,
@@ -1300,6 +1304,9 @@ set_clause:
 set_target:
 	ColId opt_indirection
 		{
+			if !checkIndirection(pglex, $2) {
+				return 1
+			}
 			$$ = &nodes.ResTarget{
 				Name:        $1,
 				Indirection: $2,
@@ -3558,6 +3565,9 @@ RenameStmt:
 		}
 	| ALTER TYPE_P any_name RENAME ATTRIBUTE name TO name opt_drop_behavior
 		{
+			if !checkRangeVarNames(pglex, $3, $<loc>3) {
+				return 1
+			}
 			$$ = &nodes.RenameStmt{
 				RenameType:   nodes.OBJECT_ATTRIBUTE,
 				RelationType: nodes.OBJECT_TYPE,
@@ -5308,39 +5318,39 @@ NonReservedWord:
  *****************************************************************************/
 
 GrantStmt:
-	GRANT privileges ON TABLE any_name_list TO grantee_list opt_grant_grant_option opt_granted_by
+	GRANT privileges ON TABLE qualified_name_list TO grantee_list opt_grant_grant_option opt_granted_by
 		{
 			$$ = &nodes.GrantStmt{
 				IsGrant:     true,
 				Targtype:    nodes.ACL_TARGET_OBJECT,
 				Objtype:     nodes.OBJECT_TABLE,
-				Objects:     makeRangeVarList($5),
+				Objects:     $5,
 				Privileges:  $2,
 				Grantees:    $7,
 				GrantOption: $8,
 				Grantor:     roleSpecOrNil($9),
 			}
 		}
-	| GRANT privileges ON any_name_list TO grantee_list opt_grant_grant_option opt_granted_by
+	| GRANT privileges ON qualified_name_list TO grantee_list opt_grant_grant_option opt_granted_by
 		{
 			$$ = &nodes.GrantStmt{
 				IsGrant:     true,
 				Targtype:    nodes.ACL_TARGET_OBJECT,
 				Objtype:     nodes.OBJECT_TABLE,
-				Objects:     makeRangeVarList($4),
+				Objects:     $4,
 				Privileges:  $2,
 				Grantees:    $6,
 				GrantOption: $7,
 				Grantor:     roleSpecOrNil($8),
 			}
 		}
-	| GRANT privileges ON SEQUENCE any_name_list TO grantee_list opt_grant_grant_option opt_granted_by
+	| GRANT privileges ON SEQUENCE qualified_name_list TO grantee_list opt_grant_grant_option opt_granted_by
 		{
 			$$ = &nodes.GrantStmt{
 				IsGrant:     true,
 				Targtype:    nodes.ACL_TARGET_OBJECT,
 				Objtype:     nodes.OBJECT_SEQUENCE,
-				Objects:     makeRangeVarList($5),
+				Objects:     $5,
 				Privileges:  $2,
 				Grantees:    $7,
 				GrantOption: $8,
@@ -5571,39 +5581,39 @@ GrantStmt:
 	;
 
 RevokeStmt:
-	REVOKE privileges ON TABLE any_name_list FROM grantee_list opt_granted_by opt_drop_behavior
+	REVOKE privileges ON TABLE qualified_name_list FROM grantee_list opt_granted_by opt_drop_behavior
 		{
 			$$ = &nodes.GrantStmt{
 				IsGrant:    false,
 				Targtype:   nodes.ACL_TARGET_OBJECT,
 				Objtype:    nodes.OBJECT_TABLE,
-				Objects:    makeRangeVarList($5),
+				Objects:    $5,
 				Privileges: $2,
 				Grantees:   $7,
 				Grantor:    roleSpecOrNil($8),
 				Behavior:   nodes.DropBehavior($9),
 			}
 		}
-	| REVOKE privileges ON any_name_list FROM grantee_list opt_granted_by opt_drop_behavior
+	| REVOKE privileges ON qualified_name_list FROM grantee_list opt_granted_by opt_drop_behavior
 		{
 			$$ = &nodes.GrantStmt{
 				IsGrant:    false,
 				Targtype:   nodes.ACL_TARGET_OBJECT,
 				Objtype:    nodes.OBJECT_TABLE,
-				Objects:    makeRangeVarList($4),
+				Objects:    $4,
 				Privileges: $2,
 				Grantees:   $6,
 				Grantor:    roleSpecOrNil($7),
 				Behavior:   nodes.DropBehavior($8),
 			}
 		}
-	| REVOKE privileges ON SEQUENCE any_name_list FROM grantee_list opt_granted_by opt_drop_behavior
+	| REVOKE privileges ON SEQUENCE qualified_name_list FROM grantee_list opt_granted_by opt_drop_behavior
 		{
 			$$ = &nodes.GrantStmt{
 				IsGrant:    false,
 				Targtype:   nodes.ACL_TARGET_OBJECT,
 				Objtype:    nodes.OBJECT_SEQUENCE,
-				Objects:    makeRangeVarList($5),
+				Objects:    $5,
 				Privileges: $2,
 				Grantees:   $7,
 				Grantor:    roleSpecOrNil($8),
@@ -5831,13 +5841,13 @@ RevokeStmt:
 				Behavior:   nodes.DropBehavior($10),
 			}
 		}
-	| REVOKE GRANT OPTION FOR privileges ON TABLE any_name_list FROM grantee_list opt_granted_by opt_drop_behavior
+	| REVOKE GRANT OPTION FOR privileges ON TABLE qualified_name_list FROM grantee_list opt_granted_by opt_drop_behavior
 		{
 			$$ = &nodes.GrantStmt{
 				IsGrant:     false,
 				Targtype:    nodes.ACL_TARGET_OBJECT,
 				Objtype:     nodes.OBJECT_TABLE,
-				Objects:     makeRangeVarList($8),
+				Objects:     $8,
 				Privileges:  $5,
 				Grantees:    $10,
 				GrantOption: true,
@@ -5845,13 +5855,13 @@ RevokeStmt:
 				Behavior:    nodes.DropBehavior($12),
 			}
 		}
-	| REVOKE GRANT OPTION FOR privileges ON any_name_list FROM grantee_list opt_granted_by opt_drop_behavior
+	| REVOKE GRANT OPTION FOR privileges ON qualified_name_list FROM grantee_list opt_granted_by opt_drop_behavior
 		{
 			$$ = &nodes.GrantStmt{
 				IsGrant:     false,
 				Targtype:    nodes.ACL_TARGET_OBJECT,
 				Objtype:     nodes.OBJECT_TABLE,
-				Objects:     makeRangeVarList($7),
+				Objects:     $7,
 				Privileges:  $5,
 				Grantees:    $9,
 				GrantOption: true,
@@ -5859,13 +5869,13 @@ RevokeStmt:
 				Behavior:    nodes.DropBehavior($11),
 			}
 		}
-	| REVOKE GRANT OPTION FOR privileges ON SEQUENCE any_name_list FROM grantee_list opt_granted_by opt_drop_behavior
+	| REVOKE GRANT OPTION FOR privileges ON SEQUENCE qualified_name_list FROM grantee_list opt_granted_by opt_drop_behavior
 		{
 			$$ = &nodes.GrantStmt{
 				IsGrant:     false,
 				Targtype:    nodes.ACL_TARGET_OBJECT,
 				Objtype:     nodes.OBJECT_SEQUENCE,
-				Objects:     makeRangeVarList($8),
+				Objects:     $8,
 				Privileges:  $5,
 				Grantees:    $10,
 				GrantOption: true,
@@ -7121,6 +7131,9 @@ AlterCollationStmt:
 AlterCompositeTypeStmt:
 	ALTER TYPE_P any_name alter_type_cmds
 		{
+			if !checkRangeVarNames(pglex, $3, $<loc>3) {
+				return 1
+			}
 			rv := &nodes.RangeVar{
 				Inh:     true,
 				Location: $<loc>3,
@@ -7370,6 +7383,9 @@ DefineStmt:
 CompositeTypeStmt:
 	CREATE TYPE_P any_name AS '(' OptTableFuncElementList ')'
 		{
+			if !checkRangeVarNames(pglex, $3, $<loc>3) {
+				return 1
+			}
 			$$ = &nodes.CompositeTypeStmt{
 				Typevar:    makeRangeVarFromAnyName($3, $<loc>3),
 				Coldeflist: $6,
@@ -9460,6 +9476,9 @@ c_expr:
 	| AexprConst { $$ = $1 }
 	| PARAM opt_indirection
 		{
+			if !checkIndirection(pglex, $2) {
+				return 1
+			}
 			p := &nodes.ParamRef{
 				Number:   int($1),
 				Location: $<loc>1,
@@ -9475,6 +9494,9 @@ c_expr:
 		}
 	| '(' a_expr ')' opt_indirection
 		{
+			if !checkIndirection(pglex, $4) {
+				return 1
+			}
 			if $4 != nil {
 				$$ = &nodes.A_Indirection{
 					Arg:         $2,
@@ -9495,6 +9517,9 @@ c_expr:
 		}
 	| select_with_parens indirection
 		{
+			if !checkIndirection(pglex, $2) {
+				return 1
+			}
 			sublink := &nodes.SubLink{
 				SubLinkType: int(nodes.EXPR_SUBLINK),
 				Subselect:   $1,
@@ -11031,14 +11056,10 @@ func_name:
 		}
 	| ColId indirection
 		{
-			/* schema.funcname or catalog.schema.funcname */
-			l := &nodes.List{Items: []nodes.Node{&nodes.String{Str: $1}}}
-			if $2 != nil {
-				for _, item := range $2.Items {
-					l.Items = append(l.Items, item)
-				}
+			if !checkNames(pglex, $2) {
+				return 1
 			}
-			$$ = l
+			$$ = prependList(&nodes.String{Str: $1}, $2)
 		}
 	;
 
@@ -11056,6 +11077,9 @@ columnref:
 			// If indirection contains A_Indices (subscripts), split the list.
 			// Field selections before the first subscript go into ColumnRef.Fields,
 			// everything from the first subscript onward goes into A_Indirection.
+			if !checkIndirection(pglex, $2) {
+				return 1
+			}
 			c := &nodes.ColumnRef{Location: $<loc>1}
 			nfields := 0
 			var indirList *nodes.List
@@ -11270,16 +11294,13 @@ qualified_name:
 		{
 			$$ = makeList(&nodes.String{Str: $1})
 		}
-	| ColId '.' attr_name
+	| ColId indirection
 		{
-			l := makeList(&nodes.String{Str: $1})
-			$$ = appendList(l, &nodes.String{Str: $3})
-		}
-	| ColId '.' attr_name '.' attr_name
-		{
-			l := makeList(&nodes.String{Str: $1})
-			l = appendList(l, &nodes.String{Str: $3})
-			$$ = appendList(l, &nodes.String{Str: $5})
+			l := prependList(&nodes.String{Str: $1}, $2)
+			if !checkNames(pglex, $2) || !checkRangeVarNames(pglex, l, $<loc>1) {
+				return 1
+			}
+			$$ = l
 		}
 	;
 
@@ -13751,8 +13772,11 @@ function_with_argtypes:
 		}
 	| ColId indirection
 		{
+			if !checkNames(pglex, $2) {
+				return 1
+			}
 			$$ = &nodes.ObjectWithArgs{
-				Objname:        checkFuncName(prependList(&nodes.String{Str: $1}, $2)),
+				Objname:        prependList(&nodes.String{Str: $1}, $2),
 				ArgsUnspecified: true,
 			}
 		}
@@ -17352,6 +17376,15 @@ func grammarError(lex pgLexer, code, message, hint string, loc nodes.ParseLoc) {
 	}
 }
 
+// grammarSyntaxError raises a grammar action's parser_yyerror(message), as
+// PostgreSQL 16's does: 42601, message at or near the token the lexer
+// returned last, at that token. The first error stands.
+func grammarSyntaxError(lex pgLexer, message string) {
+	if pl, ok := lex.(*parserLexer); ok && pl.err == nil {
+		pl.err = &ParseError{Code: codeSyntaxError, Message: pl.atOrNear(message), Position: pl.lastLoc}
+	}
+}
+
 // setParseResult stores the parse result in the lexer.
 func setParseResult(lex pgLexer, result *nodes.List) {
 	if pl, ok := lex.(*parserLexer); ok {
@@ -17410,18 +17443,6 @@ func makeRangeVar(names *nodes.List, location nodes.ParseLoc) nodes.Node {
 		}
 	}
 	return rv
-}
-
-func makeRangeVarList(nameList *nodes.List) *nodes.List {
-	if nameList == nil {
-		return nil
-	}
-	result := &nodes.List{}
-	for _, item := range nameList.Items {
-		rv := makeRangeVar(item.(*nodes.List), -1)
-		result.Items = append(result.Items, rv)
-	}
-	return result
 }
 
 func makeAExpr(kind nodes.A_Expr_Kind, op string, lexpr, rexpr nodes.Node, location nodes.ParseLoc) nodes.Node {
@@ -17912,10 +17933,48 @@ func makeOrderedSetArgs(directArgs *nodes.List, orderedArgs *nodes.List) *nodes.
 	return makeList2(combined, &nodes.Integer{Ival: int64(ndirect)})
 }
 
-// checkFuncName validates that a qualified function name has at most 3 parts.
-func checkFuncName(names *nodes.List) *nodes.List {
-	// Just return as-is; error checking can be done later
-	return names
+// checkNames is PostgreSQL 16's check_func_name and check_qualified_name:
+// every part of a name's indirection after its first is a name, not a
+// subscript or a '*'. Otherwise it raises a syntax error at the token the
+// lexer returned last and reports false.
+func checkNames(lex pgLexer, indirection *nodes.List) bool {
+	for _, item := range indirection.Elems() {
+		if _, ok := item.(*nodes.String); !ok {
+			grammarSyntaxError(lex, "syntax error")
+			return false
+		}
+	}
+	return true
+}
+
+// checkIndirection is PostgreSQL 16's check_indirection: a '*' is only the
+// last element of an indirection. Otherwise it raises improper use of "*" at
+// the token the lexer returned last and reports false.
+func checkIndirection(lex pgLexer, indirection *nodes.List) bool {
+	items := indirection.Elems()
+	for i, item := range items {
+		if _, ok := item.(*nodes.A_Star); ok && i < len(items)-1 {
+			grammarSyntaxError(lex, "improper use of \"*\"")
+			return false
+		}
+	}
+	return true
+}
+
+// checkRangeVarNames refuses a relation name of more than three parts, as
+// PostgreSQL 16's makeRangeVarFromQualifiedName and makeRangeVarFromAnyName
+// do, at the name's first part (loc), and reports whether it is short enough.
+func checkRangeVarNames(lex pgLexer, names *nodes.List, loc nodes.ParseLoc) bool {
+	items := names.Elems()
+	if len(items) <= 3 {
+		return true
+	}
+	parts := make([]string, len(items))
+	for i, item := range items {
+		parts[i] = item.(*nodes.String).Str
+	}
+	grammarError(lex, codeSyntaxError, "improper qualified name (too many dotted names): "+strings.Join(parts, "."), "", loc)
+	return false
 }
 
 // intToString converts an int64 to a string representation.

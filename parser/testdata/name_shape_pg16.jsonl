@@ -1,0 +1,448 @@
+{"sql": "select a", "pg16After": "42703 column \"a\" does not exist"}
+{"sql": "select a.b", "pg16After": "42P01 missing FROM-clause entry for table \"a\""}
+{"sql": "select a.b.c", "pg16After": "42P01 missing FROM-clause entry for table \"b\""}
+{"sql": "select a.b.c.d", "pg16After": "0A000 cross-database references are not implemented: a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "select a.b.c.d.e", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d.e", "pg16Name": "a.b.c.d.e"}
+{"sql": "select a.b.c.d.e.f.g", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d.e.f.g", "pg16Name": "a.b.c.d.e.f.g"}
+{"sql": "select a.*", "pg16After": "42P01 missing FROM-clause entry for table \"a\""}
+{"sql": "select a.b.*", "pg16After": "42P01 missing FROM-clause entry for table \"b\""}
+{"sql": "select a.b.c.*", "pg16After": "0A000 cross-database references are not implemented: a.b.c.*", "pg16Name": "a.b.c.*"}
+{"sql": "select a.b.c.d.*", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d.*", "pg16Name": "a.b.c.d.*"}
+{"sql": "select a.*.b", "syntaxError": "improper use of \"*\" at end of input", "position": 12}
+{"sql": "select a.*.*", "syntaxError": "improper use of \"*\" at end of input", "position": 12}
+{"sql": "select a.b.*.c", "syntaxError": "improper use of \"*\" at end of input", "position": 14}
+{"sql": "select a.*[1]", "syntaxError": "improper use of \"*\" at end of input", "position": 13}
+{"sql": "select a.b.*[1]", "syntaxError": "improper use of \"*\" at end of input", "position": 15}
+{"sql": "select a.*.b from t", "syntaxError": "improper use of \"*\" at or near \"from\"", "position": 13}
+{"sql": "select a.* , a.*.b from t", "syntaxError": "improper use of \"*\" at or near \"from\"", "position": 19}
+{"sql": "select a[1]", "pg16After": "42703 column \"a\" does not exist"}
+{"sql": "select a[1].b", "pg16After": "42703 column \"a\" does not exist"}
+{"sql": "select a[1].*", "pg16After": "42703 column \"a\" does not exist"}
+{"sql": "select a[1].*.b", "syntaxError": "improper use of \"*\" at end of input", "position": 15}
+{"sql": "select a[1].*[1]", "syntaxError": "improper use of \"*\" at end of input", "position": 16}
+{"sql": "select a[1].*.*", "syntaxError": "improper use of \"*\" at end of input", "position": 15}
+{"sql": "select a[1:2]", "pg16After": "42703 column \"a\" does not exist"}
+{"sql": "select a[:]", "pg16After": "42703 column \"a\" does not exist"}
+{"sql": "select a[1][2]", "pg16After": "42703 column \"a\" does not exist"}
+{"sql": "select a.b[1].c[2].d", "pg16After": "42P01 missing FROM-clause entry for table \"a\""}
+{"sql": "select a.b[1].c.*", "pg16After": "42P01 missing FROM-clause entry for table \"a\""}
+{"sql": "select a.b[1].*.c", "syntaxError": "improper use of \"*\" at end of input", "position": 17}
+{"sql": "select \"a\".*.\"b\"", "syntaxError": "improper use of \"*\" at end of input", "position": 16}
+{"sql": "select a . b . c", "pg16After": "42P01 missing FROM-clause entry for table \"b\""}
+{"sql": "select t.*::text from t", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "select 1 from t where t.* is null", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "select 1 from t where a.*.b = 1", "syntaxError": "improper use of \"*\" at or near \"=\"", "position": 28}
+{"sql": "select 1 from t order by a.*.b", "syntaxError": "improper use of \"*\" at end of input", "position": 30}
+{"sql": "select 1 from t group by a.*.b", "syntaxError": "improper use of \"*\" at end of input", "position": 30}
+{"sql": "select f(a.*.b)", "syntaxError": "improper use of \"*\" at or near \")\"", "position": 14}
+{"sql": "select f(x => a.*.b)", "syntaxError": "improper use of \"*\" at or near \")\"", "position": 19}
+{"sql": "select row(a.*.b)", "syntaxError": "improper use of \"*\" at or near \")\"", "position": 16}
+{"sql": "select array[a.*.b]", "syntaxError": "improper use of \"*\" at or near \"]\"", "position": 18}
+{"sql": "select coalesce(a[1].*, 1)", "pg16After": "42703 column \"a\" does not exist"}
+{"sql": "select a.*.b is null", "syntaxError": "improper use of \"*\" at or near \"is\"", "position": 13}
+{"sql": "select a.* as x from t", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "select a.b.* as x from t", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "select xmlelement(name x, xmlattributes(a.*.b))", "syntaxError": "improper use of \"*\" at or near \")\"", "position": 45}
+{"sql": "with x as (select a.*.b) select 1", "syntaxError": "improper use of \"*\" at or near \")\"", "position": 23}
+{"sql": "explain select a.*.b", "syntaxError": "improper use of \"*\" at end of input", "position": 20}
+{"sql": "insert into t values (1) returning a.*.b", "syntaxError": "improper use of \"*\" at end of input", "position": 40}
+{"sql": "insert into t values (1) returning a.b.*", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "delete from t returning a[1].*.b", "syntaxError": "improper use of \"*\" at end of input", "position": 32}
+{"sql": "select a()", "pg16After": "42883 function a() does not exist"}
+{"sql": "select a.b()", "pg16After": "3F000 schema \"a\" does not exist"}
+{"sql": "select a.b.c()", "pg16After": "0A000 cross-database references are not implemented: a.b.c", "pg16Name": "a.b.c"}
+{"sql": "select a.b.c.d()", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "select a.b.c.d.e()", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d.e", "pg16Name": "a.b.c.d.e"}
+{"sql": "select a.*()", "syntaxError": "syntax error at or near \"(\"", "position": 10}
+{"sql": "select a.b.*()", "syntaxError": "syntax error at or near \"(\"", "position": 12}
+{"sql": "select a[1]()", "syntaxError": "syntax error at or near \"(\"", "position": 11}
+{"sql": "select a.b[1]()", "syntaxError": "syntax error at or near \"(\"", "position": 13}
+{"sql": "select a.b[1:2]()", "syntaxError": "syntax error at or near \"(\"", "position": 15}
+{"sql": "select a.*.b()", "syntaxError": "syntax error at or near \"(\"", "position": 12}
+{"sql": "select a[1].b()", "syntaxError": "syntax error at or near \"(\"", "position": 13}
+{"sql": "select a.b[1](1)", "syntaxError": "syntax error at or near \"(\"", "position": 13}
+{"sql": "select a.b[1](*)", "syntaxError": "syntax error at or near \"(\"", "position": 13}
+{"sql": "select a.b[1](distinct x)", "syntaxError": "syntax error at or near \"(\"", "position": 13}
+{"sql": "select a.b[1](variadic x)", "syntaxError": "syntax error at or near \"(\"", "position": 13}
+{"sql": "select a.b.*(1, 2)", "syntaxError": "syntax error at or near \"(\"", "position": 12}
+{"sql": "select a.b(1) over ()", "pg16After": "3F000 schema \"a\" does not exist"}
+{"sql": "select a.b[1](1) over ()", "syntaxError": "syntax error at or near \"(\"", "position": 13}
+{"sql": "select a.b[1](1) filter (where true)", "syntaxError": "syntax error at or near \"(\"", "position": 13}
+{"sql": "select a.b[1](1) within group (order by x)", "syntaxError": "syntax error at or near \"(\"", "position": 13}
+{"sql": "select * from t tablesample a.b(1)", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "select * from t tablesample a.b[1](1)", "syntaxError": "syntax error at or near \"(\"", "position": 34}
+{"sql": "select * from t tablesample a.*(1)", "syntaxError": "syntax error at or near \"(\"", "position": 31}
+{"sql": "select * from a.b[1]()", "syntaxError": "syntax error at or near \"(\"", "position": 20}
+{"sql": "select * from a.*()", "syntaxError": "syntax error at or near \"(\"", "position": 17}
+{"sql": "select * from a.b.c.d.e()", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d.e", "pg16Name": "a.b.c.d.e"}
+{"sql": "select * from rows from (a.b[1]())", "syntaxError": "syntax error at or near \"(\"", "position": 31}
+{"sql": "select a 'x'", "pg16After": "42704 type \"a\" does not exist"}
+{"sql": "select a.b 'x'", "pg16After": "3F000 schema \"a\" does not exist"}
+{"sql": "select a.b.c 'x'", "pg16After": "0A000 cross-database references are not implemented: a.b.c", "pg16Name": "a.b.c"}
+{"sql": "select a.b.c.d 'x'", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "select a.b[1] 'x'", "syntaxError": "syntax error at or near \"'x'\"", "position": 14}
+{"sql": "select a.b[1:2] 'x'", "syntaxError": "syntax error at or near \"'x'\"", "position": 16}
+{"sql": "select a.* 'x'", "syntaxError": "syntax error at or near \"'x'\"", "position": 11}
+{"sql": "select a.b.* 'x'", "syntaxError": "syntax error at or near \"'x'\"", "position": 13}
+{"sql": "select a[1] 'x'", "syntaxError": "syntax error at or near \"'x'\"", "position": 12}
+{"sql": "select a.*.b 'x'", "syntaxError": "syntax error at or near \"'x'\"", "position": 13}
+{"sql": "select a.b(1) 'x'", "pg16After": "3F000 schema \"a\" does not exist"}
+{"sql": "select a.b[1](1) 'x'", "syntaxError": "syntax error at or near \"(\"", "position": 13}
+{"sql": "select a.*(1) 'x'", "syntaxError": "syntax error at or near \"(\"", "position": 10}
+{"sql": "select a.b.c.d(1) 'x'", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "select x from t where a.b[1] 'x' = 1", "syntaxError": "syntax error at or near \"'x'\"", "position": 29}
+{"sql": "select 1::a.b", "pg16After": "3F000 schema \"a\" does not exist"}
+{"sql": "select 1::a.b[1]", "pg16After": "3F000 schema \"a\" does not exist"}
+{"sql": "select 1::a.b.c.d.e", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d.e", "pg16Name": "a.b.c.d.e"}
+{"sql": "select 1::a.*", "syntaxError": "syntax error at or near \"*\"", "position": 12}
+{"sql": "select 1::a.b.*", "syntaxError": "syntax error at or near \"*\"", "position": 14}
+{"sql": "select cast(1 as a.b[])", "pg16After": "3F000 schema \"a\" does not exist"}
+{"sql": "select cast(1 as a.*)", "syntaxError": "syntax error at or near \"*\"", "position": 19}
+{"sql": "select cast(1 as a[1].b)", "syntaxError": "syntax error at or near \".\"", "position": 21}
+{"sql": "select (x).a", "pg16After": "42703 column \"x\" does not exist"}
+{"sql": "select (x).a[1].b", "pg16After": "42703 column \"x\" does not exist"}
+{"sql": "select (x).*", "pg16After": "42703 column \"x\" does not exist"}
+{"sql": "select (x).*.a", "syntaxError": "improper use of \"*\" at end of input", "position": 14}
+{"sql": "select (x).a.*", "pg16After": "42703 column \"x\" does not exist"}
+{"sql": "select (x).a.*.b", "syntaxError": "improper use of \"*\" at end of input", "position": 16}
+{"sql": "select (x)[1].*", "pg16After": "42703 column \"x\" does not exist"}
+{"sql": "select (x).*[1]", "syntaxError": "improper use of \"*\" at end of input", "position": 15}
+{"sql": "select (x)[1].*.a", "syntaxError": "improper use of \"*\" at end of input", "position": 17}
+{"sql": "select ((x).a).b[1].c", "pg16After": "42703 column \"x\" does not exist"}
+{"sql": "select (x).a[1].b.*", "pg16After": "42703 column \"x\" does not exist"}
+{"sql": "select $1.a", "pg16After": "42P02 there is no parameter $1"}
+{"sql": "select $1.*", "pg16After": "42P02 there is no parameter $1"}
+{"sql": "select $1.*.a", "syntaxError": "improper use of \"*\" at end of input", "position": 13}
+{"sql": "select $1[1]", "pg16After": "42P02 there is no parameter $1"}
+{"sql": "select $1[1].*.a", "syntaxError": "improper use of \"*\" at end of input", "position": 16}
+{"sql": "select $1.a.*", "pg16After": "42P02 there is no parameter $1"}
+{"sql": "select (select 1).a", "pg16After": "42809 column notation .a applied to type integer, which is not a composite type"}
+{"sql": "select (select 1).*", "pg16After": "42809 type integer is not composite"}
+{"sql": "select (select 1).*.a", "syntaxError": "improper use of \"*\" at end of input", "position": 21}
+{"sql": "select (select 1)[1]", "pg16After": "42804 cannot subscript type integer because it does not support subscripting"}
+{"sql": "select (select 1).a.*.b", "syntaxError": "improper use of \"*\" at end of input", "position": 23}
+{"sql": "select (row(1, 2)).*", "pg16After": "ok"}
+{"sql": "select (row(1, 2)).f1", "pg16After": "ok"}
+{"sql": "insert into a values (1)", "pg16After": "42P01 relation \"a\" does not exist", "pg16Name": "a"}
+{"sql": "insert into a.b values (1)", "pg16After": "42P01 relation \"a.b\" does not exist", "pg16Name": "a.b"}
+{"sql": "insert into a.b.c values (1)", "pg16After": "0A000 cross-database references are not implemented: \"a.b.c\"", "pg16Name": "a.b.c"}
+{"sql": "insert into a.b.c.d values (1)", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 12}
+{"sql": "insert into a.b.c.d.e values (1)", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d.e", "position": 12}
+{"sql": "insert into a.b[1] values (1)", "syntaxError": "syntax error at or near \"values\"", "position": 19}
+{"sql": "insert into a.* values (1)", "syntaxError": "syntax error at or near \"values\"", "position": 16}
+{"sql": "insert into a.b.c.d as x values (1)", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 12}
+{"sql": "insert into t (a.b) values (1)", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "insert into t (a[1]) values (1)", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "insert into t (a.b[1].c) values (1)", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "insert into t (a.*) values (1)", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "insert into t (a.*.b) values (1)", "syntaxError": "improper use of \"*\" at or near \")\"", "position": 20}
+{"sql": "insert into t (a[1].*) values (1)", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "insert into t (a.b.*) values (1)", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "insert into t (a) values (1) on conflict do update set a.b = 1", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "insert into t (a) values (1) on conflict do update set a.*.b = 1", "syntaxError": "improper use of \"*\" at or near \"=\"", "position": 61}
+{"sql": "insert into t (a) values (1) on conflict do update set a.* = 1", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "update t set a = 1", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "update t set a.b = 1", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "update t set a[1] = 1", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "update t set a.b[1] = 1", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "update t set a[1].b = 1", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "update t set a.* = 1", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "update t set a.b.* = 1", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "update t set a.*.b = 1", "syntaxError": "improper use of \"*\" at or near \"=\"", "position": 19}
+{"sql": "update t set a[1].* = 1", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "update t set a[1].*.b = 1", "syntaxError": "improper use of \"*\" at or near \"=\"", "position": 22}
+{"sql": "update t set (a.b, c[1]) = (1, 2)", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "update t set (a.*) = row(1)", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "update t set (a.*.b, c) = (1, 2)", "syntaxError": "improper use of \"*\" at or near \",\"", "position": 19}
+{"sql": "update a.b.c.d set x = 1", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 7}
+{"sql": "update a.b.c.d.e set x = 1", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d.e", "position": 7}
+{"sql": "update a.b[1] set x = 1", "syntaxError": "syntax error at or near \"set\"", "position": 14}
+{"sql": "update a.* set x = 1", "syntaxError": "syntax error at or near \"set\"", "position": 11}
+{"sql": "update only a.b.c.d set x = 1", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 12}
+{"sql": "update t set x = 1 from a.b.c.d", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 24}
+{"sql": "select * from a", "pg16After": "42P01 relation \"a\" does not exist", "pg16Name": "a"}
+{"sql": "select * from a.b", "pg16After": "42P01 relation \"a.b\" does not exist", "pg16Name": "a.b"}
+{"sql": "select * from a.b.c", "pg16After": "0A000 cross-database references are not implemented: \"a.b.c\"", "pg16Name": "a.b.c"}
+{"sql": "select * from a.b.c.d", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 14}
+{"sql": "select * from a.b.c.d.e", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d.e", "position": 14}
+{"sql": "select * from a.b[1]", "syntaxError": "syntax error at end of input", "position": 20}
+{"sql": "select * from a[1]", "syntaxError": "syntax error at end of input", "position": 18}
+{"sql": "select * from a.*", "syntaxError": "syntax error at end of input", "position": 17}
+{"sql": "select * from a.b.*", "syntaxError": "syntax error at end of input", "position": 19}
+{"sql": "select * from a.b.c.d *", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 14}
+{"sql": "select * from a *", "pg16After": "42P01 relation \"a\" does not exist", "pg16Name": "a"}
+{"sql": "select * from only a.b.c.d", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 19}
+{"sql": "select * from only (a.b.c.d)", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 20}
+{"sql": "select * from a.b.c.d as x", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 14}
+{"sql": "select * from t join a.b.c.d on true", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 21}
+{"sql": "select * from t, a.b.c.d.e x", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d.e", "position": 17}
+{"sql": "select * from a.b.c.d.e.f", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d.e.f", "position": 14}
+{"sql": "delete from a.b.c.d", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 12}
+{"sql": "delete from a.b[1]", "syntaxError": "syntax error at end of input", "position": 18}
+{"sql": "delete from a.*", "syntaxError": "syntax error at end of input", "position": 15}
+{"sql": "delete from t using a.b.c.d", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 20}
+{"sql": "table a.b.c.d", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 6}
+{"sql": "table a.b.c", "pg16After": "0A000 cross-database references are not implemented: \"a.b.c\"", "pg16Name": "a.b.c"}
+{"sql": "select * into a.b.c.d from t", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 14}
+{"sql": "truncate a.b.c.d", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 9}
+{"sql": "truncate a.b[1]", "syntaxError": "syntax error at end of input", "position": 15}
+{"sql": "lock table a.b.c.d", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 11}
+{"sql": "vacuum a.b.c.d", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 7}
+{"sql": "vacuum a.b[1]", "syntaxError": "syntax error at end of input", "position": 13}
+{"sql": "analyze a.b.c.d (x)", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 8}
+{"sql": "cluster a.b.c.d", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 8}
+{"sql": "cluster i on a.b.c.d", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 13}
+{"sql": "reindex table a.b.c.d", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 14}
+{"sql": "reindex index a.b.c.d", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 14}
+{"sql": "refresh materialized view a.b.c.d", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 26}
+{"sql": "copy a.b.c.d from '/nonexistent'", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 5}
+{"sql": "copy a.b[1] from '/nonexistent'", "syntaxError": "syntax error at or near \"from\"", "position": 12}
+{"sql": "copy a.b.c.d (x) to '/nonexistent'", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 5}
+{"sql": "grant select on a.b.c.d to public", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 16}
+{"sql": "grant select on table a.b[1] to public", "syntaxError": "syntax error at or near \"to\"", "position": 29}
+{"sql": "grant select on a.*, t to public", "syntaxError": "syntax error at or near \",\"", "position": 19}
+{"sql": "revoke select on a.b.c.d.e from public", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d.e", "position": 17}
+{"sql": "grant execute on function a.b.c.d() to public", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "grant execute on function a.b[1]() to public", "syntaxError": "syntax error at or near \"(\"", "position": 32}
+{"sql": "create table a (x int)", "pg16After": "ok"}
+{"sql": "create table a.b (x int)", "pg16After": "3F000 schema \"a\" does not exist"}
+{"sql": "create table a.b.c (x int)", "pg16After": "0A000 cross-database references are not implemented: \"a.b.c\"", "pg16Name": "a.b.c"}
+{"sql": "create table a.b.c.d (x int)", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 13}
+{"sql": "create table a.b.c.d.e (x int)", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d.e", "position": 13}
+{"sql": "create table a.b[1] (x int)", "syntaxError": "syntax error at or near \"(\"", "position": 20}
+{"sql": "create table a.* (x int)", "syntaxError": "syntax error at or near \"(\"", "position": 17}
+{"sql": "create table a.b.* (x int)", "syntaxError": "syntax error at or near \"(\"", "position": 19}
+{"sql": "create table a[1] (x int)", "syntaxError": "syntax error at or near \"(\"", "position": 18}
+{"sql": "create table if not exists a.b.c.d (x int)", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 27}
+{"sql": "create temp table a.b.c.d (x int)", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 18}
+{"sql": "create table x (y int references a.b.c.d)", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 33}
+{"sql": "create table x (y int, foreign key (y) references a.b.c.d)", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 50}
+{"sql": "create table x (y int references a.b[1])", "syntaxError": "syntax error at or near \")\"", "position": 39}
+{"sql": "create table x partition of a.b.c.d for values in (1)", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 28}
+{"sql": "create table a.b.c.d partition of x for values in (1)", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 13}
+{"sql": "create table x (like a.b.c.d)", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 21}
+{"sql": "create table x (like a.b[1])", "syntaxError": "syntax error at or near \")\"", "position": 27}
+{"sql": "create table x of a.b.c.d", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "create table x of a.b[1]", "syntaxError": "syntax error at or near \"[\"", "position": 21}
+{"sql": "create table x () inherits (a.b.c.d)", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 28}
+{"sql": "create table a.b.c.d as select 1", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 13}
+{"sql": "create table a.b[1] as select 1", "syntaxError": "syntax error at or near \"as\"", "position": 20}
+{"sql": "create view a.b.c.d as select 1", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 12}
+{"sql": "create view a.b[1] as select 1", "syntaxError": "syntax error at or near \"as\"", "position": 19}
+{"sql": "create recursive view a.b.c.d (x) as select 1", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 22}
+{"sql": "create materialized view a.b.c.d as select 1", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 25}
+{"sql": "create sequence a.b.c.d", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 16}
+{"sql": "create sequence a.b[1]", "syntaxError": "syntax error at end of input", "position": 22}
+{"sql": "alter sequence a.b.c.d restart", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 15}
+{"sql": "create index on a.b.c.d (x)", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 16}
+{"sql": "create index i on a.b[1] (x)", "syntaxError": "syntax error at or near \"(\"", "position": 25}
+{"sql": "create index i on only a.b.c.d (x)", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 23}
+{"sql": "create foreign table a.b.c.d (x int) server s", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 21}
+{"sql": "create trigger tr after insert on a.b.c.d for each row execute function f()", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 34}
+{"sql": "create trigger tr after insert on t for each row execute function a.b.c.d()", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "create trigger tr after insert on t for each row execute function a.b[1]()", "syntaxError": "syntax error at or near \"(\"", "position": 72}
+{"sql": "create trigger tr after insert on t for each row execute function a.*()", "syntaxError": "syntax error at or near \"(\"", "position": 69}
+{"sql": "create constraint trigger tr after insert on t from a.b.c.d for each row execute function f()", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 52}
+{"sql": "create rule r as on insert to a.b.c.d do nothing", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 30}
+{"sql": "create rule r as on insert to a.b[1] do nothing", "syntaxError": "syntax error at or near \"do\"", "position": 37}
+{"sql": "create policy p on a.b.c.d", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 19}
+{"sql": "alter policy p on a.b.c.d rename to q", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 18}
+{"sql": "create statistics a.b.c.d on x, y from t", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "create statistics s on x, y from a.b.c.d", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 33}
+{"sql": "drop table a.b.c.d", "pg16After": "42601 improper relation name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "drop table a.b.c.d.e", "pg16After": "42601 improper relation name (too many dotted names): a.b.c.d.e", "pg16Name": "a.b.c.d.e"}
+{"sql": "drop table a.b[1]", "syntaxError": "syntax error at or near \"[\"", "position": 14}
+{"sql": "drop table a.*", "syntaxError": "syntax error at or near \"*\"", "position": 13}
+{"sql": "drop table a.b, c.d.e.f", "pg16After": "3F000 schema \"a\" does not exist"}
+{"sql": "drop view a.b.c.d", "pg16After": "42601 improper relation name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "drop index a.b.c.d", "pg16After": "42601 improper relation name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "drop sequence a.b.c.d", "pg16After": "42601 improper relation name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "drop type a.b.c.d", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "drop type a.b[1]", "pg16After": "3F000 schema \"a\" does not exist", "divergence": "DROP TYPE and COMMENT ON TYPE take an any_name; PostgreSQL 16's take a Typename, which may carry array bounds"}
+{"sql": "drop domain a.b.c.d", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "drop schema a.b", "syntaxError": "syntax error at or near \".\"", "position": 13}
+{"sql": "drop schema a", "pg16After": "3F000 schema \"a\" does not exist"}
+{"sql": "drop function a.b.c.d()", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "drop function a.b.c.d", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "drop function a.b[1]()", "syntaxError": "syntax error at or near \"(\"", "position": 20}
+{"sql": "drop function a.b[1]", "syntaxError": "syntax error at end of input", "position": 20}
+{"sql": "drop function a.*", "syntaxError": "syntax error at end of input", "position": 17}
+{"sql": "drop function a.b.*()", "syntaxError": "syntax error at or near \"(\"", "position": 19}
+{"sql": "drop procedure a.b.c.d()", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "drop routine a.b[1]", "syntaxError": "syntax error at end of input", "position": 19}
+{"sql": "drop aggregate a.b.c.d(int)", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "drop aggregate a.b[1](int)", "syntaxError": "syntax error at or near \"(\"", "position": 21}
+{"sql": "drop operator a.b.+ (int, int)", "pg16After": "0A000 cross-database references are not implemented: a.b.+", "pg16Name": "a.b.+"}
+{"sql": "drop operator a.b.c.d.+ (int, int)", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d.+", "pg16Name": "a.b.c.d.+"}
+{"sql": "drop collation a.b.c.d", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "alter table a.b.c.d rename to x", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 12}
+{"sql": "alter table a.b[1] rename to x", "syntaxError": "syntax error at or near \"rename\"", "position": 19}
+{"sql": "alter table a.b.c.d rename column x to y", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 12}
+{"sql": "alter table only a.b.c.d add column y int", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 17}
+{"sql": "alter table a.b.c.d set schema s", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 12}
+{"sql": "alter table x rename to a.b", "syntaxError": "syntax error at or near \".\"", "position": 25}
+{"sql": "alter table t attach partition a.b.c.d for values in (1)", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 31}
+{"sql": "alter table t inherit a.b.c.d", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 22}
+{"sql": "alter index a.b.c.d rename to x", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 12}
+{"sql": "alter index a.b[1] rename to x", "syntaxError": "syntax error at or near \"rename\"", "position": 19}
+{"sql": "alter view a.b.c.d rename to x", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 11}
+{"sql": "alter materialized view a.b.c.d rename to x", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 24}
+{"sql": "alter sequence a.b.c.d set schema s", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 15}
+{"sql": "alter trigger tr on a.b.c.d rename to x", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 20}
+{"sql": "create function a.b.c.d() returns int language sql as 'select 1'", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "create function a.b[1]() returns int language sql as 'select 1'", "syntaxError": "syntax error at or near \"(\"", "position": 22}
+{"sql": "create function a.*() returns int language sql as 'select 1'", "syntaxError": "syntax error at or near \"(\"", "position": 19}
+{"sql": "create function a.b.*() returns int language sql as 'select 1'", "syntaxError": "syntax error at or near \"(\"", "position": 21}
+{"sql": "create procedure a.b[1]() language sql as 'select 1'", "syntaxError": "syntax error at or near \"(\"", "position": 23}
+{"sql": "create function f() returns a.b%type language sql as 'select 1'", "pg16After": "42P01 relation \"a\" does not exist", "pg16Name": "a"}
+{"sql": "create function f() returns a.b.c.d%type language sql as 'select 1'", "pg16After": "0A000 cross-database references are not implemented: \"a.b.c\"", "pg16Name": "a.b.c"}
+{"sql": "create function f(x a.b[1]%type) returns int language sql as 'select 1'", "syntaxError": "syntax error at or near \"%\"", "position": 26}
+{"sql": "create function f() returns setof a.b.c%type language sql as 'select 1'", "pg16After": "3F000 schema \"a\" does not exist"}
+{"sql": "create aggregate a.b.c.d(int) (sfunc = f, stype = int)", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "create aggregate a.b[1](int) (sfunc = f, stype = int)", "syntaxError": "syntax error at or near \"(\"", "position": 23}
+{"sql": "create aggregate x(int) (sfunc = a.b.c.d, stype = int)", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "alter function a.b[1]() rename to x", "syntaxError": "syntax error at or near \"(\"", "position": 21}
+{"sql": "alter function a.b.c.d() rename to x", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "create type a.b.c as (x int)", "pg16After": "0A000 cross-database references are not implemented: \"a.b.c\"", "pg16Name": "a.b.c"}
+{"sql": "create type a.b.c.d as (x int)", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 12}
+{"sql": "create type a.b.c.d.e as (x int)", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d.e", "position": 12}
+{"sql": "create type a.b[1] as (x int)", "syntaxError": "syntax error at or near \"[\"", "position": 15}
+{"sql": "create type a.b.c.d as enum ('x')", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "create type a.b.c.d as range (subtype = int)", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "create type a.b.c.d (input = f, output = g)", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "create type a.b.c.d", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "create domain a.b.c.d as int", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "alter type a.b.c.d add attribute x int", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 11}
+{"sql": "alter type a.b.c add attribute x int", "pg16After": "0A000 cross-database references are not implemented: \"a.b.c\"", "pg16Name": "a.b.c"}
+{"sql": "alter type a.b.c.d rename attribute x to y", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 11}
+{"sql": "alter type a.b.c rename attribute x to y", "pg16After": "0A000 cross-database references are not implemented: \"a.b.c\"", "pg16Name": "a.b.c"}
+{"sql": "alter type a.b.c.d rename to z", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "alter type a.b.c.d add value 'x'", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "alter type a.b.c.d owner to public", "pg16After": "42704 role \"public\" does not exist"}
+{"sql": "alter type a.b.c.d set schema s", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "create schema a", "pg16After": "ok"}
+{"sql": "create schema a.b", "syntaxError": "syntax error at or near \".\"", "position": 15}
+{"sql": "create operator a.+ (function = f)", "pg16After": "3F000 schema \"a\" does not exist"}
+{"sql": "create operator a.b.+ (function = f)", "pg16After": "0A000 cross-database references are not implemented: a.b.+", "pg16Name": "a.b.+"}
+{"sql": "create operator a.b.c.d.+ (function = f)", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d.+", "pg16Name": "a.b.c.d.+"}
+{"sql": "select 1 operator(a.+) 2", "pg16After": "3F000 schema \"a\" does not exist"}
+{"sql": "select 1 operator(a.b.+) 2", "pg16After": "0A000 cross-database references are not implemented: a.b.+", "pg16Name": "a.b.+"}
+{"sql": "select 1 operator(a.b.c.+) 2", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.+", "pg16Name": "a.b.c.+"}
+{"sql": "select 1 operator(a.b.c.d.+) 2", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d.+", "pg16Name": "a.b.c.d.+"}
+{"sql": "select 1 operator(a[1].+) 2", "syntaxError": "syntax error at or near \"[\"", "position": 19}
+{"sql": "select operator(a.b.c.d.-) 1", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d.-", "pg16Name": "a.b.c.d.-"}
+{"sql": "comment on operator a.b.c.d.+ (int, int) is 'x'", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d.+", "pg16Name": "a.b.c.d.+"}
+{"sql": "alter operator a.b.c.d.+ (int, int) owner to public", "pg16After": "42704 role \"public\" does not exist"}
+{"sql": "comment on table a.b.c.d is 'x'", "pg16After": "42601 improper relation name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "comment on table a.b[1] is 'x'", "syntaxError": "syntax error at or near \"[\"", "position": 20}
+{"sql": "comment on table a.* is 'x'", "syntaxError": "syntax error at or near \"*\"", "position": 19}
+{"sql": "comment on column a is 'x'", "pg16After": "42601 column name must be qualified"}
+{"sql": "comment on column a.b is 'x'", "pg16After": "42P01 relation \"a\" does not exist", "pg16Name": "a"}
+{"sql": "comment on column a.b.c.d is 'x'", "pg16After": "0A000 cross-database references are not implemented: \"a.b.c\"", "pg16Name": "a.b.c"}
+{"sql": "comment on column a.b.c.d.e is 'x'", "pg16After": "42601 improper relation name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "comment on column a.b[1] is 'x'", "syntaxError": "syntax error at or near \"[\"", "position": 21}
+{"sql": "comment on function a.b.c.d() is 'x'", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "comment on function a.b[1]() is 'x'", "syntaxError": "syntax error at or near \"(\"", "position": 26}
+{"sql": "comment on type a.b[1] is 'x'", "pg16After": "3F000 schema \"a\" does not exist", "divergence": "DROP TYPE and COMMENT ON TYPE take an any_name; PostgreSQL 16's take a Typename, which may carry array bounds"}
+{"sql": "comment on type a.b.c.d is 'x'", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "comment on schema a.b is 'x'", "syntaxError": "syntax error at or near \".\"", "position": 19}
+{"sql": "create language l handler a", "pg16After": "42883 function a() does not exist"}
+{"sql": "create language l handler a.b.c.d", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "create language l handler a.b[1]", "syntaxError": "syntax error at or near \"[\"", "position": 29}
+{"sql": "create language l handler a.*", "syntaxError": "syntax error at or near \"*\"", "position": 28}
+{"sql": "create language l handler h inline a.b.c.d validator a.b.c.d.e", "pg16After": "42883 function h() does not exist"}
+{"sql": "create foreign data wrapper w handler a.b.c.d", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "create foreign data wrapper w validator a.b[1]", "syntaxError": "syntax error at or near \"[\"", "position": 43}
+{"sql": "create access method m type table handler a.b.c.d", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "create access method m type table handler a.b.*", "syntaxError": "syntax error at or near \"*\"", "position": 46}
+{"sql": "select x collate a.b.c.d from t", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "select x collate a.b[1] from t", "syntaxError": "syntax error at or near \"[\"", "position": 20}
+{"sql": "select x collate a.* from t", "syntaxError": "syntax error at or near \"*\"", "position": 19}
+{"sql": "create collation a.b.c.d from x", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "create text search configuration a.b.c.d (parser = default)", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "create conversion a.b.c.d for 'LATIN1' to 'UTF8' from f", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "create table x (y text collate a.b.c.d)", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "select *.a", "syntaxError": "syntax error at or near \".\"", "position": 8}
+{"sql": "select a.b.c.d.e.*", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d.e.*", "pg16Name": "a.b.c.d.e.*"}
+{"sql": "select a.*.b, 1", "syntaxError": "improper use of \"*\" at or near \",\"", "position": 12}
+{"sql": "select a.*.b+1", "syntaxError": "improper use of \"*\" at or near \"+\"", "position": 12}
+{"sql": "select a . * . b", "syntaxError": "improper use of \"*\" at end of input", "position": 16}
+{"sql": "select (a.b).c[1].*", "pg16After": "42P01 missing FROM-clause entry for table \"a\""}
+{"sql": "select (a.b).c.*.d", "syntaxError": "improper use of \"*\" at end of input", "position": 18}
+{"sql": "select a.b.c[1].d.*", "pg16After": "42P01 missing FROM-clause entry for table \"b\""}
+{"sql": "select $1.a[1].*", "pg16After": "42P02 there is no parameter $1"}
+{"sql": "select (x).a.b.c.d.e", "pg16After": "42703 column \"x\" does not exist"}
+{"sql": "select (t.*).*", "pg16After": "42P01 missing FROM-clause entry for table \"t\""}
+{"sql": "select (t.*).a from t", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "select row(1).*", "syntaxError": "syntax error at or near \".\"", "position": 13}
+{"sql": "select a.b(1)[1]", "syntaxError": "syntax error at or near \"[\"", "position": 13}
+{"sql": "select a.b[1]::int", "pg16After": "42P01 missing FROM-clause entry for table \"a\""}
+{"sql": "select a.*::text", "pg16After": "42P01 missing FROM-clause entry for table \"a\""}
+{"sql": "select a.*.b::text", "syntaxError": "improper use of \"*\" at or near \"::\"", "position": 12}
+{"sql": "values (a.*.b)", "syntaxError": "improper use of \"*\" at or near \")\"", "position": 13}
+{"sql": "select a.select()", "pg16After": "3F000 schema \"a\" does not exist"}
+{"sql": "select a.b.select 'x'", "pg16After": "0A000 cross-database references are not implemented: a.b.select", "pg16Name": "a.b.select"}
+{"sql": "select pg_catalog.int4 'x'", "pg16After": "22P02 invalid input syntax for type integer: \"x\""}
+{"sql": "select a.b.c.d.e 'x'", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d.e", "pg16Name": "a.b.c.d.e"}
+{"sql": "select a.b.c.d.e.f.g 'x'", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d.e.f.g", "pg16Name": "a.b.c.d.e.f.g"}
+{"sql": "select a.b.c.d.e(1)", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d.e", "pg16Name": "a.b.c.d.e"}
+{"sql": "select a.b.c.d.e.f.g()", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d.e.f.g", "pg16Name": "a.b.c.d.e.f.g"}
+{"sql": "select a.b.*() over w", "syntaxError": "syntax error at or near \"(\"", "position": 12}
+{"sql": "select * from t tablesample a.b.c(1)", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "select * from a.b.c *", "pg16After": "0A000 cross-database references are not implemented: \"a.b.c\"", "pg16Name": "a.b.c"}
+{"sql": "select * from only a.b.c", "pg16After": "0A000 cross-database references are not implemented: \"a.b.c\"", "pg16Name": "a.b.c"}
+{"sql": "select * from a.from", "pg16After": "42P01 relation \"a.from\" does not exist", "pg16Name": "a.from"}
+{"sql": "select * from a.b.c.d.*", "syntaxError": "syntax error at end of input", "position": 23}
+{"sql": "select 1 from a.b.c.d.e.f.g", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d.e.f.g", "position": 14}
+{"sql": "create table a.select (x int)", "pg16After": "3F000 schema \"a\" does not exist"}
+{"sql": "create table a.b.select (x int)", "pg16After": "0A000 cross-database references are not implemented: \"a.b.select\"", "pg16Name": "a.b.select"}
+{"sql": "create table a.b.c.select (x int)", "syntaxError": "improper qualified name (too many dotted names): a.b.c.select", "position": 13}
+{"sql": "alter table a.b.c.d.e rename to x", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d.e", "position": 12}
+{"sql": "create index i on a.b.c.d.e (x)", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d.e", "position": 18}
+{"sql": "merge into a.b.c.d using t on true when matched then do nothing", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 11}
+{"sql": "merge into t using a.b.c.d on true when matched then do nothing", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 19}
+{"sql": "merge into t using a.b[1] on true when matched then do nothing", "syntaxError": "syntax error at or near \"on\"", "position": 26}
+{"sql": "merge into t using u on true when matched then update set a.*.b = 1", "syntaxError": "improper use of \"*\" at or near \"=\"", "position": 64}
+{"sql": "merge into t using u on true when not matched then insert (a.*.b) values (1)", "syntaxError": "improper use of \"*\" at or near \")\"", "position": 64}
+{"sql": "call a.b[1]()", "syntaxError": "syntax error at or near \"(\"", "position": 11}
+{"sql": "call a.b.c.d()", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "call a.*()", "syntaxError": "syntax error at or near \"(\"", "position": 8}
+{"sql": "create cast (int as text) with function a.b[1](int)", "syntaxError": "syntax error at or near \"(\"", "position": 46}
+{"sql": "create cast (int as text) with function a.b.c.d(int)", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "alter function a.*(int) owner to public", "syntaxError": "syntax error at or near \"(\"", "position": 18}
+{"sql": "drop function a.b(int), c.d[1](int)", "syntaxError": "syntax error at or near \"(\"", "position": 30}
+{"sql": "drop function a.b(int), c.d.e.f(int)", "pg16After": "3F000 schema \"a\" does not exist"}
+{"sql": "security label on table a.b.c.d is 'x'", "pg16After": "22023 no security label providers have been loaded"}
+{"sql": "security label on table a.b[1] is 'x'", "syntaxError": "syntax error at or near \"[\"", "position": 27}
+{"sql": "create table x (y int default a.*.b)", "syntaxError": "improper use of \"*\" at or near \")\"", "position": 35}
+{"sql": "create table x (y int default a.b[1] 'x')", "syntaxError": "syntax error at or near \"'x'\"", "position": 37}
+{"sql": "create index on t ((a.*.b))", "syntaxError": "improper use of \"*\" at or near \")\"", "position": 25}
+{"sql": "create table x (y int check (a[1].*.b > 0))", "syntaxError": "improper use of \"*\" at or near \">\"", "position": 38}
+{"sql": "select 1 operator(a.b.c.d.e.+) 2", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d.e.+", "pg16Name": "a.b.c.d.e.+"}
+{"sql": "comment on column a.b.c.d.e.f is 'x'", "pg16After": "42601 improper relation name (too many dotted names): a.b.c.d.e", "pg16Name": "a.b.c.d.e"}
+{"sql": "create foreign data wrapper w handler a.*", "syntaxError": "syntax error at or near \"*\"", "position": 40}
+{"sql": "create function f(x a.*%type) returns int language sql as 'select 1'", "syntaxError": "syntax error at or near \"*%\"", "position": 22}
+{"sql": "create function f(x a.b.c.d.e%type) returns int language sql as 'select 1'", "pg16After": "42601 improper %TYPE reference (too many dotted names): a.b.c.d.e", "pg16Name": "a.b.c.d.e"}
+{"sql": "update t set a.b[1].* = 1", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "insert into t (a[1].b.*) select 1", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "select (select 1)[1].*.a", "syntaxError": "improper use of \"*\" at end of input", "position": 24}
+{"sql": "select (x).a[1:2].*", "pg16After": "42703 column \"x\" does not exist"}
+{"sql": "select (x).a[:].*.b", "syntaxError": "improper use of \"*\" at end of input", "position": 19}
+{"sql": "alter table t rename a.b to c", "syntaxError": "syntax error at or near \".\"", "position": 22}
+{"sql": "alter table t alter column a.b type int", "syntaxError": "syntax error at or near \".\"", "position": 28}
+{"sql": "listen a.b", "syntaxError": "syntax error at or near \".\"", "position": 8}
+{"sql": "create schema s create table a.b.c.d (x int)", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 29}
+{"sql": "create table x (like a.b.c)", "pg16After": "0A000 cross-database references are not implemented: \"a.b.c\"", "pg16Name": "a.b.c"}
+{"sql": "explain update a.b.c.d set x = 1", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 15}
+{"sql": "prepare p as select a.*.b", "syntaxError": "improper use of \"*\" at end of input", "position": 25}
+{"sql": "with recursive a.b as (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 16}
+{"sql": "select * from t as a.b", "syntaxError": "syntax error at or near \".\"", "position": 20}
+{"sql": "select * from (select 1) a.b", "syntaxError": "syntax error at or near \".\"", "position": 26}
+{"sql": "select a.b from t as a(b)", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "grant select on table a.b.c, d.e.f.g to public", "syntaxError": "improper qualified name (too many dotted names): d.e.f.g", "position": 29}
+{"sql": "grant select on sequence a.b.c.d to public", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 25}
+{"sql": "grant usage on type a.b.c.d to public", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
+{"sql": "revoke grant option for select on a.b.c.d from public", "syntaxError": "improper qualified name (too many dotted names): a.b.c.d", "position": 34}
+{"sql": "grant select on t, a.b to public", "pg16After": "42P01 relation \"t\" does not exist", "pg16Name": "t"}
+{"sql": "grant select on table a.b.c to public", "pg16After": "0A000 cross-database references are not implemented: \"a.b.c\"", "pg16Name": "a.b.c"}
+{"sql": "revoke select on sequence a.b from public", "pg16After": "3F000 schema \"a\" does not exist"}
