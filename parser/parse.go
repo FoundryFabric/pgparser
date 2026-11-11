@@ -167,10 +167,7 @@ func (l *parserLexer) applyLookahead(curToken, nextToken int) int {
 // action's own message is kept.
 func (l *parserLexer) Error(s string) {
 	if s == "syntax error" {
-		s = "syntax error at end of input"
-		if l.lastLoc < len(l.lexer.input) {
-			s = "syntax error at or near \"" + l.lexer.input[l.lastLoc:l.lastEnd] + "\""
-		}
+		s = l.atOrNear(s)
 	}
 	l.err = &ParseError{
 		Code:     codeSyntaxError,
@@ -193,11 +190,16 @@ func pgStackExhausted(lex pgLexer) {
 	if !ok || l.err != nil {
 		return
 	}
-	message := "memory exhausted at end of input"
+	l.err = &ParseError{Code: codeSyntaxError, Message: l.atOrNear("memory exhausted"), Position: l.lastLoc}
+}
+
+// atOrNear is message as PostgreSQL 16's scanner_yyerror words it at the
+// token Lex returned last: at or near its text, or at end of input.
+func (l *parserLexer) atOrNear(message string) string {
 	if l.lastLoc < len(l.lexer.input) {
-		message = "memory exhausted at or near \"" + l.lexer.input[l.lastLoc:l.lastEnd] + "\""
+		return message + " at or near \"" + l.lexer.input[l.lastLoc:l.lastEnd] + "\""
 	}
-	l.err = &ParseError{Code: codeSyntaxError, Message: message, Position: l.lastLoc}
+	return message + " at end of input"
 }
 
 // mapTokenType maps lexer token types to parser token types.
