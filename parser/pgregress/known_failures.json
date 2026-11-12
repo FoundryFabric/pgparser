@@ -3,7 +3,8 @@
     326
   ],
   "alter_table.sql": [
-    60
+    60,
+    583
   ],
   "collate.icu.utf8.sql": [
     115,
@@ -49,6 +50,7 @@
     13
   ],
   "create_table.sql": [
+    32,
     76,
     134
   ],

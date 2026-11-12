@@ -1559,7 +1559,6 @@ OptAccessMethod:
 
 OptWith:
 	WITH reloptions				{ $$ = $2 }
-	| WITH OIDS					{ $$ = nil /* deprecated */ }
 	| WITHOUT OIDS				{ $$ = nil }
 	| /* EMPTY */				{ $$ = nil }
 	;
@@ -3211,13 +3210,7 @@ alter_table_cmd:
 				Def:     $6,
 			}
 		}
-	/* SET WITH/WITHOUT OIDS (deprecated but still parsed) */
-	| SET WITH OIDS
-		{
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_DropOids), /* deprecated, reuse DropOids */
-			}
-		}
+	/* SET WITHOUT OIDS (deprecated but still parsed) */
 	| SET WITHOUT OIDS
 		{
 			$$ = &nodes.AlterTableCmd{

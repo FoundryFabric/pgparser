@@ -1903,8 +1903,8 @@
 {"file":"alter_table.sql","stmt":580,"sum":"d56e4687"}
 {"file":"alter_table.sql","stmt":581,"sum":"7e5a8950"}
 {"file":"alter_table.sql","stmt":582,"sum":"057b1e3e"}
-{"file":"alter_table.sql","stmt":583,"sum":"3d8328e3","code":"42601","msg":"syntax error at or near \"WITH\"","pos":80,"class":"with-oids"}
-{"file":"alter_table.sql","stmt":583,"edit":[85,4,"as"],"code":"42601","msg":"syntax error at or near \"WITH\"","pos":80,"class":"with-oids"}
+{"file":"alter_table.sql","stmt":583,"sum":"3d8328e3","code":"42601","msg":"syntax error at or near \"WITH\"","pos":80}
+{"file":"alter_table.sql","stmt":583,"edit":[85,4,"as"],"code":"42601","msg":"syntax error at or near \"WITH\"","pos":80}
 {"file":"alter_table.sql","stmt":584,"sum":"22f68a5d"}
 {"file":"alter_table.sql","stmt":585,"sum":"8cc60379"}
 {"file":"alter_table.sql","stmt":586,"sum":"ac5bb5b0"}
@@ -9925,7 +9925,7 @@
 {"file":"create_table.sql","stmt":29,"edit":[271,0,".x"]}
 {"file":"create_table.sql","stmt":30,"sum":"138cc495"}
 {"file":"create_table.sql","stmt":31,"sum":"58789cae"}
-{"file":"create_table.sql","stmt":32,"sum":"ca9c6fed","code":"42601","msg":"syntax error at or near \"OIDS\"","pos":85,"class":"with-oids"}
+{"file":"create_table.sql","stmt":32,"sum":"ca9c6fed","code":"42601","msg":"syntax error at or near \"OIDS\"","pos":85}
 {"file":"create_table.sql","stmt":33,"sum":"2210394a"}
 {"file":"create_table.sql","stmt":34,"sum":"7f9268bb"}
 {"file":"create_table.sql","stmt":35,"sum":"8b0c699c"}
@@ -58725,8 +58725,8 @@
 {"sql":"select now() at local","code":"42601","msg":"syntax error at or near \"local\"","pos":16,"class":"pg17-ddl"}
 {"sql":"alter domain d add not null","code":"42601","msg":"syntax error at or near \"not\"","pos":19,"class":"pg17-ddl"}
 {"sql":"alter operator === (int, int) set (merges)","code":"42601","msg":"syntax error at or near \")\"","pos":41,"class":"pg17-ddl"}
-{"sql":"create table t () with oids","code":"42601","msg":"syntax error at or near \"oids\"","pos":23,"class":"with-oids"}
-{"sql":"alter table t set with oids","code":"42601","msg":"syntax error at or near \"with\"","pos":18,"class":"with-oids"}
+{"sql":"create table t () with oids","code":"42601","msg":"syntax error at or near \"oids\"","pos":23}
+{"sql":"alter table t set with oids","code":"42601","msg":"syntax error at or near \"with\"","pos":18}
 {"sql":"create table t () without oids"}
 {"sql":"select 1 name"}
 {"sql":"select 1 type"}

@@ -84,7 +84,7 @@ L a feature's grammar.
 | constraint-attribute-checks (fixed) | 1 | 9 (5/1/3) | accepts what `processCASbits` and constraint actions refuse | `ConstraintAttributeSpec`/`processCASbits`, `key_action` SET NULL (cols), `ColConstraintElem` GENERATED | no | S |
 | select-clause-checks (fixed) | 1 | 8 (3/2/3) | accepts WITH TIES without ORDER BY, with SKIP LOCKED; ORDER BY with WITHIN GROUP | `insertSelectOptions`, `func_application` within `func_expr` | no | S |
 | uescape (fixed) | 1 | 7 (2/4/1) | accepts an invalid UESCAPE character; other message for a UESCAPE not followed by a string | scanner and `base_yylex` UESCAPE handling (`check_uescapechar`) | no | S |
-| with-oids | 1 | 5 (2/1/2) | accepts WITH OIDS | `OptWith`, `alter_table_cmd` SET WITH OIDS | no | S |
+| with-oids (fixed) | 1 | 5 (2/1/2) | accepts WITH OIDS | `OptWith`, `alter_table_cmd` SET WITH OIDS | no | S |
 | drop-aggregate-arguments (fixed) | 1 | 4 (1/1/2) | accepts DROP AGGREGATE without argument types | `DropStmt` AGGREGATE `aggregate_with_argtypes_list` | no | S |
 | partition-command-in-list | 1 | 4 (0/2/2) | accepts ATTACH/DETACH PARTITION in a command list | `AlterTableStmt` `partition_cmd` | no | S |
 | role-name-checks (fixed) | 1 | 4 (0/1/3) | accepts `ALTER ROLE CURRENT_USER RENAME`; 42601 for 42939 | `RoleId` action, `RenameStmt` | no | S |
@@ -288,7 +288,7 @@ the next token comes before both. The fork scanned for the word UESCAPE and a
 one-character string after it, and without them read UESCAPE as the next
 token. All 7 agree, and so do the 5 `bare-column-label` rows left.
 
-### with-oids (risk 1, 5)
+### with-oids (risk 1, 5; fixed)
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
@@ -296,6 +296,10 @@ token. All 7 agree, and so do the 5 `bare-column-label` rows left.
 | `alter table t set with oids` | 42601 syntax error at or near "with" at 18 | accepts |
 
 `create table t () without oids` is accepted by both.
+
+`OptWith` no longer has `WITH OIDS`, and `alter_table_cmd` no longer has
+`SET WITH OIDS`, as in PostgreSQL 16, which keeps only WITHOUT OIDS. All 5
+agree.
 
 ### drop-aggregate-arguments (risk 1, 4; fixed)
 
