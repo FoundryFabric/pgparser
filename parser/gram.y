@@ -162,7 +162,7 @@ import (
 %type <str>   Sconst
 %type <boolean> opt_all_clause
 %type <ival>   set_quantifier
-%type <list>  distinct_clause opt_distinct_clause
+%type <list>  distinct_clause
 %type <node>  with_clause opt_with_clause common_table_expr
 %type <ival>  opt_materialized
 %type <list>  cte_list
@@ -406,15 +406,14 @@ import (
 %type <node> xml_attribute_el xml_namespace_el
 %type <ival>  xml_whitespace_option xml_indent_option
 
-%type <node>  json_value_expr json_output_clause_opt json_format_clause json_format_clause_opt
+%type <node>  json_value_expr json_format_clause json_format_clause_opt
 %type <node>  json_returning_clause_opt
 %type <node>  json_behavior json_behavior_clause_opt json_on_error_clause_opt
 %type <node>  json_table json_table_column_definition json_table_column_path_clause_opt
 %type <list>  json_name_and_value_list json_value_expr_list
 %type <list>  json_arguments json_passing_clause_opt
 %type <list>  json_table_column_definition_list
-%type <list>  json_table_column_option_list
-%type <node>  json_name_and_value json_argument json_table_column_option_el
+%type <node>  json_name_and_value json_argument
 %type <node>  json_aggregate_func
 %type <ival>  json_behavior_type json_predicate_type_constraint
 %type <ival>  json_wrapper_behavior json_quotes_clause_opt
@@ -7813,11 +7812,6 @@ opt_all_clause:
 	| /* EMPTY */ { $$ = false }
 	;
 
-opt_distinct_clause:
-	distinct_clause { $$ = $1 }
-	| opt_all_clause { $$ = nil }
-	;
-
 distinct_clause:
 	DISTINCT
 		{
@@ -10655,10 +10649,6 @@ json_returning_clause_opt:
 		{ $$ = nil }
 	;
 
-json_output_clause_opt:
-	json_returning_clause_opt { $$ = $1 }
-	;
-
 json_behavior:
 	DEFAULT a_expr
 		{
@@ -10972,24 +10962,6 @@ json_table_column_path_clause_opt:
 		}
 	| /* EMPTY */
 		{ $$ = nil }
-	;
-
-json_table_column_option_list:
-	json_table_column_option_el
-		{ $$ = makeList($1) }
-	| json_table_column_option_list json_table_column_option_el
-		{ $$ = appendList($1, $2) }
-	;
-
-json_table_column_option_el:
-	DEFAULT b_expr
-		{ $$ = makeDefElem("default", $2) }
-	| PATH b_expr
-		{ $$ = makeDefElem("path", $2) }
-	| NOT NULL_P
-		{ $$ = makeDefElem("__pg__is_not_null", &nodes.Boolean{Boolval: true}) }
-	| NULL_P
-		{ $$ = makeDefElem("__pg__is_not_null", &nodes.Boolean{Boolval: false}) }
 	;
 
 path_opt:

@@ -585,8 +585,8 @@ deleted, so the list is `function_with_argtypes_list` from its first name, and
 
 `make cover` (`tools/parsercover`) lists the grammar rules whose action no
 test reduces. On `ff` after #32 there were 253 of 2,491. Of the 244 that can
-be reduced (goyacc reduces the other 9 in no state: no other rule uses
-their nonterminals),
+be reduced (goyacc reduced the other 9 in no state: no other rule used
+their nonterminals, and they are deleted, see below),
 `TestRuleCoverageIsPostgreSQL16s` (`testdata/rule_coverage_pg16.jsonl`) pins
 PostgreSQL 16.15's answers for at least one statement that reduces each,
 taken by the oracle as above; where both accept, libpg_query 16's tree was
@@ -672,6 +672,16 @@ CREATE LANGUAGE without a handler now builds a `CreateExtensionStmt`, OR
 REPLACE as its IF NOT EXISTS, TRUSTED dropped. The 81 trees that changed
 match libpg_query's. `testdata/create_language_pg16.jsonl` pins 395
 statements; all agree.
+
+### dead rules (deleted)
+
+goyacc reported 9 rules never reduced in any state, because no other rule
+used their nonterminals: `opt_distinct_clause: distinct_clause` and
+`opt_all_clause`, `json_output_clause_opt: json_returning_clause_opt`,
+`json_table_column_option_list: json_table_column_option_el` and its
+recursive form, and `json_table_column_option_el: DEFAULT b_expr`, `PATH
+b_expr`, `NOT NULL_P` and `NULL_P`. They are deleted, with their `%type`
+entries; no tree or verdict changed.
 
 ## Rerunning
 
