@@ -607,7 +607,23 @@ them:
 
 The statements' verdicts disagreed with PostgreSQL 16 in three more classes,
 each fixed with its own test data below: `explain-create-table`,
-`key-match-partial` and `grant-alter-system`.
+`key-match-partial` and `grant-on-parameter`.
+
+### grant-on-parameter (risk 2, 1; fixed)
+
+| statement | PostgreSQL 16 | parser |
+|---|---|---|
+| `grant alter system on parameter x to r` | accepts | 42601 syntax error at or near "x" at 32 |
+
+The parser had no `ON PARAMETER` target for GRANT and REVOKE, so
+`privilege: ALTER SYSTEM_P` could never be reduced. GRANT, REVOKE and
+REVOKE GRANT OPTION FOR now take `PARAMETER parameter_name_list`, names as
+SET takes them (a ColId, then any number of `.` ColId), each a `String` in
+`Objects`, with `OBJECT_PARAMETER_ACL`. `testdata/grant_parameter_pg16.jsonl`
+pins 500 statements; all agree, and where both accept, libpg_query's trees
+differ only in the grantee's and grantor's location, which the parser does
+not set anywhere (an `unlocated RoleSpec.location` class all over the
+corpus).
 
 ## Rerunning
 

@@ -128,6 +128,8 @@ import (
 %start stmtblock
 
 %type <list>  stmtblock
+%type <list>  parameter_name_list
+%type <str>   parameter_name
 %type <list>  NumericOnly_list
 %type <node>  stmt SelectStmt simple_select select_clause
 %type <node>  select_with_parens select_no_parens
@@ -5308,6 +5310,19 @@ GrantStmt:
 				Grantor:     roleSpecOrNil($9),
 			}
 		}
+	| GRANT privileges ON PARAMETER parameter_name_list TO grantee_list opt_grant_grant_option opt_granted_by
+		{
+			$$ = &nodes.GrantStmt{
+				IsGrant:     true,
+				Targtype:    nodes.ACL_TARGET_OBJECT,
+				Objtype:     nodes.OBJECT_PARAMETER_ACL,
+				Objects:     $5,
+				Privileges:  $2,
+				Grantees:    $7,
+				GrantOption: $8,
+				Grantor:     roleSpecOrNil($9),
+			}
+		}
 	| GRANT privileges ON TYPE_P any_name_list TO grantee_list opt_grant_grant_option opt_granted_by
 		{
 			$$ = &nodes.GrantStmt{
@@ -5565,6 +5580,19 @@ RevokeStmt:
 				Targtype:   nodes.ACL_TARGET_OBJECT,
 				Objtype:    nodes.OBJECT_TABLESPACE,
 				Objects:    makeNameListAsAnyNameList($5),
+				Privileges: $2,
+				Grantees:   $7,
+				Grantor:    roleSpecOrNil($8),
+				Behavior:   nodes.DropBehavior($9),
+			}
+		}
+	| REVOKE privileges ON PARAMETER parameter_name_list FROM grantee_list opt_granted_by opt_drop_behavior
+		{
+			$$ = &nodes.GrantStmt{
+				IsGrant:    false,
+				Targtype:   nodes.ACL_TARGET_OBJECT,
+				Objtype:    nodes.OBJECT_PARAMETER_ACL,
+				Objects:    $5,
 				Privileges: $2,
 				Grantees:   $7,
 				Grantor:    roleSpecOrNil($8),
@@ -5842,6 +5870,20 @@ RevokeStmt:
 				Behavior:    nodes.DropBehavior($12),
 			}
 		}
+	| REVOKE GRANT OPTION FOR privileges ON PARAMETER parameter_name_list FROM grantee_list opt_granted_by opt_drop_behavior
+		{
+			$$ = &nodes.GrantStmt{
+				IsGrant:     false,
+				Targtype:    nodes.ACL_TARGET_OBJECT,
+				Objtype:     nodes.OBJECT_PARAMETER_ACL,
+				Objects:     $8,
+				Privileges:  $5,
+				Grantees:    $10,
+				GrantOption: true,
+				Grantor:     roleSpecOrNil($11),
+				Behavior:    nodes.DropBehavior($12),
+			}
+		}
 	| REVOKE GRANT OPTION FOR privileges ON TYPE_P any_name_list FROM grantee_list opt_granted_by opt_drop_behavior
 		{
 			$$ = &nodes.GrantStmt{
@@ -5920,6 +5962,21 @@ privilege:
 		{ $$ = &nodes.AccessPriv{PrivName: "alter system"} }
 	| ColId opt_column_list
 		{ $$ = &nodes.AccessPriv{PrivName: $1, Cols: $2} }
+	;
+
+/* A run-time parameter's name, as SET takes it: dotted for a custom one. */
+parameter_name_list:
+	parameter_name
+		{ $$ = makeList(&nodes.String{Str: $1}) }
+	| parameter_name_list ',' parameter_name
+		{ $$ = appendList($1, &nodes.String{Str: $3}) }
+	;
+
+parameter_name:
+	ColId
+		{ $$ = $1 }
+	| parameter_name '.' ColId
+		{ $$ = $1 + "." + $3 }
 	;
 
 grantee_list:

@@ -1,0 +1,500 @@
+{"sql":"grant alter system on parameter x to r"}
+{"sql":"revoke alter system on parameter x from r"}
+{"sql":"revoke grant option for alter system on parameter x from r"}
+{"sql":"grant alter system on parameter a.b to r"}
+{"sql":"revoke alter system on parameter a.b from r"}
+{"sql":"revoke grant option for alter system on parameter a.b from r"}
+{"sql":"grant alter system on parameter a.b.c to r"}
+{"sql":"revoke alter system on parameter a.b.c from r"}
+{"sql":"revoke grant option for alter system on parameter a.b.c from r"}
+{"sql":"grant alter system on parameter x, y to r"}
+{"sql":"revoke alter system on parameter x, y from r"}
+{"sql":"revoke grant option for alter system on parameter x, y from r"}
+{"sql":"grant alter system on parameter a.b, c.d.e to r"}
+{"sql":"revoke alter system on parameter a.b, c.d.e from r"}
+{"sql":"revoke grant option for alter system on parameter a.b, c.d.e from r"}
+{"sql":"grant alter system on parameter \"Work_Mem\" to r"}
+{"sql":"revoke alter system on parameter \"Work_Mem\" from r"}
+{"sql":"revoke grant option for alter system on parameter \"Work_Mem\" from r"}
+{"sql":"grant alter system on parameter work_mem to r"}
+{"sql":"revoke alter system on parameter work_mem from r"}
+{"sql":"revoke grant option for alter system on parameter work_mem from r"}
+{"sql":"grant alter system on parameter parameter to r"}
+{"sql":"revoke alter system on parameter parameter from r"}
+{"sql":"revoke grant option for alter system on parameter parameter from r"}
+{"sql":"grant alter system on parameter public to r"}
+{"sql":"revoke alter system on parameter public from r"}
+{"sql":"revoke grant option for alter system on parameter public from r"}
+{"sql":"grant alter system on parameter x. to r","code":"42601","message":"syntax error at or near \"to\"","position":35}
+{"sql":"revoke alter system on parameter x. from r","code":"42601","message":"syntax error at or near \"from\"","position":36}
+{"sql":"revoke grant option for alter system on parameter x. from r","code":"42601","message":"syntax error at or near \"from\"","position":53}
+{"sql":"grant alter system on parameter x, to r","code":"42601","message":"syntax error at or near \"to\"","position":35}
+{"sql":"revoke alter system on parameter x, from r","code":"42601","message":"syntax error at or near \"from\"","position":36}
+{"sql":"revoke grant option for alter system on parameter x, from r","code":"42601","message":"syntax error at or near \"from\"","position":53}
+{"sql":"grant alter system on parameter  to r"}
+{"sql":"revoke alter system on parameter  from r"}
+{"sql":"revoke grant option for alter system on parameter  from r"}
+{"sql":"grant alter system on parameter 1 to r","code":"42601","message":"syntax error at or near \"1\"","position":32}
+{"sql":"revoke alter system on parameter 1 from r","code":"42601","message":"syntax error at or near \"1\"","position":33}
+{"sql":"revoke grant option for alter system on parameter 1 from r","code":"42601","message":"syntax error at or near \"1\"","position":50}
+{"sql":"grant alter system on parameter 'x' to r","code":"42601","message":"syntax error at or near \"'x'\"","position":32}
+{"sql":"revoke alter system on parameter 'x' from r","code":"42601","message":"syntax error at or near \"'x'\"","position":33}
+{"sql":"revoke grant option for alter system on parameter 'x' from r","code":"42601","message":"syntax error at or near \"'x'\"","position":50}
+{"sql":"grant alter system on parameter a.* to r","code":"42601","message":"syntax error at or near \"*\"","position":34}
+{"sql":"revoke alter system on parameter a.* from r","code":"42601","message":"syntax error at or near \"*\"","position":35}
+{"sql":"revoke grant option for alter system on parameter a.* from r","code":"42601","message":"syntax error at or near \"*\"","position":52}
+{"sql":"grant alter system on parameter x y to r","code":"42601","message":"syntax error at or near \"y\"","position":34}
+{"sql":"revoke alter system on parameter x y from r","code":"42601","message":"syntax error at or near \"y\"","position":35}
+{"sql":"revoke grant option for alter system on parameter x y from r","code":"42601","message":"syntax error at or near \"y\"","position":52}
+{"sql":"grant alter system on parameter x[1] to r","code":"42601","message":"syntax error at or near \"[\"","position":33}
+{"sql":"revoke alter system on parameter x[1] from r","code":"42601","message":"syntax error at or near \"[\"","position":34}
+{"sql":"revoke grant option for alter system on parameter x[1] from r","code":"42601","message":"syntax error at or near \"[\"","position":51}
+{"sql":"grant alter system on parameter select to r","code":"42601","message":"syntax error at or near \"select\"","position":32}
+{"sql":"revoke alter system on parameter select from r","code":"42601","message":"syntax error at or near \"select\"","position":33}
+{"sql":"revoke grant option for alter system on parameter select from r","code":"42601","message":"syntax error at or near \"select\"","position":50}
+{"sql":"grant alter system on parameter authorization to r","code":"42601","message":"syntax error at or near \"authorization\"","position":32}
+{"sql":"revoke alter system on parameter authorization from r","code":"42601","message":"syntax error at or near \"authorization\"","position":33}
+{"sql":"revoke grant option for alter system on parameter authorization from r","code":"42601","message":"syntax error at or near \"authorization\"","position":50}
+{"sql":"grant alter system on parameter table x to r","code":"42601","message":"syntax error at or near \"table\"","position":32}
+{"sql":"revoke alter system on parameter table x from r","code":"42601","message":"syntax error at or near \"table\"","position":33}
+{"sql":"revoke grant option for alter system on parameter table x from r","code":"42601","message":"syntax error at or near \"table\"","position":50}
+{"sql":"grant set on parameter x to r"}
+{"sql":"revoke set on parameter x from r"}
+{"sql":"revoke grant option for set on parameter x from r"}
+{"sql":"grant set on parameter a.b to r"}
+{"sql":"revoke set on parameter a.b from r"}
+{"sql":"revoke grant option for set on parameter a.b from r"}
+{"sql":"grant set on parameter a.b.c to r"}
+{"sql":"revoke set on parameter a.b.c from r"}
+{"sql":"revoke grant option for set on parameter a.b.c from r"}
+{"sql":"grant set on parameter x, y to r"}
+{"sql":"revoke set on parameter x, y from r"}
+{"sql":"revoke grant option for set on parameter x, y from r"}
+{"sql":"grant set on parameter a.b, c.d.e to r"}
+{"sql":"revoke set on parameter a.b, c.d.e from r"}
+{"sql":"revoke grant option for set on parameter a.b, c.d.e from r"}
+{"sql":"grant set on parameter \"Work_Mem\" to r"}
+{"sql":"revoke set on parameter \"Work_Mem\" from r"}
+{"sql":"revoke grant option for set on parameter \"Work_Mem\" from r"}
+{"sql":"grant set on parameter work_mem to r"}
+{"sql":"revoke set on parameter work_mem from r"}
+{"sql":"revoke grant option for set on parameter work_mem from r"}
+{"sql":"grant set on parameter parameter to r"}
+{"sql":"revoke set on parameter parameter from r"}
+{"sql":"revoke grant option for set on parameter parameter from r"}
+{"sql":"grant set on parameter public to r"}
+{"sql":"revoke set on parameter public from r"}
+{"sql":"revoke grant option for set on parameter public from r"}
+{"sql":"grant set on parameter x. to r","code":"42601","message":"syntax error at or near \"to\"","position":26}
+{"sql":"revoke set on parameter x. from r","code":"42601","message":"syntax error at or near \"from\"","position":27}
+{"sql":"revoke grant option for set on parameter x. from r","code":"42601","message":"syntax error at or near \"from\"","position":44}
+{"sql":"grant set on parameter x, to r","code":"42601","message":"syntax error at or near \"to\"","position":26}
+{"sql":"revoke set on parameter x, from r","code":"42601","message":"syntax error at or near \"from\"","position":27}
+{"sql":"revoke grant option for set on parameter x, from r","code":"42601","message":"syntax error at or near \"from\"","position":44}
+{"sql":"grant set on parameter  to r"}
+{"sql":"revoke set on parameter  from r"}
+{"sql":"revoke grant option for set on parameter  from r"}
+{"sql":"grant set on parameter 1 to r","code":"42601","message":"syntax error at or near \"1\"","position":23}
+{"sql":"revoke set on parameter 1 from r","code":"42601","message":"syntax error at or near \"1\"","position":24}
+{"sql":"revoke grant option for set on parameter 1 from r","code":"42601","message":"syntax error at or near \"1\"","position":41}
+{"sql":"grant set on parameter 'x' to r","code":"42601","message":"syntax error at or near \"'x'\"","position":23}
+{"sql":"revoke set on parameter 'x' from r","code":"42601","message":"syntax error at or near \"'x'\"","position":24}
+{"sql":"revoke grant option for set on parameter 'x' from r","code":"42601","message":"syntax error at or near \"'x'\"","position":41}
+{"sql":"grant set on parameter a.* to r","code":"42601","message":"syntax error at or near \"*\"","position":25}
+{"sql":"revoke set on parameter a.* from r","code":"42601","message":"syntax error at or near \"*\"","position":26}
+{"sql":"revoke grant option for set on parameter a.* from r","code":"42601","message":"syntax error at or near \"*\"","position":43}
+{"sql":"grant set on parameter x y to r","code":"42601","message":"syntax error at or near \"y\"","position":25}
+{"sql":"revoke set on parameter x y from r","code":"42601","message":"syntax error at or near \"y\"","position":26}
+{"sql":"revoke grant option for set on parameter x y from r","code":"42601","message":"syntax error at or near \"y\"","position":43}
+{"sql":"grant set on parameter x[1] to r","code":"42601","message":"syntax error at or near \"[\"","position":24}
+{"sql":"revoke set on parameter x[1] from r","code":"42601","message":"syntax error at or near \"[\"","position":25}
+{"sql":"revoke grant option for set on parameter x[1] from r","code":"42601","message":"syntax error at or near \"[\"","position":42}
+{"sql":"grant set on parameter select to r","code":"42601","message":"syntax error at or near \"select\"","position":23}
+{"sql":"revoke set on parameter select from r","code":"42601","message":"syntax error at or near \"select\"","position":24}
+{"sql":"revoke grant option for set on parameter select from r","code":"42601","message":"syntax error at or near \"select\"","position":41}
+{"sql":"grant set on parameter authorization to r","code":"42601","message":"syntax error at or near \"authorization\"","position":23}
+{"sql":"revoke set on parameter authorization from r","code":"42601","message":"syntax error at or near \"authorization\"","position":24}
+{"sql":"revoke grant option for set on parameter authorization from r","code":"42601","message":"syntax error at or near \"authorization\"","position":41}
+{"sql":"grant set on parameter table x to r","code":"42601","message":"syntax error at or near \"table\"","position":23}
+{"sql":"revoke set on parameter table x from r","code":"42601","message":"syntax error at or near \"table\"","position":24}
+{"sql":"revoke grant option for set on parameter table x from r","code":"42601","message":"syntax error at or near \"table\"","position":41}
+{"sql":"grant set, alter system on parameter x to r"}
+{"sql":"revoke set, alter system on parameter x from r"}
+{"sql":"revoke grant option for set, alter system on parameter x from r"}
+{"sql":"grant set, alter system on parameter a.b to r"}
+{"sql":"revoke set, alter system on parameter a.b from r"}
+{"sql":"revoke grant option for set, alter system on parameter a.b from r"}
+{"sql":"grant set, alter system on parameter a.b.c to r"}
+{"sql":"revoke set, alter system on parameter a.b.c from r"}
+{"sql":"revoke grant option for set, alter system on parameter a.b.c from r"}
+{"sql":"grant set, alter system on parameter x, y to r"}
+{"sql":"revoke set, alter system on parameter x, y from r"}
+{"sql":"revoke grant option for set, alter system on parameter x, y from r"}
+{"sql":"grant set, alter system on parameter a.b, c.d.e to r"}
+{"sql":"revoke set, alter system on parameter a.b, c.d.e from r"}
+{"sql":"revoke grant option for set, alter system on parameter a.b, c.d.e from r"}
+{"sql":"grant set, alter system on parameter \"Work_Mem\" to r"}
+{"sql":"revoke set, alter system on parameter \"Work_Mem\" from r"}
+{"sql":"revoke grant option for set, alter system on parameter \"Work_Mem\" from r"}
+{"sql":"grant set, alter system on parameter work_mem to r"}
+{"sql":"revoke set, alter system on parameter work_mem from r"}
+{"sql":"revoke grant option for set, alter system on parameter work_mem from r"}
+{"sql":"grant set, alter system on parameter parameter to r"}
+{"sql":"revoke set, alter system on parameter parameter from r"}
+{"sql":"revoke grant option for set, alter system on parameter parameter from r"}
+{"sql":"grant set, alter system on parameter public to r"}
+{"sql":"revoke set, alter system on parameter public from r"}
+{"sql":"revoke grant option for set, alter system on parameter public from r"}
+{"sql":"grant set, alter system on parameter x. to r","code":"42601","message":"syntax error at or near \"to\"","position":40}
+{"sql":"revoke set, alter system on parameter x. from r","code":"42601","message":"syntax error at or near \"from\"","position":41}
+{"sql":"revoke grant option for set, alter system on parameter x. from r","code":"42601","message":"syntax error at or near \"from\"","position":58}
+{"sql":"grant set, alter system on parameter x, to r","code":"42601","message":"syntax error at or near \"to\"","position":40}
+{"sql":"revoke set, alter system on parameter x, from r","code":"42601","message":"syntax error at or near \"from\"","position":41}
+{"sql":"revoke grant option for set, alter system on parameter x, from r","code":"42601","message":"syntax error at or near \"from\"","position":58}
+{"sql":"grant set, alter system on parameter  to r"}
+{"sql":"revoke set, alter system on parameter  from r"}
+{"sql":"revoke grant option for set, alter system on parameter  from r"}
+{"sql":"grant set, alter system on parameter 1 to r","code":"42601","message":"syntax error at or near \"1\"","position":37}
+{"sql":"revoke set, alter system on parameter 1 from r","code":"42601","message":"syntax error at or near \"1\"","position":38}
+{"sql":"revoke grant option for set, alter system on parameter 1 from r","code":"42601","message":"syntax error at or near \"1\"","position":55}
+{"sql":"grant set, alter system on parameter 'x' to r","code":"42601","message":"syntax error at or near \"'x'\"","position":37}
+{"sql":"revoke set, alter system on parameter 'x' from r","code":"42601","message":"syntax error at or near \"'x'\"","position":38}
+{"sql":"revoke grant option for set, alter system on parameter 'x' from r","code":"42601","message":"syntax error at or near \"'x'\"","position":55}
+{"sql":"grant set, alter system on parameter a.* to r","code":"42601","message":"syntax error at or near \"*\"","position":39}
+{"sql":"revoke set, alter system on parameter a.* from r","code":"42601","message":"syntax error at or near \"*\"","position":40}
+{"sql":"revoke grant option for set, alter system on parameter a.* from r","code":"42601","message":"syntax error at or near \"*\"","position":57}
+{"sql":"grant set, alter system on parameter x y to r","code":"42601","message":"syntax error at or near \"y\"","position":39}
+{"sql":"revoke set, alter system on parameter x y from r","code":"42601","message":"syntax error at or near \"y\"","position":40}
+{"sql":"revoke grant option for set, alter system on parameter x y from r","code":"42601","message":"syntax error at or near \"y\"","position":57}
+{"sql":"grant set, alter system on parameter x[1] to r","code":"42601","message":"syntax error at or near \"[\"","position":38}
+{"sql":"revoke set, alter system on parameter x[1] from r","code":"42601","message":"syntax error at or near \"[\"","position":39}
+{"sql":"revoke grant option for set, alter system on parameter x[1] from r","code":"42601","message":"syntax error at or near \"[\"","position":56}
+{"sql":"grant set, alter system on parameter select to r","code":"42601","message":"syntax error at or near \"select\"","position":37}
+{"sql":"revoke set, alter system on parameter select from r","code":"42601","message":"syntax error at or near \"select\"","position":38}
+{"sql":"revoke grant option for set, alter system on parameter select from r","code":"42601","message":"syntax error at or near \"select\"","position":55}
+{"sql":"grant set, alter system on parameter authorization to r","code":"42601","message":"syntax error at or near \"authorization\"","position":37}
+{"sql":"revoke set, alter system on parameter authorization from r","code":"42601","message":"syntax error at or near \"authorization\"","position":38}
+{"sql":"revoke grant option for set, alter system on parameter authorization from r","code":"42601","message":"syntax error at or near \"authorization\"","position":55}
+{"sql":"grant set, alter system on parameter table x to r","code":"42601","message":"syntax error at or near \"table\"","position":37}
+{"sql":"revoke set, alter system on parameter table x from r","code":"42601","message":"syntax error at or near \"table\"","position":38}
+{"sql":"revoke grant option for set, alter system on parameter table x from r","code":"42601","message":"syntax error at or near \"table\"","position":55}
+{"sql":"grant all on parameter x to r"}
+{"sql":"revoke all on parameter x from r"}
+{"sql":"revoke grant option for all on parameter x from r"}
+{"sql":"grant all on parameter a.b to r"}
+{"sql":"revoke all on parameter a.b from r"}
+{"sql":"revoke grant option for all on parameter a.b from r"}
+{"sql":"grant all on parameter a.b.c to r"}
+{"sql":"revoke all on parameter a.b.c from r"}
+{"sql":"revoke grant option for all on parameter a.b.c from r"}
+{"sql":"grant all on parameter x, y to r"}
+{"sql":"revoke all on parameter x, y from r"}
+{"sql":"revoke grant option for all on parameter x, y from r"}
+{"sql":"grant all on parameter a.b, c.d.e to r"}
+{"sql":"revoke all on parameter a.b, c.d.e from r"}
+{"sql":"revoke grant option for all on parameter a.b, c.d.e from r"}
+{"sql":"grant all on parameter \"Work_Mem\" to r"}
+{"sql":"revoke all on parameter \"Work_Mem\" from r"}
+{"sql":"revoke grant option for all on parameter \"Work_Mem\" from r"}
+{"sql":"grant all on parameter work_mem to r"}
+{"sql":"revoke all on parameter work_mem from r"}
+{"sql":"revoke grant option for all on parameter work_mem from r"}
+{"sql":"grant all on parameter parameter to r"}
+{"sql":"revoke all on parameter parameter from r"}
+{"sql":"revoke grant option for all on parameter parameter from r"}
+{"sql":"grant all on parameter public to r"}
+{"sql":"revoke all on parameter public from r"}
+{"sql":"revoke grant option for all on parameter public from r"}
+{"sql":"grant all on parameter x. to r","code":"42601","message":"syntax error at or near \"to\"","position":26}
+{"sql":"revoke all on parameter x. from r","code":"42601","message":"syntax error at or near \"from\"","position":27}
+{"sql":"revoke grant option for all on parameter x. from r","code":"42601","message":"syntax error at or near \"from\"","position":44}
+{"sql":"grant all on parameter x, to r","code":"42601","message":"syntax error at or near \"to\"","position":26}
+{"sql":"revoke all on parameter x, from r","code":"42601","message":"syntax error at or near \"from\"","position":27}
+{"sql":"revoke grant option for all on parameter x, from r","code":"42601","message":"syntax error at or near \"from\"","position":44}
+{"sql":"grant all on parameter  to r"}
+{"sql":"revoke all on parameter  from r"}
+{"sql":"revoke grant option for all on parameter  from r"}
+{"sql":"grant all on parameter 1 to r","code":"42601","message":"syntax error at or near \"1\"","position":23}
+{"sql":"revoke all on parameter 1 from r","code":"42601","message":"syntax error at or near \"1\"","position":24}
+{"sql":"revoke grant option for all on parameter 1 from r","code":"42601","message":"syntax error at or near \"1\"","position":41}
+{"sql":"grant all on parameter 'x' to r","code":"42601","message":"syntax error at or near \"'x'\"","position":23}
+{"sql":"revoke all on parameter 'x' from r","code":"42601","message":"syntax error at or near \"'x'\"","position":24}
+{"sql":"revoke grant option for all on parameter 'x' from r","code":"42601","message":"syntax error at or near \"'x'\"","position":41}
+{"sql":"grant all on parameter a.* to r","code":"42601","message":"syntax error at or near \"*\"","position":25}
+{"sql":"revoke all on parameter a.* from r","code":"42601","message":"syntax error at or near \"*\"","position":26}
+{"sql":"revoke grant option for all on parameter a.* from r","code":"42601","message":"syntax error at or near \"*\"","position":43}
+{"sql":"grant all on parameter x y to r","code":"42601","message":"syntax error at or near \"y\"","position":25}
+{"sql":"revoke all on parameter x y from r","code":"42601","message":"syntax error at or near \"y\"","position":26}
+{"sql":"revoke grant option for all on parameter x y from r","code":"42601","message":"syntax error at or near \"y\"","position":43}
+{"sql":"grant all on parameter x[1] to r","code":"42601","message":"syntax error at or near \"[\"","position":24}
+{"sql":"revoke all on parameter x[1] from r","code":"42601","message":"syntax error at or near \"[\"","position":25}
+{"sql":"revoke grant option for all on parameter x[1] from r","code":"42601","message":"syntax error at or near \"[\"","position":42}
+{"sql":"grant all on parameter select to r","code":"42601","message":"syntax error at or near \"select\"","position":23}
+{"sql":"revoke all on parameter select from r","code":"42601","message":"syntax error at or near \"select\"","position":24}
+{"sql":"revoke grant option for all on parameter select from r","code":"42601","message":"syntax error at or near \"select\"","position":41}
+{"sql":"grant all on parameter authorization to r","code":"42601","message":"syntax error at or near \"authorization\"","position":23}
+{"sql":"revoke all on parameter authorization from r","code":"42601","message":"syntax error at or near \"authorization\"","position":24}
+{"sql":"revoke grant option for all on parameter authorization from r","code":"42601","message":"syntax error at or near \"authorization\"","position":41}
+{"sql":"grant all on parameter table x to r","code":"42601","message":"syntax error at or near \"table\"","position":23}
+{"sql":"revoke all on parameter table x from r","code":"42601","message":"syntax error at or near \"table\"","position":24}
+{"sql":"revoke grant option for all on parameter table x from r","code":"42601","message":"syntax error at or near \"table\"","position":41}
+{"sql":"grant all privileges on parameter x to r"}
+{"sql":"revoke all privileges on parameter x from r"}
+{"sql":"revoke grant option for all privileges on parameter x from r"}
+{"sql":"grant all privileges on parameter a.b to r"}
+{"sql":"revoke all privileges on parameter a.b from r"}
+{"sql":"revoke grant option for all privileges on parameter a.b from r"}
+{"sql":"grant all privileges on parameter a.b.c to r"}
+{"sql":"revoke all privileges on parameter a.b.c from r"}
+{"sql":"revoke grant option for all privileges on parameter a.b.c from r"}
+{"sql":"grant all privileges on parameter x, y to r"}
+{"sql":"revoke all privileges on parameter x, y from r"}
+{"sql":"revoke grant option for all privileges on parameter x, y from r"}
+{"sql":"grant all privileges on parameter a.b, c.d.e to r"}
+{"sql":"revoke all privileges on parameter a.b, c.d.e from r"}
+{"sql":"revoke grant option for all privileges on parameter a.b, c.d.e from r"}
+{"sql":"grant all privileges on parameter \"Work_Mem\" to r"}
+{"sql":"revoke all privileges on parameter \"Work_Mem\" from r"}
+{"sql":"revoke grant option for all privileges on parameter \"Work_Mem\" from r"}
+{"sql":"grant all privileges on parameter work_mem to r"}
+{"sql":"revoke all privileges on parameter work_mem from r"}
+{"sql":"revoke grant option for all privileges on parameter work_mem from r"}
+{"sql":"grant all privileges on parameter parameter to r"}
+{"sql":"revoke all privileges on parameter parameter from r"}
+{"sql":"revoke grant option for all privileges on parameter parameter from r"}
+{"sql":"grant all privileges on parameter public to r"}
+{"sql":"revoke all privileges on parameter public from r"}
+{"sql":"revoke grant option for all privileges on parameter public from r"}
+{"sql":"grant all privileges on parameter x. to r","code":"42601","message":"syntax error at or near \"to\"","position":37}
+{"sql":"revoke all privileges on parameter x. from r","code":"42601","message":"syntax error at or near \"from\"","position":38}
+{"sql":"revoke grant option for all privileges on parameter x. from r","code":"42601","message":"syntax error at or near \"from\"","position":55}
+{"sql":"grant all privileges on parameter x, to r","code":"42601","message":"syntax error at or near \"to\"","position":37}
+{"sql":"revoke all privileges on parameter x, from r","code":"42601","message":"syntax error at or near \"from\"","position":38}
+{"sql":"revoke grant option for all privileges on parameter x, from r","code":"42601","message":"syntax error at or near \"from\"","position":55}
+{"sql":"grant all privileges on parameter  to r"}
+{"sql":"revoke all privileges on parameter  from r"}
+{"sql":"revoke grant option for all privileges on parameter  from r"}
+{"sql":"grant all privileges on parameter 1 to r","code":"42601","message":"syntax error at or near \"1\"","position":34}
+{"sql":"revoke all privileges on parameter 1 from r","code":"42601","message":"syntax error at or near \"1\"","position":35}
+{"sql":"revoke grant option for all privileges on parameter 1 from r","code":"42601","message":"syntax error at or near \"1\"","position":52}
+{"sql":"grant all privileges on parameter 'x' to r","code":"42601","message":"syntax error at or near \"'x'\"","position":34}
+{"sql":"revoke all privileges on parameter 'x' from r","code":"42601","message":"syntax error at or near \"'x'\"","position":35}
+{"sql":"revoke grant option for all privileges on parameter 'x' from r","code":"42601","message":"syntax error at or near \"'x'\"","position":52}
+{"sql":"grant all privileges on parameter a.* to r","code":"42601","message":"syntax error at or near \"*\"","position":36}
+{"sql":"revoke all privileges on parameter a.* from r","code":"42601","message":"syntax error at or near \"*\"","position":37}
+{"sql":"revoke grant option for all privileges on parameter a.* from r","code":"42601","message":"syntax error at or near \"*\"","position":54}
+{"sql":"grant all privileges on parameter x y to r","code":"42601","message":"syntax error at or near \"y\"","position":36}
+{"sql":"revoke all privileges on parameter x y from r","code":"42601","message":"syntax error at or near \"y\"","position":37}
+{"sql":"revoke grant option for all privileges on parameter x y from r","code":"42601","message":"syntax error at or near \"y\"","position":54}
+{"sql":"grant all privileges on parameter x[1] to r","code":"42601","message":"syntax error at or near \"[\"","position":35}
+{"sql":"revoke all privileges on parameter x[1] from r","code":"42601","message":"syntax error at or near \"[\"","position":36}
+{"sql":"revoke grant option for all privileges on parameter x[1] from r","code":"42601","message":"syntax error at or near \"[\"","position":53}
+{"sql":"grant all privileges on parameter select to r","code":"42601","message":"syntax error at or near \"select\"","position":34}
+{"sql":"revoke all privileges on parameter select from r","code":"42601","message":"syntax error at or near \"select\"","position":35}
+{"sql":"revoke grant option for all privileges on parameter select from r","code":"42601","message":"syntax error at or near \"select\"","position":52}
+{"sql":"grant all privileges on parameter authorization to r","code":"42601","message":"syntax error at or near \"authorization\"","position":34}
+{"sql":"revoke all privileges on parameter authorization from r","code":"42601","message":"syntax error at or near \"authorization\"","position":35}
+{"sql":"revoke grant option for all privileges on parameter authorization from r","code":"42601","message":"syntax error at or near \"authorization\"","position":52}
+{"sql":"grant all privileges on parameter table x to r","code":"42601","message":"syntax error at or near \"table\"","position":34}
+{"sql":"revoke all privileges on parameter table x from r","code":"42601","message":"syntax error at or near \"table\"","position":35}
+{"sql":"revoke grant option for all privileges on parameter table x from r","code":"42601","message":"syntax error at or near \"table\"","position":52}
+{"sql":"grant select on parameter x to r"}
+{"sql":"revoke select on parameter x from r"}
+{"sql":"revoke grant option for select on parameter x from r"}
+{"sql":"grant select on parameter a.b to r"}
+{"sql":"revoke select on parameter a.b from r"}
+{"sql":"revoke grant option for select on parameter a.b from r"}
+{"sql":"grant select on parameter a.b.c to r"}
+{"sql":"revoke select on parameter a.b.c from r"}
+{"sql":"revoke grant option for select on parameter a.b.c from r"}
+{"sql":"grant select on parameter x, y to r"}
+{"sql":"revoke select on parameter x, y from r"}
+{"sql":"revoke grant option for select on parameter x, y from r"}
+{"sql":"grant select on parameter a.b, c.d.e to r"}
+{"sql":"revoke select on parameter a.b, c.d.e from r"}
+{"sql":"revoke grant option for select on parameter a.b, c.d.e from r"}
+{"sql":"grant select on parameter \"Work_Mem\" to r"}
+{"sql":"revoke select on parameter \"Work_Mem\" from r"}
+{"sql":"revoke grant option for select on parameter \"Work_Mem\" from r"}
+{"sql":"grant select on parameter work_mem to r"}
+{"sql":"revoke select on parameter work_mem from r"}
+{"sql":"revoke grant option for select on parameter work_mem from r"}
+{"sql":"grant select on parameter parameter to r"}
+{"sql":"revoke select on parameter parameter from r"}
+{"sql":"revoke grant option for select on parameter parameter from r"}
+{"sql":"grant select on parameter public to r"}
+{"sql":"revoke select on parameter public from r"}
+{"sql":"revoke grant option for select on parameter public from r"}
+{"sql":"grant select on parameter x. to r","code":"42601","message":"syntax error at or near \"to\"","position":29}
+{"sql":"revoke select on parameter x. from r","code":"42601","message":"syntax error at or near \"from\"","position":30}
+{"sql":"revoke grant option for select on parameter x. from r","code":"42601","message":"syntax error at or near \"from\"","position":47}
+{"sql":"grant select on parameter x, to r","code":"42601","message":"syntax error at or near \"to\"","position":29}
+{"sql":"revoke select on parameter x, from r","code":"42601","message":"syntax error at or near \"from\"","position":30}
+{"sql":"revoke grant option for select on parameter x, from r","code":"42601","message":"syntax error at or near \"from\"","position":47}
+{"sql":"grant select on parameter  to r"}
+{"sql":"revoke select on parameter  from r"}
+{"sql":"revoke grant option for select on parameter  from r"}
+{"sql":"grant select on parameter 1 to r","code":"42601","message":"syntax error at or near \"1\"","position":26}
+{"sql":"revoke select on parameter 1 from r","code":"42601","message":"syntax error at or near \"1\"","position":27}
+{"sql":"revoke grant option for select on parameter 1 from r","code":"42601","message":"syntax error at or near \"1\"","position":44}
+{"sql":"grant select on parameter 'x' to r","code":"42601","message":"syntax error at or near \"'x'\"","position":26}
+{"sql":"revoke select on parameter 'x' from r","code":"42601","message":"syntax error at or near \"'x'\"","position":27}
+{"sql":"revoke grant option for select on parameter 'x' from r","code":"42601","message":"syntax error at or near \"'x'\"","position":44}
+{"sql":"grant select on parameter a.* to r","code":"42601","message":"syntax error at or near \"*\"","position":28}
+{"sql":"revoke select on parameter a.* from r","code":"42601","message":"syntax error at or near \"*\"","position":29}
+{"sql":"revoke grant option for select on parameter a.* from r","code":"42601","message":"syntax error at or near \"*\"","position":46}
+{"sql":"grant select on parameter x y to r","code":"42601","message":"syntax error at or near \"y\"","position":28}
+{"sql":"revoke select on parameter x y from r","code":"42601","message":"syntax error at or near \"y\"","position":29}
+{"sql":"revoke grant option for select on parameter x y from r","code":"42601","message":"syntax error at or near \"y\"","position":46}
+{"sql":"grant select on parameter x[1] to r","code":"42601","message":"syntax error at or near \"[\"","position":27}
+{"sql":"revoke select on parameter x[1] from r","code":"42601","message":"syntax error at or near \"[\"","position":28}
+{"sql":"revoke grant option for select on parameter x[1] from r","code":"42601","message":"syntax error at or near \"[\"","position":45}
+{"sql":"grant select on parameter select to r","code":"42601","message":"syntax error at or near \"select\"","position":26}
+{"sql":"revoke select on parameter select from r","code":"42601","message":"syntax error at or near \"select\"","position":27}
+{"sql":"revoke grant option for select on parameter select from r","code":"42601","message":"syntax error at or near \"select\"","position":44}
+{"sql":"grant select on parameter authorization to r","code":"42601","message":"syntax error at or near \"authorization\"","position":26}
+{"sql":"revoke select on parameter authorization from r","code":"42601","message":"syntax error at or near \"authorization\"","position":27}
+{"sql":"revoke grant option for select on parameter authorization from r","code":"42601","message":"syntax error at or near \"authorization\"","position":44}
+{"sql":"grant select on parameter table x to r","code":"42601","message":"syntax error at or near \"table\"","position":26}
+{"sql":"revoke select on parameter table x from r","code":"42601","message":"syntax error at or near \"table\"","position":27}
+{"sql":"revoke grant option for select on parameter table x from r","code":"42601","message":"syntax error at or near \"table\"","position":44}
+{"sql":"grant alter system (a) on parameter x to r","code":"42601","message":"syntax error at or near \"(\"","position":19}
+{"sql":"revoke alter system (a) on parameter x from r","code":"42601","message":"syntax error at or near \"(\"","position":20}
+{"sql":"revoke grant option for alter system (a) on parameter x from r","code":"42601","message":"syntax error at or near \"(\"","position":37}
+{"sql":"grant alter system (a) on parameter a.b to r","code":"42601","message":"syntax error at or near \"(\"","position":19}
+{"sql":"revoke alter system (a) on parameter a.b from r","code":"42601","message":"syntax error at or near \"(\"","position":20}
+{"sql":"revoke grant option for alter system (a) on parameter a.b from r","code":"42601","message":"syntax error at or near \"(\"","position":37}
+{"sql":"grant alter system (a) on parameter a.b.c to r","code":"42601","message":"syntax error at or near \"(\"","position":19}
+{"sql":"revoke alter system (a) on parameter a.b.c from r","code":"42601","message":"syntax error at or near \"(\"","position":20}
+{"sql":"revoke grant option for alter system (a) on parameter a.b.c from r","code":"42601","message":"syntax error at or near \"(\"","position":37}
+{"sql":"grant alter system (a) on parameter x, y to r","code":"42601","message":"syntax error at or near \"(\"","position":19}
+{"sql":"revoke alter system (a) on parameter x, y from r","code":"42601","message":"syntax error at or near \"(\"","position":20}
+{"sql":"revoke grant option for alter system (a) on parameter x, y from r","code":"42601","message":"syntax error at or near \"(\"","position":37}
+{"sql":"grant alter system (a) on parameter a.b, c.d.e to r","code":"42601","message":"syntax error at or near \"(\"","position":19}
+{"sql":"revoke alter system (a) on parameter a.b, c.d.e from r","code":"42601","message":"syntax error at or near \"(\"","position":20}
+{"sql":"revoke grant option for alter system (a) on parameter a.b, c.d.e from r","code":"42601","message":"syntax error at or near \"(\"","position":37}
+{"sql":"grant alter system (a) on parameter \"Work_Mem\" to r","code":"42601","message":"syntax error at or near \"(\"","position":19}
+{"sql":"revoke alter system (a) on parameter \"Work_Mem\" from r","code":"42601","message":"syntax error at or near \"(\"","position":20}
+{"sql":"revoke grant option for alter system (a) on parameter \"Work_Mem\" from r","code":"42601","message":"syntax error at or near \"(\"","position":37}
+{"sql":"grant alter system (a) on parameter work_mem to r","code":"42601","message":"syntax error at or near \"(\"","position":19}
+{"sql":"revoke alter system (a) on parameter work_mem from r","code":"42601","message":"syntax error at or near \"(\"","position":20}
+{"sql":"revoke grant option for alter system (a) on parameter work_mem from r","code":"42601","message":"syntax error at or near \"(\"","position":37}
+{"sql":"grant alter system (a) on parameter parameter to r","code":"42601","message":"syntax error at or near \"(\"","position":19}
+{"sql":"revoke alter system (a) on parameter parameter from r","code":"42601","message":"syntax error at or near \"(\"","position":20}
+{"sql":"revoke grant option for alter system (a) on parameter parameter from r","code":"42601","message":"syntax error at or near \"(\"","position":37}
+{"sql":"grant alter system (a) on parameter public to r","code":"42601","message":"syntax error at or near \"(\"","position":19}
+{"sql":"revoke alter system (a) on parameter public from r","code":"42601","message":"syntax error at or near \"(\"","position":20}
+{"sql":"revoke grant option for alter system (a) on parameter public from r","code":"42601","message":"syntax error at or near \"(\"","position":37}
+{"sql":"grant alter system (a) on parameter x. to r","code":"42601","message":"syntax error at or near \"(\"","position":19}
+{"sql":"revoke alter system (a) on parameter x. from r","code":"42601","message":"syntax error at or near \"(\"","position":20}
+{"sql":"revoke grant option for alter system (a) on parameter x. from r","code":"42601","message":"syntax error at or near \"(\"","position":37}
+{"sql":"grant alter system (a) on parameter x, to r","code":"42601","message":"syntax error at or near \"(\"","position":19}
+{"sql":"revoke alter system (a) on parameter x, from r","code":"42601","message":"syntax error at or near \"(\"","position":20}
+{"sql":"revoke grant option for alter system (a) on parameter x, from r","code":"42601","message":"syntax error at or near \"(\"","position":37}
+{"sql":"grant alter system (a) on parameter  to r","code":"42601","message":"syntax error at or near \"(\"","position":19}
+{"sql":"revoke alter system (a) on parameter  from r","code":"42601","message":"syntax error at or near \"(\"","position":20}
+{"sql":"revoke grant option for alter system (a) on parameter  from r","code":"42601","message":"syntax error at or near \"(\"","position":37}
+{"sql":"grant alter system (a) on parameter 1 to r","code":"42601","message":"syntax error at or near \"(\"","position":19}
+{"sql":"revoke alter system (a) on parameter 1 from r","code":"42601","message":"syntax error at or near \"(\"","position":20}
+{"sql":"revoke grant option for alter system (a) on parameter 1 from r","code":"42601","message":"syntax error at or near \"(\"","position":37}
+{"sql":"grant alter system (a) on parameter 'x' to r","code":"42601","message":"syntax error at or near \"(\"","position":19}
+{"sql":"revoke alter system (a) on parameter 'x' from r","code":"42601","message":"syntax error at or near \"(\"","position":20}
+{"sql":"revoke grant option for alter system (a) on parameter 'x' from r","code":"42601","message":"syntax error at or near \"(\"","position":37}
+{"sql":"grant alter system (a) on parameter a.* to r","code":"42601","message":"syntax error at or near \"(\"","position":19}
+{"sql":"revoke alter system (a) on parameter a.* from r","code":"42601","message":"syntax error at or near \"(\"","position":20}
+{"sql":"revoke grant option for alter system (a) on parameter a.* from r","code":"42601","message":"syntax error at or near \"(\"","position":37}
+{"sql":"grant alter system (a) on parameter x y to r","code":"42601","message":"syntax error at or near \"(\"","position":19}
+{"sql":"revoke alter system (a) on parameter x y from r","code":"42601","message":"syntax error at or near \"(\"","position":20}
+{"sql":"revoke grant option for alter system (a) on parameter x y from r","code":"42601","message":"syntax error at or near \"(\"","position":37}
+{"sql":"grant alter system (a) on parameter x[1] to r","code":"42601","message":"syntax error at or near \"(\"","position":19}
+{"sql":"revoke alter system (a) on parameter x[1] from r","code":"42601","message":"syntax error at or near \"(\"","position":20}
+{"sql":"revoke grant option for alter system (a) on parameter x[1] from r","code":"42601","message":"syntax error at or near \"(\"","position":37}
+{"sql":"grant alter system (a) on parameter select to r","code":"42601","message":"syntax error at or near \"(\"","position":19}
+{"sql":"revoke alter system (a) on parameter select from r","code":"42601","message":"syntax error at or near \"(\"","position":20}
+{"sql":"revoke grant option for alter system (a) on parameter select from r","code":"42601","message":"syntax error at or near \"(\"","position":37}
+{"sql":"grant alter system (a) on parameter authorization to r","code":"42601","message":"syntax error at or near \"(\"","position":19}
+{"sql":"revoke alter system (a) on parameter authorization from r","code":"42601","message":"syntax error at or near \"(\"","position":20}
+{"sql":"revoke grant option for alter system (a) on parameter authorization from r","code":"42601","message":"syntax error at or near \"(\"","position":37}
+{"sql":"grant alter system (a) on parameter table x to r","code":"42601","message":"syntax error at or near \"(\"","position":19}
+{"sql":"revoke alter system (a) on parameter table x from r","code":"42601","message":"syntax error at or near \"(\"","position":20}
+{"sql":"revoke grant option for alter system (a) on parameter table x from r","code":"42601","message":"syntax error at or near \"(\"","position":37}
+{"sql":"grant set (a) on parameter x to r"}
+{"sql":"revoke set (a) on parameter x from r"}
+{"sql":"revoke grant option for set (a) on parameter x from r"}
+{"sql":"grant set (a) on parameter a.b to r"}
+{"sql":"revoke set (a) on parameter a.b from r"}
+{"sql":"revoke grant option for set (a) on parameter a.b from r"}
+{"sql":"grant set (a) on parameter a.b.c to r"}
+{"sql":"revoke set (a) on parameter a.b.c from r"}
+{"sql":"revoke grant option for set (a) on parameter a.b.c from r"}
+{"sql":"grant set (a) on parameter x, y to r"}
+{"sql":"revoke set (a) on parameter x, y from r"}
+{"sql":"revoke grant option for set (a) on parameter x, y from r"}
+{"sql":"grant set (a) on parameter a.b, c.d.e to r"}
+{"sql":"revoke set (a) on parameter a.b, c.d.e from r"}
+{"sql":"revoke grant option for set (a) on parameter a.b, c.d.e from r"}
+{"sql":"grant set (a) on parameter \"Work_Mem\" to r"}
+{"sql":"revoke set (a) on parameter \"Work_Mem\" from r"}
+{"sql":"revoke grant option for set (a) on parameter \"Work_Mem\" from r"}
+{"sql":"grant set (a) on parameter work_mem to r"}
+{"sql":"revoke set (a) on parameter work_mem from r"}
+{"sql":"revoke grant option for set (a) on parameter work_mem from r"}
+{"sql":"grant set (a) on parameter parameter to r"}
+{"sql":"revoke set (a) on parameter parameter from r"}
+{"sql":"revoke grant option for set (a) on parameter parameter from r"}
+{"sql":"grant set (a) on parameter public to r"}
+{"sql":"revoke set (a) on parameter public from r"}
+{"sql":"revoke grant option for set (a) on parameter public from r"}
+{"sql":"grant set (a) on parameter x. to r","code":"42601","message":"syntax error at or near \"to\"","position":30}
+{"sql":"revoke set (a) on parameter x. from r","code":"42601","message":"syntax error at or near \"from\"","position":31}
+{"sql":"revoke grant option for set (a) on parameter x. from r","code":"42601","message":"syntax error at or near \"from\"","position":48}
+{"sql":"grant set (a) on parameter x, to r","code":"42601","message":"syntax error at or near \"to\"","position":30}
+{"sql":"revoke set (a) on parameter x, from r","code":"42601","message":"syntax error at or near \"from\"","position":31}
+{"sql":"revoke grant option for set (a) on parameter x, from r","code":"42601","message":"syntax error at or near \"from\"","position":48}
+{"sql":"grant set (a) on parameter  to r"}
+{"sql":"revoke set (a) on parameter  from r"}
+{"sql":"revoke grant option for set (a) on parameter  from r"}
+{"sql":"grant set (a) on parameter 1 to r","code":"42601","message":"syntax error at or near \"1\"","position":27}
+{"sql":"revoke set (a) on parameter 1 from r","code":"42601","message":"syntax error at or near \"1\"","position":28}
+{"sql":"revoke grant option for set (a) on parameter 1 from r","code":"42601","message":"syntax error at or near \"1\"","position":45}
+{"sql":"grant set (a) on parameter 'x' to r","code":"42601","message":"syntax error at or near \"'x'\"","position":27}
+{"sql":"revoke set (a) on parameter 'x' from r","code":"42601","message":"syntax error at or near \"'x'\"","position":28}
+{"sql":"revoke grant option for set (a) on parameter 'x' from r","code":"42601","message":"syntax error at or near \"'x'\"","position":45}
+{"sql":"grant set (a) on parameter a.* to r","code":"42601","message":"syntax error at or near \"*\"","position":29}
+{"sql":"revoke set (a) on parameter a.* from r","code":"42601","message":"syntax error at or near \"*\"","position":30}
+{"sql":"revoke grant option for set (a) on parameter a.* from r","code":"42601","message":"syntax error at or near \"*\"","position":47}
+{"sql":"grant set (a) on parameter x y to r","code":"42601","message":"syntax error at or near \"y\"","position":29}
+{"sql":"revoke set (a) on parameter x y from r","code":"42601","message":"syntax error at or near \"y\"","position":30}
+{"sql":"revoke grant option for set (a) on parameter x y from r","code":"42601","message":"syntax error at or near \"y\"","position":47}
+{"sql":"grant set (a) on parameter x[1] to r","code":"42601","message":"syntax error at or near \"[\"","position":28}
+{"sql":"revoke set (a) on parameter x[1] from r","code":"42601","message":"syntax error at or near \"[\"","position":29}
+{"sql":"revoke grant option for set (a) on parameter x[1] from r","code":"42601","message":"syntax error at or near \"[\"","position":46}
+{"sql":"grant set (a) on parameter select to r","code":"42601","message":"syntax error at or near \"select\"","position":27}
+{"sql":"revoke set (a) on parameter select from r","code":"42601","message":"syntax error at or near \"select\"","position":28}
+{"sql":"revoke grant option for set (a) on parameter select from r","code":"42601","message":"syntax error at or near \"select\"","position":45}
+{"sql":"grant set (a) on parameter authorization to r","code":"42601","message":"syntax error at or near \"authorization\"","position":27}
+{"sql":"revoke set (a) on parameter authorization from r","code":"42601","message":"syntax error at or near \"authorization\"","position":28}
+{"sql":"revoke grant option for set (a) on parameter authorization from r","code":"42601","message":"syntax error at or near \"authorization\"","position":45}
+{"sql":"grant set (a) on parameter table x to r","code":"42601","message":"syntax error at or near \"table\"","position":27}
+{"sql":"revoke set (a) on parameter table x from r","code":"42601","message":"syntax error at or near \"table\"","position":28}
+{"sql":"revoke grant option for set (a) on parameter table x from r","code":"42601","message":"syntax error at or near \"table\"","position":45}
+{"sql":"grant set on parameter x to r, public with grant option granted by u"}
+{"sql":"grant set on parameter x to group r"}
+{"sql":"revoke set on parameter x from r granted by current_user cascade"}
+{"sql":"revoke grant option for set on parameter x from r restrict"}
+{"sql":"grant set on parameter x","code":"42601","message":"syntax error at end of input","position":24}
+{"sql":"grant set on parameter x to","code":"42601","message":"syntax error at end of input","position":27}
+{"sql":"revoke set on parameter x to r","code":"42601","message":"syntax error at or near \"to\"","position":26}
+{"sql":"grant set on parameter a.b to r, public with grant option granted by u"}
+{"sql":"grant set on parameter a.b to group r"}
+{"sql":"revoke set on parameter a.b from r granted by current_user cascade"}
+{"sql":"revoke grant option for set on parameter a.b from r restrict"}
+{"sql":"grant set on parameter a.b","code":"42601","message":"syntax error at end of input","position":26}
+{"sql":"grant set on parameter a.b to","code":"42601","message":"syntax error at end of input","position":29}
+{"sql":"revoke set on parameter a.b to r","code":"42601","message":"syntax error at or near \"to\"","position":28}
+{"sql":"grant select on parameter to r"}
+{"sql":"grant select on parameter.x to r"}
+{"sql":"grant select on parameter, t to r"}
+{"sql":"revoke select on parameter from r"}
+{"sql":"grant all on table parameter to r"}
+{"sql":"alter default privileges grant set on parameters to r","code":"42601","message":"syntax error at or near \"parameters\"","position":38}
