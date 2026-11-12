@@ -1,0 +1,1984 @@
+{"sql":"explain (verbose) select 1"}
+{"sql":"explain (verbose on) select 1"}
+{"sql":"explain (verbose off) select 1"}
+{"sql":"explain (verbose true) select 1"}
+{"sql":"explain (verbose false) select 1"}
+{"sql":"explain (verbose 's') select 1"}
+{"sql":"explain (verbose 1) select 1"}
+{"sql":"explain (verbose -1) select 1"}
+{"sql":"explain (verbose +2.5) select 1"}
+{"sql":"explain (verbose x) select 1"}
+{"sql":"explain (verbose json) select 1"}
+{"sql":"explain (verbose select) select 1","syntaxError":"syntax error at or near \"select\"","position":17}
+{"sql":"explain (verbose default) select 1","syntaxError":"syntax error at or near \"default\"","position":17}
+{"sql":"explain (verbose null) select 1","syntaxError":"syntax error at or near \"null\"","position":17}
+{"sql":"explain (verbose *) select 1","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"explain (verbose (a)) select 1","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"explain (verbose (a, 'b')) select 1","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"explain (verbose (on, true)) select 1","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"explain (verbose (1)) select 1","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"explain (verbose ()) select 1","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"explain (verbose (select)) select 1","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"explain (verbose (a)(b)) select 1","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"explain (verbose * *) select 1","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"explain (verbose x y) select 1","syntaxError":"syntax error at or near \"y\"","position":19}
+{"sql":"explain (analyze) select 1"}
+{"sql":"explain (analyze on) select 1"}
+{"sql":"explain (analyze off) select 1"}
+{"sql":"explain (analyze true) select 1"}
+{"sql":"explain (analyze false) select 1"}
+{"sql":"explain (analyze 's') select 1"}
+{"sql":"explain (analyze 1) select 1"}
+{"sql":"explain (analyze -1) select 1"}
+{"sql":"explain (analyze +2.5) select 1"}
+{"sql":"explain (analyze x) select 1"}
+{"sql":"explain (analyze json) select 1"}
+{"sql":"explain (analyze select) select 1","syntaxError":"syntax error at or near \"select\"","position":17}
+{"sql":"explain (analyze default) select 1","syntaxError":"syntax error at or near \"default\"","position":17}
+{"sql":"explain (analyze null) select 1","syntaxError":"syntax error at or near \"null\"","position":17}
+{"sql":"explain (analyze *) select 1","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"explain (analyze (a)) select 1","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"explain (analyze (a, 'b')) select 1","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"explain (analyze (on, true)) select 1","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"explain (analyze (1)) select 1","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"explain (analyze ()) select 1","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"explain (analyze (select)) select 1","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"explain (analyze (a)(b)) select 1","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"explain (analyze * *) select 1","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"explain (analyze x y) select 1","syntaxError":"syntax error at or near \"y\"","position":19}
+{"sql":"explain (analyse) select 1"}
+{"sql":"explain (analyse on) select 1"}
+{"sql":"explain (analyse off) select 1"}
+{"sql":"explain (analyse true) select 1"}
+{"sql":"explain (analyse false) select 1"}
+{"sql":"explain (analyse 's') select 1"}
+{"sql":"explain (analyse 1) select 1"}
+{"sql":"explain (analyse -1) select 1"}
+{"sql":"explain (analyse +2.5) select 1"}
+{"sql":"explain (analyse x) select 1"}
+{"sql":"explain (analyse json) select 1"}
+{"sql":"explain (analyse select) select 1","syntaxError":"syntax error at or near \"select\"","position":17}
+{"sql":"explain (analyse default) select 1","syntaxError":"syntax error at or near \"default\"","position":17}
+{"sql":"explain (analyse null) select 1","syntaxError":"syntax error at or near \"null\"","position":17}
+{"sql":"explain (analyse *) select 1","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"explain (analyse (a)) select 1","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"explain (analyse (a, 'b')) select 1","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"explain (analyse (on, true)) select 1","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"explain (analyse (1)) select 1","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"explain (analyse ()) select 1","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"explain (analyse (select)) select 1","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"explain (analyse (a)(b)) select 1","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"explain (analyse * *) select 1","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"explain (analyse x y) select 1","syntaxError":"syntax error at or near \"y\"","position":19}
+{"sql":"explain (format) select 1"}
+{"sql":"explain (format on) select 1"}
+{"sql":"explain (format off) select 1"}
+{"sql":"explain (format true) select 1"}
+{"sql":"explain (format false) select 1"}
+{"sql":"explain (format 's') select 1"}
+{"sql":"explain (format 1) select 1"}
+{"sql":"explain (format -1) select 1"}
+{"sql":"explain (format +2.5) select 1"}
+{"sql":"explain (format x) select 1"}
+{"sql":"explain (format json) select 1"}
+{"sql":"explain (format select) select 1","syntaxError":"syntax error at or near \"select\"","position":16}
+{"sql":"explain (format default) select 1","syntaxError":"syntax error at or near \"default\"","position":16}
+{"sql":"explain (format null) select 1","syntaxError":"syntax error at or near \"null\"","position":16}
+{"sql":"explain (format *) select 1","syntaxError":"syntax error at or near \"*\"","position":16}
+{"sql":"explain (format (a)) select 1","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"explain (format (a, 'b')) select 1","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"explain (format (on, true)) select 1","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"explain (format (1)) select 1","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"explain (format ()) select 1","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"explain (format (select)) select 1","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"explain (format (a)(b)) select 1","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"explain (format * *) select 1","syntaxError":"syntax error at or near \"*\"","position":16}
+{"sql":"explain (format x y) select 1","syntaxError":"syntax error at or near \"y\"","position":18}
+{"sql":"explain (default) select 1","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"explain (default on) select 1","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"explain (default off) select 1","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"explain (default true) select 1","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"explain (default false) select 1","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"explain (default 's') select 1","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"explain (default 1) select 1","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"explain (default -1) select 1","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"explain (default +2.5) select 1","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"explain (default x) select 1","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"explain (default json) select 1","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"explain (default select) select 1","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"explain (default default) select 1","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"explain (default null) select 1","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"explain (default *) select 1","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"explain (default (a)) select 1","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"explain (default (a, 'b')) select 1","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"explain (default (on, true)) select 1","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"explain (default (1)) select 1","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"explain (default ()) select 1","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"explain (default (select)) select 1","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"explain (default (a)(b)) select 1","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"explain (default * *) select 1","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"explain (default x y) select 1","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"explain (select) select 1","syntaxError":"syntax error at or near \"select\"","position":17}
+{"sql":"explain (select on) select 1","syntaxError":"syntax error at or near \"on\"","position":16}
+{"sql":"explain (select off) select 1","syntaxError":"syntax error at or near \"select\"","position":21}
+{"sql":"explain (select true) select 1","syntaxError":"syntax error at or near \"select\"","position":22}
+{"sql":"explain (select false) select 1","syntaxError":"syntax error at or near \"select\"","position":23}
+{"sql":"explain (select 's') select 1","syntaxError":"syntax error at or near \"select\"","position":21}
+{"sql":"explain (select 1) select 1","syntaxError":"syntax error at or near \"select\"","position":19}
+{"sql":"explain (select -1) select 1","syntaxError":"syntax error at or near \"select\"","position":20}
+{"sql":"explain (select +2.5) select 1","syntaxError":"syntax error at or near \"select\"","position":22}
+{"sql":"explain (select x) select 1","syntaxError":"syntax error at or near \"select\"","position":19}
+{"sql":"explain (select json) select 1","syntaxError":"syntax error at or near \"select\"","position":22}
+{"sql":"explain (select select) select 1","syntaxError":"syntax error at or near \"select\"","position":16}
+{"sql":"explain (select default) select 1","syntaxError":"syntax error at or near \"select\"","position":25}
+{"sql":"explain (select null) select 1","syntaxError":"syntax error at or near \"select\"","position":22}
+{"sql":"explain (select *) select 1","syntaxError":"syntax error at or near \"select\"","position":19}
+{"sql":"explain (select (a)) select 1","syntaxError":"syntax error at or near \"select\"","position":21}
+{"sql":"explain (select (a, 'b')) select 1","syntaxError":"syntax error at or near \"select\"","position":26}
+{"sql":"explain (select (on, true)) select 1","syntaxError":"syntax error at or near \"on\"","position":17}
+{"sql":"explain (select (1)) select 1","syntaxError":"syntax error at or near \"select\"","position":21}
+{"sql":"explain (select ()) select 1","syntaxError":"syntax error at or near \")\"","position":17}
+{"sql":"explain (select (select)) select 1","syntaxError":"syntax error at or near \"select\"","position":26}
+{"sql":"explain (select (a)(b)) select 1","syntaxError":"syntax error at or near \"(\"","position":19}
+{"sql":"explain (select * *) select 1","syntaxError":"syntax error at or near \"*\"","position":18}
+{"sql":"explain (select x y) select 1","syntaxError":"syntax error at or near \"select\"","position":21}
+{"sql":"explain (cross) select 1"}
+{"sql":"explain (cross on) select 1"}
+{"sql":"explain (cross off) select 1"}
+{"sql":"explain (cross true) select 1"}
+{"sql":"explain (cross false) select 1"}
+{"sql":"explain (cross 's') select 1"}
+{"sql":"explain (cross 1) select 1"}
+{"sql":"explain (cross -1) select 1"}
+{"sql":"explain (cross +2.5) select 1"}
+{"sql":"explain (cross x) select 1"}
+{"sql":"explain (cross json) select 1"}
+{"sql":"explain (cross select) select 1","syntaxError":"syntax error at or near \"select\"","position":15}
+{"sql":"explain (cross default) select 1","syntaxError":"syntax error at or near \"default\"","position":15}
+{"sql":"explain (cross null) select 1","syntaxError":"syntax error at or near \"null\"","position":15}
+{"sql":"explain (cross *) select 1","syntaxError":"syntax error at or near \"*\"","position":15}
+{"sql":"explain (cross (a)) select 1","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"explain (cross (a, 'b')) select 1","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"explain (cross (on, true)) select 1","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"explain (cross (1)) select 1","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"explain (cross ()) select 1","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"explain (cross (select)) select 1","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"explain (cross (a)(b)) select 1","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"explain (cross * *) select 1","syntaxError":"syntax error at or near \"*\"","position":15}
+{"sql":"explain (cross x y) select 1","syntaxError":"syntax error at or near \"y\"","position":17}
+{"sql":"explain (else) select 1","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"explain (else on) select 1","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"explain (else off) select 1","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"explain (else true) select 1","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"explain (else false) select 1","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"explain (else 's') select 1","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"explain (else 1) select 1","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"explain (else -1) select 1","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"explain (else +2.5) select 1","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"explain (else x) select 1","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"explain (else json) select 1","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"explain (else select) select 1","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"explain (else default) select 1","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"explain (else null) select 1","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"explain (else *) select 1","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"explain (else (a)) select 1","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"explain (else (a, 'b')) select 1","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"explain (else (on, true)) select 1","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"explain (else (1)) select 1","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"explain (else ()) select 1","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"explain (else (select)) select 1","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"explain (else (a)(b)) select 1","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"explain (else * *) select 1","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"explain (else x y) select 1","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"explain (x) select 1"}
+{"sql":"explain (x on) select 1"}
+{"sql":"explain (x off) select 1"}
+{"sql":"explain (x true) select 1"}
+{"sql":"explain (x false) select 1"}
+{"sql":"explain (x 's') select 1"}
+{"sql":"explain (x 1) select 1"}
+{"sql":"explain (x -1) select 1"}
+{"sql":"explain (x +2.5) select 1"}
+{"sql":"explain (x x) select 1"}
+{"sql":"explain (x json) select 1"}
+{"sql":"explain (x select) select 1","syntaxError":"syntax error at or near \"select\"","position":11}
+{"sql":"explain (x default) select 1","syntaxError":"syntax error at or near \"default\"","position":11}
+{"sql":"explain (x null) select 1","syntaxError":"syntax error at or near \"null\"","position":11}
+{"sql":"explain (x *) select 1","syntaxError":"syntax error at or near \"*\"","position":11}
+{"sql":"explain (x (a)) select 1","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"explain (x (a, 'b')) select 1","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"explain (x (on, true)) select 1","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"explain (x (1)) select 1","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"explain (x ()) select 1","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"explain (x (select)) select 1","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"explain (x (a)(b)) select 1","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"explain (x * *) select 1","syntaxError":"syntax error at or near \"*\"","position":11}
+{"sql":"explain (x x y) select 1","syntaxError":"syntax error at or near \"y\"","position":13}
+{"sql":"explain (\"X\") select 1"}
+{"sql":"explain (\"X\" on) select 1"}
+{"sql":"explain (\"X\" off) select 1"}
+{"sql":"explain (\"X\" true) select 1"}
+{"sql":"explain (\"X\" false) select 1"}
+{"sql":"explain (\"X\" 's') select 1"}
+{"sql":"explain (\"X\" 1) select 1"}
+{"sql":"explain (\"X\" -1) select 1"}
+{"sql":"explain (\"X\" +2.5) select 1"}
+{"sql":"explain (\"X\" x) select 1"}
+{"sql":"explain (\"X\" json) select 1"}
+{"sql":"explain (\"X\" select) select 1","syntaxError":"syntax error at or near \"select\"","position":13}
+{"sql":"explain (\"X\" default) select 1","syntaxError":"syntax error at or near \"default\"","position":13}
+{"sql":"explain (\"X\" null) select 1","syntaxError":"syntax error at or near \"null\"","position":13}
+{"sql":"explain (\"X\" *) select 1","syntaxError":"syntax error at or near \"*\"","position":13}
+{"sql":"explain (\"X\" (a)) select 1","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"explain (\"X\" (a, 'b')) select 1","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"explain (\"X\" (on, true)) select 1","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"explain (\"X\" (1)) select 1","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"explain (\"X\" ()) select 1","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"explain (\"X\" (select)) select 1","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"explain (\"X\" (a)(b)) select 1","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"explain (\"X\" * *) select 1","syntaxError":"syntax error at or near \"*\"","position":13}
+{"sql":"explain (\"X\" x y) select 1","syntaxError":"syntax error at or near \"y\"","position":15}
+{"sql":"explain (verbose, analyze) select 1"}
+{"sql":"explain (verbose on, costs off) select 1"}
+{"sql":"explain (x *, y (a)) select 1","syntaxError":"syntax error at or near \"*\"","position":11}
+{"sql":"explain (verbose,) select 1","syntaxError":"syntax error at or near \")\"","position":17}
+{"sql":"explain () select 1","syntaxError":"syntax error at or near \")\"","position":9}
+{"sql":"explain (verbose, , x) select 1","syntaxError":"syntax error at or near \",\"","position":18}
+{"sql":"explain ((verbose)) select 1","syntaxError":"syntax error at or near \"verbose\"","position":10}
+{"sql":"explain (verbose 1 2) select 1","syntaxError":"syntax error at or near \"2\"","position":19}
+{"sql":"vacuum (verbose) t"}
+{"sql":"vacuum (verbose on) t"}
+{"sql":"vacuum (verbose off) t"}
+{"sql":"vacuum (verbose true) t"}
+{"sql":"vacuum (verbose false) t"}
+{"sql":"vacuum (verbose 's') t"}
+{"sql":"vacuum (verbose 1) t"}
+{"sql":"vacuum (verbose -1) t"}
+{"sql":"vacuum (verbose +2.5) t"}
+{"sql":"vacuum (verbose x) t"}
+{"sql":"vacuum (verbose json) t"}
+{"sql":"vacuum (verbose select) t","syntaxError":"syntax error at or near \"select\"","position":16}
+{"sql":"vacuum (verbose default) t","syntaxError":"syntax error at or near \"default\"","position":16}
+{"sql":"vacuum (verbose null) t","syntaxError":"syntax error at or near \"null\"","position":16}
+{"sql":"vacuum (verbose *) t","syntaxError":"syntax error at or near \"*\"","position":16}
+{"sql":"vacuum (verbose (a)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"vacuum (verbose (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"vacuum (verbose (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"vacuum (verbose (1)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"vacuum (verbose ()) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"vacuum (verbose (select)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"vacuum (verbose (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"vacuum (verbose * *) t","syntaxError":"syntax error at or near \"*\"","position":16}
+{"sql":"vacuum (verbose x y) t","syntaxError":"syntax error at or near \"y\"","position":18}
+{"sql":"vacuum (analyze) t"}
+{"sql":"vacuum (analyze on) t"}
+{"sql":"vacuum (analyze off) t"}
+{"sql":"vacuum (analyze true) t"}
+{"sql":"vacuum (analyze false) t"}
+{"sql":"vacuum (analyze 's') t"}
+{"sql":"vacuum (analyze 1) t"}
+{"sql":"vacuum (analyze -1) t"}
+{"sql":"vacuum (analyze +2.5) t"}
+{"sql":"vacuum (analyze x) t"}
+{"sql":"vacuum (analyze json) t"}
+{"sql":"vacuum (analyze select) t","syntaxError":"syntax error at or near \"select\"","position":16}
+{"sql":"vacuum (analyze default) t","syntaxError":"syntax error at or near \"default\"","position":16}
+{"sql":"vacuum (analyze null) t","syntaxError":"syntax error at or near \"null\"","position":16}
+{"sql":"vacuum (analyze *) t","syntaxError":"syntax error at or near \"*\"","position":16}
+{"sql":"vacuum (analyze (a)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"vacuum (analyze (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"vacuum (analyze (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"vacuum (analyze (1)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"vacuum (analyze ()) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"vacuum (analyze (select)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"vacuum (analyze (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"vacuum (analyze * *) t","syntaxError":"syntax error at or near \"*\"","position":16}
+{"sql":"vacuum (analyze x y) t","syntaxError":"syntax error at or near \"y\"","position":18}
+{"sql":"vacuum (analyse) t"}
+{"sql":"vacuum (analyse on) t"}
+{"sql":"vacuum (analyse off) t"}
+{"sql":"vacuum (analyse true) t"}
+{"sql":"vacuum (analyse false) t"}
+{"sql":"vacuum (analyse 's') t"}
+{"sql":"vacuum (analyse 1) t"}
+{"sql":"vacuum (analyse -1) t"}
+{"sql":"vacuum (analyse +2.5) t"}
+{"sql":"vacuum (analyse x) t"}
+{"sql":"vacuum (analyse json) t"}
+{"sql":"vacuum (analyse select) t","syntaxError":"syntax error at or near \"select\"","position":16}
+{"sql":"vacuum (analyse default) t","syntaxError":"syntax error at or near \"default\"","position":16}
+{"sql":"vacuum (analyse null) t","syntaxError":"syntax error at or near \"null\"","position":16}
+{"sql":"vacuum (analyse *) t","syntaxError":"syntax error at or near \"*\"","position":16}
+{"sql":"vacuum (analyse (a)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"vacuum (analyse (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"vacuum (analyse (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"vacuum (analyse (1)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"vacuum (analyse ()) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"vacuum (analyse (select)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"vacuum (analyse (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"vacuum (analyse * *) t","syntaxError":"syntax error at or near \"*\"","position":16}
+{"sql":"vacuum (analyse x y) t","syntaxError":"syntax error at or near \"y\"","position":18}
+{"sql":"vacuum (format) t"}
+{"sql":"vacuum (format on) t"}
+{"sql":"vacuum (format off) t"}
+{"sql":"vacuum (format true) t"}
+{"sql":"vacuum (format false) t"}
+{"sql":"vacuum (format 's') t"}
+{"sql":"vacuum (format 1) t"}
+{"sql":"vacuum (format -1) t"}
+{"sql":"vacuum (format +2.5) t"}
+{"sql":"vacuum (format x) t"}
+{"sql":"vacuum (format json) t"}
+{"sql":"vacuum (format select) t","syntaxError":"syntax error at or near \"select\"","position":15}
+{"sql":"vacuum (format default) t","syntaxError":"syntax error at or near \"default\"","position":15}
+{"sql":"vacuum (format null) t","syntaxError":"syntax error at or near \"null\"","position":15}
+{"sql":"vacuum (format *) t","syntaxError":"syntax error at or near \"*\"","position":15}
+{"sql":"vacuum (format (a)) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"vacuum (format (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"vacuum (format (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"vacuum (format (1)) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"vacuum (format ()) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"vacuum (format (select)) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"vacuum (format (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"vacuum (format * *) t","syntaxError":"syntax error at or near \"*\"","position":15}
+{"sql":"vacuum (format x y) t","syntaxError":"syntax error at or near \"y\"","position":17}
+{"sql":"vacuum (default) t","syntaxError":"syntax error at or near \"default\"","position":8}
+{"sql":"vacuum (default on) t","syntaxError":"syntax error at or near \"default\"","position":8}
+{"sql":"vacuum (default off) t","syntaxError":"syntax error at or near \"default\"","position":8}
+{"sql":"vacuum (default true) t","syntaxError":"syntax error at or near \"default\"","position":8}
+{"sql":"vacuum (default false) t","syntaxError":"syntax error at or near \"default\"","position":8}
+{"sql":"vacuum (default 's') t","syntaxError":"syntax error at or near \"default\"","position":8}
+{"sql":"vacuum (default 1) t","syntaxError":"syntax error at or near \"default\"","position":8}
+{"sql":"vacuum (default -1) t","syntaxError":"syntax error at or near \"default\"","position":8}
+{"sql":"vacuum (default +2.5) t","syntaxError":"syntax error at or near \"default\"","position":8}
+{"sql":"vacuum (default x) t","syntaxError":"syntax error at or near \"default\"","position":8}
+{"sql":"vacuum (default json) t","syntaxError":"syntax error at or near \"default\"","position":8}
+{"sql":"vacuum (default select) t","syntaxError":"syntax error at or near \"default\"","position":8}
+{"sql":"vacuum (default default) t","syntaxError":"syntax error at or near \"default\"","position":8}
+{"sql":"vacuum (default null) t","syntaxError":"syntax error at or near \"default\"","position":8}
+{"sql":"vacuum (default *) t","syntaxError":"syntax error at or near \"default\"","position":8}
+{"sql":"vacuum (default (a)) t","syntaxError":"syntax error at or near \"default\"","position":8}
+{"sql":"vacuum (default (a, 'b')) t","syntaxError":"syntax error at or near \"default\"","position":8}
+{"sql":"vacuum (default (on, true)) t","syntaxError":"syntax error at or near \"default\"","position":8}
+{"sql":"vacuum (default (1)) t","syntaxError":"syntax error at or near \"default\"","position":8}
+{"sql":"vacuum (default ()) t","syntaxError":"syntax error at or near \"default\"","position":8}
+{"sql":"vacuum (default (select)) t","syntaxError":"syntax error at or near \"default\"","position":8}
+{"sql":"vacuum (default (a)(b)) t","syntaxError":"syntax error at or near \"default\"","position":8}
+{"sql":"vacuum (default * *) t","syntaxError":"syntax error at or near \"default\"","position":8}
+{"sql":"vacuum (default x y) t","syntaxError":"syntax error at or near \"default\"","position":8}
+{"sql":"vacuum (select) t","syntaxError":"syntax error at or near \"select\"","position":8}
+{"sql":"vacuum (select on) t","syntaxError":"syntax error at or near \"select\"","position":8}
+{"sql":"vacuum (select off) t","syntaxError":"syntax error at or near \"select\"","position":8}
+{"sql":"vacuum (select true) t","syntaxError":"syntax error at or near \"select\"","position":8}
+{"sql":"vacuum (select false) t","syntaxError":"syntax error at or near \"select\"","position":8}
+{"sql":"vacuum (select 's') t","syntaxError":"syntax error at or near \"select\"","position":8}
+{"sql":"vacuum (select 1) t","syntaxError":"syntax error at or near \"select\"","position":8}
+{"sql":"vacuum (select -1) t","syntaxError":"syntax error at or near \"select\"","position":8}
+{"sql":"vacuum (select +2.5) t","syntaxError":"syntax error at or near \"select\"","position":8}
+{"sql":"vacuum (select x) t","syntaxError":"syntax error at or near \"select\"","position":8}
+{"sql":"vacuum (select json) t","syntaxError":"syntax error at or near \"select\"","position":8}
+{"sql":"vacuum (select select) t","syntaxError":"syntax error at or near \"select\"","position":8}
+{"sql":"vacuum (select default) t","syntaxError":"syntax error at or near \"select\"","position":8}
+{"sql":"vacuum (select null) t","syntaxError":"syntax error at or near \"select\"","position":8}
+{"sql":"vacuum (select *) t","syntaxError":"syntax error at or near \"select\"","position":8}
+{"sql":"vacuum (select (a)) t","syntaxError":"syntax error at or near \"select\"","position":8}
+{"sql":"vacuum (select (a, 'b')) t","syntaxError":"syntax error at or near \"select\"","position":8}
+{"sql":"vacuum (select (on, true)) t","syntaxError":"syntax error at or near \"select\"","position":8}
+{"sql":"vacuum (select (1)) t","syntaxError":"syntax error at or near \"select\"","position":8}
+{"sql":"vacuum (select ()) t","syntaxError":"syntax error at or near \"select\"","position":8}
+{"sql":"vacuum (select (select)) t","syntaxError":"syntax error at or near \"select\"","position":8}
+{"sql":"vacuum (select (a)(b)) t","syntaxError":"syntax error at or near \"select\"","position":8}
+{"sql":"vacuum (select * *) t","syntaxError":"syntax error at or near \"select\"","position":8}
+{"sql":"vacuum (select x y) t","syntaxError":"syntax error at or near \"select\"","position":8}
+{"sql":"vacuum (cross) t"}
+{"sql":"vacuum (cross on) t"}
+{"sql":"vacuum (cross off) t"}
+{"sql":"vacuum (cross true) t"}
+{"sql":"vacuum (cross false) t"}
+{"sql":"vacuum (cross 's') t"}
+{"sql":"vacuum (cross 1) t"}
+{"sql":"vacuum (cross -1) t"}
+{"sql":"vacuum (cross +2.5) t"}
+{"sql":"vacuum (cross x) t"}
+{"sql":"vacuum (cross json) t"}
+{"sql":"vacuum (cross select) t","syntaxError":"syntax error at or near \"select\"","position":14}
+{"sql":"vacuum (cross default) t","syntaxError":"syntax error at or near \"default\"","position":14}
+{"sql":"vacuum (cross null) t","syntaxError":"syntax error at or near \"null\"","position":14}
+{"sql":"vacuum (cross *) t","syntaxError":"syntax error at or near \"*\"","position":14}
+{"sql":"vacuum (cross (a)) t","syntaxError":"syntax error at or near \"(\"","position":14}
+{"sql":"vacuum (cross (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":14}
+{"sql":"vacuum (cross (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":14}
+{"sql":"vacuum (cross (1)) t","syntaxError":"syntax error at or near \"(\"","position":14}
+{"sql":"vacuum (cross ()) t","syntaxError":"syntax error at or near \"(\"","position":14}
+{"sql":"vacuum (cross (select)) t","syntaxError":"syntax error at or near \"(\"","position":14}
+{"sql":"vacuum (cross (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":14}
+{"sql":"vacuum (cross * *) t","syntaxError":"syntax error at or near \"*\"","position":14}
+{"sql":"vacuum (cross x y) t","syntaxError":"syntax error at or near \"y\"","position":16}
+{"sql":"vacuum (else) t","syntaxError":"syntax error at or near \"else\"","position":8}
+{"sql":"vacuum (else on) t","syntaxError":"syntax error at or near \"else\"","position":8}
+{"sql":"vacuum (else off) t","syntaxError":"syntax error at or near \"else\"","position":8}
+{"sql":"vacuum (else true) t","syntaxError":"syntax error at or near \"else\"","position":8}
+{"sql":"vacuum (else false) t","syntaxError":"syntax error at or near \"else\"","position":8}
+{"sql":"vacuum (else 's') t","syntaxError":"syntax error at or near \"else\"","position":8}
+{"sql":"vacuum (else 1) t","syntaxError":"syntax error at or near \"else\"","position":8}
+{"sql":"vacuum (else -1) t","syntaxError":"syntax error at or near \"else\"","position":8}
+{"sql":"vacuum (else +2.5) t","syntaxError":"syntax error at or near \"else\"","position":8}
+{"sql":"vacuum (else x) t","syntaxError":"syntax error at or near \"else\"","position":8}
+{"sql":"vacuum (else json) t","syntaxError":"syntax error at or near \"else\"","position":8}
+{"sql":"vacuum (else select) t","syntaxError":"syntax error at or near \"else\"","position":8}
+{"sql":"vacuum (else default) t","syntaxError":"syntax error at or near \"else\"","position":8}
+{"sql":"vacuum (else null) t","syntaxError":"syntax error at or near \"else\"","position":8}
+{"sql":"vacuum (else *) t","syntaxError":"syntax error at or near \"else\"","position":8}
+{"sql":"vacuum (else (a)) t","syntaxError":"syntax error at or near \"else\"","position":8}
+{"sql":"vacuum (else (a, 'b')) t","syntaxError":"syntax error at or near \"else\"","position":8}
+{"sql":"vacuum (else (on, true)) t","syntaxError":"syntax error at or near \"else\"","position":8}
+{"sql":"vacuum (else (1)) t","syntaxError":"syntax error at or near \"else\"","position":8}
+{"sql":"vacuum (else ()) t","syntaxError":"syntax error at or near \"else\"","position":8}
+{"sql":"vacuum (else (select)) t","syntaxError":"syntax error at or near \"else\"","position":8}
+{"sql":"vacuum (else (a)(b)) t","syntaxError":"syntax error at or near \"else\"","position":8}
+{"sql":"vacuum (else * *) t","syntaxError":"syntax error at or near \"else\"","position":8}
+{"sql":"vacuum (else x y) t","syntaxError":"syntax error at or near \"else\"","position":8}
+{"sql":"vacuum (x) t"}
+{"sql":"vacuum (x on) t"}
+{"sql":"vacuum (x off) t"}
+{"sql":"vacuum (x true) t"}
+{"sql":"vacuum (x false) t"}
+{"sql":"vacuum (x 's') t"}
+{"sql":"vacuum (x 1) t"}
+{"sql":"vacuum (x -1) t"}
+{"sql":"vacuum (x +2.5) t"}
+{"sql":"vacuum (x x) t"}
+{"sql":"vacuum (x json) t"}
+{"sql":"vacuum (x select) t","syntaxError":"syntax error at or near \"select\"","position":10}
+{"sql":"vacuum (x default) t","syntaxError":"syntax error at or near \"default\"","position":10}
+{"sql":"vacuum (x null) t","syntaxError":"syntax error at or near \"null\"","position":10}
+{"sql":"vacuum (x *) t","syntaxError":"syntax error at or near \"*\"","position":10}
+{"sql":"vacuum (x (a)) t","syntaxError":"syntax error at or near \"(\"","position":10}
+{"sql":"vacuum (x (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":10}
+{"sql":"vacuum (x (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":10}
+{"sql":"vacuum (x (1)) t","syntaxError":"syntax error at or near \"(\"","position":10}
+{"sql":"vacuum (x ()) t","syntaxError":"syntax error at or near \"(\"","position":10}
+{"sql":"vacuum (x (select)) t","syntaxError":"syntax error at or near \"(\"","position":10}
+{"sql":"vacuum (x (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":10}
+{"sql":"vacuum (x * *) t","syntaxError":"syntax error at or near \"*\"","position":10}
+{"sql":"vacuum (x x y) t","syntaxError":"syntax error at or near \"y\"","position":12}
+{"sql":"vacuum (\"X\") t"}
+{"sql":"vacuum (\"X\" on) t"}
+{"sql":"vacuum (\"X\" off) t"}
+{"sql":"vacuum (\"X\" true) t"}
+{"sql":"vacuum (\"X\" false) t"}
+{"sql":"vacuum (\"X\" 's') t"}
+{"sql":"vacuum (\"X\" 1) t"}
+{"sql":"vacuum (\"X\" -1) t"}
+{"sql":"vacuum (\"X\" +2.5) t"}
+{"sql":"vacuum (\"X\" x) t"}
+{"sql":"vacuum (\"X\" json) t"}
+{"sql":"vacuum (\"X\" select) t","syntaxError":"syntax error at or near \"select\"","position":12}
+{"sql":"vacuum (\"X\" default) t","syntaxError":"syntax error at or near \"default\"","position":12}
+{"sql":"vacuum (\"X\" null) t","syntaxError":"syntax error at or near \"null\"","position":12}
+{"sql":"vacuum (\"X\" *) t","syntaxError":"syntax error at or near \"*\"","position":12}
+{"sql":"vacuum (\"X\" (a)) t","syntaxError":"syntax error at or near \"(\"","position":12}
+{"sql":"vacuum (\"X\" (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":12}
+{"sql":"vacuum (\"X\" (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":12}
+{"sql":"vacuum (\"X\" (1)) t","syntaxError":"syntax error at or near \"(\"","position":12}
+{"sql":"vacuum (\"X\" ()) t","syntaxError":"syntax error at or near \"(\"","position":12}
+{"sql":"vacuum (\"X\" (select)) t","syntaxError":"syntax error at or near \"(\"","position":12}
+{"sql":"vacuum (\"X\" (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":12}
+{"sql":"vacuum (\"X\" * *) t","syntaxError":"syntax error at or near \"*\"","position":12}
+{"sql":"vacuum (\"X\" x y) t","syntaxError":"syntax error at or near \"y\"","position":14}
+{"sql":"vacuum (verbose, analyze) t"}
+{"sql":"vacuum (verbose on, costs off) t"}
+{"sql":"vacuum (x *, y (a)) t","syntaxError":"syntax error at or near \"*\"","position":10}
+{"sql":"vacuum (verbose,) t","syntaxError":"syntax error at or near \")\"","position":16}
+{"sql":"vacuum () t","syntaxError":"syntax error at or near \")\"","position":8}
+{"sql":"vacuum (verbose, , x) t","syntaxError":"syntax error at or near \",\"","position":17}
+{"sql":"vacuum ((verbose)) t","syntaxError":"syntax error at or near \"(\"","position":8}
+{"sql":"vacuum (verbose 1 2) t","syntaxError":"syntax error at or near \"2\"","position":18}
+{"sql":"analyze (verbose) t"}
+{"sql":"analyze (verbose on) t"}
+{"sql":"analyze (verbose off) t"}
+{"sql":"analyze (verbose true) t"}
+{"sql":"analyze (verbose false) t"}
+{"sql":"analyze (verbose 's') t"}
+{"sql":"analyze (verbose 1) t"}
+{"sql":"analyze (verbose -1) t"}
+{"sql":"analyze (verbose +2.5) t"}
+{"sql":"analyze (verbose x) t"}
+{"sql":"analyze (verbose json) t"}
+{"sql":"analyze (verbose select) t","syntaxError":"syntax error at or near \"select\"","position":17}
+{"sql":"analyze (verbose default) t","syntaxError":"syntax error at or near \"default\"","position":17}
+{"sql":"analyze (verbose null) t","syntaxError":"syntax error at or near \"null\"","position":17}
+{"sql":"analyze (verbose *) t","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"analyze (verbose (a)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyze (verbose (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyze (verbose (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyze (verbose (1)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyze (verbose ()) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyze (verbose (select)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyze (verbose (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyze (verbose * *) t","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"analyze (verbose x y) t","syntaxError":"syntax error at or near \"y\"","position":19}
+{"sql":"analyze (analyze) t"}
+{"sql":"analyze (analyze on) t"}
+{"sql":"analyze (analyze off) t"}
+{"sql":"analyze (analyze true) t"}
+{"sql":"analyze (analyze false) t"}
+{"sql":"analyze (analyze 's') t"}
+{"sql":"analyze (analyze 1) t"}
+{"sql":"analyze (analyze -1) t"}
+{"sql":"analyze (analyze +2.5) t"}
+{"sql":"analyze (analyze x) t"}
+{"sql":"analyze (analyze json) t"}
+{"sql":"analyze (analyze select) t","syntaxError":"syntax error at or near \"select\"","position":17}
+{"sql":"analyze (analyze default) t","syntaxError":"syntax error at or near \"default\"","position":17}
+{"sql":"analyze (analyze null) t","syntaxError":"syntax error at or near \"null\"","position":17}
+{"sql":"analyze (analyze *) t","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"analyze (analyze (a)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyze (analyze (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyze (analyze (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyze (analyze (1)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyze (analyze ()) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyze (analyze (select)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyze (analyze (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyze (analyze * *) t","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"analyze (analyze x y) t","syntaxError":"syntax error at or near \"y\"","position":19}
+{"sql":"analyze (analyse) t"}
+{"sql":"analyze (analyse on) t"}
+{"sql":"analyze (analyse off) t"}
+{"sql":"analyze (analyse true) t"}
+{"sql":"analyze (analyse false) t"}
+{"sql":"analyze (analyse 's') t"}
+{"sql":"analyze (analyse 1) t"}
+{"sql":"analyze (analyse -1) t"}
+{"sql":"analyze (analyse +2.5) t"}
+{"sql":"analyze (analyse x) t"}
+{"sql":"analyze (analyse json) t"}
+{"sql":"analyze (analyse select) t","syntaxError":"syntax error at or near \"select\"","position":17}
+{"sql":"analyze (analyse default) t","syntaxError":"syntax error at or near \"default\"","position":17}
+{"sql":"analyze (analyse null) t","syntaxError":"syntax error at or near \"null\"","position":17}
+{"sql":"analyze (analyse *) t","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"analyze (analyse (a)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyze (analyse (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyze (analyse (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyze (analyse (1)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyze (analyse ()) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyze (analyse (select)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyze (analyse (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyze (analyse * *) t","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"analyze (analyse x y) t","syntaxError":"syntax error at or near \"y\"","position":19}
+{"sql":"analyze (format) t"}
+{"sql":"analyze (format on) t"}
+{"sql":"analyze (format off) t"}
+{"sql":"analyze (format true) t"}
+{"sql":"analyze (format false) t"}
+{"sql":"analyze (format 's') t"}
+{"sql":"analyze (format 1) t"}
+{"sql":"analyze (format -1) t"}
+{"sql":"analyze (format +2.5) t"}
+{"sql":"analyze (format x) t"}
+{"sql":"analyze (format json) t"}
+{"sql":"analyze (format select) t","syntaxError":"syntax error at or near \"select\"","position":16}
+{"sql":"analyze (format default) t","syntaxError":"syntax error at or near \"default\"","position":16}
+{"sql":"analyze (format null) t","syntaxError":"syntax error at or near \"null\"","position":16}
+{"sql":"analyze (format *) t","syntaxError":"syntax error at or near \"*\"","position":16}
+{"sql":"analyze (format (a)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"analyze (format (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"analyze (format (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"analyze (format (1)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"analyze (format ()) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"analyze (format (select)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"analyze (format (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"analyze (format * *) t","syntaxError":"syntax error at or near \"*\"","position":16}
+{"sql":"analyze (format x y) t","syntaxError":"syntax error at or near \"y\"","position":18}
+{"sql":"analyze (default) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyze (default on) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyze (default off) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyze (default true) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyze (default false) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyze (default 's') t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyze (default 1) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyze (default -1) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyze (default +2.5) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyze (default x) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyze (default json) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyze (default select) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyze (default default) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyze (default null) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyze (default *) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyze (default (a)) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyze (default (a, 'b')) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyze (default (on, true)) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyze (default (1)) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyze (default ()) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyze (default (select)) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyze (default (a)(b)) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyze (default * *) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyze (default x y) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyze (select) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyze (select on) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyze (select off) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyze (select true) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyze (select false) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyze (select 's') t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyze (select 1) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyze (select -1) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyze (select +2.5) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyze (select x) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyze (select json) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyze (select select) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyze (select default) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyze (select null) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyze (select *) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyze (select (a)) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyze (select (a, 'b')) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyze (select (on, true)) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyze (select (1)) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyze (select ()) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyze (select (select)) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyze (select (a)(b)) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyze (select * *) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyze (select x y) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyze (cross) t"}
+{"sql":"analyze (cross on) t"}
+{"sql":"analyze (cross off) t"}
+{"sql":"analyze (cross true) t"}
+{"sql":"analyze (cross false) t"}
+{"sql":"analyze (cross 's') t"}
+{"sql":"analyze (cross 1) t"}
+{"sql":"analyze (cross -1) t"}
+{"sql":"analyze (cross +2.5) t"}
+{"sql":"analyze (cross x) t"}
+{"sql":"analyze (cross json) t"}
+{"sql":"analyze (cross select) t","syntaxError":"syntax error at or near \"select\"","position":15}
+{"sql":"analyze (cross default) t","syntaxError":"syntax error at or near \"default\"","position":15}
+{"sql":"analyze (cross null) t","syntaxError":"syntax error at or near \"null\"","position":15}
+{"sql":"analyze (cross *) t","syntaxError":"syntax error at or near \"*\"","position":15}
+{"sql":"analyze (cross (a)) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"analyze (cross (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"analyze (cross (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"analyze (cross (1)) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"analyze (cross ()) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"analyze (cross (select)) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"analyze (cross (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"analyze (cross * *) t","syntaxError":"syntax error at or near \"*\"","position":15}
+{"sql":"analyze (cross x y) t","syntaxError":"syntax error at or near \"y\"","position":17}
+{"sql":"analyze (else) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyze (else on) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyze (else off) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyze (else true) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyze (else false) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyze (else 's') t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyze (else 1) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyze (else -1) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyze (else +2.5) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyze (else x) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyze (else json) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyze (else select) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyze (else default) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyze (else null) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyze (else *) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyze (else (a)) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyze (else (a, 'b')) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyze (else (on, true)) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyze (else (1)) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyze (else ()) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyze (else (select)) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyze (else (a)(b)) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyze (else * *) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyze (else x y) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyze (x) t"}
+{"sql":"analyze (x on) t"}
+{"sql":"analyze (x off) t"}
+{"sql":"analyze (x true) t"}
+{"sql":"analyze (x false) t"}
+{"sql":"analyze (x 's') t"}
+{"sql":"analyze (x 1) t"}
+{"sql":"analyze (x -1) t"}
+{"sql":"analyze (x +2.5) t"}
+{"sql":"analyze (x x) t"}
+{"sql":"analyze (x json) t"}
+{"sql":"analyze (x select) t","syntaxError":"syntax error at or near \"select\"","position":11}
+{"sql":"analyze (x default) t","syntaxError":"syntax error at or near \"default\"","position":11}
+{"sql":"analyze (x null) t","syntaxError":"syntax error at or near \"null\"","position":11}
+{"sql":"analyze (x *) t","syntaxError":"syntax error at or near \"*\"","position":11}
+{"sql":"analyze (x (a)) t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"analyze (x (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"analyze (x (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"analyze (x (1)) t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"analyze (x ()) t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"analyze (x (select)) t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"analyze (x (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"analyze (x * *) t","syntaxError":"syntax error at or near \"*\"","position":11}
+{"sql":"analyze (x x y) t","syntaxError":"syntax error at or near \"y\"","position":13}
+{"sql":"analyze (\"X\") t"}
+{"sql":"analyze (\"X\" on) t"}
+{"sql":"analyze (\"X\" off) t"}
+{"sql":"analyze (\"X\" true) t"}
+{"sql":"analyze (\"X\" false) t"}
+{"sql":"analyze (\"X\" 's') t"}
+{"sql":"analyze (\"X\" 1) t"}
+{"sql":"analyze (\"X\" -1) t"}
+{"sql":"analyze (\"X\" +2.5) t"}
+{"sql":"analyze (\"X\" x) t"}
+{"sql":"analyze (\"X\" json) t"}
+{"sql":"analyze (\"X\" select) t","syntaxError":"syntax error at or near \"select\"","position":13}
+{"sql":"analyze (\"X\" default) t","syntaxError":"syntax error at or near \"default\"","position":13}
+{"sql":"analyze (\"X\" null) t","syntaxError":"syntax error at or near \"null\"","position":13}
+{"sql":"analyze (\"X\" *) t","syntaxError":"syntax error at or near \"*\"","position":13}
+{"sql":"analyze (\"X\" (a)) t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"analyze (\"X\" (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"analyze (\"X\" (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"analyze (\"X\" (1)) t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"analyze (\"X\" ()) t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"analyze (\"X\" (select)) t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"analyze (\"X\" (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"analyze (\"X\" * *) t","syntaxError":"syntax error at or near \"*\"","position":13}
+{"sql":"analyze (\"X\" x y) t","syntaxError":"syntax error at or near \"y\"","position":15}
+{"sql":"analyze (verbose, analyze) t"}
+{"sql":"analyze (verbose on, costs off) t"}
+{"sql":"analyze (x *, y (a)) t","syntaxError":"syntax error at or near \"*\"","position":11}
+{"sql":"analyze (verbose,) t","syntaxError":"syntax error at or near \")\"","position":17}
+{"sql":"analyze () t","syntaxError":"syntax error at or near \")\"","position":9}
+{"sql":"analyze (verbose, , x) t","syntaxError":"syntax error at or near \",\"","position":18}
+{"sql":"analyze ((verbose)) t","syntaxError":"syntax error at or near \"(\"","position":9}
+{"sql":"analyze (verbose 1 2) t","syntaxError":"syntax error at or near \"2\"","position":19}
+{"sql":"analyse (verbose) t"}
+{"sql":"analyse (verbose on) t"}
+{"sql":"analyse (verbose off) t"}
+{"sql":"analyse (verbose true) t"}
+{"sql":"analyse (verbose false) t"}
+{"sql":"analyse (verbose 's') t"}
+{"sql":"analyse (verbose 1) t"}
+{"sql":"analyse (verbose -1) t"}
+{"sql":"analyse (verbose +2.5) t"}
+{"sql":"analyse (verbose x) t"}
+{"sql":"analyse (verbose json) t"}
+{"sql":"analyse (verbose select) t","syntaxError":"syntax error at or near \"select\"","position":17}
+{"sql":"analyse (verbose default) t","syntaxError":"syntax error at or near \"default\"","position":17}
+{"sql":"analyse (verbose null) t","syntaxError":"syntax error at or near \"null\"","position":17}
+{"sql":"analyse (verbose *) t","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"analyse (verbose (a)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyse (verbose (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyse (verbose (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyse (verbose (1)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyse (verbose ()) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyse (verbose (select)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyse (verbose (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyse (verbose * *) t","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"analyse (verbose x y) t","syntaxError":"syntax error at or near \"y\"","position":19}
+{"sql":"analyse (analyze) t"}
+{"sql":"analyse (analyze on) t"}
+{"sql":"analyse (analyze off) t"}
+{"sql":"analyse (analyze true) t"}
+{"sql":"analyse (analyze false) t"}
+{"sql":"analyse (analyze 's') t"}
+{"sql":"analyse (analyze 1) t"}
+{"sql":"analyse (analyze -1) t"}
+{"sql":"analyse (analyze +2.5) t"}
+{"sql":"analyse (analyze x) t"}
+{"sql":"analyse (analyze json) t"}
+{"sql":"analyse (analyze select) t","syntaxError":"syntax error at or near \"select\"","position":17}
+{"sql":"analyse (analyze default) t","syntaxError":"syntax error at or near \"default\"","position":17}
+{"sql":"analyse (analyze null) t","syntaxError":"syntax error at or near \"null\"","position":17}
+{"sql":"analyse (analyze *) t","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"analyse (analyze (a)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyse (analyze (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyse (analyze (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyse (analyze (1)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyse (analyze ()) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyse (analyze (select)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyse (analyze (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyse (analyze * *) t","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"analyse (analyze x y) t","syntaxError":"syntax error at or near \"y\"","position":19}
+{"sql":"analyse (analyse) t"}
+{"sql":"analyse (analyse on) t"}
+{"sql":"analyse (analyse off) t"}
+{"sql":"analyse (analyse true) t"}
+{"sql":"analyse (analyse false) t"}
+{"sql":"analyse (analyse 's') t"}
+{"sql":"analyse (analyse 1) t"}
+{"sql":"analyse (analyse -1) t"}
+{"sql":"analyse (analyse +2.5) t"}
+{"sql":"analyse (analyse x) t"}
+{"sql":"analyse (analyse json) t"}
+{"sql":"analyse (analyse select) t","syntaxError":"syntax error at or near \"select\"","position":17}
+{"sql":"analyse (analyse default) t","syntaxError":"syntax error at or near \"default\"","position":17}
+{"sql":"analyse (analyse null) t","syntaxError":"syntax error at or near \"null\"","position":17}
+{"sql":"analyse (analyse *) t","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"analyse (analyse (a)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyse (analyse (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyse (analyse (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyse (analyse (1)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyse (analyse ()) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyse (analyse (select)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyse (analyse (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"analyse (analyse * *) t","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"analyse (analyse x y) t","syntaxError":"syntax error at or near \"y\"","position":19}
+{"sql":"analyse (format) t"}
+{"sql":"analyse (format on) t"}
+{"sql":"analyse (format off) t"}
+{"sql":"analyse (format true) t"}
+{"sql":"analyse (format false) t"}
+{"sql":"analyse (format 's') t"}
+{"sql":"analyse (format 1) t"}
+{"sql":"analyse (format -1) t"}
+{"sql":"analyse (format +2.5) t"}
+{"sql":"analyse (format x) t"}
+{"sql":"analyse (format json) t"}
+{"sql":"analyse (format select) t","syntaxError":"syntax error at or near \"select\"","position":16}
+{"sql":"analyse (format default) t","syntaxError":"syntax error at or near \"default\"","position":16}
+{"sql":"analyse (format null) t","syntaxError":"syntax error at or near \"null\"","position":16}
+{"sql":"analyse (format *) t","syntaxError":"syntax error at or near \"*\"","position":16}
+{"sql":"analyse (format (a)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"analyse (format (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"analyse (format (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"analyse (format (1)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"analyse (format ()) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"analyse (format (select)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"analyse (format (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"analyse (format * *) t","syntaxError":"syntax error at or near \"*\"","position":16}
+{"sql":"analyse (format x y) t","syntaxError":"syntax error at or near \"y\"","position":18}
+{"sql":"analyse (default) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyse (default on) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyse (default off) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyse (default true) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyse (default false) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyse (default 's') t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyse (default 1) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyse (default -1) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyse (default +2.5) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyse (default x) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyse (default json) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyse (default select) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyse (default default) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyse (default null) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyse (default *) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyse (default (a)) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyse (default (a, 'b')) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyse (default (on, true)) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyse (default (1)) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyse (default ()) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyse (default (select)) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyse (default (a)(b)) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyse (default * *) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyse (default x y) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"analyse (select) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyse (select on) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyse (select off) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyse (select true) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyse (select false) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyse (select 's') t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyse (select 1) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyse (select -1) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyse (select +2.5) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyse (select x) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyse (select json) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyse (select select) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyse (select default) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyse (select null) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyse (select *) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyse (select (a)) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyse (select (a, 'b')) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyse (select (on, true)) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyse (select (1)) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyse (select ()) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyse (select (select)) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyse (select (a)(b)) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyse (select * *) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyse (select x y) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"analyse (cross) t"}
+{"sql":"analyse (cross on) t"}
+{"sql":"analyse (cross off) t"}
+{"sql":"analyse (cross true) t"}
+{"sql":"analyse (cross false) t"}
+{"sql":"analyse (cross 's') t"}
+{"sql":"analyse (cross 1) t"}
+{"sql":"analyse (cross -1) t"}
+{"sql":"analyse (cross +2.5) t"}
+{"sql":"analyse (cross x) t"}
+{"sql":"analyse (cross json) t"}
+{"sql":"analyse (cross select) t","syntaxError":"syntax error at or near \"select\"","position":15}
+{"sql":"analyse (cross default) t","syntaxError":"syntax error at or near \"default\"","position":15}
+{"sql":"analyse (cross null) t","syntaxError":"syntax error at or near \"null\"","position":15}
+{"sql":"analyse (cross *) t","syntaxError":"syntax error at or near \"*\"","position":15}
+{"sql":"analyse (cross (a)) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"analyse (cross (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"analyse (cross (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"analyse (cross (1)) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"analyse (cross ()) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"analyse (cross (select)) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"analyse (cross (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"analyse (cross * *) t","syntaxError":"syntax error at or near \"*\"","position":15}
+{"sql":"analyse (cross x y) t","syntaxError":"syntax error at or near \"y\"","position":17}
+{"sql":"analyse (else) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyse (else on) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyse (else off) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyse (else true) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyse (else false) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyse (else 's') t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyse (else 1) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyse (else -1) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyse (else +2.5) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyse (else x) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyse (else json) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyse (else select) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyse (else default) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyse (else null) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyse (else *) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyse (else (a)) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyse (else (a, 'b')) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyse (else (on, true)) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyse (else (1)) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyse (else ()) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyse (else (select)) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyse (else (a)(b)) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyse (else * *) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyse (else x y) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"analyse (x) t"}
+{"sql":"analyse (x on) t"}
+{"sql":"analyse (x off) t"}
+{"sql":"analyse (x true) t"}
+{"sql":"analyse (x false) t"}
+{"sql":"analyse (x 's') t"}
+{"sql":"analyse (x 1) t"}
+{"sql":"analyse (x -1) t"}
+{"sql":"analyse (x +2.5) t"}
+{"sql":"analyse (x x) t"}
+{"sql":"analyse (x json) t"}
+{"sql":"analyse (x select) t","syntaxError":"syntax error at or near \"select\"","position":11}
+{"sql":"analyse (x default) t","syntaxError":"syntax error at or near \"default\"","position":11}
+{"sql":"analyse (x null) t","syntaxError":"syntax error at or near \"null\"","position":11}
+{"sql":"analyse (x *) t","syntaxError":"syntax error at or near \"*\"","position":11}
+{"sql":"analyse (x (a)) t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"analyse (x (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"analyse (x (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"analyse (x (1)) t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"analyse (x ()) t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"analyse (x (select)) t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"analyse (x (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"analyse (x * *) t","syntaxError":"syntax error at or near \"*\"","position":11}
+{"sql":"analyse (x x y) t","syntaxError":"syntax error at or near \"y\"","position":13}
+{"sql":"analyse (\"X\") t"}
+{"sql":"analyse (\"X\" on) t"}
+{"sql":"analyse (\"X\" off) t"}
+{"sql":"analyse (\"X\" true) t"}
+{"sql":"analyse (\"X\" false) t"}
+{"sql":"analyse (\"X\" 's') t"}
+{"sql":"analyse (\"X\" 1) t"}
+{"sql":"analyse (\"X\" -1) t"}
+{"sql":"analyse (\"X\" +2.5) t"}
+{"sql":"analyse (\"X\" x) t"}
+{"sql":"analyse (\"X\" json) t"}
+{"sql":"analyse (\"X\" select) t","syntaxError":"syntax error at or near \"select\"","position":13}
+{"sql":"analyse (\"X\" default) t","syntaxError":"syntax error at or near \"default\"","position":13}
+{"sql":"analyse (\"X\" null) t","syntaxError":"syntax error at or near \"null\"","position":13}
+{"sql":"analyse (\"X\" *) t","syntaxError":"syntax error at or near \"*\"","position":13}
+{"sql":"analyse (\"X\" (a)) t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"analyse (\"X\" (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"analyse (\"X\" (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"analyse (\"X\" (1)) t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"analyse (\"X\" ()) t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"analyse (\"X\" (select)) t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"analyse (\"X\" (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"analyse (\"X\" * *) t","syntaxError":"syntax error at or near \"*\"","position":13}
+{"sql":"analyse (\"X\" x y) t","syntaxError":"syntax error at or near \"y\"","position":15}
+{"sql":"analyse (verbose, analyze) t"}
+{"sql":"analyse (verbose on, costs off) t"}
+{"sql":"analyse (x *, y (a)) t","syntaxError":"syntax error at or near \"*\"","position":11}
+{"sql":"analyse (verbose,) t","syntaxError":"syntax error at or near \")\"","position":17}
+{"sql":"analyse () t","syntaxError":"syntax error at or near \")\"","position":9}
+{"sql":"analyse (verbose, , x) t","syntaxError":"syntax error at or near \",\"","position":18}
+{"sql":"analyse ((verbose)) t","syntaxError":"syntax error at or near \"(\"","position":9}
+{"sql":"analyse (verbose 1 2) t","syntaxError":"syntax error at or near \"2\"","position":19}
+{"sql":"cluster (verbose) t"}
+{"sql":"cluster (verbose on) t"}
+{"sql":"cluster (verbose off) t"}
+{"sql":"cluster (verbose true) t"}
+{"sql":"cluster (verbose false) t"}
+{"sql":"cluster (verbose 's') t"}
+{"sql":"cluster (verbose 1) t"}
+{"sql":"cluster (verbose -1) t"}
+{"sql":"cluster (verbose +2.5) t"}
+{"sql":"cluster (verbose x) t"}
+{"sql":"cluster (verbose json) t"}
+{"sql":"cluster (verbose select) t","syntaxError":"syntax error at or near \"select\"","position":17}
+{"sql":"cluster (verbose default) t","syntaxError":"syntax error at or near \"default\"","position":17}
+{"sql":"cluster (verbose null) t","syntaxError":"syntax error at or near \"null\"","position":17}
+{"sql":"cluster (verbose *) t","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"cluster (verbose (a)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"cluster (verbose (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"cluster (verbose (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"cluster (verbose (1)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"cluster (verbose ()) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"cluster (verbose (select)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"cluster (verbose (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"cluster (verbose * *) t","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"cluster (verbose x y) t","syntaxError":"syntax error at or near \"y\"","position":19}
+{"sql":"cluster (analyze) t"}
+{"sql":"cluster (analyze on) t"}
+{"sql":"cluster (analyze off) t"}
+{"sql":"cluster (analyze true) t"}
+{"sql":"cluster (analyze false) t"}
+{"sql":"cluster (analyze 's') t"}
+{"sql":"cluster (analyze 1) t"}
+{"sql":"cluster (analyze -1) t"}
+{"sql":"cluster (analyze +2.5) t"}
+{"sql":"cluster (analyze x) t"}
+{"sql":"cluster (analyze json) t"}
+{"sql":"cluster (analyze select) t","syntaxError":"syntax error at or near \"select\"","position":17}
+{"sql":"cluster (analyze default) t","syntaxError":"syntax error at or near \"default\"","position":17}
+{"sql":"cluster (analyze null) t","syntaxError":"syntax error at or near \"null\"","position":17}
+{"sql":"cluster (analyze *) t","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"cluster (analyze (a)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"cluster (analyze (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"cluster (analyze (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"cluster (analyze (1)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"cluster (analyze ()) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"cluster (analyze (select)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"cluster (analyze (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"cluster (analyze * *) t","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"cluster (analyze x y) t","syntaxError":"syntax error at or near \"y\"","position":19}
+{"sql":"cluster (analyse) t"}
+{"sql":"cluster (analyse on) t"}
+{"sql":"cluster (analyse off) t"}
+{"sql":"cluster (analyse true) t"}
+{"sql":"cluster (analyse false) t"}
+{"sql":"cluster (analyse 's') t"}
+{"sql":"cluster (analyse 1) t"}
+{"sql":"cluster (analyse -1) t"}
+{"sql":"cluster (analyse +2.5) t"}
+{"sql":"cluster (analyse x) t"}
+{"sql":"cluster (analyse json) t"}
+{"sql":"cluster (analyse select) t","syntaxError":"syntax error at or near \"select\"","position":17}
+{"sql":"cluster (analyse default) t","syntaxError":"syntax error at or near \"default\"","position":17}
+{"sql":"cluster (analyse null) t","syntaxError":"syntax error at or near \"null\"","position":17}
+{"sql":"cluster (analyse *) t","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"cluster (analyse (a)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"cluster (analyse (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"cluster (analyse (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"cluster (analyse (1)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"cluster (analyse ()) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"cluster (analyse (select)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"cluster (analyse (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"cluster (analyse * *) t","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"cluster (analyse x y) t","syntaxError":"syntax error at or near \"y\"","position":19}
+{"sql":"cluster (format) t"}
+{"sql":"cluster (format on) t"}
+{"sql":"cluster (format off) t"}
+{"sql":"cluster (format true) t"}
+{"sql":"cluster (format false) t"}
+{"sql":"cluster (format 's') t"}
+{"sql":"cluster (format 1) t"}
+{"sql":"cluster (format -1) t"}
+{"sql":"cluster (format +2.5) t"}
+{"sql":"cluster (format x) t"}
+{"sql":"cluster (format json) t"}
+{"sql":"cluster (format select) t","syntaxError":"syntax error at or near \"select\"","position":16}
+{"sql":"cluster (format default) t","syntaxError":"syntax error at or near \"default\"","position":16}
+{"sql":"cluster (format null) t","syntaxError":"syntax error at or near \"null\"","position":16}
+{"sql":"cluster (format *) t","syntaxError":"syntax error at or near \"*\"","position":16}
+{"sql":"cluster (format (a)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"cluster (format (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"cluster (format (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"cluster (format (1)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"cluster (format ()) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"cluster (format (select)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"cluster (format (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"cluster (format * *) t","syntaxError":"syntax error at or near \"*\"","position":16}
+{"sql":"cluster (format x y) t","syntaxError":"syntax error at or near \"y\"","position":18}
+{"sql":"cluster (default) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"cluster (default on) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"cluster (default off) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"cluster (default true) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"cluster (default false) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"cluster (default 's') t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"cluster (default 1) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"cluster (default -1) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"cluster (default +2.5) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"cluster (default x) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"cluster (default json) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"cluster (default select) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"cluster (default default) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"cluster (default null) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"cluster (default *) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"cluster (default (a)) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"cluster (default (a, 'b')) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"cluster (default (on, true)) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"cluster (default (1)) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"cluster (default ()) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"cluster (default (select)) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"cluster (default (a)(b)) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"cluster (default * *) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"cluster (default x y) t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"cluster (select) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"cluster (select on) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"cluster (select off) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"cluster (select true) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"cluster (select false) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"cluster (select 's') t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"cluster (select 1) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"cluster (select -1) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"cluster (select +2.5) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"cluster (select x) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"cluster (select json) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"cluster (select select) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"cluster (select default) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"cluster (select null) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"cluster (select *) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"cluster (select (a)) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"cluster (select (a, 'b')) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"cluster (select (on, true)) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"cluster (select (1)) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"cluster (select ()) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"cluster (select (select)) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"cluster (select (a)(b)) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"cluster (select * *) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"cluster (select x y) t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"cluster (cross) t"}
+{"sql":"cluster (cross on) t"}
+{"sql":"cluster (cross off) t"}
+{"sql":"cluster (cross true) t"}
+{"sql":"cluster (cross false) t"}
+{"sql":"cluster (cross 's') t"}
+{"sql":"cluster (cross 1) t"}
+{"sql":"cluster (cross -1) t"}
+{"sql":"cluster (cross +2.5) t"}
+{"sql":"cluster (cross x) t"}
+{"sql":"cluster (cross json) t"}
+{"sql":"cluster (cross select) t","syntaxError":"syntax error at or near \"select\"","position":15}
+{"sql":"cluster (cross default) t","syntaxError":"syntax error at or near \"default\"","position":15}
+{"sql":"cluster (cross null) t","syntaxError":"syntax error at or near \"null\"","position":15}
+{"sql":"cluster (cross *) t","syntaxError":"syntax error at or near \"*\"","position":15}
+{"sql":"cluster (cross (a)) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"cluster (cross (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"cluster (cross (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"cluster (cross (1)) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"cluster (cross ()) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"cluster (cross (select)) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"cluster (cross (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"cluster (cross * *) t","syntaxError":"syntax error at or near \"*\"","position":15}
+{"sql":"cluster (cross x y) t","syntaxError":"syntax error at or near \"y\"","position":17}
+{"sql":"cluster (else) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"cluster (else on) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"cluster (else off) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"cluster (else true) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"cluster (else false) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"cluster (else 's') t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"cluster (else 1) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"cluster (else -1) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"cluster (else +2.5) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"cluster (else x) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"cluster (else json) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"cluster (else select) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"cluster (else default) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"cluster (else null) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"cluster (else *) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"cluster (else (a)) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"cluster (else (a, 'b')) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"cluster (else (on, true)) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"cluster (else (1)) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"cluster (else ()) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"cluster (else (select)) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"cluster (else (a)(b)) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"cluster (else * *) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"cluster (else x y) t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"cluster (x) t"}
+{"sql":"cluster (x on) t"}
+{"sql":"cluster (x off) t"}
+{"sql":"cluster (x true) t"}
+{"sql":"cluster (x false) t"}
+{"sql":"cluster (x 's') t"}
+{"sql":"cluster (x 1) t"}
+{"sql":"cluster (x -1) t"}
+{"sql":"cluster (x +2.5) t"}
+{"sql":"cluster (x x) t"}
+{"sql":"cluster (x json) t"}
+{"sql":"cluster (x select) t","syntaxError":"syntax error at or near \"select\"","position":11}
+{"sql":"cluster (x default) t","syntaxError":"syntax error at or near \"default\"","position":11}
+{"sql":"cluster (x null) t","syntaxError":"syntax error at or near \"null\"","position":11}
+{"sql":"cluster (x *) t","syntaxError":"syntax error at or near \"*\"","position":11}
+{"sql":"cluster (x (a)) t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"cluster (x (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"cluster (x (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"cluster (x (1)) t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"cluster (x ()) t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"cluster (x (select)) t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"cluster (x (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"cluster (x * *) t","syntaxError":"syntax error at or near \"*\"","position":11}
+{"sql":"cluster (x x y) t","syntaxError":"syntax error at or near \"y\"","position":13}
+{"sql":"cluster (\"X\") t"}
+{"sql":"cluster (\"X\" on) t"}
+{"sql":"cluster (\"X\" off) t"}
+{"sql":"cluster (\"X\" true) t"}
+{"sql":"cluster (\"X\" false) t"}
+{"sql":"cluster (\"X\" 's') t"}
+{"sql":"cluster (\"X\" 1) t"}
+{"sql":"cluster (\"X\" -1) t"}
+{"sql":"cluster (\"X\" +2.5) t"}
+{"sql":"cluster (\"X\" x) t"}
+{"sql":"cluster (\"X\" json) t"}
+{"sql":"cluster (\"X\" select) t","syntaxError":"syntax error at or near \"select\"","position":13}
+{"sql":"cluster (\"X\" default) t","syntaxError":"syntax error at or near \"default\"","position":13}
+{"sql":"cluster (\"X\" null) t","syntaxError":"syntax error at or near \"null\"","position":13}
+{"sql":"cluster (\"X\" *) t","syntaxError":"syntax error at or near \"*\"","position":13}
+{"sql":"cluster (\"X\" (a)) t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"cluster (\"X\" (a, 'b')) t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"cluster (\"X\" (on, true)) t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"cluster (\"X\" (1)) t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"cluster (\"X\" ()) t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"cluster (\"X\" (select)) t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"cluster (\"X\" (a)(b)) t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"cluster (\"X\" * *) t","syntaxError":"syntax error at or near \"*\"","position":13}
+{"sql":"cluster (\"X\" x y) t","syntaxError":"syntax error at or near \"y\"","position":15}
+{"sql":"cluster (verbose, analyze) t"}
+{"sql":"cluster (verbose on, costs off) t"}
+{"sql":"cluster (x *, y (a)) t","syntaxError":"syntax error at or near \"*\"","position":11}
+{"sql":"cluster (verbose,) t","syntaxError":"syntax error at or near \")\"","position":17}
+{"sql":"cluster () t","syntaxError":"syntax error at or near \")\"","position":9}
+{"sql":"cluster (verbose, , x) t","syntaxError":"syntax error at or near \",\"","position":18}
+{"sql":"cluster ((verbose)) t","syntaxError":"syntax error at or near \"(\"","position":9}
+{"sql":"cluster (verbose 1 2) t","syntaxError":"syntax error at or near \"2\"","position":19}
+{"sql":"reindex (verbose) table t"}
+{"sql":"reindex (verbose on) table t"}
+{"sql":"reindex (verbose off) table t"}
+{"sql":"reindex (verbose true) table t"}
+{"sql":"reindex (verbose false) table t"}
+{"sql":"reindex (verbose 's') table t"}
+{"sql":"reindex (verbose 1) table t"}
+{"sql":"reindex (verbose -1) table t"}
+{"sql":"reindex (verbose +2.5) table t"}
+{"sql":"reindex (verbose x) table t"}
+{"sql":"reindex (verbose json) table t"}
+{"sql":"reindex (verbose select) table t","syntaxError":"syntax error at or near \"select\"","position":17}
+{"sql":"reindex (verbose default) table t","syntaxError":"syntax error at or near \"default\"","position":17}
+{"sql":"reindex (verbose null) table t","syntaxError":"syntax error at or near \"null\"","position":17}
+{"sql":"reindex (verbose *) table t","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"reindex (verbose (a)) table t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"reindex (verbose (a, 'b')) table t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"reindex (verbose (on, true)) table t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"reindex (verbose (1)) table t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"reindex (verbose ()) table t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"reindex (verbose (select)) table t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"reindex (verbose (a)(b)) table t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"reindex (verbose * *) table t","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"reindex (verbose x y) table t","syntaxError":"syntax error at or near \"y\"","position":19}
+{"sql":"reindex (analyze) table t"}
+{"sql":"reindex (analyze on) table t"}
+{"sql":"reindex (analyze off) table t"}
+{"sql":"reindex (analyze true) table t"}
+{"sql":"reindex (analyze false) table t"}
+{"sql":"reindex (analyze 's') table t"}
+{"sql":"reindex (analyze 1) table t"}
+{"sql":"reindex (analyze -1) table t"}
+{"sql":"reindex (analyze +2.5) table t"}
+{"sql":"reindex (analyze x) table t"}
+{"sql":"reindex (analyze json) table t"}
+{"sql":"reindex (analyze select) table t","syntaxError":"syntax error at or near \"select\"","position":17}
+{"sql":"reindex (analyze default) table t","syntaxError":"syntax error at or near \"default\"","position":17}
+{"sql":"reindex (analyze null) table t","syntaxError":"syntax error at or near \"null\"","position":17}
+{"sql":"reindex (analyze *) table t","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"reindex (analyze (a)) table t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"reindex (analyze (a, 'b')) table t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"reindex (analyze (on, true)) table t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"reindex (analyze (1)) table t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"reindex (analyze ()) table t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"reindex (analyze (select)) table t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"reindex (analyze (a)(b)) table t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"reindex (analyze * *) table t","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"reindex (analyze x y) table t","syntaxError":"syntax error at or near \"y\"","position":19}
+{"sql":"reindex (analyse) table t"}
+{"sql":"reindex (analyse on) table t"}
+{"sql":"reindex (analyse off) table t"}
+{"sql":"reindex (analyse true) table t"}
+{"sql":"reindex (analyse false) table t"}
+{"sql":"reindex (analyse 's') table t"}
+{"sql":"reindex (analyse 1) table t"}
+{"sql":"reindex (analyse -1) table t"}
+{"sql":"reindex (analyse +2.5) table t"}
+{"sql":"reindex (analyse x) table t"}
+{"sql":"reindex (analyse json) table t"}
+{"sql":"reindex (analyse select) table t","syntaxError":"syntax error at or near \"select\"","position":17}
+{"sql":"reindex (analyse default) table t","syntaxError":"syntax error at or near \"default\"","position":17}
+{"sql":"reindex (analyse null) table t","syntaxError":"syntax error at or near \"null\"","position":17}
+{"sql":"reindex (analyse *) table t","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"reindex (analyse (a)) table t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"reindex (analyse (a, 'b')) table t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"reindex (analyse (on, true)) table t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"reindex (analyse (1)) table t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"reindex (analyse ()) table t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"reindex (analyse (select)) table t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"reindex (analyse (a)(b)) table t","syntaxError":"syntax error at or near \"(\"","position":17}
+{"sql":"reindex (analyse * *) table t","syntaxError":"syntax error at or near \"*\"","position":17}
+{"sql":"reindex (analyse x y) table t","syntaxError":"syntax error at or near \"y\"","position":19}
+{"sql":"reindex (format) table t"}
+{"sql":"reindex (format on) table t"}
+{"sql":"reindex (format off) table t"}
+{"sql":"reindex (format true) table t"}
+{"sql":"reindex (format false) table t"}
+{"sql":"reindex (format 's') table t"}
+{"sql":"reindex (format 1) table t"}
+{"sql":"reindex (format -1) table t"}
+{"sql":"reindex (format +2.5) table t"}
+{"sql":"reindex (format x) table t"}
+{"sql":"reindex (format json) table t"}
+{"sql":"reindex (format select) table t","syntaxError":"syntax error at or near \"select\"","position":16}
+{"sql":"reindex (format default) table t","syntaxError":"syntax error at or near \"default\"","position":16}
+{"sql":"reindex (format null) table t","syntaxError":"syntax error at or near \"null\"","position":16}
+{"sql":"reindex (format *) table t","syntaxError":"syntax error at or near \"*\"","position":16}
+{"sql":"reindex (format (a)) table t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"reindex (format (a, 'b')) table t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"reindex (format (on, true)) table t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"reindex (format (1)) table t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"reindex (format ()) table t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"reindex (format (select)) table t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"reindex (format (a)(b)) table t","syntaxError":"syntax error at or near \"(\"","position":16}
+{"sql":"reindex (format * *) table t","syntaxError":"syntax error at or near \"*\"","position":16}
+{"sql":"reindex (format x y) table t","syntaxError":"syntax error at or near \"y\"","position":18}
+{"sql":"reindex (default) table t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"reindex (default on) table t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"reindex (default off) table t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"reindex (default true) table t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"reindex (default false) table t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"reindex (default 's') table t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"reindex (default 1) table t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"reindex (default -1) table t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"reindex (default +2.5) table t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"reindex (default x) table t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"reindex (default json) table t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"reindex (default select) table t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"reindex (default default) table t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"reindex (default null) table t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"reindex (default *) table t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"reindex (default (a)) table t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"reindex (default (a, 'b')) table t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"reindex (default (on, true)) table t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"reindex (default (1)) table t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"reindex (default ()) table t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"reindex (default (select)) table t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"reindex (default (a)(b)) table t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"reindex (default * *) table t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"reindex (default x y) table t","syntaxError":"syntax error at or near \"default\"","position":9}
+{"sql":"reindex (select) table t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"reindex (select on) table t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"reindex (select off) table t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"reindex (select true) table t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"reindex (select false) table t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"reindex (select 's') table t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"reindex (select 1) table t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"reindex (select -1) table t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"reindex (select +2.5) table t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"reindex (select x) table t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"reindex (select json) table t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"reindex (select select) table t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"reindex (select default) table t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"reindex (select null) table t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"reindex (select *) table t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"reindex (select (a)) table t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"reindex (select (a, 'b')) table t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"reindex (select (on, true)) table t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"reindex (select (1)) table t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"reindex (select ()) table t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"reindex (select (select)) table t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"reindex (select (a)(b)) table t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"reindex (select * *) table t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"reindex (select x y) table t","syntaxError":"syntax error at or near \"select\"","position":9}
+{"sql":"reindex (cross) table t"}
+{"sql":"reindex (cross on) table t"}
+{"sql":"reindex (cross off) table t"}
+{"sql":"reindex (cross true) table t"}
+{"sql":"reindex (cross false) table t"}
+{"sql":"reindex (cross 's') table t"}
+{"sql":"reindex (cross 1) table t"}
+{"sql":"reindex (cross -1) table t"}
+{"sql":"reindex (cross +2.5) table t"}
+{"sql":"reindex (cross x) table t"}
+{"sql":"reindex (cross json) table t"}
+{"sql":"reindex (cross select) table t","syntaxError":"syntax error at or near \"select\"","position":15}
+{"sql":"reindex (cross default) table t","syntaxError":"syntax error at or near \"default\"","position":15}
+{"sql":"reindex (cross null) table t","syntaxError":"syntax error at or near \"null\"","position":15}
+{"sql":"reindex (cross *) table t","syntaxError":"syntax error at or near \"*\"","position":15}
+{"sql":"reindex (cross (a)) table t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"reindex (cross (a, 'b')) table t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"reindex (cross (on, true)) table t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"reindex (cross (1)) table t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"reindex (cross ()) table t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"reindex (cross (select)) table t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"reindex (cross (a)(b)) table t","syntaxError":"syntax error at or near \"(\"","position":15}
+{"sql":"reindex (cross * *) table t","syntaxError":"syntax error at or near \"*\"","position":15}
+{"sql":"reindex (cross x y) table t","syntaxError":"syntax error at or near \"y\"","position":17}
+{"sql":"reindex (else) table t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"reindex (else on) table t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"reindex (else off) table t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"reindex (else true) table t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"reindex (else false) table t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"reindex (else 's') table t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"reindex (else 1) table t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"reindex (else -1) table t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"reindex (else +2.5) table t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"reindex (else x) table t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"reindex (else json) table t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"reindex (else select) table t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"reindex (else default) table t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"reindex (else null) table t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"reindex (else *) table t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"reindex (else (a)) table t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"reindex (else (a, 'b')) table t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"reindex (else (on, true)) table t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"reindex (else (1)) table t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"reindex (else ()) table t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"reindex (else (select)) table t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"reindex (else (a)(b)) table t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"reindex (else * *) table t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"reindex (else x y) table t","syntaxError":"syntax error at or near \"else\"","position":9}
+{"sql":"reindex (x) table t"}
+{"sql":"reindex (x on) table t"}
+{"sql":"reindex (x off) table t"}
+{"sql":"reindex (x true) table t"}
+{"sql":"reindex (x false) table t"}
+{"sql":"reindex (x 's') table t"}
+{"sql":"reindex (x 1) table t"}
+{"sql":"reindex (x -1) table t"}
+{"sql":"reindex (x +2.5) table t"}
+{"sql":"reindex (x x) table t"}
+{"sql":"reindex (x json) table t"}
+{"sql":"reindex (x select) table t","syntaxError":"syntax error at or near \"select\"","position":11}
+{"sql":"reindex (x default) table t","syntaxError":"syntax error at or near \"default\"","position":11}
+{"sql":"reindex (x null) table t","syntaxError":"syntax error at or near \"null\"","position":11}
+{"sql":"reindex (x *) table t","syntaxError":"syntax error at or near \"*\"","position":11}
+{"sql":"reindex (x (a)) table t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"reindex (x (a, 'b')) table t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"reindex (x (on, true)) table t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"reindex (x (1)) table t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"reindex (x ()) table t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"reindex (x (select)) table t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"reindex (x (a)(b)) table t","syntaxError":"syntax error at or near \"(\"","position":11}
+{"sql":"reindex (x * *) table t","syntaxError":"syntax error at or near \"*\"","position":11}
+{"sql":"reindex (x x y) table t","syntaxError":"syntax error at or near \"y\"","position":13}
+{"sql":"reindex (\"X\") table t"}
+{"sql":"reindex (\"X\" on) table t"}
+{"sql":"reindex (\"X\" off) table t"}
+{"sql":"reindex (\"X\" true) table t"}
+{"sql":"reindex (\"X\" false) table t"}
+{"sql":"reindex (\"X\" 's') table t"}
+{"sql":"reindex (\"X\" 1) table t"}
+{"sql":"reindex (\"X\" -1) table t"}
+{"sql":"reindex (\"X\" +2.5) table t"}
+{"sql":"reindex (\"X\" x) table t"}
+{"sql":"reindex (\"X\" json) table t"}
+{"sql":"reindex (\"X\" select) table t","syntaxError":"syntax error at or near \"select\"","position":13}
+{"sql":"reindex (\"X\" default) table t","syntaxError":"syntax error at or near \"default\"","position":13}
+{"sql":"reindex (\"X\" null) table t","syntaxError":"syntax error at or near \"null\"","position":13}
+{"sql":"reindex (\"X\" *) table t","syntaxError":"syntax error at or near \"*\"","position":13}
+{"sql":"reindex (\"X\" (a)) table t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"reindex (\"X\" (a, 'b')) table t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"reindex (\"X\" (on, true)) table t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"reindex (\"X\" (1)) table t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"reindex (\"X\" ()) table t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"reindex (\"X\" (select)) table t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"reindex (\"X\" (a)(b)) table t","syntaxError":"syntax error at or near \"(\"","position":13}
+{"sql":"reindex (\"X\" * *) table t","syntaxError":"syntax error at or near \"*\"","position":13}
+{"sql":"reindex (\"X\" x y) table t","syntaxError":"syntax error at or near \"y\"","position":15}
+{"sql":"reindex (verbose, analyze) table t"}
+{"sql":"reindex (verbose on, costs off) table t"}
+{"sql":"reindex (x *, y (a)) table t","syntaxError":"syntax error at or near \"*\"","position":11}
+{"sql":"reindex (verbose,) table t","syntaxError":"syntax error at or near \")\"","position":17}
+{"sql":"reindex () table t","syntaxError":"syntax error at or near \")\"","position":9}
+{"sql":"reindex (verbose, , x) table t","syntaxError":"syntax error at or near \",\"","position":18}
+{"sql":"reindex ((verbose)) table t","syntaxError":"syntax error at or near \"(\"","position":9}
+{"sql":"reindex (verbose 1 2) table t","syntaxError":"syntax error at or near \"2\"","position":19}
+{"sql":"copy t from stdin (verbose)"}
+{"sql":"copy t from stdin (verbose on)"}
+{"sql":"copy t from stdin (verbose off)"}
+{"sql":"copy t from stdin (verbose true)"}
+{"sql":"copy t from stdin (verbose false)"}
+{"sql":"copy t from stdin (verbose 's')"}
+{"sql":"copy t from stdin (verbose 1)"}
+{"sql":"copy t from stdin (verbose -1)"}
+{"sql":"copy t from stdin (verbose +2.5)"}
+{"sql":"copy t from stdin (verbose x)"}
+{"sql":"copy t from stdin (verbose json)"}
+{"sql":"copy t from stdin (verbose select)","syntaxError":"syntax error at or near \"select\"","position":27}
+{"sql":"copy t from stdin (verbose default)","syntaxError":"syntax error at or near \"default\"","position":27}
+{"sql":"copy t from stdin (verbose null)","syntaxError":"syntax error at or near \"null\"","position":27}
+{"sql":"copy t from stdin (verbose *)"}
+{"sql":"copy t from stdin (verbose (a))"}
+{"sql":"copy t from stdin (verbose (a, 'b'))"}
+{"sql":"copy t from stdin (verbose (on, true))"}
+{"sql":"copy t from stdin (verbose (1))","syntaxError":"syntax error at or near \"1\"","position":28}
+{"sql":"copy t from stdin (verbose ())","syntaxError":"syntax error at or near \")\"","position":28}
+{"sql":"copy t from stdin (verbose (select))","syntaxError":"syntax error at or near \"select\"","position":28}
+{"sql":"copy t from stdin (verbose (a)(b))","syntaxError":"syntax error at or near \"(\"","position":30}
+{"sql":"copy t from stdin (verbose * *)","syntaxError":"syntax error at or near \"*\"","position":29}
+{"sql":"copy t from stdin (verbose x y)","syntaxError":"syntax error at or near \"y\"","position":29}
+{"sql":"copy t from stdin (analyze)"}
+{"sql":"copy t from stdin (analyze on)"}
+{"sql":"copy t from stdin (analyze off)"}
+{"sql":"copy t from stdin (analyze true)"}
+{"sql":"copy t from stdin (analyze false)"}
+{"sql":"copy t from stdin (analyze 's')"}
+{"sql":"copy t from stdin (analyze 1)"}
+{"sql":"copy t from stdin (analyze -1)"}
+{"sql":"copy t from stdin (analyze +2.5)"}
+{"sql":"copy t from stdin (analyze x)"}
+{"sql":"copy t from stdin (analyze json)"}
+{"sql":"copy t from stdin (analyze select)","syntaxError":"syntax error at or near \"select\"","position":27}
+{"sql":"copy t from stdin (analyze default)","syntaxError":"syntax error at or near \"default\"","position":27}
+{"sql":"copy t from stdin (analyze null)","syntaxError":"syntax error at or near \"null\"","position":27}
+{"sql":"copy t from stdin (analyze *)"}
+{"sql":"copy t from stdin (analyze (a))"}
+{"sql":"copy t from stdin (analyze (a, 'b'))"}
+{"sql":"copy t from stdin (analyze (on, true))"}
+{"sql":"copy t from stdin (analyze (1))","syntaxError":"syntax error at or near \"1\"","position":28}
+{"sql":"copy t from stdin (analyze ())","syntaxError":"syntax error at or near \")\"","position":28}
+{"sql":"copy t from stdin (analyze (select))","syntaxError":"syntax error at or near \"select\"","position":28}
+{"sql":"copy t from stdin (analyze (a)(b))","syntaxError":"syntax error at or near \"(\"","position":30}
+{"sql":"copy t from stdin (analyze * *)","syntaxError":"syntax error at or near \"*\"","position":29}
+{"sql":"copy t from stdin (analyze x y)","syntaxError":"syntax error at or near \"y\"","position":29}
+{"sql":"copy t from stdin (analyse)"}
+{"sql":"copy t from stdin (analyse on)"}
+{"sql":"copy t from stdin (analyse off)"}
+{"sql":"copy t from stdin (analyse true)"}
+{"sql":"copy t from stdin (analyse false)"}
+{"sql":"copy t from stdin (analyse 's')"}
+{"sql":"copy t from stdin (analyse 1)"}
+{"sql":"copy t from stdin (analyse -1)"}
+{"sql":"copy t from stdin (analyse +2.5)"}
+{"sql":"copy t from stdin (analyse x)"}
+{"sql":"copy t from stdin (analyse json)"}
+{"sql":"copy t from stdin (analyse select)","syntaxError":"syntax error at or near \"select\"","position":27}
+{"sql":"copy t from stdin (analyse default)","syntaxError":"syntax error at or near \"default\"","position":27}
+{"sql":"copy t from stdin (analyse null)","syntaxError":"syntax error at or near \"null\"","position":27}
+{"sql":"copy t from stdin (analyse *)"}
+{"sql":"copy t from stdin (analyse (a))"}
+{"sql":"copy t from stdin (analyse (a, 'b'))"}
+{"sql":"copy t from stdin (analyse (on, true))"}
+{"sql":"copy t from stdin (analyse (1))","syntaxError":"syntax error at or near \"1\"","position":28}
+{"sql":"copy t from stdin (analyse ())","syntaxError":"syntax error at or near \")\"","position":28}
+{"sql":"copy t from stdin (analyse (select))","syntaxError":"syntax error at or near \"select\"","position":28}
+{"sql":"copy t from stdin (analyse (a)(b))","syntaxError":"syntax error at or near \"(\"","position":30}
+{"sql":"copy t from stdin (analyse * *)","syntaxError":"syntax error at or near \"*\"","position":29}
+{"sql":"copy t from stdin (analyse x y)","syntaxError":"syntax error at or near \"y\"","position":29}
+{"sql":"copy t from stdin (format)"}
+{"sql":"copy t from stdin (format on)"}
+{"sql":"copy t from stdin (format off)"}
+{"sql":"copy t from stdin (format true)"}
+{"sql":"copy t from stdin (format false)"}
+{"sql":"copy t from stdin (format 's')"}
+{"sql":"copy t from stdin (format 1)"}
+{"sql":"copy t from stdin (format -1)"}
+{"sql":"copy t from stdin (format +2.5)"}
+{"sql":"copy t from stdin (format x)"}
+{"sql":"copy t from stdin (format json)","syntaxError":"syntax error at or near \"format\"","position":19}
+{"sql":"copy t from stdin (format select)","syntaxError":"syntax error at or near \"select\"","position":26}
+{"sql":"copy t from stdin (format default)","syntaxError":"syntax error at or near \"default\"","position":26}
+{"sql":"copy t from stdin (format null)","syntaxError":"syntax error at or near \"null\"","position":26}
+{"sql":"copy t from stdin (format *)"}
+{"sql":"copy t from stdin (format (a))"}
+{"sql":"copy t from stdin (format (a, 'b'))"}
+{"sql":"copy t from stdin (format (on, true))"}
+{"sql":"copy t from stdin (format (1))","syntaxError":"syntax error at or near \"1\"","position":27}
+{"sql":"copy t from stdin (format ())","syntaxError":"syntax error at or near \")\"","position":27}
+{"sql":"copy t from stdin (format (select))","syntaxError":"syntax error at or near \"select\"","position":27}
+{"sql":"copy t from stdin (format (a)(b))","syntaxError":"syntax error at or near \"(\"","position":29}
+{"sql":"copy t from stdin (format * *)","syntaxError":"syntax error at or near \"*\"","position":28}
+{"sql":"copy t from stdin (format x y)","syntaxError":"syntax error at or near \"y\"","position":28}
+{"sql":"copy t from stdin (default)"}
+{"sql":"copy t from stdin (default on)"}
+{"sql":"copy t from stdin (default off)"}
+{"sql":"copy t from stdin (default true)"}
+{"sql":"copy t from stdin (default false)"}
+{"sql":"copy t from stdin (default 's')"}
+{"sql":"copy t from stdin (default 1)"}
+{"sql":"copy t from stdin (default -1)"}
+{"sql":"copy t from stdin (default +2.5)"}
+{"sql":"copy t from stdin (default x)"}
+{"sql":"copy t from stdin (default json)"}
+{"sql":"copy t from stdin (default select)","syntaxError":"syntax error at or near \"select\"","position":27}
+{"sql":"copy t from stdin (default default)","syntaxError":"syntax error at or near \"default\"","position":27}
+{"sql":"copy t from stdin (default null)","syntaxError":"syntax error at or near \"null\"","position":27}
+{"sql":"copy t from stdin (default *)"}
+{"sql":"copy t from stdin (default (a))"}
+{"sql":"copy t from stdin (default (a, 'b'))"}
+{"sql":"copy t from stdin (default (on, true))"}
+{"sql":"copy t from stdin (default (1))","syntaxError":"syntax error at or near \"1\"","position":28}
+{"sql":"copy t from stdin (default ())","syntaxError":"syntax error at or near \")\"","position":28}
+{"sql":"copy t from stdin (default (select))","syntaxError":"syntax error at or near \"select\"","position":28}
+{"sql":"copy t from stdin (default (a)(b))","syntaxError":"syntax error at or near \"(\"","position":30}
+{"sql":"copy t from stdin (default * *)","syntaxError":"syntax error at or near \"*\"","position":29}
+{"sql":"copy t from stdin (default x y)","syntaxError":"syntax error at or near \"y\"","position":29}
+{"sql":"copy t from stdin (select)"}
+{"sql":"copy t from stdin (select on)"}
+{"sql":"copy t from stdin (select off)"}
+{"sql":"copy t from stdin (select true)"}
+{"sql":"copy t from stdin (select false)"}
+{"sql":"copy t from stdin (select 's')"}
+{"sql":"copy t from stdin (select 1)"}
+{"sql":"copy t from stdin (select -1)"}
+{"sql":"copy t from stdin (select +2.5)"}
+{"sql":"copy t from stdin (select x)"}
+{"sql":"copy t from stdin (select json)"}
+{"sql":"copy t from stdin (select select)","syntaxError":"syntax error at or near \"select\"","position":26}
+{"sql":"copy t from stdin (select default)","syntaxError":"syntax error at or near \"default\"","position":26}
+{"sql":"copy t from stdin (select null)","syntaxError":"syntax error at or near \"null\"","position":26}
+{"sql":"copy t from stdin (select *)"}
+{"sql":"copy t from stdin (select (a))"}
+{"sql":"copy t from stdin (select (a, 'b'))"}
+{"sql":"copy t from stdin (select (on, true))"}
+{"sql":"copy t from stdin (select (1))","syntaxError":"syntax error at or near \"1\"","position":27}
+{"sql":"copy t from stdin (select ())","syntaxError":"syntax error at or near \")\"","position":27}
+{"sql":"copy t from stdin (select (select))","syntaxError":"syntax error at or near \"select\"","position":27}
+{"sql":"copy t from stdin (select (a)(b))","syntaxError":"syntax error at or near \"(\"","position":29}
+{"sql":"copy t from stdin (select * *)","syntaxError":"syntax error at or near \"*\"","position":28}
+{"sql":"copy t from stdin (select x y)","syntaxError":"syntax error at or near \"y\"","position":28}
+{"sql":"copy t from stdin (cross)"}
+{"sql":"copy t from stdin (cross on)"}
+{"sql":"copy t from stdin (cross off)"}
+{"sql":"copy t from stdin (cross true)"}
+{"sql":"copy t from stdin (cross false)"}
+{"sql":"copy t from stdin (cross 's')"}
+{"sql":"copy t from stdin (cross 1)"}
+{"sql":"copy t from stdin (cross -1)"}
+{"sql":"copy t from stdin (cross +2.5)"}
+{"sql":"copy t from stdin (cross x)"}
+{"sql":"copy t from stdin (cross json)"}
+{"sql":"copy t from stdin (cross select)","syntaxError":"syntax error at or near \"select\"","position":25}
+{"sql":"copy t from stdin (cross default)","syntaxError":"syntax error at or near \"default\"","position":25}
+{"sql":"copy t from stdin (cross null)","syntaxError":"syntax error at or near \"null\"","position":25}
+{"sql":"copy t from stdin (cross *)"}
+{"sql":"copy t from stdin (cross (a))"}
+{"sql":"copy t from stdin (cross (a, 'b'))"}
+{"sql":"copy t from stdin (cross (on, true))"}
+{"sql":"copy t from stdin (cross (1))","syntaxError":"syntax error at or near \"1\"","position":26}
+{"sql":"copy t from stdin (cross ())","syntaxError":"syntax error at or near \")\"","position":26}
+{"sql":"copy t from stdin (cross (select))","syntaxError":"syntax error at or near \"select\"","position":26}
+{"sql":"copy t from stdin (cross (a)(b))","syntaxError":"syntax error at or near \"(\"","position":28}
+{"sql":"copy t from stdin (cross * *)","syntaxError":"syntax error at or near \"*\"","position":27}
+{"sql":"copy t from stdin (cross x y)","syntaxError":"syntax error at or near \"y\"","position":27}
+{"sql":"copy t from stdin (else)"}
+{"sql":"copy t from stdin (else on)"}
+{"sql":"copy t from stdin (else off)"}
+{"sql":"copy t from stdin (else true)"}
+{"sql":"copy t from stdin (else false)"}
+{"sql":"copy t from stdin (else 's')"}
+{"sql":"copy t from stdin (else 1)"}
+{"sql":"copy t from stdin (else -1)"}
+{"sql":"copy t from stdin (else +2.5)"}
+{"sql":"copy t from stdin (else x)"}
+{"sql":"copy t from stdin (else json)"}
+{"sql":"copy t from stdin (else select)","syntaxError":"syntax error at or near \"select\"","position":24}
+{"sql":"copy t from stdin (else default)","syntaxError":"syntax error at or near \"default\"","position":24}
+{"sql":"copy t from stdin (else null)","syntaxError":"syntax error at or near \"null\"","position":24}
+{"sql":"copy t from stdin (else *)"}
+{"sql":"copy t from stdin (else (a))"}
+{"sql":"copy t from stdin (else (a, 'b'))"}
+{"sql":"copy t from stdin (else (on, true))"}
+{"sql":"copy t from stdin (else (1))","syntaxError":"syntax error at or near \"1\"","position":25}
+{"sql":"copy t from stdin (else ())","syntaxError":"syntax error at or near \")\"","position":25}
+{"sql":"copy t from stdin (else (select))","syntaxError":"syntax error at or near \"select\"","position":25}
+{"sql":"copy t from stdin (else (a)(b))","syntaxError":"syntax error at or near \"(\"","position":27}
+{"sql":"copy t from stdin (else * *)","syntaxError":"syntax error at or near \"*\"","position":26}
+{"sql":"copy t from stdin (else x y)","syntaxError":"syntax error at or near \"y\"","position":26}
+{"sql":"copy t from stdin (x)"}
+{"sql":"copy t from stdin (x on)"}
+{"sql":"copy t from stdin (x off)"}
+{"sql":"copy t from stdin (x true)"}
+{"sql":"copy t from stdin (x false)"}
+{"sql":"copy t from stdin (x 's')"}
+{"sql":"copy t from stdin (x 1)"}
+{"sql":"copy t from stdin (x -1)"}
+{"sql":"copy t from stdin (x +2.5)"}
+{"sql":"copy t from stdin (x x)"}
+{"sql":"copy t from stdin (x json)"}
+{"sql":"copy t from stdin (x select)","syntaxError":"syntax error at or near \"select\"","position":21}
+{"sql":"copy t from stdin (x default)","syntaxError":"syntax error at or near \"default\"","position":21}
+{"sql":"copy t from stdin (x null)","syntaxError":"syntax error at or near \"null\"","position":21}
+{"sql":"copy t from stdin (x *)"}
+{"sql":"copy t from stdin (x (a))"}
+{"sql":"copy t from stdin (x (a, 'b'))"}
+{"sql":"copy t from stdin (x (on, true))"}
+{"sql":"copy t from stdin (x (1))","syntaxError":"syntax error at or near \"1\"","position":22}
+{"sql":"copy t from stdin (x ())","syntaxError":"syntax error at or near \")\"","position":22}
+{"sql":"copy t from stdin (x (select))","syntaxError":"syntax error at or near \"select\"","position":22}
+{"sql":"copy t from stdin (x (a)(b))","syntaxError":"syntax error at or near \"(\"","position":24}
+{"sql":"copy t from stdin (x * *)","syntaxError":"syntax error at or near \"*\"","position":23}
+{"sql":"copy t from stdin (x x y)","syntaxError":"syntax error at or near \"y\"","position":23}
+{"sql":"copy t from stdin (\"X\")"}
+{"sql":"copy t from stdin (\"X\" on)"}
+{"sql":"copy t from stdin (\"X\" off)"}
+{"sql":"copy t from stdin (\"X\" true)"}
+{"sql":"copy t from stdin (\"X\" false)"}
+{"sql":"copy t from stdin (\"X\" 's')"}
+{"sql":"copy t from stdin (\"X\" 1)"}
+{"sql":"copy t from stdin (\"X\" -1)"}
+{"sql":"copy t from stdin (\"X\" +2.5)"}
+{"sql":"copy t from stdin (\"X\" x)"}
+{"sql":"copy t from stdin (\"X\" json)"}
+{"sql":"copy t from stdin (\"X\" select)","syntaxError":"syntax error at or near \"select\"","position":23}
+{"sql":"copy t from stdin (\"X\" default)","syntaxError":"syntax error at or near \"default\"","position":23}
+{"sql":"copy t from stdin (\"X\" null)","syntaxError":"syntax error at or near \"null\"","position":23}
+{"sql":"copy t from stdin (\"X\" *)"}
+{"sql":"copy t from stdin (\"X\" (a))"}
+{"sql":"copy t from stdin (\"X\" (a, 'b'))"}
+{"sql":"copy t from stdin (\"X\" (on, true))"}
+{"sql":"copy t from stdin (\"X\" (1))","syntaxError":"syntax error at or near \"1\"","position":24}
+{"sql":"copy t from stdin (\"X\" ())","syntaxError":"syntax error at or near \")\"","position":24}
+{"sql":"copy t from stdin (\"X\" (select))","syntaxError":"syntax error at or near \"select\"","position":24}
+{"sql":"copy t from stdin (\"X\" (a)(b))","syntaxError":"syntax error at or near \"(\"","position":26}
+{"sql":"copy t from stdin (\"X\" * *)","syntaxError":"syntax error at or near \"*\"","position":25}
+{"sql":"copy t from stdin (\"X\" x y)","syntaxError":"syntax error at or near \"y\"","position":25}
+{"sql":"copy t from stdin (verbose, analyze)"}
+{"sql":"copy t from stdin (verbose on, costs off)"}
+{"sql":"copy t from stdin (x *, y (a))"}
+{"sql":"copy t from stdin (verbose,)","syntaxError":"syntax error at or near \")\"","position":27}
+{"sql":"copy t from stdin ()","syntaxError":"syntax error at or near \")\"","position":19}
+{"sql":"copy t from stdin (verbose, , x)","syntaxError":"syntax error at or near \",\"","position":28}
+{"sql":"copy t from stdin ((verbose))","syntaxError":"syntax error at or near \"(\"","position":19}
+{"sql":"copy t from stdin (verbose 1 2)","syntaxError":"syntax error at or near \"2\"","position":29}
+{"sql":"copy t to stdout with (verbose)"}
+{"sql":"copy t to stdout with (verbose on)"}
+{"sql":"copy t to stdout with (verbose off)"}
+{"sql":"copy t to stdout with (verbose true)"}
+{"sql":"copy t to stdout with (verbose false)"}
+{"sql":"copy t to stdout with (verbose 's')"}
+{"sql":"copy t to stdout with (verbose 1)"}
+{"sql":"copy t to stdout with (verbose -1)"}
+{"sql":"copy t to stdout with (verbose +2.5)"}
+{"sql":"copy t to stdout with (verbose x)"}
+{"sql":"copy t to stdout with (verbose json)"}
+{"sql":"copy t to stdout with (verbose select)","syntaxError":"syntax error at or near \"select\"","position":31}
+{"sql":"copy t to stdout with (verbose default)","syntaxError":"syntax error at or near \"default\"","position":31}
+{"sql":"copy t to stdout with (verbose null)","syntaxError":"syntax error at or near \"null\"","position":31}
+{"sql":"copy t to stdout with (verbose *)"}
+{"sql":"copy t to stdout with (verbose (a))"}
+{"sql":"copy t to stdout with (verbose (a, 'b'))"}
+{"sql":"copy t to stdout with (verbose (on, true))"}
+{"sql":"copy t to stdout with (verbose (1))","syntaxError":"syntax error at or near \"1\"","position":32}
+{"sql":"copy t to stdout with (verbose ())","syntaxError":"syntax error at or near \")\"","position":32}
+{"sql":"copy t to stdout with (verbose (select))","syntaxError":"syntax error at or near \"select\"","position":32}
+{"sql":"copy t to stdout with (verbose (a)(b))","syntaxError":"syntax error at or near \"(\"","position":34}
+{"sql":"copy t to stdout with (verbose * *)","syntaxError":"syntax error at or near \"*\"","position":33}
+{"sql":"copy t to stdout with (verbose x y)","syntaxError":"syntax error at or near \"y\"","position":33}
+{"sql":"copy t to stdout with (analyze)"}
+{"sql":"copy t to stdout with (analyze on)"}
+{"sql":"copy t to stdout with (analyze off)"}
+{"sql":"copy t to stdout with (analyze true)"}
+{"sql":"copy t to stdout with (analyze false)"}
+{"sql":"copy t to stdout with (analyze 's')"}
+{"sql":"copy t to stdout with (analyze 1)"}
+{"sql":"copy t to stdout with (analyze -1)"}
+{"sql":"copy t to stdout with (analyze +2.5)"}
+{"sql":"copy t to stdout with (analyze x)"}
+{"sql":"copy t to stdout with (analyze json)"}
+{"sql":"copy t to stdout with (analyze select)","syntaxError":"syntax error at or near \"select\"","position":31}
+{"sql":"copy t to stdout with (analyze default)","syntaxError":"syntax error at or near \"default\"","position":31}
+{"sql":"copy t to stdout with (analyze null)","syntaxError":"syntax error at or near \"null\"","position":31}
+{"sql":"copy t to stdout with (analyze *)"}
+{"sql":"copy t to stdout with (analyze (a))"}
+{"sql":"copy t to stdout with (analyze (a, 'b'))"}
+{"sql":"copy t to stdout with (analyze (on, true))"}
+{"sql":"copy t to stdout with (analyze (1))","syntaxError":"syntax error at or near \"1\"","position":32}
+{"sql":"copy t to stdout with (analyze ())","syntaxError":"syntax error at or near \")\"","position":32}
+{"sql":"copy t to stdout with (analyze (select))","syntaxError":"syntax error at or near \"select\"","position":32}
+{"sql":"copy t to stdout with (analyze (a)(b))","syntaxError":"syntax error at or near \"(\"","position":34}
+{"sql":"copy t to stdout with (analyze * *)","syntaxError":"syntax error at or near \"*\"","position":33}
+{"sql":"copy t to stdout with (analyze x y)","syntaxError":"syntax error at or near \"y\"","position":33}
+{"sql":"copy t to stdout with (analyse)"}
+{"sql":"copy t to stdout with (analyse on)"}
+{"sql":"copy t to stdout with (analyse off)"}
+{"sql":"copy t to stdout with (analyse true)"}
+{"sql":"copy t to stdout with (analyse false)"}
+{"sql":"copy t to stdout with (analyse 's')"}
+{"sql":"copy t to stdout with (analyse 1)"}
+{"sql":"copy t to stdout with (analyse -1)"}
+{"sql":"copy t to stdout with (analyse +2.5)"}
+{"sql":"copy t to stdout with (analyse x)"}
+{"sql":"copy t to stdout with (analyse json)"}
+{"sql":"copy t to stdout with (analyse select)","syntaxError":"syntax error at or near \"select\"","position":31}
+{"sql":"copy t to stdout with (analyse default)","syntaxError":"syntax error at or near \"default\"","position":31}
+{"sql":"copy t to stdout with (analyse null)","syntaxError":"syntax error at or near \"null\"","position":31}
+{"sql":"copy t to stdout with (analyse *)"}
+{"sql":"copy t to stdout with (analyse (a))"}
+{"sql":"copy t to stdout with (analyse (a, 'b'))"}
+{"sql":"copy t to stdout with (analyse (on, true))"}
+{"sql":"copy t to stdout with (analyse (1))","syntaxError":"syntax error at or near \"1\"","position":32}
+{"sql":"copy t to stdout with (analyse ())","syntaxError":"syntax error at or near \")\"","position":32}
+{"sql":"copy t to stdout with (analyse (select))","syntaxError":"syntax error at or near \"select\"","position":32}
+{"sql":"copy t to stdout with (analyse (a)(b))","syntaxError":"syntax error at or near \"(\"","position":34}
+{"sql":"copy t to stdout with (analyse * *)","syntaxError":"syntax error at or near \"*\"","position":33}
+{"sql":"copy t to stdout with (analyse x y)","syntaxError":"syntax error at or near \"y\"","position":33}
+{"sql":"copy t to stdout with (format)"}
+{"sql":"copy t to stdout with (format on)"}
+{"sql":"copy t to stdout with (format off)"}
+{"sql":"copy t to stdout with (format true)"}
+{"sql":"copy t to stdout with (format false)"}
+{"sql":"copy t to stdout with (format 's')"}
+{"sql":"copy t to stdout with (format 1)"}
+{"sql":"copy t to stdout with (format -1)"}
+{"sql":"copy t to stdout with (format +2.5)"}
+{"sql":"copy t to stdout with (format x)"}
+{"sql":"copy t to stdout with (format json)","syntaxError":"syntax error at or near \"format\"","position":23}
+{"sql":"copy t to stdout with (format select)","syntaxError":"syntax error at or near \"select\"","position":30}
+{"sql":"copy t to stdout with (format default)","syntaxError":"syntax error at or near \"default\"","position":30}
+{"sql":"copy t to stdout with (format null)","syntaxError":"syntax error at or near \"null\"","position":30}
+{"sql":"copy t to stdout with (format *)"}
+{"sql":"copy t to stdout with (format (a))"}
+{"sql":"copy t to stdout with (format (a, 'b'))"}
+{"sql":"copy t to stdout with (format (on, true))"}
+{"sql":"copy t to stdout with (format (1))","syntaxError":"syntax error at or near \"1\"","position":31}
+{"sql":"copy t to stdout with (format ())","syntaxError":"syntax error at or near \")\"","position":31}
+{"sql":"copy t to stdout with (format (select))","syntaxError":"syntax error at or near \"select\"","position":31}
+{"sql":"copy t to stdout with (format (a)(b))","syntaxError":"syntax error at or near \"(\"","position":33}
+{"sql":"copy t to stdout with (format * *)","syntaxError":"syntax error at or near \"*\"","position":32}
+{"sql":"copy t to stdout with (format x y)","syntaxError":"syntax error at or near \"y\"","position":32}
+{"sql":"copy t to stdout with (default)"}
+{"sql":"copy t to stdout with (default on)"}
+{"sql":"copy t to stdout with (default off)"}
+{"sql":"copy t to stdout with (default true)"}
+{"sql":"copy t to stdout with (default false)"}
+{"sql":"copy t to stdout with (default 's')"}
+{"sql":"copy t to stdout with (default 1)"}
+{"sql":"copy t to stdout with (default -1)"}
+{"sql":"copy t to stdout with (default +2.5)"}
+{"sql":"copy t to stdout with (default x)"}
+{"sql":"copy t to stdout with (default json)"}
+{"sql":"copy t to stdout with (default select)","syntaxError":"syntax error at or near \"select\"","position":31}
+{"sql":"copy t to stdout with (default default)","syntaxError":"syntax error at or near \"default\"","position":31}
+{"sql":"copy t to stdout with (default null)","syntaxError":"syntax error at or near \"null\"","position":31}
+{"sql":"copy t to stdout with (default *)"}
+{"sql":"copy t to stdout with (default (a))"}
+{"sql":"copy t to stdout with (default (a, 'b'))"}
+{"sql":"copy t to stdout with (default (on, true))"}
+{"sql":"copy t to stdout with (default (1))","syntaxError":"syntax error at or near \"1\"","position":32}
+{"sql":"copy t to stdout with (default ())","syntaxError":"syntax error at or near \")\"","position":32}
+{"sql":"copy t to stdout with (default (select))","syntaxError":"syntax error at or near \"select\"","position":32}
+{"sql":"copy t to stdout with (default (a)(b))","syntaxError":"syntax error at or near \"(\"","position":34}
+{"sql":"copy t to stdout with (default * *)","syntaxError":"syntax error at or near \"*\"","position":33}
+{"sql":"copy t to stdout with (default x y)","syntaxError":"syntax error at or near \"y\"","position":33}
+{"sql":"copy t to stdout with (select)"}
+{"sql":"copy t to stdout with (select on)"}
+{"sql":"copy t to stdout with (select off)"}
+{"sql":"copy t to stdout with (select true)"}
+{"sql":"copy t to stdout with (select false)"}
+{"sql":"copy t to stdout with (select 's')"}
+{"sql":"copy t to stdout with (select 1)"}
+{"sql":"copy t to stdout with (select -1)"}
+{"sql":"copy t to stdout with (select +2.5)"}
+{"sql":"copy t to stdout with (select x)"}
+{"sql":"copy t to stdout with (select json)"}
+{"sql":"copy t to stdout with (select select)","syntaxError":"syntax error at or near \"select\"","position":30}
+{"sql":"copy t to stdout with (select default)","syntaxError":"syntax error at or near \"default\"","position":30}
+{"sql":"copy t to stdout with (select null)","syntaxError":"syntax error at or near \"null\"","position":30}
+{"sql":"copy t to stdout with (select *)"}
+{"sql":"copy t to stdout with (select (a))"}
+{"sql":"copy t to stdout with (select (a, 'b'))"}
+{"sql":"copy t to stdout with (select (on, true))"}
+{"sql":"copy t to stdout with (select (1))","syntaxError":"syntax error at or near \"1\"","position":31}
+{"sql":"copy t to stdout with (select ())","syntaxError":"syntax error at or near \")\"","position":31}
+{"sql":"copy t to stdout with (select (select))","syntaxError":"syntax error at or near \"select\"","position":31}
+{"sql":"copy t to stdout with (select (a)(b))","syntaxError":"syntax error at or near \"(\"","position":33}
+{"sql":"copy t to stdout with (select * *)","syntaxError":"syntax error at or near \"*\"","position":32}
+{"sql":"copy t to stdout with (select x y)","syntaxError":"syntax error at or near \"y\"","position":32}
+{"sql":"copy t to stdout with (cross)"}
+{"sql":"copy t to stdout with (cross on)"}
+{"sql":"copy t to stdout with (cross off)"}
+{"sql":"copy t to stdout with (cross true)"}
+{"sql":"copy t to stdout with (cross false)"}
+{"sql":"copy t to stdout with (cross 's')"}
+{"sql":"copy t to stdout with (cross 1)"}
+{"sql":"copy t to stdout with (cross -1)"}
+{"sql":"copy t to stdout with (cross +2.5)"}
+{"sql":"copy t to stdout with (cross x)"}
+{"sql":"copy t to stdout with (cross json)"}
+{"sql":"copy t to stdout with (cross select)","syntaxError":"syntax error at or near \"select\"","position":29}
+{"sql":"copy t to stdout with (cross default)","syntaxError":"syntax error at or near \"default\"","position":29}
+{"sql":"copy t to stdout with (cross null)","syntaxError":"syntax error at or near \"null\"","position":29}
+{"sql":"copy t to stdout with (cross *)"}
+{"sql":"copy t to stdout with (cross (a))"}
+{"sql":"copy t to stdout with (cross (a, 'b'))"}
+{"sql":"copy t to stdout with (cross (on, true))"}
+{"sql":"copy t to stdout with (cross (1))","syntaxError":"syntax error at or near \"1\"","position":30}
+{"sql":"copy t to stdout with (cross ())","syntaxError":"syntax error at or near \")\"","position":30}
+{"sql":"copy t to stdout with (cross (select))","syntaxError":"syntax error at or near \"select\"","position":30}
+{"sql":"copy t to stdout with (cross (a)(b))","syntaxError":"syntax error at or near \"(\"","position":32}
+{"sql":"copy t to stdout with (cross * *)","syntaxError":"syntax error at or near \"*\"","position":31}
+{"sql":"copy t to stdout with (cross x y)","syntaxError":"syntax error at or near \"y\"","position":31}
+{"sql":"copy t to stdout with (else)"}
+{"sql":"copy t to stdout with (else on)"}
+{"sql":"copy t to stdout with (else off)"}
+{"sql":"copy t to stdout with (else true)"}
+{"sql":"copy t to stdout with (else false)"}
+{"sql":"copy t to stdout with (else 's')"}
+{"sql":"copy t to stdout with (else 1)"}
+{"sql":"copy t to stdout with (else -1)"}
+{"sql":"copy t to stdout with (else +2.5)"}
+{"sql":"copy t to stdout with (else x)"}
+{"sql":"copy t to stdout with (else json)"}
+{"sql":"copy t to stdout with (else select)","syntaxError":"syntax error at or near \"select\"","position":28}
+{"sql":"copy t to stdout with (else default)","syntaxError":"syntax error at or near \"default\"","position":28}
+{"sql":"copy t to stdout with (else null)","syntaxError":"syntax error at or near \"null\"","position":28}
+{"sql":"copy t to stdout with (else *)"}
+{"sql":"copy t to stdout with (else (a))"}
+{"sql":"copy t to stdout with (else (a, 'b'))"}
+{"sql":"copy t to stdout with (else (on, true))"}
+{"sql":"copy t to stdout with (else (1))","syntaxError":"syntax error at or near \"1\"","position":29}
+{"sql":"copy t to stdout with (else ())","syntaxError":"syntax error at or near \")\"","position":29}
+{"sql":"copy t to stdout with (else (select))","syntaxError":"syntax error at or near \"select\"","position":29}
+{"sql":"copy t to stdout with (else (a)(b))","syntaxError":"syntax error at or near \"(\"","position":31}
+{"sql":"copy t to stdout with (else * *)","syntaxError":"syntax error at or near \"*\"","position":30}
+{"sql":"copy t to stdout with (else x y)","syntaxError":"syntax error at or near \"y\"","position":30}
+{"sql":"copy t to stdout with (x)"}
+{"sql":"copy t to stdout with (x on)"}
+{"sql":"copy t to stdout with (x off)"}
+{"sql":"copy t to stdout with (x true)"}
+{"sql":"copy t to stdout with (x false)"}
+{"sql":"copy t to stdout with (x 's')"}
+{"sql":"copy t to stdout with (x 1)"}
+{"sql":"copy t to stdout with (x -1)"}
+{"sql":"copy t to stdout with (x +2.5)"}
+{"sql":"copy t to stdout with (x x)"}
+{"sql":"copy t to stdout with (x json)"}
+{"sql":"copy t to stdout with (x select)","syntaxError":"syntax error at or near \"select\"","position":25}
+{"sql":"copy t to stdout with (x default)","syntaxError":"syntax error at or near \"default\"","position":25}
+{"sql":"copy t to stdout with (x null)","syntaxError":"syntax error at or near \"null\"","position":25}
+{"sql":"copy t to stdout with (x *)"}
+{"sql":"copy t to stdout with (x (a))"}
+{"sql":"copy t to stdout with (x (a, 'b'))"}
+{"sql":"copy t to stdout with (x (on, true))"}
+{"sql":"copy t to stdout with (x (1))","syntaxError":"syntax error at or near \"1\"","position":26}
+{"sql":"copy t to stdout with (x ())","syntaxError":"syntax error at or near \")\"","position":26}
+{"sql":"copy t to stdout with (x (select))","syntaxError":"syntax error at or near \"select\"","position":26}
+{"sql":"copy t to stdout with (x (a)(b))","syntaxError":"syntax error at or near \"(\"","position":28}
+{"sql":"copy t to stdout with (x * *)","syntaxError":"syntax error at or near \"*\"","position":27}
+{"sql":"copy t to stdout with (x x y)","syntaxError":"syntax error at or near \"y\"","position":27}
+{"sql":"copy t to stdout with (\"X\")"}
+{"sql":"copy t to stdout with (\"X\" on)"}
+{"sql":"copy t to stdout with (\"X\" off)"}
+{"sql":"copy t to stdout with (\"X\" true)"}
+{"sql":"copy t to stdout with (\"X\" false)"}
+{"sql":"copy t to stdout with (\"X\" 's')"}
+{"sql":"copy t to stdout with (\"X\" 1)"}
+{"sql":"copy t to stdout with (\"X\" -1)"}
+{"sql":"copy t to stdout with (\"X\" +2.5)"}
+{"sql":"copy t to stdout with (\"X\" x)"}
+{"sql":"copy t to stdout with (\"X\" json)"}
+{"sql":"copy t to stdout with (\"X\" select)","syntaxError":"syntax error at or near \"select\"","position":27}
+{"sql":"copy t to stdout with (\"X\" default)","syntaxError":"syntax error at or near \"default\"","position":27}
+{"sql":"copy t to stdout with (\"X\" null)","syntaxError":"syntax error at or near \"null\"","position":27}
+{"sql":"copy t to stdout with (\"X\" *)"}
+{"sql":"copy t to stdout with (\"X\" (a))"}
+{"sql":"copy t to stdout with (\"X\" (a, 'b'))"}
+{"sql":"copy t to stdout with (\"X\" (on, true))"}
+{"sql":"copy t to stdout with (\"X\" (1))","syntaxError":"syntax error at or near \"1\"","position":28}
+{"sql":"copy t to stdout with (\"X\" ())","syntaxError":"syntax error at or near \")\"","position":28}
+{"sql":"copy t to stdout with (\"X\" (select))","syntaxError":"syntax error at or near \"select\"","position":28}
+{"sql":"copy t to stdout with (\"X\" (a)(b))","syntaxError":"syntax error at or near \"(\"","position":30}
+{"sql":"copy t to stdout with (\"X\" * *)","syntaxError":"syntax error at or near \"*\"","position":29}
+{"sql":"copy t to stdout with (\"X\" x y)","syntaxError":"syntax error at or near \"y\"","position":29}
+{"sql":"copy t to stdout with (verbose, analyze)"}
+{"sql":"copy t to stdout with (verbose on, costs off)"}
+{"sql":"copy t to stdout with (x *, y (a))"}
+{"sql":"copy t to stdout with (verbose,)","syntaxError":"syntax error at or near \")\"","position":31}
+{"sql":"copy t to stdout with ()","syntaxError":"syntax error at or near \")\"","position":23}
+{"sql":"copy t to stdout with (verbose, , x)","syntaxError":"syntax error at or near \",\"","position":32}
+{"sql":"copy t to stdout with ((verbose))","syntaxError":"syntax error at or near \"(\"","position":23}
+{"sql":"copy t to stdout with (verbose 1 2)","syntaxError":"syntax error at or near \"2\"","position":33}
