@@ -827,6 +827,39 @@ location unset as PostgreSQL 16 leaves it. The 98 trees that changed over
 the corpus and test data are those statements.
 `testdata/replica_identity_pg16.jsonl` pins 24 statements; all agree.
 
+### create-procedure-marked (tree 41 and 41; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `create procedure p() language sql as 'select 1'` | `is_procedure` true, 2 options | no such field; an option `isProcedure` 1 as a third |
+
+CREATE PROCEDURE was marked by an `isProcedure` DefElem appended to its
+options, which PostgreSQL 16 has not got and which a consumer reading the
+options as PostgreSQL's would take for an unknown one. `CreateFunctionStmt`
+now has PostgreSQL 16's `IsProcedure`, and the options are the statement's
+own. Every CREATE FUNCTION and CREATE PROCEDURE tree changed (1,325 over the
+corpus and test data: the new field). With the option gone, the corpus
+comparison now compares each procedure's options pairwise, so the
+already-known `DefElem.arg` (+2, a boolean option the parser keeps as an
+`Integer`) and `CreateFunctionStmt.options/DefElem.location` (+40) classes
+grew by procedures they had not reached. `testdata/create_procedure_pg16.jsonl`
+pins 12 statements; all agree.
+
+### integer-literal-width (tree 145, 66, 33, 24, 15, 4, 2, 1, 1, 1 and 4; left)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `select 0x80000000` | `Float` `0x80000000` | `Integer` 2147483648 |
+| `select 12345678901234567::money` | `Float` `12345678901234567` | `Integer` 12345678901234567 |
+| `select 1_000.` | `Float` `1_000.` | `Float` `1000.` |
+
+These are the deliberate divergence FORK.md records: `Integer` holds an
+`int64`, and a literal that fits one is an `Integer`, where PostgreSQL 16's
+is a `Float` past `int32` and `make_const` reads an int8 from it. A Float's
+text has its underscores taken out, where PostgreSQL keeps the literal's
+text for numeric's input to read. The value is the same either way; the
+classes stay until that divergence is reconsidered.
+
 ## Rerunning
 
 ```

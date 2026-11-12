@@ -4319,15 +4319,14 @@ CreateFunctionStmt:
 	| CREATE opt_or_replace PROCEDURE func_name func_args_with_defaults
 	opt_createfunc_opt_list opt_routine_body
 		{
-			n := &nodes.CreateFunctionStmt{
+			$$ = &nodes.CreateFunctionStmt{
+				IsProcedure: true,
 				IsOrReplace: $2,
 				Funcname:    $4,
 				Parameters:  $5,
 				Options:     $6,
 				SqlBody:     $7,
 			}
-			n.Options = appendList(n.Options, &nodes.DefElem{Defname: "isProcedure", Arg: &nodes.Integer{Ival: 1}})
-			$$ = n
 		}
 	;
 

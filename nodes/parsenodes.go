@@ -988,6 +988,7 @@ func (n *AlterSeqStmt) Tag() NodeTag { return T_AlterSeqStmt }
 
 // CreateFunctionStmt represents a CREATE FUNCTION statement.
 type CreateFunctionStmt struct {
+	IsProcedure bool       // it is really CREATE PROCEDURE
 	IsOrReplace bool       // T = replace if already exists
 	Funcname    *List      // qualified name of function to create
 	Parameters  *List      // list of FunctionParameter

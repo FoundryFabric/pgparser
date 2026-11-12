@@ -278,17 +278,12 @@ func TestCreateProcedure(t *testing.T) {
 	if stmt.ReturnType != nil {
 		t.Errorf("expected nil ReturnType for procedure, got %v", stmt.ReturnType)
 	}
-	// Check isProcedure marker
-	procDef := findDefElem(stmt.Options, "isProcedure")
-	if procDef == nil {
-		t.Fatal("expected isProcedure option for procedure")
+	// CREATE PROCEDURE is marked as PostgreSQL 16 marks it, not by an option
+	if !stmt.IsProcedure {
+		t.Error("expected IsProcedure to be true")
 	}
-	procVal, ok := procDef.Arg.(*nodes.Integer)
-	if !ok {
-		t.Fatalf("expected isProcedure arg to be *nodes.Integer, got %T", procDef.Arg)
-	}
-	if procVal.Ival != 1 {
-		t.Errorf("expected isProcedure value 1, got %d", procVal.Ival)
+	if findDefElem(stmt.Options, "isProcedure") != nil {
+		t.Error("expected no isProcedure option")
 	}
 }
 
