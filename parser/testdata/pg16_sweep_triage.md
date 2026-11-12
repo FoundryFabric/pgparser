@@ -625,6 +625,16 @@ differ only in the grantee's and grantor's location, which the parser does
 not set anywhere (an `unlocated RoleSpec.location` class all over the
 corpus).
 
+### key-match-partial (risk 1, 1; fixed)
+
+| statement | PostgreSQL 16 | parser |
+|---|---|---|
+| `create table t (a int references u match partial)` | 0A000 MATCH PARTIAL not yet implemented at 35 | accepts |
+
+`key_match: MATCH PARTIAL` now raises `0A000 MATCH PARTIAL not yet
+implemented` at MATCH through `grammarError`, ending the parse.
+`testdata/match_partial_pg16.jsonl` pins 104 statements; all agree.
+
 ## Rerunning
 
 ```

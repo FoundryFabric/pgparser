@@ -1,0 +1,104 @@
+{"sql":"create table t (a int references u match partial)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":35}
+{"sql":"create table t (a int references u match PARTIAL)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":35}
+{"sql":"create table t (a int references u match full)"}
+{"sql":"create table t (a int references u match simple)"}
+{"sql":"create table t (a int references u match Partial)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":35}
+{"sql":"create table t (a int references u match partial partial)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":35}
+{"sql":"create table t (a int references u match \"partial\")","code":"42601","message":"syntax error at or near \"\"partial\"\"","position":41}
+{"sql":"create table t (a int references u match partial x)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":35}
+{"sql":"create table t (a int references u match )","code":"42601","message":"syntax error at or near \")\"","position":41}
+{"sql":"create table t (a int references u match foo)","code":"42601","message":"syntax error at or near \"foo\"","position":41}
+{"sql":"create table t (a int references u (b) match partial on delete cascade)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":39}
+{"sql":"create table t (a int references u (b) match PARTIAL on delete cascade)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":39}
+{"sql":"create table t (a int references u (b) match full on delete cascade)"}
+{"sql":"create table t (a int references u (b) match simple on delete cascade)"}
+{"sql":"create table t (a int references u (b) match Partial on delete cascade)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":39}
+{"sql":"create table t (a int references u (b) match partial partial on delete cascade)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":39}
+{"sql":"create table t (a int references u (b) match \"partial\" on delete cascade)","code":"42601","message":"syntax error at or near \"\"partial\"\"","position":45}
+{"sql":"create table t (a int references u (b) match partial x on delete cascade)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":39}
+{"sql":"create table t (a int references u (b) match  on delete cascade)","code":"42601","message":"syntax error at or near \"on\"","position":46}
+{"sql":"create table t (a int references u (b) match foo on delete cascade)","code":"42601","message":"syntax error at or near \"foo\"","position":45}
+{"sql":"create table t (a int, foreign key (a) references u match partial)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":52}
+{"sql":"create table t (a int, foreign key (a) references u match PARTIAL)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":52}
+{"sql":"create table t (a int, foreign key (a) references u match full)"}
+{"sql":"create table t (a int, foreign key (a) references u match simple)"}
+{"sql":"create table t (a int, foreign key (a) references u match Partial)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":52}
+{"sql":"create table t (a int, foreign key (a) references u match partial partial)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":52}
+{"sql":"create table t (a int, foreign key (a) references u match \"partial\")","code":"42601","message":"syntax error at or near \"\"partial\"\"","position":58}
+{"sql":"create table t (a int, foreign key (a) references u match partial x)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":52}
+{"sql":"create table t (a int, foreign key (a) references u match )","code":"42601","message":"syntax error at or near \")\"","position":58}
+{"sql":"create table t (a int, foreign key (a) references u match foo)","code":"42601","message":"syntax error at or near \"foo\"","position":58}
+{"sql":"create table t (a int, foreign key (a) references u (b) match partial on update set null deferrable)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":56}
+{"sql":"create table t (a int, foreign key (a) references u (b) match PARTIAL on update set null deferrable)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":56}
+{"sql":"create table t (a int, foreign key (a) references u (b) match full on update set null deferrable)"}
+{"sql":"create table t (a int, foreign key (a) references u (b) match simple on update set null deferrable)"}
+{"sql":"create table t (a int, foreign key (a) references u (b) match Partial on update set null deferrable)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":56}
+{"sql":"create table t (a int, foreign key (a) references u (b) match partial partial on update set null deferrable)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":56}
+{"sql":"create table t (a int, foreign key (a) references u (b) match \"partial\" on update set null deferrable)","code":"42601","message":"syntax error at or near \"\"partial\"\"","position":62}
+{"sql":"create table t (a int, foreign key (a) references u (b) match partial x on update set null deferrable)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":56}
+{"sql":"create table t (a int, foreign key (a) references u (b) match  on update set null deferrable)","code":"42601","message":"syntax error at or near \"on\"","position":63}
+{"sql":"create table t (a int, foreign key (a) references u (b) match foo on update set null deferrable)","code":"42601","message":"syntax error at or near \"foo\"","position":62}
+{"sql":"alter table t add foreign key (a) references u match partial","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":47}
+{"sql":"alter table t add foreign key (a) references u match PARTIAL","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":47}
+{"sql":"alter table t add foreign key (a) references u match full"}
+{"sql":"alter table t add foreign key (a) references u match simple"}
+{"sql":"alter table t add foreign key (a) references u match Partial","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":47}
+{"sql":"alter table t add foreign key (a) references u match partial partial","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":47}
+{"sql":"alter table t add foreign key (a) references u match \"partial\"","code":"42601","message":"syntax error at or near \"\"partial\"\"","position":53}
+{"sql":"alter table t add foreign key (a) references u match partial x","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":47}
+{"sql":"alter table t add foreign key (a) references u match ","code":"42601","message":"syntax error at end of input","position":53}
+{"sql":"alter table t add foreign key (a) references u match foo","code":"42601","message":"syntax error at or near \"foo\"","position":53}
+{"sql":"alter table t add constraint c foreign key (a, b) references u (c, d) match partial not valid","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":70}
+{"sql":"alter table t add constraint c foreign key (a, b) references u (c, d) match PARTIAL not valid","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":70}
+{"sql":"alter table t add constraint c foreign key (a, b) references u (c, d) match full not valid"}
+{"sql":"alter table t add constraint c foreign key (a, b) references u (c, d) match simple not valid"}
+{"sql":"alter table t add constraint c foreign key (a, b) references u (c, d) match Partial not valid","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":70}
+{"sql":"alter table t add constraint c foreign key (a, b) references u (c, d) match partial partial not valid","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":70}
+{"sql":"alter table t add constraint c foreign key (a, b) references u (c, d) match \"partial\" not valid","code":"42601","message":"syntax error at or near \"\"partial\"\"","position":76}
+{"sql":"alter table t add constraint c foreign key (a, b) references u (c, d) match partial x not valid","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":70}
+{"sql":"alter table t add constraint c foreign key (a, b) references u (c, d) match  not valid","code":"42601","message":"syntax error at or near \"not\"","position":77}
+{"sql":"alter table t add constraint c foreign key (a, b) references u (c, d) match foo not valid","code":"42601","message":"syntax error at or near \"foo\"","position":76}
+{"sql":"create table t (a int constraint c references u match partial not null)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":48}
+{"sql":"create table t (a int constraint c references u match PARTIAL not null)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":48}
+{"sql":"create table t (a int constraint c references u match full not null)"}
+{"sql":"create table t (a int constraint c references u match simple not null)"}
+{"sql":"create table t (a int constraint c references u match Partial not null)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":48}
+{"sql":"create table t (a int constraint c references u match partial partial not null)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":48}
+{"sql":"create table t (a int constraint c references u match \"partial\" not null)","code":"42601","message":"syntax error at or near \"\"partial\"\"","position":54}
+{"sql":"create table t (a int constraint c references u match partial x not null)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":48}
+{"sql":"create table t (a int constraint c references u match  not null)","code":"42601","message":"syntax error at or near \"not\"","position":55}
+{"sql":"create table t (a int constraint c references u match foo not null)","code":"42601","message":"syntax error at or near \"foo\"","position":54}
+{"sql":"alter table t add column a int references u match partial","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":44}
+{"sql":"alter table t add column a int references u match PARTIAL","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":44}
+{"sql":"alter table t add column a int references u match full"}
+{"sql":"alter table t add column a int references u match simple"}
+{"sql":"alter table t add column a int references u match Partial","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":44}
+{"sql":"alter table t add column a int references u match partial partial","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":44}
+{"sql":"alter table t add column a int references u match \"partial\"","code":"42601","message":"syntax error at or near \"\"partial\"\"","position":50}
+{"sql":"alter table t add column a int references u match partial x","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":44}
+{"sql":"alter table t add column a int references u match ","code":"42601","message":"syntax error at end of input","position":50}
+{"sql":"alter table t add column a int references u match foo","code":"42601","message":"syntax error at or near \"foo\"","position":50}
+{"sql":"create table t (a int references u match partial match full)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":35}
+{"sql":"create table t (a int references u match PARTIAL match full)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":35}
+{"sql":"create table t (a int references u match full match full)","code":"42601","message":"syntax error at or near \"match\"","position":46}
+{"sql":"create table t (a int references u match simple match full)","code":"42601","message":"syntax error at or near \"match\"","position":48}
+{"sql":"create table t (a int references u match Partial match full)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":35}
+{"sql":"create table t (a int references u match partial partial match full)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":35}
+{"sql":"create table t (a int references u match \"partial\" match full)","code":"42601","message":"syntax error at or near \"\"partial\"\"","position":41}
+{"sql":"create table t (a int references u match partial x match full)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":35}
+{"sql":"create table t (a int references u match  match full)","code":"42601","message":"syntax error at or near \"match\"","position":42}
+{"sql":"create table t (a int references u match foo match full)","code":"42601","message":"syntax error at or near \"foo\"","position":41}
+{"sql":"create table t (a int references u match partial","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":35}
+{"sql":"create table t (a int references u match PARTIAL","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":35}
+{"sql":"create table t (a int references u match full","code":"42601","message":"syntax error at end of input","position":45}
+{"sql":"create table t (a int references u match simple","code":"42601","message":"syntax error at end of input","position":47}
+{"sql":"create table t (a int references u match Partial","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":35}
+{"sql":"create table t (a int references u match partial partial","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":35}
+{"sql":"create table t (a int references u match \"partial\"","code":"42601","message":"syntax error at or near \"\"partial\"\"","position":41}
+{"sql":"create table t (a int references u match partial x","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":35}
+{"sql":"create table t (a int references u match ","code":"42601","message":"syntax error at end of input","position":41}
+{"sql":"create table t (a int references u match foo","code":"42601","message":"syntax error at or near \"foo\"","position":41}
+{"sql":"create table t (a int references u match partial on delete cascade, b int references v match partial)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":35}
+{"sql":"create table t (a int references u match partial, b int unique unique)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":35}
+{"sql":"create table t (a int unique unique, b int references u match partial)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":56}
+{"sql":"select 1; create table t (a int references u match partial)","code":"0A000","message":"MATCH PARTIAL not yet implemented","position":45}

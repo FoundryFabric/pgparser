@@ -21202,8 +21202,8 @@ pgdefault:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
 //line gram.y:2203
 		{
-			/* PARTIAL is not implemented */
-			pgVAL.ival = int64('p')
+			grammarError(pglex, "0A000", "MATCH PARTIAL not yet implemented", "", pgDollar[1].loc)
+			return 1
 		}
 	case 293:
 		pgDollar = pgS[pgpt-2 : pgpt+1]

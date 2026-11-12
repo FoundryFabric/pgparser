@@ -2201,8 +2201,8 @@ key_match:
 	MATCH FULL     { $$ = int64('f') }
 	| MATCH PARTIAL
 		{
-			/* PARTIAL is not implemented */
-			$$ = int64('p')
+			grammarError(pglex, "0A000", "MATCH PARTIAL not yet implemented", "", $<loc>1)
+			return 1
 		}
 	| MATCH SIMPLE { $$ = int64('s') }
 	| /* EMPTY */  { $$ = int64('s') }
