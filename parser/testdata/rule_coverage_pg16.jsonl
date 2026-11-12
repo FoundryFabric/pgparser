@@ -1,0 +1,314 @@
+{"sql":"alter extension e add operator class c using btree"}
+{"sql":"alter extension e drop operator family f using hash"}
+{"sql":"alter extension e add procedure p(int)"}
+{"sql":"alter extension e drop routine r(int)"}
+{"sql":"alter extension e add table t"}
+{"sql":"alter extension e add schema s"}
+{"sql":"alter extension e update"}
+{"sql":"alter extension e update to '2.0'"}
+{"sql":"alter extension e update to v2"}
+{"sql":"alter routine r(int) immutable"}
+{"sql":"alter routine r(int) immutable strict restrict"}
+{"sql":"alter index i depends on extension e"}
+{"sql":"alter materialized view mv no depends on extension e"}
+{"sql":"alter procedure p(int) depends on extension e"}
+{"sql":"alter routine r() no depends on extension e"}
+{"sql":"alter trigger tg on t depends on extension e"}
+{"sql":"alter extension e set schema s"}
+{"sql":"alter materialized view if exists mv set schema s"}
+{"sql":"alter procedure p(int) set schema s"}
+{"sql":"alter routine r(int) set schema s"}
+{"sql":"alter sequence if exists sq set schema s"}
+{"sql":"alter view if exists v set schema s"}
+{"sql":"alter view v set schema s"}
+{"sql":"alter system set work_mem = '1MB'"}
+{"sql":"alter system set work_mem to default"}
+{"sql":"alter system reset work_mem"}
+{"sql":"alter system reset all"}
+{"sql":"alter text search configuration c alter mapping for word replace a with b"}
+{"sql":"alter text search configuration c alter mapping for word, asciiword replace pg_catalog.a with b"}
+{"sql":"alter index all in tablespace a owned by r set tablespace b nowait"}
+{"sql":"alter index if exists i set tablespace t"}
+{"sql":"alter materialized view all in tablespace a owned by r set tablespace b"}
+{"sql":"alter materialized view if exists mv set without cluster"}
+{"sql":"alter sequence if exists s owner to r"}
+{"sql":"alter table all in tablespace a owned by r, s set tablespace b nowait"}
+{"sql":"alter table all in tablespace a owned by r set tablespace b"}
+{"sql":"alter view if exists v alter column c set default 1"}
+{"sql":"select '1'::national character varying(3)"}
+{"sql":"select '1'::national character(3)"}
+{"sql":"select '1'::national char(3)"}
+{"sql":"select '1'::national char varying(3)"}
+{"sql":"select character 'x'"}
+{"sql":"select character varying 'x'"}
+{"sql":"select character(3) 'x'"}
+{"sql":"select character varying(3) 'x'"}
+{"sql":"select national character 'x'"}
+{"sql":"select national character varying(3) 'x'"}
+{"sql":"select national char 'x'"}
+{"sql":"select national char varying(2) 'x'"}
+{"sql":"select nchar 'x'"}
+{"sql":"select nchar varying 'x'"}
+{"sql":"select nchar(2) 'x'"}
+{"sql":"select nchar varying(2) 'x'"}
+{"sql":"select varchar(3) 'x'"}
+{"sql":"select bit(3) '101'"}
+{"sql":"select bit varying '1'"}
+{"sql":"select bit varying(4) '1'"}
+{"sql":"select bit '1'"}
+{"sql":"cluster (verbose)","code":"42601","message":"syntax error at end of input","position":17,"class":"pg17-utility"}
+{"sql":"cluster (verbose) t"}
+{"sql":"comment on operator class c using btree is 'x'"}
+{"sql":"comment on operator family f using hash is null"}
+{"sql":"comment on procedure p(int) is 'x'"}
+{"sql":"comment on routine r(int) is 'x'"}
+{"sql":"create extension if not exists e with schema s version '1' cascade"}
+{"sql":"create extension e"}
+{"sql":"create extension e schema s version v2 cascade"}
+{"sql":"create extension e with time","code":"42601","message":"syntax error at or near \"time\"","position":24}
+{"sql":"create role r with ordinality","code":"42601","message":"syntax error at or near \"ordinality\"","position":19}
+{"sql":"create foreign table if not exists ft (a int) server s"}
+{"sql":"create foreign table if not exists ft (a int) inherits (p) server s options (x 'y')"}
+{"sql":"create foreign table if not exists ft partition of p for values in (1) server s"}
+{"sql":"create foreign table if not exists ft partition of p (a not null) for values from (1) to (2) server s"}
+{"sql":"create language l"}
+{"sql":"create or replace trusted procedural language l"}
+{"sql":"create trusted language l"}
+{"sql":"create table if not exists p1 partition of p (a not null) for values in (1)"}
+{"sql":"create table if not exists p1 partition of p for values in (1)"}
+{"sql":"create temp table if not exists p1 partition of p default partition by list (a)"}
+{"sql":"deallocate prepare all"}
+{"sql":"alter default privileges revoke grant option for select on tables from r"}
+{"sql":"alter default privileges in schema s revoke grant option for all on functions from r cascade"}
+{"sql":"discard plans"}
+{"sql":"discard temporary"}
+{"sql":"drop policy if exists p on t"}
+{"sql":"drop policy if exists p on t cascade"}
+{"sql":"drop publication if exists p"}
+{"sql":"drop publication if exists p, q restrict"}
+{"sql":"drop tablespace if exists t"}
+{"sql":"drop database if exists d"}
+{"sql":"create table t (a int, exclude using gist (a with operator(pg_catalog.=)))"}
+{"sql":"create table t (a int, exclude (a with operator(=)))"}
+{"sql":"explain analyze select 1"}
+{"sql":"explain analyze verbose select 1"}
+{"sql":"explain verbose select 1"}
+{"sql":"explain create table t as select 1"}
+{"sql":"explain create table t (a) as select 1"}
+{"sql":"explain refresh materialized view mv"}
+{"sql":"grant execute on all functions in schema s to r"}
+{"sql":"grant execute on all procedures in schema s to r"}
+{"sql":"grant usage on all sequences in schema s to r"}
+{"sql":"grant execute on routine r(int) to u"}
+{"sql":"grant usage on sequence sq to r"}
+{"sql":"grant usage on sequence sq, sr to r with grant option"}
+{"sql":"select 1 operator(%) 2"}
+{"sql":"select 1 operator(pg_catalog.%) 2"}
+{"sql":"notify c, 'payload'"}
+{"sql":"select 1::dec(3,1)"}
+{"sql":"select 1::dec"}
+{"sql":"create local temp table t (a int)"}
+{"sql":"create local temporary table t (a int)"}
+{"sql":"select * into global temp t from x"}
+{"sql":"select * into global temporary table t from x"}
+{"sql":"select * into local temp t from x"}
+{"sql":"select * into local temporary t from x"}
+{"sql":"select * into temporary t from x"}
+{"sql":"select * into unlogged table t from x"}
+{"sql":"alter foreign table if exists ft rename column a to b"}
+{"sql":"alter foreign table ft rename column a to b"}
+{"sql":"alter materialized view if exists mv rename to n"}
+{"sql":"alter materialized view mv rename column a to b"}
+{"sql":"alter materialized view mv rename a to b"}
+{"sql":"alter materialized view mv rename to n"}
+{"sql":"alter procedure p(int) rename to q"}
+{"sql":"alter sequence if exists s rename to t"}
+{"sql":"alter sequence s rename to t"}
+{"sql":"alter table if exists t rename a to b"}
+{"sql":"alter table if exists t rename to u"}
+{"sql":"alter view if exists v rename to w"}
+{"sql":"alter view v rename a to b"}
+{"sql":"revoke grant option for create on database d from r"}
+{"sql":"revoke grant option for usage on domain dm from r"}
+{"sql":"revoke grant option for usage on foreign data wrapper w from r"}
+{"sql":"revoke grant option for usage on foreign server s from r cascade"}
+{"sql":"revoke grant option for execute on function f(int) from r"}
+{"sql":"revoke grant option for usage on language l from r"}
+{"sql":"revoke grant option for execute on procedure p() from r"}
+{"sql":"revoke grant option for execute on routine r() from u"}
+{"sql":"revoke grant option for usage on schema s from r"}
+{"sql":"revoke grant option for usage on sequence sq from r"}
+{"sql":"revoke grant option for select on table t from r"}
+{"sql":"revoke grant option for create on tablespace ts from r"}
+{"sql":"revoke grant option for usage on type ty from r granted by u"}
+{"sql":"revoke execute on all routines in schema s from r"}
+{"sql":"revoke usage on all sequences in schema s from r"}
+{"sql":"revoke execute on routine r(int) from u"}
+{"sql":"revoke create on tablespace ts from r"}
+{"sql":"security label on column t.c is 'x'"}
+{"sql":"security label for p on column t.c is null"}
+{"sql":"security label on table t is null"}
+{"sql":"create sequence s no maxvalue no minvalue"}
+{"sql":"create table t (like u including statistics)"}
+{"sql":"create table t (like u excluding all)"}
+{"sql":"create table t (like u including all excluding statistics excluding comments)"}
+{"sql":"create trigger tg after update on t referencing old row as o for each row execute function f()"}
+{"sql":"create trigger tg after update on t referencing new table as n old row o for each statement execute function f()"}
+{"sql":"create trigger tg before insert on t for each row execute function f(1.5)"}
+{"sql":"create function f() returns setof int array language sql as ''"}
+{"sql":"create function f() returns setof int array[3] language sql as ''"}
+{"sql":"show all"}
+{"sql":"show session authorization"}
+{"sql":"show transaction isolation level"}
+{"sql":"select not between"}
+{"sql":"select not between from t"}
+{"sql":"select not in","code":"42601","message":"syntax error at or near \"in\"","position":11}
+{"sql":"select not like","code":"42601","message":"syntax error at end of input","position":15}
+{"sql":"select not similar","code":"42601","message":"syntax error at end of input","position":18}
+{"sql":"select 'a' ilike 'b' escape 'c'"}
+{"sql":"select 'a' not ilike 'b' escape 'c'"}
+{"sql":"select 'a' not similar to 'b'"}
+{"sql":"select 'a' not similar to 'b' escape 'c'"}
+{"sql":"alter table t add if not exists c int"}
+{"sql":"alter table t disable row level security"}
+{"sql":"alter table t drop if exists c"}
+{"sql":"alter table t drop if exists c cascade"}
+{"sql":"alter table t enable always rule r"}
+{"sql":"alter table t enable replica trigger tg"}
+{"sql":"alter table t enable trigger all"}
+{"sql":"alter table t enable trigger user"}
+{"sql":"alter table t no force row level security"}
+{"sql":"create function f(in out a int) returns int language sql as ''"}
+{"sql":"create table t (a int default 1 % 2)"}
+{"sql":"create table t (a int default 1 / 2)"}
+{"sql":"create table t (a int default 1 < 2)"}
+{"sql":"create table t (a int default 1 = 2)"}
+{"sql":"create table t (a int default 1 > 2)"}
+{"sql":"create table t (a int default 1 >= 2)"}
+{"sql":"create table t (a int default 1 is distinct from 2)"}
+{"sql":"create table t (a int default 'x' is document)"}
+{"sql":"create table t (a int default 1 is not distinct from 2)"}
+{"sql":"create table t (a int default 'x' is not document)"}
+{"sql":"create table t (a int default 1 <= 2)"}
+{"sql":"create table t (a int default 1 <> 2)"}
+{"sql":"create table t (a int default 1 != 2)"}
+{"sql":"create table t (a int default ~ 1)"}
+{"sql":"create table t (a int default operator(pg_catalog.~) 1)"}
+{"sql":"create function f() returns setof int rows 10 language sql as ''"}
+{"sql":"alter function f() rows 10"}
+{"sql":"copy t from stdin using delimiters ','"}
+{"sql":"copy t from stdin delimiters ','"}
+{"sql":"copy t to stdout with binary"}
+{"sql":"copy t to stdout binary"}
+{"sql":"copy t from stdin csv escape as '\\'"}
+{"sql":"copy t from stdin csv escape '\\'"}
+{"sql":"copy t from stdin csv force not null *","code":"42601","message":"syntax error at or near \"*\"","position":37,"class":"pg17-utility"}
+{"sql":"copy t from stdin csv force not null a, b"}
+{"sql":"copy t from stdin csv force null *","code":"42601","message":"syntax error at or near \"*\"","position":33,"class":"pg17-utility"}
+{"sql":"copy t from stdin csv force null a"}
+{"sql":"copy t to stdout csv force quote *"}
+{"sql":"copy t to stdout csv force quote a, b"}
+{"sql":"copy t from stdin csv quote as '\"'"}
+{"sql":"copy t from stdin csv quote '\"'"}
+{"sql":"create database d owner = default"}
+{"sql":"create database d connection limit 5"}
+{"sql":"create database d location 'x'"}
+{"sql":"create database d owner r"}
+{"sql":"create database d tablespace ts"}
+{"sql":"create database d with owner = r tablespace = default"}
+{"sql":"declare c asensitive cursor for select 1"}
+{"sql":"declare c binary asensitive cursor for select 1"}
+{"sql":"drop database d with (force, force)"}
+{"sql":"drop database d (force, force)"}
+{"sql":"select extract('year' from now())"}
+{"sql":"create foreign data wrapper w no handler"}
+{"sql":"create foreign data wrapper w no handler no validator"}
+{"sql":"fetch forward 2 from c"}
+{"sql":"fetch forward 2 c"}
+{"sql":"fetch forward c"}
+{"sql":"fetch forward in c"}
+{"sql":"fetch forward -2 in c"}
+{"sql":"select 1 for read only"}
+{"sql":"create server s version null foreign data wrapper w"}
+{"sql":"select * from json_arrayagg(1)"}
+{"sql":"select * from json_objectagg(k: v)"}
+{"sql":"create index on t (json_arrayagg(a))"}
+{"sql":"drop function left"}
+{"sql":"drop function authorization"}
+{"sql":"create index on t ((a + 1) collate \"C\" int4_ops (x = 1) desc nulls first)"}
+{"sql":"create index on t (lower(a) text_ops (x = 1))"}
+{"sql":"create index on t (lower(a) collate \"C\" text_ops (x = 1) asc nulls last)"}
+{"sql":"insert into t (a) overriding system value select 1"}
+{"sql":"insert into t (a, b) overriding user value values (1, 2)"}
+{"sql":"set transaction isolation level read uncommitted"}
+{"sql":"select json_query('1', '$' with conditional array wrapper)","code":"42601","message":"syntax error at or near \"with\"","position":27,"class":"pg17-sqljson"}
+{"sql":"select json_query('1', '$' without array wrapper)","code":"42601","message":"syntax error at or near \"without\"","position":27,"class":"pg17-sqljson"}
+{"sql":"merge into t using s on true when not matched then insert overriding system value values (1)"}
+{"sql":"merge into t using s on true when not matched then insert overriding user value values (default)"}
+{"sql":"comment on database d is 'x'"}
+{"sql":"comment on tablespace ts is 'x'"}
+{"sql":"security label on database d is 'x'"}
+{"sql":"alter extension e add database d"}
+{"sql":"alter extension e add tablespace ts"}
+{"sql":"comment on policy p on t is 'x'"}
+{"sql":"create operator class c for type int using btree as operator 1 < (int, int) for search"}
+{"sql":"create operator === (function = f, hashes = 1, x = 'y')"}
+{"sql":"create operator === (leftarg = int, rightarg = int, procedure = f, commutator = operator(pg_catalog.=))"}
+{"sql":"create operator === (leftarg = int, x = -1.5)"}
+{"sql":"select 1 between asymmetric 0 and 2"}
+{"sql":"select 1 not between asymmetric 0 and 2"}
+{"sql":"set names"}
+{"sql":"set names default"}
+{"sql":"set names 'utf8'"}
+{"sql":"set names utf8","code":"42601","message":"syntax error at or near \"utf8\"","position":10}
+{"sql":"create type t as enum ()"}
+{"sql":"create database d owner = r"}
+{"sql":"create operator class c for type int using btree family f as operator 1 <"}
+{"sql":"create operator class c default for type int using gist as operator 1 < recheck"}
+{"sql":"create operator class c for type int using gist as operator 1 < (int, int) recheck"}
+{"sql":"truncate t continue identity"}
+{"sql":"truncate t restart identity"}
+{"sql":"create language l handler h no validator"}
+{"sql":"create language l handler h validator v"}
+{"sql":"vacuum verbose t"}
+{"sql":"analyze verbose t"}
+{"sql":"cluster verbose t"}
+{"sql":"cluster verbose"}
+{"sql":"cluster verbose i on t"}
+{"sql":"grant all privileges (a) on t to r"}
+{"sql":"grant all privileges (a, b) on table t to r"}
+{"sql":"select 1 operator(pg_catalog.=) any (array[1])"}
+{"sql":"reset transaction isolation level"}
+{"sql":"select row(1, 2) overlaps row(3, 4)"}
+{"sql":"select (1, 2) overlaps row(3, 4)"}
+{"sql":"select row(1, 2) in (select 1, 2)"}
+{"sql":"set schema 'x'"}
+{"sql":"set session authorization default"}
+{"sql":"set work_mem from current"}
+{"sql":"alter table t alter c set statistics default","code":"42601","message":"syntax error at or near \"default\"","position":37}
+{"sql":"alter table t alter column c set statistics -1"}
+{"sql":"select 'a' not ilike any (array['b'])"}
+{"sql":"select 'a' not like all (array['b'])"}
+{"sql":"select * from t, lateral json_table('1', '$' columns (a int)) j","code":"42601","message":"syntax error at or near \"columns\"","position":45,"class":"pg17-sqljson"}
+{"sql":"select * from lateral json_table('1', '$' columns (a int))","code":"42601","message":"syntax error at or near \"columns\"","position":42,"class":"pg17-sqljson"}
+{"sql":"create transform for int language l (to sql with function f(internal))"}
+{"sql":"create transform for int language l (to sql with function f(internal), from sql with function g(internal))"}
+{"sql":"create transform for int language l (from sql with function g(internal), to sql with function f(internal))"}
+{"sql":"create function f() returns int language sql transform for type int, for type text as ''"}
+{"sql":"select xmlparse(document 'x' preserve whitespace)"}
+{"sql":"select xmlparse(document 'x' strip whitespace)"}
+{"sql":"select xmlexists('/a' passing '<a/>' by ref)"}
+{"sql":"select xmlexists('/a' passing '<a/>' by value)"}
+{"sql":"select xmlexists('/a' passing by ref '<a/>' by value)"}
+{"sql":"set time zone pst8pdt"}
+{"sql":"set time zone local"}
+{"sql":"set time zone default"}
+{"sql":"select '1'::national character varying"}
+{"sql":"select '1'::national character"}
+{"sql":"select '1'::national char"}
+{"sql":"select '1'::national char varying"}
+{"sql":"alter operator === (int, int) set (restrict = 1)"}
+{"sql":"alter operator === (int, int) set (join = 'x', restrict = -1.5)"}
+{"sql":"alter statistics s set statistics default","code":"42601","message":"syntax error at or near \"default\"","position":34,"class":"pg17-ddl"}
+{"sql":"alter statistics if exists s set statistics default","code":"42601","message":"syntax error at or near \"default\"","position":44,"class":"pg17-ddl"}
+{"sql":"alter statistics s set statistics 100"}

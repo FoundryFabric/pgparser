@@ -581,6 +581,34 @@ at the string. Both agree.
 deleted, so the list is `function_with_argtypes_list` from its first name, and
 `q[]` is refused at `]`, as in PostgreSQL 16. Both agree.
 
+## Rule coverage
+
+`make cover` (`tools/parsercover`) lists the grammar rules whose action no
+test reduces. On `ff` after #32 there were 253 of 2,491. Of the 244 that can
+be reduced (goyacc reduces the other 9 in no state: no other rule uses
+their nonterminals),
+`TestRuleCoverageIsPostgreSQL16s` (`testdata/rule_coverage_pg16.jsonl`) pins
+PostgreSQL 16.15's answers for at least one statement that reduces each,
+taken by the oracle as above; where both accept, libpg_query 16's tree was
+compared with the parser's (`pg16sweep libpg`).
+
+9 of its statements are PostgreSQL 17 grammar that PostgreSQL 16 refuses.
+They are tagged with a class, as the sweep's pg17 rows are, and
+`checkPG16Answers` requires the parser to still differ from PostgreSQL 16 on
+them:
+
+| class | statements | rule |
+|---|---|---|
+| pg17-utility | `cluster (verbose)` | `ClusterStmt: CLUSTER '(' utility_option_list ')'`, with no table |
+| pg17-utility | `copy t from stdin csv force not null *`, `copy t from stdin csv force null *` | `copy_opt_item: FORCE NOT NULL_P '*'`, `FORCE NULL_P '*'` |
+| pg17-sqljson | `select json_query('1', '$' with conditional array wrapper)`, `... without array wrapper` | `json_wrapper_behavior` |
+| pg17-sqljson | `select * from t, lateral json_table(...) j`, `select * from lateral json_table(...)` | `table_ref: LATERAL_P json_table opt_alias_clause` |
+| pg17-ddl | `alter statistics s set statistics default`, with IF EXISTS | `set_statistics_value: DEFAULT` |
+
+The statements' verdicts disagreed with PostgreSQL 16 in three more classes,
+each fixed with its own test data below: `explain-create-table`,
+`key-match-partial` and `grant-alter-system`.
+
 ## Rerunning
 
 ```
