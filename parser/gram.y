@@ -7793,44 +7793,57 @@ select_no_parens:
 	| select_clause sort_clause
 		{
 			n := $1.(*nodes.SelectStmt)
-			n.SortClause = $2
+			if !insertSelectOptions(pglex, n, $2, nil, nil, nil, -1) {
+				return 1
+			}
 			$$ = n
 		}
 	| select_clause opt_sort_clause for_locking_clause opt_select_limit
 		{
 			n := $1.(*nodes.SelectStmt)
-			insertSelectOptions(n, $2, $3, $4, nil)
+			if !insertSelectOptions(pglex, n, $2, $3, $4, nil, -1) {
+				return 1
+			}
 			$$ = n
 		}
 	| select_clause opt_sort_clause select_limit opt_for_locking_clause
 		{
 			n := $1.(*nodes.SelectStmt)
-			insertSelectOptions(n, $2, $4, $3, nil)
+			if !insertSelectOptions(pglex, n, $2, $4, $3, nil, -1) {
+				return 1
+			}
 			$$ = n
 		}
 	| with_clause select_clause
 		{
 			n := $2.(*nodes.SelectStmt)
-			n.WithClause = $1.(*nodes.WithClause)
+			if !insertSelectOptions(pglex, n, nil, nil, nil, $1.(*nodes.WithClause), $<loc>1) {
+				return 1
+			}
 			$$ = n
 		}
 	| with_clause select_clause sort_clause
 		{
 			n := $2.(*nodes.SelectStmt)
-			n.WithClause = $1.(*nodes.WithClause)
-			n.SortClause = $3
+			if !insertSelectOptions(pglex, n, $3, nil, nil, $1.(*nodes.WithClause), $<loc>1) {
+				return 1
+			}
 			$$ = n
 		}
 	| with_clause select_clause opt_sort_clause for_locking_clause opt_select_limit
 		{
 			n := $2.(*nodes.SelectStmt)
-			insertSelectOptions(n, $3, $4, $5, $1.(*nodes.WithClause))
+			if !insertSelectOptions(pglex, n, $3, $4, $5, $1.(*nodes.WithClause), $<loc>1) {
+				return 1
+			}
 			$$ = n
 		}
 	| with_clause select_clause opt_sort_clause select_limit opt_for_locking_clause
 		{
 			n := $2.(*nodes.SelectStmt)
-			insertSelectOptions(n, $3, $5, $4, $1.(*nodes.WithClause))
+			if !insertSelectOptions(pglex, n, $3, $5, $4, $1.(*nodes.WithClause), $<loc>1) {
+				return 1
+			}
 			$$ = n
 		}
 	;
@@ -9660,6 +9673,9 @@ func_expr:
 		{
 			n := $1.(*nodes.FuncCall)
 			if $2 != nil {
+				if !checkWithinGroup(pglex, n, $<loc>2) {
+					return 1
+				}
 				n.AggOrder = $2.(*nodes.List)
 				n.AggWithinGroup = true
 			}
@@ -18551,22 +18567,101 @@ func splitColQualList(qualList *nodes.List, coldef *nodes.ColumnDef) {
 	}
 }
 
-func insertSelectOptions(stmt *nodes.SelectStmt, sortClause *nodes.List, lockingClause *nodes.List,
-	limitClause *SelectLimit, withClause *nodes.WithClause) {
+// insertSelectOptions adds the clauses after a select_clause to its
+// SelectStmt, refusing what PostgreSQL 16's insertSelectOptions refuses: a
+// second ORDER BY, OFFSET, LIMIT or WITH (the select_clause was a
+// parenthesized select that had its own), a limit after WITH TIES, and WITH
+// TIES without ORDER BY or with SKIP LOCKED. withLoc is the WITH clause's
+// first token. It reports false once the error is raised.
+func insertSelectOptions(lex pgLexer, stmt *nodes.SelectStmt, sortClause *nodes.List, lockingClause *nodes.List,
+	limitClause *SelectLimit, withClause *nodes.WithClause, withLoc nodes.ParseLoc) bool {
 	if sortClause != nil {
+		if stmt.SortClause != nil {
+			grammarError(lex, codeSyntaxError, "multiple ORDER BY clauses not allowed", "", sortClauseLocation(sortClause))
+			return false
+		}
 		stmt.SortClause = sortClause
 	}
+	skipLocked := hasSkipLocked(stmt.LockingClause) || hasSkipLocked(lockingClause)
 	if lockingClause != nil {
 		stmt.LockingClause = lockingClause
 	}
 	if limitClause != nil {
+		if limitClause.LimitOffset != nil && stmt.LimitOffset != nil {
+			grammarError(lex, codeSyntaxError, "multiple OFFSET clauses not allowed", "",
+				nodes.ParseLoc(nodes.ExprLocation(limitClause.LimitOffset)))
+			return false
+		}
+		if limitClause.LimitCount != nil && stmt.LimitCount != nil {
+			grammarError(lex, codeSyntaxError, "multiple LIMIT clauses not allowed", "",
+				nodes.ParseLoc(nodes.ExprLocation(limitClause.LimitCount)))
+			return false
+		}
+		if stmt.LimitOption == nodes.LIMIT_OPTION_WITH_TIES {
+			grammarError(lex, codeSyntaxError, "multiple limit options not allowed", "", -1)
+			return false
+		}
+		if limitClause.LimitOption == nodes.LIMIT_OPTION_WITH_TIES {
+			if stmt.SortClause == nil {
+				grammarError(lex, codeSyntaxError, "WITH TIES cannot be specified without ORDER BY clause", "", -1)
+				return false
+			}
+			if skipLocked {
+				grammarError(lex, codeSyntaxError, "SKIP LOCKED and WITH TIES options cannot be used together", "", -1)
+				return false
+			}
+		}
 		stmt.LimitOffset = limitClause.LimitOffset
 		stmt.LimitCount = limitClause.LimitCount
 		stmt.LimitOption = limitClause.LimitOption
 	}
 	if withClause != nil {
+		if stmt.WithClause != nil {
+			grammarError(lex, codeSyntaxError, "multiple WITH clauses not allowed", "", withLoc)
+			return false
+		}
 		stmt.WithClause = withClause
 	}
+	return true
+}
+
+// sortClauseLocation is where an ORDER BY list starts, as PostgreSQL 16
+// reports it: the ExprLocation of its sort keys' expressions.
+func sortClauseLocation(sortClause *nodes.List) nodes.ParseLoc {
+	keys := make([]nodes.Node, len(sortClause.Items))
+	for i, item := range sortClause.Items {
+		keys[i] = item.(*nodes.SortBy).Node
+	}
+	return nodes.ParseLoc(nodes.ExprLocation(&nodes.List{Items: keys}))
+}
+
+// hasSkipLocked reports whether a locking clause list has a SKIP LOCKED item.
+func hasSkipLocked(lockingClause *nodes.List) bool {
+	for _, item := range lockingClause.Elems() {
+		if item.(*nodes.LockingClause).WaitPolicy == int(nodes.LockWaitSkip) {
+			return true
+		}
+	}
+	return false
+}
+
+// checkWithinGroup refuses what PostgreSQL 16 refuses in a function call
+// with WITHIN GROUP, at WITHIN: an ORDER BY in its arguments, DISTINCT and
+// VARIADIC. It reports false once the error is raised.
+func checkWithinGroup(lex pgLexer, fc *nodes.FuncCall, loc nodes.ParseLoc) bool {
+	var message string
+	switch {
+	case fc.AggOrder != nil:
+		message = "cannot use multiple ORDER BY clauses with WITHIN GROUP"
+	case fc.AggDistinct:
+		message = "cannot use DISTINCT with WITHIN GROUP"
+	case fc.FuncVariadic:
+		message = "cannot use VARIADIC with WITHIN GROUP"
+	default:
+		return true
+	}
+	grammarError(lex, codeSyntaxError, message, "", loc)
+	return false
 }
 
 // relpersistenceForTemp returns the relpersistence byte based on temp flag.

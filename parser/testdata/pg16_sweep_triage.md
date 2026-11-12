@@ -82,7 +82,7 @@ L a feature's grammar.
 | grammar-action-checks (fixed) | 1 | 21 (8/6/7) | accepts what a grammar action refuses | `CopyStmt`, `parsePartitionStrategy`, `alter_table_cmd` column number, `CreateSchemaStmt`, `TriggerEvents`, `xmltable_column_option_el`, `frame_extent`, `json_encoding_clause_opt` | no | M |
 | cte-column-list-parentheses (fixed) | 1 | 12 (0/10/2) | accepts a CTE's column names without parentheses | `opt_name_list` | no | S |
 | constraint-attribute-checks (fixed) | 1 | 9 (5/1/3) | accepts what `processCASbits` and constraint actions refuse | `ConstraintAttributeSpec`/`processCASbits`, `key_action` SET NULL (cols), `ColConstraintElem` GENERATED | no | S |
-| select-clause-checks | 1 | 8 (3/2/3) | accepts WITH TIES without ORDER BY, with SKIP LOCKED; ORDER BY with WITHIN GROUP | `insertSelectOptions`, `func_application` within `func_expr` | no | S |
+| select-clause-checks (fixed) | 1 | 8 (3/2/3) | accepts WITH TIES without ORDER BY, with SKIP LOCKED; ORDER BY with WITHIN GROUP | `insertSelectOptions`, `func_application` within `func_expr` | no | S |
 | uescape | 1 | 7 (2/4/1) | accepts an invalid UESCAPE character; other message for a UESCAPE not followed by a string | scanner and `base_yylex` UESCAPE handling (`check_uescapechar`) | no | S |
 | with-oids | 1 | 5 (2/1/2) | accepts WITH OIDS | `OptWith`, `alter_table_cmd` SET WITH OIDS | no | S |
 | drop-aggregate-arguments | 1 | 4 (1/1/2) | accepts DROP AGGREGATE without argument types | `DropStmt` AGGREGATE `aggregate_with_argtypes_list` | no | S |
@@ -256,13 +256,18 @@ REFERENCES takes only DEFERRABLE, NOT DEFERRABLE and INITIALLY, as
 PostgreSQL 16's `ConstraintAttr` does, so NOT VALID and NO INHERIT there are
 syntax errors.
 
-### select-clause-checks (risk 1, 8)
+### select-clause-checks (risk 1, 8; fixed)
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
 | `select 1 fetch first 1 row with ties` | 42601 WITH TIES cannot be specified without ORDER BY clause | accepts |
 | `select 1 order by 1 fetch first 1 row with ties for update skip locked` | 42601 SKIP LOCKED and WITH TIES options cannot be used together | accepts |
 | `select percentile_cont(p order by p) within group (order by x)` | 42601 cannot use multiple ORDER BY clauses with WITHIN GROUP at 37 | accepts |
+
+`insertSelectOptions` now refuses WITH TIES without ORDER BY or with SKIP
+LOCKED, and a second ORDER BY, OFFSET, LIMIT or WITH, and a limit after WITH
+TIES, as PostgreSQL 16 does; `func_expr` refuses WITHIN GROUP after an
+argument ORDER BY, DISTINCT or VARIADIC, at WITHIN. All 8 agree.
 
 ### uescape (risk 1, 7)
 
