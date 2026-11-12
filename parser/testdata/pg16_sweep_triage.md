@@ -812,6 +812,21 @@ change clears the four classes of both. The 49 trees that changed over the
 corpus and test data are those statements. `testdata/bool_const_pg16.jsonl`
 pins 21 statements; all agree.
 
+### alter-table-cmd-definition (tree 62 and 46; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `alter table t replica identity full` | `def` `ReplicaIdentityStmt` `f` | no `def`: DEFAULT, FULL and NOTHING were alike |
+| `alter table t replica identity using index i` | `def` `ReplicaIdentityStmt` `i`, `i` | `name` `i` |
+| `alter table t alter constraint c deferrable` | `def` `Constraint` foreign key `c`, deferrable | `name` `c`, the attributes dropped |
+
+REPLICA IDENTITY's identity is a new `nodes.ReplicaIdentityStmt` (the tag
+was there) with PostgreSQL 16's `REPLICA_IDENTITY_*` chars; ALTER
+CONSTRAINT's is a foreign key `Constraint` with its attributes applied,
+location unset as PostgreSQL 16 leaves it. The 98 trees that changed over
+the corpus and test data are those statements.
+`testdata/replica_identity_pg16.jsonl` pins 24 statements; all agree.
+
 ## Rerunning
 
 ```

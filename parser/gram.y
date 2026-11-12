@@ -2722,9 +2722,15 @@ alter_table_cmd:
 			if !checkConstraintAttrs(pglex, $4, "FOREIGN KEY", true, false, false) {
 				return 1
 			}
+			/* PostgreSQL 16 leaves its location unset. */
+			c := &nodes.Constraint{
+				Contype: nodes.CONSTR_FOREIGN,
+				Conname: $3,
+			}
+			applyConstraintAttrs(c, $4)
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_AlterConstraint),
-				Name:    $3,
+				Def:     c,
 			}
 		}
 	/* INHERIT / NO INHERIT */
@@ -2940,25 +2946,28 @@ alter_table_cmd:
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_ReplicaIdentity),
+				Def:     &nodes.ReplicaIdentityStmt{IdentityType: nodes.REPLICA_IDENTITY_DEFAULT},
 			}
 		}
 	| REPLICA IDENTITY_P FULL
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_ReplicaIdentity),
+				Def:     &nodes.ReplicaIdentityStmt{IdentityType: nodes.REPLICA_IDENTITY_FULL},
 			}
 		}
 	| REPLICA IDENTITY_P NOTHING
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_ReplicaIdentity),
+				Def:     &nodes.ReplicaIdentityStmt{IdentityType: nodes.REPLICA_IDENTITY_NOTHING},
 			}
 		}
 	| REPLICA IDENTITY_P USING INDEX name
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_ReplicaIdentity),
-				Name:    $5,
+				Def:     &nodes.ReplicaIdentityStmt{IdentityType: nodes.REPLICA_IDENTITY_INDEX, Name: $5},
 			}
 		}
 	/* SET STORAGE */

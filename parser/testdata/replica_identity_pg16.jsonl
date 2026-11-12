@@ -1,0 +1,24 @@
+{"sql":"alter table t replica identity default"}
+{"sql":"alter table t replica identity full"}
+{"sql":"alter table t replica identity nothing"}
+{"sql":"alter table t replica identity using index i"}
+{"sql":"alter table only t replica identity full"}
+{"sql":"alter table if exists t replica identity using index s_i"}
+{"sql":"alter table t replica identity full, add column a int"}
+{"sql":"alter materialized view m replica identity full"}
+{"sql":"alter table t replica identity","code":"42601","message":"syntax error at end of input","position":30}
+{"sql":"alter table t replica identity index i","code":"42601","message":"syntax error at or near \"index\"","position":31}
+{"sql":"alter table t replica identity using index","code":"42601","message":"syntax error at end of input","position":42}
+{"sql":"alter table t replica identity using index s.i","code":"42601","message":"syntax error at or near \".\"","position":44}
+{"sql":"alter table t replica identity none","code":"42601","message":"syntax error at or near \"none\"","position":31}
+{"sql":"alter foreign table t replica identity full"}
+{"sql":"alter table t alter constraint c deferrable"}
+{"sql":"alter table t alter constraint c not deferrable"}
+{"sql":"alter table t alter constraint c initially deferred"}
+{"sql":"alter table t alter constraint c deferrable initially immediate"}
+{"sql":"alter table t alter constraint c not deferrable initially deferred","code":"42601","message":"constraint declared INITIALLY DEFERRED must be DEFERRABLE","position":48}
+{"sql":"alter table t alter constraint c not valid","code":"0A000","message":"FOREIGN KEY constraints cannot be marked NOT VALID","position":-1}
+{"sql":"alter table t alter constraint c no inherit","code":"0A000","message":"FOREIGN KEY constraints cannot be marked NO INHERIT","position":-1}
+{"sql":"alter table t alter constraint c"}
+{"sql":"alter foreign table t alter constraint c deferrable"}
+{"sql":"alter table t alter constraint c initially deferred initially immediate","code":"42601","message":"conflicting constraint properties","position":52}

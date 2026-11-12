@@ -176,6 +176,22 @@ type AlterTableCmd struct {
 
 func (n *AlterTableCmd) Tag() NodeTag { return T_AlterTableCmd }
 
+// ReplicaIdentityStmt is ALTER TABLE ... REPLICA IDENTITY's definition.
+type ReplicaIdentityStmt struct {
+	IdentityType byte   // REPLICA_IDENTITY_DEFAULT, _FULL, _NOTHING or _INDEX
+	Name         string // the index, for REPLICA_IDENTITY_INDEX
+}
+
+func (n *ReplicaIdentityStmt) Tag() NodeTag { return T_ReplicaIdentityStmt }
+
+// ReplicaIdentityStmt.IdentityType values, pg_class.relreplident's.
+const (
+	REPLICA_IDENTITY_DEFAULT byte = 'd'
+	REPLICA_IDENTITY_NOTHING byte = 'n'
+	REPLICA_IDENTITY_FULL    byte = 'f'
+	REPLICA_IDENTITY_INDEX   byte = 'i'
+)
+
 // AlterTableMoveAllStmt represents ALTER TABLE/INDEX/MATERIALIZED VIEW ALL IN TABLESPACE.
 type AlterTableMoveAllStmt struct {
 	OrigTablespacename string // source tablespace
