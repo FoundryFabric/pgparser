@@ -1,0 +1,496 @@
+{"sql": "with x as (select 1) select 1"}
+{"sql": "with x as materialized (select 1) select 1"}
+{"sql": "with x as not materialized (select 1) select 1"}
+{"sql": "with x a as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a, b as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a, b as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a, b as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x (a) as (select 1) select 1"}
+{"sql": "with x (a) as materialized (select 1) select 1"}
+{"sql": "with x (a) as not materialized (select 1) select 1"}
+{"sql": "with x (a, b) as (select 1) select 1"}
+{"sql": "with x (a, b) as materialized (select 1) select 1"}
+{"sql": "with x (a, b) as not materialized (select 1) select 1"}
+{"sql": "with x () as (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 8}
+{"sql": "with x () as materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 8}
+{"sql": "with x () as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 8}
+{"sql": "with x (a,) as (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 10}
+{"sql": "with x (a,) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 10}
+{"sql": "with x (a,) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 10}
+{"sql": "with x a (b) as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a (b) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a (b) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x (a) b as (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 11}
+{"sql": "with x (a) b as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 11}
+{"sql": "with x (a) b as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 11}
+{"sql": "with x (a)(b) as (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 10}
+{"sql": "with x (a)(b) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 10}
+{"sql": "with x (a)(b) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 10}
+{"sql": "with x a.b as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a.b as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a.b as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x (a.b) as (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 9}
+{"sql": "with x (a.b) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 9}
+{"sql": "with x (a.b) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 9}
+{"sql": "with x ,a as (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 7}
+{"sql": "with x ,a as materialized (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 7}
+{"sql": "with x ,a as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 7}
+{"sql": "with \"X\" as (select 1) select 1"}
+{"sql": "with \"X\" as materialized (select 1) select 1"}
+{"sql": "with \"X\" as not materialized (select 1) select 1"}
+{"sql": "with \"X\" a as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 9}
+{"sql": "with \"X\" a as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 9}
+{"sql": "with \"X\" a as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 9}
+{"sql": "with \"X\" a, b as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 9}
+{"sql": "with \"X\" a, b as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 9}
+{"sql": "with \"X\" a, b as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 9}
+{"sql": "with \"X\" (a) as (select 1) select 1"}
+{"sql": "with \"X\" (a) as materialized (select 1) select 1"}
+{"sql": "with \"X\" (a) as not materialized (select 1) select 1"}
+{"sql": "with \"X\" (a, b) as (select 1) select 1"}
+{"sql": "with \"X\" (a, b) as materialized (select 1) select 1"}
+{"sql": "with \"X\" (a, b) as not materialized (select 1) select 1"}
+{"sql": "with \"X\" () as (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 10}
+{"sql": "with \"X\" () as materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 10}
+{"sql": "with \"X\" () as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 10}
+{"sql": "with \"X\" (a,) as (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 12}
+{"sql": "with \"X\" (a,) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 12}
+{"sql": "with \"X\" (a,) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 12}
+{"sql": "with \"X\" a (b) as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 9}
+{"sql": "with \"X\" a (b) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 9}
+{"sql": "with \"X\" a (b) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 9}
+{"sql": "with \"X\" (a) b as (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 13}
+{"sql": "with \"X\" (a) b as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 13}
+{"sql": "with \"X\" (a) b as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 13}
+{"sql": "with \"X\" (a)(b) as (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 12}
+{"sql": "with \"X\" (a)(b) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 12}
+{"sql": "with \"X\" (a)(b) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 12}
+{"sql": "with \"X\" a.b as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 9}
+{"sql": "with \"X\" a.b as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 9}
+{"sql": "with \"X\" a.b as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 9}
+{"sql": "with \"X\" (a.b) as (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 11}
+{"sql": "with \"X\" (a.b) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 11}
+{"sql": "with \"X\" (a.b) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 11}
+{"sql": "with \"X\" ,a as (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 9}
+{"sql": "with \"X\" ,a as materialized (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 9}
+{"sql": "with \"X\" ,a as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 9}
+{"sql": "with materialized as (select 1) select 1"}
+{"sql": "with materialized as materialized (select 1) select 1"}
+{"sql": "with materialized as not materialized (select 1) select 1"}
+{"sql": "with materialized a as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 18}
+{"sql": "with materialized a as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 18}
+{"sql": "with materialized a as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 18}
+{"sql": "with materialized a, b as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 18}
+{"sql": "with materialized a, b as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 18}
+{"sql": "with materialized a, b as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 18}
+{"sql": "with materialized (a) as (select 1) select 1"}
+{"sql": "with materialized (a) as materialized (select 1) select 1"}
+{"sql": "with materialized (a) as not materialized (select 1) select 1"}
+{"sql": "with materialized (a, b) as (select 1) select 1"}
+{"sql": "with materialized (a, b) as materialized (select 1) select 1"}
+{"sql": "with materialized (a, b) as not materialized (select 1) select 1"}
+{"sql": "with materialized () as (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 19}
+{"sql": "with materialized () as materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 19}
+{"sql": "with materialized () as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 19}
+{"sql": "with materialized (a,) as (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 21}
+{"sql": "with materialized (a,) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 21}
+{"sql": "with materialized (a,) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 21}
+{"sql": "with materialized a (b) as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 18}
+{"sql": "with materialized a (b) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 18}
+{"sql": "with materialized a (b) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 18}
+{"sql": "with materialized (a) b as (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 22}
+{"sql": "with materialized (a) b as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 22}
+{"sql": "with materialized (a) b as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 22}
+{"sql": "with materialized (a)(b) as (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 21}
+{"sql": "with materialized (a)(b) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 21}
+{"sql": "with materialized (a)(b) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 21}
+{"sql": "with materialized a.b as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 18}
+{"sql": "with materialized a.b as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 18}
+{"sql": "with materialized a.b as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 18}
+{"sql": "with materialized (a.b) as (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 20}
+{"sql": "with materialized (a.b) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 20}
+{"sql": "with materialized (a.b) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 20}
+{"sql": "with materialized ,a as (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 18}
+{"sql": "with materialized ,a as materialized (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 18}
+{"sql": "with materialized ,a as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 18}
+{"sql": "with role as (select 1) select 1"}
+{"sql": "with role as materialized (select 1) select 1"}
+{"sql": "with role as not materialized (select 1) select 1"}
+{"sql": "with role a as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 10}
+{"sql": "with role a as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 10}
+{"sql": "with role a as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 10}
+{"sql": "with role a, b as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 10}
+{"sql": "with role a, b as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 10}
+{"sql": "with role a, b as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 10}
+{"sql": "with role (a) as (select 1) select 1"}
+{"sql": "with role (a) as materialized (select 1) select 1"}
+{"sql": "with role (a) as not materialized (select 1) select 1"}
+{"sql": "with role (a, b) as (select 1) select 1"}
+{"sql": "with role (a, b) as materialized (select 1) select 1"}
+{"sql": "with role (a, b) as not materialized (select 1) select 1"}
+{"sql": "with role () as (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 11}
+{"sql": "with role () as materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 11}
+{"sql": "with role () as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 11}
+{"sql": "with role (a,) as (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 13}
+{"sql": "with role (a,) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 13}
+{"sql": "with role (a,) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 13}
+{"sql": "with role a (b) as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 10}
+{"sql": "with role a (b) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 10}
+{"sql": "with role a (b) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 10}
+{"sql": "with role (a) b as (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 14}
+{"sql": "with role (a) b as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 14}
+{"sql": "with role (a) b as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 14}
+{"sql": "with role (a)(b) as (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 13}
+{"sql": "with role (a)(b) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 13}
+{"sql": "with role (a)(b) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 13}
+{"sql": "with role a.b as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 10}
+{"sql": "with role a.b as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 10}
+{"sql": "with role a.b as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 10}
+{"sql": "with role (a.b) as (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 12}
+{"sql": "with role (a.b) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 12}
+{"sql": "with role (a.b) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 12}
+{"sql": "with role ,a as (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 10}
+{"sql": "with role ,a as materialized (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 10}
+{"sql": "with role ,a as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 10}
+{"sql": "with recursive x as (select 1) select 1"}
+{"sql": "with recursive x as materialized (select 1) select 1"}
+{"sql": "with recursive x as not materialized (select 1) select 1"}
+{"sql": "with recursive x a as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 17}
+{"sql": "with recursive x a as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 17}
+{"sql": "with recursive x a as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 17}
+{"sql": "with recursive x a, b as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 17}
+{"sql": "with recursive x a, b as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 17}
+{"sql": "with recursive x a, b as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 17}
+{"sql": "with recursive x (a) as (select 1) select 1"}
+{"sql": "with recursive x (a) as materialized (select 1) select 1"}
+{"sql": "with recursive x (a) as not materialized (select 1) select 1"}
+{"sql": "with recursive x (a, b) as (select 1) select 1"}
+{"sql": "with recursive x (a, b) as materialized (select 1) select 1"}
+{"sql": "with recursive x (a, b) as not materialized (select 1) select 1"}
+{"sql": "with recursive x () as (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 18}
+{"sql": "with recursive x () as materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 18}
+{"sql": "with recursive x () as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 18}
+{"sql": "with recursive x (a,) as (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 20}
+{"sql": "with recursive x (a,) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 20}
+{"sql": "with recursive x (a,) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 20}
+{"sql": "with recursive x a (b) as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 17}
+{"sql": "with recursive x a (b) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 17}
+{"sql": "with recursive x a (b) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 17}
+{"sql": "with recursive x (a) b as (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 21}
+{"sql": "with recursive x (a) b as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 21}
+{"sql": "with recursive x (a) b as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 21}
+{"sql": "with recursive x (a)(b) as (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 20}
+{"sql": "with recursive x (a)(b) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 20}
+{"sql": "with recursive x (a)(b) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 20}
+{"sql": "with recursive x a.b as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 17}
+{"sql": "with recursive x a.b as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 17}
+{"sql": "with recursive x a.b as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 17}
+{"sql": "with recursive x (a.b) as (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 19}
+{"sql": "with recursive x (a.b) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 19}
+{"sql": "with recursive x (a.b) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 19}
+{"sql": "with recursive x ,a as (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 17}
+{"sql": "with recursive x ,a as materialized (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 17}
+{"sql": "with recursive x ,a as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 17}
+{"sql": "with recursive \"X\" as (select 1) select 1"}
+{"sql": "with recursive \"X\" as materialized (select 1) select 1"}
+{"sql": "with recursive \"X\" as not materialized (select 1) select 1"}
+{"sql": "with recursive \"X\" a as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 19}
+{"sql": "with recursive \"X\" a as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 19}
+{"sql": "with recursive \"X\" a as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 19}
+{"sql": "with recursive \"X\" a, b as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 19}
+{"sql": "with recursive \"X\" a, b as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 19}
+{"sql": "with recursive \"X\" a, b as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 19}
+{"sql": "with recursive \"X\" (a) as (select 1) select 1"}
+{"sql": "with recursive \"X\" (a) as materialized (select 1) select 1"}
+{"sql": "with recursive \"X\" (a) as not materialized (select 1) select 1"}
+{"sql": "with recursive \"X\" (a, b) as (select 1) select 1"}
+{"sql": "with recursive \"X\" (a, b) as materialized (select 1) select 1"}
+{"sql": "with recursive \"X\" (a, b) as not materialized (select 1) select 1"}
+{"sql": "with recursive \"X\" () as (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 20}
+{"sql": "with recursive \"X\" () as materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 20}
+{"sql": "with recursive \"X\" () as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 20}
+{"sql": "with recursive \"X\" (a,) as (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 22}
+{"sql": "with recursive \"X\" (a,) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 22}
+{"sql": "with recursive \"X\" (a,) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 22}
+{"sql": "with recursive \"X\" a (b) as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 19}
+{"sql": "with recursive \"X\" a (b) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 19}
+{"sql": "with recursive \"X\" a (b) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 19}
+{"sql": "with recursive \"X\" (a) b as (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 23}
+{"sql": "with recursive \"X\" (a) b as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 23}
+{"sql": "with recursive \"X\" (a) b as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 23}
+{"sql": "with recursive \"X\" (a)(b) as (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 22}
+{"sql": "with recursive \"X\" (a)(b) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 22}
+{"sql": "with recursive \"X\" (a)(b) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 22}
+{"sql": "with recursive \"X\" a.b as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 19}
+{"sql": "with recursive \"X\" a.b as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 19}
+{"sql": "with recursive \"X\" a.b as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 19}
+{"sql": "with recursive \"X\" (a.b) as (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 21}
+{"sql": "with recursive \"X\" (a.b) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 21}
+{"sql": "with recursive \"X\" (a.b) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 21}
+{"sql": "with recursive \"X\" ,a as (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 19}
+{"sql": "with recursive \"X\" ,a as materialized (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 19}
+{"sql": "with recursive \"X\" ,a as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 19}
+{"sql": "with recursive materialized as (select 1) select 1"}
+{"sql": "with recursive materialized as materialized (select 1) select 1"}
+{"sql": "with recursive materialized as not materialized (select 1) select 1"}
+{"sql": "with recursive materialized a as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 28}
+{"sql": "with recursive materialized a as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 28}
+{"sql": "with recursive materialized a as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 28}
+{"sql": "with recursive materialized a, b as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 28}
+{"sql": "with recursive materialized a, b as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 28}
+{"sql": "with recursive materialized a, b as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 28}
+{"sql": "with recursive materialized (a) as (select 1) select 1"}
+{"sql": "with recursive materialized (a) as materialized (select 1) select 1"}
+{"sql": "with recursive materialized (a) as not materialized (select 1) select 1"}
+{"sql": "with recursive materialized (a, b) as (select 1) select 1"}
+{"sql": "with recursive materialized (a, b) as materialized (select 1) select 1"}
+{"sql": "with recursive materialized (a, b) as not materialized (select 1) select 1"}
+{"sql": "with recursive materialized () as (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 29}
+{"sql": "with recursive materialized () as materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 29}
+{"sql": "with recursive materialized () as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 29}
+{"sql": "with recursive materialized (a,) as (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 31}
+{"sql": "with recursive materialized (a,) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 31}
+{"sql": "with recursive materialized (a,) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 31}
+{"sql": "with recursive materialized a (b) as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 28}
+{"sql": "with recursive materialized a (b) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 28}
+{"sql": "with recursive materialized a (b) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 28}
+{"sql": "with recursive materialized (a) b as (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 32}
+{"sql": "with recursive materialized (a) b as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 32}
+{"sql": "with recursive materialized (a) b as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 32}
+{"sql": "with recursive materialized (a)(b) as (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 31}
+{"sql": "with recursive materialized (a)(b) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 31}
+{"sql": "with recursive materialized (a)(b) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 31}
+{"sql": "with recursive materialized a.b as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 28}
+{"sql": "with recursive materialized a.b as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 28}
+{"sql": "with recursive materialized a.b as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 28}
+{"sql": "with recursive materialized (a.b) as (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 30}
+{"sql": "with recursive materialized (a.b) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 30}
+{"sql": "with recursive materialized (a.b) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 30}
+{"sql": "with recursive materialized ,a as (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 28}
+{"sql": "with recursive materialized ,a as materialized (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 28}
+{"sql": "with recursive materialized ,a as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 28}
+{"sql": "with recursive role as (select 1) select 1"}
+{"sql": "with recursive role as materialized (select 1) select 1"}
+{"sql": "with recursive role as not materialized (select 1) select 1"}
+{"sql": "with recursive role a as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 20}
+{"sql": "with recursive role a as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 20}
+{"sql": "with recursive role a as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 20}
+{"sql": "with recursive role a, b as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 20}
+{"sql": "with recursive role a, b as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 20}
+{"sql": "with recursive role a, b as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 20}
+{"sql": "with recursive role (a) as (select 1) select 1"}
+{"sql": "with recursive role (a) as materialized (select 1) select 1"}
+{"sql": "with recursive role (a) as not materialized (select 1) select 1"}
+{"sql": "with recursive role (a, b) as (select 1) select 1"}
+{"sql": "with recursive role (a, b) as materialized (select 1) select 1"}
+{"sql": "with recursive role (a, b) as not materialized (select 1) select 1"}
+{"sql": "with recursive role () as (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 21}
+{"sql": "with recursive role () as materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 21}
+{"sql": "with recursive role () as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 21}
+{"sql": "with recursive role (a,) as (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 23}
+{"sql": "with recursive role (a,) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 23}
+{"sql": "with recursive role (a,) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 23}
+{"sql": "with recursive role a (b) as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 20}
+{"sql": "with recursive role a (b) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 20}
+{"sql": "with recursive role a (b) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 20}
+{"sql": "with recursive role (a) b as (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 24}
+{"sql": "with recursive role (a) b as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 24}
+{"sql": "with recursive role (a) b as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 24}
+{"sql": "with recursive role (a)(b) as (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 23}
+{"sql": "with recursive role (a)(b) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 23}
+{"sql": "with recursive role (a)(b) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 23}
+{"sql": "with recursive role a.b as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 20}
+{"sql": "with recursive role a.b as materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 20}
+{"sql": "with recursive role a.b as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 20}
+{"sql": "with recursive role (a.b) as (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 22}
+{"sql": "with recursive role (a.b) as materialized (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 22}
+{"sql": "with recursive role (a.b) as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 22}
+{"sql": "with recursive role ,a as (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 20}
+{"sql": "with recursive role ,a as materialized (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 20}
+{"sql": "with recursive role ,a as not materialized (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 20}
+{"sql": "with x as (select 1)", "syntaxError": "syntax error at end of input", "position": 20}
+{"sql": "with x as (select 1) select * from x"}
+{"sql": "with x as (select 1) insert into t values (1)"}
+{"sql": "with x as (select 1) update t set a = 1"}
+{"sql": "with x as (select 1) delete from t"}
+{"sql": "with x (select 1) select 1", "syntaxError": "syntax error at or near \"select\"", "position": 8}
+{"sql": "with y as (select 1), x as (select 1) select 1"}
+{"sql": "with recursive y as (select 1), x as (select 1) select 1"}
+{"sql": "select * from (with x as (select 1) select 1) s"}
+{"sql": "create view v as with x as (select 1) select 1"}
+{"sql": "insert into t with x as (select 1) select 1"}
+{"sql": "explain with x as (select 1) select 1"}
+{"sql": "with recursive x as (select 1) search depth first by a set s select 1"}
+{"sql": "with recursive x as (select 1) cycle a set c using p select 1"}
+{"sql": "with x a as (select 1)", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a as (select 1) select * from x", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a as (select 1) insert into t values (1)", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a as (select 1) update t set a = 1", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a as (select 1) delete from t", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with y as (select 1), x a as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 24}
+{"sql": "with recursive y as (select 1), x a as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 34}
+{"sql": "select * from (with x a as (select 1) select 1) s", "syntaxError": "syntax error at or near \"a\"", "position": 22}
+{"sql": "create view v as with x a as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 24}
+{"sql": "insert into t with x a as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 21}
+{"sql": "explain with x a as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 15}
+{"sql": "with recursive x a as (select 1) search depth first by a set s select 1", "syntaxError": "syntax error at or near \"a\"", "position": 17}
+{"sql": "with recursive x a as (select 1) cycle a set c using p select 1", "syntaxError": "syntax error at or near \"a\"", "position": 17}
+{"sql": "with x a, b as (select 1)", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a, b as (select 1) select * from x", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a, b as (select 1) insert into t values (1)", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a, b as (select 1) update t set a = 1", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a, b as (select 1) delete from t", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a, b (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with y as (select 1), x a, b as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 24}
+{"sql": "with recursive y as (select 1), x a, b as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 34}
+{"sql": "select * from (with x a, b as (select 1) select 1) s", "syntaxError": "syntax error at or near \"a\"", "position": 22}
+{"sql": "create view v as with x a, b as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 24}
+{"sql": "insert into t with x a, b as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 21}
+{"sql": "explain with x a, b as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 15}
+{"sql": "with recursive x a, b as (select 1) search depth first by a set s select 1", "syntaxError": "syntax error at or near \"a\"", "position": 17}
+{"sql": "with recursive x a, b as (select 1) cycle a set c using p select 1", "syntaxError": "syntax error at or near \"a\"", "position": 17}
+{"sql": "with x (a) as (select 1)", "syntaxError": "syntax error at end of input", "position": 24}
+{"sql": "with x (a) as (select 1) select * from x"}
+{"sql": "with x (a) as (select 1) insert into t values (1)"}
+{"sql": "with x (a) as (select 1) update t set a = 1"}
+{"sql": "with x (a) as (select 1) delete from t"}
+{"sql": "with x (a) (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 11}
+{"sql": "with y as (select 1), x (a) as (select 1) select 1"}
+{"sql": "with recursive y as (select 1), x (a) as (select 1) select 1"}
+{"sql": "select * from (with x (a) as (select 1) select 1) s"}
+{"sql": "create view v as with x (a) as (select 1) select 1"}
+{"sql": "insert into t with x (a) as (select 1) select 1"}
+{"sql": "explain with x (a) as (select 1) select 1"}
+{"sql": "with recursive x (a) as (select 1) search depth first by a set s select 1"}
+{"sql": "with recursive x (a) as (select 1) cycle a set c using p select 1"}
+{"sql": "with x (a, b) as (select 1)", "syntaxError": "syntax error at end of input", "position": 27}
+{"sql": "with x (a, b) as (select 1) select * from x"}
+{"sql": "with x (a, b) as (select 1) insert into t values (1)"}
+{"sql": "with x (a, b) as (select 1) update t set a = 1"}
+{"sql": "with x (a, b) as (select 1) delete from t"}
+{"sql": "with x (a, b) (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 14}
+{"sql": "with y as (select 1), x (a, b) as (select 1) select 1"}
+{"sql": "with recursive y as (select 1), x (a, b) as (select 1) select 1"}
+{"sql": "select * from (with x (a, b) as (select 1) select 1) s"}
+{"sql": "create view v as with x (a, b) as (select 1) select 1"}
+{"sql": "insert into t with x (a, b) as (select 1) select 1"}
+{"sql": "explain with x (a, b) as (select 1) select 1"}
+{"sql": "with recursive x (a, b) as (select 1) search depth first by a set s select 1"}
+{"sql": "with recursive x (a, b) as (select 1) cycle a set c using p select 1"}
+{"sql": "with x () as (select 1)", "syntaxError": "syntax error at or near \")\"", "position": 8}
+{"sql": "with x () as (select 1) select * from x", "syntaxError": "syntax error at or near \")\"", "position": 8}
+{"sql": "with x () as (select 1) insert into t values (1)", "syntaxError": "syntax error at or near \")\"", "position": 8}
+{"sql": "with x () as (select 1) update t set a = 1", "syntaxError": "syntax error at or near \")\"", "position": 8}
+{"sql": "with x () as (select 1) delete from t", "syntaxError": "syntax error at or near \")\"", "position": 8}
+{"sql": "with x () (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 8}
+{"sql": "with y as (select 1), x () as (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 25}
+{"sql": "with recursive y as (select 1), x () as (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 35}
+{"sql": "select * from (with x () as (select 1) select 1) s", "syntaxError": "syntax error at or near \")\"", "position": 23}
+{"sql": "create view v as with x () as (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 25}
+{"sql": "insert into t with x () as (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 22}
+{"sql": "explain with x () as (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 16}
+{"sql": "with recursive x () as (select 1) search depth first by a set s select 1", "syntaxError": "syntax error at or near \")\"", "position": 18}
+{"sql": "with recursive x () as (select 1) cycle a set c using p select 1", "syntaxError": "syntax error at or near \")\"", "position": 18}
+{"sql": "with x (a,) as (select 1)", "syntaxError": "syntax error at or near \")\"", "position": 10}
+{"sql": "with x (a,) as (select 1) select * from x", "syntaxError": "syntax error at or near \")\"", "position": 10}
+{"sql": "with x (a,) as (select 1) insert into t values (1)", "syntaxError": "syntax error at or near \")\"", "position": 10}
+{"sql": "with x (a,) as (select 1) update t set a = 1", "syntaxError": "syntax error at or near \")\"", "position": 10}
+{"sql": "with x (a,) as (select 1) delete from t", "syntaxError": "syntax error at or near \")\"", "position": 10}
+{"sql": "with x (a,) (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 10}
+{"sql": "with y as (select 1), x (a,) as (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 27}
+{"sql": "with recursive y as (select 1), x (a,) as (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 37}
+{"sql": "select * from (with x (a,) as (select 1) select 1) s", "syntaxError": "syntax error at or near \")\"", "position": 25}
+{"sql": "create view v as with x (a,) as (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 27}
+{"sql": "insert into t with x (a,) as (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 24}
+{"sql": "explain with x (a,) as (select 1) select 1", "syntaxError": "syntax error at or near \")\"", "position": 18}
+{"sql": "with recursive x (a,) as (select 1) search depth first by a set s select 1", "syntaxError": "syntax error at or near \")\"", "position": 20}
+{"sql": "with recursive x (a,) as (select 1) cycle a set c using p select 1", "syntaxError": "syntax error at or near \")\"", "position": 20}
+{"sql": "with x a (b) as (select 1)", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a (b) as (select 1) select * from x", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a (b) as (select 1) insert into t values (1)", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a (b) as (select 1) update t set a = 1", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a (b) as (select 1) delete from t", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a (b) (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with y as (select 1), x a (b) as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 24}
+{"sql": "with recursive y as (select 1), x a (b) as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 34}
+{"sql": "select * from (with x a (b) as (select 1) select 1) s", "syntaxError": "syntax error at or near \"a\"", "position": 22}
+{"sql": "create view v as with x a (b) as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 24}
+{"sql": "insert into t with x a (b) as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 21}
+{"sql": "explain with x a (b) as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 15}
+{"sql": "with recursive x a (b) as (select 1) search depth first by a set s select 1", "syntaxError": "syntax error at or near \"a\"", "position": 17}
+{"sql": "with recursive x a (b) as (select 1) cycle a set c using p select 1", "syntaxError": "syntax error at or near \"a\"", "position": 17}
+{"sql": "with x (a) b as (select 1)", "syntaxError": "syntax error at or near \"b\"", "position": 11}
+{"sql": "with x (a) b as (select 1) select * from x", "syntaxError": "syntax error at or near \"b\"", "position": 11}
+{"sql": "with x (a) b as (select 1) insert into t values (1)", "syntaxError": "syntax error at or near \"b\"", "position": 11}
+{"sql": "with x (a) b as (select 1) update t set a = 1", "syntaxError": "syntax error at or near \"b\"", "position": 11}
+{"sql": "with x (a) b as (select 1) delete from t", "syntaxError": "syntax error at or near \"b\"", "position": 11}
+{"sql": "with x (a) b (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 11}
+{"sql": "with y as (select 1), x (a) b as (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 28}
+{"sql": "with recursive y as (select 1), x (a) b as (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 38}
+{"sql": "select * from (with x (a) b as (select 1) select 1) s", "syntaxError": "syntax error at or near \"b\"", "position": 26}
+{"sql": "create view v as with x (a) b as (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 28}
+{"sql": "insert into t with x (a) b as (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 25}
+{"sql": "explain with x (a) b as (select 1) select 1", "syntaxError": "syntax error at or near \"b\"", "position": 19}
+{"sql": "with recursive x (a) b as (select 1) search depth first by a set s select 1", "syntaxError": "syntax error at or near \"b\"", "position": 21}
+{"sql": "with recursive x (a) b as (select 1) cycle a set c using p select 1", "syntaxError": "syntax error at or near \"b\"", "position": 21}
+{"sql": "with x (a)(b) as (select 1)", "syntaxError": "syntax error at or near \"(\"", "position": 10}
+{"sql": "with x (a)(b) as (select 1) select * from x", "syntaxError": "syntax error at or near \"(\"", "position": 10}
+{"sql": "with x (a)(b) as (select 1) insert into t values (1)", "syntaxError": "syntax error at or near \"(\"", "position": 10}
+{"sql": "with x (a)(b) as (select 1) update t set a = 1", "syntaxError": "syntax error at or near \"(\"", "position": 10}
+{"sql": "with x (a)(b) as (select 1) delete from t", "syntaxError": "syntax error at or near \"(\"", "position": 10}
+{"sql": "with x (a)(b) (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 10}
+{"sql": "with y as (select 1), x (a)(b) as (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 27}
+{"sql": "with recursive y as (select 1), x (a)(b) as (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 37}
+{"sql": "select * from (with x (a)(b) as (select 1) select 1) s", "syntaxError": "syntax error at or near \"(\"", "position": 25}
+{"sql": "create view v as with x (a)(b) as (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 27}
+{"sql": "insert into t with x (a)(b) as (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 24}
+{"sql": "explain with x (a)(b) as (select 1) select 1", "syntaxError": "syntax error at or near \"(\"", "position": 18}
+{"sql": "with recursive x (a)(b) as (select 1) search depth first by a set s select 1", "syntaxError": "syntax error at or near \"(\"", "position": 20}
+{"sql": "with recursive x (a)(b) as (select 1) cycle a set c using p select 1", "syntaxError": "syntax error at or near \"(\"", "position": 20}
+{"sql": "with x a.b as (select 1)", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a.b as (select 1) select * from x", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a.b as (select 1) insert into t values (1)", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a.b as (select 1) update t set a = 1", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a.b as (select 1) delete from t", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with x a.b (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 7}
+{"sql": "with y as (select 1), x a.b as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 24}
+{"sql": "with recursive y as (select 1), x a.b as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 34}
+{"sql": "select * from (with x a.b as (select 1) select 1) s", "syntaxError": "syntax error at or near \"a\"", "position": 22}
+{"sql": "create view v as with x a.b as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 24}
+{"sql": "insert into t with x a.b as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 21}
+{"sql": "explain with x a.b as (select 1) select 1", "syntaxError": "syntax error at or near \"a\"", "position": 15}
+{"sql": "with recursive x a.b as (select 1) search depth first by a set s select 1", "syntaxError": "syntax error at or near \"a\"", "position": 17}
+{"sql": "with recursive x a.b as (select 1) cycle a set c using p select 1", "syntaxError": "syntax error at or near \"a\"", "position": 17}
+{"sql": "with x (a.b) as (select 1)", "syntaxError": "syntax error at or near \".\"", "position": 9}
+{"sql": "with x (a.b) as (select 1) select * from x", "syntaxError": "syntax error at or near \".\"", "position": 9}
+{"sql": "with x (a.b) as (select 1) insert into t values (1)", "syntaxError": "syntax error at or near \".\"", "position": 9}
+{"sql": "with x (a.b) as (select 1) update t set a = 1", "syntaxError": "syntax error at or near \".\"", "position": 9}
+{"sql": "with x (a.b) as (select 1) delete from t", "syntaxError": "syntax error at or near \".\"", "position": 9}
+{"sql": "with x (a.b) (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 9}
+{"sql": "with y as (select 1), x (a.b) as (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 26}
+{"sql": "with recursive y as (select 1), x (a.b) as (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 36}
+{"sql": "select * from (with x (a.b) as (select 1) select 1) s", "syntaxError": "syntax error at or near \".\"", "position": 24}
+{"sql": "create view v as with x (a.b) as (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 26}
+{"sql": "insert into t with x (a.b) as (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 23}
+{"sql": "explain with x (a.b) as (select 1) select 1", "syntaxError": "syntax error at or near \".\"", "position": 17}
+{"sql": "with recursive x (a.b) as (select 1) search depth first by a set s select 1", "syntaxError": "syntax error at or near \".\"", "position": 19}
+{"sql": "with recursive x (a.b) as (select 1) cycle a set c using p select 1", "syntaxError": "syntax error at or near \".\"", "position": 19}
+{"sql": "with x ,a as (select 1)", "syntaxError": "syntax error at or near \",\"", "position": 7}
+{"sql": "with x ,a as (select 1) select * from x", "syntaxError": "syntax error at or near \",\"", "position": 7}
+{"sql": "with x ,a as (select 1) insert into t values (1)", "syntaxError": "syntax error at or near \",\"", "position": 7}
+{"sql": "with x ,a as (select 1) update t set a = 1", "syntaxError": "syntax error at or near \",\"", "position": 7}
+{"sql": "with x ,a as (select 1) delete from t", "syntaxError": "syntax error at or near \",\"", "position": 7}
+{"sql": "with x ,a (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 7}
+{"sql": "with y as (select 1), x ,a as (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 24}
+{"sql": "with recursive y as (select 1), x ,a as (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 34}
+{"sql": "select * from (with x ,a as (select 1) select 1) s", "syntaxError": "syntax error at or near \",\"", "position": 22}
+{"sql": "create view v as with x ,a as (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 24}
+{"sql": "insert into t with x ,a as (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 21}
+{"sql": "explain with x ,a as (select 1) select 1", "syntaxError": "syntax error at or near \",\"", "position": 15}
+{"sql": "with recursive x ,a as (select 1) search depth first by a set s select 1", "syntaxError": "syntax error at or near \",\"", "position": 17}
+{"sql": "with recursive x ,a as (select 1) cycle a set c using p select 1", "syntaxError": "syntax error at or near \",\"", "position": 17}
+{"sql": "with", "syntaxError": "syntax error at end of input", "position": 4}
+{"sql": "with x", "syntaxError": "syntax error at end of input", "position": 6}

@@ -14055,7 +14055,7 @@
 {"file":"foreign_data.sql","stmt":135,"sum":"f1b8a310"}
 {"file":"foreign_data.sql","stmt":136,"sum":"23d1dd9a"}
 {"file":"foreign_data.sql","stmt":137,"sum":"637503fe"}
-{"file":"foreign_data.sql","stmt":137,"edit":[0,3,"with"],"code":"42601","msg":"syntax error at or near \"regress_test_role\"","pos":10,"class":"cte-column-list-parentheses"}
+{"file":"foreign_data.sql","stmt":137,"edit":[0,3,"with"],"code":"42601","msg":"syntax error at or near \"regress_test_role\"","pos":10}
 {"file":"foreign_data.sql","stmt":138,"sum":"191089ef"}
 {"file":"foreign_data.sql","stmt":139,"sum":"f1b8a310"}
 {"file":"foreign_data.sql","stmt":140,"sum":"0626efcd"}
@@ -34598,7 +34598,7 @@
 {"file":"partition_prune.sql","stmt":580,"sum":"38e3cbb7"}
 {"file":"partition_prune.sql","stmt":581,"sum":"25ca1781"}
 {"file":"partition_prune.sql","stmt":582,"sum":"e9c733a5"}
-{"file":"partition_prune.sql","stmt":582,"edit":[20,6,"with"],"code":"42601","msg":"syntax error at or near \"set\"","pos":31,"class":"cte-column-list-parentheses"}
+{"file":"partition_prune.sql","stmt":582,"edit":[20,6,"with"],"code":"42601","msg":"syntax error at or near \"set\"","pos":31}
 {"file":"partition_prune.sql","stmt":583,"sum":"bddcefae"}
 {"file":"partition_prune.sql","stmt":583,"edit":[9,5,""]}
 {"file":"partition_prune.sql","stmt":584,"sum":"d6c3d06d"}
@@ -40155,7 +40155,7 @@
 {"file":"publication.sql","stmt":472,"edit":[5,0,".x"],"code":"42601","msg":"syntax error at or near \".\"","pos":5}
 {"file":"publication.sql","stmt":473,"sum":"db053ea6"}
 {"file":"publication.sql","stmt":474,"sum":"9ead119e"}
-{"file":"publication.sql","stmt":474,"edit":[38,5,"with"],"code":"42601","msg":"syntax error at or near \"testpub4\"","pos":55,"class":"cte-column-list-parentheses"}
+{"file":"publication.sql","stmt":474,"edit":[38,5,"with"],"code":"42601","msg":"syntax error at or near \"testpub4\"","pos":55}
 {"file":"publication.sql","stmt":475,"sum":"f5f96bf0"}
 {"file":"publication.sql","stmt":476,"sum":"f6134b37"}
 {"file":"publication.sql","stmt":477,"sum":"123fcd37"}
@@ -54541,7 +54541,7 @@
 {"file":"tuplesort.sql","stmt":90,"sum":"25965537"}
 {"file":"tuplesort.sql","stmt":91,"sum":"42b9d358"}
 {"file":"tuplesort.sql","stmt":92,"sum":"00025c1e"}
-{"file":"tuplesort.sql","stmt":92,"edit":[0,3,"with"],"code":"42601","msg":"syntax error at or near \"work_mem\"","pos":11,"class":"cte-column-list-parentheses"}
+{"file":"tuplesort.sql","stmt":92,"edit":[0,3,"with"],"code":"42601","msg":"syntax error at or near \"work_mem\"","pos":11}
 {"file":"tuplesort.sql","stmt":93,"sum":"3456f2d6"}
 {"file":"tuplesort.sql","stmt":94,"sum":"eb2ebdbd"}
 {"file":"tuplesort.sql","stmt":95,"sum":"8508fc8f"}
@@ -57784,7 +57784,7 @@
 {"file":"with.sql","stmt":31,"sum":"692d60e9"}
 {"file":"with.sql","stmt":31,"edit":[98,4,""]}
 {"file":"with.sql","stmt":32,"sum":"530a8b58"}
-{"file":"with.sql","stmt":32,"edit":[60,23,"subdepartment RECURSIVE"],"code":"42601","msg":"syntax error at or near \"RECURSIVE\"","pos":74,"class":"cte-column-list-parentheses"}
+{"file":"with.sql","stmt":32,"edit":[60,23,"subdepartment RECURSIVE"],"code":"42601","msg":"syntax error at or near \"RECURSIVE\"","pos":74}
 {"file":"with.sql","stmt":33,"sum":"287129bd"}
 {"file":"with.sql","stmt":34,"sum":"faed931b"}
 {"file":"with.sql","stmt":35,"sum":"8bc42223"}
@@ -57806,10 +57806,10 @@
 {"file":"with.sql","stmt":46,"sum":"545317fe"}
 {"file":"with.sql","stmt":46,"edit":[29,0," VALUES"],"code":"42601","msg":"syntax error at or near \"VALUES\"","pos":30}
 {"file":"with.sql","stmt":47,"sum":"28fad3d2"}
-{"file":"with.sql","stmt":47,"edit":[153,0," cte"],"code":"42601","msg":"syntax error at or near \"cte\"","pos":154,"class":"cte-column-list-parentheses"}
+{"file":"with.sql","stmt":47,"edit":[153,0," cte"],"code":"42601","msg":"syntax error at or near \"cte\"","pos":154}
 {"file":"with.sql","stmt":47,"edit":[204,1,""]}
 {"file":"with.sql","stmt":48,"sum":"d26a587e"}
-{"file":"with.sql","stmt":48,"edit":[154,2,""],"code":"42601","msg":"syntax error at or near \"materialized\"","pos":155,"class":"cte-column-list-parentheses"}
+{"file":"with.sql","stmt":48,"edit":[154,2,""],"code":"42601","msg":"syntax error at or near \"materialized\"","pos":155}
 {"file":"with.sql","stmt":49,"sum":"d15fe18a"}
 {"file":"with.sql","stmt":49,"edit":[61,0,".x"]}
 {"file":"with.sql","stmt":50,"sum":"e16574ac"}
@@ -57859,7 +57859,7 @@
 {"file":"with.sql","stmt":79,"sum":"d36ad619"}
 {"file":"with.sql","stmt":79,"edit":[103,7,"g graph"]}
 {"file":"with.sql","stmt":80,"sum":"448f579e"}
-{"file":"with.sql","stmt":80,"edit":[43,0," recursive"],"code":"42601","msg":"syntax error at or near \"test\"","pos":54,"class":"cte-column-list-parentheses"}
+{"file":"with.sql","stmt":80,"edit":[43,0," recursive"],"code":"42601","msg":"syntax error at or near \"test\"","pos":54}
 {"file":"with.sql","stmt":81,"sum":"84b39d3b"}
 {"file":"with.sql","stmt":82,"sum":"46ae0ebb"}
 {"file":"with.sql","stmt":83,"sum":"1304e5a0"}
@@ -57916,7 +57916,7 @@
 {"file":"with.sql","stmt":124,"sum":"8fd3d725"}
 {"file":"with.sql","stmt":125,"sum":"105bad90"}
 {"file":"with.sql","stmt":126,"sum":"fe0316bf"}
-{"file":"with.sql","stmt":126,"edit":[30,0," RECURSIVE"],"code":"42601","msg":"syntax error at or near \"x\"","pos":41,"class":"cte-column-list-parentheses"}
+{"file":"with.sql","stmt":126,"edit":[30,0," RECURSIVE"],"code":"42601","msg":"syntax error at or near \"x\"","pos":41}
 {"file":"with.sql","stmt":127,"sum":"6bf1481b"}
 {"file":"with.sql","stmt":128,"sum":"d09b793a"}
 {"file":"with.sql","stmt":128,"edit":[114,1,""]}
@@ -58108,7 +58108,7 @@
 {"file":"with.sql","stmt":273,"sum":"ab479028"}
 {"file":"with.sql","stmt":273,"edit":[18,0,".x"]}
 {"file":"with.sql","stmt":274,"sum":"c82e3264"}
-{"file":"with.sql","stmt":274,"edit":[9,0," rcte"],"code":"42601","msg":"syntax error at or near \"rcte\"","pos":10,"class":"cte-column-list-parentheses"}
+{"file":"with.sql","stmt":274,"edit":[9,0," rcte"],"code":"42601","msg":"syntax error at or near \"rcte\"","pos":10}
 {"file":"with.sql","stmt":275,"sum":"aaa6e85f"}
 {"file":"with.sql","stmt":276,"sum":"ede26215"}
 {"file":"with.sql","stmt":277,"sum":"aaa6e85f"}
@@ -58743,8 +58743,8 @@
 {"sql":"copy t from stdin with (default default)","code":"42601","msg":"syntax error at or near \"default\"","pos":32}
 {"sql":"copy t to stdout with (force_quote *)"}
 {"sql":"copy t from stdin with (format csv, default '\\D')"}
-{"sql":"with x a as (select 1) select 1","code":"42601","msg":"syntax error at or near \"a\"","pos":7,"class":"cte-column-list-parentheses"}
-{"sql":"with x a, b as (select 1) select 1","code":"42601","msg":"syntax error at or near \"a\"","pos":7,"class":"cte-column-list-parentheses"}
+{"sql":"with x a as (select 1) select 1","code":"42601","msg":"syntax error at or near \"a\"","pos":7}
+{"sql":"with x a, b as (select 1) select 1","code":"42601","msg":"syntax error at or near \"a\"","pos":7}
 {"sql":"with x (a, b) as (select 1, 2) select 1"}
 {"sql":"alter table t alter a set (n_distinct = 1)","class":"alter-column-optional-keyword"}
 {"sql":"alter table t alter a set generated by default","class":"alter-column-optional-keyword"}
