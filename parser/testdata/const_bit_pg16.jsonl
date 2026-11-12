@@ -1,0 +1,123 @@
+{"sql":"select bit '1'"}
+{"sql":"select bit '101'"}
+{"sql":"select bit b'1'","code":"42601","message":"syntax error at or near \"b'1'\"","position":11}
+{"sql":"select bit x'f'","code":"42601","message":"syntax error at or near \"x'f'\"","position":11}
+{"sql":"select bit e'1'"}
+{"sql":"select bit $$1$$"}
+{"sql":"select bit 1","code":"42601","message":"syntax error at or near \"1\"","position":11}
+{"sql":"select bit "}
+{"sql":"select BIT '1'"}
+{"sql":"select BIT '101'"}
+{"sql":"select BIT b'1'","code":"42601","message":"syntax error at or near \"b'1'\"","position":11}
+{"sql":"select BIT x'f'","code":"42601","message":"syntax error at or near \"x'f'\"","position":11}
+{"sql":"select BIT e'1'"}
+{"sql":"select BIT $$1$$"}
+{"sql":"select BIT 1","code":"42601","message":"syntax error at or near \"1\"","position":11}
+{"sql":"select BIT "}
+{"sql":"select bit varying '1'"}
+{"sql":"select bit varying '101'"}
+{"sql":"select bit varying b'1'","code":"42601","message":"syntax error at or near \"b'1'\"","position":19}
+{"sql":"select bit varying x'f'","code":"42601","message":"syntax error at or near \"x'f'\"","position":19}
+{"sql":"select bit varying e'1'"}
+{"sql":"select bit varying $$1$$"}
+{"sql":"select bit varying 1","code":"42601","message":"syntax error at or near \"1\"","position":19}
+{"sql":"select bit varying ","code":"42601","message":"syntax error at end of input","position":19}
+{"sql":"select bit(3) '1'"}
+{"sql":"select bit(3) '101'"}
+{"sql":"select bit(3) b'1'","code":"42601","message":"syntax error at or near \"b'1'\"","position":14}
+{"sql":"select bit(3) x'f'","code":"42601","message":"syntax error at or near \"x'f'\"","position":14}
+{"sql":"select bit(3) e'1'"}
+{"sql":"select bit(3) $$1$$"}
+{"sql":"select bit(3) 1","code":"42601","message":"syntax error at or near \"1\"","position":14}
+{"sql":"select bit(3) ","code":"42601","message":"syntax error at end of input","position":14}
+{"sql":"select bit varying(3) '1'"}
+{"sql":"select bit varying(3) '101'"}
+{"sql":"select bit varying(3) b'1'","code":"42601","message":"syntax error at or near \"b'1'\"","position":22}
+{"sql":"select bit varying(3) x'f'","code":"42601","message":"syntax error at or near \"x'f'\"","position":22}
+{"sql":"select bit varying(3) e'1'"}
+{"sql":"select bit varying(3) $$1$$"}
+{"sql":"select bit varying(3) 1","code":"42601","message":"syntax error at or near \"1\"","position":22}
+{"sql":"select bit varying(3) ","code":"42601","message":"syntax error at end of input","position":22}
+{"sql":"select bit(1) '1'"}
+{"sql":"select bit(1) '101'"}
+{"sql":"select bit(1) b'1'","code":"42601","message":"syntax error at or near \"b'1'\"","position":14}
+{"sql":"select bit(1) x'f'","code":"42601","message":"syntax error at or near \"x'f'\"","position":14}
+{"sql":"select bit(1) e'1'"}
+{"sql":"select bit(1) $$1$$"}
+{"sql":"select bit(1) 1","code":"42601","message":"syntax error at or near \"1\"","position":14}
+{"sql":"select bit(1) ","code":"42601","message":"syntax error at end of input","position":14}
+{"sql":"select bit() '1'","code":"42601","message":"syntax error at or near \")\"","position":11}
+{"sql":"select bit() '101'","code":"42601","message":"syntax error at or near \")\"","position":11}
+{"sql":"select bit() b'1'","code":"42601","message":"syntax error at or near \")\"","position":11}
+{"sql":"select bit() x'f'","code":"42601","message":"syntax error at or near \")\"","position":11}
+{"sql":"select bit() e'1'","code":"42601","message":"syntax error at or near \")\"","position":11}
+{"sql":"select bit() $$1$$","code":"42601","message":"syntax error at or near \")\"","position":11}
+{"sql":"select bit() 1","code":"42601","message":"syntax error at or near \")\"","position":11}
+{"sql":"select bit() ","code":"42601","message":"syntax error at or near \")\"","position":11}
+{"sql":"select bit varying() '1'","code":"42601","message":"syntax error at or near \")\"","position":19}
+{"sql":"select bit varying() '101'","code":"42601","message":"syntax error at or near \")\"","position":19}
+{"sql":"select bit varying() b'1'","code":"42601","message":"syntax error at or near \")\"","position":19}
+{"sql":"select bit varying() x'f'","code":"42601","message":"syntax error at or near \")\"","position":19}
+{"sql":"select bit varying() e'1'","code":"42601","message":"syntax error at or near \")\"","position":19}
+{"sql":"select bit varying() $$1$$","code":"42601","message":"syntax error at or near \")\"","position":19}
+{"sql":"select bit varying() 1","code":"42601","message":"syntax error at or near \")\"","position":19}
+{"sql":"select bit varying() ","code":"42601","message":"syntax error at or near \")\"","position":19}
+{"sql":"select bit(3, 4) '1'"}
+{"sql":"select bit(3, 4) '101'"}
+{"sql":"select bit(3, 4) b'1'","code":"42601","message":"syntax error at or near \"b'1'\"","position":17}
+{"sql":"select bit(3, 4) x'f'","code":"42601","message":"syntax error at or near \"x'f'\"","position":17}
+{"sql":"select bit(3, 4) e'1'"}
+{"sql":"select bit(3, 4) $$1$$"}
+{"sql":"select bit(3, 4) 1","code":"42601","message":"syntax error at or near \"1\"","position":17}
+{"sql":"select bit(3, 4) ","code":"42601","message":"syntax error at end of input","position":17}
+{"sql":"select bit(x) '1'"}
+{"sql":"select bit(x) '101'"}
+{"sql":"select bit(x) b'1'","code":"42601","message":"syntax error at or near \"b'1'\"","position":14}
+{"sql":"select bit(x) x'f'","code":"42601","message":"syntax error at or near \"x'f'\"","position":14}
+{"sql":"select bit(x) e'1'"}
+{"sql":"select bit(x) $$1$$"}
+{"sql":"select bit(x) 1","code":"42601","message":"syntax error at or near \"1\"","position":14}
+{"sql":"select bit(x) ","code":"42601","message":"syntax error at end of input","position":14}
+{"sql":"select bit varying varying '1'","code":"42601","message":"syntax error at or near \"varying\"","position":19}
+{"sql":"select bit varying varying '101'","code":"42601","message":"syntax error at or near \"varying\"","position":19}
+{"sql":"select bit varying varying b'1'","code":"42601","message":"syntax error at or near \"varying\"","position":19}
+{"sql":"select bit varying varying x'f'","code":"42601","message":"syntax error at or near \"varying\"","position":19}
+{"sql":"select bit varying varying e'1'","code":"42601","message":"syntax error at or near \"varying\"","position":19}
+{"sql":"select bit varying varying $$1$$","code":"42601","message":"syntax error at or near \"varying\"","position":19}
+{"sql":"select bit varying varying 1","code":"42601","message":"syntax error at or near \"varying\"","position":19}
+{"sql":"select bit varying varying ","code":"42601","message":"syntax error at or near \"varying\"","position":19}
+{"sql":"select varbit '1'"}
+{"sql":"select varbit '101'"}
+{"sql":"select varbit b'1'","code":"42601","message":"syntax error at or near \"b'1'\"","position":14}
+{"sql":"select varbit x'f'","code":"42601","message":"syntax error at or near \"x'f'\"","position":14}
+{"sql":"select varbit e'1'"}
+{"sql":"select varbit $$1$$"}
+{"sql":"select varbit 1","code":"42601","message":"syntax error at or near \"1\"","position":14}
+{"sql":"select varbit "}
+{"sql":"select bit[] '1'","code":"42601","message":"syntax error at or near \"]\"","position":11}
+{"sql":"select bit[] '101'","code":"42601","message":"syntax error at or near \"]\"","position":11}
+{"sql":"select bit[] b'1'","code":"42601","message":"syntax error at or near \"]\"","position":11}
+{"sql":"select bit[] x'f'","code":"42601","message":"syntax error at or near \"]\"","position":11}
+{"sql":"select bit[] e'1'","code":"42601","message":"syntax error at or near \"]\"","position":11}
+{"sql":"select bit[] $$1$$","code":"42601","message":"syntax error at or near \"]\"","position":11}
+{"sql":"select bit[] 1","code":"42601","message":"syntax error at or near \"]\"","position":11}
+{"sql":"select bit[] ","code":"42601","message":"syntax error at or near \"]\"","position":11}
+{"sql":"select 1::bit"}
+{"sql":"select '1'::bit"}
+{"sql":"select cast('1' as bit)"}
+{"sql":"create table t (a bit)"}
+{"sql":"create table t (a bit, b bit varying, c bit(2))"}
+{"sql":"select bit '1' || bit '0'"}
+{"sql":"select array[bit '1']"}
+{"sql":"select bit '1' = b'1'"}
+{"sql":"values (bit '1')"}
+{"sql":"select f(bit '1')"}
+{"sql":"select bit '1' uescape '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":23}
+{"sql":"select bit varying '1' collate \"C\""}
+{"sql":"select '1'::bit varying"}
+{"sql":"select bit '1'::bit(2)"}
+{"sql":"create function f(bit) returns bit language sql as ''"}
+{"sql":"select * from t where a = bit '1'"}
+{"sql":"insert into t values (bit '1')"}
+{"sql":"select interval '1' day, bit '1'"}
+{"sql":"select bit"}

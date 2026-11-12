@@ -607,7 +607,11 @@ them:
 
 The statements' verdicts disagreed with PostgreSQL 16 in three more classes,
 each fixed with its own test data below: `explain-create-table`,
-`key-match-partial` and `grant-on-parameter`.
+`key-match-partial` and `grant-on-parameter`. Where both accepted, their
+trees differed from libpg_query's in classes the regression corpus already
+has (missing locations, `ObjectWithArgs.objfuncargs`, a list where
+libpg_query has a `String`), except two, fixed below: `const-bit-typmods`
+and `create-language-extension`.
 
 ### grant-on-parameter (risk 2, 1; fixed)
 
@@ -644,6 +648,17 @@ implemented` at MATCH through `grammarError`, ending the parse.
 The fork's `ExplainableStmt` had `CreateStmt`, which PostgreSQL 16's has
 not; it is deleted, and EXPLAIN takes CREATE TABLE only through
 `CreateAsStmt`. `testdata/explain_create_pg16.jsonl` pins 156 statements;
+all agree.
+
+### const-bit-typmods (tree; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `select bit '1'` | `TypeName` `bit`, no typmods | `TypeName` `bit`, typmods `[1]` |
+
+`ConstBit: BitWithoutLength` kept `BitWithoutLength`'s BIT(1) modifier, which
+is a column's default length; it now clears it. The 17 trees that changed
+match libpg_query's. `testdata/const_bit_pg16.jsonl` pins 123 statements;
 all agree.
 
 ## Rerunning

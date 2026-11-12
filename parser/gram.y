@@ -11640,8 +11640,9 @@ ConstBit:
 	BitWithLength		{ $$ = $1 }
 	| BitWithoutLength
 		{
+			/* A constant's BIT has no length; a column's is BIT(1). */
 			$$ = $1
-			/* ConstBit defaults to unspecified length for BIT */
+			$$.Typmods = nil
 		}
 	;
 
