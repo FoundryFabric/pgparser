@@ -7,19 +7,16 @@
     583
   ],
   "collate.icu.utf8.sql": [
-    115,
-    187
+    115
   ],
   "collate.linux.utf8.sql": [
-    123,
-    180
+    123
   ],
   "collate.sql": [
     79
   ],
   "collate.windows.win1252.sql": [
-    94,
-    151
+    94
   ],
   "constraints.sql": [
     14,

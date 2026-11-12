@@ -327,7 +327,7 @@ import (
 %type <node>  grant_role_opt
 %type <node>  grant_role_opt_value
 %type <ival>  add_drop
-%type <node>  CreatedbStmt AlterDatabaseStmt AlterDatabaseSetStmt DropdbStmt AlterSystemStmt
+%type <node>  CreatedbStmt AlterDatabaseStmt AlterDatabaseSetStmt DropdbStmt AlterSystemStmt AlterDatabaseRefreshCollStmt
 %type <list>  createdb_opt_list createdb_opt_items
 %type <node>  createdb_opt_item
 %type <str>   createdb_opt_name
@@ -776,6 +776,7 @@ stmt:
 		{
 			$$ = $1
 		}
+	| AlterDatabaseRefreshCollStmt
 	| AlterDatabaseSetStmt
 		{
 			$$ = $1
@@ -6518,6 +6519,13 @@ AlterDatabaseStmt:
 				Dbname:  $3,
 				Options: makeList(makeDefElem("tablespace", &nodes.String{Str: $6})),
 			}
+		}
+	;
+
+AlterDatabaseRefreshCollStmt:
+	ALTER DATABASE name REFRESH COLLATION VERSION_P
+		{
+			$$ = &nodes.AlterDatabaseRefreshCollStmt{Dbname: $3}
 		}
 	;
 

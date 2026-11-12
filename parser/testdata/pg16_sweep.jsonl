@@ -58767,8 +58767,8 @@
 {"sql":"reindex database"}
 {"sql":"reindex (verbose) system"}
 {"sql":"reindex table","code":"42601","msg":"syntax error at end of input","pos":13}
-{"sql":"alter database x refresh collation version","class":"alter-database-refresh-collation"}
-{"sql":"alter database x refresh","code":"42601","msg":"syntax error at end of input","pos":24,"class":"alter-database-refresh-collation"}
+{"sql":"alter database x refresh collation version"}
+{"sql":"alter database x refresh","code":"42601","msg":"syntax error at end of input","pos":24}
 {"sql":"drop aggregate a","code":"42601","msg":"syntax error at end of input","pos":16}
 {"sql":"drop aggregate a(*)"}
 {"sql":"drop aggregate if exists a, b","code":"42601","msg":"syntax error at or near \",\"","pos":26}
@@ -58857,7 +58857,7 @@
 {"sql":"SELECT 6"}
 {"sql":"-- BEGIN ATOMIC block should not split on internal semicolons\nCREATE FUNCTION atomic_fun(a int) RETURNS int LANGUAGE SQL\nBEGIN ATOMIC\n  SELECT a + 1;\n  SELECT a + 2;\nEND"}
 {"sql":"-- CREATE RULE DO (...) should keep semicolons inside parens\nCREATE RULE r1 AS ON INSERT TO foo DO (\n  INSERT INTO foo VALUES (1);\n  UPDATE foo SET a = 2;\n)"}
-{"sql":"-- Grammar compatibility fixtures for postgres features missing in pgparser.\n-- expect-error: syntax error\nALTER DATABASE mydb REFRESH COLLATION VERSION","class":"alter-database-refresh-collation"}
+{"sql":"-- Grammar compatibility fixtures for postgres features missing in pgparser.\n-- expect-error: syntax error\nALTER DATABASE mydb REFRESH COLLATION VERSION"}
 {"sql":"-- expect-error: syntax error\nALTER TYPE mood DROP VALUE 'sad'","code":"42601","msg":"syntax error at or near \"VALUE\"","pos":51}
 {"sql":"-- expect-error: syntax error\nALTER EXTENSION hstore ADD CAST (text AS hstore)"}
 {"sql":"-- expect-error: syntax error\nALTER EXTENSION hstore ADD TRANSFORM FOR jsonb LANGUAGE plpgsql"}

@@ -1,0 +1,147 @@
+{"sql":"alter database x refresh collation version"}
+{"sql":"alter database x REFRESH COLLATION VERSION"}
+{"sql":"alter database x refresh","code":"42601","message":"syntax error at end of input","position":24}
+{"sql":"alter database x refresh collation","code":"42601","message":"syntax error at end of input","position":34}
+{"sql":"alter database x refresh version","code":"42601","message":"syntax error at or near \"version\"","position":25}
+{"sql":"alter database x refresh collation version x","code":"42601","message":"syntax error at or near \"x\"","position":43}
+{"sql":"alter database x refresh collation version;"}
+{"sql":"alter database x refresh collation version; select 1"}
+{"sql":"alter database x refresh collation versions","code":"42601","message":"syntax error at or near \"versions\"","position":35}
+{"sql":"alter database x refresh collations version","code":"42601","message":"syntax error at or near \"collations\"","position":25}
+{"sql":"alter database x collation version","code":"42601","message":"syntax error at or near \"collation\"","position":17}
+{"sql":"alter database x refresh collation version 1","code":"42601","message":"syntax error at or near \"1\"","position":43}
+{"sql":"alter database x refresh collation version (x)","code":"42601","message":"syntax error at or near \"(\"","position":43}
+{"sql":"alter database x refresh collation version, refresh collation version","code":"42601","message":"syntax error at or near \",\"","position":42}
+{"sql":"alter database \"X\" refresh collation version"}
+{"sql":"alter database \"X\" REFRESH COLLATION VERSION"}
+{"sql":"alter database \"X\" refresh","code":"42601","message":"syntax error at end of input","position":26}
+{"sql":"alter database \"X\" refresh collation","code":"42601","message":"syntax error at end of input","position":36}
+{"sql":"alter database \"X\" refresh version","code":"42601","message":"syntax error at or near \"version\"","position":27}
+{"sql":"alter database \"X\" refresh collation version x","code":"42601","message":"syntax error at or near \"x\"","position":45}
+{"sql":"alter database \"X\" refresh collation version;"}
+{"sql":"alter database \"X\" refresh collation version; select 1"}
+{"sql":"alter database \"X\" refresh collation versions","code":"42601","message":"syntax error at or near \"versions\"","position":37}
+{"sql":"alter database \"X\" refresh collations version","code":"42601","message":"syntax error at or near \"collations\"","position":27}
+{"sql":"alter database \"X\" collation version","code":"42601","message":"syntax error at or near \"collation\"","position":19}
+{"sql":"alter database \"X\" refresh collation version 1","code":"42601","message":"syntax error at or near \"1\"","position":45}
+{"sql":"alter database \"X\" refresh collation version (x)","code":"42601","message":"syntax error at or near \"(\"","position":45}
+{"sql":"alter database \"X\" refresh collation version, refresh collation version","code":"42601","message":"syntax error at or near \",\"","position":44}
+{"sql":"alter database mydb refresh collation version"}
+{"sql":"alter database mydb REFRESH COLLATION VERSION"}
+{"sql":"alter database mydb refresh","code":"42601","message":"syntax error at end of input","position":27}
+{"sql":"alter database mydb refresh collation","code":"42601","message":"syntax error at end of input","position":37}
+{"sql":"alter database mydb refresh version","code":"42601","message":"syntax error at or near \"version\"","position":28}
+{"sql":"alter database mydb refresh collation version x","code":"42601","message":"syntax error at or near \"x\"","position":46}
+{"sql":"alter database mydb refresh collation version;"}
+{"sql":"alter database mydb refresh collation version; select 1"}
+{"sql":"alter database mydb refresh collation versions","code":"42601","message":"syntax error at or near \"versions\"","position":38}
+{"sql":"alter database mydb refresh collations version","code":"42601","message":"syntax error at or near \"collations\"","position":28}
+{"sql":"alter database mydb collation version","code":"42601","message":"syntax error at or near \"collation\"","position":20}
+{"sql":"alter database mydb refresh collation version 1","code":"42601","message":"syntax error at or near \"1\"","position":46}
+{"sql":"alter database mydb refresh collation version (x)","code":"42601","message":"syntax error at or near \"(\"","position":46}
+{"sql":"alter database mydb refresh collation version, refresh collation version","code":"42601","message":"syntax error at or near \",\"","position":45}
+{"sql":"alter database name refresh collation version"}
+{"sql":"alter database name REFRESH COLLATION VERSION"}
+{"sql":"alter database name refresh","code":"42601","message":"syntax error at end of input","position":27}
+{"sql":"alter database name refresh collation","code":"42601","message":"syntax error at end of input","position":37}
+{"sql":"alter database name refresh version","code":"42601","message":"syntax error at or near \"version\"","position":28}
+{"sql":"alter database name refresh collation version x","code":"42601","message":"syntax error at or near \"x\"","position":46}
+{"sql":"alter database name refresh collation version;"}
+{"sql":"alter database name refresh collation version; select 1"}
+{"sql":"alter database name refresh collation versions","code":"42601","message":"syntax error at or near \"versions\"","position":38}
+{"sql":"alter database name refresh collations version","code":"42601","message":"syntax error at or near \"collations\"","position":28}
+{"sql":"alter database name collation version","code":"42601","message":"syntax error at or near \"collation\"","position":20}
+{"sql":"alter database name refresh collation version 1","code":"42601","message":"syntax error at or near \"1\"","position":46}
+{"sql":"alter database name refresh collation version (x)","code":"42601","message":"syntax error at or near \"(\"","position":46}
+{"sql":"alter database name refresh collation version, refresh collation version","code":"42601","message":"syntax error at or near \",\"","position":45}
+{"sql":"alter database refresh refresh collation version"}
+{"sql":"alter database refresh REFRESH COLLATION VERSION"}
+{"sql":"alter database refresh refresh","code":"42601","message":"syntax error at end of input","position":30}
+{"sql":"alter database refresh refresh collation","code":"42601","message":"syntax error at end of input","position":40}
+{"sql":"alter database refresh refresh version","code":"42601","message":"syntax error at or near \"version\"","position":31}
+{"sql":"alter database refresh refresh collation version x","code":"42601","message":"syntax error at or near \"x\"","position":49}
+{"sql":"alter database refresh refresh collation version;"}
+{"sql":"alter database refresh refresh collation version; select 1"}
+{"sql":"alter database refresh refresh collation versions","code":"42601","message":"syntax error at or near \"versions\"","position":41}
+{"sql":"alter database refresh refresh collations version","code":"42601","message":"syntax error at or near \"collations\"","position":31}
+{"sql":"alter database refresh collation version","code":"42601","message":"syntax error at or near \"collation\"","position":23}
+{"sql":"alter database refresh refresh collation version 1","code":"42601","message":"syntax error at or near \"1\"","position":49}
+{"sql":"alter database refresh refresh collation version (x)","code":"42601","message":"syntax error at or near \"(\"","position":49}
+{"sql":"alter database refresh refresh collation version, refresh collation version","code":"42601","message":"syntax error at or near \",\"","position":48}
+{"sql":"alter database collation refresh collation version","code":"42601","message":"syntax error at or near \"collation\"","position":15}
+{"sql":"alter database collation REFRESH COLLATION VERSION","code":"42601","message":"syntax error at or near \"collation\"","position":15}
+{"sql":"alter database collation refresh","code":"42601","message":"syntax error at or near \"collation\"","position":15}
+{"sql":"alter database collation refresh collation","code":"42601","message":"syntax error at or near \"collation\"","position":15}
+{"sql":"alter database collation refresh version","code":"42601","message":"syntax error at or near \"collation\"","position":15}
+{"sql":"alter database collation refresh collation version x","code":"42601","message":"syntax error at or near \"collation\"","position":15}
+{"sql":"alter database collation refresh collation version;","code":"42601","message":"syntax error at or near \"collation\"","position":15}
+{"sql":"alter database collation refresh collation version; select 1","code":"42601","message":"syntax error at or near \"collation\"","position":15}
+{"sql":"alter database collation refresh collation versions","code":"42601","message":"syntax error at or near \"collation\"","position":15}
+{"sql":"alter database collation refresh collations version","code":"42601","message":"syntax error at or near \"collation\"","position":15}
+{"sql":"alter database collation collation version","code":"42601","message":"syntax error at or near \"collation\"","position":15}
+{"sql":"alter database collation refresh collation version 1","code":"42601","message":"syntax error at or near \"collation\"","position":15}
+{"sql":"alter database collation refresh collation version (x)","code":"42601","message":"syntax error at or near \"collation\"","position":15}
+{"sql":"alter database collation refresh collation version, refresh collation version","code":"42601","message":"syntax error at or near \"collation\"","position":15}
+{"sql":"alter database version refresh collation version"}
+{"sql":"alter database version REFRESH COLLATION VERSION"}
+{"sql":"alter database version refresh","code":"42601","message":"syntax error at end of input","position":30}
+{"sql":"alter database version refresh collation","code":"42601","message":"syntax error at end of input","position":40}
+{"sql":"alter database version refresh version","code":"42601","message":"syntax error at or near \"version\"","position":31}
+{"sql":"alter database version refresh collation version x","code":"42601","message":"syntax error at or near \"x\"","position":49}
+{"sql":"alter database version refresh collation version;"}
+{"sql":"alter database version refresh collation version; select 1"}
+{"sql":"alter database version refresh collation versions","code":"42601","message":"syntax error at or near \"versions\"","position":41}
+{"sql":"alter database version refresh collations version","code":"42601","message":"syntax error at or near \"collations\"","position":31}
+{"sql":"alter database version collation version","code":"42601","message":"syntax error at or near \"collation\"","position":23}
+{"sql":"alter database version refresh collation version 1","code":"42601","message":"syntax error at or near \"1\"","position":49}
+{"sql":"alter database version refresh collation version (x)","code":"42601","message":"syntax error at or near \"(\"","position":49}
+{"sql":"alter database version refresh collation version, refresh collation version","code":"42601","message":"syntax error at or near \",\"","position":48}
+{"sql":"alter database s.x refresh collation version","code":"42601","message":"syntax error at or near \".\"","position":16}
+{"sql":"alter database s.x REFRESH COLLATION VERSION","code":"42601","message":"syntax error at or near \".\"","position":16}
+{"sql":"alter database s.x refresh","code":"42601","message":"syntax error at or near \".\"","position":16}
+{"sql":"alter database s.x refresh collation","code":"42601","message":"syntax error at or near \".\"","position":16}
+{"sql":"alter database s.x refresh version","code":"42601","message":"syntax error at or near \".\"","position":16}
+{"sql":"alter database s.x refresh collation version x","code":"42601","message":"syntax error at or near \".\"","position":16}
+{"sql":"alter database s.x refresh collation version;","code":"42601","message":"syntax error at or near \".\"","position":16}
+{"sql":"alter database s.x refresh collation version; select 1","code":"42601","message":"syntax error at or near \".\"","position":16}
+{"sql":"alter database s.x refresh collation versions","code":"42601","message":"syntax error at or near \".\"","position":16}
+{"sql":"alter database s.x refresh collations version","code":"42601","message":"syntax error at or near \".\"","position":16}
+{"sql":"alter database s.x collation version","code":"42601","message":"syntax error at or near \".\"","position":16}
+{"sql":"alter database s.x refresh collation version 1","code":"42601","message":"syntax error at or near \".\"","position":16}
+{"sql":"alter database s.x refresh collation version (x)","code":"42601","message":"syntax error at or near \".\"","position":16}
+{"sql":"alter database s.x refresh collation version, refresh collation version","code":"42601","message":"syntax error at or near \".\"","position":16}
+{"sql":"alter database current_database refresh collation version"}
+{"sql":"alter database current_database REFRESH COLLATION VERSION"}
+{"sql":"alter database current_database refresh","code":"42601","message":"syntax error at end of input","position":39}
+{"sql":"alter database current_database refresh collation","code":"42601","message":"syntax error at end of input","position":49}
+{"sql":"alter database current_database refresh version","code":"42601","message":"syntax error at or near \"version\"","position":40}
+{"sql":"alter database current_database refresh collation version x","code":"42601","message":"syntax error at or near \"x\"","position":58}
+{"sql":"alter database current_database refresh collation version;"}
+{"sql":"alter database current_database refresh collation version; select 1"}
+{"sql":"alter database current_database refresh collation versions","code":"42601","message":"syntax error at or near \"versions\"","position":50}
+{"sql":"alter database current_database refresh collations version","code":"42601","message":"syntax error at or near \"collations\"","position":40}
+{"sql":"alter database current_database collation version","code":"42601","message":"syntax error at or near \"collation\"","position":32}
+{"sql":"alter database current_database refresh collation version 1","code":"42601","message":"syntax error at or near \"1\"","position":58}
+{"sql":"alter database current_database refresh collation version (x)","code":"42601","message":"syntax error at or near \"(\"","position":58}
+{"sql":"alter database current_database refresh collation version, refresh collation version","code":"42601","message":"syntax error at or near \",\"","position":57}
+{"sql":"alter database all refresh collation version","code":"42601","message":"syntax error at or near \"all\"","position":15}
+{"sql":"alter database all REFRESH COLLATION VERSION","code":"42601","message":"syntax error at or near \"all\"","position":15}
+{"sql":"alter database all refresh","code":"42601","message":"syntax error at or near \"all\"","position":15}
+{"sql":"alter database all refresh collation","code":"42601","message":"syntax error at or near \"all\"","position":15}
+{"sql":"alter database all refresh version","code":"42601","message":"syntax error at or near \"all\"","position":15}
+{"sql":"alter database all refresh collation version x","code":"42601","message":"syntax error at or near \"all\"","position":15}
+{"sql":"alter database all refresh collation version;","code":"42601","message":"syntax error at or near \"all\"","position":15}
+{"sql":"alter database all refresh collation version; select 1","code":"42601","message":"syntax error at or near \"all\"","position":15}
+{"sql":"alter database all refresh collation versions","code":"42601","message":"syntax error at or near \"all\"","position":15}
+{"sql":"alter database all refresh collations version","code":"42601","message":"syntax error at or near \"all\"","position":15}
+{"sql":"alter database all collation version","code":"42601","message":"syntax error at or near \"all\"","position":15}
+{"sql":"alter database all refresh collation version 1","code":"42601","message":"syntax error at or near \"all\"","position":15}
+{"sql":"alter database all refresh collation version (x)","code":"42601","message":"syntax error at or near \"all\"","position":15}
+{"sql":"alter database all refresh collation version, refresh collation version","code":"42601","message":"syntax error at or near \"all\"","position":15}
+{"sql":"alter collation c refresh version"}
+{"sql":"alter collation c refresh collation version","code":"42601","message":"syntax error at or near \"collation\"","position":26}
+{"sql":"alter table t refresh collation version","code":"42601","message":"syntax error at or near \"refresh\"","position":14}
+{"sql":"alter database x with refresh collation version","code":"42601","message":"syntax error at or near \"refresh\"","position":22}
+{"sql":"alter database x set refresh collation version","code":"42601","message":"syntax error at or near \"collation\"","position":29}
+{"sql":"alter database x owner to r"}
+{"sql":"alter database x refresh collation version owner to r","code":"42601","message":"syntax error at or near \"owner\"","position":43}

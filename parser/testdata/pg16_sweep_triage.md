@@ -96,7 +96,7 @@ L a feature's grammar.
 | reindex-optional-name (fixed) | 2 | 4 (1/0/3) | refuses `REINDEX SYSTEM`, `REINDEX DATABASE` | `ReindexStmt` `opt_single_name` | no | S |
 | role-spec-keywords | 2 | 4 (0/1/3) | refuses a type_func_name keyword as a role | `RoleSpec: NonReservedWord` | no | S |
 | copy-generic-options (fixed) | 2 | 4 (0/2/2) | refuses a reserved keyword as a COPY option name; accepts DEFAULT as its argument | `copy_generic_opt_elem: ColLabel copy_generic_opt_arg` | no | S |
-| alter-database-refresh-collation | 2 | 3 (0/0/3) | refuses `ALTER DATABASE x REFRESH COLLATION VERSION` | `AlterDatabaseRefreshCollStmt` | no | S |
+| alter-database-refresh-collation (fixed) | 2 | 3 (0/0/3) | refuses `ALTER DATABASE x REFRESH COLLATION VERSION` | `AlterDatabaseRefreshCollStmt` | no | S |
 | column-options-qualified-name (fixed) | 2 | 3 (0/1/2) | refuses `ALTER COLUMN a SET (x.y = 1)` | `alter_table_cmd` SET/RESET `reloptions` (`reloption_elem`) | no | S |
 | alter-extension-member (fixed) | 2 | 2 (0/0/2) | refuses ALTER EXTENSION ADD CAST, ADD TRANSFORM | `AlterExtensionContentsStmt` | yes, both | S |
 | role-option-error-order (fixed) | 3 | 7 (0/6/1) | syntax error at the next token for PostgreSQL's `unrecognized role option` | `CreateOptRoleElem`/`AlterOptRoleElem: IDENT` | no | S |
@@ -463,7 +463,7 @@ All 4 agree.
 COPY's options are now `ColLabel copy_generic_opt_arg`, whose argument has
 `'*'` and `'(' list ')'` but not DEFAULT; all 4 agree.
 
-### alter-database-refresh-collation (risk 2, 3)
+### alter-database-refresh-collation (risk 2, 3; fixed)
 
 PostgreSQL 16 (since 15) parses `ALTER DATABASE name REFRESH COLLATION
 VERSION`. `tests/grammar/sql/phase7_compat.sql` pins it as a syntax error,
@@ -478,6 +478,10 @@ changes those fixtures.
 |---|---|---|
 | `alter database x refresh collation version` | accepts | 42601 syntax error at or near "refresh" at 17 |
 | `alter database x refresh` | 42601 syntax error at end of input at 24 | 42601 syntax error at or near "refresh" at 17 |
+
+`AlterDatabaseRefreshCollStmt` (`ALTER DATABASE name REFRESH COLLATION
+VERSION`) is new, with its node in `nodes`; the tree is libpg_query's.
+`tests/grammar/sql/phase7_compat.sql` now expects it to parse. All 3 agree.
 
 ### column-options-qualified-name (risk 2, 3; fixed)
 
