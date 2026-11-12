@@ -784,6 +784,20 @@ trees that changed over the corpus and test data have INCLUDING ALL or
 EXCLUDING ALL. `testdata/table_like_pg16.jsonl` pins 21 statements; all
 agree.
 
+### constraint-trigger-deferrable (tree 4, verdict 3; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `create constraint trigger t after insert on r initially deferred for each row ...` | `deferrable` true, `initdeferred` true | `deferrable` false |
+| `create or replace constraint trigger t ...` | `0A000 CREATE OR REPLACE CONSTRAINT TRIGGER is not supported` | accepted |
+
+INITIALLY DEFERRED implies DEFERRABLE, as PostgreSQL 16's `processCASbits`
+has it and the parser's constraints already had it. OR REPLACE is refused
+before the attributes are checked. The 11 trees that changed over the
+corpus and test data are INITIALLY DEFERRED constraint triggers, and the 3
+verdicts OR REPLACE ones. `testdata/constraint_trigger_pg16.jsonl` pins 25
+statements; all agree.
+
 ## Rerunning
 
 ```

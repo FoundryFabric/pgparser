@@ -13901,11 +13901,16 @@ CreateTrigStmt:
 			if len($7.Items) > 1 && $7.Items[1] != nil {
 				columns = $7.Items[1].(*nodes.List)
 			}
+			if $2 {
+				grammarError(pglex, "0A000", "CREATE OR REPLACE CONSTRAINT TRIGGER is not supported", "", -1)
+				return 1
+			}
 			casBits := $11
 			if !checkConstraintAttrs(pglex, casBits, "TRIGGER", true, false, false) {
 				return 1
 			}
-			deferrable := (casBits & int64(nodes.CAS_DEFERRABLE)) != 0
+			/* INITIALLY DEFERRED implies DEFERRABLE. */
+			deferrable := (casBits & int64(nodes.CAS_DEFERRABLE|nodes.CAS_INITIALLY_DEFERRED)) != 0
 			initdeferred := (casBits & int64(nodes.CAS_INITIALLY_DEFERRED)) != 0
 			var constrrel *nodes.RangeVar
 			if $10 != nil {

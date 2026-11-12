@@ -1,0 +1,25 @@
+{"sql":"create constraint trigger t after insert on r for each row execute function f()"}
+{"sql":"create constraint trigger t after insert on r deferrable for each row execute function f()"}
+{"sql":"create constraint trigger t after insert on r not deferrable for each row execute function f()"}
+{"sql":"create constraint trigger t after insert on r initially deferred for each row execute function f()"}
+{"sql":"create constraint trigger t after insert on r initially immediate for each row execute function f()"}
+{"sql":"create constraint trigger t after insert on r deferrable initially deferred for each row execute function f()"}
+{"sql":"create constraint trigger t after insert on r deferrable initially immediate for each row execute function f()"}
+{"sql":"create constraint trigger t after insert on r initially deferred deferrable for each row execute function f()"}
+{"sql":"create constraint trigger t after insert on r not deferrable initially immediate for each row execute function f()"}
+{"sql":"create constraint trigger t after insert on r not deferrable initially deferred for each row execute function f()","code":"42601","message":"constraint declared INITIALLY DEFERRED must be DEFERRABLE","position":61}
+{"sql":"create constraint trigger t after insert on r initially deferred not deferrable for each row execute function f()","code":"42601","message":"constraint declared INITIALLY DEFERRED must be DEFERRABLE","position":65}
+{"sql":"create constraint trigger t after update on r from s initially deferred for each row execute procedure f()"}
+{"sql":"create or replace constraint trigger t after delete on r initially deferred for each row execute function f()","code":"0A000","message":"CREATE OR REPLACE CONSTRAINT TRIGGER is not supported","position":-1}
+{"sql":"create constraint trigger t after insert on r initially deferred for each row when (new.a > 0) execute function f(1, 'x')"}
+{"sql":"create constraint trigger t after insert on r not valid for each row execute function f()","code":"0A000","message":"TRIGGER constraints cannot be marked NOT VALID","position":-1}
+{"sql":"create constraint trigger t after insert on r no inherit for each row execute function f()","code":"0A000","message":"TRIGGER constraints cannot be marked NO INHERIT","position":-1}
+{"sql":"create constraint trigger t after insert on r deferrable deferrable for each row execute function f()"}
+{"sql":"create constraint trigger t after insert on r initially deferred initially immediate for each row execute function f()","code":"42601","message":"conflicting constraint properties","position":65}
+{"sql":"create constraint trigger t before insert on r initially deferred for each row execute function f()","code":"42601","message":"syntax error at or near \"before\"","position":28}
+{"sql":"create constraint trigger t after insert on r initially deferred for each statement execute function f()","code":"42601","message":"syntax error at or near \"statement\"","position":74}
+{"sql":"create trigger t after insert on r initially deferred for each row execute function f()","code":"42601","message":"syntax error at or near \"initially\"","position":35}
+{"sql":"create trigger t after insert on r for each row execute function f()"}
+{"sql":"create or replace constraint trigger t after insert on r not valid for each row execute function f()","code":"0A000","message":"CREATE OR REPLACE CONSTRAINT TRIGGER is not supported","position":-1}
+{"sql":"create or replace constraint trigger t after insert on r for each row execute function f()","code":"0A000","message":"CREATE OR REPLACE CONSTRAINT TRIGGER is not supported","position":-1}
+{"sql":"create or replace trigger t after insert on r for each row execute function f()"}
