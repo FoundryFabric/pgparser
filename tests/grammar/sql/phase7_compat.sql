@@ -6,5 +6,5 @@ ALTER DATABASE mydb REFRESH COLLATION VERSION;
 -- expect-error: syntax error
 ALTER TYPE mood DROP VALUE 'sad';
 
--- expect-error: syntax error
+-- expect-error: CREATE ASSERTION is not yet implemented
 CREATE ASSERTION positive CHECK (1 = 1);

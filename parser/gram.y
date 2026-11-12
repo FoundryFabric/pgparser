@@ -443,7 +443,7 @@ import (
 %type <node>  CreateTableSpaceStmt DropTableSpaceStmt
 %type <node>  OptTableSpaceOwner
 %type <node>  AlterTblSpcStmt
-%type <node>  CreateAmStmt
+%type <node>  CreateAmStmt CreateAssertionStmt
 %type <ival>  am_type
 %type <node>  CreatePolicyStmt AlterPolicyStmt
 %type <boolean>  RowSecurityDefaultPermissive
@@ -933,6 +933,7 @@ stmt:
 			$$ = $1
 		}
 	| CreateAmStmt
+	| CreateAssertionStmt
 		{
 			$$ = $1
 		}
@@ -9034,8 +9035,8 @@ a_expr:
 		}
 	| UNIQUE opt_unique_null_treatment select_with_parens
 		{
-			pglex.Error("UNIQUE predicate is not yet implemented")
-			$$ = nil
+			grammarError(pglex, "0A000", "UNIQUE predicate is not yet implemented", "", $<loc>1)
+			return 1
 		}
 	| a_expr COLLATE any_name
 		{
@@ -12066,8 +12067,8 @@ set_rest_more:
 		}
 	| CATALOG_P Sconst
 		{
-			pglex.Error("current database cannot be changed")
-			$$ = nil
+			grammarError(pglex, "0A000", "current database cannot be changed", "", $<loc>2)
+			return 1
 		}
 	| SCHEMA Sconst
 		{
@@ -15016,6 +15017,14 @@ AlterExtensionContentsStmt:
  *      CREATE ACCESS METHOD
  *
  *****************************************************************************/
+
+CreateAssertionStmt:
+	CREATE ASSERTION any_name CHECK '(' a_expr ')' ConstraintAttributeSpec
+		{
+			grammarError(pglex, "0A000", "CREATE ASSERTION is not yet implemented", "", -1)
+			return 1
+		}
+	;
 
 CreateAmStmt:
 	CREATE ACCESS METHOD name TYPE_P am_type HANDLER handler_name

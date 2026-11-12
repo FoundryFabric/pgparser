@@ -58803,7 +58803,7 @@
 {"sql":"SELECT COALESCE(NULL, 1, 2)"}
 {"sql":"SELECT GREATEST(1, 2), LEAST(2, 3)"}
 {"sql":"-- Phase 2: core expression grammar gaps\nSELECT TREAT('1' AS int)"}
-{"sql":"-- expect-error: UNIQUE predicate is not yet implemented\nSELECT UNIQUE (SELECT 1)","code":"0A000","msg":"UNIQUE predicate is not yet implemented","pos":64,"class":"not-yet-implemented-errors"}
+{"sql":"-- expect-error: UNIQUE predicate is not yet implemented\nSELECT UNIQUE (SELECT 1)","code":"0A000","msg":"UNIQUE predicate is not yet implemented","pos":64}
 {"sql":"SELECT ROW()"}
 {"sql":"SELECT 1 OPERATOR(pg_catalog.=) ANY (SELECT 1)"}
 {"sql":"SELECT (SELECT 1)[1]"}
@@ -58861,4 +58861,4 @@
 {"sql":"-- expect-error: syntax error\nALTER TYPE mood DROP VALUE 'sad'","code":"42601","msg":"syntax error at or near \"VALUE\"","pos":51}
 {"sql":"-- expect-error: syntax error\nALTER EXTENSION hstore ADD CAST (text AS hstore)"}
 {"sql":"-- expect-error: syntax error\nALTER EXTENSION hstore ADD TRANSFORM FOR jsonb LANGUAGE plpgsql"}
-{"sql":"-- expect-error: syntax error\nCREATE ASSERTION positive CHECK (1 = 1)","code":"0A000","msg":"CREATE ASSERTION is not yet implemented","pos":-1,"class":"not-yet-implemented-errors"}
+{"sql":"-- expect-error: syntax error\nCREATE ASSERTION positive CHECK (1 = 1)","code":"0A000","msg":"CREATE ASSERTION is not yet implemented","pos":-1}

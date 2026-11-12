@@ -102,7 +102,7 @@ L a feature's grammar.
 | role-option-error-order (fixed) | 3 | 7 (0/6/1) | syntax error at the next token for PostgreSQL's `unrecognized role option` | `CreateOptRoleElem`/`AlterOptRoleElem: IDENT` | no | S |
 | operator-missing-argument-message (fixed) | 3 | 5 (2/1/2) | hint folded into the message | `oper_argtypes` | no | S |
 | policy-option-message (fixed) | 3 | 3 (1/1/1) | hint used as the message | `RowSecurityDefaultPermissive` | no | S |
-| not-yet-implemented-errors | 3 | 2 (0/0/2) | 42601 for 0A000 | `a_expr UNIQUE select_with_parens`, `CreateAssertionStmt` | no | S |
+| not-yet-implemented-errors (fixed) | 3 | 2 (0/0/2) | 42601 for 0A000 | `a_expr UNIQUE select_with_parens`, `CreateAssertionStmt` | no | S |
 | drop-routine-list-name (fixed) | 3 | 2 (0/1/1) | refused at `[` instead of at `]` | `function_with_argtypes_list` | no | S |
 
 Totals: 1,653 statements; 30 classes. Every disagreement is in a class.
@@ -540,12 +540,22 @@ security option "<word>"` with HINT `Only PERMISSIVE or RESTRICTIVE policies
 are supported currently.` at the word through `grammarError`, and ends the
 parse there. All 3 agree.
 
-### not-yet-implemented-errors (risk 3, 2)
+### not-yet-implemented-errors (risk 3, 2; fixed)
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
 | `SELECT UNIQUE (SELECT 1)` | 0A000 UNIQUE predicate is not yet implemented (at UNIQUE) | 42601 UNIQUE predicate is not yet implemented (16 bytes later) |
 | `CREATE ASSERTION positive CHECK (1 = 1)` | 0A000 CREATE ASSERTION is not yet implemented | 42601 syntax error at or near "ASSERTION" |
+
+`a_expr UNIQUE opt_unique_null_treatment select_with_parens` now raises
+`0A000 UNIQUE predicate is not yet implemented` at UNIQUE, and the new
+`CreateAssertionStmt` (`CREATE ASSERTION any_name CHECK '(' a_expr ')'
+ConstraintAttributeSpec`) raises `0A000 CREATE ASSERTION is not yet
+implemented` with no position, both through `grammarError`, ending the
+parse. `tests/grammar/sql/phase7_compat.sql` now expects CREATE ASSERTION's
+message. `SET CATALOG 'x'`, whose action had the same fault and made `Parse`
+panic (a nil statement), is now `0A000 current database cannot be changed`
+at the string. Both agree.
 
 ### drop-routine-list-name (risk 3, 2; fixed)
 

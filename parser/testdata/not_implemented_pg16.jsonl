@@ -1,0 +1,390 @@
+{"sql":"select unique (select 1)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select 1 where unique (select 1)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":15}
+{"sql":"select not unique (select 1)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":11}
+{"sql":"select unique (select 1) and true","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique (select 1) x","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select (unique (select 1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":8}
+{"sql":"select case when unique (select 1) then 1 end","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":17}
+{"sql":"insert into t select unique (select 1)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":21}
+{"sql":"select unique (select 1), 1","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique (select a from t where b)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select 1 where unique (select a from t where b)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":15}
+{"sql":"select not unique (select a from t where b)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":11}
+{"sql":"select unique (select a from t where b) and true","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique (select a from t where b) x","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select (unique (select a from t where b))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":8}
+{"sql":"select case when unique (select a from t where b) then 1 end","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":17}
+{"sql":"insert into t select unique (select a from t where b)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":21}
+{"sql":"select unique (select a from t where b), 1","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique ((select 1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select 1 where unique ((select 1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":15}
+{"sql":"select not unique ((select 1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":11}
+{"sql":"select unique ((select 1)) and true","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique ((select 1)) x","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select (unique ((select 1)))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":8}
+{"sql":"select case when unique ((select 1)) then 1 end","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":17}
+{"sql":"insert into t select unique ((select 1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":21}
+{"sql":"select unique ((select 1)), 1","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique (values (1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select 1 where unique (values (1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":15}
+{"sql":"select not unique (values (1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":11}
+{"sql":"select unique (values (1)) and true","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique (values (1)) x","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select (unique (values (1)))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":8}
+{"sql":"select case when unique (values (1)) then 1 end","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":17}
+{"sql":"insert into t select unique (values (1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":21}
+{"sql":"select unique (values (1)), 1","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique (1)","code":"42601","message":"syntax error at or near \"1\"","position":15}
+{"sql":"select 1 where unique (1)","code":"42601","message":"syntax error at or near \"1\"","position":23}
+{"sql":"select not unique (1)","code":"42601","message":"syntax error at or near \"1\"","position":19}
+{"sql":"select unique (1) and true","code":"42601","message":"syntax error at or near \"1\"","position":15}
+{"sql":"select unique (1) x","code":"42601","message":"syntax error at or near \"1\"","position":15}
+{"sql":"select (unique (1))","code":"42601","message":"syntax error at or near \"1\"","position":16}
+{"sql":"select case when unique (1) then 1 end","code":"42601","message":"syntax error at or near \"1\"","position":25}
+{"sql":"insert into t select unique (1)","code":"42601","message":"syntax error at or near \"1\"","position":29}
+{"sql":"select unique (1), 1","code":"42601","message":"syntax error at or near \"1\"","position":15}
+{"sql":"select unique (select 1 union select 2)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select 1 where unique (select 1 union select 2)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":15}
+{"sql":"select not unique (select 1 union select 2)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":11}
+{"sql":"select unique (select 1 union select 2) and true","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique (select 1 union select 2) x","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select (unique (select 1 union select 2))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":8}
+{"sql":"select case when unique (select 1 union select 2) then 1 end","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":17}
+{"sql":"insert into t select unique (select 1 union select 2)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":21}
+{"sql":"select unique (select 1 union select 2), 1","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique","code":"42601","message":"syntax error at end of input","position":13}
+{"sql":"select 1 where unique","code":"42601","message":"syntax error at end of input","position":21}
+{"sql":"select not unique","code":"42601","message":"syntax error at end of input","position":17}
+{"sql":"select unique and true","code":"42601","message":"syntax error at or near \"and\"","position":14}
+{"sql":"select unique x","code":"42601","message":"syntax error at or near \"x\"","position":14}
+{"sql":"select (unique)","code":"42601","message":"syntax error at or near \")\"","position":14}
+{"sql":"select case when unique then 1 end","code":"42601","message":"syntax error at or near \"then\"","position":24}
+{"sql":"insert into t select unique","code":"42601","message":"syntax error at end of input","position":27}
+{"sql":"select unique, 1","code":"42601","message":"syntax error at or near \",\"","position":13}
+{"sql":"select UNIQUE (select 1)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select 1 where UNIQUE (select 1)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":15}
+{"sql":"select not UNIQUE (select 1)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":11}
+{"sql":"select UNIQUE (select 1) and true","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select UNIQUE (select 1) x","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select (UNIQUE (select 1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":8}
+{"sql":"select case when UNIQUE (select 1) then 1 end","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":17}
+{"sql":"insert into t select UNIQUE (select 1)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":21}
+{"sql":"select UNIQUE (select 1), 1","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select UNIQUE (select a from t where b)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select 1 where UNIQUE (select a from t where b)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":15}
+{"sql":"select not UNIQUE (select a from t where b)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":11}
+{"sql":"select UNIQUE (select a from t where b) and true","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select UNIQUE (select a from t where b) x","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select (UNIQUE (select a from t where b))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":8}
+{"sql":"select case when UNIQUE (select a from t where b) then 1 end","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":17}
+{"sql":"insert into t select UNIQUE (select a from t where b)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":21}
+{"sql":"select UNIQUE (select a from t where b), 1","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select UNIQUE ((select 1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select 1 where UNIQUE ((select 1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":15}
+{"sql":"select not UNIQUE ((select 1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":11}
+{"sql":"select UNIQUE ((select 1)) and true","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select UNIQUE ((select 1)) x","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select (UNIQUE ((select 1)))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":8}
+{"sql":"select case when UNIQUE ((select 1)) then 1 end","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":17}
+{"sql":"insert into t select UNIQUE ((select 1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":21}
+{"sql":"select UNIQUE ((select 1)), 1","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select UNIQUE (values (1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select 1 where UNIQUE (values (1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":15}
+{"sql":"select not UNIQUE (values (1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":11}
+{"sql":"select UNIQUE (values (1)) and true","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select UNIQUE (values (1)) x","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select (UNIQUE (values (1)))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":8}
+{"sql":"select case when UNIQUE (values (1)) then 1 end","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":17}
+{"sql":"insert into t select UNIQUE (values (1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":21}
+{"sql":"select UNIQUE (values (1)), 1","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select UNIQUE (1)","code":"42601","message":"syntax error at or near \"1\"","position":15}
+{"sql":"select 1 where UNIQUE (1)","code":"42601","message":"syntax error at or near \"1\"","position":23}
+{"sql":"select not UNIQUE (1)","code":"42601","message":"syntax error at or near \"1\"","position":19}
+{"sql":"select UNIQUE (1) and true","code":"42601","message":"syntax error at or near \"1\"","position":15}
+{"sql":"select UNIQUE (1) x","code":"42601","message":"syntax error at or near \"1\"","position":15}
+{"sql":"select (UNIQUE (1))","code":"42601","message":"syntax error at or near \"1\"","position":16}
+{"sql":"select case when UNIQUE (1) then 1 end","code":"42601","message":"syntax error at or near \"1\"","position":25}
+{"sql":"insert into t select UNIQUE (1)","code":"42601","message":"syntax error at or near \"1\"","position":29}
+{"sql":"select UNIQUE (1), 1","code":"42601","message":"syntax error at or near \"1\"","position":15}
+{"sql":"select UNIQUE (select 1 union select 2)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select 1 where UNIQUE (select 1 union select 2)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":15}
+{"sql":"select not UNIQUE (select 1 union select 2)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":11}
+{"sql":"select UNIQUE (select 1 union select 2) and true","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select UNIQUE (select 1 union select 2) x","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select (UNIQUE (select 1 union select 2))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":8}
+{"sql":"select case when UNIQUE (select 1 union select 2) then 1 end","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":17}
+{"sql":"insert into t select UNIQUE (select 1 union select 2)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":21}
+{"sql":"select UNIQUE (select 1 union select 2), 1","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select UNIQUE","code":"42601","message":"syntax error at end of input","position":13}
+{"sql":"select 1 where UNIQUE","code":"42601","message":"syntax error at end of input","position":21}
+{"sql":"select not UNIQUE","code":"42601","message":"syntax error at end of input","position":17}
+{"sql":"select UNIQUE and true","code":"42601","message":"syntax error at or near \"and\"","position":14}
+{"sql":"select UNIQUE x","code":"42601","message":"syntax error at or near \"x\"","position":14}
+{"sql":"select (UNIQUE)","code":"42601","message":"syntax error at or near \")\"","position":14}
+{"sql":"select case when UNIQUE then 1 end","code":"42601","message":"syntax error at or near \"then\"","position":24}
+{"sql":"insert into t select UNIQUE","code":"42601","message":"syntax error at end of input","position":27}
+{"sql":"select UNIQUE, 1","code":"42601","message":"syntax error at or near \",\"","position":13}
+{"sql":"select unique nulls distinct (select 1)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select 1 where unique nulls distinct (select 1)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":15}
+{"sql":"select not unique nulls distinct (select 1)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":11}
+{"sql":"select unique nulls distinct (select 1) and true","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique nulls distinct (select 1) x","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select (unique nulls distinct (select 1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":8}
+{"sql":"select case when unique nulls distinct (select 1) then 1 end","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":17}
+{"sql":"insert into t select unique nulls distinct (select 1)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":21}
+{"sql":"select unique nulls distinct (select 1), 1","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique nulls distinct (select a from t where b)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select 1 where unique nulls distinct (select a from t where b)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":15}
+{"sql":"select not unique nulls distinct (select a from t where b)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":11}
+{"sql":"select unique nulls distinct (select a from t where b) and true","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique nulls distinct (select a from t where b) x","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select (unique nulls distinct (select a from t where b))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":8}
+{"sql":"select case when unique nulls distinct (select a from t where b) then 1 end","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":17}
+{"sql":"insert into t select unique nulls distinct (select a from t where b)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":21}
+{"sql":"select unique nulls distinct (select a from t where b), 1","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique nulls distinct ((select 1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select 1 where unique nulls distinct ((select 1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":15}
+{"sql":"select not unique nulls distinct ((select 1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":11}
+{"sql":"select unique nulls distinct ((select 1)) and true","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique nulls distinct ((select 1)) x","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select (unique nulls distinct ((select 1)))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":8}
+{"sql":"select case when unique nulls distinct ((select 1)) then 1 end","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":17}
+{"sql":"insert into t select unique nulls distinct ((select 1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":21}
+{"sql":"select unique nulls distinct ((select 1)), 1","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique nulls distinct (values (1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select 1 where unique nulls distinct (values (1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":15}
+{"sql":"select not unique nulls distinct (values (1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":11}
+{"sql":"select unique nulls distinct (values (1)) and true","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique nulls distinct (values (1)) x","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select (unique nulls distinct (values (1)))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":8}
+{"sql":"select case when unique nulls distinct (values (1)) then 1 end","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":17}
+{"sql":"insert into t select unique nulls distinct (values (1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":21}
+{"sql":"select unique nulls distinct (values (1)), 1","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique nulls distinct (1)","code":"42601","message":"syntax error at or near \"1\"","position":30}
+{"sql":"select 1 where unique nulls distinct (1)","code":"42601","message":"syntax error at or near \"1\"","position":38}
+{"sql":"select not unique nulls distinct (1)","code":"42601","message":"syntax error at or near \"1\"","position":34}
+{"sql":"select unique nulls distinct (1) and true","code":"42601","message":"syntax error at or near \"1\"","position":30}
+{"sql":"select unique nulls distinct (1) x","code":"42601","message":"syntax error at or near \"1\"","position":30}
+{"sql":"select (unique nulls distinct (1))","code":"42601","message":"syntax error at or near \"1\"","position":31}
+{"sql":"select case when unique nulls distinct (1) then 1 end","code":"42601","message":"syntax error at or near \"1\"","position":40}
+{"sql":"insert into t select unique nulls distinct (1)","code":"42601","message":"syntax error at or near \"1\"","position":44}
+{"sql":"select unique nulls distinct (1), 1","code":"42601","message":"syntax error at or near \"1\"","position":30}
+{"sql":"select unique nulls distinct (select 1 union select 2)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select 1 where unique nulls distinct (select 1 union select 2)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":15}
+{"sql":"select not unique nulls distinct (select 1 union select 2)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":11}
+{"sql":"select unique nulls distinct (select 1 union select 2) and true","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique nulls distinct (select 1 union select 2) x","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select (unique nulls distinct (select 1 union select 2))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":8}
+{"sql":"select case when unique nulls distinct (select 1 union select 2) then 1 end","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":17}
+{"sql":"insert into t select unique nulls distinct (select 1 union select 2)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":21}
+{"sql":"select unique nulls distinct (select 1 union select 2), 1","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique nulls distinct","code":"42601","message":"syntax error at end of input","position":28}
+{"sql":"select 1 where unique nulls distinct","code":"42601","message":"syntax error at end of input","position":36}
+{"sql":"select not unique nulls distinct","code":"42601","message":"syntax error at end of input","position":32}
+{"sql":"select unique nulls distinct and true","code":"42601","message":"syntax error at or near \"and\"","position":29}
+{"sql":"select unique nulls distinct x","code":"42601","message":"syntax error at or near \"x\"","position":29}
+{"sql":"select (unique nulls distinct)","code":"42601","message":"syntax error at or near \")\"","position":29}
+{"sql":"select case when unique nulls distinct then 1 end","code":"42601","message":"syntax error at or near \"then\"","position":39}
+{"sql":"insert into t select unique nulls distinct","code":"42601","message":"syntax error at end of input","position":42}
+{"sql":"select unique nulls distinct, 1","code":"42601","message":"syntax error at or near \",\"","position":28}
+{"sql":"select unique nulls not distinct (select 1)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select 1 where unique nulls not distinct (select 1)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":15}
+{"sql":"select not unique nulls not distinct (select 1)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":11}
+{"sql":"select unique nulls not distinct (select 1) and true","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique nulls not distinct (select 1) x","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select (unique nulls not distinct (select 1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":8}
+{"sql":"select case when unique nulls not distinct (select 1) then 1 end","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":17}
+{"sql":"insert into t select unique nulls not distinct (select 1)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":21}
+{"sql":"select unique nulls not distinct (select 1), 1","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique nulls not distinct (select a from t where b)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select 1 where unique nulls not distinct (select a from t where b)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":15}
+{"sql":"select not unique nulls not distinct (select a from t where b)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":11}
+{"sql":"select unique nulls not distinct (select a from t where b) and true","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique nulls not distinct (select a from t where b) x","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select (unique nulls not distinct (select a from t where b))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":8}
+{"sql":"select case when unique nulls not distinct (select a from t where b) then 1 end","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":17}
+{"sql":"insert into t select unique nulls not distinct (select a from t where b)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":21}
+{"sql":"select unique nulls not distinct (select a from t where b), 1","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique nulls not distinct ((select 1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select 1 where unique nulls not distinct ((select 1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":15}
+{"sql":"select not unique nulls not distinct ((select 1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":11}
+{"sql":"select unique nulls not distinct ((select 1)) and true","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique nulls not distinct ((select 1)) x","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select (unique nulls not distinct ((select 1)))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":8}
+{"sql":"select case when unique nulls not distinct ((select 1)) then 1 end","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":17}
+{"sql":"insert into t select unique nulls not distinct ((select 1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":21}
+{"sql":"select unique nulls not distinct ((select 1)), 1","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique nulls not distinct (values (1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select 1 where unique nulls not distinct (values (1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":15}
+{"sql":"select not unique nulls not distinct (values (1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":11}
+{"sql":"select unique nulls not distinct (values (1)) and true","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique nulls not distinct (values (1)) x","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select (unique nulls not distinct (values (1)))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":8}
+{"sql":"select case when unique nulls not distinct (values (1)) then 1 end","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":17}
+{"sql":"insert into t select unique nulls not distinct (values (1))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":21}
+{"sql":"select unique nulls not distinct (values (1)), 1","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique nulls not distinct (1)","code":"42601","message":"syntax error at or near \"1\"","position":34}
+{"sql":"select 1 where unique nulls not distinct (1)","code":"42601","message":"syntax error at or near \"1\"","position":42}
+{"sql":"select not unique nulls not distinct (1)","code":"42601","message":"syntax error at or near \"1\"","position":38}
+{"sql":"select unique nulls not distinct (1) and true","code":"42601","message":"syntax error at or near \"1\"","position":34}
+{"sql":"select unique nulls not distinct (1) x","code":"42601","message":"syntax error at or near \"1\"","position":34}
+{"sql":"select (unique nulls not distinct (1))","code":"42601","message":"syntax error at or near \"1\"","position":35}
+{"sql":"select case when unique nulls not distinct (1) then 1 end","code":"42601","message":"syntax error at or near \"1\"","position":44}
+{"sql":"insert into t select unique nulls not distinct (1)","code":"42601","message":"syntax error at or near \"1\"","position":48}
+{"sql":"select unique nulls not distinct (1), 1","code":"42601","message":"syntax error at or near \"1\"","position":34}
+{"sql":"select unique nulls not distinct (select 1 union select 2)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select 1 where unique nulls not distinct (select 1 union select 2)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":15}
+{"sql":"select not unique nulls not distinct (select 1 union select 2)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":11}
+{"sql":"select unique nulls not distinct (select 1 union select 2) and true","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique nulls not distinct (select 1 union select 2) x","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select (unique nulls not distinct (select 1 union select 2))","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":8}
+{"sql":"select case when unique nulls not distinct (select 1 union select 2) then 1 end","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":17}
+{"sql":"insert into t select unique nulls not distinct (select 1 union select 2)","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":21}
+{"sql":"select unique nulls not distinct (select 1 union select 2), 1","code":"0A000","message":"UNIQUE predicate is not yet implemented","position":7}
+{"sql":"select unique nulls not distinct","code":"42601","message":"syntax error at end of input","position":32}
+{"sql":"select 1 where unique nulls not distinct","code":"42601","message":"syntax error at end of input","position":40}
+{"sql":"select not unique nulls not distinct","code":"42601","message":"syntax error at end of input","position":36}
+{"sql":"select unique nulls not distinct and true","code":"42601","message":"syntax error at or near \"and\"","position":33}
+{"sql":"select unique nulls not distinct x","code":"42601","message":"syntax error at or near \"x\"","position":33}
+{"sql":"select (unique nulls not distinct)","code":"42601","message":"syntax error at or near \")\"","position":33}
+{"sql":"select case when unique nulls not distinct then 1 end","code":"42601","message":"syntax error at or near \"then\"","position":43}
+{"sql":"insert into t select unique nulls not distinct","code":"42601","message":"syntax error at end of input","position":46}
+{"sql":"select unique nulls not distinct, 1","code":"42601","message":"syntax error at or near \",\"","position":32}
+{"sql":"select unique all (select 1)","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select 1 where unique all (select 1)","code":"42601","message":"syntax error at or near \"all\"","position":22}
+{"sql":"select not unique all (select 1)","code":"42601","message":"syntax error at or near \"all\"","position":18}
+{"sql":"select unique all (select 1) and true","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select unique all (select 1) x","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select (unique all (select 1))","code":"42601","message":"syntax error at or near \"all\"","position":15}
+{"sql":"select case when unique all (select 1) then 1 end","code":"42601","message":"syntax error at or near \"all\"","position":24}
+{"sql":"insert into t select unique all (select 1)","code":"42601","message":"syntax error at or near \"all\"","position":28}
+{"sql":"select unique all (select 1), 1","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select unique all (select a from t where b)","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select 1 where unique all (select a from t where b)","code":"42601","message":"syntax error at or near \"all\"","position":22}
+{"sql":"select not unique all (select a from t where b)","code":"42601","message":"syntax error at or near \"all\"","position":18}
+{"sql":"select unique all (select a from t where b) and true","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select unique all (select a from t where b) x","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select (unique all (select a from t where b))","code":"42601","message":"syntax error at or near \"all\"","position":15}
+{"sql":"select case when unique all (select a from t where b) then 1 end","code":"42601","message":"syntax error at or near \"all\"","position":24}
+{"sql":"insert into t select unique all (select a from t where b)","code":"42601","message":"syntax error at or near \"all\"","position":28}
+{"sql":"select unique all (select a from t where b), 1","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select unique all ((select 1))","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select 1 where unique all ((select 1))","code":"42601","message":"syntax error at or near \"all\"","position":22}
+{"sql":"select not unique all ((select 1))","code":"42601","message":"syntax error at or near \"all\"","position":18}
+{"sql":"select unique all ((select 1)) and true","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select unique all ((select 1)) x","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select (unique all ((select 1)))","code":"42601","message":"syntax error at or near \"all\"","position":15}
+{"sql":"select case when unique all ((select 1)) then 1 end","code":"42601","message":"syntax error at or near \"all\"","position":24}
+{"sql":"insert into t select unique all ((select 1))","code":"42601","message":"syntax error at or near \"all\"","position":28}
+{"sql":"select unique all ((select 1)), 1","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select unique all (values (1))","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select 1 where unique all (values (1))","code":"42601","message":"syntax error at or near \"all\"","position":22}
+{"sql":"select not unique all (values (1))","code":"42601","message":"syntax error at or near \"all\"","position":18}
+{"sql":"select unique all (values (1)) and true","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select unique all (values (1)) x","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select (unique all (values (1)))","code":"42601","message":"syntax error at or near \"all\"","position":15}
+{"sql":"select case when unique all (values (1)) then 1 end","code":"42601","message":"syntax error at or near \"all\"","position":24}
+{"sql":"insert into t select unique all (values (1))","code":"42601","message":"syntax error at or near \"all\"","position":28}
+{"sql":"select unique all (values (1)), 1","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select unique all (1)","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select 1 where unique all (1)","code":"42601","message":"syntax error at or near \"all\"","position":22}
+{"sql":"select not unique all (1)","code":"42601","message":"syntax error at or near \"all\"","position":18}
+{"sql":"select unique all (1) and true","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select unique all (1) x","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select (unique all (1))","code":"42601","message":"syntax error at or near \"all\"","position":15}
+{"sql":"select case when unique all (1) then 1 end","code":"42601","message":"syntax error at or near \"all\"","position":24}
+{"sql":"insert into t select unique all (1)","code":"42601","message":"syntax error at or near \"all\"","position":28}
+{"sql":"select unique all (1), 1","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select unique all (select 1 union select 2)","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select 1 where unique all (select 1 union select 2)","code":"42601","message":"syntax error at or near \"all\"","position":22}
+{"sql":"select not unique all (select 1 union select 2)","code":"42601","message":"syntax error at or near \"all\"","position":18}
+{"sql":"select unique all (select 1 union select 2) and true","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select unique all (select 1 union select 2) x","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select (unique all (select 1 union select 2))","code":"42601","message":"syntax error at or near \"all\"","position":15}
+{"sql":"select case when unique all (select 1 union select 2) then 1 end","code":"42601","message":"syntax error at or near \"all\"","position":24}
+{"sql":"insert into t select unique all (select 1 union select 2)","code":"42601","message":"syntax error at or near \"all\"","position":28}
+{"sql":"select unique all (select 1 union select 2), 1","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select unique all","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select 1 where unique all","code":"42601","message":"syntax error at or near \"all\"","position":22}
+{"sql":"select not unique all","code":"42601","message":"syntax error at or near \"all\"","position":18}
+{"sql":"select unique all and true","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select unique all x","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"select (unique all)","code":"42601","message":"syntax error at or near \"all\"","position":15}
+{"sql":"select case when unique all then 1 end","code":"42601","message":"syntax error at or near \"all\"","position":24}
+{"sql":"insert into t select unique all","code":"42601","message":"syntax error at or near \"all\"","position":28}
+{"sql":"select unique all, 1","code":"42601","message":"syntax error at or near \"all\"","position":14}
+{"sql":"create assertion a check (1 = 1)","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion a check (true)","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion a check ((select count(*) from t) > 0)","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion a check (1 = 1) deferrable","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion a check (1 = 1) initially deferred","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion a check (1 = 1) not deferrable initially deferred","code":"42601","message":"constraint declared INITIALLY DEFERRED must be DEFERRABLE","position":48}
+{"sql":"create assertion a check (1 = 1) deferrable not deferrable","code":"42601","message":"conflicting constraint properties","position":44}
+{"sql":"create assertion a check (1 = 1) not valid","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion a check (1 = 1) no inherit","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion a check 1","code":"42601","message":"syntax error at or near \"1\"","position":25}
+{"sql":"create assertion a check ()","code":"42601","message":"syntax error at or near \")\"","position":26}
+{"sql":"create assertion a check (1 = 1) x","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion a","code":"42601","message":"syntax error at end of input","position":18}
+{"sql":"create assertion a check","code":"42601","message":"syntax error at end of input","position":24}
+{"sql":"create assertion s.a check (1 = 1)","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion s.a check (true)","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion s.a check ((select count(*) from t) > 0)","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion s.a check (1 = 1) deferrable","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion s.a check (1 = 1) initially deferred","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion s.a check (1 = 1) not deferrable initially deferred","code":"42601","message":"constraint declared INITIALLY DEFERRED must be DEFERRABLE","position":50}
+{"sql":"create assertion s.a check (1 = 1) deferrable not deferrable","code":"42601","message":"conflicting constraint properties","position":46}
+{"sql":"create assertion s.a check (1 = 1) not valid","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion s.a check (1 = 1) no inherit","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion s.a check 1","code":"42601","message":"syntax error at or near \"1\"","position":27}
+{"sql":"create assertion s.a check ()","code":"42601","message":"syntax error at or near \")\"","position":28}
+{"sql":"create assertion s.a check (1 = 1) x","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion s.a","code":"42601","message":"syntax error at end of input","position":20}
+{"sql":"create assertion s.a check","code":"42601","message":"syntax error at end of input","position":26}
+{"sql":"create assertion \"A\" check (1 = 1)","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion \"A\" check (true)","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion \"A\" check ((select count(*) from t) > 0)","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion \"A\" check (1 = 1) deferrable","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion \"A\" check (1 = 1) initially deferred","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion \"A\" check (1 = 1) not deferrable initially deferred","code":"42601","message":"constraint declared INITIALLY DEFERRED must be DEFERRABLE","position":50}
+{"sql":"create assertion \"A\" check (1 = 1) deferrable not deferrable","code":"42601","message":"conflicting constraint properties","position":46}
+{"sql":"create assertion \"A\" check (1 = 1) not valid","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion \"A\" check (1 = 1) no inherit","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion \"A\" check 1","code":"42601","message":"syntax error at or near \"1\"","position":27}
+{"sql":"create assertion \"A\" check ()","code":"42601","message":"syntax error at or near \")\"","position":28}
+{"sql":"create assertion \"A\" check (1 = 1) x","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion \"A\"","code":"42601","message":"syntax error at end of input","position":20}
+{"sql":"create assertion \"A\" check","code":"42601","message":"syntax error at end of input","position":26}
+{"sql":"create assertion a.b.c check (1 = 1)","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion a.b.c check (true)","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion a.b.c check ((select count(*) from t) > 0)","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion a.b.c check (1 = 1) deferrable","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion a.b.c check (1 = 1) initially deferred","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion a.b.c check (1 = 1) not deferrable initially deferred","code":"42601","message":"constraint declared INITIALLY DEFERRED must be DEFERRABLE","position":52}
+{"sql":"create assertion a.b.c check (1 = 1) deferrable not deferrable","code":"42601","message":"conflicting constraint properties","position":48}
+{"sql":"create assertion a.b.c check (1 = 1) not valid","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion a.b.c check (1 = 1) no inherit","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion a.b.c check 1","code":"42601","message":"syntax error at or near \"1\"","position":29}
+{"sql":"create assertion a.b.c check ()","code":"42601","message":"syntax error at or near \")\"","position":30}
+{"sql":"create assertion a.b.c check (1 = 1) x","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"create assertion a.b.c","code":"42601","message":"syntax error at end of input","position":22}
+{"sql":"create assertion a.b.c check","code":"42601","message":"syntax error at end of input","position":28}
+{"sql":"create assertion","code":"42601","message":"syntax error at end of input","position":16}
+{"sql":"drop assertion a","code":"42601","message":"syntax error at or near \"assertion\"","position":5}
+{"sql":"create assertion a check (1 = 1); select 1","code":"0A000","message":"CREATE ASSERTION is not yet implemented","position":-1}
+{"sql":"set catalog 'x'","code":"0A000","message":"current database cannot be changed","position":12}
+{"sql":"set catalog 'x' x","code":"0A000","message":"current database cannot be changed","position":12}
+{"sql":"set local catalog 'x'","code":"0A000","message":"current database cannot be changed","position":18}
+{"sql":"set session catalog 'x'","code":"0A000","message":"current database cannot be changed","position":20}
+{"sql":"set catalog x","code":"42601","message":"syntax error at or near \"x\"","position":12}
+{"sql":"set catalog","code":"42601","message":"syntax error at end of input","position":11}
+{"sql":"set catalog 'x', 'y'","code":"0A000","message":"current database cannot be changed","position":12}
+{"sql":"set catalog e'x'","code":"0A000","message":"current database cannot be changed","position":12}
+{"sql":"set catalog 'x'; select 1","code":"0A000","message":"current database cannot be changed","position":12}
+{"sql":"alter role r set catalog 'x'","code":"0A000","message":"current database cannot be changed","position":25}
+{"sql":"alter database d set catalog 'x'","code":"0A000","message":"current database cannot be changed","position":29}
+{"sql":"alter system set catalog 'x'","code":"42601","message":"syntax error at or near \"'x'\"","position":25}
+{"sql":"set catalog to 'x'"}
+{"sql":"set catalog = 'x'"}
+{"sql":"reset catalog"}
+{"sql":"show catalog"}
