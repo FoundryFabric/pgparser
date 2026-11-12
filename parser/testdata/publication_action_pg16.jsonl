@@ -1,0 +1,42 @@
+{"sql":"alter publication p add table t"}
+{"sql":"alter publication p drop table t"}
+{"sql":"alter publication p set table t"}
+{"sql":"alter publication p add table t, u"}
+{"sql":"alter publication p drop table t, s.u"}
+{"sql":"alter publication p set table t (a, b) where (a > 0), u"}
+{"sql":"alter publication p add tables in schema s"}
+{"sql":"alter publication p drop tables in schema s, u"}
+{"sql":"alter publication p set tables in schema s, current_schema"}
+{"sql":"alter publication p set tables in schema current_schema, s"}
+{"sql":"alter publication p add tables in schema current_schema, \"CURRENT_SCHEMA\""}
+{"sql":"alter publication p add table t, tables in schema s, u"}
+{"sql":"alter publication p add tables in schema s, table t, u"}
+{"sql":"alter publication p set (publish = 'insert')"}
+{"sql":"alter publication p set (publish = 'insert', publish_via_partition_root)"}
+{"sql":"alter publication p add table only t, u*"}
+{"sql":"alter publication p add table t, only u"}
+{"sql":"alter publication p add table t, u (a)"}
+{"sql":"alter publication p add tables in schema s, u (a)","code":"42601","message":"column specification not allowed for schema","position":44}
+{"sql":"alter publication p add tables in schema s, u where (a > 0)","code":"42601","message":"WHERE clause not allowed for schema","position":44}
+{"sql":"alter publication p add tables in schema s, a.b","code":"42601","message":"invalid schema name","position":44}
+{"sql":"alter publication p add table t, current_schema","code":"42601","message":"invalid table name","position":33}
+{"sql":"alter publication p add t","code":"42601","message":"invalid publication object list","position":24}
+{"sql":"alter publication p add current_schema","code":"42601","message":"invalid publication object list","position":24}
+{"sql":"alter publication p drop tables in schema s, current_schema, u"}
+{"sql":"alter publication p owner to r"}
+{"sql":"alter publication p rename to q"}
+{"sql":"create publication p for table t, u"}
+{"sql":"create publication p for table t, s.u, v (a)"}
+{"sql":"create publication p for tables in schema s, u, v"}
+{"sql":"create publication p for tables in schema current_schema, s"}
+{"sql":"create publication p for tables in schema s, current_schema"}
+{"sql":"create publication p for table t, tables in schema s, u"}
+{"sql":"create publication p for all tables"}
+{"sql":"create publication p"}
+{"sql":"create publication p for table t where (a > 1), u where (b < 2)"}
+{"sql":"create publication p for tables in schema s, u.v","code":"42601","message":"invalid schema name","position":45}
+{"sql":"create publication p for t","code":"42601","message":"invalid publication object list","position":25}
+{"sql":"create publication p for table t, u with (publish = 'insert')"}
+{"sql":"alter publication p add table","code":"42601","message":"syntax error at end of input","position":29}
+{"sql":"alter publication p drop","code":"42601","message":"syntax error at end of input","position":24}
+{"sql":"alter publication p set tables in schema","code":"42601","message":"syntax error at end of input","position":40}

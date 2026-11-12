@@ -1829,7 +1829,7 @@ type AlterPublicationStmt struct {
 	Options      *List         // list of DefElem nodes
 	Pubobjects   *List         // list of PublicationObjSpec
 	ForAllTables bool          // FOR ALL TABLES
-	Action       DefElemAction // SET, ADD, DROP
+	Action       AlterPublicationAction // ADD, DROP or SET of Pubobjects
 }
 
 func (n *AlterPublicationStmt) Tag() NodeTag { return T_AlterPublicationStmt }

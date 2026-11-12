@@ -1930,9 +1930,10 @@ type pubObj struct {
 
 // preprocessPubobjList is PostgreSQL 16's preprocess_pubobj_list: the first
 // object is a TABLE or TABLES IN SCHEMA, and an object without one takes the
-// kind before it. A table is not CURRENT_SCHEMA; a schema is a bare name or
-// CURRENT_SCHEMA, with no column list or WHERE clause. Otherwise it raises the
-// error at the object and reports false.
+// kind before it. A table is not CURRENT_SCHEMA; a schema is a bare name,
+// which becomes the object's name, or CURRENT_SCHEMA, with no column list or
+// WHERE clause. Otherwise it raises the error at the object and reports
+// false.
 func preprocessPubobjList(lex pgLexer, objs []pubObj) (*nodes.List, bool) {
 	if objs[0].spec.Pubobjtype == nodes.PUBLICATIONOBJ_CONTINUATION {
 		grammarError(lex, codeSyntaxError, "invalid publication object list", "", objs[0].loc)
@@ -1953,13 +1954,19 @@ func preprocessPubobjList(lex pgLexer, objs []pubObj) (*nodes.List, bool) {
 			if pt == nil {
 				message = "invalid table name"
 			}
+			o.spec.Pubobjtype = kind
 		case pt == nil:
+			o.spec.Pubobjtype = nodes.PUBLICATIONOBJ_TABLES_IN_CUR_SCHEMA
 		case pt.WhereClause != nil:
 			message = "WHERE clause not allowed for schema"
 		case pt.Columns != nil:
 			message = "column specification not allowed for schema"
 		case !o.name:
 			message = "invalid schema name"
+		default:
+			o.spec.Pubobjtype = nodes.PUBLICATIONOBJ_TABLES_IN_SCHEMA
+			o.spec.Name = pt.Relation.Relname
+			o.spec.Pubtable = nil
 		}
 		if message != "" {
 			grammarError(lex, codeSyntaxError, message, "", o.loc)
@@ -37824,7 +37831,7 @@ pgdefault:
 			pgVAL.node = &nodes.AlterPublicationStmt{
 				Pubname:    pgDollar[3].str,
 				Pubobjects: objs,
-				Action:     nodes.DEFELEM_ADD,
+				Action:     nodes.AP_AddObjects,
 			}
 		}
 	case 2319:
@@ -37838,7 +37845,7 @@ pgdefault:
 			pgVAL.node = &nodes.AlterPublicationStmt{
 				Pubname:    pgDollar[3].str,
 				Pubobjects: objs,
-				Action:     nodes.DEFELEM_SET,
+				Action:     nodes.AP_SetObjects,
 			}
 		}
 	case 2320:
@@ -37852,7 +37859,7 @@ pgdefault:
 			pgVAL.node = &nodes.AlterPublicationStmt{
 				Pubname:    pgDollar[3].str,
 				Pubobjects: objs,
-				Action:     nodes.DEFELEM_DROP,
+				Action:     nodes.AP_DropObjects,
 			}
 		}
 	case 2321:

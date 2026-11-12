@@ -744,6 +744,32 @@ classes), which is the same meaning. The 53 trees that changed over the
 corpus and test data are JSON_ARRAY statements or have an encoding.
 `testdata/json_array_pg16.jsonl` pins 42 statements; all agree.
 
+### publication-action-and-objects (tree 152, 15, 4 and 4; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `alter publication p add table t` | `action` `AP_AddObjects` | `DEFELEM_ADD` |
+| `alter publication p drop table t, u` | `u` is `PUBLICATIONOBJ_TABLE` | `PUBLICATIONOBJ_CONTINUATION` |
+| `create publication p for tables in schema s, u` | `u` is `PUBLICATIONOBJ_TABLES_IN_SCHEMA` named `u` | `PUBLICATIONOBJ_CONTINUATION`, a `PublicationTable` `u` |
+
+The action was not mixed up: ADD, SET and DROP were `DEFELEM_ADD`,
+`DEFELEM_SET` and `DEFELEM_DROP`, so the comparison, which matches enums by
+member name, saw 2 for libpg_query's `AP_AddObjects` 0. But PostgreSQL 16's
+field is an `AlterPublicationAction`, which the nodes package already
+declares; `AlterPublicationStmt.Action` is now one (ALTER PUBLICATION SET
+with options keeps the zero value, `AP_AddObjects`, as PostgreSQL leaves
+it). The object list was checked as `preprocess_pubobj_list` checks it, but
+an object after the first kept `PUBLICATIONOBJ_CONTINUATION`, and a schema
+after TABLES IN SCHEMA stayed a table: the kind before it is now written
+into it, a bare name becomes the schema's `Name`, and CURRENT_SCHEMA becomes
+`PUBLICATIONOBJ_TABLES_IN_CUR_SCHEMA`. The 421 trees that changed over the
+corpus and test data are ALTER PUBLICATION statements and publication
+object lists with more than one object. `testdata/publication_action_pg16.jsonl`
+pins 42 statements; all agree. `alter publication p add tables in schema s,
+only u` is left out of it: PostgreSQL 16 raises `invalid schema name` at the
+object's unset location 0, which the oracle's `select 1/0;` prefix turns
+into no position; libpg_query, and `publication_object_pg16.jsonl`, have 0.
+
 ## Rerunning
 
 ```
