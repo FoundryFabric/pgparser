@@ -97,7 +97,7 @@ L a feature's grammar.
 | role-spec-keywords | 2 | 4 (0/1/3) | refuses a type_func_name keyword as a role | `RoleSpec: NonReservedWord` | no | S |
 | copy-generic-options (fixed) | 2 | 4 (0/2/2) | refuses a reserved keyword as a COPY option name; accepts DEFAULT as its argument | `copy_generic_opt_elem: ColLabel copy_generic_opt_arg` | no | S |
 | alter-database-refresh-collation | 2 | 3 (0/0/3) | refuses `ALTER DATABASE x REFRESH COLLATION VERSION` | `AlterDatabaseRefreshCollStmt` | no | S |
-| column-options-qualified-name | 2 | 3 (0/1/2) | refuses `ALTER COLUMN a SET (x.y = 1)` | `alter_table_cmd` SET/RESET `reloptions` (`reloption_elem`) | no | S |
+| column-options-qualified-name (fixed) | 2 | 3 (0/1/2) | refuses `ALTER COLUMN a SET (x.y = 1)` | `alter_table_cmd` SET/RESET `reloptions` (`reloption_elem`) | no | S |
 | alter-extension-member (fixed) | 2 | 2 (0/0/2) | refuses ALTER EXTENSION ADD CAST, ADD TRANSFORM | `AlterExtensionContentsStmt` | yes, both | S |
 | role-option-error-order | 3 | 7 (0/6/1) | syntax error at the next token for PostgreSQL's `unrecognized role option` | `CreateOptRoleElem`/`AlterOptRoleElem: IDENT` | no | S |
 | operator-missing-argument-message | 3 | 5 (2/1/2) | hint folded into the message | `oper_argtypes` | no | S |
@@ -471,7 +471,7 @@ changes those fixtures.
 | `alter database x refresh collation version` | accepts | 42601 syntax error at or near "refresh" at 17 |
 | `alter database x refresh` | 42601 syntax error at end of input at 24 | 42601 syntax error at or near "refresh" at 17 |
 
-### column-options-qualified-name (risk 2, 3)
+### column-options-qualified-name (risk 2, 3; fixed)
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
@@ -479,6 +479,9 @@ changes those fixtures.
 | `alter table t alter column a reset (x.y)` | accepts | 42601 syntax error at or near "." at 37 |
 
 `alter table t set (toast.autovacuum_enabled = false)` is accepted by both.
+
+A column's SET and RESET now take `reloptions`, as PostgreSQL 16's do, so an
+option name may be qualified (`x.y`), as a relation's may. All 3 agree.
 
 ### alter-extension-member (risk 2, 2; fixed by #15)
 

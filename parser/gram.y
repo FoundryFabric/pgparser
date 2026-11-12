@@ -3068,20 +3068,20 @@ alter_table_cmd:
 			}
 		}
 	/* ALTER COLUMN ... SET (options) / RESET (options) */
-	| ALTER opt_column ColId SET '(' def_list ')'
+	| ALTER opt_column ColId SET reloptions
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetOptions),
 				Name:    $3,
-				Def:     $6,
+				Def:     $5,
 			}
 		}
-	| ALTER opt_column ColId RESET '(' def_list ')'
+	| ALTER opt_column ColId RESET reloptions
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_ResetOptions),
 				Name:    $3,
-				Def:     $6,
+				Def:     $5,
 			}
 		}
 	/* SET WITHOUT OIDS (deprecated but still parsed) */

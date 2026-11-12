@@ -1,0 +1,302 @@
+{"sql":"alter table t alter column a set (n_distinct = 1)"}
+{"sql":"alter table t alter column a set (x.y = 1)"}
+{"sql":"alter table t alter column a set (x.y)"}
+{"sql":"alter table t alter column a set (toast.autovacuum_enabled = false)"}
+{"sql":"alter table t alter column a set (a.b = 'x', c = 2)"}
+{"sql":"alter table t alter column a set (a, b.c)"}
+{"sql":"alter table t alter column a set (x.y.z = 1)","code":"42601","message":"syntax error at or near \".\"","position":37}
+{"sql":"alter table t alter column a set (x. = 1)","code":"42601","message":"syntax error at or near \"=\"","position":37}
+{"sql":"alter table t alter column a set (.y = 1)","code":"42601","message":"syntax error at or near \".\"","position":34}
+{"sql":"alter table t alter column a set (x.y = )","code":"42601","message":"syntax error at or near \")\"","position":40}
+{"sql":"alter table t alter column a set (\"X\".\"Y\" = 1)"}
+{"sql":"alter table t alter column a set (select.from = 1)"}
+{"sql":"alter table t alter column a set (x.select)"}
+{"sql":"alter table t alter column a set (x.y = default)"}
+{"sql":"alter table t alter column a set (x.y = true)"}
+{"sql":"alter table t alter column a set (x.y = -1)"}
+{"sql":"alter table t alter column a set (x.y = int4)"}
+{"sql":"alter table t alter column a set (x.y = none)"}
+{"sql":"alter table t alter column a set (x.y = 1.5)"}
+{"sql":"alter table t alter column a set (x.y = 'a', x.y = 'b')"}
+{"sql":"alter table t alter column a set (x..y = 1)","code":"42601","message":"syntax error at or near \"..\"","position":35}
+{"sql":"alter table t alter column a set (x.y, )","code":"42601","message":"syntax error at or near \")\"","position":39}
+{"sql":"alter table t alter column a set (x.*)","code":"42601","message":"syntax error at or near \"*\"","position":36}
+{"sql":"alter table t alter column a set (x.y[1] = 1)","code":"42601","message":"syntax error at or near \"[\"","position":37}
+{"sql":"alter table t alter column a set (x.y(1) = 1)","code":"42601","message":"syntax error at or near \"(\"","position":37}
+{"sql":"alter table t alter column a reset (n_distinct = 1)"}
+{"sql":"alter table t alter column a reset (x.y = 1)"}
+{"sql":"alter table t alter column a reset (x.y)"}
+{"sql":"alter table t alter column a reset (toast.autovacuum_enabled = false)"}
+{"sql":"alter table t alter column a reset (a.b = 'x', c = 2)"}
+{"sql":"alter table t alter column a reset (a, b.c)"}
+{"sql":"alter table t alter column a reset (x.y.z = 1)","code":"42601","message":"syntax error at or near \".\"","position":39}
+{"sql":"alter table t alter column a reset (x. = 1)","code":"42601","message":"syntax error at or near \"=\"","position":39}
+{"sql":"alter table t alter column a reset (.y = 1)","code":"42601","message":"syntax error at or near \".\"","position":36}
+{"sql":"alter table t alter column a reset (x.y = )","code":"42601","message":"syntax error at or near \")\"","position":42}
+{"sql":"alter table t alter column a reset (\"X\".\"Y\" = 1)"}
+{"sql":"alter table t alter column a reset (select.from = 1)"}
+{"sql":"alter table t alter column a reset (x.select)"}
+{"sql":"alter table t alter column a reset (x.y = default)"}
+{"sql":"alter table t alter column a reset (x.y = true)"}
+{"sql":"alter table t alter column a reset (x.y = -1)"}
+{"sql":"alter table t alter column a reset (x.y = int4)"}
+{"sql":"alter table t alter column a reset (x.y = none)"}
+{"sql":"alter table t alter column a reset (x.y = 1.5)"}
+{"sql":"alter table t alter column a reset (x.y = 'a', x.y = 'b')"}
+{"sql":"alter table t alter column a reset (x..y = 1)","code":"42601","message":"syntax error at or near \"..\"","position":37}
+{"sql":"alter table t alter column a reset (x.y, )","code":"42601","message":"syntax error at or near \")\"","position":41}
+{"sql":"alter table t alter column a reset (x.*)","code":"42601","message":"syntax error at or near \"*\"","position":38}
+{"sql":"alter table t alter column a reset (x.y[1] = 1)","code":"42601","message":"syntax error at or near \"[\"","position":39}
+{"sql":"alter table t alter column a reset (x.y(1) = 1)","code":"42601","message":"syntax error at or near \"(\"","position":39}
+{"sql":"alter table t alter a set (n_distinct = 1)"}
+{"sql":"alter table t alter a set (x.y = 1)"}
+{"sql":"alter table t alter a set (x.y)"}
+{"sql":"alter table t alter a set (toast.autovacuum_enabled = false)"}
+{"sql":"alter table t alter a set (a.b = 'x', c = 2)"}
+{"sql":"alter table t alter a set (a, b.c)"}
+{"sql":"alter table t alter a set (x.y.z = 1)","code":"42601","message":"syntax error at or near \".\"","position":30}
+{"sql":"alter table t alter a set (x. = 1)","code":"42601","message":"syntax error at or near \"=\"","position":30}
+{"sql":"alter table t alter a set (.y = 1)","code":"42601","message":"syntax error at or near \".\"","position":27}
+{"sql":"alter table t alter a set (x.y = )","code":"42601","message":"syntax error at or near \")\"","position":33}
+{"sql":"alter table t alter a set (\"X\".\"Y\" = 1)"}
+{"sql":"alter table t alter a set (select.from = 1)"}
+{"sql":"alter table t alter a set (x.select)"}
+{"sql":"alter table t alter a set (x.y = default)"}
+{"sql":"alter table t alter a set (x.y = true)"}
+{"sql":"alter table t alter a set (x.y = -1)"}
+{"sql":"alter table t alter a set (x.y = int4)"}
+{"sql":"alter table t alter a set (x.y = none)"}
+{"sql":"alter table t alter a set (x.y = 1.5)"}
+{"sql":"alter table t alter a set (x.y = 'a', x.y = 'b')"}
+{"sql":"alter table t alter a set (x..y = 1)","code":"42601","message":"syntax error at or near \"..\"","position":28}
+{"sql":"alter table t alter a set (x.y, )","code":"42601","message":"syntax error at or near \")\"","position":32}
+{"sql":"alter table t alter a set (x.*)","code":"42601","message":"syntax error at or near \"*\"","position":29}
+{"sql":"alter table t alter a set (x.y[1] = 1)","code":"42601","message":"syntax error at or near \"[\"","position":30}
+{"sql":"alter table t alter a set (x.y(1) = 1)","code":"42601","message":"syntax error at or near \"(\"","position":30}
+{"sql":"alter table t alter a reset (n_distinct = 1)"}
+{"sql":"alter table t alter a reset (x.y = 1)"}
+{"sql":"alter table t alter a reset (x.y)"}
+{"sql":"alter table t alter a reset (toast.autovacuum_enabled = false)"}
+{"sql":"alter table t alter a reset (a.b = 'x', c = 2)"}
+{"sql":"alter table t alter a reset (a, b.c)"}
+{"sql":"alter table t alter a reset (x.y.z = 1)","code":"42601","message":"syntax error at or near \".\"","position":32}
+{"sql":"alter table t alter a reset (x. = 1)","code":"42601","message":"syntax error at or near \"=\"","position":32}
+{"sql":"alter table t alter a reset (.y = 1)","code":"42601","message":"syntax error at or near \".\"","position":29}
+{"sql":"alter table t alter a reset (x.y = )","code":"42601","message":"syntax error at or near \")\"","position":35}
+{"sql":"alter table t alter a reset (\"X\".\"Y\" = 1)"}
+{"sql":"alter table t alter a reset (select.from = 1)"}
+{"sql":"alter table t alter a reset (x.select)"}
+{"sql":"alter table t alter a reset (x.y = default)"}
+{"sql":"alter table t alter a reset (x.y = true)"}
+{"sql":"alter table t alter a reset (x.y = -1)"}
+{"sql":"alter table t alter a reset (x.y = int4)"}
+{"sql":"alter table t alter a reset (x.y = none)"}
+{"sql":"alter table t alter a reset (x.y = 1.5)"}
+{"sql":"alter table t alter a reset (x.y = 'a', x.y = 'b')"}
+{"sql":"alter table t alter a reset (x..y = 1)","code":"42601","message":"syntax error at or near \"..\"","position":30}
+{"sql":"alter table t alter a reset (x.y, )","code":"42601","message":"syntax error at or near \")\"","position":34}
+{"sql":"alter table t alter a reset (x.*)","code":"42601","message":"syntax error at or near \"*\"","position":31}
+{"sql":"alter table t alter a reset (x.y[1] = 1)","code":"42601","message":"syntax error at or near \"[\"","position":32}
+{"sql":"alter table t alter a reset (x.y(1) = 1)","code":"42601","message":"syntax error at or near \"(\"","position":32}
+{"sql":"alter index i alter column 1 set (n_distinct = 1)","code":"42601","message":"syntax error at or near \"(\"","position":33}
+{"sql":"alter index i alter column 1 set (x.y = 1)","code":"42601","message":"syntax error at or near \"(\"","position":33}
+{"sql":"alter index i alter column 1 set (x.y)","code":"42601","message":"syntax error at or near \"(\"","position":33}
+{"sql":"alter index i alter column 1 set (toast.autovacuum_enabled = false)","code":"42601","message":"syntax error at or near \"(\"","position":33}
+{"sql":"alter index i alter column 1 set (a.b = 'x', c = 2)","code":"42601","message":"syntax error at or near \"(\"","position":33}
+{"sql":"alter index i alter column 1 set (a, b.c)","code":"42601","message":"syntax error at or near \"(\"","position":33}
+{"sql":"alter index i alter column 1 set (x.y.z = 1)","code":"42601","message":"syntax error at or near \"(\"","position":33}
+{"sql":"alter index i alter column 1 set (x. = 1)","code":"42601","message":"syntax error at or near \"(\"","position":33}
+{"sql":"alter index i alter column 1 set (.y = 1)","code":"42601","message":"syntax error at or near \"(\"","position":33}
+{"sql":"alter index i alter column 1 set (x.y = )","code":"42601","message":"syntax error at or near \"(\"","position":33}
+{"sql":"alter index i alter column 1 set (\"X\".\"Y\" = 1)","code":"42601","message":"syntax error at or near \"(\"","position":33}
+{"sql":"alter index i alter column 1 set (select.from = 1)","code":"42601","message":"syntax error at or near \"(\"","position":33}
+{"sql":"alter index i alter column 1 set (x.select)","code":"42601","message":"syntax error at or near \"(\"","position":33}
+{"sql":"alter index i alter column 1 set (x.y = default)","code":"42601","message":"syntax error at or near \"(\"","position":33}
+{"sql":"alter index i alter column 1 set (x.y = true)","code":"42601","message":"syntax error at or near \"(\"","position":33}
+{"sql":"alter index i alter column 1 set (x.y = -1)","code":"42601","message":"syntax error at or near \"(\"","position":33}
+{"sql":"alter index i alter column 1 set (x.y = int4)","code":"42601","message":"syntax error at or near \"(\"","position":33}
+{"sql":"alter index i alter column 1 set (x.y = none)","code":"42601","message":"syntax error at or near \"(\"","position":33}
+{"sql":"alter index i alter column 1 set (x.y = 1.5)","code":"42601","message":"syntax error at or near \"(\"","position":33}
+{"sql":"alter index i alter column 1 set (x.y = 'a', x.y = 'b')","code":"42601","message":"syntax error at or near \"(\"","position":33}
+{"sql":"alter index i alter column 1 set (x..y = 1)","code":"42601","message":"syntax error at or near \"(\"","position":33}
+{"sql":"alter index i alter column 1 set (x.y, )","code":"42601","message":"syntax error at or near \"(\"","position":33}
+{"sql":"alter index i alter column 1 set (x.*)","code":"42601","message":"syntax error at or near \"(\"","position":33}
+{"sql":"alter index i alter column 1 set (x.y[1] = 1)","code":"42601","message":"syntax error at or near \"(\"","position":33}
+{"sql":"alter index i alter column 1 set (x.y(1) = 1)","code":"42601","message":"syntax error at or near \"(\"","position":33}
+{"sql":"alter materialized view m alter column a set (n_distinct = 1)"}
+{"sql":"alter materialized view m alter column a set (x.y = 1)"}
+{"sql":"alter materialized view m alter column a set (x.y)"}
+{"sql":"alter materialized view m alter column a set (toast.autovacuum_enabled = false)"}
+{"sql":"alter materialized view m alter column a set (a.b = 'x', c = 2)"}
+{"sql":"alter materialized view m alter column a set (a, b.c)"}
+{"sql":"alter materialized view m alter column a set (x.y.z = 1)","code":"42601","message":"syntax error at or near \".\"","position":49}
+{"sql":"alter materialized view m alter column a set (x. = 1)","code":"42601","message":"syntax error at or near \"=\"","position":49}
+{"sql":"alter materialized view m alter column a set (.y = 1)","code":"42601","message":"syntax error at or near \".\"","position":46}
+{"sql":"alter materialized view m alter column a set (x.y = )","code":"42601","message":"syntax error at or near \")\"","position":52}
+{"sql":"alter materialized view m alter column a set (\"X\".\"Y\" = 1)"}
+{"sql":"alter materialized view m alter column a set (select.from = 1)"}
+{"sql":"alter materialized view m alter column a set (x.select)"}
+{"sql":"alter materialized view m alter column a set (x.y = default)"}
+{"sql":"alter materialized view m alter column a set (x.y = true)"}
+{"sql":"alter materialized view m alter column a set (x.y = -1)"}
+{"sql":"alter materialized view m alter column a set (x.y = int4)"}
+{"sql":"alter materialized view m alter column a set (x.y = none)"}
+{"sql":"alter materialized view m alter column a set (x.y = 1.5)"}
+{"sql":"alter materialized view m alter column a set (x.y = 'a', x.y = 'b')"}
+{"sql":"alter materialized view m alter column a set (x..y = 1)","code":"42601","message":"syntax error at or near \"..\"","position":47}
+{"sql":"alter materialized view m alter column a set (x.y, )","code":"42601","message":"syntax error at or near \")\"","position":51}
+{"sql":"alter materialized view m alter column a set (x.*)","code":"42601","message":"syntax error at or near \"*\"","position":48}
+{"sql":"alter materialized view m alter column a set (x.y[1] = 1)","code":"42601","message":"syntax error at or near \"[\"","position":49}
+{"sql":"alter materialized view m alter column a set (x.y(1) = 1)","code":"42601","message":"syntax error at or near \"(\"","position":49}
+{"sql":"alter foreign table f alter column a set (n_distinct = 1)"}
+{"sql":"alter foreign table f alter column a set (x.y = 1)"}
+{"sql":"alter foreign table f alter column a set (x.y)"}
+{"sql":"alter foreign table f alter column a set (toast.autovacuum_enabled = false)"}
+{"sql":"alter foreign table f alter column a set (a.b = 'x', c = 2)"}
+{"sql":"alter foreign table f alter column a set (a, b.c)"}
+{"sql":"alter foreign table f alter column a set (x.y.z = 1)","code":"42601","message":"syntax error at or near \".\"","position":45}
+{"sql":"alter foreign table f alter column a set (x. = 1)","code":"42601","message":"syntax error at or near \"=\"","position":45}
+{"sql":"alter foreign table f alter column a set (.y = 1)","code":"42601","message":"syntax error at or near \".\"","position":42}
+{"sql":"alter foreign table f alter column a set (x.y = )","code":"42601","message":"syntax error at or near \")\"","position":48}
+{"sql":"alter foreign table f alter column a set (\"X\".\"Y\" = 1)"}
+{"sql":"alter foreign table f alter column a set (select.from = 1)"}
+{"sql":"alter foreign table f alter column a set (x.select)"}
+{"sql":"alter foreign table f alter column a set (x.y = default)"}
+{"sql":"alter foreign table f alter column a set (x.y = true)"}
+{"sql":"alter foreign table f alter column a set (x.y = -1)"}
+{"sql":"alter foreign table f alter column a set (x.y = int4)"}
+{"sql":"alter foreign table f alter column a set (x.y = none)"}
+{"sql":"alter foreign table f alter column a set (x.y = 1.5)"}
+{"sql":"alter foreign table f alter column a set (x.y = 'a', x.y = 'b')"}
+{"sql":"alter foreign table f alter column a set (x..y = 1)","code":"42601","message":"syntax error at or near \"..\"","position":43}
+{"sql":"alter foreign table f alter column a set (x.y, )","code":"42601","message":"syntax error at or near \")\"","position":47}
+{"sql":"alter foreign table f alter column a set (x.*)","code":"42601","message":"syntax error at or near \"*\"","position":44}
+{"sql":"alter foreign table f alter column a set (x.y[1] = 1)","code":"42601","message":"syntax error at or near \"[\"","position":45}
+{"sql":"alter foreign table f alter column a set (x.y(1) = 1)","code":"42601","message":"syntax error at or near \"(\"","position":45}
+{"sql":"alter table t set (n_distinct = 1)"}
+{"sql":"alter table t set (x.y = 1)"}
+{"sql":"alter table t set (x.y)"}
+{"sql":"alter table t set (toast.autovacuum_enabled = false)"}
+{"sql":"alter table t set (a.b = 'x', c = 2)"}
+{"sql":"alter table t set (a, b.c)"}
+{"sql":"alter table t set (x.y.z = 1)","code":"42601","message":"syntax error at or near \".\"","position":22}
+{"sql":"alter table t set (x. = 1)","code":"42601","message":"syntax error at or near \"=\"","position":22}
+{"sql":"alter table t set (.y = 1)","code":"42601","message":"syntax error at or near \".\"","position":19}
+{"sql":"alter table t set (x.y = )","code":"42601","message":"syntax error at or near \")\"","position":25}
+{"sql":"alter table t set (\"X\".\"Y\" = 1)"}
+{"sql":"alter table t set (select.from = 1)"}
+{"sql":"alter table t set (x.select)"}
+{"sql":"alter table t set (x.y = default)"}
+{"sql":"alter table t set (x.y = true)"}
+{"sql":"alter table t set (x.y = -1)"}
+{"sql":"alter table t set (x.y = int4)"}
+{"sql":"alter table t set (x.y = none)"}
+{"sql":"alter table t set (x.y = 1.5)"}
+{"sql":"alter table t set (x.y = 'a', x.y = 'b')"}
+{"sql":"alter table t set (x..y = 1)","code":"42601","message":"syntax error at or near \"..\"","position":20}
+{"sql":"alter table t set (x.y, )","code":"42601","message":"syntax error at or near \")\"","position":24}
+{"sql":"alter table t set (x.*)","code":"42601","message":"syntax error at or near \"*\"","position":21}
+{"sql":"alter table t set (x.y[1] = 1)","code":"42601","message":"syntax error at or near \"[\"","position":22}
+{"sql":"alter table t set (x.y(1) = 1)","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"alter table t reset (n_distinct = 1)"}
+{"sql":"alter table t reset (x.y = 1)"}
+{"sql":"alter table t reset (x.y)"}
+{"sql":"alter table t reset (toast.autovacuum_enabled = false)"}
+{"sql":"alter table t reset (a.b = 'x', c = 2)"}
+{"sql":"alter table t reset (a, b.c)"}
+{"sql":"alter table t reset (x.y.z = 1)","code":"42601","message":"syntax error at or near \".\"","position":24}
+{"sql":"alter table t reset (x. = 1)","code":"42601","message":"syntax error at or near \"=\"","position":24}
+{"sql":"alter table t reset (.y = 1)","code":"42601","message":"syntax error at or near \".\"","position":21}
+{"sql":"alter table t reset (x.y = )","code":"42601","message":"syntax error at or near \")\"","position":27}
+{"sql":"alter table t reset (\"X\".\"Y\" = 1)"}
+{"sql":"alter table t reset (select.from = 1)"}
+{"sql":"alter table t reset (x.select)"}
+{"sql":"alter table t reset (x.y = default)"}
+{"sql":"alter table t reset (x.y = true)"}
+{"sql":"alter table t reset (x.y = -1)"}
+{"sql":"alter table t reset (x.y = int4)"}
+{"sql":"alter table t reset (x.y = none)"}
+{"sql":"alter table t reset (x.y = 1.5)"}
+{"sql":"alter table t reset (x.y = 'a', x.y = 'b')"}
+{"sql":"alter table t reset (x..y = 1)","code":"42601","message":"syntax error at or near \"..\"","position":22}
+{"sql":"alter table t reset (x.y, )","code":"42601","message":"syntax error at or near \")\"","position":26}
+{"sql":"alter table t reset (x.*)","code":"42601","message":"syntax error at or near \"*\"","position":23}
+{"sql":"alter table t reset (x.y[1] = 1)","code":"42601","message":"syntax error at or near \"[\"","position":24}
+{"sql":"alter table t reset (x.y(1) = 1)","code":"42601","message":"syntax error at or near \"(\"","position":24}
+{"sql":"alter index i set (n_distinct = 1)"}
+{"sql":"alter index i set (x.y = 1)"}
+{"sql":"alter index i set (x.y)"}
+{"sql":"alter index i set (toast.autovacuum_enabled = false)"}
+{"sql":"alter index i set (a.b = 'x', c = 2)"}
+{"sql":"alter index i set (a, b.c)"}
+{"sql":"alter index i set (x.y.z = 1)","code":"42601","message":"syntax error at or near \".\"","position":22}
+{"sql":"alter index i set (x. = 1)","code":"42601","message":"syntax error at or near \"=\"","position":22}
+{"sql":"alter index i set (.y = 1)","code":"42601","message":"syntax error at or near \".\"","position":19}
+{"sql":"alter index i set (x.y = )","code":"42601","message":"syntax error at or near \")\"","position":25}
+{"sql":"alter index i set (\"X\".\"Y\" = 1)"}
+{"sql":"alter index i set (select.from = 1)"}
+{"sql":"alter index i set (x.select)"}
+{"sql":"alter index i set (x.y = default)"}
+{"sql":"alter index i set (x.y = true)"}
+{"sql":"alter index i set (x.y = -1)"}
+{"sql":"alter index i set (x.y = int4)"}
+{"sql":"alter index i set (x.y = none)"}
+{"sql":"alter index i set (x.y = 1.5)"}
+{"sql":"alter index i set (x.y = 'a', x.y = 'b')"}
+{"sql":"alter index i set (x..y = 1)","code":"42601","message":"syntax error at or near \"..\"","position":20}
+{"sql":"alter index i set (x.y, )","code":"42601","message":"syntax error at or near \")\"","position":24}
+{"sql":"alter index i set (x.*)","code":"42601","message":"syntax error at or near \"*\"","position":21}
+{"sql":"alter index i set (x.y[1] = 1)","code":"42601","message":"syntax error at or near \"[\"","position":22}
+{"sql":"alter index i set (x.y(1) = 1)","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"alter view v set (n_distinct = 1)"}
+{"sql":"alter view v set (x.y = 1)"}
+{"sql":"alter view v set (x.y)"}
+{"sql":"alter view v set (toast.autovacuum_enabled = false)"}
+{"sql":"alter view v set (a.b = 'x', c = 2)"}
+{"sql":"alter view v set (a, b.c)"}
+{"sql":"alter view v set (x.y.z = 1)","code":"42601","message":"syntax error at or near \".\"","position":21}
+{"sql":"alter view v set (x. = 1)","code":"42601","message":"syntax error at or near \"=\"","position":21}
+{"sql":"alter view v set (.y = 1)","code":"42601","message":"syntax error at or near \".\"","position":18}
+{"sql":"alter view v set (x.y = )","code":"42601","message":"syntax error at or near \")\"","position":24}
+{"sql":"alter view v set (\"X\".\"Y\" = 1)"}
+{"sql":"alter view v set (select.from = 1)"}
+{"sql":"alter view v set (x.select)"}
+{"sql":"alter view v set (x.y = default)"}
+{"sql":"alter view v set (x.y = true)"}
+{"sql":"alter view v set (x.y = -1)"}
+{"sql":"alter view v set (x.y = int4)"}
+{"sql":"alter view v set (x.y = none)"}
+{"sql":"alter view v set (x.y = 1.5)"}
+{"sql":"alter view v set (x.y = 'a', x.y = 'b')"}
+{"sql":"alter view v set (x..y = 1)","code":"42601","message":"syntax error at or near \"..\"","position":19}
+{"sql":"alter view v set (x.y, )","code":"42601","message":"syntax error at or near \")\"","position":23}
+{"sql":"alter view v set (x.*)","code":"42601","message":"syntax error at or near \"*\"","position":20}
+{"sql":"alter view v set (x.y[1] = 1)","code":"42601","message":"syntax error at or near \"[\"","position":21}
+{"sql":"alter view v set (x.y(1) = 1)","code":"42601","message":"syntax error at or near \"(\"","position":21}
+{"sql":"alter materialized view m reset (n_distinct = 1)"}
+{"sql":"alter materialized view m reset (x.y = 1)"}
+{"sql":"alter materialized view m reset (x.y)"}
+{"sql":"alter materialized view m reset (toast.autovacuum_enabled = false)"}
+{"sql":"alter materialized view m reset (a.b = 'x', c = 2)"}
+{"sql":"alter materialized view m reset (a, b.c)"}
+{"sql":"alter materialized view m reset (x.y.z = 1)","code":"42601","message":"syntax error at or near \".\"","position":36}
+{"sql":"alter materialized view m reset (x. = 1)","code":"42601","message":"syntax error at or near \"=\"","position":36}
+{"sql":"alter materialized view m reset (.y = 1)","code":"42601","message":"syntax error at or near \".\"","position":33}
+{"sql":"alter materialized view m reset (x.y = )","code":"42601","message":"syntax error at or near \")\"","position":39}
+{"sql":"alter materialized view m reset (\"X\".\"Y\" = 1)"}
+{"sql":"alter materialized view m reset (select.from = 1)"}
+{"sql":"alter materialized view m reset (x.select)"}
+{"sql":"alter materialized view m reset (x.y = default)"}
+{"sql":"alter materialized view m reset (x.y = true)"}
+{"sql":"alter materialized view m reset (x.y = -1)"}
+{"sql":"alter materialized view m reset (x.y = int4)"}
+{"sql":"alter materialized view m reset (x.y = none)"}
+{"sql":"alter materialized view m reset (x.y = 1.5)"}
+{"sql":"alter materialized view m reset (x.y = 'a', x.y = 'b')"}
+{"sql":"alter materialized view m reset (x..y = 1)","code":"42601","message":"syntax error at or near \"..\"","position":34}
+{"sql":"alter materialized view m reset (x.y, )","code":"42601","message":"syntax error at or near \")\"","position":38}
+{"sql":"alter materialized view m reset (x.*)","code":"42601","message":"syntax error at or near \"*\"","position":35}
+{"sql":"alter materialized view m reset (x.y[1] = 1)","code":"42601","message":"syntax error at or near \"[\"","position":36}
+{"sql":"alter materialized view m reset (x.y(1) = 1)","code":"42601","message":"syntax error at or near \"(\"","position":36}
+{"sql":"alter table t alter column a set (x.y = 1), alter column b reset (x.y)"}
+{"sql":"alter table t alter column a set (x.y = 1) cascade","code":"42601","message":"syntax error at or near \"cascade\"","position":43}
