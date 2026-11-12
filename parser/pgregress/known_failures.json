@@ -1,4 +1,7 @@
 {
+  "aggregates.sql": [
+    326
+  ],
   "alter_table.sql": [
     60
   ],
@@ -118,6 +121,10 @@
   ],
   "largeobject.sql": [
     16
+  ],
+  "limit.sql": [
+    72,
+    73
   ],
   "merge.sql": [
     20,
