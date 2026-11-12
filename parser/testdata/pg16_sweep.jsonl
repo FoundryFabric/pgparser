@@ -8931,7 +8931,7 @@
 {"file":"create_index.sql","stmt":515,"edit":[61,0,".x"]}
 {"file":"create_index.sql","stmt":516,"sum":"27b4f981"}
 {"file":"create_index.sql","stmt":517,"sum":"e83b3214"}
-{"file":"create_index.sql","stmt":518,"sum":"2c86d1f4","class":"reindex-optional-name"}
+{"file":"create_index.sql","stmt":518,"sum":"2c86d1f4"}
 {"file":"create_index.sql","stmt":519,"sum":"80c95702"}
 {"file":"create_index.sql","stmt":520,"sum":"1153d636"}
 {"file":"create_index.sql","stmt":521,"sum":"be8e8ccf"}
@@ -58763,9 +58763,9 @@
 {"sql":"alter role r"}
 {"sql":"alter user r"}
 {"sql":"alter role r with"}
-{"sql":"reindex system","class":"reindex-optional-name"}
-{"sql":"reindex database","class":"reindex-optional-name"}
-{"sql":"reindex (verbose) system","class":"reindex-optional-name"}
+{"sql":"reindex system"}
+{"sql":"reindex database"}
+{"sql":"reindex (verbose) system"}
 {"sql":"reindex table","code":"42601","msg":"syntax error at end of input","pos":13}
 {"sql":"alter database x refresh collation version","class":"alter-database-refresh-collation"}
 {"sql":"alter database x refresh","code":"42601","msg":"syntax error at end of input","pos":24,"class":"alter-database-refresh-collation"}

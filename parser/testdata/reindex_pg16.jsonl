@@ -1,0 +1,886 @@
+{"sql":"reindex system"}
+{"sql":"reindex system d"}
+{"sql":"reindex system \"D\""}
+{"sql":"reindex system s.d","code":"42601","message":"syntax error at or near \".\"","position":16}
+{"sql":"reindex system name"}
+{"sql":"reindex system concurrently"}
+{"sql":"reindex system d e","code":"42601","message":"syntax error at or near \"e\"","position":17}
+{"sql":"reindex system 1","code":"42601","message":"syntax error at or near \"1\"","position":15}
+{"sql":"reindex system ;"}
+{"sql":"reindex system ; select 1"}
+{"sql":"reindex system d,","code":"42601","message":"syntax error at or near \",\"","position":16}
+{"sql":"reindex system concurrently d"}
+{"sql":"reindex system concurrently \"D\""}
+{"sql":"reindex system concurrently s.d","code":"42601","message":"syntax error at or near \".\"","position":29}
+{"sql":"reindex system concurrently name"}
+{"sql":"reindex system concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":28}
+{"sql":"reindex system concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":30}
+{"sql":"reindex system concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":28}
+{"sql":"reindex system concurrently ;"}
+{"sql":"reindex system concurrently ; select 1"}
+{"sql":"reindex system concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":29}
+{"sql":"reindex database"}
+{"sql":"reindex database d"}
+{"sql":"reindex database \"D\""}
+{"sql":"reindex database s.d","code":"42601","message":"syntax error at or near \".\"","position":18}
+{"sql":"reindex database name"}
+{"sql":"reindex database concurrently"}
+{"sql":"reindex database d e","code":"42601","message":"syntax error at or near \"e\"","position":19}
+{"sql":"reindex database 1","code":"42601","message":"syntax error at or near \"1\"","position":17}
+{"sql":"reindex database ;"}
+{"sql":"reindex database ; select 1"}
+{"sql":"reindex database d,","code":"42601","message":"syntax error at or near \",\"","position":18}
+{"sql":"reindex database concurrently d"}
+{"sql":"reindex database concurrently \"D\""}
+{"sql":"reindex database concurrently s.d","code":"42601","message":"syntax error at or near \".\"","position":31}
+{"sql":"reindex database concurrently name"}
+{"sql":"reindex database concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":30}
+{"sql":"reindex database concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":32}
+{"sql":"reindex database concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":30}
+{"sql":"reindex database concurrently ;"}
+{"sql":"reindex database concurrently ; select 1"}
+{"sql":"reindex database concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":31}
+{"sql":"reindex SYSTEM"}
+{"sql":"reindex SYSTEM d"}
+{"sql":"reindex SYSTEM \"D\""}
+{"sql":"reindex SYSTEM s.d","code":"42601","message":"syntax error at or near \".\"","position":16}
+{"sql":"reindex SYSTEM name"}
+{"sql":"reindex SYSTEM concurrently"}
+{"sql":"reindex SYSTEM d e","code":"42601","message":"syntax error at or near \"e\"","position":17}
+{"sql":"reindex SYSTEM 1","code":"42601","message":"syntax error at or near \"1\"","position":15}
+{"sql":"reindex SYSTEM ;"}
+{"sql":"reindex SYSTEM ; select 1"}
+{"sql":"reindex SYSTEM d,","code":"42601","message":"syntax error at or near \",\"","position":16}
+{"sql":"reindex SYSTEM concurrently d"}
+{"sql":"reindex SYSTEM concurrently \"D\""}
+{"sql":"reindex SYSTEM concurrently s.d","code":"42601","message":"syntax error at or near \".\"","position":29}
+{"sql":"reindex SYSTEM concurrently name"}
+{"sql":"reindex SYSTEM concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":28}
+{"sql":"reindex SYSTEM concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":30}
+{"sql":"reindex SYSTEM concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":28}
+{"sql":"reindex SYSTEM concurrently ;"}
+{"sql":"reindex SYSTEM concurrently ; select 1"}
+{"sql":"reindex SYSTEM concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":29}
+{"sql":"reindex DATABASE"}
+{"sql":"reindex DATABASE d"}
+{"sql":"reindex DATABASE \"D\""}
+{"sql":"reindex DATABASE s.d","code":"42601","message":"syntax error at or near \".\"","position":18}
+{"sql":"reindex DATABASE name"}
+{"sql":"reindex DATABASE concurrently"}
+{"sql":"reindex DATABASE d e","code":"42601","message":"syntax error at or near \"e\"","position":19}
+{"sql":"reindex DATABASE 1","code":"42601","message":"syntax error at or near \"1\"","position":17}
+{"sql":"reindex DATABASE ;"}
+{"sql":"reindex DATABASE ; select 1"}
+{"sql":"reindex DATABASE d,","code":"42601","message":"syntax error at or near \",\"","position":18}
+{"sql":"reindex DATABASE concurrently d"}
+{"sql":"reindex DATABASE concurrently \"D\""}
+{"sql":"reindex DATABASE concurrently s.d","code":"42601","message":"syntax error at or near \".\"","position":31}
+{"sql":"reindex DATABASE concurrently name"}
+{"sql":"reindex DATABASE concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":30}
+{"sql":"reindex DATABASE concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":32}
+{"sql":"reindex DATABASE concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":30}
+{"sql":"reindex DATABASE concurrently ;"}
+{"sql":"reindex DATABASE concurrently ; select 1"}
+{"sql":"reindex DATABASE concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":31}
+{"sql":"reindex schema","code":"42601","message":"syntax error at end of input","position":14}
+{"sql":"reindex schema d"}
+{"sql":"reindex schema \"D\""}
+{"sql":"reindex schema s.d","code":"42601","message":"syntax error at or near \".\"","position":16}
+{"sql":"reindex schema name"}
+{"sql":"reindex schema concurrently","code":"42601","message":"syntax error at end of input","position":27}
+{"sql":"reindex schema d e","code":"42601","message":"syntax error at or near \"e\"","position":17}
+{"sql":"reindex schema 1","code":"42601","message":"syntax error at or near \"1\"","position":15}
+{"sql":"reindex schema ;","code":"42601","message":"syntax error at or near \";\"","position":15}
+{"sql":"reindex schema ; select 1","code":"42601","message":"syntax error at or near \";\"","position":15}
+{"sql":"reindex schema d,","code":"42601","message":"syntax error at or near \",\"","position":16}
+{"sql":"reindex schema concurrently d"}
+{"sql":"reindex schema concurrently \"D\""}
+{"sql":"reindex schema concurrently s.d","code":"42601","message":"syntax error at or near \".\"","position":29}
+{"sql":"reindex schema concurrently name"}
+{"sql":"reindex schema concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":28}
+{"sql":"reindex schema concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":30}
+{"sql":"reindex schema concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":28}
+{"sql":"reindex schema concurrently ;","code":"42601","message":"syntax error at or near \";\"","position":28}
+{"sql":"reindex schema concurrently ; select 1","code":"42601","message":"syntax error at or near \";\"","position":28}
+{"sql":"reindex schema concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":29}
+{"sql":"reindex table","code":"42601","message":"syntax error at end of input","position":13}
+{"sql":"reindex table d"}
+{"sql":"reindex table \"D\""}
+{"sql":"reindex table s.d"}
+{"sql":"reindex table name"}
+{"sql":"reindex table concurrently","code":"42601","message":"syntax error at end of input","position":26}
+{"sql":"reindex table d e","code":"42601","message":"syntax error at or near \"e\"","position":16}
+{"sql":"reindex table 1","code":"42601","message":"syntax error at or near \"1\"","position":14}
+{"sql":"reindex table ;","code":"42601","message":"syntax error at or near \";\"","position":14}
+{"sql":"reindex table ; select 1","code":"42601","message":"syntax error at or near \";\"","position":14}
+{"sql":"reindex table d,","code":"42601","message":"syntax error at or near \",\"","position":15}
+{"sql":"reindex table concurrently d"}
+{"sql":"reindex table concurrently \"D\""}
+{"sql":"reindex table concurrently s.d"}
+{"sql":"reindex table concurrently name"}
+{"sql":"reindex table concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":27}
+{"sql":"reindex table concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":29}
+{"sql":"reindex table concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":27}
+{"sql":"reindex table concurrently ;","code":"42601","message":"syntax error at or near \";\"","position":27}
+{"sql":"reindex table concurrently ; select 1","code":"42601","message":"syntax error at or near \";\"","position":27}
+{"sql":"reindex table concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":28}
+{"sql":"reindex index","code":"42601","message":"syntax error at end of input","position":13}
+{"sql":"reindex index d"}
+{"sql":"reindex index \"D\""}
+{"sql":"reindex index s.d"}
+{"sql":"reindex index name"}
+{"sql":"reindex index concurrently","code":"42601","message":"syntax error at end of input","position":26}
+{"sql":"reindex index d e","code":"42601","message":"syntax error at or near \"e\"","position":16}
+{"sql":"reindex index 1","code":"42601","message":"syntax error at or near \"1\"","position":14}
+{"sql":"reindex index ;","code":"42601","message":"syntax error at or near \";\"","position":14}
+{"sql":"reindex index ; select 1","code":"42601","message":"syntax error at or near \";\"","position":14}
+{"sql":"reindex index d,","code":"42601","message":"syntax error at or near \",\"","position":15}
+{"sql":"reindex index concurrently d"}
+{"sql":"reindex index concurrently \"D\""}
+{"sql":"reindex index concurrently s.d"}
+{"sql":"reindex index concurrently name"}
+{"sql":"reindex index concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":27}
+{"sql":"reindex index concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":29}
+{"sql":"reindex index concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":27}
+{"sql":"reindex index concurrently ;","code":"42601","message":"syntax error at or near \";\"","position":27}
+{"sql":"reindex index concurrently ; select 1","code":"42601","message":"syntax error at or near \";\"","position":27}
+{"sql":"reindex index concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":28}
+{"sql":"reindex (verbose) system"}
+{"sql":"reindex (verbose) system d"}
+{"sql":"reindex (verbose) system \"D\""}
+{"sql":"reindex (verbose) system s.d","code":"42601","message":"syntax error at or near \".\"","position":26}
+{"sql":"reindex (verbose) system name"}
+{"sql":"reindex (verbose) system concurrently"}
+{"sql":"reindex (verbose) system d e","code":"42601","message":"syntax error at or near \"e\"","position":27}
+{"sql":"reindex (verbose) system 1","code":"42601","message":"syntax error at or near \"1\"","position":25}
+{"sql":"reindex (verbose) system ;"}
+{"sql":"reindex (verbose) system ; select 1"}
+{"sql":"reindex (verbose) system d,","code":"42601","message":"syntax error at or near \",\"","position":26}
+{"sql":"reindex (verbose) system concurrently d"}
+{"sql":"reindex (verbose) system concurrently \"D\""}
+{"sql":"reindex (verbose) system concurrently s.d","code":"42601","message":"syntax error at or near \".\"","position":39}
+{"sql":"reindex (verbose) system concurrently name"}
+{"sql":"reindex (verbose) system concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":38}
+{"sql":"reindex (verbose) system concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":40}
+{"sql":"reindex (verbose) system concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":38}
+{"sql":"reindex (verbose) system concurrently ;"}
+{"sql":"reindex (verbose) system concurrently ; select 1"}
+{"sql":"reindex (verbose) system concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":39}
+{"sql":"reindex (verbose) database"}
+{"sql":"reindex (verbose) database d"}
+{"sql":"reindex (verbose) database \"D\""}
+{"sql":"reindex (verbose) database s.d","code":"42601","message":"syntax error at or near \".\"","position":28}
+{"sql":"reindex (verbose) database name"}
+{"sql":"reindex (verbose) database concurrently"}
+{"sql":"reindex (verbose) database d e","code":"42601","message":"syntax error at or near \"e\"","position":29}
+{"sql":"reindex (verbose) database 1","code":"42601","message":"syntax error at or near \"1\"","position":27}
+{"sql":"reindex (verbose) database ;"}
+{"sql":"reindex (verbose) database ; select 1"}
+{"sql":"reindex (verbose) database d,","code":"42601","message":"syntax error at or near \",\"","position":28}
+{"sql":"reindex (verbose) database concurrently d"}
+{"sql":"reindex (verbose) database concurrently \"D\""}
+{"sql":"reindex (verbose) database concurrently s.d","code":"42601","message":"syntax error at or near \".\"","position":41}
+{"sql":"reindex (verbose) database concurrently name"}
+{"sql":"reindex (verbose) database concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":40}
+{"sql":"reindex (verbose) database concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":42}
+{"sql":"reindex (verbose) database concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":40}
+{"sql":"reindex (verbose) database concurrently ;"}
+{"sql":"reindex (verbose) database concurrently ; select 1"}
+{"sql":"reindex (verbose) database concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":41}
+{"sql":"reindex (verbose) SYSTEM"}
+{"sql":"reindex (verbose) SYSTEM d"}
+{"sql":"reindex (verbose) SYSTEM \"D\""}
+{"sql":"reindex (verbose) SYSTEM s.d","code":"42601","message":"syntax error at or near \".\"","position":26}
+{"sql":"reindex (verbose) SYSTEM name"}
+{"sql":"reindex (verbose) SYSTEM concurrently"}
+{"sql":"reindex (verbose) SYSTEM d e","code":"42601","message":"syntax error at or near \"e\"","position":27}
+{"sql":"reindex (verbose) SYSTEM 1","code":"42601","message":"syntax error at or near \"1\"","position":25}
+{"sql":"reindex (verbose) SYSTEM ;"}
+{"sql":"reindex (verbose) SYSTEM ; select 1"}
+{"sql":"reindex (verbose) SYSTEM d,","code":"42601","message":"syntax error at or near \",\"","position":26}
+{"sql":"reindex (verbose) SYSTEM concurrently d"}
+{"sql":"reindex (verbose) SYSTEM concurrently \"D\""}
+{"sql":"reindex (verbose) SYSTEM concurrently s.d","code":"42601","message":"syntax error at or near \".\"","position":39}
+{"sql":"reindex (verbose) SYSTEM concurrently name"}
+{"sql":"reindex (verbose) SYSTEM concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":38}
+{"sql":"reindex (verbose) SYSTEM concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":40}
+{"sql":"reindex (verbose) SYSTEM concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":38}
+{"sql":"reindex (verbose) SYSTEM concurrently ;"}
+{"sql":"reindex (verbose) SYSTEM concurrently ; select 1"}
+{"sql":"reindex (verbose) SYSTEM concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":39}
+{"sql":"reindex (verbose) DATABASE"}
+{"sql":"reindex (verbose) DATABASE d"}
+{"sql":"reindex (verbose) DATABASE \"D\""}
+{"sql":"reindex (verbose) DATABASE s.d","code":"42601","message":"syntax error at or near \".\"","position":28}
+{"sql":"reindex (verbose) DATABASE name"}
+{"sql":"reindex (verbose) DATABASE concurrently"}
+{"sql":"reindex (verbose) DATABASE d e","code":"42601","message":"syntax error at or near \"e\"","position":29}
+{"sql":"reindex (verbose) DATABASE 1","code":"42601","message":"syntax error at or near \"1\"","position":27}
+{"sql":"reindex (verbose) DATABASE ;"}
+{"sql":"reindex (verbose) DATABASE ; select 1"}
+{"sql":"reindex (verbose) DATABASE d,","code":"42601","message":"syntax error at or near \",\"","position":28}
+{"sql":"reindex (verbose) DATABASE concurrently d"}
+{"sql":"reindex (verbose) DATABASE concurrently \"D\""}
+{"sql":"reindex (verbose) DATABASE concurrently s.d","code":"42601","message":"syntax error at or near \".\"","position":41}
+{"sql":"reindex (verbose) DATABASE concurrently name"}
+{"sql":"reindex (verbose) DATABASE concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":40}
+{"sql":"reindex (verbose) DATABASE concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":42}
+{"sql":"reindex (verbose) DATABASE concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":40}
+{"sql":"reindex (verbose) DATABASE concurrently ;"}
+{"sql":"reindex (verbose) DATABASE concurrently ; select 1"}
+{"sql":"reindex (verbose) DATABASE concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":41}
+{"sql":"reindex (verbose) schema","code":"42601","message":"syntax error at end of input","position":24}
+{"sql":"reindex (verbose) schema d"}
+{"sql":"reindex (verbose) schema \"D\""}
+{"sql":"reindex (verbose) schema s.d","code":"42601","message":"syntax error at or near \".\"","position":26}
+{"sql":"reindex (verbose) schema name"}
+{"sql":"reindex (verbose) schema concurrently","code":"42601","message":"syntax error at end of input","position":37}
+{"sql":"reindex (verbose) schema d e","code":"42601","message":"syntax error at or near \"e\"","position":27}
+{"sql":"reindex (verbose) schema 1","code":"42601","message":"syntax error at or near \"1\"","position":25}
+{"sql":"reindex (verbose) schema ;","code":"42601","message":"syntax error at or near \";\"","position":25}
+{"sql":"reindex (verbose) schema ; select 1","code":"42601","message":"syntax error at or near \";\"","position":25}
+{"sql":"reindex (verbose) schema d,","code":"42601","message":"syntax error at or near \",\"","position":26}
+{"sql":"reindex (verbose) schema concurrently d"}
+{"sql":"reindex (verbose) schema concurrently \"D\""}
+{"sql":"reindex (verbose) schema concurrently s.d","code":"42601","message":"syntax error at or near \".\"","position":39}
+{"sql":"reindex (verbose) schema concurrently name"}
+{"sql":"reindex (verbose) schema concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":38}
+{"sql":"reindex (verbose) schema concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":40}
+{"sql":"reindex (verbose) schema concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":38}
+{"sql":"reindex (verbose) schema concurrently ;","code":"42601","message":"syntax error at or near \";\"","position":38}
+{"sql":"reindex (verbose) schema concurrently ; select 1","code":"42601","message":"syntax error at or near \";\"","position":38}
+{"sql":"reindex (verbose) schema concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":39}
+{"sql":"reindex (verbose) table","code":"42601","message":"syntax error at end of input","position":23}
+{"sql":"reindex (verbose) table d"}
+{"sql":"reindex (verbose) table \"D\""}
+{"sql":"reindex (verbose) table s.d"}
+{"sql":"reindex (verbose) table name"}
+{"sql":"reindex (verbose) table concurrently","code":"42601","message":"syntax error at end of input","position":36}
+{"sql":"reindex (verbose) table d e","code":"42601","message":"syntax error at or near \"e\"","position":26}
+{"sql":"reindex (verbose) table 1","code":"42601","message":"syntax error at or near \"1\"","position":24}
+{"sql":"reindex (verbose) table ;","code":"42601","message":"syntax error at or near \";\"","position":24}
+{"sql":"reindex (verbose) table ; select 1","code":"42601","message":"syntax error at or near \";\"","position":24}
+{"sql":"reindex (verbose) table d,","code":"42601","message":"syntax error at or near \",\"","position":25}
+{"sql":"reindex (verbose) table concurrently d"}
+{"sql":"reindex (verbose) table concurrently \"D\""}
+{"sql":"reindex (verbose) table concurrently s.d"}
+{"sql":"reindex (verbose) table concurrently name"}
+{"sql":"reindex (verbose) table concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":37}
+{"sql":"reindex (verbose) table concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":39}
+{"sql":"reindex (verbose) table concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":37}
+{"sql":"reindex (verbose) table concurrently ;","code":"42601","message":"syntax error at or near \";\"","position":37}
+{"sql":"reindex (verbose) table concurrently ; select 1","code":"42601","message":"syntax error at or near \";\"","position":37}
+{"sql":"reindex (verbose) table concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":38}
+{"sql":"reindex (verbose) index","code":"42601","message":"syntax error at end of input","position":23}
+{"sql":"reindex (verbose) index d"}
+{"sql":"reindex (verbose) index \"D\""}
+{"sql":"reindex (verbose) index s.d"}
+{"sql":"reindex (verbose) index name"}
+{"sql":"reindex (verbose) index concurrently","code":"42601","message":"syntax error at end of input","position":36}
+{"sql":"reindex (verbose) index d e","code":"42601","message":"syntax error at or near \"e\"","position":26}
+{"sql":"reindex (verbose) index 1","code":"42601","message":"syntax error at or near \"1\"","position":24}
+{"sql":"reindex (verbose) index ;","code":"42601","message":"syntax error at or near \";\"","position":24}
+{"sql":"reindex (verbose) index ; select 1","code":"42601","message":"syntax error at or near \";\"","position":24}
+{"sql":"reindex (verbose) index d,","code":"42601","message":"syntax error at or near \",\"","position":25}
+{"sql":"reindex (verbose) index concurrently d"}
+{"sql":"reindex (verbose) index concurrently \"D\""}
+{"sql":"reindex (verbose) index concurrently s.d"}
+{"sql":"reindex (verbose) index concurrently name"}
+{"sql":"reindex (verbose) index concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":37}
+{"sql":"reindex (verbose) index concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":39}
+{"sql":"reindex (verbose) index concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":37}
+{"sql":"reindex (verbose) index concurrently ;","code":"42601","message":"syntax error at or near \";\"","position":37}
+{"sql":"reindex (verbose) index concurrently ; select 1","code":"42601","message":"syntax error at or near \";\"","position":37}
+{"sql":"reindex (verbose) index concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":38}
+{"sql":"reindex (concurrently) system"}
+{"sql":"reindex (concurrently) system d"}
+{"sql":"reindex (concurrently) system \"D\""}
+{"sql":"reindex (concurrently) system s.d","code":"42601","message":"syntax error at or near \".\"","position":31}
+{"sql":"reindex (concurrently) system name"}
+{"sql":"reindex (concurrently) system concurrently"}
+{"sql":"reindex (concurrently) system d e","code":"42601","message":"syntax error at or near \"e\"","position":32}
+{"sql":"reindex (concurrently) system 1","code":"42601","message":"syntax error at or near \"1\"","position":30}
+{"sql":"reindex (concurrently) system ;"}
+{"sql":"reindex (concurrently) system ; select 1"}
+{"sql":"reindex (concurrently) system d,","code":"42601","message":"syntax error at or near \",\"","position":31}
+{"sql":"reindex (concurrently) system concurrently d"}
+{"sql":"reindex (concurrently) system concurrently \"D\""}
+{"sql":"reindex (concurrently) system concurrently s.d","code":"42601","message":"syntax error at or near \".\"","position":44}
+{"sql":"reindex (concurrently) system concurrently name"}
+{"sql":"reindex (concurrently) system concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":43}
+{"sql":"reindex (concurrently) system concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":45}
+{"sql":"reindex (concurrently) system concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":43}
+{"sql":"reindex (concurrently) system concurrently ;"}
+{"sql":"reindex (concurrently) system concurrently ; select 1"}
+{"sql":"reindex (concurrently) system concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":44}
+{"sql":"reindex (concurrently) database"}
+{"sql":"reindex (concurrently) database d"}
+{"sql":"reindex (concurrently) database \"D\""}
+{"sql":"reindex (concurrently) database s.d","code":"42601","message":"syntax error at or near \".\"","position":33}
+{"sql":"reindex (concurrently) database name"}
+{"sql":"reindex (concurrently) database concurrently"}
+{"sql":"reindex (concurrently) database d e","code":"42601","message":"syntax error at or near \"e\"","position":34}
+{"sql":"reindex (concurrently) database 1","code":"42601","message":"syntax error at or near \"1\"","position":32}
+{"sql":"reindex (concurrently) database ;"}
+{"sql":"reindex (concurrently) database ; select 1"}
+{"sql":"reindex (concurrently) database d,","code":"42601","message":"syntax error at or near \",\"","position":33}
+{"sql":"reindex (concurrently) database concurrently d"}
+{"sql":"reindex (concurrently) database concurrently \"D\""}
+{"sql":"reindex (concurrently) database concurrently s.d","code":"42601","message":"syntax error at or near \".\"","position":46}
+{"sql":"reindex (concurrently) database concurrently name"}
+{"sql":"reindex (concurrently) database concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":45}
+{"sql":"reindex (concurrently) database concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":47}
+{"sql":"reindex (concurrently) database concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":45}
+{"sql":"reindex (concurrently) database concurrently ;"}
+{"sql":"reindex (concurrently) database concurrently ; select 1"}
+{"sql":"reindex (concurrently) database concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":46}
+{"sql":"reindex (concurrently) SYSTEM"}
+{"sql":"reindex (concurrently) SYSTEM d"}
+{"sql":"reindex (concurrently) SYSTEM \"D\""}
+{"sql":"reindex (concurrently) SYSTEM s.d","code":"42601","message":"syntax error at or near \".\"","position":31}
+{"sql":"reindex (concurrently) SYSTEM name"}
+{"sql":"reindex (concurrently) SYSTEM concurrently"}
+{"sql":"reindex (concurrently) SYSTEM d e","code":"42601","message":"syntax error at or near \"e\"","position":32}
+{"sql":"reindex (concurrently) SYSTEM 1","code":"42601","message":"syntax error at or near \"1\"","position":30}
+{"sql":"reindex (concurrently) SYSTEM ;"}
+{"sql":"reindex (concurrently) SYSTEM ; select 1"}
+{"sql":"reindex (concurrently) SYSTEM d,","code":"42601","message":"syntax error at or near \",\"","position":31}
+{"sql":"reindex (concurrently) SYSTEM concurrently d"}
+{"sql":"reindex (concurrently) SYSTEM concurrently \"D\""}
+{"sql":"reindex (concurrently) SYSTEM concurrently s.d","code":"42601","message":"syntax error at or near \".\"","position":44}
+{"sql":"reindex (concurrently) SYSTEM concurrently name"}
+{"sql":"reindex (concurrently) SYSTEM concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":43}
+{"sql":"reindex (concurrently) SYSTEM concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":45}
+{"sql":"reindex (concurrently) SYSTEM concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":43}
+{"sql":"reindex (concurrently) SYSTEM concurrently ;"}
+{"sql":"reindex (concurrently) SYSTEM concurrently ; select 1"}
+{"sql":"reindex (concurrently) SYSTEM concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":44}
+{"sql":"reindex (concurrently) DATABASE"}
+{"sql":"reindex (concurrently) DATABASE d"}
+{"sql":"reindex (concurrently) DATABASE \"D\""}
+{"sql":"reindex (concurrently) DATABASE s.d","code":"42601","message":"syntax error at or near \".\"","position":33}
+{"sql":"reindex (concurrently) DATABASE name"}
+{"sql":"reindex (concurrently) DATABASE concurrently"}
+{"sql":"reindex (concurrently) DATABASE d e","code":"42601","message":"syntax error at or near \"e\"","position":34}
+{"sql":"reindex (concurrently) DATABASE 1","code":"42601","message":"syntax error at or near \"1\"","position":32}
+{"sql":"reindex (concurrently) DATABASE ;"}
+{"sql":"reindex (concurrently) DATABASE ; select 1"}
+{"sql":"reindex (concurrently) DATABASE d,","code":"42601","message":"syntax error at or near \",\"","position":33}
+{"sql":"reindex (concurrently) DATABASE concurrently d"}
+{"sql":"reindex (concurrently) DATABASE concurrently \"D\""}
+{"sql":"reindex (concurrently) DATABASE concurrently s.d","code":"42601","message":"syntax error at or near \".\"","position":46}
+{"sql":"reindex (concurrently) DATABASE concurrently name"}
+{"sql":"reindex (concurrently) DATABASE concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":45}
+{"sql":"reindex (concurrently) DATABASE concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":47}
+{"sql":"reindex (concurrently) DATABASE concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":45}
+{"sql":"reindex (concurrently) DATABASE concurrently ;"}
+{"sql":"reindex (concurrently) DATABASE concurrently ; select 1"}
+{"sql":"reindex (concurrently) DATABASE concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":46}
+{"sql":"reindex (concurrently) schema","code":"42601","message":"syntax error at end of input","position":29}
+{"sql":"reindex (concurrently) schema d"}
+{"sql":"reindex (concurrently) schema \"D\""}
+{"sql":"reindex (concurrently) schema s.d","code":"42601","message":"syntax error at or near \".\"","position":31}
+{"sql":"reindex (concurrently) schema name"}
+{"sql":"reindex (concurrently) schema concurrently","code":"42601","message":"syntax error at end of input","position":42}
+{"sql":"reindex (concurrently) schema d e","code":"42601","message":"syntax error at or near \"e\"","position":32}
+{"sql":"reindex (concurrently) schema 1","code":"42601","message":"syntax error at or near \"1\"","position":30}
+{"sql":"reindex (concurrently) schema ;","code":"42601","message":"syntax error at or near \";\"","position":30}
+{"sql":"reindex (concurrently) schema ; select 1","code":"42601","message":"syntax error at or near \";\"","position":30}
+{"sql":"reindex (concurrently) schema d,","code":"42601","message":"syntax error at or near \",\"","position":31}
+{"sql":"reindex (concurrently) schema concurrently d"}
+{"sql":"reindex (concurrently) schema concurrently \"D\""}
+{"sql":"reindex (concurrently) schema concurrently s.d","code":"42601","message":"syntax error at or near \".\"","position":44}
+{"sql":"reindex (concurrently) schema concurrently name"}
+{"sql":"reindex (concurrently) schema concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":43}
+{"sql":"reindex (concurrently) schema concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":45}
+{"sql":"reindex (concurrently) schema concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":43}
+{"sql":"reindex (concurrently) schema concurrently ;","code":"42601","message":"syntax error at or near \";\"","position":43}
+{"sql":"reindex (concurrently) schema concurrently ; select 1","code":"42601","message":"syntax error at or near \";\"","position":43}
+{"sql":"reindex (concurrently) schema concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":44}
+{"sql":"reindex (concurrently) table","code":"42601","message":"syntax error at end of input","position":28}
+{"sql":"reindex (concurrently) table d"}
+{"sql":"reindex (concurrently) table \"D\""}
+{"sql":"reindex (concurrently) table s.d"}
+{"sql":"reindex (concurrently) table name"}
+{"sql":"reindex (concurrently) table concurrently","code":"42601","message":"syntax error at end of input","position":41}
+{"sql":"reindex (concurrently) table d e","code":"42601","message":"syntax error at or near \"e\"","position":31}
+{"sql":"reindex (concurrently) table 1","code":"42601","message":"syntax error at or near \"1\"","position":29}
+{"sql":"reindex (concurrently) table ;","code":"42601","message":"syntax error at or near \";\"","position":29}
+{"sql":"reindex (concurrently) table ; select 1","code":"42601","message":"syntax error at or near \";\"","position":29}
+{"sql":"reindex (concurrently) table d,","code":"42601","message":"syntax error at or near \",\"","position":30}
+{"sql":"reindex (concurrently) table concurrently d"}
+{"sql":"reindex (concurrently) table concurrently \"D\""}
+{"sql":"reindex (concurrently) table concurrently s.d"}
+{"sql":"reindex (concurrently) table concurrently name"}
+{"sql":"reindex (concurrently) table concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":42}
+{"sql":"reindex (concurrently) table concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":44}
+{"sql":"reindex (concurrently) table concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":42}
+{"sql":"reindex (concurrently) table concurrently ;","code":"42601","message":"syntax error at or near \";\"","position":42}
+{"sql":"reindex (concurrently) table concurrently ; select 1","code":"42601","message":"syntax error at or near \";\"","position":42}
+{"sql":"reindex (concurrently) table concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":43}
+{"sql":"reindex (concurrently) index","code":"42601","message":"syntax error at end of input","position":28}
+{"sql":"reindex (concurrently) index d"}
+{"sql":"reindex (concurrently) index \"D\""}
+{"sql":"reindex (concurrently) index s.d"}
+{"sql":"reindex (concurrently) index name"}
+{"sql":"reindex (concurrently) index concurrently","code":"42601","message":"syntax error at end of input","position":41}
+{"sql":"reindex (concurrently) index d e","code":"42601","message":"syntax error at or near \"e\"","position":31}
+{"sql":"reindex (concurrently) index 1","code":"42601","message":"syntax error at or near \"1\"","position":29}
+{"sql":"reindex (concurrently) index ;","code":"42601","message":"syntax error at or near \";\"","position":29}
+{"sql":"reindex (concurrently) index ; select 1","code":"42601","message":"syntax error at or near \";\"","position":29}
+{"sql":"reindex (concurrently) index d,","code":"42601","message":"syntax error at or near \",\"","position":30}
+{"sql":"reindex (concurrently) index concurrently d"}
+{"sql":"reindex (concurrently) index concurrently \"D\""}
+{"sql":"reindex (concurrently) index concurrently s.d"}
+{"sql":"reindex (concurrently) index concurrently name"}
+{"sql":"reindex (concurrently) index concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":42}
+{"sql":"reindex (concurrently) index concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":44}
+{"sql":"reindex (concurrently) index concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":42}
+{"sql":"reindex (concurrently) index concurrently ;","code":"42601","message":"syntax error at or near \";\"","position":42}
+{"sql":"reindex (concurrently) index concurrently ; select 1","code":"42601","message":"syntax error at or near \";\"","position":42}
+{"sql":"reindex (concurrently) index concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":43}
+{"sql":"reindex (verbose, concurrently false) system"}
+{"sql":"reindex (verbose, concurrently false) system d"}
+{"sql":"reindex (verbose, concurrently false) system \"D\""}
+{"sql":"reindex (verbose, concurrently false) system s.d","code":"42601","message":"syntax error at or near \".\"","position":46}
+{"sql":"reindex (verbose, concurrently false) system name"}
+{"sql":"reindex (verbose, concurrently false) system concurrently"}
+{"sql":"reindex (verbose, concurrently false) system d e","code":"42601","message":"syntax error at or near \"e\"","position":47}
+{"sql":"reindex (verbose, concurrently false) system 1","code":"42601","message":"syntax error at or near \"1\"","position":45}
+{"sql":"reindex (verbose, concurrently false) system ;"}
+{"sql":"reindex (verbose, concurrently false) system ; select 1"}
+{"sql":"reindex (verbose, concurrently false) system d,","code":"42601","message":"syntax error at or near \",\"","position":46}
+{"sql":"reindex (verbose, concurrently false) system concurrently d"}
+{"sql":"reindex (verbose, concurrently false) system concurrently \"D\""}
+{"sql":"reindex (verbose, concurrently false) system concurrently s.d","code":"42601","message":"syntax error at or near \".\"","position":59}
+{"sql":"reindex (verbose, concurrently false) system concurrently name"}
+{"sql":"reindex (verbose, concurrently false) system concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":58}
+{"sql":"reindex (verbose, concurrently false) system concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":60}
+{"sql":"reindex (verbose, concurrently false) system concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":58}
+{"sql":"reindex (verbose, concurrently false) system concurrently ;"}
+{"sql":"reindex (verbose, concurrently false) system concurrently ; select 1"}
+{"sql":"reindex (verbose, concurrently false) system concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":59}
+{"sql":"reindex (verbose, concurrently false) database"}
+{"sql":"reindex (verbose, concurrently false) database d"}
+{"sql":"reindex (verbose, concurrently false) database \"D\""}
+{"sql":"reindex (verbose, concurrently false) database s.d","code":"42601","message":"syntax error at or near \".\"","position":48}
+{"sql":"reindex (verbose, concurrently false) database name"}
+{"sql":"reindex (verbose, concurrently false) database concurrently"}
+{"sql":"reindex (verbose, concurrently false) database d e","code":"42601","message":"syntax error at or near \"e\"","position":49}
+{"sql":"reindex (verbose, concurrently false) database 1","code":"42601","message":"syntax error at or near \"1\"","position":47}
+{"sql":"reindex (verbose, concurrently false) database ;"}
+{"sql":"reindex (verbose, concurrently false) database ; select 1"}
+{"sql":"reindex (verbose, concurrently false) database d,","code":"42601","message":"syntax error at or near \",\"","position":48}
+{"sql":"reindex (verbose, concurrently false) database concurrently d"}
+{"sql":"reindex (verbose, concurrently false) database concurrently \"D\""}
+{"sql":"reindex (verbose, concurrently false) database concurrently s.d","code":"42601","message":"syntax error at or near \".\"","position":61}
+{"sql":"reindex (verbose, concurrently false) database concurrently name"}
+{"sql":"reindex (verbose, concurrently false) database concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":60}
+{"sql":"reindex (verbose, concurrently false) database concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":62}
+{"sql":"reindex (verbose, concurrently false) database concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":60}
+{"sql":"reindex (verbose, concurrently false) database concurrently ;"}
+{"sql":"reindex (verbose, concurrently false) database concurrently ; select 1"}
+{"sql":"reindex (verbose, concurrently false) database concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":61}
+{"sql":"reindex (verbose, concurrently false) SYSTEM"}
+{"sql":"reindex (verbose, concurrently false) SYSTEM d"}
+{"sql":"reindex (verbose, concurrently false) SYSTEM \"D\""}
+{"sql":"reindex (verbose, concurrently false) SYSTEM s.d","code":"42601","message":"syntax error at or near \".\"","position":46}
+{"sql":"reindex (verbose, concurrently false) SYSTEM name"}
+{"sql":"reindex (verbose, concurrently false) SYSTEM concurrently"}
+{"sql":"reindex (verbose, concurrently false) SYSTEM d e","code":"42601","message":"syntax error at or near \"e\"","position":47}
+{"sql":"reindex (verbose, concurrently false) SYSTEM 1","code":"42601","message":"syntax error at or near \"1\"","position":45}
+{"sql":"reindex (verbose, concurrently false) SYSTEM ;"}
+{"sql":"reindex (verbose, concurrently false) SYSTEM ; select 1"}
+{"sql":"reindex (verbose, concurrently false) SYSTEM d,","code":"42601","message":"syntax error at or near \",\"","position":46}
+{"sql":"reindex (verbose, concurrently false) SYSTEM concurrently d"}
+{"sql":"reindex (verbose, concurrently false) SYSTEM concurrently \"D\""}
+{"sql":"reindex (verbose, concurrently false) SYSTEM concurrently s.d","code":"42601","message":"syntax error at or near \".\"","position":59}
+{"sql":"reindex (verbose, concurrently false) SYSTEM concurrently name"}
+{"sql":"reindex (verbose, concurrently false) SYSTEM concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":58}
+{"sql":"reindex (verbose, concurrently false) SYSTEM concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":60}
+{"sql":"reindex (verbose, concurrently false) SYSTEM concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":58}
+{"sql":"reindex (verbose, concurrently false) SYSTEM concurrently ;"}
+{"sql":"reindex (verbose, concurrently false) SYSTEM concurrently ; select 1"}
+{"sql":"reindex (verbose, concurrently false) SYSTEM concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":59}
+{"sql":"reindex (verbose, concurrently false) DATABASE"}
+{"sql":"reindex (verbose, concurrently false) DATABASE d"}
+{"sql":"reindex (verbose, concurrently false) DATABASE \"D\""}
+{"sql":"reindex (verbose, concurrently false) DATABASE s.d","code":"42601","message":"syntax error at or near \".\"","position":48}
+{"sql":"reindex (verbose, concurrently false) DATABASE name"}
+{"sql":"reindex (verbose, concurrently false) DATABASE concurrently"}
+{"sql":"reindex (verbose, concurrently false) DATABASE d e","code":"42601","message":"syntax error at or near \"e\"","position":49}
+{"sql":"reindex (verbose, concurrently false) DATABASE 1","code":"42601","message":"syntax error at or near \"1\"","position":47}
+{"sql":"reindex (verbose, concurrently false) DATABASE ;"}
+{"sql":"reindex (verbose, concurrently false) DATABASE ; select 1"}
+{"sql":"reindex (verbose, concurrently false) DATABASE d,","code":"42601","message":"syntax error at or near \",\"","position":48}
+{"sql":"reindex (verbose, concurrently false) DATABASE concurrently d"}
+{"sql":"reindex (verbose, concurrently false) DATABASE concurrently \"D\""}
+{"sql":"reindex (verbose, concurrently false) DATABASE concurrently s.d","code":"42601","message":"syntax error at or near \".\"","position":61}
+{"sql":"reindex (verbose, concurrently false) DATABASE concurrently name"}
+{"sql":"reindex (verbose, concurrently false) DATABASE concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":60}
+{"sql":"reindex (verbose, concurrently false) DATABASE concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":62}
+{"sql":"reindex (verbose, concurrently false) DATABASE concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":60}
+{"sql":"reindex (verbose, concurrently false) DATABASE concurrently ;"}
+{"sql":"reindex (verbose, concurrently false) DATABASE concurrently ; select 1"}
+{"sql":"reindex (verbose, concurrently false) DATABASE concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":61}
+{"sql":"reindex (verbose, concurrently false) schema","code":"42601","message":"syntax error at end of input","position":44}
+{"sql":"reindex (verbose, concurrently false) schema d"}
+{"sql":"reindex (verbose, concurrently false) schema \"D\""}
+{"sql":"reindex (verbose, concurrently false) schema s.d","code":"42601","message":"syntax error at or near \".\"","position":46}
+{"sql":"reindex (verbose, concurrently false) schema name"}
+{"sql":"reindex (verbose, concurrently false) schema concurrently","code":"42601","message":"syntax error at end of input","position":57}
+{"sql":"reindex (verbose, concurrently false) schema d e","code":"42601","message":"syntax error at or near \"e\"","position":47}
+{"sql":"reindex (verbose, concurrently false) schema 1","code":"42601","message":"syntax error at or near \"1\"","position":45}
+{"sql":"reindex (verbose, concurrently false) schema ;","code":"42601","message":"syntax error at or near \";\"","position":45}
+{"sql":"reindex (verbose, concurrently false) schema ; select 1","code":"42601","message":"syntax error at or near \";\"","position":45}
+{"sql":"reindex (verbose, concurrently false) schema d,","code":"42601","message":"syntax error at or near \",\"","position":46}
+{"sql":"reindex (verbose, concurrently false) schema concurrently d"}
+{"sql":"reindex (verbose, concurrently false) schema concurrently \"D\""}
+{"sql":"reindex (verbose, concurrently false) schema concurrently s.d","code":"42601","message":"syntax error at or near \".\"","position":59}
+{"sql":"reindex (verbose, concurrently false) schema concurrently name"}
+{"sql":"reindex (verbose, concurrently false) schema concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":58}
+{"sql":"reindex (verbose, concurrently false) schema concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":60}
+{"sql":"reindex (verbose, concurrently false) schema concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":58}
+{"sql":"reindex (verbose, concurrently false) schema concurrently ;","code":"42601","message":"syntax error at or near \";\"","position":58}
+{"sql":"reindex (verbose, concurrently false) schema concurrently ; select 1","code":"42601","message":"syntax error at or near \";\"","position":58}
+{"sql":"reindex (verbose, concurrently false) schema concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":59}
+{"sql":"reindex (verbose, concurrently false) table","code":"42601","message":"syntax error at end of input","position":43}
+{"sql":"reindex (verbose, concurrently false) table d"}
+{"sql":"reindex (verbose, concurrently false) table \"D\""}
+{"sql":"reindex (verbose, concurrently false) table s.d"}
+{"sql":"reindex (verbose, concurrently false) table name"}
+{"sql":"reindex (verbose, concurrently false) table concurrently","code":"42601","message":"syntax error at end of input","position":56}
+{"sql":"reindex (verbose, concurrently false) table d e","code":"42601","message":"syntax error at or near \"e\"","position":46}
+{"sql":"reindex (verbose, concurrently false) table 1","code":"42601","message":"syntax error at or near \"1\"","position":44}
+{"sql":"reindex (verbose, concurrently false) table ;","code":"42601","message":"syntax error at or near \";\"","position":44}
+{"sql":"reindex (verbose, concurrently false) table ; select 1","code":"42601","message":"syntax error at or near \";\"","position":44}
+{"sql":"reindex (verbose, concurrently false) table d,","code":"42601","message":"syntax error at or near \",\"","position":45}
+{"sql":"reindex (verbose, concurrently false) table concurrently d"}
+{"sql":"reindex (verbose, concurrently false) table concurrently \"D\""}
+{"sql":"reindex (verbose, concurrently false) table concurrently s.d"}
+{"sql":"reindex (verbose, concurrently false) table concurrently name"}
+{"sql":"reindex (verbose, concurrently false) table concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":57}
+{"sql":"reindex (verbose, concurrently false) table concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":59}
+{"sql":"reindex (verbose, concurrently false) table concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":57}
+{"sql":"reindex (verbose, concurrently false) table concurrently ;","code":"42601","message":"syntax error at or near \";\"","position":57}
+{"sql":"reindex (verbose, concurrently false) table concurrently ; select 1","code":"42601","message":"syntax error at or near \";\"","position":57}
+{"sql":"reindex (verbose, concurrently false) table concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":58}
+{"sql":"reindex (verbose, concurrently false) index","code":"42601","message":"syntax error at end of input","position":43}
+{"sql":"reindex (verbose, concurrently false) index d"}
+{"sql":"reindex (verbose, concurrently false) index \"D\""}
+{"sql":"reindex (verbose, concurrently false) index s.d"}
+{"sql":"reindex (verbose, concurrently false) index name"}
+{"sql":"reindex (verbose, concurrently false) index concurrently","code":"42601","message":"syntax error at end of input","position":56}
+{"sql":"reindex (verbose, concurrently false) index d e","code":"42601","message":"syntax error at or near \"e\"","position":46}
+{"sql":"reindex (verbose, concurrently false) index 1","code":"42601","message":"syntax error at or near \"1\"","position":44}
+{"sql":"reindex (verbose, concurrently false) index ;","code":"42601","message":"syntax error at or near \";\"","position":44}
+{"sql":"reindex (verbose, concurrently false) index ; select 1","code":"42601","message":"syntax error at or near \";\"","position":44}
+{"sql":"reindex (verbose, concurrently false) index d,","code":"42601","message":"syntax error at or near \",\"","position":45}
+{"sql":"reindex (verbose, concurrently false) index concurrently d"}
+{"sql":"reindex (verbose, concurrently false) index concurrently \"D\""}
+{"sql":"reindex (verbose, concurrently false) index concurrently s.d"}
+{"sql":"reindex (verbose, concurrently false) index concurrently name"}
+{"sql":"reindex (verbose, concurrently false) index concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":57}
+{"sql":"reindex (verbose, concurrently false) index concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":59}
+{"sql":"reindex (verbose, concurrently false) index concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":57}
+{"sql":"reindex (verbose, concurrently false) index concurrently ;","code":"42601","message":"syntax error at or near \";\"","position":57}
+{"sql":"reindex (verbose, concurrently false) index concurrently ; select 1","code":"42601","message":"syntax error at or near \";\"","position":57}
+{"sql":"reindex (verbose, concurrently false) index concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":58}
+{"sql":"reindex (tablespace x) system"}
+{"sql":"reindex (tablespace x) system d"}
+{"sql":"reindex (tablespace x) system \"D\""}
+{"sql":"reindex (tablespace x) system s.d","code":"42601","message":"syntax error at or near \".\"","position":31}
+{"sql":"reindex (tablespace x) system name"}
+{"sql":"reindex (tablespace x) system concurrently"}
+{"sql":"reindex (tablespace x) system d e","code":"42601","message":"syntax error at or near \"e\"","position":32}
+{"sql":"reindex (tablespace x) system 1","code":"42601","message":"syntax error at or near \"1\"","position":30}
+{"sql":"reindex (tablespace x) system ;"}
+{"sql":"reindex (tablespace x) system ; select 1"}
+{"sql":"reindex (tablespace x) system d,","code":"42601","message":"syntax error at or near \",\"","position":31}
+{"sql":"reindex (tablespace x) system concurrently d"}
+{"sql":"reindex (tablespace x) system concurrently \"D\""}
+{"sql":"reindex (tablespace x) system concurrently s.d","code":"42601","message":"syntax error at or near \".\"","position":44}
+{"sql":"reindex (tablespace x) system concurrently name"}
+{"sql":"reindex (tablespace x) system concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":43}
+{"sql":"reindex (tablespace x) system concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":45}
+{"sql":"reindex (tablespace x) system concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":43}
+{"sql":"reindex (tablespace x) system concurrently ;"}
+{"sql":"reindex (tablespace x) system concurrently ; select 1"}
+{"sql":"reindex (tablespace x) system concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":44}
+{"sql":"reindex (tablespace x) database"}
+{"sql":"reindex (tablespace x) database d"}
+{"sql":"reindex (tablespace x) database \"D\""}
+{"sql":"reindex (tablespace x) database s.d","code":"42601","message":"syntax error at or near \".\"","position":33}
+{"sql":"reindex (tablespace x) database name"}
+{"sql":"reindex (tablespace x) database concurrently"}
+{"sql":"reindex (tablespace x) database d e","code":"42601","message":"syntax error at or near \"e\"","position":34}
+{"sql":"reindex (tablespace x) database 1","code":"42601","message":"syntax error at or near \"1\"","position":32}
+{"sql":"reindex (tablespace x) database ;"}
+{"sql":"reindex (tablespace x) database ; select 1"}
+{"sql":"reindex (tablespace x) database d,","code":"42601","message":"syntax error at or near \",\"","position":33}
+{"sql":"reindex (tablespace x) database concurrently d"}
+{"sql":"reindex (tablespace x) database concurrently \"D\""}
+{"sql":"reindex (tablespace x) database concurrently s.d","code":"42601","message":"syntax error at or near \".\"","position":46}
+{"sql":"reindex (tablespace x) database concurrently name"}
+{"sql":"reindex (tablespace x) database concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":45}
+{"sql":"reindex (tablespace x) database concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":47}
+{"sql":"reindex (tablespace x) database concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":45}
+{"sql":"reindex (tablespace x) database concurrently ;"}
+{"sql":"reindex (tablespace x) database concurrently ; select 1"}
+{"sql":"reindex (tablespace x) database concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":46}
+{"sql":"reindex (tablespace x) SYSTEM"}
+{"sql":"reindex (tablespace x) SYSTEM d"}
+{"sql":"reindex (tablespace x) SYSTEM \"D\""}
+{"sql":"reindex (tablespace x) SYSTEM s.d","code":"42601","message":"syntax error at or near \".\"","position":31}
+{"sql":"reindex (tablespace x) SYSTEM name"}
+{"sql":"reindex (tablespace x) SYSTEM concurrently"}
+{"sql":"reindex (tablespace x) SYSTEM d e","code":"42601","message":"syntax error at or near \"e\"","position":32}
+{"sql":"reindex (tablespace x) SYSTEM 1","code":"42601","message":"syntax error at or near \"1\"","position":30}
+{"sql":"reindex (tablespace x) SYSTEM ;"}
+{"sql":"reindex (tablespace x) SYSTEM ; select 1"}
+{"sql":"reindex (tablespace x) SYSTEM d,","code":"42601","message":"syntax error at or near \",\"","position":31}
+{"sql":"reindex (tablespace x) SYSTEM concurrently d"}
+{"sql":"reindex (tablespace x) SYSTEM concurrently \"D\""}
+{"sql":"reindex (tablespace x) SYSTEM concurrently s.d","code":"42601","message":"syntax error at or near \".\"","position":44}
+{"sql":"reindex (tablespace x) SYSTEM concurrently name"}
+{"sql":"reindex (tablespace x) SYSTEM concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":43}
+{"sql":"reindex (tablespace x) SYSTEM concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":45}
+{"sql":"reindex (tablespace x) SYSTEM concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":43}
+{"sql":"reindex (tablespace x) SYSTEM concurrently ;"}
+{"sql":"reindex (tablespace x) SYSTEM concurrently ; select 1"}
+{"sql":"reindex (tablespace x) SYSTEM concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":44}
+{"sql":"reindex (tablespace x) DATABASE"}
+{"sql":"reindex (tablespace x) DATABASE d"}
+{"sql":"reindex (tablespace x) DATABASE \"D\""}
+{"sql":"reindex (tablespace x) DATABASE s.d","code":"42601","message":"syntax error at or near \".\"","position":33}
+{"sql":"reindex (tablespace x) DATABASE name"}
+{"sql":"reindex (tablespace x) DATABASE concurrently"}
+{"sql":"reindex (tablespace x) DATABASE d e","code":"42601","message":"syntax error at or near \"e\"","position":34}
+{"sql":"reindex (tablespace x) DATABASE 1","code":"42601","message":"syntax error at or near \"1\"","position":32}
+{"sql":"reindex (tablespace x) DATABASE ;"}
+{"sql":"reindex (tablespace x) DATABASE ; select 1"}
+{"sql":"reindex (tablespace x) DATABASE d,","code":"42601","message":"syntax error at or near \",\"","position":33}
+{"sql":"reindex (tablespace x) DATABASE concurrently d"}
+{"sql":"reindex (tablespace x) DATABASE concurrently \"D\""}
+{"sql":"reindex (tablespace x) DATABASE concurrently s.d","code":"42601","message":"syntax error at or near \".\"","position":46}
+{"sql":"reindex (tablespace x) DATABASE concurrently name"}
+{"sql":"reindex (tablespace x) DATABASE concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":45}
+{"sql":"reindex (tablespace x) DATABASE concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":47}
+{"sql":"reindex (tablespace x) DATABASE concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":45}
+{"sql":"reindex (tablespace x) DATABASE concurrently ;"}
+{"sql":"reindex (tablespace x) DATABASE concurrently ; select 1"}
+{"sql":"reindex (tablespace x) DATABASE concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":46}
+{"sql":"reindex (tablespace x) schema","code":"42601","message":"syntax error at end of input","position":29}
+{"sql":"reindex (tablespace x) schema d"}
+{"sql":"reindex (tablespace x) schema \"D\""}
+{"sql":"reindex (tablespace x) schema s.d","code":"42601","message":"syntax error at or near \".\"","position":31}
+{"sql":"reindex (tablespace x) schema name"}
+{"sql":"reindex (tablespace x) schema concurrently","code":"42601","message":"syntax error at end of input","position":42}
+{"sql":"reindex (tablespace x) schema d e","code":"42601","message":"syntax error at or near \"e\"","position":32}
+{"sql":"reindex (tablespace x) schema 1","code":"42601","message":"syntax error at or near \"1\"","position":30}
+{"sql":"reindex (tablespace x) schema ;","code":"42601","message":"syntax error at or near \";\"","position":30}
+{"sql":"reindex (tablespace x) schema ; select 1","code":"42601","message":"syntax error at or near \";\"","position":30}
+{"sql":"reindex (tablespace x) schema d,","code":"42601","message":"syntax error at or near \",\"","position":31}
+{"sql":"reindex (tablespace x) schema concurrently d"}
+{"sql":"reindex (tablespace x) schema concurrently \"D\""}
+{"sql":"reindex (tablespace x) schema concurrently s.d","code":"42601","message":"syntax error at or near \".\"","position":44}
+{"sql":"reindex (tablespace x) schema concurrently name"}
+{"sql":"reindex (tablespace x) schema concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":43}
+{"sql":"reindex (tablespace x) schema concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":45}
+{"sql":"reindex (tablespace x) schema concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":43}
+{"sql":"reindex (tablespace x) schema concurrently ;","code":"42601","message":"syntax error at or near \";\"","position":43}
+{"sql":"reindex (tablespace x) schema concurrently ; select 1","code":"42601","message":"syntax error at or near \";\"","position":43}
+{"sql":"reindex (tablespace x) schema concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":44}
+{"sql":"reindex (tablespace x) table","code":"42601","message":"syntax error at end of input","position":28}
+{"sql":"reindex (tablespace x) table d"}
+{"sql":"reindex (tablespace x) table \"D\""}
+{"sql":"reindex (tablespace x) table s.d"}
+{"sql":"reindex (tablespace x) table name"}
+{"sql":"reindex (tablespace x) table concurrently","code":"42601","message":"syntax error at end of input","position":41}
+{"sql":"reindex (tablespace x) table d e","code":"42601","message":"syntax error at or near \"e\"","position":31}
+{"sql":"reindex (tablespace x) table 1","code":"42601","message":"syntax error at or near \"1\"","position":29}
+{"sql":"reindex (tablespace x) table ;","code":"42601","message":"syntax error at or near \";\"","position":29}
+{"sql":"reindex (tablespace x) table ; select 1","code":"42601","message":"syntax error at or near \";\"","position":29}
+{"sql":"reindex (tablespace x) table d,","code":"42601","message":"syntax error at or near \",\"","position":30}
+{"sql":"reindex (tablespace x) table concurrently d"}
+{"sql":"reindex (tablespace x) table concurrently \"D\""}
+{"sql":"reindex (tablespace x) table concurrently s.d"}
+{"sql":"reindex (tablespace x) table concurrently name"}
+{"sql":"reindex (tablespace x) table concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":42}
+{"sql":"reindex (tablespace x) table concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":44}
+{"sql":"reindex (tablespace x) table concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":42}
+{"sql":"reindex (tablespace x) table concurrently ;","code":"42601","message":"syntax error at or near \";\"","position":42}
+{"sql":"reindex (tablespace x) table concurrently ; select 1","code":"42601","message":"syntax error at or near \";\"","position":42}
+{"sql":"reindex (tablespace x) table concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":43}
+{"sql":"reindex (tablespace x) index","code":"42601","message":"syntax error at end of input","position":28}
+{"sql":"reindex (tablespace x) index d"}
+{"sql":"reindex (tablespace x) index \"D\""}
+{"sql":"reindex (tablespace x) index s.d"}
+{"sql":"reindex (tablespace x) index name"}
+{"sql":"reindex (tablespace x) index concurrently","code":"42601","message":"syntax error at end of input","position":41}
+{"sql":"reindex (tablespace x) index d e","code":"42601","message":"syntax error at or near \"e\"","position":31}
+{"sql":"reindex (tablespace x) index 1","code":"42601","message":"syntax error at or near \"1\"","position":29}
+{"sql":"reindex (tablespace x) index ;","code":"42601","message":"syntax error at or near \";\"","position":29}
+{"sql":"reindex (tablespace x) index ; select 1","code":"42601","message":"syntax error at or near \";\"","position":29}
+{"sql":"reindex (tablespace x) index d,","code":"42601","message":"syntax error at or near \",\"","position":30}
+{"sql":"reindex (tablespace x) index concurrently d"}
+{"sql":"reindex (tablespace x) index concurrently \"D\""}
+{"sql":"reindex (tablespace x) index concurrently s.d"}
+{"sql":"reindex (tablespace x) index concurrently name"}
+{"sql":"reindex (tablespace x) index concurrently concurrently","code":"42601","message":"syntax error at or near \"concurrently\"","position":42}
+{"sql":"reindex (tablespace x) index concurrently d e","code":"42601","message":"syntax error at or near \"e\"","position":44}
+{"sql":"reindex (tablespace x) index concurrently 1","code":"42601","message":"syntax error at or near \"1\"","position":42}
+{"sql":"reindex (tablespace x) index concurrently ;","code":"42601","message":"syntax error at or near \";\"","position":42}
+{"sql":"reindex (tablespace x) index concurrently ; select 1","code":"42601","message":"syntax error at or near \";\"","position":42}
+{"sql":"reindex (tablespace x) index concurrently d,","code":"42601","message":"syntax error at or near \",\"","position":43}
+{"sql":"reindex () system","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () system d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () system \"D\"","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () system s.d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () system name","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () system concurrently","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () system d e","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () system 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () system ;","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () system ; select 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () system d,","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () system concurrently d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () system concurrently \"D\"","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () system concurrently s.d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () system concurrently name","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () system concurrently concurrently","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () system concurrently d e","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () system concurrently 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () system concurrently ;","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () system concurrently ; select 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () system concurrently d,","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () database","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () database d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () database \"D\"","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () database s.d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () database name","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () database concurrently","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () database d e","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () database 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () database ;","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () database ; select 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () database d,","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () database concurrently d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () database concurrently \"D\"","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () database concurrently s.d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () database concurrently name","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () database concurrently concurrently","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () database concurrently d e","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () database concurrently 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () database concurrently ;","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () database concurrently ; select 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () database concurrently d,","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () SYSTEM","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () SYSTEM d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () SYSTEM \"D\"","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () SYSTEM s.d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () SYSTEM name","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () SYSTEM concurrently","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () SYSTEM d e","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () SYSTEM 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () SYSTEM ;","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () SYSTEM ; select 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () SYSTEM d,","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () SYSTEM concurrently d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () SYSTEM concurrently \"D\"","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () SYSTEM concurrently s.d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () SYSTEM concurrently name","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () SYSTEM concurrently concurrently","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () SYSTEM concurrently d e","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () SYSTEM concurrently 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () SYSTEM concurrently ;","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () SYSTEM concurrently ; select 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () SYSTEM concurrently d,","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () DATABASE","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () DATABASE d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () DATABASE \"D\"","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () DATABASE s.d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () DATABASE name","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () DATABASE concurrently","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () DATABASE d e","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () DATABASE 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () DATABASE ;","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () DATABASE ; select 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () DATABASE d,","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () DATABASE concurrently d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () DATABASE concurrently \"D\"","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () DATABASE concurrently s.d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () DATABASE concurrently name","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () DATABASE concurrently concurrently","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () DATABASE concurrently d e","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () DATABASE concurrently 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () DATABASE concurrently ;","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () DATABASE concurrently ; select 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () DATABASE concurrently d,","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () schema","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () schema d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () schema \"D\"","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () schema s.d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () schema name","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () schema concurrently","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () schema d e","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () schema 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () schema ;","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () schema ; select 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () schema d,","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () schema concurrently d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () schema concurrently \"D\"","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () schema concurrently s.d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () schema concurrently name","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () schema concurrently concurrently","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () schema concurrently d e","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () schema concurrently 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () schema concurrently ;","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () schema concurrently ; select 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () schema concurrently d,","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () table","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () table d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () table \"D\"","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () table s.d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () table name","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () table concurrently","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () table d e","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () table 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () table ;","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () table ; select 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () table d,","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () table concurrently d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () table concurrently \"D\"","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () table concurrently s.d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () table concurrently name","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () table concurrently concurrently","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () table concurrently d e","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () table concurrently 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () table concurrently ;","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () table concurrently ; select 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () table concurrently d,","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () index","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () index d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () index \"D\"","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () index s.d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () index name","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () index concurrently","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () index d e","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () index 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () index ;","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () index ; select 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () index d,","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () index concurrently d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () index concurrently \"D\"","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () index concurrently s.d","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () index concurrently name","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () index concurrently concurrently","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () index concurrently d e","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () index concurrently 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () index concurrently ;","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () index concurrently ; select 1","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex () index concurrently d,","code":"42601","message":"syntax error at or near \")\"","position":9}
+{"sql":"reindex","code":"42601","message":"syntax error at end of input","position":7}
+{"sql":"reindex (verbose)","code":"42601","message":"syntax error at end of input","position":17}
+{"sql":"reindex system system"}
+{"sql":"reindex database database"}

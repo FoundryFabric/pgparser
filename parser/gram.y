@@ -12710,7 +12710,7 @@ ReindexStmt:
 			}
 			$$ = n
 		}
-	| REINDEX opt_reindex_option_list reindex_target_multitable opt_concurrently name
+	| REINDEX opt_reindex_option_list reindex_target_multitable opt_concurrently opt_single_name
 		{
 			n := &nodes.ReindexStmt{
 				Kind:   nodes.ReindexObjectType($3),

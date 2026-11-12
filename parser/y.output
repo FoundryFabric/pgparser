@@ -7444,7 +7444,7 @@ state 168
 state 169
 	ReindexStmt:  REINDEX.opt_reindex_option_list reindex_target_type opt_concurrently qualified_name 
 	ReindexStmt:  REINDEX.opt_reindex_option_list SCHEMA opt_concurrently name 
-	ReindexStmt:  REINDEX.opt_reindex_option_list reindex_target_multitable opt_concurrently name 
+	ReindexStmt:  REINDEX.opt_reindex_option_list reindex_target_multitable opt_concurrently opt_single_name 
 	opt_reindex_option_list: .    (1956)
 
 	'('  shift 803
@@ -47879,7 +47879,7 @@ state 801
 state 802
 	ReindexStmt:  REINDEX opt_reindex_option_list.reindex_target_type opt_concurrently qualified_name 
 	ReindexStmt:  REINDEX opt_reindex_option_list.SCHEMA opt_concurrently name 
-	ReindexStmt:  REINDEX opt_reindex_option_list.reindex_target_multitable opt_concurrently name 
+	ReindexStmt:  REINDEX opt_reindex_option_list.reindex_target_multitable opt_concurrently opt_single_name 
 
 	DATABASE  shift 1243
 	INDEX  shift 1240
@@ -74630,7 +74630,7 @@ state 1238
 	opt_concurrently  goto 1968
 
 state 1239
-	ReindexStmt:  REINDEX opt_reindex_option_list reindex_target_multitable.opt_concurrently name 
+	ReindexStmt:  REINDEX opt_reindex_option_list reindex_target_multitable.opt_concurrently opt_single_name 
 	opt_concurrently: .    (532)
 
 	CONCURRENTLY  shift 1474
@@ -151160,7 +151160,8 @@ state 1968
 	col_name_keyword  goto 315
 
 state 1969
-	ReindexStmt:  REINDEX opt_reindex_option_list reindex_target_multitable opt_concurrently.name 
+	ReindexStmt:  REINDEX opt_reindex_option_list reindex_target_multitable opt_concurrently.opt_single_name 
+	opt_single_name: .    (534)
 
 	IDENT  shift 313
 	ABORT_P  shift 316
@@ -151553,12 +151554,13 @@ state 1969
 	YEAR_P  shift 639
 	YES_P  shift 640
 	ZONE  shift 641
-	.  error
+	.  reduce 534 (src line 4054)
 
-	name  goto 3284
+	name  goto 935
 	ColId  goto 312
 	unreserved_keyword  goto 314
 	col_name_keyword  goto 315
+	opt_single_name  goto 3284
 
 state 1970
 	opt_reindex_option_list:  '(' utility_option_list ')'.    (1955)
@@ -263635,7 +263637,7 @@ state 3283
 
 
 state 3284
-	ReindexStmt:  REINDEX opt_reindex_option_list reindex_target_multitable opt_concurrently name.    (1950)
+	ReindexStmt:  REINDEX opt_reindex_option_list reindex_target_multitable opt_concurrently opt_single_name.    (1950)
 
 	.  reduce 1950 (src line 12713)
 
@@ -579373,8 +579375,8 @@ Rule not reduced: json_table_column_option_el:  NULL_P
 memory: parser 21292/240000
 4821 extra closures
 509660 shift entries, 462 exceptions
-5614 goto entries
+5615 goto entries
 10302 entries saved by goto default
 Optimizer space used: output 126765/240000
-126765 table entries, 34787 zero
+126765 table entries, 34786 zero
 maximum spread: 532, maximum offset: 6841
