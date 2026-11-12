@@ -20723,7 +20723,7 @@ pgdefault:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
 //line gram.y:1799
 		{
-			pgVAL.ival = 0xFFFFFFFF
+			pgVAL.ival = 0x7FFFFFFF
 		}
 	case 238:
 		pgDollar = pgS[pgpt-1 : pgpt+1]

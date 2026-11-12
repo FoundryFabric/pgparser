@@ -770,6 +770,20 @@ only u` is left out of it: PostgreSQL 16 raises `invalid schema name` at the
 object's unset location 0, which the oracle's `select 1/0;` prefix turns
 into no position; libpg_query, and `publication_object_pg16.jsonl`, have 0.
 
+### table-like-all (tree 9; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `create table t (like s including all)` | `options` 2147483647 | 4294967295 |
+| `create table t (like s including all excluding comments)` | 2147483646 | 4294967294 |
+
+INCLUDING ALL is PostgreSQL 16's `CREATE_TABLE_LIKE_ALL`, `PG_INT32_MAX`; it
+was every bit of the `uint32`. Each option's bit was set either way, so only
+a consumer comparing with `CREATE_TABLE_LIKE_ALL` saw a difference. The 19
+trees that changed over the corpus and test data have INCLUDING ALL or
+EXCLUDING ALL. `testdata/table_like_pg16.jsonl` pins 21 statements; all
+agree.
+
 ## Rerunning
 
 ```

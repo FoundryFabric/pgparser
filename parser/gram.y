@@ -1796,7 +1796,7 @@ TableLikeOptionList:
 	;
 
 TableLikeOption:
-	ALL				{ $$ = 0xFFFFFFFF }
+	ALL				{ $$ = 0x7FFFFFFF } /* CREATE_TABLE_LIKE_ALL, PG_INT32_MAX */
 	| COMMENTS		{ $$ = 1 }
 	| COMPRESSION	{ $$ = 2 }
 	| CONSTRAINTS	{ $$ = 4 }

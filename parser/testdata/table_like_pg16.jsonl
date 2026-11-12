@@ -1,0 +1,21 @@
+{"sql":"create table t (like s)"}
+{"sql":"create table t (like s including all)"}
+{"sql":"create table t (like s including all excluding comments)"}
+{"sql":"create table t (like s including all excluding indexes excluding storage)"}
+{"sql":"create table t (like s excluding all)"}
+{"sql":"create table t (like s excluding all including defaults)"}
+{"sql":"create table t (like s including comments including compression including constraints including defaults including generated including identity including indexes including statistics including storage)"}
+{"sql":"create table t (like s including defaults excluding defaults)"}
+{"sql":"create table t (like s excluding comments)"}
+{"sql":"create table t (like s including all including all)"}
+{"sql":"create table t (like s excluding all excluding all)"}
+{"sql":"create table t (like s including all excluding all)"}
+{"sql":"create table t (a int, like s including all, b int)"}
+{"sql":"create table t (like s including all, like u excluding all)"}
+{"sql":"create table t (like s.u including all excluding constraints)"}
+{"sql":"create temp table t (like s including all)"}
+{"sql":"create table t (like s including)","code":"42601","message":"syntax error at or near \")\"","position":32}
+{"sql":"create table t (like s including nothing)","code":"42601","message":"syntax error at or near \"nothing\"","position":33}
+{"sql":"create table t (like s including all excluding)","code":"42601","message":"syntax error at or near \")\"","position":46}
+{"sql":"create table t (like s all)","code":"42601","message":"syntax error at or near \"all\"","position":23}
+{"sql":"create foreign table t (like s including all) server x"}
