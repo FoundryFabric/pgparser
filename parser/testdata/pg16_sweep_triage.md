@@ -798,6 +798,20 @@ corpus and test data are INITIALLY DEFERRED constraint triggers, and the 3
 verdicts OR REPLACE ones. `testdata/constraint_trigger_pg16.jsonl` pins 25
 statements; all agree.
 
+### bool-const (tree 10, 10, 24 and 34; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `with recursive t ... cycle a set c using p select ...` | marks `A_Const` boolean true and false | `A_Const` strings `'t'` and `'f'` |
+| `select xmlparse(content '<a/>')` | second argument `A_Const` boolean false | `A_Const` string `'f'` |
+
+`makeBoolAConst` made a string constant, which PostgreSQL before 15 cast to
+boolean; PostgreSQL 16's makes a `Boolean`. Its only callers are a CYCLE
+clause without TO and DEFAULT and XMLPARSE's whitespace option, so this one
+change clears the four classes of both. The 49 trees that changed over the
+corpus and test data are those statements. `testdata/bool_const_pg16.jsonl`
+pins 21 statements; all agree.
+
 ## Rerunning
 
 ```

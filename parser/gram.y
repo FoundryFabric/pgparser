@@ -18160,10 +18160,7 @@ func makeStringConst(str string, location nodes.ParseLoc) nodes.Node {
 }
 
 func makeBoolAConst(val int64, location nodes.ParseLoc) nodes.Node {
-	if val != 0 {
-		return &nodes.A_Const{Val: &nodes.String{Str: "t"}, Location: location}
-	}
-	return &nodes.A_Const{Val: &nodes.String{Str: "f"}, Location: location}
+	return &nodes.A_Const{Val: &nodes.Boolean{Boolval: val != 0}, Location: location}
 }
 
 func makeNullAConst(location nodes.ParseLoc) nodes.Node {
