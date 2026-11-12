@@ -560,8 +560,8 @@ parse there. All 3 agree.
 | `CREATE ASSERTION positive CHECK (1 = 1)` | 0A000 CREATE ASSERTION is not yet implemented | 42601 syntax error at or near "ASSERTION" |
 
 `a_expr UNIQUE opt_unique_null_treatment select_with_parens` now raises
-`0A000 UNIQUE predicate is not yet implemented` at UNIQUE, and the new
-`CreateAssertionStmt` (`CREATE ASSERTION any_name CHECK '(' a_expr ')'
+`0A000 UNIQUE predicate is not yet implemented` at UNIQUE, and a new
+production of `stmt` (`CREATE ASSERTION any_name CHECK '(' a_expr ')'
 ConstraintAttributeSpec`) raises `0A000 CREATE ASSERTION is not yet
 implemented` with no position, both through `grammarError`, ending the
 parse. `tests/grammar/sql/phase7_compat.sql` now expects CREATE ASSERTION's

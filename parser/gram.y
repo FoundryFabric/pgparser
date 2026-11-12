@@ -443,7 +443,7 @@ import (
 %type <node>  CreateTableSpaceStmt DropTableSpaceStmt
 %type <node>  OptTableSpaceOwner
 %type <node>  AlterTblSpcStmt
-%type <node>  CreateAmStmt CreateAssertionStmt
+%type <node>  CreateAmStmt
 %type <ival>  am_type
 %type <node>  CreatePolicyStmt AlterPolicyStmt
 %type <boolean>  RowSecurityDefaultPermissive
@@ -934,9 +934,10 @@ stmt:
 			$$ = $1
 		}
 	| CreateAmStmt
-	| CreateAssertionStmt
+	| CREATE ASSERTION any_name CHECK '(' a_expr ')' ConstraintAttributeSpec
 		{
-			$$ = $1
+			grammarError(pglex, "0A000", "CREATE ASSERTION is not yet implemented", "", -1)
+			return 1
 		}
 	| CreatePolicyStmt
 		{
@@ -15026,14 +15027,6 @@ AlterExtensionContentsStmt:
  *
  *****************************************************************************/
 
-CreateAssertionStmt:
-	CREATE ASSERTION any_name CHECK '(' a_expr ')' ConstraintAttributeSpec
-		{
-			grammarError(pglex, "0A000", "CREATE ASSERTION is not yet implemented", "", -1)
-			return 1
-		}
-	;
-
 CreateAmStmt:
 	CREATE ACCESS METHOD name TYPE_P am_type HANDLER handler_name
 		{
@@ -17909,9 +17902,6 @@ func setParseResult(lex pgLexer, result *nodes.List) {
 }
 
 func makeList(n nodes.Node) *nodes.List {
-	if n == nil {
-		return &nodes.List{}
-	}
 	return &nodes.List{Items: []nodes.Node{n}}
 }
 
@@ -17919,9 +17909,7 @@ func appendList(l *nodes.List, n nodes.Node) *nodes.List {
 	if l == nil {
 		return makeList(n)
 	}
-	if n != nil {
-		l.Items = append(l.Items, n)
-	}
+	l.Items = append(l.Items, n)
 	return l
 }
 
@@ -17929,9 +17917,7 @@ func prependList(n nodes.Node, l *nodes.List) *nodes.List {
 	if l == nil {
 		return makeList(n)
 	}
-	if n != nil {
-		l.Items = append([]nodes.Node{n}, l.Items...)
-	}
+	l.Items = append([]nodes.Node{n}, l.Items...)
 	return l
 }
 
