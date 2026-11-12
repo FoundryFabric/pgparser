@@ -7,16 +7,19 @@ import (
 	"github.com/pgplex/pgparser/nodes"
 )
 
-// TestParseQualifiedDropFunctionIsObjectWithArgs pins the shape a qualified
-// DROP FUNCTION, PROCEDURE or ROUTINE name takes since any_name became
-// PostgreSQL 16's `ColId attrs`: an ObjectWithArgs with no argument list, as
-// PostgreSQL 16's function_with_argtypes builds it. An unqualified name is still
-// the fork's any_name list (PostgreSQL 16 builds an ObjectWithArgs there too).
-func TestParseQualifiedDropFunctionIsObjectWithArgs(t *testing.T) {
+// TestParseDropFunctionIsObjectWithArgs pins the shape a DROP FUNCTION,
+// PROCEDURE or ROUTINE name without arguments takes, qualified or not: an
+// ObjectWithArgs with no argument list, as PostgreSQL 16's
+// function_with_argtypes builds it.
+func TestParseDropFunctionIsObjectWithArgs(t *testing.T) {
 	for _, c := range []struct {
 		sql   string
 		parts []string
 	}{
+		{"drop function f", []string{"f"}},
+		{"drop function if exists f cascade", []string{"f"}},
+		{"drop procedure p restrict", []string{"p"}},
+		{"drop routine r", []string{"r"}},
 		{"drop function s.f", []string{"s", "f"}},
 		{"drop function if exists s.f cascade", []string{"s", "f"}},
 		{"drop procedure s.p", []string{"s", "p"}},
@@ -32,9 +35,6 @@ func TestParseQualifiedDropFunctionIsObjectWithArgs(t *testing.T) {
 			t.Errorf("Parse(%q): ObjectWithArgs{%v, args %v, unspecified %v}, want {%v, nil, true}",
 				c.sql, got, owa.Objargs, owa.ArgsUnspecified, c.parts)
 		}
-	}
-	if obj, ok := dropObject(t, "drop function f").(*nodes.List); !ok || !reflect.DeepEqual(stringParts(obj), []string{"f"}) {
-		t.Errorf("Parse(drop function f): object is %#v, want the list [f]", obj)
 	}
 }
 

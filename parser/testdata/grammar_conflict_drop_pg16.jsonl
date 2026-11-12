@@ -1,0 +1,547 @@
+{"sql":"drop function f"}
+{"sql":"drop function s.f"}
+{"sql":"drop function a.b.c"}
+{"sql":"drop function \"F\""}
+{"sql":"drop function name"}
+{"sql":"drop function f()"}
+{"sql":"drop function f(int)"}
+{"sql":"drop function s.f(int, text)"}
+{"sql":"drop function f(*)","code":"42601","message":"syntax error at or near \"*\"","position":16}
+{"sql":"drop function f(in a int)"}
+{"sql":"drop function f[]","code":"42601","message":"syntax error at or near \"]\"","position":16}
+{"sql":"drop function s.","code":"42601","message":"syntax error at end of input","position":16}
+{"sql":"drop function f, g"}
+{"sql":"drop function f(), g"}
+{"sql":"drop function f, s.g(int)"}
+{"sql":"drop function s.f, g"}
+{"sql":"drop function f(*), g(int)","code":"42601","message":"syntax error at or near \"*\"","position":16}
+{"sql":"drop function f, g[]","code":"42601","message":"syntax error at or near \"]\"","position":19}
+{"sql":"drop function f cascade"}
+{"sql":"drop function s.f cascade"}
+{"sql":"drop function a.b.c cascade"}
+{"sql":"drop function \"F\" cascade"}
+{"sql":"drop function name cascade"}
+{"sql":"drop function f() cascade"}
+{"sql":"drop function f(int) cascade"}
+{"sql":"drop function s.f(int, text) cascade"}
+{"sql":"drop function f(*) cascade","code":"42601","message":"syntax error at or near \"*\"","position":16}
+{"sql":"drop function f(in a int) cascade"}
+{"sql":"drop function f[] cascade","code":"42601","message":"syntax error at or near \"]\"","position":16}
+{"sql":"drop function s. cascade"}
+{"sql":"drop function f, g cascade"}
+{"sql":"drop function f(), g cascade"}
+{"sql":"drop function f, s.g(int) cascade"}
+{"sql":"drop function s.f, g cascade"}
+{"sql":"drop function f(*), g(int) cascade","code":"42601","message":"syntax error at or near \"*\"","position":16}
+{"sql":"drop function f, g[] cascade","code":"42601","message":"syntax error at or near \"]\"","position":19}
+{"sql":"drop function f restrict"}
+{"sql":"drop function s.f restrict"}
+{"sql":"drop function a.b.c restrict"}
+{"sql":"drop function \"F\" restrict"}
+{"sql":"drop function name restrict"}
+{"sql":"drop function f() restrict"}
+{"sql":"drop function f(int) restrict"}
+{"sql":"drop function s.f(int, text) restrict"}
+{"sql":"drop function f(*) restrict","code":"42601","message":"syntax error at or near \"*\"","position":16}
+{"sql":"drop function f(in a int) restrict"}
+{"sql":"drop function f[] restrict","code":"42601","message":"syntax error at or near \"]\"","position":16}
+{"sql":"drop function s. restrict"}
+{"sql":"drop function f, g restrict"}
+{"sql":"drop function f(), g restrict"}
+{"sql":"drop function f, s.g(int) restrict"}
+{"sql":"drop function s.f, g restrict"}
+{"sql":"drop function f(*), g(int) restrict","code":"42601","message":"syntax error at or near \"*\"","position":16}
+{"sql":"drop function f, g[] restrict","code":"42601","message":"syntax error at or near \"]\"","position":19}
+{"sql":"drop function f,","code":"42601","message":"syntax error at end of input","position":16}
+{"sql":"drop function f.","code":"42601","message":"syntax error at end of input","position":16}
+{"sql":"drop function","code":"42601","message":"syntax error at end of input","position":13}
+{"sql":"drop function f; select 1"}
+{"sql":"drop function if exists f"}
+{"sql":"drop function if exists s.f"}
+{"sql":"drop function if exists a.b.c"}
+{"sql":"drop function if exists \"F\""}
+{"sql":"drop function if exists name"}
+{"sql":"drop function if exists f()"}
+{"sql":"drop function if exists f(int)"}
+{"sql":"drop function if exists s.f(int, text)"}
+{"sql":"drop function if exists f(*)","code":"42601","message":"syntax error at or near \"*\"","position":26}
+{"sql":"drop function if exists f(in a int)"}
+{"sql":"drop function if exists f[]","code":"42601","message":"syntax error at or near \"]\"","position":26}
+{"sql":"drop function if exists s.","code":"42601","message":"syntax error at end of input","position":26}
+{"sql":"drop function if exists f, g"}
+{"sql":"drop function if exists f(), g"}
+{"sql":"drop function if exists f, s.g(int)"}
+{"sql":"drop function if exists s.f, g"}
+{"sql":"drop function if exists f(*), g(int)","code":"42601","message":"syntax error at or near \"*\"","position":26}
+{"sql":"drop function if exists f, g[]","code":"42601","message":"syntax error at or near \"]\"","position":29}
+{"sql":"drop function if exists f cascade"}
+{"sql":"drop function if exists s.f cascade"}
+{"sql":"drop function if exists a.b.c cascade"}
+{"sql":"drop function if exists \"F\" cascade"}
+{"sql":"drop function if exists name cascade"}
+{"sql":"drop function if exists f() cascade"}
+{"sql":"drop function if exists f(int) cascade"}
+{"sql":"drop function if exists s.f(int, text) cascade"}
+{"sql":"drop function if exists f(*) cascade","code":"42601","message":"syntax error at or near \"*\"","position":26}
+{"sql":"drop function if exists f(in a int) cascade"}
+{"sql":"drop function if exists f[] cascade","code":"42601","message":"syntax error at or near \"]\"","position":26}
+{"sql":"drop function if exists s. cascade"}
+{"sql":"drop function if exists f, g cascade"}
+{"sql":"drop function if exists f(), g cascade"}
+{"sql":"drop function if exists f, s.g(int) cascade"}
+{"sql":"drop function if exists s.f, g cascade"}
+{"sql":"drop function if exists f(*), g(int) cascade","code":"42601","message":"syntax error at or near \"*\"","position":26}
+{"sql":"drop function if exists f, g[] cascade","code":"42601","message":"syntax error at or near \"]\"","position":29}
+{"sql":"drop function if exists f restrict"}
+{"sql":"drop function if exists s.f restrict"}
+{"sql":"drop function if exists a.b.c restrict"}
+{"sql":"drop function if exists \"F\" restrict"}
+{"sql":"drop function if exists name restrict"}
+{"sql":"drop function if exists f() restrict"}
+{"sql":"drop function if exists f(int) restrict"}
+{"sql":"drop function if exists s.f(int, text) restrict"}
+{"sql":"drop function if exists f(*) restrict","code":"42601","message":"syntax error at or near \"*\"","position":26}
+{"sql":"drop function if exists f(in a int) restrict"}
+{"sql":"drop function if exists f[] restrict","code":"42601","message":"syntax error at or near \"]\"","position":26}
+{"sql":"drop function if exists s. restrict"}
+{"sql":"drop function if exists f, g restrict"}
+{"sql":"drop function if exists f(), g restrict"}
+{"sql":"drop function if exists f, s.g(int) restrict"}
+{"sql":"drop function if exists s.f, g restrict"}
+{"sql":"drop function if exists f(*), g(int) restrict","code":"42601","message":"syntax error at or near \"*\"","position":26}
+{"sql":"drop function if exists f, g[] restrict","code":"42601","message":"syntax error at or near \"]\"","position":29}
+{"sql":"drop function if exists f,","code":"42601","message":"syntax error at end of input","position":26}
+{"sql":"drop function if exists f.","code":"42601","message":"syntax error at end of input","position":26}
+{"sql":"drop function if exists","code":"42601","message":"syntax error at end of input","position":23}
+{"sql":"drop function if exists f; select 1"}
+{"sql":"drop procedure f"}
+{"sql":"drop procedure s.f"}
+{"sql":"drop procedure a.b.c"}
+{"sql":"drop procedure \"F\""}
+{"sql":"drop procedure name"}
+{"sql":"drop procedure f()"}
+{"sql":"drop procedure f(int)"}
+{"sql":"drop procedure s.f(int, text)"}
+{"sql":"drop procedure f(*)","code":"42601","message":"syntax error at or near \"*\"","position":17}
+{"sql":"drop procedure f(in a int)"}
+{"sql":"drop procedure f[]","code":"42601","message":"syntax error at or near \"]\"","position":17}
+{"sql":"drop procedure s.","code":"42601","message":"syntax error at end of input","position":17}
+{"sql":"drop procedure f, g"}
+{"sql":"drop procedure f(), g"}
+{"sql":"drop procedure f, s.g(int)"}
+{"sql":"drop procedure s.f, g"}
+{"sql":"drop procedure f(*), g(int)","code":"42601","message":"syntax error at or near \"*\"","position":17}
+{"sql":"drop procedure f, g[]","code":"42601","message":"syntax error at or near \"]\"","position":20}
+{"sql":"drop procedure f cascade"}
+{"sql":"drop procedure s.f cascade"}
+{"sql":"drop procedure a.b.c cascade"}
+{"sql":"drop procedure \"F\" cascade"}
+{"sql":"drop procedure name cascade"}
+{"sql":"drop procedure f() cascade"}
+{"sql":"drop procedure f(int) cascade"}
+{"sql":"drop procedure s.f(int, text) cascade"}
+{"sql":"drop procedure f(*) cascade","code":"42601","message":"syntax error at or near \"*\"","position":17}
+{"sql":"drop procedure f(in a int) cascade"}
+{"sql":"drop procedure f[] cascade","code":"42601","message":"syntax error at or near \"]\"","position":17}
+{"sql":"drop procedure s. cascade"}
+{"sql":"drop procedure f, g cascade"}
+{"sql":"drop procedure f(), g cascade"}
+{"sql":"drop procedure f, s.g(int) cascade"}
+{"sql":"drop procedure s.f, g cascade"}
+{"sql":"drop procedure f(*), g(int) cascade","code":"42601","message":"syntax error at or near \"*\"","position":17}
+{"sql":"drop procedure f, g[] cascade","code":"42601","message":"syntax error at or near \"]\"","position":20}
+{"sql":"drop procedure f restrict"}
+{"sql":"drop procedure s.f restrict"}
+{"sql":"drop procedure a.b.c restrict"}
+{"sql":"drop procedure \"F\" restrict"}
+{"sql":"drop procedure name restrict"}
+{"sql":"drop procedure f() restrict"}
+{"sql":"drop procedure f(int) restrict"}
+{"sql":"drop procedure s.f(int, text) restrict"}
+{"sql":"drop procedure f(*) restrict","code":"42601","message":"syntax error at or near \"*\"","position":17}
+{"sql":"drop procedure f(in a int) restrict"}
+{"sql":"drop procedure f[] restrict","code":"42601","message":"syntax error at or near \"]\"","position":17}
+{"sql":"drop procedure s. restrict"}
+{"sql":"drop procedure f, g restrict"}
+{"sql":"drop procedure f(), g restrict"}
+{"sql":"drop procedure f, s.g(int) restrict"}
+{"sql":"drop procedure s.f, g restrict"}
+{"sql":"drop procedure f(*), g(int) restrict","code":"42601","message":"syntax error at or near \"*\"","position":17}
+{"sql":"drop procedure f, g[] restrict","code":"42601","message":"syntax error at or near \"]\"","position":20}
+{"sql":"drop procedure f,","code":"42601","message":"syntax error at end of input","position":17}
+{"sql":"drop procedure f.","code":"42601","message":"syntax error at end of input","position":17}
+{"sql":"drop procedure","code":"42601","message":"syntax error at end of input","position":14}
+{"sql":"drop procedure f; select 1"}
+{"sql":"drop procedure if exists f"}
+{"sql":"drop procedure if exists s.f"}
+{"sql":"drop procedure if exists a.b.c"}
+{"sql":"drop procedure if exists \"F\""}
+{"sql":"drop procedure if exists name"}
+{"sql":"drop procedure if exists f()"}
+{"sql":"drop procedure if exists f(int)"}
+{"sql":"drop procedure if exists s.f(int, text)"}
+{"sql":"drop procedure if exists f(*)","code":"42601","message":"syntax error at or near \"*\"","position":27}
+{"sql":"drop procedure if exists f(in a int)"}
+{"sql":"drop procedure if exists f[]","code":"42601","message":"syntax error at or near \"]\"","position":27}
+{"sql":"drop procedure if exists s.","code":"42601","message":"syntax error at end of input","position":27}
+{"sql":"drop procedure if exists f, g"}
+{"sql":"drop procedure if exists f(), g"}
+{"sql":"drop procedure if exists f, s.g(int)"}
+{"sql":"drop procedure if exists s.f, g"}
+{"sql":"drop procedure if exists f(*), g(int)","code":"42601","message":"syntax error at or near \"*\"","position":27}
+{"sql":"drop procedure if exists f, g[]","code":"42601","message":"syntax error at or near \"]\"","position":30}
+{"sql":"drop procedure if exists f cascade"}
+{"sql":"drop procedure if exists s.f cascade"}
+{"sql":"drop procedure if exists a.b.c cascade"}
+{"sql":"drop procedure if exists \"F\" cascade"}
+{"sql":"drop procedure if exists name cascade"}
+{"sql":"drop procedure if exists f() cascade"}
+{"sql":"drop procedure if exists f(int) cascade"}
+{"sql":"drop procedure if exists s.f(int, text) cascade"}
+{"sql":"drop procedure if exists f(*) cascade","code":"42601","message":"syntax error at or near \"*\"","position":27}
+{"sql":"drop procedure if exists f(in a int) cascade"}
+{"sql":"drop procedure if exists f[] cascade","code":"42601","message":"syntax error at or near \"]\"","position":27}
+{"sql":"drop procedure if exists s. cascade"}
+{"sql":"drop procedure if exists f, g cascade"}
+{"sql":"drop procedure if exists f(), g cascade"}
+{"sql":"drop procedure if exists f, s.g(int) cascade"}
+{"sql":"drop procedure if exists s.f, g cascade"}
+{"sql":"drop procedure if exists f(*), g(int) cascade","code":"42601","message":"syntax error at or near \"*\"","position":27}
+{"sql":"drop procedure if exists f, g[] cascade","code":"42601","message":"syntax error at or near \"]\"","position":30}
+{"sql":"drop procedure if exists f restrict"}
+{"sql":"drop procedure if exists s.f restrict"}
+{"sql":"drop procedure if exists a.b.c restrict"}
+{"sql":"drop procedure if exists \"F\" restrict"}
+{"sql":"drop procedure if exists name restrict"}
+{"sql":"drop procedure if exists f() restrict"}
+{"sql":"drop procedure if exists f(int) restrict"}
+{"sql":"drop procedure if exists s.f(int, text) restrict"}
+{"sql":"drop procedure if exists f(*) restrict","code":"42601","message":"syntax error at or near \"*\"","position":27}
+{"sql":"drop procedure if exists f(in a int) restrict"}
+{"sql":"drop procedure if exists f[] restrict","code":"42601","message":"syntax error at or near \"]\"","position":27}
+{"sql":"drop procedure if exists s. restrict"}
+{"sql":"drop procedure if exists f, g restrict"}
+{"sql":"drop procedure if exists f(), g restrict"}
+{"sql":"drop procedure if exists f, s.g(int) restrict"}
+{"sql":"drop procedure if exists s.f, g restrict"}
+{"sql":"drop procedure if exists f(*), g(int) restrict","code":"42601","message":"syntax error at or near \"*\"","position":27}
+{"sql":"drop procedure if exists f, g[] restrict","code":"42601","message":"syntax error at or near \"]\"","position":30}
+{"sql":"drop procedure if exists f,","code":"42601","message":"syntax error at end of input","position":27}
+{"sql":"drop procedure if exists f.","code":"42601","message":"syntax error at end of input","position":27}
+{"sql":"drop procedure if exists","code":"42601","message":"syntax error at end of input","position":24}
+{"sql":"drop procedure if exists f; select 1"}
+{"sql":"drop routine f"}
+{"sql":"drop routine s.f"}
+{"sql":"drop routine a.b.c"}
+{"sql":"drop routine \"F\""}
+{"sql":"drop routine name"}
+{"sql":"drop routine f()"}
+{"sql":"drop routine f(int)"}
+{"sql":"drop routine s.f(int, text)"}
+{"sql":"drop routine f(*)","code":"42601","message":"syntax error at or near \"*\"","position":15}
+{"sql":"drop routine f(in a int)"}
+{"sql":"drop routine f[]","code":"42601","message":"syntax error at or near \"]\"","position":15}
+{"sql":"drop routine s.","code":"42601","message":"syntax error at end of input","position":15}
+{"sql":"drop routine f, g"}
+{"sql":"drop routine f(), g"}
+{"sql":"drop routine f, s.g(int)"}
+{"sql":"drop routine s.f, g"}
+{"sql":"drop routine f(*), g(int)","code":"42601","message":"syntax error at or near \"*\"","position":15}
+{"sql":"drop routine f, g[]","code":"42601","message":"syntax error at or near \"]\"","position":18}
+{"sql":"drop routine f cascade"}
+{"sql":"drop routine s.f cascade"}
+{"sql":"drop routine a.b.c cascade"}
+{"sql":"drop routine \"F\" cascade"}
+{"sql":"drop routine name cascade"}
+{"sql":"drop routine f() cascade"}
+{"sql":"drop routine f(int) cascade"}
+{"sql":"drop routine s.f(int, text) cascade"}
+{"sql":"drop routine f(*) cascade","code":"42601","message":"syntax error at or near \"*\"","position":15}
+{"sql":"drop routine f(in a int) cascade"}
+{"sql":"drop routine f[] cascade","code":"42601","message":"syntax error at or near \"]\"","position":15}
+{"sql":"drop routine s. cascade"}
+{"sql":"drop routine f, g cascade"}
+{"sql":"drop routine f(), g cascade"}
+{"sql":"drop routine f, s.g(int) cascade"}
+{"sql":"drop routine s.f, g cascade"}
+{"sql":"drop routine f(*), g(int) cascade","code":"42601","message":"syntax error at or near \"*\"","position":15}
+{"sql":"drop routine f, g[] cascade","code":"42601","message":"syntax error at or near \"]\"","position":18}
+{"sql":"drop routine f restrict"}
+{"sql":"drop routine s.f restrict"}
+{"sql":"drop routine a.b.c restrict"}
+{"sql":"drop routine \"F\" restrict"}
+{"sql":"drop routine name restrict"}
+{"sql":"drop routine f() restrict"}
+{"sql":"drop routine f(int) restrict"}
+{"sql":"drop routine s.f(int, text) restrict"}
+{"sql":"drop routine f(*) restrict","code":"42601","message":"syntax error at or near \"*\"","position":15}
+{"sql":"drop routine f(in a int) restrict"}
+{"sql":"drop routine f[] restrict","code":"42601","message":"syntax error at or near \"]\"","position":15}
+{"sql":"drop routine s. restrict"}
+{"sql":"drop routine f, g restrict"}
+{"sql":"drop routine f(), g restrict"}
+{"sql":"drop routine f, s.g(int) restrict"}
+{"sql":"drop routine s.f, g restrict"}
+{"sql":"drop routine f(*), g(int) restrict","code":"42601","message":"syntax error at or near \"*\"","position":15}
+{"sql":"drop routine f, g[] restrict","code":"42601","message":"syntax error at or near \"]\"","position":18}
+{"sql":"drop routine f,","code":"42601","message":"syntax error at end of input","position":15}
+{"sql":"drop routine f.","code":"42601","message":"syntax error at end of input","position":15}
+{"sql":"drop routine","code":"42601","message":"syntax error at end of input","position":12}
+{"sql":"drop routine f; select 1"}
+{"sql":"drop routine if exists f"}
+{"sql":"drop routine if exists s.f"}
+{"sql":"drop routine if exists a.b.c"}
+{"sql":"drop routine if exists \"F\""}
+{"sql":"drop routine if exists name"}
+{"sql":"drop routine if exists f()"}
+{"sql":"drop routine if exists f(int)"}
+{"sql":"drop routine if exists s.f(int, text)"}
+{"sql":"drop routine if exists f(*)","code":"42601","message":"syntax error at or near \"*\"","position":25}
+{"sql":"drop routine if exists f(in a int)"}
+{"sql":"drop routine if exists f[]","code":"42601","message":"syntax error at or near \"]\"","position":25}
+{"sql":"drop routine if exists s.","code":"42601","message":"syntax error at end of input","position":25}
+{"sql":"drop routine if exists f, g"}
+{"sql":"drop routine if exists f(), g"}
+{"sql":"drop routine if exists f, s.g(int)"}
+{"sql":"drop routine if exists s.f, g"}
+{"sql":"drop routine if exists f(*), g(int)","code":"42601","message":"syntax error at or near \"*\"","position":25}
+{"sql":"drop routine if exists f, g[]","code":"42601","message":"syntax error at or near \"]\"","position":28}
+{"sql":"drop routine if exists f cascade"}
+{"sql":"drop routine if exists s.f cascade"}
+{"sql":"drop routine if exists a.b.c cascade"}
+{"sql":"drop routine if exists \"F\" cascade"}
+{"sql":"drop routine if exists name cascade"}
+{"sql":"drop routine if exists f() cascade"}
+{"sql":"drop routine if exists f(int) cascade"}
+{"sql":"drop routine if exists s.f(int, text) cascade"}
+{"sql":"drop routine if exists f(*) cascade","code":"42601","message":"syntax error at or near \"*\"","position":25}
+{"sql":"drop routine if exists f(in a int) cascade"}
+{"sql":"drop routine if exists f[] cascade","code":"42601","message":"syntax error at or near \"]\"","position":25}
+{"sql":"drop routine if exists s. cascade"}
+{"sql":"drop routine if exists f, g cascade"}
+{"sql":"drop routine if exists f(), g cascade"}
+{"sql":"drop routine if exists f, s.g(int) cascade"}
+{"sql":"drop routine if exists s.f, g cascade"}
+{"sql":"drop routine if exists f(*), g(int) cascade","code":"42601","message":"syntax error at or near \"*\"","position":25}
+{"sql":"drop routine if exists f, g[] cascade","code":"42601","message":"syntax error at or near \"]\"","position":28}
+{"sql":"drop routine if exists f restrict"}
+{"sql":"drop routine if exists s.f restrict"}
+{"sql":"drop routine if exists a.b.c restrict"}
+{"sql":"drop routine if exists \"F\" restrict"}
+{"sql":"drop routine if exists name restrict"}
+{"sql":"drop routine if exists f() restrict"}
+{"sql":"drop routine if exists f(int) restrict"}
+{"sql":"drop routine if exists s.f(int, text) restrict"}
+{"sql":"drop routine if exists f(*) restrict","code":"42601","message":"syntax error at or near \"*\"","position":25}
+{"sql":"drop routine if exists f(in a int) restrict"}
+{"sql":"drop routine if exists f[] restrict","code":"42601","message":"syntax error at or near \"]\"","position":25}
+{"sql":"drop routine if exists s. restrict"}
+{"sql":"drop routine if exists f, g restrict"}
+{"sql":"drop routine if exists f(), g restrict"}
+{"sql":"drop routine if exists f, s.g(int) restrict"}
+{"sql":"drop routine if exists s.f, g restrict"}
+{"sql":"drop routine if exists f(*), g(int) restrict","code":"42601","message":"syntax error at or near \"*\"","position":25}
+{"sql":"drop routine if exists f, g[] restrict","code":"42601","message":"syntax error at or near \"]\"","position":28}
+{"sql":"drop routine if exists f,","code":"42601","message":"syntax error at end of input","position":25}
+{"sql":"drop routine if exists f.","code":"42601","message":"syntax error at end of input","position":25}
+{"sql":"drop routine if exists","code":"42601","message":"syntax error at end of input","position":22}
+{"sql":"drop routine if exists f; select 1"}
+{"sql":"drop aggregate f","code":"42601","message":"syntax error at end of input","position":16}
+{"sql":"drop aggregate s.f","code":"42601","message":"syntax error at end of input","position":18}
+{"sql":"drop aggregate a.b.c","code":"42601","message":"syntax error at end of input","position":20}
+{"sql":"drop aggregate \"F\"","code":"42601","message":"syntax error at end of input","position":18}
+{"sql":"drop aggregate name","code":"42601","message":"syntax error at end of input","position":19}
+{"sql":"drop aggregate f()","code":"42601","message":"syntax error at or near \")\"","position":17}
+{"sql":"drop aggregate f(int)"}
+{"sql":"drop aggregate s.f(int, text)"}
+{"sql":"drop aggregate f(*)"}
+{"sql":"drop aggregate f(in a int)"}
+{"sql":"drop aggregate f[]","code":"42601","message":"syntax error at or near \"]\"","position":17}
+{"sql":"drop aggregate s.","code":"42601","message":"syntax error at end of input","position":17}
+{"sql":"drop aggregate f, g","code":"42601","message":"syntax error at or near \",\"","position":16}
+{"sql":"drop aggregate f(), g","code":"42601","message":"syntax error at or near \")\"","position":17}
+{"sql":"drop aggregate f, s.g(int)","code":"42601","message":"syntax error at or near \",\"","position":16}
+{"sql":"drop aggregate s.f, g","code":"42601","message":"syntax error at or near \",\"","position":18}
+{"sql":"drop aggregate f(*), g(int)"}
+{"sql":"drop aggregate f, g[]","code":"42601","message":"syntax error at or near \",\"","position":16}
+{"sql":"drop aggregate f cascade","code":"42601","message":"syntax error at or near \"cascade\"","position":17}
+{"sql":"drop aggregate s.f cascade","code":"42601","message":"syntax error at or near \"cascade\"","position":19}
+{"sql":"drop aggregate a.b.c cascade","code":"42601","message":"syntax error at or near \"cascade\"","position":21}
+{"sql":"drop aggregate \"F\" cascade","code":"42601","message":"syntax error at or near \"cascade\"","position":19}
+{"sql":"drop aggregate name cascade","code":"42601","message":"syntax error at or near \"cascade\"","position":20}
+{"sql":"drop aggregate f() cascade","code":"42601","message":"syntax error at or near \")\"","position":17}
+{"sql":"drop aggregate f(int) cascade"}
+{"sql":"drop aggregate s.f(int, text) cascade"}
+{"sql":"drop aggregate f(*) cascade"}
+{"sql":"drop aggregate f(in a int) cascade"}
+{"sql":"drop aggregate f[] cascade","code":"42601","message":"syntax error at or near \"]\"","position":17}
+{"sql":"drop aggregate s. cascade","code":"42601","message":"syntax error at end of input","position":25}
+{"sql":"drop aggregate f, g cascade","code":"42601","message":"syntax error at or near \",\"","position":16}
+{"sql":"drop aggregate f(), g cascade","code":"42601","message":"syntax error at or near \")\"","position":17}
+{"sql":"drop aggregate f, s.g(int) cascade","code":"42601","message":"syntax error at or near \",\"","position":16}
+{"sql":"drop aggregate s.f, g cascade","code":"42601","message":"syntax error at or near \",\"","position":18}
+{"sql":"drop aggregate f(*), g(int) cascade"}
+{"sql":"drop aggregate f, g[] cascade","code":"42601","message":"syntax error at or near \",\"","position":16}
+{"sql":"drop aggregate f restrict","code":"42601","message":"syntax error at or near \"restrict\"","position":17}
+{"sql":"drop aggregate s.f restrict","code":"42601","message":"syntax error at or near \"restrict\"","position":19}
+{"sql":"drop aggregate a.b.c restrict","code":"42601","message":"syntax error at or near \"restrict\"","position":21}
+{"sql":"drop aggregate \"F\" restrict","code":"42601","message":"syntax error at or near \"restrict\"","position":19}
+{"sql":"drop aggregate name restrict","code":"42601","message":"syntax error at or near \"restrict\"","position":20}
+{"sql":"drop aggregate f() restrict","code":"42601","message":"syntax error at or near \")\"","position":17}
+{"sql":"drop aggregate f(int) restrict"}
+{"sql":"drop aggregate s.f(int, text) restrict"}
+{"sql":"drop aggregate f(*) restrict"}
+{"sql":"drop aggregate f(in a int) restrict"}
+{"sql":"drop aggregate f[] restrict","code":"42601","message":"syntax error at or near \"]\"","position":17}
+{"sql":"drop aggregate s. restrict","code":"42601","message":"syntax error at end of input","position":26}
+{"sql":"drop aggregate f, g restrict","code":"42601","message":"syntax error at or near \",\"","position":16}
+{"sql":"drop aggregate f(), g restrict","code":"42601","message":"syntax error at or near \")\"","position":17}
+{"sql":"drop aggregate f, s.g(int) restrict","code":"42601","message":"syntax error at or near \",\"","position":16}
+{"sql":"drop aggregate s.f, g restrict","code":"42601","message":"syntax error at or near \",\"","position":18}
+{"sql":"drop aggregate f(*), g(int) restrict"}
+{"sql":"drop aggregate f, g[] restrict","code":"42601","message":"syntax error at or near \",\"","position":16}
+{"sql":"drop aggregate f,","code":"42601","message":"syntax error at or near \",\"","position":16}
+{"sql":"drop aggregate f.","code":"42601","message":"syntax error at end of input","position":17}
+{"sql":"drop aggregate","code":"42601","message":"syntax error at end of input","position":14}
+{"sql":"drop aggregate f; select 1","code":"42601","message":"syntax error at or near \";\"","position":16}
+{"sql":"drop aggregate if exists f","code":"42601","message":"syntax error at end of input","position":26}
+{"sql":"drop aggregate if exists s.f","code":"42601","message":"syntax error at end of input","position":28}
+{"sql":"drop aggregate if exists a.b.c","code":"42601","message":"syntax error at end of input","position":30}
+{"sql":"drop aggregate if exists \"F\"","code":"42601","message":"syntax error at end of input","position":28}
+{"sql":"drop aggregate if exists name","code":"42601","message":"syntax error at end of input","position":29}
+{"sql":"drop aggregate if exists f()","code":"42601","message":"syntax error at or near \")\"","position":27}
+{"sql":"drop aggregate if exists f(int)"}
+{"sql":"drop aggregate if exists s.f(int, text)"}
+{"sql":"drop aggregate if exists f(*)"}
+{"sql":"drop aggregate if exists f(in a int)"}
+{"sql":"drop aggregate if exists f[]","code":"42601","message":"syntax error at or near \"]\"","position":27}
+{"sql":"drop aggregate if exists s.","code":"42601","message":"syntax error at end of input","position":27}
+{"sql":"drop aggregate if exists f, g","code":"42601","message":"syntax error at or near \",\"","position":26}
+{"sql":"drop aggregate if exists f(), g","code":"42601","message":"syntax error at or near \")\"","position":27}
+{"sql":"drop aggregate if exists f, s.g(int)","code":"42601","message":"syntax error at or near \",\"","position":26}
+{"sql":"drop aggregate if exists s.f, g","code":"42601","message":"syntax error at or near \",\"","position":28}
+{"sql":"drop aggregate if exists f(*), g(int)"}
+{"sql":"drop aggregate if exists f, g[]","code":"42601","message":"syntax error at or near \",\"","position":26}
+{"sql":"drop aggregate if exists f cascade","code":"42601","message":"syntax error at or near \"cascade\"","position":27}
+{"sql":"drop aggregate if exists s.f cascade","code":"42601","message":"syntax error at or near \"cascade\"","position":29}
+{"sql":"drop aggregate if exists a.b.c cascade","code":"42601","message":"syntax error at or near \"cascade\"","position":31}
+{"sql":"drop aggregate if exists \"F\" cascade","code":"42601","message":"syntax error at or near \"cascade\"","position":29}
+{"sql":"drop aggregate if exists name cascade","code":"42601","message":"syntax error at or near \"cascade\"","position":30}
+{"sql":"drop aggregate if exists f() cascade","code":"42601","message":"syntax error at or near \")\"","position":27}
+{"sql":"drop aggregate if exists f(int) cascade"}
+{"sql":"drop aggregate if exists s.f(int, text) cascade"}
+{"sql":"drop aggregate if exists f(*) cascade"}
+{"sql":"drop aggregate if exists f(in a int) cascade"}
+{"sql":"drop aggregate if exists f[] cascade","code":"42601","message":"syntax error at or near \"]\"","position":27}
+{"sql":"drop aggregate if exists s. cascade","code":"42601","message":"syntax error at end of input","position":35}
+{"sql":"drop aggregate if exists f, g cascade","code":"42601","message":"syntax error at or near \",\"","position":26}
+{"sql":"drop aggregate if exists f(), g cascade","code":"42601","message":"syntax error at or near \")\"","position":27}
+{"sql":"drop aggregate if exists f, s.g(int) cascade","code":"42601","message":"syntax error at or near \",\"","position":26}
+{"sql":"drop aggregate if exists s.f, g cascade","code":"42601","message":"syntax error at or near \",\"","position":28}
+{"sql":"drop aggregate if exists f(*), g(int) cascade"}
+{"sql":"drop aggregate if exists f, g[] cascade","code":"42601","message":"syntax error at or near \",\"","position":26}
+{"sql":"drop aggregate if exists f restrict","code":"42601","message":"syntax error at or near \"restrict\"","position":27}
+{"sql":"drop aggregate if exists s.f restrict","code":"42601","message":"syntax error at or near \"restrict\"","position":29}
+{"sql":"drop aggregate if exists a.b.c restrict","code":"42601","message":"syntax error at or near \"restrict\"","position":31}
+{"sql":"drop aggregate if exists \"F\" restrict","code":"42601","message":"syntax error at or near \"restrict\"","position":29}
+{"sql":"drop aggregate if exists name restrict","code":"42601","message":"syntax error at or near \"restrict\"","position":30}
+{"sql":"drop aggregate if exists f() restrict","code":"42601","message":"syntax error at or near \")\"","position":27}
+{"sql":"drop aggregate if exists f(int) restrict"}
+{"sql":"drop aggregate if exists s.f(int, text) restrict"}
+{"sql":"drop aggregate if exists f(*) restrict"}
+{"sql":"drop aggregate if exists f(in a int) restrict"}
+{"sql":"drop aggregate if exists f[] restrict","code":"42601","message":"syntax error at or near \"]\"","position":27}
+{"sql":"drop aggregate if exists s. restrict","code":"42601","message":"syntax error at end of input","position":36}
+{"sql":"drop aggregate if exists f, g restrict","code":"42601","message":"syntax error at or near \",\"","position":26}
+{"sql":"drop aggregate if exists f(), g restrict","code":"42601","message":"syntax error at or near \")\"","position":27}
+{"sql":"drop aggregate if exists f, s.g(int) restrict","code":"42601","message":"syntax error at or near \",\"","position":26}
+{"sql":"drop aggregate if exists s.f, g restrict","code":"42601","message":"syntax error at or near \",\"","position":28}
+{"sql":"drop aggregate if exists f(*), g(int) restrict"}
+{"sql":"drop aggregate if exists f, g[] restrict","code":"42601","message":"syntax error at or near \",\"","position":26}
+{"sql":"drop aggregate if exists f,","code":"42601","message":"syntax error at or near \",\"","position":26}
+{"sql":"drop aggregate if exists f.","code":"42601","message":"syntax error at end of input","position":27}
+{"sql":"drop aggregate if exists","code":"42601","message":"syntax error at end of input","position":24}
+{"sql":"drop aggregate if exists f; select 1","code":"42601","message":"syntax error at or near \";\"","position":26}
+{"sql":"drop subscription s"}
+{"sql":"drop subscription \"S\""}
+{"sql":"drop subscription a.b","code":"42601","message":"syntax error at or near \".\"","position":19}
+{"sql":"drop subscription name"}
+{"sql":"drop subscription s, t","code":"42601","message":"syntax error at or near \",\"","position":19}
+{"sql":"drop subscription s,","code":"42601","message":"syntax error at or near \",\"","position":19}
+{"sql":"drop subscription public"}
+{"sql":"drop subscription s(1)","code":"42601","message":"syntax error at or near \"(\"","position":19}
+{"sql":"drop subscription s cascade"}
+{"sql":"drop subscription \"S\" cascade"}
+{"sql":"drop subscription a.b cascade","code":"42601","message":"syntax error at or near \".\"","position":19}
+{"sql":"drop subscription name cascade"}
+{"sql":"drop subscription s, t cascade","code":"42601","message":"syntax error at or near \",\"","position":19}
+{"sql":"drop subscription s, cascade","code":"42601","message":"syntax error at or near \",\"","position":19}
+{"sql":"drop subscription public cascade"}
+{"sql":"drop subscription s(1) cascade","code":"42601","message":"syntax error at or near \"(\"","position":19}
+{"sql":"drop subscription s restrict"}
+{"sql":"drop subscription \"S\" restrict"}
+{"sql":"drop subscription a.b restrict","code":"42601","message":"syntax error at or near \".\"","position":19}
+{"sql":"drop subscription name restrict"}
+{"sql":"drop subscription s, t restrict","code":"42601","message":"syntax error at or near \",\"","position":19}
+{"sql":"drop subscription s, restrict","code":"42601","message":"syntax error at or near \",\"","position":19}
+{"sql":"drop subscription public restrict"}
+{"sql":"drop subscription s(1) restrict","code":"42601","message":"syntax error at or near \"(\"","position":19}
+{"sql":"drop subscription if exists s"}
+{"sql":"drop subscription if exists \"S\""}
+{"sql":"drop subscription if exists a.b","code":"42601","message":"syntax error at or near \".\"","position":29}
+{"sql":"drop subscription if exists name"}
+{"sql":"drop subscription if exists s, t","code":"42601","message":"syntax error at or near \",\"","position":29}
+{"sql":"drop subscription if exists s,","code":"42601","message":"syntax error at or near \",\"","position":29}
+{"sql":"drop subscription if exists public"}
+{"sql":"drop subscription if exists s(1)","code":"42601","message":"syntax error at or near \"(\"","position":29}
+{"sql":"drop subscription if exists s cascade"}
+{"sql":"drop subscription if exists \"S\" cascade"}
+{"sql":"drop subscription if exists a.b cascade","code":"42601","message":"syntax error at or near \".\"","position":29}
+{"sql":"drop subscription if exists name cascade"}
+{"sql":"drop subscription if exists s, t cascade","code":"42601","message":"syntax error at or near \",\"","position":29}
+{"sql":"drop subscription if exists s, cascade","code":"42601","message":"syntax error at or near \",\"","position":29}
+{"sql":"drop subscription if exists public cascade"}
+{"sql":"drop subscription if exists s(1) cascade","code":"42601","message":"syntax error at or near \"(\"","position":29}
+{"sql":"drop subscription if exists s restrict"}
+{"sql":"drop subscription if exists \"S\" restrict"}
+{"sql":"drop subscription if exists a.b restrict","code":"42601","message":"syntax error at or near \".\"","position":29}
+{"sql":"drop subscription if exists name restrict"}
+{"sql":"drop subscription if exists s, t restrict","code":"42601","message":"syntax error at or near \",\"","position":29}
+{"sql":"drop subscription if exists s, restrict","code":"42601","message":"syntax error at or near \",\"","position":29}
+{"sql":"drop subscription if exists public restrict"}
+{"sql":"drop subscription if exists s(1) restrict","code":"42601","message":"syntax error at or near \"(\"","position":29}
+{"sql":"drop owned by r"}
+{"sql":"drop owned by r cascade"}
+{"sql":"drop owned by r restrict"}
+{"sql":"drop owned by r, s"}
+{"sql":"drop owned by r, s cascade"}
+{"sql":"drop owned by r, s restrict"}
+{"sql":"drop owned by current_user"}
+{"sql":"drop owned by current_user cascade"}
+{"sql":"drop owned by current_user restrict"}
+{"sql":"drop owned by session_user"}
+{"sql":"drop owned by session_user cascade"}
+{"sql":"drop owned by session_user restrict"}
+{"sql":"drop owned by current_role"}
+{"sql":"drop owned by current_role cascade"}
+{"sql":"drop owned by current_role restrict"}
+{"sql":"drop owned by public"}
+{"sql":"drop owned by public cascade"}
+{"sql":"drop owned by public restrict"}
+{"sql":"drop owned by \"public\""}
+{"sql":"drop owned by \"public\" cascade"}
+{"sql":"drop owned by \"public\" restrict"}
+{"sql":"drop owned by none","code":"42939","message":"role name \"none\" is reserved","position":14}
+{"sql":"drop owned by none cascade","code":"42939","message":"role name \"none\" is reserved","position":14}
+{"sql":"drop owned by none restrict","code":"42939","message":"role name \"none\" is reserved","position":14}
+{"sql":"drop owned by r.s","code":"42601","message":"syntax error at or near \".\"","position":15}
+{"sql":"drop owned by r.s cascade","code":"42601","message":"syntax error at or near \".\"","position":15}
+{"sql":"drop owned by r.s restrict","code":"42601","message":"syntax error at or near \".\"","position":15}
+{"sql":"drop owned by r,","code":"42601","message":"syntax error at end of input","position":16}
+{"sql":"drop owned by r, cascade"}
+{"sql":"drop owned by r, restrict"}
+{"sql":"drop owned by user","code":"42601","message":"syntax error at or near \"user\"","position":14}
+{"sql":"drop owned by user cascade","code":"42601","message":"syntax error at or near \"user\"","position":14}
+{"sql":"drop owned by user restrict","code":"42601","message":"syntax error at or near \"user\"","position":14}
+{"sql":"drop owned by","code":"42601","message":"syntax error at end of input","position":13}
+{"sql":"drop owned r","code":"42601","message":"syntax error at or near \"r\"","position":11}
