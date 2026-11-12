@@ -13,7 +13,7 @@ import (
 // either count must change these on purpose. make check-parser checks that
 // y.output is goyacc's output for gram.y.
 const (
-	pinnedShiftReduce  = 6
+	pinnedShiftReduce  = 4
 	pinnedReduceReduce = 1
 )
 
