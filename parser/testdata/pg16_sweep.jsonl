@@ -12671,11 +12671,11 @@
 {"file":"errors.sql","stmt":45,"sum":"ad9fff5e","code":"42601","msg":"syntax error at or near \",\"","pos":41}
 {"file":"errors.sql","stmt":46,"sum":"3271ede4","code":"42601","msg":"syntax error at or near \"(\"","pos":39}
 {"file":"errors.sql","stmt":47,"sum":"757c08ea","code":"42601","msg":"syntax error at or near \")\"","pos":49}
-{"file":"errors.sql","stmt":48,"sum":"a35c58e3","code":"42601","msg":"missing argument","pos":43,"class":"operator-missing-argument-message"}
-{"file":"errors.sql","stmt":48,"edit":[44,0," ) "],"code":"42601","msg":"missing argument","pos":43,"class":"operator-missing-argument-message"}
+{"file":"errors.sql","stmt":48,"sum":"a35c58e3","code":"42601","msg":"missing argument","pos":43}
+{"file":"errors.sql","stmt":48,"edit":[44,0," ) "],"code":"42601","msg":"missing argument","pos":43}
 {"file":"errors.sql","stmt":49,"sum":"53b9c1af"}
 {"file":"errors.sql","stmt":49,"edit":[58,4,"current_catalog"],"code":"42601","msg":"syntax error at or near \"current_catalog\"","pos":58}
-{"file":"errors.sql","stmt":50,"sum":"953a6f68","code":"42601","msg":"missing argument","pos":42,"class":"operator-missing-argument-message"}
+{"file":"errors.sql","stmt":50,"sum":"953a6f68","code":"42601","msg":"missing argument","pos":42}
 {"file":"errors.sql","stmt":51,"sum":"d396d16e","code":"42601","msg":"syntax error at or near \",\"","pos":35}
 {"file":"errors.sql","stmt":52,"sum":"bf4876b5"}
 {"file":"errors.sql","stmt":53,"sum":"d3160e26"}
@@ -58794,7 +58794,7 @@
 {"sql":"select json_object(returning text format json encoding bogus)","code":"22023","msg":"unrecognized JSON encoding: bogus","pos":-1}
 {"sql":"select u&'x' uescape '+'","code":"42601","msg":"invalid Unicode escape character at or near \"'+'\"","pos":21}
 {"sql":"select u&'x' uescape (3) '!'","code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"(\"","pos":21}
-{"sql":"drop operator === (int4)","code":"42601","msg":"missing argument","pos":23,"class":"operator-missing-argument-message"}
+{"sql":"drop operator === (int4)","code":"42601","msg":"missing argument","pos":23}
 {"sql":"create policy p on t as ugly using (true)","code":"42601","msg":"unrecognized row security option \"ugly\"","pos":24,"class":"policy-option-message"}
 {"sql":"create role role x with createrole","code":"42601","msg":"unrecognized role option \"x\"","pos":17}
 {"sql":"drop procedure p, q[]","code":"42601","msg":"syntax error at or near \"]\"","pos":20}
@@ -58846,7 +58846,7 @@
 {"sql":"-- %TYPE for function param/return types\nCREATE FUNCTION foo(x hobbies_r.name%TYPE) RETURNS hobbies_r.person%TYPE AS 'select 1' LANGUAGE SQL"}
 {"sql":"CREATE FUNCTION bar(SETOF mytable.col%TYPE) RETURNS void AS 'select 1' LANGUAGE SQL"}
 {"sql":"-- Task 1: TRANSFORM in CREATE FUNCTION\nCREATE FUNCTION my_func(jsonb) RETURNS int LANGUAGE sql TRANSFORM FOR TYPE jsonb AS $$ SELECT 1; $$"}
-{"sql":"-- oper_argtypes single-arg error should report missing argument\n-- expect-error: missing argument\nDROP OPERATOR +(integer)","code":"42601","msg":"missing argument","pos":122,"class":"operator-missing-argument-message"}
+{"sql":"-- oper_argtypes single-arg error should report missing argument\n-- expect-error: missing argument\nDROP OPERATOR +(integer)","code":"42601","msg":"missing argument","pos":122}
 {"sql":"-- Task 2: LOGGED/UNLOGGED sequences\nCREATE SEQUENCE s_logged AS integer LOGGED"}
 {"sql":"CREATE SEQUENCE s_unlogged AS integer UNLOGGED"}
 {"sql":"-- Phase 6: extractor behavior coverage\n-- psql terminators should end statements mid-line\nSELECT 1"}

@@ -100,7 +100,7 @@ L a feature's grammar.
 | column-options-qualified-name (fixed) | 2 | 3 (0/1/2) | refuses `ALTER COLUMN a SET (x.y = 1)` | `alter_table_cmd` SET/RESET `reloptions` (`reloption_elem`) | no | S |
 | alter-extension-member (fixed) | 2 | 2 (0/0/2) | refuses ALTER EXTENSION ADD CAST, ADD TRANSFORM | `AlterExtensionContentsStmt` | yes, both | S |
 | role-option-error-order (fixed) | 3 | 7 (0/6/1) | syntax error at the next token for PostgreSQL's `unrecognized role option` | `CreateOptRoleElem`/`AlterOptRoleElem: IDENT` | no | S |
-| operator-missing-argument-message | 3 | 5 (2/1/2) | hint folded into the message | `oper_argtypes` | no | S |
+| operator-missing-argument-message (fixed) | 3 | 5 (2/1/2) | hint folded into the message | `oper_argtypes` | no | S |
 | policy-option-message | 3 | 3 (1/1/1) | hint used as the message | `RowSecurityDefaultPermissive` | no | S |
 | not-yet-implemented-errors | 3 | 2 (0/0/2) | 42601 for 0A000 | `a_expr UNIQUE select_with_parens`, `CreateAssertionStmt` | no | S |
 | drop-routine-list-name (fixed) | 3 | 2 (0/1/1) | refused at `[` instead of at `]` | `function_with_argtypes_list` | no | S |
@@ -515,7 +515,7 @@ the same fault, is now PostgreSQL 16's `0A000 UNENCRYPTED PASSWORD is no
 longer supported` at UNENCRYPTED, with its hint (it was 42601 at the end of
 the option). All 7 agree.
 
-### operator-missing-argument-message (risk 3, 5)
+### operator-missing-argument-message (risk 3, 5; fixed)
 
 PostgreSQL's message is `missing argument`, with HINT `Use NONE to denote the
 missing argument of a unary operator.`; the parser's message is both.
@@ -523,6 +523,11 @@ missing argument of a unary operator.`; the parser's message is both.
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
 | `drop operator === (int4)` | 42601 missing argument at 23 | 42601 missing argument, use NONE to denote the missing argument of a unary operator at 23 |
+
+`oper_argtypes` now raises PostgreSQL 16's `missing argument` with its HINT
+`Use NONE to denote the missing argument of a unary operator.` at the closing
+parenthesis through `grammarError`, and ends the parse there, so a token
+after it no longer replaces the error. All 5 agree.
 
 ### policy-option-message (risk 3, 3)
 

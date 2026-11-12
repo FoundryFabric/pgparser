@@ -13778,8 +13778,8 @@ operator_with_argtypes:
 oper_argtypes:
 	'(' Typename ')'
 		{
-			pglex.Error("missing argument, use NONE to denote the missing argument of a unary operator")
-			$$ = nil
+			grammarError(pglex, codeSyntaxError, "missing argument", "Use NONE to denote the missing argument of a unary operator.", $<loc>3)
+			return 1
 		}
 	| '(' Typename ',' Typename ')'
 		{

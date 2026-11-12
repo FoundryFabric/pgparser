@@ -1,0 +1,598 @@
+{"sql":"drop operator ===(int4)","code":"42601","message":"missing argument","position":22}
+{"sql":"drop operator ===(int4, int4)"}
+{"sql":"drop operator ===(none, int4)"}
+{"sql":"drop operator ===(int4, none)"}
+{"sql":"drop operator ===(none)","code":"42601","message":"syntax error at or near \")\"","position":22}
+{"sql":"drop operator ===(int4[])","code":"42601","message":"missing argument","position":24}
+{"sql":"drop operator ===(s.t)","code":"42601","message":"missing argument","position":21}
+{"sql":"drop operator ===(double precision)","code":"42601","message":"missing argument","position":34}
+{"sql":"drop operator ===(int4 ,)","code":"42601","message":"syntax error at or near \")\"","position":24}
+{"sql":"drop operator ===()","code":"42601","message":"syntax error at or near \")\"","position":18}
+{"sql":"drop operator ===(int4, int4, int4)","code":"42601","message":"syntax error at or near \",\"","position":28}
+{"sql":"drop operator ===(setof int4)","code":"42601","message":"missing argument","position":28}
+{"sql":"drop operator === (int4)","code":"42601","message":"missing argument","position":23}
+{"sql":"drop operator +(int4)","code":"42601","message":"missing argument","position":20}
+{"sql":"drop operator +(int4, int4)"}
+{"sql":"drop operator +(none, int4)"}
+{"sql":"drop operator +(int4, none)"}
+{"sql":"drop operator +(none)","code":"42601","message":"syntax error at or near \")\"","position":20}
+{"sql":"drop operator +(int4[])","code":"42601","message":"missing argument","position":22}
+{"sql":"drop operator +(s.t)","code":"42601","message":"missing argument","position":19}
+{"sql":"drop operator +(double precision)","code":"42601","message":"missing argument","position":32}
+{"sql":"drop operator +(int4 ,)","code":"42601","message":"syntax error at or near \")\"","position":22}
+{"sql":"drop operator +()","code":"42601","message":"syntax error at or near \")\"","position":16}
+{"sql":"drop operator +(int4, int4, int4)","code":"42601","message":"syntax error at or near \",\"","position":26}
+{"sql":"drop operator +(setof int4)","code":"42601","message":"missing argument","position":26}
+{"sql":"drop operator + (int4)","code":"42601","message":"missing argument","position":21}
+{"sql":"drop operator s.+(int4)","code":"42601","message":"missing argument","position":22}
+{"sql":"drop operator s.+(int4, int4)"}
+{"sql":"drop operator s.+(none, int4)"}
+{"sql":"drop operator s.+(int4, none)"}
+{"sql":"drop operator s.+(none)","code":"42601","message":"syntax error at or near \")\"","position":22}
+{"sql":"drop operator s.+(int4[])","code":"42601","message":"missing argument","position":24}
+{"sql":"drop operator s.+(s.t)","code":"42601","message":"missing argument","position":21}
+{"sql":"drop operator s.+(double precision)","code":"42601","message":"missing argument","position":34}
+{"sql":"drop operator s.+(int4 ,)","code":"42601","message":"syntax error at or near \")\"","position":24}
+{"sql":"drop operator s.+()","code":"42601","message":"syntax error at or near \")\"","position":18}
+{"sql":"drop operator s.+(int4, int4, int4)","code":"42601","message":"syntax error at or near \",\"","position":28}
+{"sql":"drop operator s.+(setof int4)","code":"42601","message":"missing argument","position":28}
+{"sql":"drop operator s.+ (int4)","code":"42601","message":"missing argument","position":23}
+{"sql":"drop operator operator(s.+)(int4)","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"drop operator operator(s.+)(int4, int4)","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"drop operator operator(s.+)(none, int4)","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"drop operator operator(s.+)(int4, none)","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"drop operator operator(s.+)(none)","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"drop operator operator(s.+)(int4[])","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"drop operator operator(s.+)(s.t)","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"drop operator operator(s.+)(double precision)","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"drop operator operator(s.+)(int4 ,)","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"drop operator operator(s.+)()","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"drop operator operator(s.+)(int4, int4, int4)","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"drop operator operator(s.+)(setof int4)","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"drop operator operator(s.+) (int4)","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"drop operator if exists ===(int4)","code":"42601","message":"missing argument","position":32}
+{"sql":"drop operator if exists ===(int4, int4)"}
+{"sql":"drop operator if exists ===(none, int4)"}
+{"sql":"drop operator if exists ===(int4, none)"}
+{"sql":"drop operator if exists ===(none)","code":"42601","message":"syntax error at or near \")\"","position":32}
+{"sql":"drop operator if exists ===(int4[])","code":"42601","message":"missing argument","position":34}
+{"sql":"drop operator if exists ===(s.t)","code":"42601","message":"missing argument","position":31}
+{"sql":"drop operator if exists ===(double precision)","code":"42601","message":"missing argument","position":44}
+{"sql":"drop operator if exists ===(int4 ,)","code":"42601","message":"syntax error at or near \")\"","position":34}
+{"sql":"drop operator if exists ===()","code":"42601","message":"syntax error at or near \")\"","position":28}
+{"sql":"drop operator if exists ===(int4, int4, int4)","code":"42601","message":"syntax error at or near \",\"","position":38}
+{"sql":"drop operator if exists ===(setof int4)","code":"42601","message":"missing argument","position":38}
+{"sql":"drop operator if exists === (int4)","code":"42601","message":"missing argument","position":33}
+{"sql":"drop operator if exists +(int4)","code":"42601","message":"missing argument","position":30}
+{"sql":"drop operator if exists +(int4, int4)"}
+{"sql":"drop operator if exists +(none, int4)"}
+{"sql":"drop operator if exists +(int4, none)"}
+{"sql":"drop operator if exists +(none)","code":"42601","message":"syntax error at or near \")\"","position":30}
+{"sql":"drop operator if exists +(int4[])","code":"42601","message":"missing argument","position":32}
+{"sql":"drop operator if exists +(s.t)","code":"42601","message":"missing argument","position":29}
+{"sql":"drop operator if exists +(double precision)","code":"42601","message":"missing argument","position":42}
+{"sql":"drop operator if exists +(int4 ,)","code":"42601","message":"syntax error at or near \")\"","position":32}
+{"sql":"drop operator if exists +()","code":"42601","message":"syntax error at or near \")\"","position":26}
+{"sql":"drop operator if exists +(int4, int4, int4)","code":"42601","message":"syntax error at or near \",\"","position":36}
+{"sql":"drop operator if exists +(setof int4)","code":"42601","message":"missing argument","position":36}
+{"sql":"drop operator if exists + (int4)","code":"42601","message":"missing argument","position":31}
+{"sql":"drop operator if exists s.+(int4)","code":"42601","message":"missing argument","position":32}
+{"sql":"drop operator if exists s.+(int4, int4)"}
+{"sql":"drop operator if exists s.+(none, int4)"}
+{"sql":"drop operator if exists s.+(int4, none)"}
+{"sql":"drop operator if exists s.+(none)","code":"42601","message":"syntax error at or near \")\"","position":32}
+{"sql":"drop operator if exists s.+(int4[])","code":"42601","message":"missing argument","position":34}
+{"sql":"drop operator if exists s.+(s.t)","code":"42601","message":"missing argument","position":31}
+{"sql":"drop operator if exists s.+(double precision)","code":"42601","message":"missing argument","position":44}
+{"sql":"drop operator if exists s.+(int4 ,)","code":"42601","message":"syntax error at or near \")\"","position":34}
+{"sql":"drop operator if exists s.+()","code":"42601","message":"syntax error at or near \")\"","position":28}
+{"sql":"drop operator if exists s.+(int4, int4, int4)","code":"42601","message":"syntax error at or near \",\"","position":38}
+{"sql":"drop operator if exists s.+(setof int4)","code":"42601","message":"missing argument","position":38}
+{"sql":"drop operator if exists s.+ (int4)","code":"42601","message":"missing argument","position":33}
+{"sql":"drop operator if exists operator(s.+)(int4)","code":"42601","message":"syntax error at or near \"(\"","position":32}
+{"sql":"drop operator if exists operator(s.+)(int4, int4)","code":"42601","message":"syntax error at or near \"(\"","position":32}
+{"sql":"drop operator if exists operator(s.+)(none, int4)","code":"42601","message":"syntax error at or near \"(\"","position":32}
+{"sql":"drop operator if exists operator(s.+)(int4, none)","code":"42601","message":"syntax error at or near \"(\"","position":32}
+{"sql":"drop operator if exists operator(s.+)(none)","code":"42601","message":"syntax error at or near \"(\"","position":32}
+{"sql":"drop operator if exists operator(s.+)(int4[])","code":"42601","message":"syntax error at or near \"(\"","position":32}
+{"sql":"drop operator if exists operator(s.+)(s.t)","code":"42601","message":"syntax error at or near \"(\"","position":32}
+{"sql":"drop operator if exists operator(s.+)(double precision)","code":"42601","message":"syntax error at or near \"(\"","position":32}
+{"sql":"drop operator if exists operator(s.+)(int4 ,)","code":"42601","message":"syntax error at or near \"(\"","position":32}
+{"sql":"drop operator if exists operator(s.+)()","code":"42601","message":"syntax error at or near \"(\"","position":32}
+{"sql":"drop operator if exists operator(s.+)(int4, int4, int4)","code":"42601","message":"syntax error at or near \"(\"","position":32}
+{"sql":"drop operator if exists operator(s.+)(setof int4)","code":"42601","message":"syntax error at or near \"(\"","position":32}
+{"sql":"drop operator if exists operator(s.+) (int4)","code":"42601","message":"syntax error at or near \"(\"","position":32}
+{"sql":"drop operator ===(int4) cascade","code":"42601","message":"missing argument","position":22}
+{"sql":"drop operator ===(int4, int4) cascade"}
+{"sql":"drop operator ===(none, int4) cascade"}
+{"sql":"drop operator ===(int4, none) cascade"}
+{"sql":"drop operator ===(none) cascade","code":"42601","message":"syntax error at or near \")\"","position":22}
+{"sql":"drop operator ===(int4[]) cascade","code":"42601","message":"missing argument","position":24}
+{"sql":"drop operator ===(s.t) cascade","code":"42601","message":"missing argument","position":21}
+{"sql":"drop operator ===(double precision) cascade","code":"42601","message":"missing argument","position":34}
+{"sql":"drop operator ===(int4 ,) cascade","code":"42601","message":"syntax error at or near \")\"","position":24}
+{"sql":"drop operator ===() cascade","code":"42601","message":"syntax error at or near \")\"","position":18}
+{"sql":"drop operator ===(int4, int4, int4) cascade","code":"42601","message":"syntax error at or near \",\"","position":28}
+{"sql":"drop operator ===(setof int4) cascade","code":"42601","message":"missing argument","position":28}
+{"sql":"drop operator === (int4) cascade","code":"42601","message":"missing argument","position":23}
+{"sql":"drop operator +(int4) cascade","code":"42601","message":"missing argument","position":20}
+{"sql":"drop operator +(int4, int4) cascade"}
+{"sql":"drop operator +(none, int4) cascade"}
+{"sql":"drop operator +(int4, none) cascade"}
+{"sql":"drop operator +(none) cascade","code":"42601","message":"syntax error at or near \")\"","position":20}
+{"sql":"drop operator +(int4[]) cascade","code":"42601","message":"missing argument","position":22}
+{"sql":"drop operator +(s.t) cascade","code":"42601","message":"missing argument","position":19}
+{"sql":"drop operator +(double precision) cascade","code":"42601","message":"missing argument","position":32}
+{"sql":"drop operator +(int4 ,) cascade","code":"42601","message":"syntax error at or near \")\"","position":22}
+{"sql":"drop operator +() cascade","code":"42601","message":"syntax error at or near \")\"","position":16}
+{"sql":"drop operator +(int4, int4, int4) cascade","code":"42601","message":"syntax error at or near \",\"","position":26}
+{"sql":"drop operator +(setof int4) cascade","code":"42601","message":"missing argument","position":26}
+{"sql":"drop operator + (int4) cascade","code":"42601","message":"missing argument","position":21}
+{"sql":"drop operator s.+(int4) cascade","code":"42601","message":"missing argument","position":22}
+{"sql":"drop operator s.+(int4, int4) cascade"}
+{"sql":"drop operator s.+(none, int4) cascade"}
+{"sql":"drop operator s.+(int4, none) cascade"}
+{"sql":"drop operator s.+(none) cascade","code":"42601","message":"syntax error at or near \")\"","position":22}
+{"sql":"drop operator s.+(int4[]) cascade","code":"42601","message":"missing argument","position":24}
+{"sql":"drop operator s.+(s.t) cascade","code":"42601","message":"missing argument","position":21}
+{"sql":"drop operator s.+(double precision) cascade","code":"42601","message":"missing argument","position":34}
+{"sql":"drop operator s.+(int4 ,) cascade","code":"42601","message":"syntax error at or near \")\"","position":24}
+{"sql":"drop operator s.+() cascade","code":"42601","message":"syntax error at or near \")\"","position":18}
+{"sql":"drop operator s.+(int4, int4, int4) cascade","code":"42601","message":"syntax error at or near \",\"","position":28}
+{"sql":"drop operator s.+(setof int4) cascade","code":"42601","message":"missing argument","position":28}
+{"sql":"drop operator s.+ (int4) cascade","code":"42601","message":"missing argument","position":23}
+{"sql":"drop operator operator(s.+)(int4) cascade","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"drop operator operator(s.+)(int4, int4) cascade","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"drop operator operator(s.+)(none, int4) cascade","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"drop operator operator(s.+)(int4, none) cascade","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"drop operator operator(s.+)(none) cascade","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"drop operator operator(s.+)(int4[]) cascade","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"drop operator operator(s.+)(s.t) cascade","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"drop operator operator(s.+)(double precision) cascade","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"drop operator operator(s.+)(int4 ,) cascade","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"drop operator operator(s.+)() cascade","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"drop operator operator(s.+)(int4, int4, int4) cascade","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"drop operator operator(s.+)(setof int4) cascade","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"drop operator operator(s.+) (int4) cascade","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"drop operator a.===(int4), ===(int4)","code":"42601","message":"missing argument","position":24}
+{"sql":"drop operator a.===(int4, int4), ===(int4, int4)"}
+{"sql":"drop operator a.===(none, int4), ===(none, int4)"}
+{"sql":"drop operator a.===(int4, none), ===(int4, none)"}
+{"sql":"drop operator a.===(none), ===(none)","code":"42601","message":"syntax error at or near \")\"","position":24}
+{"sql":"drop operator a.===(int4[]), ===(int4[])","code":"42601","message":"missing argument","position":26}
+{"sql":"drop operator a.===(s.t), ===(s.t)","code":"42601","message":"missing argument","position":23}
+{"sql":"drop operator a.===(double precision), ===(double precision)","code":"42601","message":"missing argument","position":36}
+{"sql":"drop operator a.===(int4 ,), ===(int4 ,)","code":"42601","message":"syntax error at or near \")\"","position":26}
+{"sql":"drop operator a.===(), ===()","code":"42601","message":"syntax error at or near \")\"","position":20}
+{"sql":"drop operator a.===(int4, int4, int4), ===(int4, int4, int4)","code":"42601","message":"syntax error at or near \",\"","position":30}
+{"sql":"drop operator a.===(setof int4), ===(setof int4)","code":"42601","message":"missing argument","position":30}
+{"sql":"drop operator a.=== (int4), === (int4)","code":"42601","message":"missing argument","position":25}
+{"sql":"drop operator a.+(int4), +(int4)","code":"42601","message":"missing argument","position":22}
+{"sql":"drop operator a.+(int4, int4), +(int4, int4)"}
+{"sql":"drop operator a.+(none, int4), +(none, int4)"}
+{"sql":"drop operator a.+(int4, none), +(int4, none)"}
+{"sql":"drop operator a.+(none), +(none)","code":"42601","message":"syntax error at or near \")\"","position":22}
+{"sql":"drop operator a.+(int4[]), +(int4[])","code":"42601","message":"missing argument","position":24}
+{"sql":"drop operator a.+(s.t), +(s.t)","code":"42601","message":"missing argument","position":21}
+{"sql":"drop operator a.+(double precision), +(double precision)","code":"42601","message":"missing argument","position":34}
+{"sql":"drop operator a.+(int4 ,), +(int4 ,)","code":"42601","message":"syntax error at or near \")\"","position":24}
+{"sql":"drop operator a.+(), +()","code":"42601","message":"syntax error at or near \")\"","position":18}
+{"sql":"drop operator a.+(int4, int4, int4), +(int4, int4, int4)","code":"42601","message":"syntax error at or near \",\"","position":28}
+{"sql":"drop operator a.+(setof int4), +(setof int4)","code":"42601","message":"missing argument","position":28}
+{"sql":"drop operator a.+ (int4), + (int4)","code":"42601","message":"missing argument","position":23}
+{"sql":"drop operator a.s.+(int4), s.+(int4)","code":"42601","message":"missing argument","position":24}
+{"sql":"drop operator a.s.+(int4, int4), s.+(int4, int4)"}
+{"sql":"drop operator a.s.+(none, int4), s.+(none, int4)"}
+{"sql":"drop operator a.s.+(int4, none), s.+(int4, none)"}
+{"sql":"drop operator a.s.+(none), s.+(none)","code":"42601","message":"syntax error at or near \")\"","position":24}
+{"sql":"drop operator a.s.+(int4[]), s.+(int4[])","code":"42601","message":"missing argument","position":26}
+{"sql":"drop operator a.s.+(s.t), s.+(s.t)","code":"42601","message":"missing argument","position":23}
+{"sql":"drop operator a.s.+(double precision), s.+(double precision)","code":"42601","message":"missing argument","position":36}
+{"sql":"drop operator a.s.+(int4 ,), s.+(int4 ,)","code":"42601","message":"syntax error at or near \")\"","position":26}
+{"sql":"drop operator a.s.+(), s.+()","code":"42601","message":"syntax error at or near \")\"","position":20}
+{"sql":"drop operator a.s.+(int4, int4, int4), s.+(int4, int4, int4)","code":"42601","message":"syntax error at or near \",\"","position":30}
+{"sql":"drop operator a.s.+(setof int4), s.+(setof int4)","code":"42601","message":"missing argument","position":30}
+{"sql":"drop operator a.s.+ (int4), s.+ (int4)","code":"42601","message":"missing argument","position":25}
+{"sql":"drop operator a.operator(s.+)(int4), operator(s.+)(int4)","code":"42601","message":"syntax error at or near \"(\"","position":24}
+{"sql":"drop operator a.operator(s.+)(int4, int4), operator(s.+)(int4, int4)","code":"42601","message":"syntax error at or near \"(\"","position":24}
+{"sql":"drop operator a.operator(s.+)(none, int4), operator(s.+)(none, int4)","code":"42601","message":"syntax error at or near \"(\"","position":24}
+{"sql":"drop operator a.operator(s.+)(int4, none), operator(s.+)(int4, none)","code":"42601","message":"syntax error at or near \"(\"","position":24}
+{"sql":"drop operator a.operator(s.+)(none), operator(s.+)(none)","code":"42601","message":"syntax error at or near \"(\"","position":24}
+{"sql":"drop operator a.operator(s.+)(int4[]), operator(s.+)(int4[])","code":"42601","message":"syntax error at or near \"(\"","position":24}
+{"sql":"drop operator a.operator(s.+)(s.t), operator(s.+)(s.t)","code":"42601","message":"syntax error at or near \"(\"","position":24}
+{"sql":"drop operator a.operator(s.+)(double precision), operator(s.+)(double precision)","code":"42601","message":"syntax error at or near \"(\"","position":24}
+{"sql":"drop operator a.operator(s.+)(int4 ,), operator(s.+)(int4 ,)","code":"42601","message":"syntax error at or near \"(\"","position":24}
+{"sql":"drop operator a.operator(s.+)(), operator(s.+)()","code":"42601","message":"syntax error at or near \"(\"","position":24}
+{"sql":"drop operator a.operator(s.+)(int4, int4, int4), operator(s.+)(int4, int4, int4)","code":"42601","message":"syntax error at or near \"(\"","position":24}
+{"sql":"drop operator a.operator(s.+)(setof int4), operator(s.+)(setof int4)","code":"42601","message":"syntax error at or near \"(\"","position":24}
+{"sql":"drop operator a.operator(s.+) (int4), operator(s.+) (int4)","code":"42601","message":"syntax error at or near \"(\"","position":24}
+{"sql":"comment on operator ===(int4) is 'x'","code":"42601","message":"missing argument","position":28}
+{"sql":"comment on operator ===(int4, int4) is 'x'"}
+{"sql":"comment on operator ===(none, int4) is 'x'"}
+{"sql":"comment on operator ===(int4, none) is 'x'"}
+{"sql":"comment on operator ===(none) is 'x'","code":"42601","message":"syntax error at or near \")\"","position":28}
+{"sql":"comment on operator ===(int4[]) is 'x'","code":"42601","message":"missing argument","position":30}
+{"sql":"comment on operator ===(s.t) is 'x'","code":"42601","message":"missing argument","position":27}
+{"sql":"comment on operator ===(double precision) is 'x'","code":"42601","message":"missing argument","position":40}
+{"sql":"comment on operator ===(int4 ,) is 'x'","code":"42601","message":"syntax error at or near \")\"","position":30}
+{"sql":"comment on operator ===() is 'x'","code":"42601","message":"syntax error at or near \")\"","position":24}
+{"sql":"comment on operator ===(int4, int4, int4) is 'x'","code":"42601","message":"syntax error at or near \",\"","position":34}
+{"sql":"comment on operator ===(setof int4) is 'x'","code":"42601","message":"missing argument","position":34}
+{"sql":"comment on operator === (int4) is 'x'","code":"42601","message":"missing argument","position":29}
+{"sql":"comment on operator +(int4) is 'x'","code":"42601","message":"missing argument","position":26}
+{"sql":"comment on operator +(int4, int4) is 'x'"}
+{"sql":"comment on operator +(none, int4) is 'x'"}
+{"sql":"comment on operator +(int4, none) is 'x'"}
+{"sql":"comment on operator +(none) is 'x'","code":"42601","message":"syntax error at or near \")\"","position":26}
+{"sql":"comment on operator +(int4[]) is 'x'","code":"42601","message":"missing argument","position":28}
+{"sql":"comment on operator +(s.t) is 'x'","code":"42601","message":"missing argument","position":25}
+{"sql":"comment on operator +(double precision) is 'x'","code":"42601","message":"missing argument","position":38}
+{"sql":"comment on operator +(int4 ,) is 'x'","code":"42601","message":"syntax error at or near \")\"","position":28}
+{"sql":"comment on operator +() is 'x'","code":"42601","message":"syntax error at or near \")\"","position":22}
+{"sql":"comment on operator +(int4, int4, int4) is 'x'","code":"42601","message":"syntax error at or near \",\"","position":32}
+{"sql":"comment on operator +(setof int4) is 'x'","code":"42601","message":"missing argument","position":32}
+{"sql":"comment on operator + (int4) is 'x'","code":"42601","message":"missing argument","position":27}
+{"sql":"comment on operator s.+(int4) is 'x'","code":"42601","message":"missing argument","position":28}
+{"sql":"comment on operator s.+(int4, int4) is 'x'"}
+{"sql":"comment on operator s.+(none, int4) is 'x'"}
+{"sql":"comment on operator s.+(int4, none) is 'x'"}
+{"sql":"comment on operator s.+(none) is 'x'","code":"42601","message":"syntax error at or near \")\"","position":28}
+{"sql":"comment on operator s.+(int4[]) is 'x'","code":"42601","message":"missing argument","position":30}
+{"sql":"comment on operator s.+(s.t) is 'x'","code":"42601","message":"missing argument","position":27}
+{"sql":"comment on operator s.+(double precision) is 'x'","code":"42601","message":"missing argument","position":40}
+{"sql":"comment on operator s.+(int4 ,) is 'x'","code":"42601","message":"syntax error at or near \")\"","position":30}
+{"sql":"comment on operator s.+() is 'x'","code":"42601","message":"syntax error at or near \")\"","position":24}
+{"sql":"comment on operator s.+(int4, int4, int4) is 'x'","code":"42601","message":"syntax error at or near \",\"","position":34}
+{"sql":"comment on operator s.+(setof int4) is 'x'","code":"42601","message":"missing argument","position":34}
+{"sql":"comment on operator s.+ (int4) is 'x'","code":"42601","message":"missing argument","position":29}
+{"sql":"comment on operator operator(s.+)(int4) is 'x'","code":"42601","message":"syntax error at or near \"(\"","position":28}
+{"sql":"comment on operator operator(s.+)(int4, int4) is 'x'","code":"42601","message":"syntax error at or near \"(\"","position":28}
+{"sql":"comment on operator operator(s.+)(none, int4) is 'x'","code":"42601","message":"syntax error at or near \"(\"","position":28}
+{"sql":"comment on operator operator(s.+)(int4, none) is 'x'","code":"42601","message":"syntax error at or near \"(\"","position":28}
+{"sql":"comment on operator operator(s.+)(none) is 'x'","code":"42601","message":"syntax error at or near \"(\"","position":28}
+{"sql":"comment on operator operator(s.+)(int4[]) is 'x'","code":"42601","message":"syntax error at or near \"(\"","position":28}
+{"sql":"comment on operator operator(s.+)(s.t) is 'x'","code":"42601","message":"syntax error at or near \"(\"","position":28}
+{"sql":"comment on operator operator(s.+)(double precision) is 'x'","code":"42601","message":"syntax error at or near \"(\"","position":28}
+{"sql":"comment on operator operator(s.+)(int4 ,) is 'x'","code":"42601","message":"syntax error at or near \"(\"","position":28}
+{"sql":"comment on operator operator(s.+)() is 'x'","code":"42601","message":"syntax error at or near \"(\"","position":28}
+{"sql":"comment on operator operator(s.+)(int4, int4, int4) is 'x'","code":"42601","message":"syntax error at or near \"(\"","position":28}
+{"sql":"comment on operator operator(s.+)(setof int4) is 'x'","code":"42601","message":"syntax error at or near \"(\"","position":28}
+{"sql":"comment on operator operator(s.+) (int4) is 'x'","code":"42601","message":"syntax error at or near \"(\"","position":28}
+{"sql":"alter extension e add operator ===(int4)","code":"42601","message":"missing argument","position":39}
+{"sql":"alter extension e add operator ===(int4, int4)"}
+{"sql":"alter extension e add operator ===(none, int4)"}
+{"sql":"alter extension e add operator ===(int4, none)"}
+{"sql":"alter extension e add operator ===(none)","code":"42601","message":"syntax error at or near \")\"","position":39}
+{"sql":"alter extension e add operator ===(int4[])","code":"42601","message":"missing argument","position":41}
+{"sql":"alter extension e add operator ===(s.t)","code":"42601","message":"missing argument","position":38}
+{"sql":"alter extension e add operator ===(double precision)","code":"42601","message":"missing argument","position":51}
+{"sql":"alter extension e add operator ===(int4 ,)","code":"42601","message":"syntax error at or near \")\"","position":41}
+{"sql":"alter extension e add operator ===()","code":"42601","message":"syntax error at or near \")\"","position":35}
+{"sql":"alter extension e add operator ===(int4, int4, int4)","code":"42601","message":"syntax error at or near \",\"","position":45}
+{"sql":"alter extension e add operator ===(setof int4)","code":"42601","message":"missing argument","position":45}
+{"sql":"alter extension e add operator === (int4)","code":"42601","message":"missing argument","position":40}
+{"sql":"alter extension e add operator +(int4)","code":"42601","message":"missing argument","position":37}
+{"sql":"alter extension e add operator +(int4, int4)"}
+{"sql":"alter extension e add operator +(none, int4)"}
+{"sql":"alter extension e add operator +(int4, none)"}
+{"sql":"alter extension e add operator +(none)","code":"42601","message":"syntax error at or near \")\"","position":37}
+{"sql":"alter extension e add operator +(int4[])","code":"42601","message":"missing argument","position":39}
+{"sql":"alter extension e add operator +(s.t)","code":"42601","message":"missing argument","position":36}
+{"sql":"alter extension e add operator +(double precision)","code":"42601","message":"missing argument","position":49}
+{"sql":"alter extension e add operator +(int4 ,)","code":"42601","message":"syntax error at or near \")\"","position":39}
+{"sql":"alter extension e add operator +()","code":"42601","message":"syntax error at or near \")\"","position":33}
+{"sql":"alter extension e add operator +(int4, int4, int4)","code":"42601","message":"syntax error at or near \",\"","position":43}
+{"sql":"alter extension e add operator +(setof int4)","code":"42601","message":"missing argument","position":43}
+{"sql":"alter extension e add operator + (int4)","code":"42601","message":"missing argument","position":38}
+{"sql":"alter extension e add operator s.+(int4)","code":"42601","message":"missing argument","position":39}
+{"sql":"alter extension e add operator s.+(int4, int4)"}
+{"sql":"alter extension e add operator s.+(none, int4)"}
+{"sql":"alter extension e add operator s.+(int4, none)"}
+{"sql":"alter extension e add operator s.+(none)","code":"42601","message":"syntax error at or near \")\"","position":39}
+{"sql":"alter extension e add operator s.+(int4[])","code":"42601","message":"missing argument","position":41}
+{"sql":"alter extension e add operator s.+(s.t)","code":"42601","message":"missing argument","position":38}
+{"sql":"alter extension e add operator s.+(double precision)","code":"42601","message":"missing argument","position":51}
+{"sql":"alter extension e add operator s.+(int4 ,)","code":"42601","message":"syntax error at or near \")\"","position":41}
+{"sql":"alter extension e add operator s.+()","code":"42601","message":"syntax error at or near \")\"","position":35}
+{"sql":"alter extension e add operator s.+(int4, int4, int4)","code":"42601","message":"syntax error at or near \",\"","position":45}
+{"sql":"alter extension e add operator s.+(setof int4)","code":"42601","message":"missing argument","position":45}
+{"sql":"alter extension e add operator s.+ (int4)","code":"42601","message":"missing argument","position":40}
+{"sql":"alter extension e add operator operator(s.+)(int4)","code":"42601","message":"syntax error at or near \"(\"","position":39}
+{"sql":"alter extension e add operator operator(s.+)(int4, int4)","code":"42601","message":"syntax error at or near \"(\"","position":39}
+{"sql":"alter extension e add operator operator(s.+)(none, int4)","code":"42601","message":"syntax error at or near \"(\"","position":39}
+{"sql":"alter extension e add operator operator(s.+)(int4, none)","code":"42601","message":"syntax error at or near \"(\"","position":39}
+{"sql":"alter extension e add operator operator(s.+)(none)","code":"42601","message":"syntax error at or near \"(\"","position":39}
+{"sql":"alter extension e add operator operator(s.+)(int4[])","code":"42601","message":"syntax error at or near \"(\"","position":39}
+{"sql":"alter extension e add operator operator(s.+)(s.t)","code":"42601","message":"syntax error at or near \"(\"","position":39}
+{"sql":"alter extension e add operator operator(s.+)(double precision)","code":"42601","message":"syntax error at or near \"(\"","position":39}
+{"sql":"alter extension e add operator operator(s.+)(int4 ,)","code":"42601","message":"syntax error at or near \"(\"","position":39}
+{"sql":"alter extension e add operator operator(s.+)()","code":"42601","message":"syntax error at or near \"(\"","position":39}
+{"sql":"alter extension e add operator operator(s.+)(int4, int4, int4)","code":"42601","message":"syntax error at or near \"(\"","position":39}
+{"sql":"alter extension e add operator operator(s.+)(setof int4)","code":"42601","message":"syntax error at or near \"(\"","position":39}
+{"sql":"alter extension e add operator operator(s.+) (int4)","code":"42601","message":"syntax error at or near \"(\"","position":39}
+{"sql":"alter extension e drop operator ===(int4)","code":"42601","message":"missing argument","position":40}
+{"sql":"alter extension e drop operator ===(int4, int4)"}
+{"sql":"alter extension e drop operator ===(none, int4)"}
+{"sql":"alter extension e drop operator ===(int4, none)"}
+{"sql":"alter extension e drop operator ===(none)","code":"42601","message":"syntax error at or near \")\"","position":40}
+{"sql":"alter extension e drop operator ===(int4[])","code":"42601","message":"missing argument","position":42}
+{"sql":"alter extension e drop operator ===(s.t)","code":"42601","message":"missing argument","position":39}
+{"sql":"alter extension e drop operator ===(double precision)","code":"42601","message":"missing argument","position":52}
+{"sql":"alter extension e drop operator ===(int4 ,)","code":"42601","message":"syntax error at or near \")\"","position":42}
+{"sql":"alter extension e drop operator ===()","code":"42601","message":"syntax error at or near \")\"","position":36}
+{"sql":"alter extension e drop operator ===(int4, int4, int4)","code":"42601","message":"syntax error at or near \",\"","position":46}
+{"sql":"alter extension e drop operator ===(setof int4)","code":"42601","message":"missing argument","position":46}
+{"sql":"alter extension e drop operator === (int4)","code":"42601","message":"missing argument","position":41}
+{"sql":"alter extension e drop operator +(int4)","code":"42601","message":"missing argument","position":38}
+{"sql":"alter extension e drop operator +(int4, int4)"}
+{"sql":"alter extension e drop operator +(none, int4)"}
+{"sql":"alter extension e drop operator +(int4, none)"}
+{"sql":"alter extension e drop operator +(none)","code":"42601","message":"syntax error at or near \")\"","position":38}
+{"sql":"alter extension e drop operator +(int4[])","code":"42601","message":"missing argument","position":40}
+{"sql":"alter extension e drop operator +(s.t)","code":"42601","message":"missing argument","position":37}
+{"sql":"alter extension e drop operator +(double precision)","code":"42601","message":"missing argument","position":50}
+{"sql":"alter extension e drop operator +(int4 ,)","code":"42601","message":"syntax error at or near \")\"","position":40}
+{"sql":"alter extension e drop operator +()","code":"42601","message":"syntax error at or near \")\"","position":34}
+{"sql":"alter extension e drop operator +(int4, int4, int4)","code":"42601","message":"syntax error at or near \",\"","position":44}
+{"sql":"alter extension e drop operator +(setof int4)","code":"42601","message":"missing argument","position":44}
+{"sql":"alter extension e drop operator + (int4)","code":"42601","message":"missing argument","position":39}
+{"sql":"alter extension e drop operator s.+(int4)","code":"42601","message":"missing argument","position":40}
+{"sql":"alter extension e drop operator s.+(int4, int4)"}
+{"sql":"alter extension e drop operator s.+(none, int4)"}
+{"sql":"alter extension e drop operator s.+(int4, none)"}
+{"sql":"alter extension e drop operator s.+(none)","code":"42601","message":"syntax error at or near \")\"","position":40}
+{"sql":"alter extension e drop operator s.+(int4[])","code":"42601","message":"missing argument","position":42}
+{"sql":"alter extension e drop operator s.+(s.t)","code":"42601","message":"missing argument","position":39}
+{"sql":"alter extension e drop operator s.+(double precision)","code":"42601","message":"missing argument","position":52}
+{"sql":"alter extension e drop operator s.+(int4 ,)","code":"42601","message":"syntax error at or near \")\"","position":42}
+{"sql":"alter extension e drop operator s.+()","code":"42601","message":"syntax error at or near \")\"","position":36}
+{"sql":"alter extension e drop operator s.+(int4, int4, int4)","code":"42601","message":"syntax error at or near \",\"","position":46}
+{"sql":"alter extension e drop operator s.+(setof int4)","code":"42601","message":"missing argument","position":46}
+{"sql":"alter extension e drop operator s.+ (int4)","code":"42601","message":"missing argument","position":41}
+{"sql":"alter extension e drop operator operator(s.+)(int4)","code":"42601","message":"syntax error at or near \"(\"","position":40}
+{"sql":"alter extension e drop operator operator(s.+)(int4, int4)","code":"42601","message":"syntax error at or near \"(\"","position":40}
+{"sql":"alter extension e drop operator operator(s.+)(none, int4)","code":"42601","message":"syntax error at or near \"(\"","position":40}
+{"sql":"alter extension e drop operator operator(s.+)(int4, none)","code":"42601","message":"syntax error at or near \"(\"","position":40}
+{"sql":"alter extension e drop operator operator(s.+)(none)","code":"42601","message":"syntax error at or near \"(\"","position":40}
+{"sql":"alter extension e drop operator operator(s.+)(int4[])","code":"42601","message":"syntax error at or near \"(\"","position":40}
+{"sql":"alter extension e drop operator operator(s.+)(s.t)","code":"42601","message":"syntax error at or near \"(\"","position":40}
+{"sql":"alter extension e drop operator operator(s.+)(double precision)","code":"42601","message":"syntax error at or near \"(\"","position":40}
+{"sql":"alter extension e drop operator operator(s.+)(int4 ,)","code":"42601","message":"syntax error at or near \"(\"","position":40}
+{"sql":"alter extension e drop operator operator(s.+)()","code":"42601","message":"syntax error at or near \"(\"","position":40}
+{"sql":"alter extension e drop operator operator(s.+)(int4, int4, int4)","code":"42601","message":"syntax error at or near \"(\"","position":40}
+{"sql":"alter extension e drop operator operator(s.+)(setof int4)","code":"42601","message":"syntax error at or near \"(\"","position":40}
+{"sql":"alter extension e drop operator operator(s.+) (int4)","code":"42601","message":"syntax error at or near \"(\"","position":40}
+{"sql":"alter operator ===(int4) set schema s","code":"42601","message":"missing argument","position":23}
+{"sql":"alter operator ===(int4, int4) set schema s"}
+{"sql":"alter operator ===(none, int4) set schema s"}
+{"sql":"alter operator ===(int4, none) set schema s"}
+{"sql":"alter operator ===(none) set schema s","code":"42601","message":"syntax error at or near \")\"","position":23}
+{"sql":"alter operator ===(int4[]) set schema s","code":"42601","message":"missing argument","position":25}
+{"sql":"alter operator ===(s.t) set schema s","code":"42601","message":"missing argument","position":22}
+{"sql":"alter operator ===(double precision) set schema s","code":"42601","message":"missing argument","position":35}
+{"sql":"alter operator ===(int4 ,) set schema s","code":"42601","message":"syntax error at or near \")\"","position":25}
+{"sql":"alter operator ===() set schema s","code":"42601","message":"syntax error at or near \")\"","position":19}
+{"sql":"alter operator ===(int4, int4, int4) set schema s","code":"42601","message":"syntax error at or near \",\"","position":29}
+{"sql":"alter operator ===(setof int4) set schema s","code":"42601","message":"missing argument","position":29}
+{"sql":"alter operator === (int4) set schema s","code":"42601","message":"missing argument","position":24}
+{"sql":"alter operator +(int4) set schema s","code":"42601","message":"missing argument","position":21}
+{"sql":"alter operator +(int4, int4) set schema s"}
+{"sql":"alter operator +(none, int4) set schema s"}
+{"sql":"alter operator +(int4, none) set schema s"}
+{"sql":"alter operator +(none) set schema s","code":"42601","message":"syntax error at or near \")\"","position":21}
+{"sql":"alter operator +(int4[]) set schema s","code":"42601","message":"missing argument","position":23}
+{"sql":"alter operator +(s.t) set schema s","code":"42601","message":"missing argument","position":20}
+{"sql":"alter operator +(double precision) set schema s","code":"42601","message":"missing argument","position":33}
+{"sql":"alter operator +(int4 ,) set schema s","code":"42601","message":"syntax error at or near \")\"","position":23}
+{"sql":"alter operator +() set schema s","code":"42601","message":"syntax error at or near \")\"","position":17}
+{"sql":"alter operator +(int4, int4, int4) set schema s","code":"42601","message":"syntax error at or near \",\"","position":27}
+{"sql":"alter operator +(setof int4) set schema s","code":"42601","message":"missing argument","position":27}
+{"sql":"alter operator + (int4) set schema s","code":"42601","message":"missing argument","position":22}
+{"sql":"alter operator s.+(int4) set schema s","code":"42601","message":"missing argument","position":23}
+{"sql":"alter operator s.+(int4, int4) set schema s"}
+{"sql":"alter operator s.+(none, int4) set schema s"}
+{"sql":"alter operator s.+(int4, none) set schema s"}
+{"sql":"alter operator s.+(none) set schema s","code":"42601","message":"syntax error at or near \")\"","position":23}
+{"sql":"alter operator s.+(int4[]) set schema s","code":"42601","message":"missing argument","position":25}
+{"sql":"alter operator s.+(s.t) set schema s","code":"42601","message":"missing argument","position":22}
+{"sql":"alter operator s.+(double precision) set schema s","code":"42601","message":"missing argument","position":35}
+{"sql":"alter operator s.+(int4 ,) set schema s","code":"42601","message":"syntax error at or near \")\"","position":25}
+{"sql":"alter operator s.+() set schema s","code":"42601","message":"syntax error at or near \")\"","position":19}
+{"sql":"alter operator s.+(int4, int4, int4) set schema s","code":"42601","message":"syntax error at or near \",\"","position":29}
+{"sql":"alter operator s.+(setof int4) set schema s","code":"42601","message":"missing argument","position":29}
+{"sql":"alter operator s.+ (int4) set schema s","code":"42601","message":"missing argument","position":24}
+{"sql":"alter operator operator(s.+)(int4) set schema s","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(int4, int4) set schema s","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(none, int4) set schema s","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(int4, none) set schema s","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(none) set schema s","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(int4[]) set schema s","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(s.t) set schema s","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(double precision) set schema s","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(int4 ,) set schema s","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)() set schema s","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(int4, int4, int4) set schema s","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(setof int4) set schema s","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+) (int4) set schema s","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator ===(int4) owner to r","code":"42601","message":"missing argument","position":23}
+{"sql":"alter operator ===(int4, int4) owner to r"}
+{"sql":"alter operator ===(none, int4) owner to r"}
+{"sql":"alter operator ===(int4, none) owner to r"}
+{"sql":"alter operator ===(none) owner to r","code":"42601","message":"syntax error at or near \")\"","position":23}
+{"sql":"alter operator ===(int4[]) owner to r","code":"42601","message":"missing argument","position":25}
+{"sql":"alter operator ===(s.t) owner to r","code":"42601","message":"missing argument","position":22}
+{"sql":"alter operator ===(double precision) owner to r","code":"42601","message":"missing argument","position":35}
+{"sql":"alter operator ===(int4 ,) owner to r","code":"42601","message":"syntax error at or near \")\"","position":25}
+{"sql":"alter operator ===() owner to r","code":"42601","message":"syntax error at or near \")\"","position":19}
+{"sql":"alter operator ===(int4, int4, int4) owner to r","code":"42601","message":"syntax error at or near \",\"","position":29}
+{"sql":"alter operator ===(setof int4) owner to r","code":"42601","message":"missing argument","position":29}
+{"sql":"alter operator === (int4) owner to r","code":"42601","message":"missing argument","position":24}
+{"sql":"alter operator +(int4) owner to r","code":"42601","message":"missing argument","position":21}
+{"sql":"alter operator +(int4, int4) owner to r"}
+{"sql":"alter operator +(none, int4) owner to r"}
+{"sql":"alter operator +(int4, none) owner to r"}
+{"sql":"alter operator +(none) owner to r","code":"42601","message":"syntax error at or near \")\"","position":21}
+{"sql":"alter operator +(int4[]) owner to r","code":"42601","message":"missing argument","position":23}
+{"sql":"alter operator +(s.t) owner to r","code":"42601","message":"missing argument","position":20}
+{"sql":"alter operator +(double precision) owner to r","code":"42601","message":"missing argument","position":33}
+{"sql":"alter operator +(int4 ,) owner to r","code":"42601","message":"syntax error at or near \")\"","position":23}
+{"sql":"alter operator +() owner to r","code":"42601","message":"syntax error at or near \")\"","position":17}
+{"sql":"alter operator +(int4, int4, int4) owner to r","code":"42601","message":"syntax error at or near \",\"","position":27}
+{"sql":"alter operator +(setof int4) owner to r","code":"42601","message":"missing argument","position":27}
+{"sql":"alter operator + (int4) owner to r","code":"42601","message":"missing argument","position":22}
+{"sql":"alter operator s.+(int4) owner to r","code":"42601","message":"missing argument","position":23}
+{"sql":"alter operator s.+(int4, int4) owner to r"}
+{"sql":"alter operator s.+(none, int4) owner to r"}
+{"sql":"alter operator s.+(int4, none) owner to r"}
+{"sql":"alter operator s.+(none) owner to r","code":"42601","message":"syntax error at or near \")\"","position":23}
+{"sql":"alter operator s.+(int4[]) owner to r","code":"42601","message":"missing argument","position":25}
+{"sql":"alter operator s.+(s.t) owner to r","code":"42601","message":"missing argument","position":22}
+{"sql":"alter operator s.+(double precision) owner to r","code":"42601","message":"missing argument","position":35}
+{"sql":"alter operator s.+(int4 ,) owner to r","code":"42601","message":"syntax error at or near \")\"","position":25}
+{"sql":"alter operator s.+() owner to r","code":"42601","message":"syntax error at or near \")\"","position":19}
+{"sql":"alter operator s.+(int4, int4, int4) owner to r","code":"42601","message":"syntax error at or near \",\"","position":29}
+{"sql":"alter operator s.+(setof int4) owner to r","code":"42601","message":"missing argument","position":29}
+{"sql":"alter operator s.+ (int4) owner to r","code":"42601","message":"missing argument","position":24}
+{"sql":"alter operator operator(s.+)(int4) owner to r","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(int4, int4) owner to r","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(none, int4) owner to r","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(int4, none) owner to r","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(none) owner to r","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(int4[]) owner to r","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(s.t) owner to r","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(double precision) owner to r","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(int4 ,) owner to r","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)() owner to r","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(int4, int4, int4) owner to r","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(setof int4) owner to r","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+) (int4) owner to r","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator ===(int4) set (restrict = x)","code":"42601","message":"missing argument","position":23}
+{"sql":"alter operator ===(int4, int4) set (restrict = x)"}
+{"sql":"alter operator ===(none, int4) set (restrict = x)"}
+{"sql":"alter operator ===(int4, none) set (restrict = x)"}
+{"sql":"alter operator ===(none) set (restrict = x)","code":"42601","message":"syntax error at or near \")\"","position":23}
+{"sql":"alter operator ===(int4[]) set (restrict = x)","code":"42601","message":"missing argument","position":25}
+{"sql":"alter operator ===(s.t) set (restrict = x)","code":"42601","message":"missing argument","position":22}
+{"sql":"alter operator ===(double precision) set (restrict = x)","code":"42601","message":"missing argument","position":35}
+{"sql":"alter operator ===(int4 ,) set (restrict = x)","code":"42601","message":"syntax error at or near \")\"","position":25}
+{"sql":"alter operator ===() set (restrict = x)","code":"42601","message":"syntax error at or near \")\"","position":19}
+{"sql":"alter operator ===(int4, int4, int4) set (restrict = x)","code":"42601","message":"syntax error at or near \",\"","position":29}
+{"sql":"alter operator ===(setof int4) set (restrict = x)","code":"42601","message":"missing argument","position":29}
+{"sql":"alter operator === (int4) set (restrict = x)","code":"42601","message":"missing argument","position":24}
+{"sql":"alter operator +(int4) set (restrict = x)","code":"42601","message":"missing argument","position":21}
+{"sql":"alter operator +(int4, int4) set (restrict = x)"}
+{"sql":"alter operator +(none, int4) set (restrict = x)"}
+{"sql":"alter operator +(int4, none) set (restrict = x)"}
+{"sql":"alter operator +(none) set (restrict = x)","code":"42601","message":"syntax error at or near \")\"","position":21}
+{"sql":"alter operator +(int4[]) set (restrict = x)","code":"42601","message":"missing argument","position":23}
+{"sql":"alter operator +(s.t) set (restrict = x)","code":"42601","message":"missing argument","position":20}
+{"sql":"alter operator +(double precision) set (restrict = x)","code":"42601","message":"missing argument","position":33}
+{"sql":"alter operator +(int4 ,) set (restrict = x)","code":"42601","message":"syntax error at or near \")\"","position":23}
+{"sql":"alter operator +() set (restrict = x)","code":"42601","message":"syntax error at or near \")\"","position":17}
+{"sql":"alter operator +(int4, int4, int4) set (restrict = x)","code":"42601","message":"syntax error at or near \",\"","position":27}
+{"sql":"alter operator +(setof int4) set (restrict = x)","code":"42601","message":"missing argument","position":27}
+{"sql":"alter operator + (int4) set (restrict = x)","code":"42601","message":"missing argument","position":22}
+{"sql":"alter operator s.+(int4) set (restrict = x)","code":"42601","message":"missing argument","position":23}
+{"sql":"alter operator s.+(int4, int4) set (restrict = x)"}
+{"sql":"alter operator s.+(none, int4) set (restrict = x)"}
+{"sql":"alter operator s.+(int4, none) set (restrict = x)"}
+{"sql":"alter operator s.+(none) set (restrict = x)","code":"42601","message":"syntax error at or near \")\"","position":23}
+{"sql":"alter operator s.+(int4[]) set (restrict = x)","code":"42601","message":"missing argument","position":25}
+{"sql":"alter operator s.+(s.t) set (restrict = x)","code":"42601","message":"missing argument","position":22}
+{"sql":"alter operator s.+(double precision) set (restrict = x)","code":"42601","message":"missing argument","position":35}
+{"sql":"alter operator s.+(int4 ,) set (restrict = x)","code":"42601","message":"syntax error at or near \")\"","position":25}
+{"sql":"alter operator s.+() set (restrict = x)","code":"42601","message":"syntax error at or near \")\"","position":19}
+{"sql":"alter operator s.+(int4, int4, int4) set (restrict = x)","code":"42601","message":"syntax error at or near \",\"","position":29}
+{"sql":"alter operator s.+(setof int4) set (restrict = x)","code":"42601","message":"missing argument","position":29}
+{"sql":"alter operator s.+ (int4) set (restrict = x)","code":"42601","message":"missing argument","position":24}
+{"sql":"alter operator operator(s.+)(int4) set (restrict = x)","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(int4, int4) set (restrict = x)","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(none, int4) set (restrict = x)","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(int4, none) set (restrict = x)","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(none) set (restrict = x)","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(int4[]) set (restrict = x)","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(s.t) set (restrict = x)","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(double precision) set (restrict = x)","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(int4 ,) set (restrict = x)","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)() set (restrict = x)","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(int4, int4, int4) set (restrict = x)","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+)(setof int4) set (restrict = x)","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter operator operator(s.+) (int4) set (restrict = x)","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"security label on operator ===(int4) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator ===(int4, int4) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator ===(none, int4) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator ===(int4, none) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator ===(none) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator ===(int4[]) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator ===(s.t) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator ===(double precision) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator ===(int4 ,) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator ===() is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator ===(int4, int4, int4) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator ===(setof int4) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator === (int4) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator +(int4) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator +(int4, int4) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator +(none, int4) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator +(int4, none) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator +(none) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator +(int4[]) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator +(s.t) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator +(double precision) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator +(int4 ,) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator +() is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator +(int4, int4, int4) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator +(setof int4) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator + (int4) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator s.+(int4) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator s.+(int4, int4) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator s.+(none, int4) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator s.+(int4, none) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator s.+(none) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator s.+(int4[]) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator s.+(s.t) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator s.+(double precision) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator s.+(int4 ,) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator s.+() is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator s.+(int4, int4, int4) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator s.+(setof int4) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator s.+ (int4) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator operator(s.+)(int4) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator operator(s.+)(int4, int4) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator operator(s.+)(none, int4) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator operator(s.+)(int4, none) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator operator(s.+)(none) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator operator(s.+)(int4[]) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator operator(s.+)(s.t) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator operator(s.+)(double precision) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator operator(s.+)(int4 ,) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator operator(s.+)() is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator operator(s.+)(int4, int4, int4) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator operator(s.+)(setof int4) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"security label on operator operator(s.+) (int4) is 'x'","code":"42601","message":"syntax error at or near \"operator\"","position":18}
+{"sql":"drop operator === (int4) x","code":"42601","message":"missing argument","position":23}
+{"sql":"drop operator === (int4), === (int4)","code":"42601","message":"missing argument","position":23}
+{"sql":"drop operator === (int4, int4) x","code":"42601","message":"syntax error at or near \"x\"","position":31}
+{"sql":"drop operator === (int4, int4), === (int4)","code":"42601","message":"missing argument","position":41}
+{"sql":"drop operator === (none, int4) x","code":"42601","message":"syntax error at or near \"x\"","position":31}
+{"sql":"drop operator === (none, int4), === (int4)","code":"42601","message":"missing argument","position":41}
+{"sql":"drop operator === (int4, none) x","code":"42601","message":"syntax error at or near \"x\"","position":31}
+{"sql":"drop operator === (int4, none), === (int4)","code":"42601","message":"missing argument","position":41}
+{"sql":"drop operator === (none) x","code":"42601","message":"syntax error at or near \")\"","position":23}
+{"sql":"drop operator === (none), === (int4)","code":"42601","message":"syntax error at or near \")\"","position":23}
+{"sql":"drop operator === (int4[]) x","code":"42601","message":"missing argument","position":25}
+{"sql":"drop operator === (int4[]), === (int4)","code":"42601","message":"missing argument","position":25}
+{"sql":"drop operator === (s.t) x","code":"42601","message":"missing argument","position":22}
+{"sql":"drop operator === (s.t), === (int4)","code":"42601","message":"missing argument","position":22}
+{"sql":"drop operator === (double precision) x","code":"42601","message":"missing argument","position":35}
+{"sql":"drop operator === (double precision), === (int4)","code":"42601","message":"missing argument","position":35}
+{"sql":"drop operator === (int4 ,) x","code":"42601","message":"syntax error at or near \")\"","position":25}
+{"sql":"drop operator === (int4 ,), === (int4)","code":"42601","message":"syntax error at or near \")\"","position":25}
+{"sql":"drop operator === () x","code":"42601","message":"syntax error at or near \")\"","position":19}
+{"sql":"drop operator === (), === (int4)","code":"42601","message":"syntax error at or near \")\"","position":19}
+{"sql":"drop operator === (int4, int4, int4) x","code":"42601","message":"syntax error at or near \",\"","position":29}
+{"sql":"drop operator === (int4, int4, int4), === (int4)","code":"42601","message":"syntax error at or near \",\"","position":29}
+{"sql":"drop operator === (setof int4) x","code":"42601","message":"missing argument","position":29}
+{"sql":"drop operator === (setof int4), === (int4)","code":"42601","message":"missing argument","position":29}
+{"sql":"drop operator ===  (int4) x","code":"42601","message":"missing argument","position":24}
+{"sql":"drop operator ===  (int4), === (int4)","code":"42601","message":"missing argument","position":24}

@@ -35535,8 +35535,8 @@ pgdefault:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
 //line gram.y:13780
 		{
-			pglex.Error("missing argument, use NONE to denote the missing argument of a unary operator")
-			pgVAL.list = nil
+			grammarError(pglex, codeSyntaxError, "missing argument", "Use NONE to denote the missing argument of a unary operator.", pgDollar[3].loc)
+			return 1
 		}
 	case 2098:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
