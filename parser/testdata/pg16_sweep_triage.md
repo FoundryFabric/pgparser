@@ -101,7 +101,7 @@ L a feature's grammar.
 | alter-extension-member (fixed) | 2 | 2 (0/0/2) | refuses ALTER EXTENSION ADD CAST, ADD TRANSFORM | `AlterExtensionContentsStmt` | yes, both | S |
 | role-option-error-order (fixed) | 3 | 7 (0/6/1) | syntax error at the next token for PostgreSQL's `unrecognized role option` | `CreateOptRoleElem`/`AlterOptRoleElem: IDENT` | no | S |
 | operator-missing-argument-message (fixed) | 3 | 5 (2/1/2) | hint folded into the message | `oper_argtypes` | no | S |
-| policy-option-message | 3 | 3 (1/1/1) | hint used as the message | `RowSecurityDefaultPermissive` | no | S |
+| policy-option-message (fixed) | 3 | 3 (1/1/1) | hint used as the message | `RowSecurityDefaultPermissive` | no | S |
 | not-yet-implemented-errors | 3 | 2 (0/0/2) | 42601 for 0A000 | `a_expr UNIQUE select_with_parens`, `CreateAssertionStmt` | no | S |
 | drop-routine-list-name (fixed) | 3 | 2 (0/1/1) | refused at `[` instead of at `]` | `function_with_argtypes_list` | no | S |
 
@@ -529,11 +529,16 @@ missing argument of a unary operator.`; the parser's message is both.
 parenthesis through `grammarError`, and ends the parse there, so a token
 after it no longer replaces the error. All 5 agree.
 
-### policy-option-message (risk 3, 3)
+### policy-option-message (risk 3, 3; fixed)
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
 | `create policy p on t as ugly using (true)` | 42601 unrecognized row security option "ugly" at 24 | 42601 only PERMISSIVE or RESTRICTIVE policies are supported at 24 |
+
+`RowSecurityDefaultPermissive` now raises PostgreSQL 16's `unrecognized row
+security option "<word>"` with HINT `Only PERMISSIVE or RESTRICTIVE policies
+are supported currently.` at the word through `grammarError`, and ends the
+parse there. All 3 agree.
 
 ### not-yet-implemented-errors (risk 3, 2)
 

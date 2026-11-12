@@ -15105,8 +15105,8 @@ RowSecurityDefaultPermissive:
 			} else if $2 == "restrictive" {
 				$$ = false
 			} else {
-				pglex.Error("only PERMISSIVE or RESTRICTIVE policies are supported")
-				$$ = true
+				grammarError(pglex, codeSyntaxError, "unrecognized row security option \""+$2+"\"", "Only PERMISSIVE or RESTRICTIVE policies are supported currently.", $<loc>2)
+				return 1
 			}
 		}
 	| /* EMPTY */    { $$ = true }

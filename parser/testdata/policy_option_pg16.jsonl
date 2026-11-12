@@ -1,0 +1,99 @@
+{"sql":"create policy p on t as permissive"}
+{"sql":"create policy p on t as restrictive"}
+{"sql":"create policy p on t as PERMISSIVE"}
+{"sql":"create policy p on t as Restrictive"}
+{"sql":"create policy p on t as \"permissive\""}
+{"sql":"create policy p on t as ugly","code":"42601","message":"unrecognized row security option \"ugly\"","position":24}
+{"sql":"create policy p on t as x","code":"42601","message":"unrecognized row security option \"x\"","position":24}
+{"sql":"create policy p on t as permissivex","code":"42601","message":"unrecognized row security option \"permissivex\"","position":24}
+{"sql":"create policy p on t as select","code":"42601","message":"syntax error at or near \"select\"","position":24}
+{"sql":"create policy p on t as all","code":"42601","message":"syntax error at or near \"all\"","position":24}
+{"sql":"create policy p on t as for","code":"42601","message":"syntax error at or near \"for\"","position":24}
+{"sql":"create policy p on t as  ","code":"42601","message":"syntax error at end of input","position":25}
+{"sql":"create policy p on t as permissive using (true)"}
+{"sql":"create policy p on t as restrictive using (true)"}
+{"sql":"create policy p on t as PERMISSIVE using (true)"}
+{"sql":"create policy p on t as Restrictive using (true)"}
+{"sql":"create policy p on t as \"permissive\" using (true)"}
+{"sql":"create policy p on t as ugly using (true)","code":"42601","message":"unrecognized row security option \"ugly\"","position":24}
+{"sql":"create policy p on t as x using (true)","code":"42601","message":"unrecognized row security option \"x\"","position":24}
+{"sql":"create policy p on t as permissivex using (true)","code":"42601","message":"unrecognized row security option \"permissivex\"","position":24}
+{"sql":"create policy p on t as select using (true)","code":"42601","message":"syntax error at or near \"select\"","position":24}
+{"sql":"create policy p on t as all using (true)","code":"42601","message":"syntax error at or near \"all\"","position":24}
+{"sql":"create policy p on t as for using (true)","code":"42601","message":"syntax error at or near \"for\"","position":24}
+{"sql":"create policy p on t as   using (true)","code":"42601","message":"syntax error at or near \"using\"","position":26}
+{"sql":"create policy p on t as permissive for select"}
+{"sql":"create policy p on t as restrictive for select"}
+{"sql":"create policy p on t as PERMISSIVE for select"}
+{"sql":"create policy p on t as Restrictive for select"}
+{"sql":"create policy p on t as \"permissive\" for select"}
+{"sql":"create policy p on t as ugly for select","code":"42601","message":"unrecognized row security option \"ugly\"","position":24}
+{"sql":"create policy p on t as x for select","code":"42601","message":"unrecognized row security option \"x\"","position":24}
+{"sql":"create policy p on t as permissivex for select","code":"42601","message":"unrecognized row security option \"permissivex\"","position":24}
+{"sql":"create policy p on t as select for select","code":"42601","message":"syntax error at or near \"select\"","position":24}
+{"sql":"create policy p on t as all for select","code":"42601","message":"syntax error at or near \"all\"","position":24}
+{"sql":"create policy p on t as for for select","code":"42601","message":"syntax error at or near \"for\"","position":24}
+{"sql":"create policy p on t as   for select","code":"42601","message":"syntax error at or near \"for\"","position":26}
+{"sql":"create policy p on t as permissive for all to r using (a) with check (b)"}
+{"sql":"create policy p on t as restrictive for all to r using (a) with check (b)"}
+{"sql":"create policy p on t as PERMISSIVE for all to r using (a) with check (b)"}
+{"sql":"create policy p on t as Restrictive for all to r using (a) with check (b)"}
+{"sql":"create policy p on t as \"permissive\" for all to r using (a) with check (b)"}
+{"sql":"create policy p on t as ugly for all to r using (a) with check (b)","code":"42601","message":"unrecognized row security option \"ugly\"","position":24}
+{"sql":"create policy p on t as x for all to r using (a) with check (b)","code":"42601","message":"unrecognized row security option \"x\"","position":24}
+{"sql":"create policy p on t as permissivex for all to r using (a) with check (b)","code":"42601","message":"unrecognized row security option \"permissivex\"","position":24}
+{"sql":"create policy p on t as select for all to r using (a) with check (b)","code":"42601","message":"syntax error at or near \"select\"","position":24}
+{"sql":"create policy p on t as all for all to r using (a) with check (b)","code":"42601","message":"syntax error at or near \"all\"","position":24}
+{"sql":"create policy p on t as for for all to r using (a) with check (b)","code":"42601","message":"syntax error at or near \"for\"","position":24}
+{"sql":"create policy p on t as   for all to r using (a) with check (b)","code":"42601","message":"syntax error at or near \"for\"","position":26}
+{"sql":"create policy p on s.t as permissive to public"}
+{"sql":"create policy p on s.t as restrictive to public"}
+{"sql":"create policy p on s.t as PERMISSIVE to public"}
+{"sql":"create policy p on s.t as Restrictive to public"}
+{"sql":"create policy p on s.t as \"permissive\" to public"}
+{"sql":"create policy p on s.t as ugly to public","code":"42601","message":"unrecognized row security option \"ugly\"","position":26}
+{"sql":"create policy p on s.t as x to public","code":"42601","message":"unrecognized row security option \"x\"","position":26}
+{"sql":"create policy p on s.t as permissivex to public","code":"42601","message":"unrecognized row security option \"permissivex\"","position":26}
+{"sql":"create policy p on s.t as select to public","code":"42601","message":"syntax error at or near \"select\"","position":26}
+{"sql":"create policy p on s.t as all to public","code":"42601","message":"syntax error at or near \"all\"","position":26}
+{"sql":"create policy p on s.t as for to public","code":"42601","message":"syntax error at or near \"for\"","position":26}
+{"sql":"create policy p on s.t as   to public","code":"42601","message":"syntax error at or near \"to\"","position":28}
+{"sql":"create policy p on t as permissive x","code":"42601","message":"syntax error at or near \"x\"","position":35}
+{"sql":"create policy p on t as restrictive x","code":"42601","message":"syntax error at or near \"x\"","position":36}
+{"sql":"create policy p on t as PERMISSIVE x","code":"42601","message":"syntax error at or near \"x\"","position":35}
+{"sql":"create policy p on t as Restrictive x","code":"42601","message":"syntax error at or near \"x\"","position":36}
+{"sql":"create policy p on t as \"permissive\" x","code":"42601","message":"syntax error at or near \"x\"","position":37}
+{"sql":"create policy p on t as ugly x","code":"42601","message":"unrecognized row security option \"ugly\"","position":24}
+{"sql":"create policy p on t as x x","code":"42601","message":"unrecognized row security option \"x\"","position":24}
+{"sql":"create policy p on t as permissivex x","code":"42601","message":"unrecognized row security option \"permissivex\"","position":24}
+{"sql":"create policy p on t as select x","code":"42601","message":"syntax error at or near \"select\"","position":24}
+{"sql":"create policy p on t as all x","code":"42601","message":"syntax error at or near \"all\"","position":24}
+{"sql":"create policy p on t as for x","code":"42601","message":"syntax error at or near \"for\"","position":24}
+{"sql":"create policy p on t as   x","code":"42601","message":"unrecognized row security option \"x\"","position":26}
+{"sql":"create policy p on t as permissive ;"}
+{"sql":"create policy p on t as restrictive ;"}
+{"sql":"create policy p on t as PERMISSIVE ;"}
+{"sql":"create policy p on t as Restrictive ;"}
+{"sql":"create policy p on t as \"permissive\" ;"}
+{"sql":"create policy p on t as ugly ;","code":"42601","message":"unrecognized row security option \"ugly\"","position":24}
+{"sql":"create policy p on t as x ;","code":"42601","message":"unrecognized row security option \"x\"","position":24}
+{"sql":"create policy p on t as permissivex ;","code":"42601","message":"unrecognized row security option \"permissivex\"","position":24}
+{"sql":"create policy p on t as select ;","code":"42601","message":"syntax error at or near \"select\"","position":24}
+{"sql":"create policy p on t as all ;","code":"42601","message":"syntax error at or near \"all\"","position":24}
+{"sql":"create policy p on t as for ;","code":"42601","message":"syntax error at or near \"for\"","position":24}
+{"sql":"create policy p on t as   ;","code":"42601","message":"syntax error at or near \";\"","position":26}
+{"sql":"create policy p on t as permissive as permissive","code":"42601","message":"syntax error at or near \"as\"","position":35}
+{"sql":"create policy p on t as restrictive as permissive","code":"42601","message":"syntax error at or near \"as\"","position":36}
+{"sql":"create policy p on t as PERMISSIVE as permissive","code":"42601","message":"syntax error at or near \"as\"","position":35}
+{"sql":"create policy p on t as Restrictive as permissive","code":"42601","message":"syntax error at or near \"as\"","position":36}
+{"sql":"create policy p on t as \"permissive\" as permissive","code":"42601","message":"syntax error at or near \"as\"","position":37}
+{"sql":"create policy p on t as ugly as permissive","code":"42601","message":"unrecognized row security option \"ugly\"","position":24}
+{"sql":"create policy p on t as x as permissive","code":"42601","message":"unrecognized row security option \"x\"","position":24}
+{"sql":"create policy p on t as permissivex as permissive","code":"42601","message":"unrecognized row security option \"permissivex\"","position":24}
+{"sql":"create policy p on t as select as permissive","code":"42601","message":"syntax error at or near \"select\"","position":24}
+{"sql":"create policy p on t as all as permissive","code":"42601","message":"syntax error at or near \"all\"","position":24}
+{"sql":"create policy p on t as for as permissive","code":"42601","message":"syntax error at or near \"for\"","position":24}
+{"sql":"create policy p on t as   as permissive","code":"42601","message":"syntax error at or near \"as\"","position":26}
+{"sql":"create policy p on t as","code":"42601","message":"syntax error at end of input","position":23}
+{"sql":"alter policy p on t as ugly","code":"42601","message":"syntax error at or near \"as\"","position":20}
+{"sql":"create policy p on t using (true) as ugly","code":"42601","message":"syntax error at or near \"as\"","position":34}

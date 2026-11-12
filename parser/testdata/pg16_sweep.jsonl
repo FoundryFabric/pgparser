@@ -42249,8 +42249,8 @@
 {"file":"rowsecurity.sql","stmt":33,"sum":"1166d263"}
 {"file":"rowsecurity.sql","stmt":34,"sum":"ed971b3d"}
 {"file":"rowsecurity.sql","stmt":35,"sum":"0e3f93ca"}
-{"file":"rowsecurity.sql","stmt":36,"sum":"78d0e81c","code":"42601","msg":"unrecognized row security option \"ugly\"","pos":72,"class":"policy-option-message"}
-{"file":"rowsecurity.sql","stmt":36,"edit":[153,0," current_user"],"code":"42601","msg":"unrecognized row security option \"ugly\"","pos":72,"class":"policy-option-message"}
+{"file":"rowsecurity.sql","stmt":36,"sum":"78d0e81c","code":"42601","msg":"unrecognized row security option \"ugly\"","pos":72}
+{"file":"rowsecurity.sql","stmt":36,"edit":[153,0," current_user"],"code":"42601","msg":"unrecognized row security option \"ugly\"","pos":72}
 {"file":"rowsecurity.sql","stmt":37,"sum":"8e5aada4"}
 {"file":"rowsecurity.sql","stmt":38,"sum":"896a1c30"}
 {"file":"rowsecurity.sql","stmt":39,"sum":"48fe6d0a"}
@@ -58795,7 +58795,7 @@
 {"sql":"select u&'x' uescape '+'","code":"42601","msg":"invalid Unicode escape character at or near \"'+'\"","pos":21}
 {"sql":"select u&'x' uescape (3) '!'","code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"(\"","pos":21}
 {"sql":"drop operator === (int4)","code":"42601","msg":"missing argument","pos":23}
-{"sql":"create policy p on t as ugly using (true)","code":"42601","msg":"unrecognized row security option \"ugly\"","pos":24,"class":"policy-option-message"}
+{"sql":"create policy p on t as ugly using (true)","code":"42601","msg":"unrecognized row security option \"ugly\"","pos":24}
 {"sql":"create role role x with createrole","code":"42601","msg":"unrecognized role option \"x\"","pos":17}
 {"sql":"drop procedure p, q[]","code":"42601","msg":"syntax error at or near \"]\"","pos":20}
 {"sql":"-- Phase 1: infrastructure coverage for core expression nodes\nSELECT CURRENT_DATE"}

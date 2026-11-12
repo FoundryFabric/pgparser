@@ -37159,8 +37159,8 @@ pgdefault:
 			} else if pgDollar[2].str == "restrictive" {
 				pgVAL.boolean = false
 			} else {
-				pglex.Error("only PERMISSIVE or RESTRICTIVE policies are supported")
-				pgVAL.boolean = true
+				grammarError(pglex, codeSyntaxError, "unrecognized row security option \""+pgDollar[2].str+"\"", "Only PERMISSIVE or RESTRICTIVE policies are supported currently.", pgDollar[2].loc)
+				return 1
 			}
 		}
 	case 2306:
