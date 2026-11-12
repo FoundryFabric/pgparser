@@ -262,13 +262,13 @@ import (
 %type <node>  CopyStmt
 %type <boolean>  copy_from opt_program
 %type <str>   copy_file_name
-%type <list>  utility_option_list copy_opt_list copy_options transaction_mode_list transaction_mode_list_or_empty
+%type <list>  utility_option_list copy_generic_opt_list copy_opt_list copy_options transaction_mode_list transaction_mode_list_or_empty
 %type <node>  copy_opt_item opt_binary copy_delimiter transaction_mode_item
 %type <str>   iso_level
-%type <node>  utility_option_elem
+%type <node>  utility_option_elem copy_generic_opt_elem
 %type <str>   utility_option_name
-%type <node>  utility_option_arg
-%type <list>  utility_option_arg_list
+%type <node>  utility_option_arg copy_generic_opt_arg
+%type <list>  copy_generic_opt_arg_list
 %type <str>   opt_boolean_or_string
 %type <node>  NumericOnly
 %type <node>  GrantStmt RevokeStmt
@@ -5113,7 +5113,7 @@ copy_opt_with:
 
 copy_options:
 	copy_opt_list                       { $$ = $1 }
-	| '(' utility_option_list ')'       { $$ = $2 }
+	| '(' copy_generic_opt_list ')'     { $$ = $2 }
 	;
 
 /* old-style COPY option syntax */
@@ -5234,24 +5234,49 @@ utility_option_elem:
 
 utility_option_name:
 	NonReservedWord  { $$ = $1 }
-	| ANALYZE        { $$ = "analyze" }
+	| analyze_keyword { $$ = "analyze" }
 	| FORMAT_LA      { $$ = "format" }
-	| DEFAULT        { $$ = "default" }
 	;
 
 utility_option_arg:
 	opt_boolean_or_string   { $$ = &nodes.String{Str: $1} }
 	| NumericOnly           { $$ = $1 }
-	| '*'                   { $$ = &nodes.A_Star{} }
-	| DEFAULT               { $$ = &nodes.String{Str: "default"} }
-	| '(' utility_option_arg_list ')' { $$ = $2 }
 	| /* EMPTY */           { $$ = nil }
 	;
 
-utility_option_arg_list:
+copy_generic_opt_list:
+	copy_generic_opt_elem
+		{
+			$$ = makeList($1)
+		}
+	| copy_generic_opt_list ',' copy_generic_opt_elem
+		{
+			$$ = appendList($1, $3)
+		}
+	;
+
+copy_generic_opt_elem:
+	ColLabel copy_generic_opt_arg
+		{
+			$$ = &nodes.DefElem{
+				Defname: $1,
+				Arg:     $2,
+			}
+		}
+	;
+
+copy_generic_opt_arg:
+	opt_boolean_or_string   { $$ = &nodes.String{Str: $1} }
+	| NumericOnly           { $$ = $1 }
+	| '*'                   { $$ = &nodes.A_Star{} }
+	| '(' copy_generic_opt_arg_list ')' { $$ = $2 }
+	| /* EMPTY */           { $$ = nil }
+	;
+
+copy_generic_opt_arg_list:
 	opt_boolean_or_string
 		{ $$ = makeList(&nodes.String{Str: $1}) }
-	| utility_option_arg_list ',' opt_boolean_or_string
+	| copy_generic_opt_arg_list ',' opt_boolean_or_string
 		{ $$ = appendList($1, &nodes.String{Str: $3}) }
 	;
 

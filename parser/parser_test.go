@@ -609,7 +609,7 @@ func TestOrderedSetAggrArgs(t *testing.T) {
 
 func TestLookaheadFormatLA(t *testing.T) {
 	// FORMAT followed by JSON should become FORMAT_LA
-	input := "COPY t TO STDOUT (FORMAT JSON)"
+	input := "EXPLAIN (FORMAT JSON) SELECT 1"
 	_, err := Parse(input)
 	if err != nil {
 		t.Fatalf("Parse error for FORMAT JSON: %v", err)

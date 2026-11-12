@@ -77,7 +77,7 @@ L a feature's grammar.
 | pg17-sqljson | 1 | 714 (334/369/11) | accepts PostgreSQL 17's SQL/JSON | `func_expr_common_subexpr` JSON_QUERY, JSON_VALUE, JSON_EXISTS, JSON(), JSON_SCALAR, JSON_SERIALIZE; `json_table` in `table_ref`; `json_returning_clause_opt`, `json_behavior_clause_opt`, `json_wrapper_behavior`, `json_quotes_clause_opt`, `json_passing_clause_opt`, `json_table_column_definition` | no | L |
 | pg17-merge | 1 | 58 (31/25/2) | accepts PostgreSQL 17's MERGE | `merge_when_clause` (`BY SOURCE`, `BY TARGET`), `MergeStmt` `returning_clause`, `MERGE_ACTION()` | no | M |
 | pg17-ddl | 1 | 42 (22/15/5) | accepts PostgreSQL 17's DDL | `set_access_method_name` (DEFAULT), `alter_table_cmd` SET EXPRESSION, `a_expr AT LOCAL`, `DomainConstraintElem` NOT NULL in ALTER DOMAIN ADD, `operator_def_elem` without `=` | no | M |
-| utility-option-argument | 1 | 55 (0/52/3) | accepts `*`, DEFAULT and `(list)` as an EXPLAIN/VACUUM/ANALYZE option argument | `utility_option_arg` | no | S |
+| utility-option-argument (fixed) | 1 | 55 (0/52/3) | accepts `*`, DEFAULT and `(list)` as an EXPLAIN/VACUUM/ANALYZE option argument | `utility_option_arg` | no | S |
 | publication-object-list (fixed) | 1 | 24 (6/15/3) | accepts what `preprocess_pubobj_list` refuses | `CreatePublicationStmt`, `AlterPublicationStmt`, `PublicationObjSpec` actions | no | S |
 | grammar-action-checks | 1 | 21 (8/6/7) | accepts what a grammar action refuses | `CopyStmt`, `parsePartitionStrategy`, `alter_table_cmd` column number, `CreateSchemaStmt`, `TriggerEvents`, `xmltable_column_option_el`, `frame_extent`, `json_encoding_clause_opt` | no | M |
 | cte-column-list-parentheses | 1 | 12 (0/10/2) | accepts a CTE's column names without parentheses | `opt_name_list` | no | S |
@@ -95,7 +95,7 @@ L a feature's grammar.
 | alter-role-no-options | 2 | 4 (0/2/2) | refuses `ALTER ROLE r` | `AlterRoleStmt` `opt_with AlterOptRoleList` | no | S |
 | reindex-optional-name | 2 | 4 (1/0/3) | refuses `REINDEX SYSTEM`, `REINDEX DATABASE` | `ReindexStmt` `opt_single_name` | no | S |
 | role-spec-keywords | 2 | 4 (0/1/3) | refuses a type_func_name keyword as a role | `RoleSpec: NonReservedWord` | no | S |
-| copy-generic-options | 2 | 4 (0/2/2) | refuses a reserved keyword as a COPY option name; accepts DEFAULT as its argument | `copy_generic_opt_elem: ColLabel copy_generic_opt_arg` | no | S |
+| copy-generic-options (fixed) | 2 | 4 (0/2/2) | refuses a reserved keyword as a COPY option name; accepts DEFAULT as its argument | `copy_generic_opt_elem: ColLabel copy_generic_opt_arg` | no | S |
 | alter-database-refresh-collation | 2 | 3 (0/0/3) | refuses `ALTER DATABASE x REFRESH COLLATION VERSION` | `AlterDatabaseRefreshCollStmt` | no | S |
 | column-options-qualified-name | 2 | 3 (0/1/2) | refuses `ALTER COLUMN a SET (x.y = 1)` | `alter_table_cmd` SET/RESET `reloptions` (`reloption_elem`) | no | S |
 | alter-extension-member (fixed) | 2 | 2 (0/0/2) | refuses ALTER EXTENSION ADD CAST, ADD TRANSFORM | `AlterExtensionContentsStmt` | yes, both | S |
@@ -151,7 +151,7 @@ TARGET` are PostgreSQL 17's.
 | `alter domain d add not null` | 42601 syntax error at or near "not" at 19 | accepts |
 | `alter operator === (int, int) set (merges)` | 42601 syntax error at or near ")" at 41 | accepts |
 
-### utility-option-argument (risk 1, 55)
+### utility-option-argument (risk 1, 55; fixed)
 
 `utility_option_arg` has `'*'`, `DEFAULT` and `'(' utility_option_arg_list
 ')'`, which are COPY's (`copy_generic_opt_arg`); PostgreSQL 16's is
@@ -165,6 +165,11 @@ PostgreSQL refuses them.
 | `explain (costs (a, b)) select 1` | 42601 syntax error at or near "(" at 15 | accepts |
 | `explain (costs default) select 1` | 42601 syntax error at or near "default" at 15 | accepts |
 | `VACUUM (ANALYZE(3)) vacowned_part2` | 42601 syntax error at or near "(" at 15 | 42601 syntax error at or near "3" at 16 |
+
+`utility_option_arg` is now `opt_boolean_or_string | NumericOnly | /* EMPTY
+*/`, and `utility_option_name` takes `analyze_keyword` and no longer DEFAULT.
+COPY's parenthesised options have their own `copy_generic_opt_list`; all 55
+agree, and so do the 4 of copy-generic-options.
 
 ### publication-object-list (risk 1, 24; fixed)
 
@@ -364,12 +369,15 @@ type names spelled with them are refused. Fixed with pg17-sqljson.
 | `create schema s authorization authorization` | accepts | 42601 syntax error at or near "authorization" at 30 |
 | `alter group g add user verbose` | accepts | 42601 syntax error at or near "verbose" at 23 |
 
-### copy-generic-options (risk 2, 4)
+### copy-generic-options (risk 2, 4; fixed)
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
 | `copy t from stdin with (else csv)` | accepts | 42601 syntax error at or near "else" at 24 |
 | `copy t from stdin with (default default)` | 42601 syntax error at or near "default" at 32 | accepts |
+
+COPY's options are now `ColLabel copy_generic_opt_arg`, whose argument has
+`'*'` and `'(' list ')'` but not DEFAULT; all 4 agree.
 
 ### alter-database-refresh-collation (risk 2, 3)
 
