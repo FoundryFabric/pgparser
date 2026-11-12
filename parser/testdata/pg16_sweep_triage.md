@@ -635,6 +635,17 @@ corpus).
 implemented` at MATCH through `grammarError`, ending the parse.
 `testdata/match_partial_pg16.jsonl` pins 104 statements; all agree.
 
+### explain-create-table (risk 1, 1; fixed)
+
+| statement | PostgreSQL 16 | parser |
+|---|---|---|
+| `explain create table t (a int)` | 42601 syntax error at or near "int" at 26 | accepts |
+
+The fork's `ExplainableStmt` had `CreateStmt`, which PostgreSQL 16's has
+not; it is deleted, and EXPLAIN takes CREATE TABLE only through
+`CreateAsStmt`. `testdata/explain_create_pg16.jsonl` pins 156 statements;
+all agree.
+
 ## Rerunning
 
 ```

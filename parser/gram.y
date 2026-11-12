@@ -4849,7 +4849,6 @@ ExplainableStmt:
 	| CreateMatViewStmt { $$ = $1 }
 	| RefreshMatViewStmt { $$ = $1 }
 	| ExecuteStmt       { $$ = $1 }
-	| CreateStmt        { $$ = $1 }
 	;
 
 /*****************************************************************************
