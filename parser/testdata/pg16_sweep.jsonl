@@ -7222,7 +7222,7 @@
 {"file":"conversion.sql","stmt":1,"sum":"aadb58cf"}
 {"file":"conversion.sql","stmt":3,"sum":"55041b18"}
 {"file":"conversion.sql","stmt":3,"edit":[41,23,"NOCREATEROLE NOCREATEDB"]}
-{"file":"conversion.sql","stmt":3,"edit":[35,0," regress_conversion_user"],"code":"42601","msg":"unrecognized role option \"regress_conversion_user\"","pos":36,"class":"role-option-error-order"}
+{"file":"conversion.sql","stmt":3,"edit":[35,0," regress_conversion_user"],"code":"42601","msg":"unrecognized role option \"regress_conversion_user\"","pos":36}
 {"file":"conversion.sql","stmt":4,"sum":"b71eeed6"}
 {"file":"conversion.sql","stmt":5,"sum":"6aa499a0"}
 {"file":"conversion.sql","stmt":6,"sum":"b637ef1a"}
@@ -9746,7 +9746,7 @@
 {"file":"create_role.sql","stmt":42,"sum":"0645ff40"}
 {"file":"create_role.sql","stmt":43,"sum":"57d94b81"}
 {"file":"create_role.sql","stmt":43,"edit":[70,0," ROLE"],"code":"42601","msg":"unrecognized role option \"regress_nosuch_admin_recursive\"","pos":76}
-{"file":"create_role.sql","stmt":43,"edit":[71,36,"ADMIN regress_nosuch_admin_recursive"],"code":"42601","msg":"unrecognized role option \"regress_nosuch_admin_recursive\"","pos":77,"class":"role-option-error-order"}
+{"file":"create_role.sql","stmt":43,"edit":[71,36,"ADMIN regress_nosuch_admin_recursive"],"code":"42601","msg":"unrecognized role option \"regress_nosuch_admin_recursive\"","pos":77}
 {"file":"create_role.sql","stmt":44,"sum":"6ffef3d5"}
 {"file":"create_role.sql","stmt":45,"sum":"d6d5fec7"}
 {"file":"create_role.sql","stmt":46,"sum":"c1ec4796"}
@@ -9754,7 +9754,7 @@
 {"file":"create_role.sql","stmt":48,"sum":"5504a32e"}
 {"file":"create_role.sql","stmt":49,"sum":"7c3e42d0"}
 {"file":"create_role.sql","stmt":50,"sum":"5ff2d442"}
-{"file":"create_role.sql","stmt":50,"edit":[10,0," ROLE"],"code":"42601","msg":"unrecognized role option \"regress_hasprivs\"","pos":16,"class":"role-option-error-order"}
+{"file":"create_role.sql","stmt":50,"edit":[10,0," ROLE"],"code":"42601","msg":"unrecognized role option \"regress_hasprivs\"","pos":16}
 {"file":"create_role.sql","stmt":51,"sum":"1e4f1c5f"}
 {"file":"create_role.sql","stmt":52,"sum":"190cdbe7"}
 {"file":"create_role.sql","stmt":53,"sum":"0468f901"}
@@ -32531,7 +32531,7 @@
 {"file":"object_address.sql","stmt":24,"edit":[31,4,""]}
 {"file":"object_address.sql","stmt":25,"sum":"aa15d60c"}
 {"file":"object_address.sql","stmt":26,"sum":"0540cec5"}
-{"file":"object_address.sql","stmt":26,"edit":[20,3,""],"code":"42601","msg":"unrecognized role option \"regress_addr_user\"","pos":21,"class":"role-option-error-order"}
+{"file":"object_address.sql","stmt":26,"edit":[20,3,""],"code":"42601","msg":"unrecognized role option \"regress_addr_user\"","pos":21}
 {"file":"object_address.sql","stmt":27,"sum":"82d8a9c2"}
 {"file":"object_address.sql","stmt":28,"sum":"0f4dc196"}
 {"file":"object_address.sql","stmt":29,"sum":"5cebcf2e"}
@@ -42121,7 +42121,7 @@
 {"file":"roleattributes.sql","stmt":17,"edit":[64,0,"(3)"]}
 {"file":"roleattributes.sql","stmt":17,"edit":[93,0,".x"]}
 {"file":"roleattributes.sql","stmt":18,"sum":"48259b34"}
-{"file":"roleattributes.sql","stmt":18,"edit":[11,0," ROLE"],"code":"42601","msg":"unrecognized role option \"regress_test_createrole\"","pos":17,"class":"role-option-error-order"}
+{"file":"roleattributes.sql","stmt":18,"edit":[11,0," ROLE"],"code":"42601","msg":"unrecognized role option \"regress_test_createrole\"","pos":17}
 {"file":"roleattributes.sql","stmt":19,"sum":"c0315c37"}
 {"file":"roleattributes.sql","stmt":19,"edit":[121,0,".x"]}
 {"file":"roleattributes.sql","stmt":19,"edit":[6,0,"(3)"]}
@@ -42129,7 +42129,7 @@
 {"file":"roleattributes.sql","stmt":21,"sum":"c0315c37"}
 {"file":"roleattributes.sql","stmt":22,"sum":"d0391f6a"}
 {"file":"roleattributes.sql","stmt":22,"edit":[40,10,""]}
-{"file":"roleattributes.sql","stmt":22,"edit":[10,0," ROLE"],"code":"42601","msg":"unrecognized role option \"regress_test_createrole\"","pos":16,"class":"role-option-error-order"}
+{"file":"roleattributes.sql","stmt":22,"edit":[10,0," ROLE"],"code":"42601","msg":"unrecognized role option \"regress_test_createrole\"","pos":16}
 {"file":"roleattributes.sql","stmt":23,"sum":"c0315c37"}
 {"file":"roleattributes.sql","stmt":23,"edit":[36,0," rolinherit"]}
 {"file":"roleattributes.sql","stmt":24,"sum":"9c0b2a04"}
@@ -58796,7 +58796,7 @@
 {"sql":"select u&'x' uescape (3) '!'","code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"(\"","pos":21}
 {"sql":"drop operator === (int4)","code":"42601","msg":"missing argument","pos":23,"class":"operator-missing-argument-message"}
 {"sql":"create policy p on t as ugly using (true)","code":"42601","msg":"unrecognized row security option \"ugly\"","pos":24,"class":"policy-option-message"}
-{"sql":"create role role x with createrole","code":"42601","msg":"unrecognized role option \"x\"","pos":17,"class":"role-option-error-order"}
+{"sql":"create role role x with createrole","code":"42601","msg":"unrecognized role option \"x\"","pos":17}
 {"sql":"drop procedure p, q[]","code":"42601","msg":"syntax error at or near \"]\"","pos":20}
 {"sql":"-- Phase 1: infrastructure coverage for core expression nodes\nSELECT CURRENT_DATE"}
 {"sql":"SELECT CURRENT_TIME(3)"}

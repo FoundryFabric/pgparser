@@ -25729,8 +25729,8 @@ pgdefault:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
 //line gram.y:6134
 		{
-			pglex.Error("UNENCRYPTED PASSWORD is no longer supported")
-			pgVAL.node = nil
+			grammarError(pglex, "0A000", "UNENCRYPTED PASSWORD is no longer supported", "Remove UNENCRYPTED to store the password in encrypted form instead.", pgDollar[1].loc)
+			return 1
 		}
 	case 835:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
@@ -25788,8 +25788,8 @@ pgdefault:
 			case "noinherit":
 				pgVAL.node = makeDefElem("inherit", &nodes.Boolean{Boolval: false})
 			default:
-				pglex.Error("unrecognized role option \"" + pgDollar[1].str + "\"")
-				pgVAL.node = nil
+				grammarError(pglex, codeSyntaxError, "unrecognized role option \""+pgDollar[1].str+"\"", "", pgDollar[1].loc)
+				return 1
 			}
 		}
 	case 840:

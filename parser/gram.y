@@ -6132,8 +6132,8 @@ AlterOptRoleElem:
 		}
 	| UNENCRYPTED PASSWORD Sconst
 		{
-			pglex.Error("UNENCRYPTED PASSWORD is no longer supported")
-			$$ = nil
+			grammarError(pglex, "0A000", "UNENCRYPTED PASSWORD is no longer supported", "Remove UNENCRYPTED to store the password in encrypted form instead.", $<loc>1)
+			return 1
 		}
 	| INHERIT
 		{
@@ -6181,8 +6181,8 @@ AlterOptRoleElem:
 			case "noinherit":
 				$$ = makeDefElem("inherit", &nodes.Boolean{Boolval: false})
 			default:
-				pglex.Error("unrecognized role option \"" + $1 + "\"")
-				$$ = nil
+				grammarError(pglex, codeSyntaxError, "unrecognized role option \""+$1+"\"", "", $<loc>1)
+				return 1
 			}
 		}
 	;

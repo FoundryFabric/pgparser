@@ -99,7 +99,7 @@ L a feature's grammar.
 | alter-database-refresh-collation | 2 | 3 (0/0/3) | refuses `ALTER DATABASE x REFRESH COLLATION VERSION` | `AlterDatabaseRefreshCollStmt` | no | S |
 | column-options-qualified-name (fixed) | 2 | 3 (0/1/2) | refuses `ALTER COLUMN a SET (x.y = 1)` | `alter_table_cmd` SET/RESET `reloptions` (`reloption_elem`) | no | S |
 | alter-extension-member (fixed) | 2 | 2 (0/0/2) | refuses ALTER EXTENSION ADD CAST, ADD TRANSFORM | `AlterExtensionContentsStmt` | yes, both | S |
-| role-option-error-order | 3 | 7 (0/6/1) | syntax error at the next token for PostgreSQL's `unrecognized role option` | `CreateOptRoleElem`/`AlterOptRoleElem: IDENT` | no | S |
+| role-option-error-order (fixed) | 3 | 7 (0/6/1) | syntax error at the next token for PostgreSQL's `unrecognized role option` | `CreateOptRoleElem`/`AlterOptRoleElem: IDENT` | no | S |
 | operator-missing-argument-message | 3 | 5 (2/1/2) | hint folded into the message | `oper_argtypes` | no | S |
 | policy-option-message | 3 | 3 (1/1/1) | hint used as the message | `RowSecurityDefaultPermissive` | no | S |
 | not-yet-implemented-errors | 3 | 2 (0/0/2) | 42601 for 0A000 | `a_expr UNIQUE select_with_parens`, `CreateAssertionStmt` | no | S |
@@ -494,7 +494,7 @@ option name may be qualified (`x.y`), as a relation's may. All 3 agree.
 | `ALTER EXTENSION hstore ADD CAST (text AS hstore)` | accepts | 42601 syntax error at or near "CAST" |
 | `ALTER EXTENSION hstore ADD TRANSFORM FOR jsonb LANGUAGE plpgsql` | accepts | 42601 syntax error at or near "TRANSFORM" |
 
-### role-option-error-order (risk 3, 7)
+### role-option-error-order (risk 3, 7; fixed)
 
 PostgreSQL raises `unrecognized role option` from the `IDENT` alternative's
 action when it reduces it, before it looks at the next token; the parser
@@ -506,6 +506,14 @@ reports a syntax error at the next token first. Alone at the end
 | `create role role x with createrole` | 42601 unrecognized role option "x" at 17 | 42601 syntax error at or near "with" at 19 |
 | `ALTER ROLE ROLE regress_hasprivs RENAME TO regress_tenant` | 42601 unrecognized role option "regress_hasprivs" at 16 | 42601 syntax error at or near "RENAME" at 33 |
 | `CREATE USER MAPPING regress_addr_user SERVER "integer"` | 42601 unrecognized role option "regress_addr_user" at 21 | 42601 syntax error at or near "SERVER" at 39 |
+
+The `IDENT` alternative now raises `unrecognized role option` through
+`grammarError` and ends the parse when it is reduced, at the word, before
+the parser looks at the next token; it set the error and went on, so a
+syntax error at the next token replaced it. UNENCRYPTED PASSWORD, which had
+the same fault, is now PostgreSQL 16's `0A000 UNENCRYPTED PASSWORD is no
+longer supported` at UNENCRYPTED, with its hint (it was 42601 at the end of
+the option). All 7 agree.
 
 ### operator-missing-argument-message (risk 3, 5)
 
