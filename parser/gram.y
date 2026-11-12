@@ -1572,8 +1572,13 @@ OptTableSpace:
 PartitionSpec_rule:
 	PARTITION BY ColId '(' part_params ')'
 		{
+			strategy, ok := parsePartitionStrategy($3)
+			if !ok {
+				grammarError(pglex, "22023", "unrecognized partitioning strategy \""+$3+"\"", "", -1)
+				return 1
+			}
 			$$ = &nodes.PartitionSpec{
-				Strategy:   parsePartitionStrategy($3),
+				Strategy:   strategy,
 				PartParams: $5,
 				Location:   -1,
 			}
@@ -3026,6 +3031,9 @@ alter_table_cmd:
 		}
 	| ALTER COLUMN Iconst SET STATISTICS SignedIconst
 		{
+			if !checkColumnNumber(pglex, $3, $<loc>3) {
+				return 1
+			}
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetStatistics),
 				Num:     int16($3),
@@ -3034,6 +3042,9 @@ alter_table_cmd:
 		}
 	| ALTER Iconst SET STATISTICS SignedIconst
 		{
+			if !checkColumnNumber(pglex, $2, $<loc>2) {
+				return 1
+			}
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetStatistics),
 				Num:     int16($2),
@@ -5052,6 +5063,14 @@ CopyStmt:
 			copy_from opt_program copy_file_name copy_delimiter copy_opt_with
 			copy_options where_clause
 		{
+			if $6 && $<boolean>7 {
+				grammarError(pglex, codeSyntaxError, "STDIN/STDOUT not allowed with PROGRAM", "", -1)
+				return 1
+			}
+			if !$5 && $11 != nil {
+				grammarError(pglex, codeSyntaxError, "WHERE clause not allowed with COPY TO", "", $<loc>11)
+				return 1
+			}
 			rv := $3.(*nodes.RangeVar)
 			stmt := &nodes.CopyStmt{
 				Relation:    rv,
@@ -5075,6 +5094,10 @@ CopyStmt:
 		}
 	| COPY '(' PreparableStmt ')' TO opt_program copy_file_name copy_opt_with copy_options
 		{
+			if $6 && $<boolean>7 {
+				grammarError(pglex, codeSyntaxError, "STDIN/STDOUT not allowed with PROGRAM", "", $<loc>5)
+				return 1
+			}
 			$$ = &nodes.CopyStmt{
 				Query:     $3,
 				IsFrom:    false,
@@ -5101,9 +5124,9 @@ opt_program:
  * stdout. We silently correct the "typo".)		 - AY 9/94
  */
 copy_file_name:
-	Sconst      { $$ = $1 }
-	| STDIN     { $$ = "" }
-	| STDOUT    { $$ = "" }
+	Sconst      { $$ = $1; $<boolean>$ = false }
+	| STDIN     { $$ = ""; $<boolean>$ = true }
+	| STDOUT    { $$ = ""; $<boolean>$ = true }
 	;
 
 copy_opt_with:
@@ -6788,6 +6811,10 @@ CreateSchemaStmt:
 		}
 	| CREATE SCHEMA IF_P NOT EXISTS opt_single_name AUTHORIZATION RoleSpec OptSchemaEltList
 		{
+			if $9 != nil {
+				grammarError(pglex, "0A000", "CREATE SCHEMA IF NOT EXISTS cannot include schema elements", "", $<loc>9)
+				return 1
+			}
 			$$ = &nodes.CreateSchemaStmt{
 				Schemaname:  $6,
 				Authrole:    $8.(*nodes.RoleSpec),
@@ -6797,6 +6824,10 @@ CreateSchemaStmt:
 		}
 	| CREATE SCHEMA IF_P NOT EXISTS ColId OptSchemaEltList
 		{
+			if $7 != nil {
+				grammarError(pglex, "0A000", "CREATE SCHEMA IF NOT EXISTS cannot include schema elements", "", $<loc>7)
+				return 1
+			}
 			$$ = &nodes.CreateSchemaStmt{
 				Schemaname:  $6,
 				SchemaElts:  $7,
@@ -6808,6 +6839,9 @@ CreateSchemaStmt:
 OptSchemaEltList:
 	OptSchemaEltList schema_stmt
 		{
+			if $1 == nil {
+				$<loc>$ = $<loc>2
+			}
 			$$ = appendList($1, $2)
 		}
 	| /* EMPTY */
@@ -9726,6 +9760,14 @@ frame_extent:
 	frame_bound
 		{
 			n := $1.(*nodes.WindowDef)
+			if n.FrameOptions&nodes.FRAMEOPTION_START_UNBOUNDED_FOLLOWING != 0 {
+				grammarError(pglex, "42P20", "frame start cannot be UNBOUNDED FOLLOWING", "", $<loc>1)
+				return 1
+			}
+			if n.FrameOptions&nodes.FRAMEOPTION_START_OFFSET_FOLLOWING != 0 {
+				grammarError(pglex, "42P20", "frame starting from following row cannot end with current row", "", $<loc>1)
+				return 1
+			}
 			n.FrameOptions |= nodes.FRAMEOPTION_END_CURRENT_ROW
 			$$ = n
 		}
@@ -9733,6 +9775,21 @@ frame_extent:
 		{
 			n1 := $2.(*nodes.WindowDef)
 			n2 := $4.(*nodes.WindowDef)
+			start, end := n1.FrameOptions, n2.FrameOptions
+			switch {
+			case start&nodes.FRAMEOPTION_START_UNBOUNDED_FOLLOWING != 0:
+				grammarError(pglex, "42P20", "frame start cannot be UNBOUNDED FOLLOWING", "", $<loc>2)
+				return 1
+			case end&nodes.FRAMEOPTION_START_UNBOUNDED_PRECEDING != 0:
+				grammarError(pglex, "42P20", "frame end cannot be UNBOUNDED PRECEDING", "", $<loc>4)
+				return 1
+			case start&nodes.FRAMEOPTION_START_CURRENT_ROW != 0 && end&nodes.FRAMEOPTION_START_OFFSET_PRECEDING != 0:
+				grammarError(pglex, "42P20", "frame starting from current row cannot have preceding rows", "", $<loc>4)
+				return 1
+			case start&nodes.FRAMEOPTION_START_OFFSET_FOLLOWING != 0 && end&(nodes.FRAMEOPTION_START_OFFSET_PRECEDING|nodes.FRAMEOPTION_START_CURRENT_ROW) != 0:
+				grammarError(pglex, "42P20", "frame starting from following row cannot have preceding rows", "", $<loc>4)
+				return 1
+			}
 			n1.FrameOptions |= n2.FrameOptions << 1
 			n1.FrameOptions |= nodes.FRAMEOPTION_BETWEEN
 			n1.EndOffset = n2.StartOffset
@@ -10550,19 +10607,32 @@ xmltable_column_el:
 				TypeName: $2,
 				Location: -1,
 			}
+			nullability := false
 			for _, item := range $3.Items {
 				defel := item.(*nodes.DefElem)
 				switch defel.Defname {
 				case "default":
+					if fc.Coldefexpr != nil {
+						grammarError(pglex, codeSyntaxError, "only one DEFAULT value is allowed", "", defel.Location)
+						return 1
+					}
 					fc.Coldefexpr = defel.Arg
 				case "path":
+					if fc.Colexpr != nil {
+						grammarError(pglex, codeSyntaxError, "only one PATH value per column is allowed", "", defel.Location)
+						return 1
+					}
 					fc.Colexpr = defel.Arg
 				case "__pg__is_not_null":
-					if defel.Arg != nil {
-						if b, ok := defel.Arg.(*nodes.Boolean); ok && b.Boolval {
-							fc.IsNotNull = true
-						}
+					if nullability {
+						grammarError(pglex, codeSyntaxError, "conflicting or redundant NULL / NOT NULL declarations for column \""+$1+"\"", "", defel.Location)
+						return 1
 					}
+					nullability = true
+					fc.IsNotNull = defel.Arg.(*nodes.Boolean).Boolval
+				default:
+					grammarError(pglex, codeSyntaxError, "unrecognized column option \""+defel.Defname+"\"", "", defel.Location)
+					return 1
 				}
 			}
 			$$ = fc
@@ -10587,23 +10657,27 @@ xmltable_column_option_list:
 xmltable_column_option_el:
 	IDENT b_expr
 		{
-			$$ = makeDefElem($1, $2)
+			if $1 == "__pg__is_not_null" {
+				grammarError(pglex, codeSyntaxError, "option name \"__pg__is_not_null\" cannot be used in XMLTABLE", "", $<loc>1)
+				return 1
+			}
+			$$ = &nodes.DefElem{Defname: $1, Arg: $2, Location: $<loc>1}
 		}
 	| DEFAULT b_expr
 		{
-			$$ = makeDefElem("default", $2)
+			$$ = &nodes.DefElem{Defname: "default", Arg: $2, Location: $<loc>1}
 		}
 	| NOT NULL_P
 		{
-			$$ = makeDefElem("__pg__is_not_null", &nodes.Boolean{Boolval: true})
+			$$ = &nodes.DefElem{Defname: "__pg__is_not_null", Arg: &nodes.Boolean{Boolval: true}, Location: $<loc>1}
 		}
 	| NULL_P
 		{
-			$$ = makeDefElem("__pg__is_not_null", &nodes.Boolean{Boolval: false})
+			$$ = &nodes.DefElem{Defname: "__pg__is_not_null", Arg: &nodes.Boolean{Boolval: false}, Location: $<loc>1}
 		}
 	| PATH b_expr
 		{
-			$$ = makeDefElem("path", $2)
+			$$ = &nodes.DefElem{Defname: "path", Arg: $2, Location: $<loc>1}
 		}
 	;
 
@@ -10657,6 +10731,12 @@ json_format_clause:
 		}
 	| FORMAT_LA JSON ENCODING name
 		{
+			switch downcase($4) {
+			case "utf8", "utf16", "utf32":
+			default:
+				grammarError(pglex, "22023", "unrecognized JSON encoding: "+$4, "", -1)
+				return 1
+			}
 			$$ = &nodes.JsonFormat{
 				FormatType: nodes.JS_FORMAT_JSON,
 				Location:   -1,
@@ -13970,6 +14050,10 @@ TriggerEvents:
 		{
 			events1 := $1.Items[0].(*nodes.Integer).Ival
 			events2 := $3.Items[0].(*nodes.Integer).Ival
+			if events1&events2 != 0 {
+				grammarSyntaxError(pglex, "duplicate trigger events specified")
+				return 1
+			}
 			var columns1, columns2 *nodes.List
 			if len($1.Items) > 1 && $1.Items[1] != nil {
 				columns1 = $1.Items[1].(*nodes.List)
@@ -18006,17 +18090,18 @@ func makeStringConstCast(s string, location nodes.ParseLoc, typeName *nodes.Type
 	}
 }
 
-func parsePartitionStrategy(strategy string) string {
-	switch strategy {
-	case "list", "LIST", "List":
-		return "l"
-	case "range", "RANGE", "Range":
-		return "r"
-	case "hash", "HASH", "Hash":
-		return "h"
-	default:
-		return strategy
+// parsePartitionStrategy is PostgreSQL 16's: list, range or hash in any ASCII
+// case, as its PARTITION_STRATEGY_* code, and false for any other name.
+func parsePartitionStrategy(strategy string) (string, bool) {
+	switch downcase(strategy) {
+	case "list":
+		return "l", true
+	case "range":
+		return "r", true
+	case "hash":
+		return "h", true
 	}
+	return "", false
 }
 
 func makeAExprFromList(kind nodes.A_Expr_Kind, name *nodes.List, lexpr, rexpr nodes.Node, location nodes.ParseLoc) nodes.Node {
@@ -18486,6 +18571,17 @@ func checkIndirection(lex pgLexer, indirection *nodes.List) bool {
 		}
 	}
 	return true
+}
+
+// checkColumnNumber refuses an index column number outside 1..32767, as
+// PostgreSQL 16's ALTER COLUMN n SET STATISTICS does, at the number (loc),
+// and reports whether it is in range.
+func checkColumnNumber(lex pgLexer, n int64, loc nodes.ParseLoc) bool {
+	if n >= 1 && n <= math.MaxInt16 {
+		return true
+	}
+	grammarError(lex, "22023", "column number must be in range from 1 to 32767", "", loc)
+	return false
 }
 
 // checkRangeVarNames refuses a relation name of more than three parts, as

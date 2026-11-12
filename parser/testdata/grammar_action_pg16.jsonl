@@ -1,0 +1,1131 @@
+{"sql":"copy x from stdin"}
+{"sql":"copy x from stdin where a = 1"}
+{"sql":"copy x from stdin with (format csv)"}
+{"sql":"copy x from stdin with (format csv) where a = 1"}
+{"sql":"copy x from stdin csv"}
+{"sql":"copy x from stdin csv where a = 1"}
+{"sql":"copy x from stdout"}
+{"sql":"copy x from stdout where a = 1"}
+{"sql":"copy x from stdout with (format csv)"}
+{"sql":"copy x from stdout with (format csv) where a = 1"}
+{"sql":"copy x from stdout csv"}
+{"sql":"copy x from stdout csv where a = 1"}
+{"sql":"copy x from 'f'"}
+{"sql":"copy x from 'f' where a = 1"}
+{"sql":"copy x from 'f' with (format csv)"}
+{"sql":"copy x from 'f' with (format csv) where a = 1"}
+{"sql":"copy x from 'f' csv"}
+{"sql":"copy x from 'f' csv where a = 1"}
+{"sql":"copy x from ''"}
+{"sql":"copy x from '' where a = 1"}
+{"sql":"copy x from '' with (format csv)"}
+{"sql":"copy x from '' with (format csv) where a = 1"}
+{"sql":"copy x from '' csv"}
+{"sql":"copy x from '' csv where a = 1"}
+{"sql":"copy x from program stdin","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x from program stdin where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x from program stdin with (format csv)","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x from program stdin with (format csv) where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x from program stdin csv","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x from program stdin csv where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x from program stdout","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x from program stdout where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x from program stdout with (format csv)","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x from program stdout with (format csv) where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x from program stdout csv","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x from program stdout csv where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x from program 'f'"}
+{"sql":"copy x from program 'f' where a = 1"}
+{"sql":"copy x from program 'f' with (format csv)"}
+{"sql":"copy x from program 'f' with (format csv) where a = 1"}
+{"sql":"copy x from program 'f' csv"}
+{"sql":"copy x from program 'f' csv where a = 1"}
+{"sql":"copy x from program ''"}
+{"sql":"copy x from program '' where a = 1"}
+{"sql":"copy x from program '' with (format csv)"}
+{"sql":"copy x from program '' with (format csv) where a = 1"}
+{"sql":"copy x from program '' csv"}
+{"sql":"copy x from program '' csv where a = 1"}
+{"sql":"copy x to stdin"}
+{"sql":"copy x to stdin where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":16}
+{"sql":"copy x to stdin with (format csv)"}
+{"sql":"copy x to stdin with (format csv) where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":34}
+{"sql":"copy x to stdin csv"}
+{"sql":"copy x to stdin csv where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":20}
+{"sql":"copy x to stdout"}
+{"sql":"copy x to stdout where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":17}
+{"sql":"copy x to stdout with (format csv)"}
+{"sql":"copy x to stdout with (format csv) where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":35}
+{"sql":"copy x to stdout csv"}
+{"sql":"copy x to stdout csv where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":21}
+{"sql":"copy x to 'f'"}
+{"sql":"copy x to 'f' where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":14}
+{"sql":"copy x to 'f' with (format csv)"}
+{"sql":"copy x to 'f' with (format csv) where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":32}
+{"sql":"copy x to 'f' csv"}
+{"sql":"copy x to 'f' csv where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":18}
+{"sql":"copy x to ''"}
+{"sql":"copy x to '' where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":13}
+{"sql":"copy x to '' with (format csv)"}
+{"sql":"copy x to '' with (format csv) where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":31}
+{"sql":"copy x to '' csv"}
+{"sql":"copy x to '' csv where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":17}
+{"sql":"copy x to program stdin","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x to program stdin where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x to program stdin with (format csv)","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x to program stdin with (format csv) where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x to program stdin csv","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x to program stdin csv where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x to program stdout","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x to program stdout where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x to program stdout with (format csv)","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x to program stdout with (format csv) where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x to program stdout csv","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x to program stdout csv where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x to program 'f'"}
+{"sql":"copy x to program 'f' where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":22}
+{"sql":"copy x to program 'f' with (format csv)"}
+{"sql":"copy x to program 'f' with (format csv) where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":40}
+{"sql":"copy x to program 'f' csv"}
+{"sql":"copy x to program 'f' csv where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":26}
+{"sql":"copy x to program ''"}
+{"sql":"copy x to program '' where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":21}
+{"sql":"copy x to program '' with (format csv)"}
+{"sql":"copy x to program '' with (format csv) where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":39}
+{"sql":"copy x to program '' csv"}
+{"sql":"copy x to program '' csv where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":25}
+{"sql":"copy x (a) from stdin"}
+{"sql":"copy x (a) from stdin where a = 1"}
+{"sql":"copy x (a) from stdin with (format csv)"}
+{"sql":"copy x (a) from stdin with (format csv) where a = 1"}
+{"sql":"copy x (a) from stdin csv"}
+{"sql":"copy x (a) from stdin csv where a = 1"}
+{"sql":"copy x (a) from stdout"}
+{"sql":"copy x (a) from stdout where a = 1"}
+{"sql":"copy x (a) from stdout with (format csv)"}
+{"sql":"copy x (a) from stdout with (format csv) where a = 1"}
+{"sql":"copy x (a) from stdout csv"}
+{"sql":"copy x (a) from stdout csv where a = 1"}
+{"sql":"copy x (a) from 'f'"}
+{"sql":"copy x (a) from 'f' where a = 1"}
+{"sql":"copy x (a) from 'f' with (format csv)"}
+{"sql":"copy x (a) from 'f' with (format csv) where a = 1"}
+{"sql":"copy x (a) from 'f' csv"}
+{"sql":"copy x (a) from 'f' csv where a = 1"}
+{"sql":"copy x (a) from ''"}
+{"sql":"copy x (a) from '' where a = 1"}
+{"sql":"copy x (a) from '' with (format csv)"}
+{"sql":"copy x (a) from '' with (format csv) where a = 1"}
+{"sql":"copy x (a) from '' csv"}
+{"sql":"copy x (a) from '' csv where a = 1"}
+{"sql":"copy x (a) from program stdin","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x (a) from program stdin where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x (a) from program stdin with (format csv)","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x (a) from program stdin with (format csv) where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x (a) from program stdin csv","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x (a) from program stdin csv where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x (a) from program stdout","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x (a) from program stdout where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x (a) from program stdout with (format csv)","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x (a) from program stdout with (format csv) where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x (a) from program stdout csv","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x (a) from program stdout csv where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x (a) from program 'f'"}
+{"sql":"copy x (a) from program 'f' where a = 1"}
+{"sql":"copy x (a) from program 'f' with (format csv)"}
+{"sql":"copy x (a) from program 'f' with (format csv) where a = 1"}
+{"sql":"copy x (a) from program 'f' csv"}
+{"sql":"copy x (a) from program 'f' csv where a = 1"}
+{"sql":"copy x (a) from program ''"}
+{"sql":"copy x (a) from program '' where a = 1"}
+{"sql":"copy x (a) from program '' with (format csv)"}
+{"sql":"copy x (a) from program '' with (format csv) where a = 1"}
+{"sql":"copy x (a) from program '' csv"}
+{"sql":"copy x (a) from program '' csv where a = 1"}
+{"sql":"copy x (a) to stdin"}
+{"sql":"copy x (a) to stdin where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":20}
+{"sql":"copy x (a) to stdin with (format csv)"}
+{"sql":"copy x (a) to stdin with (format csv) where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":38}
+{"sql":"copy x (a) to stdin csv"}
+{"sql":"copy x (a) to stdin csv where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":24}
+{"sql":"copy x (a) to stdout"}
+{"sql":"copy x (a) to stdout where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":21}
+{"sql":"copy x (a) to stdout with (format csv)"}
+{"sql":"copy x (a) to stdout with (format csv) where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":39}
+{"sql":"copy x (a) to stdout csv"}
+{"sql":"copy x (a) to stdout csv where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":25}
+{"sql":"copy x (a) to 'f'"}
+{"sql":"copy x (a) to 'f' where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":18}
+{"sql":"copy x (a) to 'f' with (format csv)"}
+{"sql":"copy x (a) to 'f' with (format csv) where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":36}
+{"sql":"copy x (a) to 'f' csv"}
+{"sql":"copy x (a) to 'f' csv where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":22}
+{"sql":"copy x (a) to ''"}
+{"sql":"copy x (a) to '' where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":17}
+{"sql":"copy x (a) to '' with (format csv)"}
+{"sql":"copy x (a) to '' with (format csv) where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":35}
+{"sql":"copy x (a) to '' csv"}
+{"sql":"copy x (a) to '' csv where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":21}
+{"sql":"copy x (a) to program stdin","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x (a) to program stdin where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x (a) to program stdin with (format csv)","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x (a) to program stdin with (format csv) where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x (a) to program stdin csv","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x (a) to program stdin csv where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x (a) to program stdout","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x (a) to program stdout where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x (a) to program stdout with (format csv)","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x (a) to program stdout with (format csv) where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x (a) to program stdout csv","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x (a) to program stdout csv where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy x (a) to program 'f'"}
+{"sql":"copy x (a) to program 'f' where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":26}
+{"sql":"copy x (a) to program 'f' with (format csv)"}
+{"sql":"copy x (a) to program 'f' with (format csv) where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":44}
+{"sql":"copy x (a) to program 'f' csv"}
+{"sql":"copy x (a) to program 'f' csv where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":30}
+{"sql":"copy x (a) to program ''"}
+{"sql":"copy x (a) to program '' where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":25}
+{"sql":"copy x (a) to program '' with (format csv)"}
+{"sql":"copy x (a) to program '' with (format csv) where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":43}
+{"sql":"copy x (a) to program '' csv"}
+{"sql":"copy x (a) to program '' csv where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":29}
+{"sql":"copy public.x from stdin"}
+{"sql":"copy public.x from stdin where a = 1"}
+{"sql":"copy public.x from stdin with (format csv)"}
+{"sql":"copy public.x from stdin with (format csv) where a = 1"}
+{"sql":"copy public.x from stdin csv"}
+{"sql":"copy public.x from stdin csv where a = 1"}
+{"sql":"copy public.x from stdout"}
+{"sql":"copy public.x from stdout where a = 1"}
+{"sql":"copy public.x from stdout with (format csv)"}
+{"sql":"copy public.x from stdout with (format csv) where a = 1"}
+{"sql":"copy public.x from stdout csv"}
+{"sql":"copy public.x from stdout csv where a = 1"}
+{"sql":"copy public.x from 'f'"}
+{"sql":"copy public.x from 'f' where a = 1"}
+{"sql":"copy public.x from 'f' with (format csv)"}
+{"sql":"copy public.x from 'f' with (format csv) where a = 1"}
+{"sql":"copy public.x from 'f' csv"}
+{"sql":"copy public.x from 'f' csv where a = 1"}
+{"sql":"copy public.x from ''"}
+{"sql":"copy public.x from '' where a = 1"}
+{"sql":"copy public.x from '' with (format csv)"}
+{"sql":"copy public.x from '' with (format csv) where a = 1"}
+{"sql":"copy public.x from '' csv"}
+{"sql":"copy public.x from '' csv where a = 1"}
+{"sql":"copy public.x from program stdin","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy public.x from program stdin where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy public.x from program stdin with (format csv)","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy public.x from program stdin with (format csv) where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy public.x from program stdin csv","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy public.x from program stdin csv where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy public.x from program stdout","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy public.x from program stdout where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy public.x from program stdout with (format csv)","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy public.x from program stdout with (format csv) where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy public.x from program stdout csv","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy public.x from program stdout csv where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy public.x from program 'f'"}
+{"sql":"copy public.x from program 'f' where a = 1"}
+{"sql":"copy public.x from program 'f' with (format csv)"}
+{"sql":"copy public.x from program 'f' with (format csv) where a = 1"}
+{"sql":"copy public.x from program 'f' csv"}
+{"sql":"copy public.x from program 'f' csv where a = 1"}
+{"sql":"copy public.x from program ''"}
+{"sql":"copy public.x from program '' where a = 1"}
+{"sql":"copy public.x from program '' with (format csv)"}
+{"sql":"copy public.x from program '' with (format csv) where a = 1"}
+{"sql":"copy public.x from program '' csv"}
+{"sql":"copy public.x from program '' csv where a = 1"}
+{"sql":"copy public.x to stdin"}
+{"sql":"copy public.x to stdin where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":23}
+{"sql":"copy public.x to stdin with (format csv)"}
+{"sql":"copy public.x to stdin with (format csv) where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":41}
+{"sql":"copy public.x to stdin csv"}
+{"sql":"copy public.x to stdin csv where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":27}
+{"sql":"copy public.x to stdout"}
+{"sql":"copy public.x to stdout where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":24}
+{"sql":"copy public.x to stdout with (format csv)"}
+{"sql":"copy public.x to stdout with (format csv) where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":42}
+{"sql":"copy public.x to stdout csv"}
+{"sql":"copy public.x to stdout csv where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":28}
+{"sql":"copy public.x to 'f'"}
+{"sql":"copy public.x to 'f' where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":21}
+{"sql":"copy public.x to 'f' with (format csv)"}
+{"sql":"copy public.x to 'f' with (format csv) where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":39}
+{"sql":"copy public.x to 'f' csv"}
+{"sql":"copy public.x to 'f' csv where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":25}
+{"sql":"copy public.x to ''"}
+{"sql":"copy public.x to '' where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":20}
+{"sql":"copy public.x to '' with (format csv)"}
+{"sql":"copy public.x to '' with (format csv) where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":38}
+{"sql":"copy public.x to '' csv"}
+{"sql":"copy public.x to '' csv where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":24}
+{"sql":"copy public.x to program stdin","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy public.x to program stdin where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy public.x to program stdin with (format csv)","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy public.x to program stdin with (format csv) where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy public.x to program stdin csv","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy public.x to program stdin csv where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy public.x to program stdout","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy public.x to program stdout where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy public.x to program stdout with (format csv)","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy public.x to program stdout with (format csv) where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy public.x to program stdout csv","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy public.x to program stdout csv where a = 1","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy public.x to program 'f'"}
+{"sql":"copy public.x to program 'f' where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":29}
+{"sql":"copy public.x to program 'f' with (format csv)"}
+{"sql":"copy public.x to program 'f' with (format csv) where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":47}
+{"sql":"copy public.x to program 'f' csv"}
+{"sql":"copy public.x to program 'f' csv where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":33}
+{"sql":"copy public.x to program ''"}
+{"sql":"copy public.x to program '' where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":28}
+{"sql":"copy public.x to program '' with (format csv)"}
+{"sql":"copy public.x to program '' with (format csv) where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":46}
+{"sql":"copy public.x to program '' csv"}
+{"sql":"copy public.x to program '' csv where a = 1","code":"42601","message":"WHERE clause not allowed with COPY TO","position":32}
+{"sql":"copy binary x from stdin"}
+{"sql":"copy binary x from 'f'"}
+{"sql":"copy binary x from program stdin","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy binary x from program 'f'"}
+{"sql":"copy binary x to stdin"}
+{"sql":"copy binary x to 'f'"}
+{"sql":"copy binary x to program stdin","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":-1}
+{"sql":"copy binary x to program 'f'"}
+{"sql":"copy (select 1) to stdin"}
+{"sql":"copy (select a from t)   to   stdin"}
+{"sql":"copy (select 1) to stdin with (format csv)"}
+{"sql":"copy (select a from t)   to   stdin with (format csv)"}
+{"sql":"copy (select 1) to stdout"}
+{"sql":"copy (select a from t)   to   stdout"}
+{"sql":"copy (select 1) to stdout with (format csv)"}
+{"sql":"copy (select a from t)   to   stdout with (format csv)"}
+{"sql":"copy (select 1) to 'f'"}
+{"sql":"copy (select a from t)   to   'f'"}
+{"sql":"copy (select 1) to 'f' with (format csv)"}
+{"sql":"copy (select a from t)   to   'f' with (format csv)"}
+{"sql":"copy (select 1) to ''"}
+{"sql":"copy (select a from t)   to   ''"}
+{"sql":"copy (select 1) to '' with (format csv)"}
+{"sql":"copy (select a from t)   to   '' with (format csv)"}
+{"sql":"copy (select 1) to program stdin","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":16}
+{"sql":"copy (select a from t)   to   program stdin","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":25}
+{"sql":"copy (select 1) to program stdin with (format csv)","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":16}
+{"sql":"copy (select a from t)   to   program stdin with (format csv)","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":25}
+{"sql":"copy (select 1) to program stdout","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":16}
+{"sql":"copy (select a from t)   to   program stdout","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":25}
+{"sql":"copy (select 1) to program stdout with (format csv)","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":16}
+{"sql":"copy (select a from t)   to   program stdout with (format csv)","code":"42601","message":"STDIN/STDOUT not allowed with PROGRAM","position":25}
+{"sql":"copy (select 1) to program 'f'"}
+{"sql":"copy (select a from t)   to   program 'f'"}
+{"sql":"copy (select 1) to program 'f' with (format csv)"}
+{"sql":"copy (select a from t)   to   program 'f' with (format csv)"}
+{"sql":"copy (select 1) to program ''"}
+{"sql":"copy (select a from t)   to   program ''"}
+{"sql":"copy (select 1) to program '' with (format csv)"}
+{"sql":"copy (select a from t)   to   program '' with (format csv)"}
+{"sql":"copy x to stdout where a = 1 and program","code":"42601","message":"WHERE clause not allowed with COPY TO","position":17}
+{"sql":"copy x to program stdout where","code":"42601","message":"syntax error at end of input","position":30}
+{"sql":"create table p (a int) partition by list (a)"}
+{"sql":"create table p (a int) partition by list (a, b)"}
+{"sql":"create table p (a int) partition by list (a collate \"C\")"}
+{"sql":"create table p (a int) partition by list ((a + 1))"}
+{"sql":"create table p partition of q for values in (1) partition by list (a)"}
+{"sql":"create table if not exists p (a int) partition by list (a) using heap"}
+{"sql":"create table p (a int) partition by LIST (a)"}
+{"sql":"create table p (a int) partition by LIST (a, b)"}
+{"sql":"create table p (a int) partition by LIST (a collate \"C\")"}
+{"sql":"create table p (a int) partition by LIST ((a + 1))"}
+{"sql":"create table p partition of q for values in (1) partition by LIST (a)"}
+{"sql":"create table if not exists p (a int) partition by LIST (a) using heap"}
+{"sql":"create table p (a int) partition by Hash (a)"}
+{"sql":"create table p (a int) partition by Hash (a, b)"}
+{"sql":"create table p (a int) partition by Hash (a collate \"C\")"}
+{"sql":"create table p (a int) partition by Hash ((a + 1))"}
+{"sql":"create table p partition of q for values in (1) partition by Hash (a)"}
+{"sql":"create table if not exists p (a int) partition by Hash (a) using heap"}
+{"sql":"create table p (a int) partition by range (a)"}
+{"sql":"create table p (a int) partition by range (a, b)"}
+{"sql":"create table p (a int) partition by range (a collate \"C\")"}
+{"sql":"create table p (a int) partition by range ((a + 1))"}
+{"sql":"create table p partition of q for values in (1) partition by range (a)"}
+{"sql":"create table if not exists p (a int) partition by range (a) using heap"}
+{"sql":"create table p (a int) partition by RANGE (a)"}
+{"sql":"create table p (a int) partition by RANGE (a, b)"}
+{"sql":"create table p (a int) partition by RANGE (a collate \"C\")"}
+{"sql":"create table p (a int) partition by RANGE ((a + 1))"}
+{"sql":"create table p partition of q for values in (1) partition by RANGE (a)"}
+{"sql":"create table if not exists p (a int) partition by RANGE (a) using heap"}
+{"sql":"create table p (a int) partition by \"list\" (a)"}
+{"sql":"create table p (a int) partition by \"list\" (a, b)"}
+{"sql":"create table p (a int) partition by \"list\" (a collate \"C\")"}
+{"sql":"create table p (a int) partition by \"list\" ((a + 1))"}
+{"sql":"create table p partition of q for values in (1) partition by \"list\" (a)"}
+{"sql":"create table if not exists p (a int) partition by \"list\" (a) using heap"}
+{"sql":"create table p (a int) partition by \"LIST\" (a)"}
+{"sql":"create table p (a int) partition by \"LIST\" (a, b)"}
+{"sql":"create table p (a int) partition by \"LIST\" (a collate \"C\")"}
+{"sql":"create table p (a int) partition by \"LIST\" ((a + 1))"}
+{"sql":"create table p partition of q for values in (1) partition by \"LIST\" (a)"}
+{"sql":"create table if not exists p (a int) partition by \"LIST\" (a) using heap"}
+{"sql":"create table p (a int) partition by \"LiSt\" (a)"}
+{"sql":"create table p (a int) partition by \"LiSt\" (a, b)"}
+{"sql":"create table p (a int) partition by \"LiSt\" (a collate \"C\")"}
+{"sql":"create table p (a int) partition by \"LiSt\" ((a + 1))"}
+{"sql":"create table p partition of q for values in (1) partition by \"LiSt\" (a)"}
+{"sql":"create table if not exists p (a int) partition by \"LiSt\" (a) using heap"}
+{"sql":"create table p (a int) partition by \"Range\" (a)"}
+{"sql":"create table p (a int) partition by \"Range\" (a, b)"}
+{"sql":"create table p (a int) partition by \"Range\" (a collate \"C\")"}
+{"sql":"create table p (a int) partition by \"Range\" ((a + 1))"}
+{"sql":"create table p partition of q for values in (1) partition by \"Range\" (a)"}
+{"sql":"create table if not exists p (a int) partition by \"Range\" (a) using heap"}
+{"sql":"create table p (a int) partition by hash (a)"}
+{"sql":"create table p (a int) partition by hash (a, b)"}
+{"sql":"create table p (a int) partition by hash (a collate \"C\")"}
+{"sql":"create table p (a int) partition by hash ((a + 1))"}
+{"sql":"create table p partition of q for values in (1) partition by hash (a)"}
+{"sql":"create table if not exists p (a int) partition by hash (a) using heap"}
+{"sql":"create table p (a int) partition by magic (a)","code":"22023","message":"unrecognized partitioning strategy \"magic\"","position":-1}
+{"sql":"create table p (a int) partition by magic (a, b)","code":"22023","message":"unrecognized partitioning strategy \"magic\"","position":-1}
+{"sql":"create table p (a int) partition by magic (a collate \"C\")","code":"22023","message":"unrecognized partitioning strategy \"magic\"","position":-1}
+{"sql":"create table p (a int) partition by magic ((a + 1))","code":"22023","message":"unrecognized partitioning strategy \"magic\"","position":-1}
+{"sql":"create table p partition of q for values in (1) partition by magic (a)","code":"22023","message":"unrecognized partitioning strategy \"magic\"","position":-1}
+{"sql":"create table if not exists p (a int) partition by magic (a) using heap","code":"22023","message":"unrecognized partitioning strategy \"magic\"","position":-1}
+{"sql":"create table p (a int) partition by ranges (a)","code":"22023","message":"unrecognized partitioning strategy \"ranges\"","position":-1}
+{"sql":"create table p (a int) partition by ranges (a, b)","code":"22023","message":"unrecognized partitioning strategy \"ranges\"","position":-1}
+{"sql":"create table p (a int) partition by ranges (a collate \"C\")","code":"22023","message":"unrecognized partitioning strategy \"ranges\"","position":-1}
+{"sql":"create table p (a int) partition by ranges ((a + 1))","code":"22023","message":"unrecognized partitioning strategy \"ranges\"","position":-1}
+{"sql":"create table p partition of q for values in (1) partition by ranges (a)","code":"22023","message":"unrecognized partitioning strategy \"ranges\"","position":-1}
+{"sql":"create table if not exists p (a int) partition by ranges (a) using heap","code":"22023","message":"unrecognized partitioning strategy \"ranges\"","position":-1}
+{"sql":"create table p (a int) partition by \"lists\" (a)","code":"22023","message":"unrecognized partitioning strategy \"lists\"","position":-1}
+{"sql":"create table p (a int) partition by \"lists\" (a, b)","code":"22023","message":"unrecognized partitioning strategy \"lists\"","position":-1}
+{"sql":"create table p (a int) partition by \"lists\" (a collate \"C\")","code":"22023","message":"unrecognized partitioning strategy \"lists\"","position":-1}
+{"sql":"create table p (a int) partition by \"lists\" ((a + 1))","code":"22023","message":"unrecognized partitioning strategy \"lists\"","position":-1}
+{"sql":"create table p partition of q for values in (1) partition by \"lists\" (a)","code":"22023","message":"unrecognized partitioning strategy \"lists\"","position":-1}
+{"sql":"create table if not exists p (a int) partition by \"lists\" (a) using heap","code":"22023","message":"unrecognized partitioning strategy \"lists\"","position":-1}
+{"sql":"create table p (a int) partition by lst (a)","code":"22023","message":"unrecognized partitioning strategy \"lst\"","position":-1}
+{"sql":"create table p (a int) partition by lst (a, b)","code":"22023","message":"unrecognized partitioning strategy \"lst\"","position":-1}
+{"sql":"create table p (a int) partition by lst (a collate \"C\")","code":"22023","message":"unrecognized partitioning strategy \"lst\"","position":-1}
+{"sql":"create table p (a int) partition by lst ((a + 1))","code":"22023","message":"unrecognized partitioning strategy \"lst\"","position":-1}
+{"sql":"create table p partition of q for values in (1) partition by lst (a)","code":"22023","message":"unrecognized partitioning strategy \"lst\"","position":-1}
+{"sql":"create table if not exists p (a int) partition by lst (a) using heap","code":"22023","message":"unrecognized partitioning strategy \"lst\"","position":-1}
+{"sql":"create table p (a int) partition by \"range \" (a)","code":"22023","message":"unrecognized partitioning strategy \"range \"","position":-1}
+{"sql":"create table p (a int) partition by \"range \" (a, b)","code":"22023","message":"unrecognized partitioning strategy \"range \"","position":-1}
+{"sql":"create table p (a int) partition by \"range \" (a collate \"C\")","code":"22023","message":"unrecognized partitioning strategy \"range \"","position":-1}
+{"sql":"create table p (a int) partition by \"range \" ((a + 1))","code":"22023","message":"unrecognized partitioning strategy \"range \"","position":-1}
+{"sql":"create table p partition of q for values in (1) partition by \"range \" (a)","code":"22023","message":"unrecognized partitioning strategy \"range \"","position":-1}
+{"sql":"create table if not exists p (a int) partition by \"range \" (a) using heap","code":"22023","message":"unrecognized partitioning strategy \"range \"","position":-1}
+{"sql":"create table p (a int) partition by partition (a)","code":"22023","message":"unrecognized partitioning strategy \"partition\"","position":-1}
+{"sql":"create table p (a int) partition by partition (a, b)","code":"22023","message":"unrecognized partitioning strategy \"partition\"","position":-1}
+{"sql":"create table p (a int) partition by partition (a collate \"C\")","code":"22023","message":"unrecognized partitioning strategy \"partition\"","position":-1}
+{"sql":"create table p (a int) partition by partition ((a + 1))","code":"22023","message":"unrecognized partitioning strategy \"partition\"","position":-1}
+{"sql":"create table p partition of q for values in (1) partition by partition (a)","code":"22023","message":"unrecognized partitioning strategy \"partition\"","position":-1}
+{"sql":"create table if not exists p (a int) partition by partition (a) using heap","code":"22023","message":"unrecognized partitioning strategy \"partition\"","position":-1}
+{"sql":"create table p (a int) partition by by (a)","code":"22023","message":"unrecognized partitioning strategy \"by\"","position":-1}
+{"sql":"create table p (a int) partition by by (a, b)","code":"22023","message":"unrecognized partitioning strategy \"by\"","position":-1}
+{"sql":"create table p (a int) partition by by (a collate \"C\")","code":"22023","message":"unrecognized partitioning strategy \"by\"","position":-1}
+{"sql":"create table p (a int) partition by by ((a + 1))","code":"22023","message":"unrecognized partitioning strategy \"by\"","position":-1}
+{"sql":"create table p partition of q for values in (1) partition by by (a)","code":"22023","message":"unrecognized partitioning strategy \"by\"","position":-1}
+{"sql":"create table if not exists p (a int) partition by by (a) using heap","code":"22023","message":"unrecognized partitioning strategy \"by\"","position":-1}
+{"sql":"alter index i alter column 0 set statistics 1","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter index i alter column 0 set statistics -1","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter index i alter column 0 set statistics 0","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter index i alter column 1 set statistics 1"}
+{"sql":"alter index i alter column 1 set statistics -1"}
+{"sql":"alter index i alter column 1 set statistics 0"}
+{"sql":"alter index i alter column 2 set statistics 1"}
+{"sql":"alter index i alter column 2 set statistics -1"}
+{"sql":"alter index i alter column 2 set statistics 0"}
+{"sql":"alter index i alter column 100 set statistics 1"}
+{"sql":"alter index i alter column 100 set statistics -1"}
+{"sql":"alter index i alter column 100 set statistics 0"}
+{"sql":"alter index i alter column 32767 set statistics 1"}
+{"sql":"alter index i alter column 32767 set statistics -1"}
+{"sql":"alter index i alter column 32767 set statistics 0"}
+{"sql":"alter index i alter column 32768 set statistics 1","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter index i alter column 32768 set statistics -1","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter index i alter column 32768 set statistics 0","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter index i alter column 65536 set statistics 1","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter index i alter column 65536 set statistics -1","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter index i alter column 65536 set statistics 0","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter index i alter column 1000000 set statistics 1","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter index i alter column 1000000 set statistics -1","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter index i alter column 1000000 set statistics 0","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter index i alter column 1_000 set statistics 1"}
+{"sql":"alter index i alter column 1_000 set statistics -1"}
+{"sql":"alter index i alter column 1_000 set statistics 0"}
+{"sql":"alter index i alter column 0x7fff set statistics 1"}
+{"sql":"alter index i alter column 0x7fff set statistics -1"}
+{"sql":"alter index i alter column 0x7fff set statistics 0"}
+{"sql":"alter index i alter column 0x8000 set statistics 1","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter index i alter column 0x8000 set statistics -1","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter index i alter column 0x8000 set statistics 0","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter index i alter column 00 set statistics 1","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter index i alter column 00 set statistics -1","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter index i alter column 00 set statistics 0","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter index i alter column 007 set statistics 1"}
+{"sql":"alter index i alter column 007 set statistics -1"}
+{"sql":"alter index i alter column 007 set statistics 0"}
+{"sql":"alter index i alter 0 set statistics 1","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter index i alter 0 set statistics -1","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter index i alter 0 set statistics 0","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter index i alter 1 set statistics 1"}
+{"sql":"alter index i alter 1 set statistics -1"}
+{"sql":"alter index i alter 1 set statistics 0"}
+{"sql":"alter index i alter 2 set statistics 1"}
+{"sql":"alter index i alter 2 set statistics -1"}
+{"sql":"alter index i alter 2 set statistics 0"}
+{"sql":"alter index i alter 100 set statistics 1"}
+{"sql":"alter index i alter 100 set statistics -1"}
+{"sql":"alter index i alter 100 set statistics 0"}
+{"sql":"alter index i alter 32767 set statistics 1"}
+{"sql":"alter index i alter 32767 set statistics -1"}
+{"sql":"alter index i alter 32767 set statistics 0"}
+{"sql":"alter index i alter 32768 set statistics 1","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter index i alter 32768 set statistics -1","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter index i alter 32768 set statistics 0","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter index i alter 65536 set statistics 1","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter index i alter 65536 set statistics -1","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter index i alter 65536 set statistics 0","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter index i alter 1000000 set statistics 1","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter index i alter 1000000 set statistics -1","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter index i alter 1000000 set statistics 0","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter index i alter 1_000 set statistics 1"}
+{"sql":"alter index i alter 1_000 set statistics -1"}
+{"sql":"alter index i alter 1_000 set statistics 0"}
+{"sql":"alter index i alter 0x7fff set statistics 1"}
+{"sql":"alter index i alter 0x7fff set statistics -1"}
+{"sql":"alter index i alter 0x7fff set statistics 0"}
+{"sql":"alter index i alter 0x8000 set statistics 1","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter index i alter 0x8000 set statistics -1","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter index i alter 0x8000 set statistics 0","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter index i alter 00 set statistics 1","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter index i alter 00 set statistics -1","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter index i alter 00 set statistics 0","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter index i alter 007 set statistics 1"}
+{"sql":"alter index i alter 007 set statistics -1"}
+{"sql":"alter index i alter 007 set statistics 0"}
+{"sql":"alter index i alter column 1 set statistics 1, alter column 0 set statistics 1","code":"22023","message":"column number must be in range from 1 to 32767","position":60}
+{"sql":"alter index i alter column 0 set statistics 1, alter column bogus","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter index i alter column 0 set statistics","code":"42601","message":"syntax error at end of input","position":43}
+{"sql":"alter table t alter column 0 set statistics 1","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter table t alter column 0 set statistics -1","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter table t alter column 0 set statistics 0","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter table t alter column 1 set statistics 1"}
+{"sql":"alter table t alter column 1 set statistics -1"}
+{"sql":"alter table t alter column 1 set statistics 0"}
+{"sql":"alter table t alter column 2 set statistics 1"}
+{"sql":"alter table t alter column 2 set statistics -1"}
+{"sql":"alter table t alter column 2 set statistics 0"}
+{"sql":"alter table t alter column 100 set statistics 1"}
+{"sql":"alter table t alter column 100 set statistics -1"}
+{"sql":"alter table t alter column 100 set statistics 0"}
+{"sql":"alter table t alter column 32767 set statistics 1"}
+{"sql":"alter table t alter column 32767 set statistics -1"}
+{"sql":"alter table t alter column 32767 set statistics 0"}
+{"sql":"alter table t alter column 32768 set statistics 1","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter table t alter column 32768 set statistics -1","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter table t alter column 32768 set statistics 0","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter table t alter column 65536 set statistics 1","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter table t alter column 65536 set statistics -1","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter table t alter column 65536 set statistics 0","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter table t alter column 1000000 set statistics 1","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter table t alter column 1000000 set statistics -1","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter table t alter column 1000000 set statistics 0","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter table t alter column 1_000 set statistics 1"}
+{"sql":"alter table t alter column 1_000 set statistics -1"}
+{"sql":"alter table t alter column 1_000 set statistics 0"}
+{"sql":"alter table t alter column 0x7fff set statistics 1"}
+{"sql":"alter table t alter column 0x7fff set statistics -1"}
+{"sql":"alter table t alter column 0x7fff set statistics 0"}
+{"sql":"alter table t alter column 0x8000 set statistics 1","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter table t alter column 0x8000 set statistics -1","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter table t alter column 0x8000 set statistics 0","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter table t alter column 00 set statistics 1","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter table t alter column 00 set statistics -1","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter table t alter column 00 set statistics 0","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter table t alter column 007 set statistics 1"}
+{"sql":"alter table t alter column 007 set statistics -1"}
+{"sql":"alter table t alter column 007 set statistics 0"}
+{"sql":"alter table t alter 0 set statistics 1","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter table t alter 0 set statistics -1","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter table t alter 0 set statistics 0","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter table t alter 1 set statistics 1"}
+{"sql":"alter table t alter 1 set statistics -1"}
+{"sql":"alter table t alter 1 set statistics 0"}
+{"sql":"alter table t alter 2 set statistics 1"}
+{"sql":"alter table t alter 2 set statistics -1"}
+{"sql":"alter table t alter 2 set statistics 0"}
+{"sql":"alter table t alter 100 set statistics 1"}
+{"sql":"alter table t alter 100 set statistics -1"}
+{"sql":"alter table t alter 100 set statistics 0"}
+{"sql":"alter table t alter 32767 set statistics 1"}
+{"sql":"alter table t alter 32767 set statistics -1"}
+{"sql":"alter table t alter 32767 set statistics 0"}
+{"sql":"alter table t alter 32768 set statistics 1","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter table t alter 32768 set statistics -1","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter table t alter 32768 set statistics 0","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter table t alter 65536 set statistics 1","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter table t alter 65536 set statistics -1","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter table t alter 65536 set statistics 0","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter table t alter 1000000 set statistics 1","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter table t alter 1000000 set statistics -1","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter table t alter 1000000 set statistics 0","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter table t alter 1_000 set statistics 1"}
+{"sql":"alter table t alter 1_000 set statistics -1"}
+{"sql":"alter table t alter 1_000 set statistics 0"}
+{"sql":"alter table t alter 0x7fff set statistics 1"}
+{"sql":"alter table t alter 0x7fff set statistics -1"}
+{"sql":"alter table t alter 0x7fff set statistics 0"}
+{"sql":"alter table t alter 0x8000 set statistics 1","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter table t alter 0x8000 set statistics -1","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter table t alter 0x8000 set statistics 0","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter table t alter 00 set statistics 1","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter table t alter 00 set statistics -1","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter table t alter 00 set statistics 0","code":"22023","message":"column number must be in range from 1 to 32767","position":20}
+{"sql":"alter table t alter 007 set statistics 1"}
+{"sql":"alter table t alter 007 set statistics -1"}
+{"sql":"alter table t alter 007 set statistics 0"}
+{"sql":"alter table t alter column 1 set statistics 1, alter column 0 set statistics 1","code":"22023","message":"column number must be in range from 1 to 32767","position":60}
+{"sql":"alter table t alter column 0 set statistics 1, alter column bogus","code":"22023","message":"column number must be in range from 1 to 32767","position":27}
+{"sql":"alter table t alter column 0 set statistics","code":"42601","message":"syntax error at end of input","position":43}
+{"sql":"create schema if not exists s"}
+{"sql":"create schema if not exists s create table t (a int)","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":30}
+{"sql":"create schema if not exists s   create view v as select 1","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":32}
+{"sql":"create schema if not exists s create sequence q","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":30}
+{"sql":"create schema if not exists s create index on t (a)","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":30}
+{"sql":"create schema if not exists s create trigger tr before insert on t execute function f()","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":30}
+{"sql":"create schema if not exists s grant select on t to r","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":30}
+{"sql":"create schema if not exists s create table t (a int) create table u (a int)","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":30}
+{"sql":"create schema if not exists s /* c */ create table t (a int)","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":38}
+{"sql":"create schema if not exists s create table t (a int) bogus","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":30}
+{"sql":"create schema if not exists authorization r"}
+{"sql":"create schema if not exists authorization r create table t (a int)","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":44}
+{"sql":"create schema if not exists authorization r   create view v as select 1","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":46}
+{"sql":"create schema if not exists authorization r create sequence q","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":44}
+{"sql":"create schema if not exists authorization r create index on t (a)","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":44}
+{"sql":"create schema if not exists authorization r create trigger tr before insert on t execute function f()","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":44}
+{"sql":"create schema if not exists authorization r grant select on t to r","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":44}
+{"sql":"create schema if not exists authorization r create table t (a int) create table u (a int)","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":44}
+{"sql":"create schema if not exists authorization r /* c */ create table t (a int)","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":52}
+{"sql":"create schema if not exists authorization r create table t (a int) bogus","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":44}
+{"sql":"create schema if not exists s authorization r"}
+{"sql":"create schema if not exists s authorization r create table t (a int)","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":46}
+{"sql":"create schema if not exists s authorization r   create view v as select 1","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":48}
+{"sql":"create schema if not exists s authorization r create sequence q","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":46}
+{"sql":"create schema if not exists s authorization r create index on t (a)","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":46}
+{"sql":"create schema if not exists s authorization r create trigger tr before insert on t execute function f()","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":46}
+{"sql":"create schema if not exists s authorization r grant select on t to r","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":46}
+{"sql":"create schema if not exists s authorization r create table t (a int) create table u (a int)","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":46}
+{"sql":"create schema if not exists s authorization r /* c */ create table t (a int)","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":54}
+{"sql":"create schema if not exists s authorization r create table t (a int) bogus","code":"0A000","message":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","position":46}
+{"sql":"create schema s"}
+{"sql":"create schema s create table t (a int)"}
+{"sql":"create schema s   create view v as select 1"}
+{"sql":"create schema s create sequence q"}
+{"sql":"create schema s create index on t (a)"}
+{"sql":"create schema s create trigger tr before insert on t execute function f()"}
+{"sql":"create schema s grant select on t to r"}
+{"sql":"create schema s create table t (a int) create table u (a int)"}
+{"sql":"create schema s /* c */ create table t (a int)"}
+{"sql":"create schema s create table t (a int) bogus","code":"42601","message":"syntax error at or near \"bogus\"","position":39}
+{"sql":"create schema authorization r"}
+{"sql":"create schema authorization r create table t (a int)"}
+{"sql":"create schema authorization r   create view v as select 1"}
+{"sql":"create schema authorization r create sequence q"}
+{"sql":"create schema authorization r create index on t (a)"}
+{"sql":"create schema authorization r create trigger tr before insert on t execute function f()"}
+{"sql":"create schema authorization r grant select on t to r"}
+{"sql":"create schema authorization r create table t (a int) create table u (a int)"}
+{"sql":"create schema authorization r /* c */ create table t (a int)"}
+{"sql":"create schema authorization r create table t (a int) bogus","code":"42601","message":"syntax error at or near \"bogus\"","position":53}
+{"sql":"create schema s authorization r"}
+{"sql":"create schema s authorization r create table t (a int)"}
+{"sql":"create schema s authorization r   create view v as select 1"}
+{"sql":"create schema s authorization r create sequence q"}
+{"sql":"create schema s authorization r create index on t (a)"}
+{"sql":"create schema s authorization r create trigger tr before insert on t execute function f()"}
+{"sql":"create schema s authorization r grant select on t to r"}
+{"sql":"create schema s authorization r create table t (a int) create table u (a int)"}
+{"sql":"create schema s authorization r /* c */ create table t (a int)"}
+{"sql":"create schema s authorization r create table t (a int) bogus","code":"42601","message":"syntax error at or near \"bogus\"","position":55}
+{"sql":"create trigger tr before insert or insert on t execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"insert\"","position":35}
+{"sql":"create trigger tr before insert or delete on t execute function f()"}
+{"sql":"create trigger tr before insert or update on t execute function f()"}
+{"sql":"create trigger tr before insert or update of a on t execute function f()"}
+{"sql":"create trigger tr before insert or update of a, b on t execute function f()"}
+{"sql":"create trigger tr before insert or truncate on t execute function f()"}
+{"sql":"create trigger tr before delete or insert on t execute function f()"}
+{"sql":"create trigger tr before delete or delete on t execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"delete\"","position":35}
+{"sql":"create trigger tr before delete or update on t execute function f()"}
+{"sql":"create trigger tr before delete or update of a on t execute function f()"}
+{"sql":"create trigger tr before delete or update of a, b on t execute function f()"}
+{"sql":"create trigger tr before delete or truncate on t execute function f()"}
+{"sql":"create trigger tr before update or insert on t execute function f()"}
+{"sql":"create trigger tr before update or delete on t execute function f()"}
+{"sql":"create trigger tr before update or update on t execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"on\"","position":42}
+{"sql":"create trigger tr before update or update of a on t execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"on\"","position":47}
+{"sql":"create trigger tr before update or update of a, b on t execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"on\"","position":50}
+{"sql":"create trigger tr before update or truncate on t execute function f()"}
+{"sql":"create trigger tr before update of a or insert on t execute function f()"}
+{"sql":"create trigger tr before update of a or delete on t execute function f()"}
+{"sql":"create trigger tr before update of a or update on t execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"on\"","position":47}
+{"sql":"create trigger tr before update of a or update of a on t execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"on\"","position":52}
+{"sql":"create trigger tr before update of a or update of a, b on t execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"on\"","position":55}
+{"sql":"create trigger tr before update of a or truncate on t execute function f()"}
+{"sql":"create trigger tr before update of a, b or insert on t execute function f()"}
+{"sql":"create trigger tr before update of a, b or delete on t execute function f()"}
+{"sql":"create trigger tr before update of a, b or update on t execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"on\"","position":50}
+{"sql":"create trigger tr before update of a, b or update of a on t execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"on\"","position":55}
+{"sql":"create trigger tr before update of a, b or update of a, b on t execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"on\"","position":58}
+{"sql":"create trigger tr before update of a, b or truncate on t execute function f()"}
+{"sql":"create trigger tr before truncate or insert on t execute function f()"}
+{"sql":"create trigger tr before truncate or delete on t execute function f()"}
+{"sql":"create trigger tr before truncate or update on t execute function f()"}
+{"sql":"create trigger tr before truncate or update of a on t execute function f()"}
+{"sql":"create trigger tr before truncate or update of a, b on t execute function f()"}
+{"sql":"create trigger tr before truncate or truncate on t execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"truncate\"","position":37}
+{"sql":"create trigger tr after insert or insert on t execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"insert\"","position":34}
+{"sql":"create trigger tr after insert or delete on t execute function f()"}
+{"sql":"create trigger tr after insert or update on t execute function f()"}
+{"sql":"create trigger tr after insert or update of a on t execute function f()"}
+{"sql":"create trigger tr after insert or update of a, b on t execute function f()"}
+{"sql":"create trigger tr after insert or truncate on t execute function f()"}
+{"sql":"create trigger tr after delete or insert on t execute function f()"}
+{"sql":"create trigger tr after delete or delete on t execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"delete\"","position":34}
+{"sql":"create trigger tr after delete or update on t execute function f()"}
+{"sql":"create trigger tr after delete or update of a on t execute function f()"}
+{"sql":"create trigger tr after delete or update of a, b on t execute function f()"}
+{"sql":"create trigger tr after delete or truncate on t execute function f()"}
+{"sql":"create trigger tr after update or insert on t execute function f()"}
+{"sql":"create trigger tr after update or delete on t execute function f()"}
+{"sql":"create trigger tr after update or update on t execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"on\"","position":41}
+{"sql":"create trigger tr after update or update of a on t execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"on\"","position":46}
+{"sql":"create trigger tr after update or update of a, b on t execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"on\"","position":49}
+{"sql":"create trigger tr after update or truncate on t execute function f()"}
+{"sql":"create trigger tr after update of a or insert on t execute function f()"}
+{"sql":"create trigger tr after update of a or delete on t execute function f()"}
+{"sql":"create trigger tr after update of a or update on t execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"on\"","position":46}
+{"sql":"create trigger tr after update of a or update of a on t execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"on\"","position":51}
+{"sql":"create trigger tr after update of a or update of a, b on t execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"on\"","position":54}
+{"sql":"create trigger tr after update of a or truncate on t execute function f()"}
+{"sql":"create trigger tr after update of a, b or insert on t execute function f()"}
+{"sql":"create trigger tr after update of a, b or delete on t execute function f()"}
+{"sql":"create trigger tr after update of a, b or update on t execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"on\"","position":49}
+{"sql":"create trigger tr after update of a, b or update of a on t execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"on\"","position":54}
+{"sql":"create trigger tr after update of a, b or update of a, b on t execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"on\"","position":57}
+{"sql":"create trigger tr after update of a, b or truncate on t execute function f()"}
+{"sql":"create trigger tr after truncate or insert on t execute function f()"}
+{"sql":"create trigger tr after truncate or delete on t execute function f()"}
+{"sql":"create trigger tr after truncate or update on t execute function f()"}
+{"sql":"create trigger tr after truncate or update of a on t execute function f()"}
+{"sql":"create trigger tr after truncate or update of a, b on t execute function f()"}
+{"sql":"create trigger tr after truncate or truncate on t execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"truncate\"","position":36}
+{"sql":"create trigger tr before insert or delete or insert on t for each row execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"insert\"","position":45}
+{"sql":"create trigger tr before insert or update or delete on t for each row execute function f()"}
+{"sql":"create trigger tr before update of a or delete or update of b on t for each row execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"on\"","position":62}
+{"sql":"create trigger tr before truncate or insert or truncate on t for each row execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"truncate\"","position":47}
+{"sql":"create trigger tr before insert or delete or update on t for each row execute function f()"}
+{"sql":"create trigger tr instead of insert or insert on v for each row execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"insert\"","position":39}
+{"sql":"create constraint trigger tr after insert or insert on t for each row execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"insert\"","position":45}
+{"sql":"create constraint trigger tr after insert or update on t for each row execute function f()"}
+{"sql":"create trigger tr before insert or insert bogus on t execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"insert\"","position":35}
+{"sql":"create trigger tr before insert or insert","code":"42601","message":"duplicate trigger events specified at or near \"insert\"","position":35}
+{"sql":"create trigger tr before update or update","code":"42601","message":"duplicate trigger events specified at end of input","position":41}
+{"sql":"create trigger tr before update or update of a ON t execute function f()","code":"42601","message":"duplicate trigger events specified at or near \"ON\"","position":47}
+{"sql":"select * from xmltable('/' passing x columns a int path 'x')"}
+{"sql":"select * from xmltable('/' passing x columns a int default 1)"}
+{"sql":"select * from xmltable('/' passing x columns a int null)"}
+{"sql":"select * from xmltable('/' passing x columns a int not null)"}
+{"sql":"select * from xmltable('/' passing x columns a int bogus 1)","code":"42601","message":"unrecognized column option \"bogus\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int \"path\" 'x')"}
+{"sql":"select * from xmltable('/' passing x columns a int \"PATH\" 'x')","code":"42601","message":"unrecognized column option \"PATH\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int \"default\" 1)"}
+{"sql":"select * from xmltable('/' passing x columns a int __pg__is_not_null 1)","code":"42601","message":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int \"__PG__is_not_null\" 1)","code":"42601","message":"unrecognized column option \"__PG__is_not_null\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int path 'x' path 'x')","code":"42601","message":"only one PATH value per column is allowed","position":60}
+{"sql":"select * from xmltable('/' passing x columns a int path 'x' default 1)"}
+{"sql":"select * from xmltable('/' passing x columns a int path 'x' null)"}
+{"sql":"select * from xmltable('/' passing x columns a int path 'x' not null)"}
+{"sql":"select * from xmltable('/' passing x columns a int path 'x' bogus 1)","code":"42601","message":"unrecognized column option \"bogus\"","position":60}
+{"sql":"select * from xmltable('/' passing x columns a int path 'x' \"path\" 'x')","code":"42601","message":"only one PATH value per column is allowed","position":60}
+{"sql":"select * from xmltable('/' passing x columns a int path 'x' \"PATH\" 'x')","code":"42601","message":"unrecognized column option \"PATH\"","position":60}
+{"sql":"select * from xmltable('/' passing x columns a int path 'x' \"default\" 1)"}
+{"sql":"select * from xmltable('/' passing x columns a int path 'x' __pg__is_not_null 1)","code":"42601","message":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","position":60}
+{"sql":"select * from xmltable('/' passing x columns a int path 'x' \"__PG__is_not_null\" 1)","code":"42601","message":"unrecognized column option \"__PG__is_not_null\"","position":60}
+{"sql":"select * from xmltable('/' passing x columns a int default 1 path 'x')"}
+{"sql":"select * from xmltable('/' passing x columns a int default 1 default 1)","code":"42601","message":"only one DEFAULT value is allowed","position":61}
+{"sql":"select * from xmltable('/' passing x columns a int default 1 null)"}
+{"sql":"select * from xmltable('/' passing x columns a int default 1 not null)"}
+{"sql":"select * from xmltable('/' passing x columns a int default 1 bogus 1)","code":"42601","message":"unrecognized column option \"bogus\"","position":61}
+{"sql":"select * from xmltable('/' passing x columns a int default 1 \"path\" 'x')"}
+{"sql":"select * from xmltable('/' passing x columns a int default 1 \"PATH\" 'x')","code":"42601","message":"unrecognized column option \"PATH\"","position":61}
+{"sql":"select * from xmltable('/' passing x columns a int default 1 \"default\" 1)","code":"42601","message":"only one DEFAULT value is allowed","position":61}
+{"sql":"select * from xmltable('/' passing x columns a int default 1 __pg__is_not_null 1)","code":"42601","message":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","position":61}
+{"sql":"select * from xmltable('/' passing x columns a int default 1 \"__PG__is_not_null\" 1)","code":"42601","message":"unrecognized column option \"__PG__is_not_null\"","position":61}
+{"sql":"select * from xmltable('/' passing x columns a int null path 'x')"}
+{"sql":"select * from xmltable('/' passing x columns a int null default 1)"}
+{"sql":"select * from xmltable('/' passing x columns a int null null)","code":"42601","message":"conflicting or redundant NULL / NOT NULL declarations for column \"a\"","position":56}
+{"sql":"select * from xmltable('/' passing x columns a int null not null)","code":"42601","message":"conflicting or redundant NULL / NOT NULL declarations for column \"a\"","position":56}
+{"sql":"select * from xmltable('/' passing x columns a int null bogus 1)","code":"42601","message":"unrecognized column option \"bogus\"","position":56}
+{"sql":"select * from xmltable('/' passing x columns a int null \"path\" 'x')"}
+{"sql":"select * from xmltable('/' passing x columns a int null \"PATH\" 'x')","code":"42601","message":"unrecognized column option \"PATH\"","position":56}
+{"sql":"select * from xmltable('/' passing x columns a int null \"default\" 1)"}
+{"sql":"select * from xmltable('/' passing x columns a int null __pg__is_not_null 1)","code":"42601","message":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","position":56}
+{"sql":"select * from xmltable('/' passing x columns a int null \"__PG__is_not_null\" 1)","code":"42601","message":"unrecognized column option \"__PG__is_not_null\"","position":56}
+{"sql":"select * from xmltable('/' passing x columns a int not null path 'x')"}
+{"sql":"select * from xmltable('/' passing x columns a int not null default 1)"}
+{"sql":"select * from xmltable('/' passing x columns a int not null null)","code":"42601","message":"conflicting or redundant NULL / NOT NULL declarations for column \"a\"","position":60}
+{"sql":"select * from xmltable('/' passing x columns a int not null not null)","code":"42601","message":"conflicting or redundant NULL / NOT NULL declarations for column \"a\"","position":60}
+{"sql":"select * from xmltable('/' passing x columns a int not null bogus 1)","code":"42601","message":"unrecognized column option \"bogus\"","position":60}
+{"sql":"select * from xmltable('/' passing x columns a int not null \"path\" 'x')"}
+{"sql":"select * from xmltable('/' passing x columns a int not null \"PATH\" 'x')","code":"42601","message":"unrecognized column option \"PATH\"","position":60}
+{"sql":"select * from xmltable('/' passing x columns a int not null \"default\" 1)"}
+{"sql":"select * from xmltable('/' passing x columns a int not null __pg__is_not_null 1)","code":"42601","message":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","position":60}
+{"sql":"select * from xmltable('/' passing x columns a int not null \"__PG__is_not_null\" 1)","code":"42601","message":"unrecognized column option \"__PG__is_not_null\"","position":60}
+{"sql":"select * from xmltable('/' passing x columns a int bogus 1 path 'x')","code":"42601","message":"unrecognized column option \"bogus\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int bogus 1 default 1)","code":"42601","message":"unrecognized column option \"bogus\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int bogus 1 null)","code":"42601","message":"unrecognized column option \"bogus\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int bogus 1 not null)","code":"42601","message":"unrecognized column option \"bogus\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int bogus 1 bogus 1)","code":"42601","message":"unrecognized column option \"bogus\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int bogus 1 \"path\" 'x')","code":"42601","message":"unrecognized column option \"bogus\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int bogus 1 \"PATH\" 'x')","code":"42601","message":"unrecognized column option \"bogus\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int bogus 1 \"default\" 1)","code":"42601","message":"unrecognized column option \"bogus\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int bogus 1 __pg__is_not_null 1)","code":"42601","message":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","position":59}
+{"sql":"select * from xmltable('/' passing x columns a int bogus 1 \"__PG__is_not_null\" 1)","code":"42601","message":"unrecognized column option \"bogus\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int \"path\" 'x' path 'x')","code":"42601","message":"only one PATH value per column is allowed","position":62}
+{"sql":"select * from xmltable('/' passing x columns a int \"path\" 'x' default 1)"}
+{"sql":"select * from xmltable('/' passing x columns a int \"path\" 'x' null)"}
+{"sql":"select * from xmltable('/' passing x columns a int \"path\" 'x' not null)"}
+{"sql":"select * from xmltable('/' passing x columns a int \"path\" 'x' bogus 1)","code":"42601","message":"unrecognized column option \"bogus\"","position":62}
+{"sql":"select * from xmltable('/' passing x columns a int \"path\" 'x' \"path\" 'x')","code":"42601","message":"only one PATH value per column is allowed","position":62}
+{"sql":"select * from xmltable('/' passing x columns a int \"path\" 'x' \"PATH\" 'x')","code":"42601","message":"unrecognized column option \"PATH\"","position":62}
+{"sql":"select * from xmltable('/' passing x columns a int \"path\" 'x' \"default\" 1)"}
+{"sql":"select * from xmltable('/' passing x columns a int \"path\" 'x' __pg__is_not_null 1)","code":"42601","message":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","position":62}
+{"sql":"select * from xmltable('/' passing x columns a int \"path\" 'x' \"__PG__is_not_null\" 1)","code":"42601","message":"unrecognized column option \"__PG__is_not_null\"","position":62}
+{"sql":"select * from xmltable('/' passing x columns a int \"PATH\" 'x' path 'x')","code":"42601","message":"unrecognized column option \"PATH\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int \"PATH\" 'x' default 1)","code":"42601","message":"unrecognized column option \"PATH\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int \"PATH\" 'x' null)","code":"42601","message":"unrecognized column option \"PATH\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int \"PATH\" 'x' not null)","code":"42601","message":"unrecognized column option \"PATH\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int \"PATH\" 'x' bogus 1)","code":"42601","message":"unrecognized column option \"PATH\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int \"PATH\" 'x' \"path\" 'x')","code":"42601","message":"unrecognized column option \"PATH\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int \"PATH\" 'x' \"PATH\" 'x')","code":"42601","message":"unrecognized column option \"PATH\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int \"PATH\" 'x' \"default\" 1)","code":"42601","message":"unrecognized column option \"PATH\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int \"PATH\" 'x' __pg__is_not_null 1)","code":"42601","message":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","position":62}
+{"sql":"select * from xmltable('/' passing x columns a int \"PATH\" 'x' \"__PG__is_not_null\" 1)","code":"42601","message":"unrecognized column option \"PATH\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int \"default\" 1 path 'x')"}
+{"sql":"select * from xmltable('/' passing x columns a int \"default\" 1 default 1)","code":"42601","message":"only one DEFAULT value is allowed","position":63}
+{"sql":"select * from xmltable('/' passing x columns a int \"default\" 1 null)"}
+{"sql":"select * from xmltable('/' passing x columns a int \"default\" 1 not null)"}
+{"sql":"select * from xmltable('/' passing x columns a int \"default\" 1 bogus 1)","code":"42601","message":"unrecognized column option \"bogus\"","position":63}
+{"sql":"select * from xmltable('/' passing x columns a int \"default\" 1 \"path\" 'x')"}
+{"sql":"select * from xmltable('/' passing x columns a int \"default\" 1 \"PATH\" 'x')","code":"42601","message":"unrecognized column option \"PATH\"","position":63}
+{"sql":"select * from xmltable('/' passing x columns a int \"default\" 1 \"default\" 1)","code":"42601","message":"only one DEFAULT value is allowed","position":63}
+{"sql":"select * from xmltable('/' passing x columns a int \"default\" 1 __pg__is_not_null 1)","code":"42601","message":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","position":63}
+{"sql":"select * from xmltable('/' passing x columns a int \"default\" 1 \"__PG__is_not_null\" 1)","code":"42601","message":"unrecognized column option \"__PG__is_not_null\"","position":63}
+{"sql":"select * from xmltable('/' passing x columns a int __pg__is_not_null 1 path 'x')","code":"42601","message":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int __pg__is_not_null 1 default 1)","code":"42601","message":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int __pg__is_not_null 1 null)","code":"42601","message":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int __pg__is_not_null 1 not null)","code":"42601","message":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int __pg__is_not_null 1 bogus 1)","code":"42601","message":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int __pg__is_not_null 1 \"path\" 'x')","code":"42601","message":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int __pg__is_not_null 1 \"PATH\" 'x')","code":"42601","message":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int __pg__is_not_null 1 \"default\" 1)","code":"42601","message":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int __pg__is_not_null 1 __pg__is_not_null 1)","code":"42601","message":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int __pg__is_not_null 1 \"__PG__is_not_null\" 1)","code":"42601","message":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int \"__PG__is_not_null\" 1 path 'x')","code":"42601","message":"unrecognized column option \"__PG__is_not_null\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int \"__PG__is_not_null\" 1 default 1)","code":"42601","message":"unrecognized column option \"__PG__is_not_null\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int \"__PG__is_not_null\" 1 null)","code":"42601","message":"unrecognized column option \"__PG__is_not_null\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int \"__PG__is_not_null\" 1 not null)","code":"42601","message":"unrecognized column option \"__PG__is_not_null\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int \"__PG__is_not_null\" 1 bogus 1)","code":"42601","message":"unrecognized column option \"__PG__is_not_null\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int \"__PG__is_not_null\" 1 \"path\" 'x')","code":"42601","message":"unrecognized column option \"__PG__is_not_null\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int \"__PG__is_not_null\" 1 \"PATH\" 'x')","code":"42601","message":"unrecognized column option \"__PG__is_not_null\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int \"__PG__is_not_null\" 1 \"default\" 1)","code":"42601","message":"unrecognized column option \"__PG__is_not_null\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int \"__PG__is_not_null\" 1 __pg__is_not_null 1)","code":"42601","message":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","position":73}
+{"sql":"select * from xmltable('/' passing x columns a int \"__PG__is_not_null\" 1 \"__PG__is_not_null\" 1)","code":"42601","message":"unrecognized column option \"__PG__is_not_null\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int path 'x' default 1 path 'y')","code":"42601","message":"only one PATH value per column is allowed","position":70}
+{"sql":"select * from xmltable('/' passing x columns k for ordinality, b text path 'b', a int path 'x' default 1 path 'y')","code":"42601","message":"only one PATH value per column is allowed","position":105}
+{"sql":"select * from xmltable('/' passing x columns a int default 1 path 'x' default 2)","code":"42601","message":"only one DEFAULT value is allowed","position":70}
+{"sql":"select * from xmltable('/' passing x columns k for ordinality, b text path 'b', a int default 1 path 'x' default 2)","code":"42601","message":"only one DEFAULT value is allowed","position":105}
+{"sql":"select * from xmltable('/' passing x columns a int null path 'x' not null)","code":"42601","message":"conflicting or redundant NULL / NOT NULL declarations for column \"a\"","position":65}
+{"sql":"select * from xmltable('/' passing x columns k for ordinality, b text path 'b', a int null path 'x' not null)","code":"42601","message":"conflicting or redundant NULL / NOT NULL declarations for column \"a\"","position":100}
+{"sql":"select * from xmltable('/' passing x columns a int path 'x' bogus 1 __pg__is_not_null 1)","code":"42601","message":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","position":68}
+{"sql":"select * from xmltable('/' passing x columns k for ordinality, b text path 'b', a int path 'x' bogus 1 __pg__is_not_null 1)","code":"42601","message":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","position":103}
+{"sql":"select * from xmltable('/' passing x columns a int path 'x' default 1 not null)"}
+{"sql":"select * from xmltable('/' passing x columns k for ordinality, b text path 'b', a int path 'x' default 1 not null)"}
+{"sql":"select * from xmltable('/' passing x columns a int bogus 1 bogus2 1","code":"42601","message":"unrecognized column option \"bogus\"","position":51}
+{"sql":"select * from xmltable('/' passing x columns a int path 'x' path 'y' bogus","code":"42601","message":"syntax error at end of input","position":74}
+{"sql":"select json_object(returning text format json encoding utf8)"}
+{"sql":"select json_array(returning bytea format json encoding utf8)"}
+{"sql":"select json_object('a': 1 format json encoding utf8)"}
+{"sql":"select json_array(1 format json encoding utf8)"}
+{"sql":"select json_arrayagg(a format json encoding utf8)"}
+{"sql":"select json_objectagg('a': 1 format json encoding utf8)"}
+{"sql":"select json_array(select 1 format json encoding utf8)"}
+{"sql":"select json_object(returning text format json encoding UTF8)"}
+{"sql":"select json_array(returning bytea format json encoding UTF8)"}
+{"sql":"select json_object('a': 1 format json encoding UTF8)"}
+{"sql":"select json_array(1 format json encoding UTF8)"}
+{"sql":"select json_arrayagg(a format json encoding UTF8)"}
+{"sql":"select json_objectagg('a': 1 format json encoding UTF8)"}
+{"sql":"select json_array(select 1 format json encoding UTF8)"}
+{"sql":"select json_object(returning text format json encoding utf16)"}
+{"sql":"select json_array(returning bytea format json encoding utf16)"}
+{"sql":"select json_object('a': 1 format json encoding utf16)"}
+{"sql":"select json_array(1 format json encoding utf16)"}
+{"sql":"select json_arrayagg(a format json encoding utf16)"}
+{"sql":"select json_objectagg('a': 1 format json encoding utf16)"}
+{"sql":"select json_array(select 1 format json encoding utf16)"}
+{"sql":"select json_object(returning text format json encoding utf32)"}
+{"sql":"select json_array(returning bytea format json encoding utf32)"}
+{"sql":"select json_object('a': 1 format json encoding utf32)"}
+{"sql":"select json_array(1 format json encoding utf32)"}
+{"sql":"select json_arrayagg(a format json encoding utf32)"}
+{"sql":"select json_objectagg('a': 1 format json encoding utf32)"}
+{"sql":"select json_array(select 1 format json encoding utf32)"}
+{"sql":"select json_object(returning text format json encoding \"uTf8\")"}
+{"sql":"select json_array(returning bytea format json encoding \"uTf8\")"}
+{"sql":"select json_object('a': 1 format json encoding \"uTf8\")"}
+{"sql":"select json_array(1 format json encoding \"uTf8\")"}
+{"sql":"select json_arrayagg(a format json encoding \"uTf8\")"}
+{"sql":"select json_objectagg('a': 1 format json encoding \"uTf8\")"}
+{"sql":"select json_array(select 1 format json encoding \"uTf8\")"}
+{"sql":"select json_object(returning text format json encoding \"UTF32\")"}
+{"sql":"select json_array(returning bytea format json encoding \"UTF32\")"}
+{"sql":"select json_object('a': 1 format json encoding \"UTF32\")"}
+{"sql":"select json_array(1 format json encoding \"UTF32\")"}
+{"sql":"select json_arrayagg(a format json encoding \"UTF32\")"}
+{"sql":"select json_objectagg('a': 1 format json encoding \"UTF32\")"}
+{"sql":"select json_array(select 1 format json encoding \"UTF32\")"}
+{"sql":"select json_object(returning text format json encoding \"utf-8\")","code":"22023","message":"unrecognized JSON encoding: utf-8","position":-1}
+{"sql":"select json_array(returning bytea format json encoding \"utf-8\")","code":"22023","message":"unrecognized JSON encoding: utf-8","position":-1}
+{"sql":"select json_object('a': 1 format json encoding \"utf-8\")","code":"22023","message":"unrecognized JSON encoding: utf-8","position":-1}
+{"sql":"select json_array(1 format json encoding \"utf-8\")","code":"22023","message":"unrecognized JSON encoding: utf-8","position":-1}
+{"sql":"select json_arrayagg(a format json encoding \"utf-8\")","code":"22023","message":"unrecognized JSON encoding: utf-8","position":-1}
+{"sql":"select json_objectagg('a': 1 format json encoding \"utf-8\")","code":"22023","message":"unrecognized JSON encoding: utf-8","position":-1}
+{"sql":"select json_array(select 1 format json encoding \"utf-8\")","code":"22023","message":"unrecognized JSON encoding: utf-8","position":-1}
+{"sql":"select json_object(returning text format json encoding latin1)","code":"22023","message":"unrecognized JSON encoding: latin1","position":-1}
+{"sql":"select json_array(returning bytea format json encoding latin1)","code":"22023","message":"unrecognized JSON encoding: latin1","position":-1}
+{"sql":"select json_object('a': 1 format json encoding latin1)","code":"22023","message":"unrecognized JSON encoding: latin1","position":-1}
+{"sql":"select json_array(1 format json encoding latin1)","code":"22023","message":"unrecognized JSON encoding: latin1","position":-1}
+{"sql":"select json_arrayagg(a format json encoding latin1)","code":"22023","message":"unrecognized JSON encoding: latin1","position":-1}
+{"sql":"select json_objectagg('a': 1 format json encoding latin1)","code":"22023","message":"unrecognized JSON encoding: latin1","position":-1}
+{"sql":"select json_array(select 1 format json encoding latin1)","code":"22023","message":"unrecognized JSON encoding: latin1","position":-1}
+{"sql":"select json_object(returning text format json encoding bogus)","code":"22023","message":"unrecognized JSON encoding: bogus","position":-1}
+{"sql":"select json_array(returning bytea format json encoding bogus)","code":"22023","message":"unrecognized JSON encoding: bogus","position":-1}
+{"sql":"select json_object('a': 1 format json encoding bogus)","code":"22023","message":"unrecognized JSON encoding: bogus","position":-1}
+{"sql":"select json_array(1 format json encoding bogus)","code":"22023","message":"unrecognized JSON encoding: bogus","position":-1}
+{"sql":"select json_arrayagg(a format json encoding bogus)","code":"22023","message":"unrecognized JSON encoding: bogus","position":-1}
+{"sql":"select json_objectagg('a': 1 format json encoding bogus)","code":"22023","message":"unrecognized JSON encoding: bogus","position":-1}
+{"sql":"select json_array(select 1 format json encoding bogus)","code":"22023","message":"unrecognized JSON encoding: bogus","position":-1}
+{"sql":"select json_object(returning text format json encoding invalid_encoding)","code":"22023","message":"unrecognized JSON encoding: invalid_encoding","position":-1}
+{"sql":"select json_array(returning bytea format json encoding invalid_encoding)","code":"22023","message":"unrecognized JSON encoding: invalid_encoding","position":-1}
+{"sql":"select json_object('a': 1 format json encoding invalid_encoding)","code":"22023","message":"unrecognized JSON encoding: invalid_encoding","position":-1}
+{"sql":"select json_array(1 format json encoding invalid_encoding)","code":"22023","message":"unrecognized JSON encoding: invalid_encoding","position":-1}
+{"sql":"select json_arrayagg(a format json encoding invalid_encoding)","code":"22023","message":"unrecognized JSON encoding: invalid_encoding","position":-1}
+{"sql":"select json_objectagg('a': 1 format json encoding invalid_encoding)","code":"22023","message":"unrecognized JSON encoding: invalid_encoding","position":-1}
+{"sql":"select json_array(select 1 format json encoding invalid_encoding)","code":"22023","message":"unrecognized JSON encoding: invalid_encoding","position":-1}
+{"sql":"select json_object(returning text format json encoding utf)","code":"22023","message":"unrecognized JSON encoding: utf","position":-1}
+{"sql":"select json_array(returning bytea format json encoding utf)","code":"22023","message":"unrecognized JSON encoding: utf","position":-1}
+{"sql":"select json_object('a': 1 format json encoding utf)","code":"22023","message":"unrecognized JSON encoding: utf","position":-1}
+{"sql":"select json_array(1 format json encoding utf)","code":"22023","message":"unrecognized JSON encoding: utf","position":-1}
+{"sql":"select json_arrayagg(a format json encoding utf)","code":"22023","message":"unrecognized JSON encoding: utf","position":-1}
+{"sql":"select json_objectagg('a': 1 format json encoding utf)","code":"22023","message":"unrecognized JSON encoding: utf","position":-1}
+{"sql":"select json_array(select 1 format json encoding utf)","code":"22023","message":"unrecognized JSON encoding: utf","position":-1}
+{"sql":"select json_object(returning text format json encoding utf64)","code":"22023","message":"unrecognized JSON encoding: utf64","position":-1}
+{"sql":"select json_array(returning bytea format json encoding utf64)","code":"22023","message":"unrecognized JSON encoding: utf64","position":-1}
+{"sql":"select json_object('a': 1 format json encoding utf64)","code":"22023","message":"unrecognized JSON encoding: utf64","position":-1}
+{"sql":"select json_array(1 format json encoding utf64)","code":"22023","message":"unrecognized JSON encoding: utf64","position":-1}
+{"sql":"select json_arrayagg(a format json encoding utf64)","code":"22023","message":"unrecognized JSON encoding: utf64","position":-1}
+{"sql":"select json_objectagg('a': 1 format json encoding utf64)","code":"22023","message":"unrecognized JSON encoding: utf64","position":-1}
+{"sql":"select json_array(select 1 format json encoding utf64)","code":"22023","message":"unrecognized JSON encoding: utf64","position":-1}
+{"sql":"select json_object(returning text format json encoding sql_ascii)","code":"22023","message":"unrecognized JSON encoding: sql_ascii","position":-1}
+{"sql":"select json_array(returning bytea format json encoding sql_ascii)","code":"22023","message":"unrecognized JSON encoding: sql_ascii","position":-1}
+{"sql":"select json_object('a': 1 format json encoding sql_ascii)","code":"22023","message":"unrecognized JSON encoding: sql_ascii","position":-1}
+{"sql":"select json_array(1 format json encoding sql_ascii)","code":"22023","message":"unrecognized JSON encoding: sql_ascii","position":-1}
+{"sql":"select json_arrayagg(a format json encoding sql_ascii)","code":"22023","message":"unrecognized JSON encoding: sql_ascii","position":-1}
+{"sql":"select json_objectagg('a': 1 format json encoding sql_ascii)","code":"22023","message":"unrecognized JSON encoding: sql_ascii","position":-1}
+{"sql":"select json_array(select 1 format json encoding sql_ascii)","code":"22023","message":"unrecognized JSON encoding: sql_ascii","position":-1}
+{"sql":"select json_object('a': 1 format json encoding bogus bogus)","code":"22023","message":"unrecognized JSON encoding: bogus","position":-1}
+{"sql":"select json_object('a': 1 format json encoding bogus,)","code":"22023","message":"unrecognized JSON encoding: bogus","position":-1}
+{"sql":"select json_object('a': 1 format json encoding bogus","code":"22023","message":"unrecognized JSON encoding: bogus","position":-1}
+{"sql":"select json_object('a': 1 format json encoding utf8 returning text format json encoding x)","code":"22023","message":"unrecognized JSON encoding: x","position":-1}
+{"sql":"select sum(a) over (order by a rows unbounded preceding) from t"}
+{"sql":"select sum(a) over (order by a rows unbounded following) from t","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":36}
+{"sql":"select sum(a) over (order by a rows current row) from t"}
+{"sql":"select sum(a) over (order by a rows 1 preceding) from t"}
+{"sql":"select sum(a) over (order by a rows 1 following) from t","code":"42P20","message":"frame starting from following row cannot end with current row","position":36}
+{"sql":"select sum(a) over (order by a rows (1) following) from t","code":"42P20","message":"frame starting from following row cannot end with current row","position":36}
+{"sql":"select sum(a) over (order by a rows 'infinity'::interval following) from t","code":"42P20","message":"frame starting from following row cannot end with current row","position":36}
+{"sql":"select sum(a) over (order by a rows between unbounded preceding and unbounded preceding) from t","code":"42P20","message":"frame end cannot be UNBOUNDED PRECEDING","position":68}
+{"sql":"select sum(a) over (order by a rows between unbounded preceding and unbounded following) from t"}
+{"sql":"select sum(a) over (order by a rows between unbounded preceding and current row) from t"}
+{"sql":"select sum(a) over (order by a rows between unbounded preceding and 1 preceding) from t"}
+{"sql":"select sum(a) over (order by a rows between unbounded preceding and 1 following) from t"}
+{"sql":"select sum(a) over (order by a rows between unbounded preceding and (1) following) from t"}
+{"sql":"select sum(a) over (order by a rows between unbounded preceding and 'infinity'::interval following) from t"}
+{"sql":"select sum(a) over (order by a rows between unbounded following and unbounded preceding) from t","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":44}
+{"sql":"select sum(a) over (order by a rows between unbounded following and unbounded following) from t","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":44}
+{"sql":"select sum(a) over (order by a rows between unbounded following and current row) from t","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":44}
+{"sql":"select sum(a) over (order by a rows between unbounded following and 1 preceding) from t","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":44}
+{"sql":"select sum(a) over (order by a rows between unbounded following and 1 following) from t","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":44}
+{"sql":"select sum(a) over (order by a rows between unbounded following and (1) following) from t","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":44}
+{"sql":"select sum(a) over (order by a rows between unbounded following and 'infinity'::interval following) from t","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":44}
+{"sql":"select sum(a) over (order by a rows between current row and unbounded preceding) from t","code":"42P20","message":"frame end cannot be UNBOUNDED PRECEDING","position":60}
+{"sql":"select sum(a) over (order by a rows between current row and unbounded following) from t"}
+{"sql":"select sum(a) over (order by a rows between current row and current row) from t"}
+{"sql":"select sum(a) over (order by a rows between current row and 1 preceding) from t","code":"42P20","message":"frame starting from current row cannot have preceding rows","position":60}
+{"sql":"select sum(a) over (order by a rows between current row and 1 following) from t"}
+{"sql":"select sum(a) over (order by a rows between current row and (1) following) from t"}
+{"sql":"select sum(a) over (order by a rows between current row and 'infinity'::interval following) from t"}
+{"sql":"select sum(a) over (order by a rows between 1 preceding and unbounded preceding) from t","code":"42P20","message":"frame end cannot be UNBOUNDED PRECEDING","position":60}
+{"sql":"select sum(a) over (order by a rows between 1 preceding and unbounded following) from t"}
+{"sql":"select sum(a) over (order by a rows between 1 preceding and current row) from t"}
+{"sql":"select sum(a) over (order by a rows between 1 preceding and 1 preceding) from t"}
+{"sql":"select sum(a) over (order by a rows between 1 preceding and 1 following) from t"}
+{"sql":"select sum(a) over (order by a rows between 1 preceding and (1) following) from t"}
+{"sql":"select sum(a) over (order by a rows between 1 preceding and 'infinity'::interval following) from t"}
+{"sql":"select sum(a) over (order by a rows between 1 following and unbounded preceding) from t","code":"42P20","message":"frame end cannot be UNBOUNDED PRECEDING","position":60}
+{"sql":"select sum(a) over (order by a rows between 1 following and unbounded following) from t"}
+{"sql":"select sum(a) over (order by a rows between 1 following and current row) from t","code":"42P20","message":"frame starting from following row cannot have preceding rows","position":60}
+{"sql":"select sum(a) over (order by a rows between 1 following and 1 preceding) from t","code":"42P20","message":"frame starting from following row cannot have preceding rows","position":60}
+{"sql":"select sum(a) over (order by a rows between 1 following and 1 following) from t"}
+{"sql":"select sum(a) over (order by a rows between 1 following and (1) following) from t"}
+{"sql":"select sum(a) over (order by a rows between 1 following and 'infinity'::interval following) from t"}
+{"sql":"select sum(a) over (order by a rows between (1) following and unbounded preceding) from t","code":"42P20","message":"frame end cannot be UNBOUNDED PRECEDING","position":62}
+{"sql":"select sum(a) over (order by a rows between (1) following and unbounded following) from t"}
+{"sql":"select sum(a) over (order by a rows between (1) following and current row) from t","code":"42P20","message":"frame starting from following row cannot have preceding rows","position":62}
+{"sql":"select sum(a) over (order by a rows between (1) following and 1 preceding) from t","code":"42P20","message":"frame starting from following row cannot have preceding rows","position":62}
+{"sql":"select sum(a) over (order by a rows between (1) following and 1 following) from t"}
+{"sql":"select sum(a) over (order by a rows between (1) following and (1) following) from t"}
+{"sql":"select sum(a) over (order by a rows between (1) following and 'infinity'::interval following) from t"}
+{"sql":"select sum(a) over (order by a rows between 'infinity'::interval following and unbounded preceding) from t","code":"42P20","message":"frame end cannot be UNBOUNDED PRECEDING","position":79}
+{"sql":"select sum(a) over (order by a rows between 'infinity'::interval following and unbounded following) from t"}
+{"sql":"select sum(a) over (order by a rows between 'infinity'::interval following and current row) from t","code":"42P20","message":"frame starting from following row cannot have preceding rows","position":79}
+{"sql":"select sum(a) over (order by a rows between 'infinity'::interval following and 1 preceding) from t","code":"42P20","message":"frame starting from following row cannot have preceding rows","position":79}
+{"sql":"select sum(a) over (order by a rows between 'infinity'::interval following and 1 following) from t"}
+{"sql":"select sum(a) over (order by a rows between 'infinity'::interval following and (1) following) from t"}
+{"sql":"select sum(a) over (order by a rows between 'infinity'::interval following and 'infinity'::interval following) from t"}
+{"sql":"select sum(a) over (order by a range unbounded preceding) from t"}
+{"sql":"select sum(a) over (order by a range unbounded following) from t","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":37}
+{"sql":"select sum(a) over (order by a range current row) from t"}
+{"sql":"select sum(a) over (order by a range 1 preceding) from t"}
+{"sql":"select sum(a) over (order by a range 1 following) from t","code":"42P20","message":"frame starting from following row cannot end with current row","position":37}
+{"sql":"select sum(a) over (order by a range (1) following) from t","code":"42P20","message":"frame starting from following row cannot end with current row","position":37}
+{"sql":"select sum(a) over (order by a range 'infinity'::interval following) from t","code":"42P20","message":"frame starting from following row cannot end with current row","position":37}
+{"sql":"select sum(a) over (order by a range between unbounded preceding and unbounded preceding) from t","code":"42P20","message":"frame end cannot be UNBOUNDED PRECEDING","position":69}
+{"sql":"select sum(a) over (order by a range between unbounded preceding and unbounded following) from t"}
+{"sql":"select sum(a) over (order by a range between unbounded preceding and current row) from t"}
+{"sql":"select sum(a) over (order by a range between unbounded preceding and 1 preceding) from t"}
+{"sql":"select sum(a) over (order by a range between unbounded preceding and 1 following) from t"}
+{"sql":"select sum(a) over (order by a range between unbounded preceding and (1) following) from t"}
+{"sql":"select sum(a) over (order by a range between unbounded preceding and 'infinity'::interval following) from t"}
+{"sql":"select sum(a) over (order by a range between unbounded following and unbounded preceding) from t","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":45}
+{"sql":"select sum(a) over (order by a range between unbounded following and unbounded following) from t","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":45}
+{"sql":"select sum(a) over (order by a range between unbounded following and current row) from t","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":45}
+{"sql":"select sum(a) over (order by a range between unbounded following and 1 preceding) from t","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":45}
+{"sql":"select sum(a) over (order by a range between unbounded following and 1 following) from t","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":45}
+{"sql":"select sum(a) over (order by a range between unbounded following and (1) following) from t","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":45}
+{"sql":"select sum(a) over (order by a range between unbounded following and 'infinity'::interval following) from t","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":45}
+{"sql":"select sum(a) over (order by a range between current row and unbounded preceding) from t","code":"42P20","message":"frame end cannot be UNBOUNDED PRECEDING","position":61}
+{"sql":"select sum(a) over (order by a range between current row and unbounded following) from t"}
+{"sql":"select sum(a) over (order by a range between current row and current row) from t"}
+{"sql":"select sum(a) over (order by a range between current row and 1 preceding) from t","code":"42P20","message":"frame starting from current row cannot have preceding rows","position":61}
+{"sql":"select sum(a) over (order by a range between current row and 1 following) from t"}
+{"sql":"select sum(a) over (order by a range between current row and (1) following) from t"}
+{"sql":"select sum(a) over (order by a range between current row and 'infinity'::interval following) from t"}
+{"sql":"select sum(a) over (order by a range between 1 preceding and unbounded preceding) from t","code":"42P20","message":"frame end cannot be UNBOUNDED PRECEDING","position":61}
+{"sql":"select sum(a) over (order by a range between 1 preceding and unbounded following) from t"}
+{"sql":"select sum(a) over (order by a range between 1 preceding and current row) from t"}
+{"sql":"select sum(a) over (order by a range between 1 preceding and 1 preceding) from t"}
+{"sql":"select sum(a) over (order by a range between 1 preceding and 1 following) from t"}
+{"sql":"select sum(a) over (order by a range between 1 preceding and (1) following) from t"}
+{"sql":"select sum(a) over (order by a range between 1 preceding and 'infinity'::interval following) from t"}
+{"sql":"select sum(a) over (order by a range between 1 following and unbounded preceding) from t","code":"42P20","message":"frame end cannot be UNBOUNDED PRECEDING","position":61}
+{"sql":"select sum(a) over (order by a range between 1 following and unbounded following) from t"}
+{"sql":"select sum(a) over (order by a range between 1 following and current row) from t","code":"42P20","message":"frame starting from following row cannot have preceding rows","position":61}
+{"sql":"select sum(a) over (order by a range between 1 following and 1 preceding) from t","code":"42P20","message":"frame starting from following row cannot have preceding rows","position":61}
+{"sql":"select sum(a) over (order by a range between 1 following and 1 following) from t"}
+{"sql":"select sum(a) over (order by a range between 1 following and (1) following) from t"}
+{"sql":"select sum(a) over (order by a range between 1 following and 'infinity'::interval following) from t"}
+{"sql":"select sum(a) over (order by a range between (1) following and unbounded preceding) from t","code":"42P20","message":"frame end cannot be UNBOUNDED PRECEDING","position":63}
+{"sql":"select sum(a) over (order by a range between (1) following and unbounded following) from t"}
+{"sql":"select sum(a) over (order by a range between (1) following and current row) from t","code":"42P20","message":"frame starting from following row cannot have preceding rows","position":63}
+{"sql":"select sum(a) over (order by a range between (1) following and 1 preceding) from t","code":"42P20","message":"frame starting from following row cannot have preceding rows","position":63}
+{"sql":"select sum(a) over (order by a range between (1) following and 1 following) from t"}
+{"sql":"select sum(a) over (order by a range between (1) following and (1) following) from t"}
+{"sql":"select sum(a) over (order by a range between (1) following and 'infinity'::interval following) from t"}
+{"sql":"select sum(a) over (order by a range between 'infinity'::interval following and unbounded preceding) from t","code":"42P20","message":"frame end cannot be UNBOUNDED PRECEDING","position":80}
+{"sql":"select sum(a) over (order by a range between 'infinity'::interval following and unbounded following) from t"}
+{"sql":"select sum(a) over (order by a range between 'infinity'::interval following and current row) from t","code":"42P20","message":"frame starting from following row cannot have preceding rows","position":80}
+{"sql":"select sum(a) over (order by a range between 'infinity'::interval following and 1 preceding) from t","code":"42P20","message":"frame starting from following row cannot have preceding rows","position":80}
+{"sql":"select sum(a) over (order by a range between 'infinity'::interval following and 1 following) from t"}
+{"sql":"select sum(a) over (order by a range between 'infinity'::interval following and (1) following) from t"}
+{"sql":"select sum(a) over (order by a range between 'infinity'::interval following and 'infinity'::interval following) from t"}
+{"sql":"select sum(a) over (order by a groups unbounded preceding) from t"}
+{"sql":"select sum(a) over (order by a groups unbounded following) from t","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":38}
+{"sql":"select sum(a) over (order by a groups current row) from t"}
+{"sql":"select sum(a) over (order by a groups 1 preceding) from t"}
+{"sql":"select sum(a) over (order by a groups 1 following) from t","code":"42P20","message":"frame starting from following row cannot end with current row","position":38}
+{"sql":"select sum(a) over (order by a groups (1) following) from t","code":"42P20","message":"frame starting from following row cannot end with current row","position":38}
+{"sql":"select sum(a) over (order by a groups 'infinity'::interval following) from t","code":"42P20","message":"frame starting from following row cannot end with current row","position":38}
+{"sql":"select sum(a) over (order by a groups between unbounded preceding and unbounded preceding) from t","code":"42P20","message":"frame end cannot be UNBOUNDED PRECEDING","position":70}
+{"sql":"select sum(a) over (order by a groups between unbounded preceding and unbounded following) from t"}
+{"sql":"select sum(a) over (order by a groups between unbounded preceding and current row) from t"}
+{"sql":"select sum(a) over (order by a groups between unbounded preceding and 1 preceding) from t"}
+{"sql":"select sum(a) over (order by a groups between unbounded preceding and 1 following) from t"}
+{"sql":"select sum(a) over (order by a groups between unbounded preceding and (1) following) from t"}
+{"sql":"select sum(a) over (order by a groups between unbounded preceding and 'infinity'::interval following) from t"}
+{"sql":"select sum(a) over (order by a groups between unbounded following and unbounded preceding) from t","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":46}
+{"sql":"select sum(a) over (order by a groups between unbounded following and unbounded following) from t","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":46}
+{"sql":"select sum(a) over (order by a groups between unbounded following and current row) from t","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":46}
+{"sql":"select sum(a) over (order by a groups between unbounded following and 1 preceding) from t","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":46}
+{"sql":"select sum(a) over (order by a groups between unbounded following and 1 following) from t","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":46}
+{"sql":"select sum(a) over (order by a groups between unbounded following and (1) following) from t","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":46}
+{"sql":"select sum(a) over (order by a groups between unbounded following and 'infinity'::interval following) from t","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":46}
+{"sql":"select sum(a) over (order by a groups between current row and unbounded preceding) from t","code":"42P20","message":"frame end cannot be UNBOUNDED PRECEDING","position":62}
+{"sql":"select sum(a) over (order by a groups between current row and unbounded following) from t"}
+{"sql":"select sum(a) over (order by a groups between current row and current row) from t"}
+{"sql":"select sum(a) over (order by a groups between current row and 1 preceding) from t","code":"42P20","message":"frame starting from current row cannot have preceding rows","position":62}
+{"sql":"select sum(a) over (order by a groups between current row and 1 following) from t"}
+{"sql":"select sum(a) over (order by a groups between current row and (1) following) from t"}
+{"sql":"select sum(a) over (order by a groups between current row and 'infinity'::interval following) from t"}
+{"sql":"select sum(a) over (order by a groups between 1 preceding and unbounded preceding) from t","code":"42P20","message":"frame end cannot be UNBOUNDED PRECEDING","position":62}
+{"sql":"select sum(a) over (order by a groups between 1 preceding and unbounded following) from t"}
+{"sql":"select sum(a) over (order by a groups between 1 preceding and current row) from t"}
+{"sql":"select sum(a) over (order by a groups between 1 preceding and 1 preceding) from t"}
+{"sql":"select sum(a) over (order by a groups between 1 preceding and 1 following) from t"}
+{"sql":"select sum(a) over (order by a groups between 1 preceding and (1) following) from t"}
+{"sql":"select sum(a) over (order by a groups between 1 preceding and 'infinity'::interval following) from t"}
+{"sql":"select sum(a) over (order by a groups between 1 following and unbounded preceding) from t","code":"42P20","message":"frame end cannot be UNBOUNDED PRECEDING","position":62}
+{"sql":"select sum(a) over (order by a groups between 1 following and unbounded following) from t"}
+{"sql":"select sum(a) over (order by a groups between 1 following and current row) from t","code":"42P20","message":"frame starting from following row cannot have preceding rows","position":62}
+{"sql":"select sum(a) over (order by a groups between 1 following and 1 preceding) from t","code":"42P20","message":"frame starting from following row cannot have preceding rows","position":62}
+{"sql":"select sum(a) over (order by a groups between 1 following and 1 following) from t"}
+{"sql":"select sum(a) over (order by a groups between 1 following and (1) following) from t"}
+{"sql":"select sum(a) over (order by a groups between 1 following and 'infinity'::interval following) from t"}
+{"sql":"select sum(a) over (order by a groups between (1) following and unbounded preceding) from t","code":"42P20","message":"frame end cannot be UNBOUNDED PRECEDING","position":64}
+{"sql":"select sum(a) over (order by a groups between (1) following and unbounded following) from t"}
+{"sql":"select sum(a) over (order by a groups between (1) following and current row) from t","code":"42P20","message":"frame starting from following row cannot have preceding rows","position":64}
+{"sql":"select sum(a) over (order by a groups between (1) following and 1 preceding) from t","code":"42P20","message":"frame starting from following row cannot have preceding rows","position":64}
+{"sql":"select sum(a) over (order by a groups between (1) following and 1 following) from t"}
+{"sql":"select sum(a) over (order by a groups between (1) following and (1) following) from t"}
+{"sql":"select sum(a) over (order by a groups between (1) following and 'infinity'::interval following) from t"}
+{"sql":"select sum(a) over (order by a groups between 'infinity'::interval following and unbounded preceding) from t","code":"42P20","message":"frame end cannot be UNBOUNDED PRECEDING","position":81}
+{"sql":"select sum(a) over (order by a groups between 'infinity'::interval following and unbounded following) from t"}
+{"sql":"select sum(a) over (order by a groups between 'infinity'::interval following and current row) from t","code":"42P20","message":"frame starting from following row cannot have preceding rows","position":81}
+{"sql":"select sum(a) over (order by a groups between 'infinity'::interval following and 1 preceding) from t","code":"42P20","message":"frame starting from following row cannot have preceding rows","position":81}
+{"sql":"select sum(a) over (order by a groups between 'infinity'::interval following and 1 following) from t"}
+{"sql":"select sum(a) over (order by a groups between 'infinity'::interval following and (1) following) from t"}
+{"sql":"select sum(a) over (order by a groups between 'infinity'::interval following and 'infinity'::interval following) from t"}
+{"sql":"select sum(a) over (w rows unbounded following exclude ties) from t window w as (order by a)","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":27}
+{"sql":"select sum(a) over w from t window w as (order by a rows unbounded following exclude ties)","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":57}
+{"sql":"select sum(a) over (w rows 1 following exclude current row) from t window w as (order by a)","code":"42P20","message":"frame starting from following row cannot end with current row","position":27}
+{"sql":"select sum(a) over w from t window w as (order by a rows 1 following exclude current row)","code":"42P20","message":"frame starting from following row cannot end with current row","position":57}
+{"sql":"select sum(a) over (w rows between current row and 1 preceding exclude group) from t window w as (order by a)","code":"42P20","message":"frame starting from current row cannot have preceding rows","position":51}
+{"sql":"select sum(a) over w from t window w as (order by a rows between current row and 1 preceding exclude group)","code":"42P20","message":"frame starting from current row cannot have preceding rows","position":81}
+{"sql":"select sum(a) over (rows 1 following and current row) from t","code":"42P20","message":"frame starting from following row cannot end with current row","position":25}
+{"sql":"select sum(a) over (rows unbounded following and current row) from t","code":"42P20","message":"frame start cannot be UNBOUNDED FOLLOWING","position":25}

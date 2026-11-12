@@ -1283,7 +1283,7 @@
 {"file":"alter_table.sql","stmt":57,"sum":"0fe1ccd7"}
 {"file":"alter_table.sql","stmt":58,"sum":"f592738f"}
 {"file":"alter_table.sql","stmt":59,"sum":"92d74813"}
-{"file":"alter_table.sql","stmt":60,"sum":"6b4d0d1d","code":"22023","msg":"column number must be in range from 1 to 32767","pos":35,"class":"grammar-action-checks"}
+{"file":"alter_table.sql","stmt":60,"sum":"6b4d0d1d","code":"22023","msg":"column number must be in range from 1 to 32767","pos":35}
 {"file":"alter_table.sql","stmt":61,"sum":"a0a1988e"}
 {"file":"alter_table.sql","stmt":62,"sum":"856a5ff3"}
 {"file":"alter_table.sql","stmt":63,"sum":"bfa9634c"}
@@ -7418,7 +7418,7 @@
 {"file":"copy2.sql","stmt":14,"sum":"7b2c8271"}
 {"file":"copy2.sql","stmt":15,"sum":"ead84e56"}
 {"file":"copy2.sql","stmt":15,"edit":[11,0,"(3)"],"code":"42601","msg":"syntax error at or near \"(\"","pos":11}
-{"file":"copy2.sql","stmt":16,"sum":"3fbaccf4","code":"42601","msg":"WHERE clause not allowed with COPY TO","pos":17,"class":"grammar-action-checks"}
+{"file":"copy2.sql","stmt":16,"sum":"3fbaccf4","code":"42601","msg":"WHERE clause not allowed with COPY TO","pos":17}
 {"file":"copy2.sql","stmt":17,"sum":"c039ae92"}
 {"file":"copy2.sql","stmt":18,"sum":"66a3a4cb"}
 {"file":"copy2.sql","stmt":19,"sum":"0ba197fa"}
@@ -9979,7 +9979,7 @@
 {"file":"create_table.sql","stmt":73,"sum":"6cb9f03a"}
 {"file":"create_table.sql","stmt":74,"sum":"a8fb464c"}
 {"file":"create_table.sql","stmt":75,"sum":"31157e31"}
-{"file":"create_table.sql","stmt":76,"sum":"55ad377e","code":"22023","msg":"unrecognized partitioning strategy \"magic\"","pos":-1,"class":"grammar-action-checks"}
+{"file":"create_table.sql","stmt":76,"sum":"55ad377e","code":"22023","msg":"unrecognized partitioning strategy \"magic\"","pos":-1}
 {"file":"create_table.sql","stmt":77,"sum":"0db03312"}
 {"file":"create_table.sql","stmt":78,"sum":"43a5fb57"}
 {"file":"create_table.sql","stmt":79,"sum":"66954e17"}
@@ -30388,7 +30388,7 @@
 {"file":"namespace.sql","stmt":22,"edit":[13,1,""]}
 {"file":"namespace.sql","stmt":23,"sum":"16ec4a98"}
 {"file":"namespace.sql","stmt":24,"sum":"3a11a1bb"}
-{"file":"namespace.sql","stmt":25,"sum":"846292a1","code":"0A000","msg":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","pos":96,"class":"grammar-action-checks"}
+{"file":"namespace.sql","stmt":25,"sum":"846292a1","code":"0A000","msg":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","pos":96}
 {"file":"namespace.sql","stmt":26,"sum":"05de0496"}
 {"file":"namespace.sql","stmt":27,"sum":"ddc5efe2"}
 {"file":"namespace.sql","stmt":27,"edit":[46,0," SELECT"],"code":"42601","msg":"syntax error at or near \"SELECT\"","pos":47}
@@ -45534,7 +45534,7 @@
 {"file":"sqljson.sql","stmt":55,"sum":"40ee9bf4"}
 {"file":"sqljson.sql","stmt":55,"edit":[6,0,"(3)"],"code":"42601","msg":"syntax error at or near \"(\"","pos":21}
 {"file":"sqljson.sql","stmt":56,"sum":"22cb495c"}
-{"file":"sqljson.sql","stmt":57,"sum":"93f179b6","code":"22023","msg":"unrecognized JSON encoding: invalid_encoding","pos":-1,"class":"grammar-action-checks"}
+{"file":"sqljson.sql","stmt":57,"sum":"93f179b6","code":"22023","msg":"unrecognized JSON encoding: invalid_encoding","pos":-1}
 {"file":"sqljson.sql","stmt":58,"sum":"e5cda27d"}
 {"file":"sqljson.sql","stmt":58,"edit":[34,0,"(3)"]}
 {"file":"sqljson.sql","stmt":59,"sum":"26c66b48"}
@@ -45610,8 +45610,8 @@
 {"file":"sqljson.sql","stmt":114,"edit":[32,0,".x"]}
 {"file":"sqljson.sql","stmt":115,"sum":"3da0aca6"}
 {"file":"sqljson.sql","stmt":116,"sum":"9ac9be9e"}
-{"file":"sqljson.sql","stmt":117,"sum":"688c7304","code":"22023","msg":"unrecognized JSON encoding: invalid_encoding","pos":-1,"class":"grammar-action-checks"}
-{"file":"sqljson.sql","stmt":117,"edit":[71,0," )"],"code":"22023","msg":"unrecognized JSON encoding: invalid_encoding","pos":-1,"class":"grammar-action-checks"}
+{"file":"sqljson.sql","stmt":117,"sum":"688c7304","code":"22023","msg":"unrecognized JSON encoding: invalid_encoding","pos":-1}
+{"file":"sqljson.sql","stmt":117,"edit":[71,0," )"],"code":"22023","msg":"unrecognized JSON encoding: invalid_encoding","pos":-1}
 {"file":"sqljson.sql","stmt":118,"sum":"1871457b"}
 {"file":"sqljson.sql","stmt":119,"sum":"cc2d3a5a"}
 {"file":"sqljson.sql","stmt":119,"edit":[33,0,"[]"]}
@@ -51876,7 +51876,7 @@
 {"file":"triggers.sql","stmt":179,"sum":"27eda9b1"}
 {"file":"triggers.sql","stmt":180,"sum":"d17d413b"}
 {"file":"triggers.sql","stmt":180,"edit":[0,4,""]}
-{"file":"triggers.sql","stmt":181,"sum":"c9f52f15","code":"42601","msg":"duplicate trigger events specified at or near \"ON\"","pos":77,"class":"grammar-action-checks"}
+{"file":"triggers.sql","stmt":181,"sum":"c9f52f15","code":"42601","msg":"duplicate trigger events specified at or near \"ON\"","pos":77}
 {"file":"triggers.sql","stmt":182,"sum":"89094291"}
 {"file":"triggers.sql","stmt":183,"sum":"16d3ca22","code":"42601","msg":"syntax error at or near \"OF\"","pos":41}
 {"file":"triggers.sql","stmt":184,"sum":"f00d1afd"}
@@ -57467,7 +57467,7 @@
 {"file":"window.sql","stmt":182,"edit":[201,0,"(3)"]}
 {"file":"window.sql","stmt":183,"sum":"92c5cd6f"}
 {"file":"window.sql","stmt":184,"sum":"c3ff2457"}
-{"file":"window.sql","stmt":184,"edit":[123,7,""],"code":"42P20","msg":"frame starting from following row cannot end with current row","pos":137,"class":"grammar-action-checks"}
+{"file":"window.sql","stmt":184,"edit":[123,7,""],"code":"42P20","msg":"frame starting from following row cannot end with current row","pos":137}
 {"file":"window.sql","stmt":185,"sum":"677ebeb6"}
 {"file":"window.sql","stmt":185,"edit":[213,0,"[]"]}
 {"file":"window.sql","stmt":186,"sum":"160bdafb"}
@@ -58581,9 +58581,9 @@
 {"file":"xml.sql","stmt":219,"sum":"0c15c4b1"}
 {"file":"xml.sql","stmt":219,"edit":[56,0,".x"]}
 {"file":"xml.sql","stmt":220,"sum":"e6b976bb"}
-{"file":"xml.sql","stmt":221,"sum":"24a81056","code":"42601","msg":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","pos":65,"class":"grammar-action-checks"}
-{"file":"xml.sql","stmt":221,"edit":[94,0," v1"],"code":"42601","msg":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","pos":65,"class":"grammar-action-checks"}
-{"file":"xml.sql","stmt":221,"edit":[24,5,"( ROW"],"code":"42601","msg":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","pos":65,"class":"grammar-action-checks"}
+{"file":"xml.sql","stmt":221,"sum":"24a81056","code":"42601","msg":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","pos":65}
+{"file":"xml.sql","stmt":221,"edit":[94,0," v1"],"code":"42601","msg":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","pos":65}
+{"file":"xml.sql","stmt":221,"edit":[24,5,"( ROW"],"code":"42601","msg":"option name \"__pg__is_not_null\" cannot be used in XMLTABLE","pos":65}
 {"file":"xml.sql","stmt":222,"sum":"3d69b355"}
 {"file":"xml.sql","stmt":223,"sum":"f86466de"}
 {"file":"xml.sql","stmt":224,"sum":"d4255479"}
@@ -58600,7 +58600,7 @@
 {"file":"xml.sql","stmt":233,"sum":"83de1712"}
 {"file":"xml.sql","stmt":234,"sum":"328c5351"}
 {"file":"xml.sql","stmt":235,"sum":"4ee95494"}
-{"file":"xml.sql","stmt":235,"edit":[183,1,""],"code":"42601","msg":"unrecognized column option \"rawdata\"","pos":184,"class":"grammar-action-checks"}
+{"file":"xml.sql","stmt":235,"edit":[183,1,""],"code":"42601","msg":"unrecognized column option \"rawdata\"","pos":184}
 {"file":"xml.sql","stmt":236,"sum":"a10d9626"}
 {"file":"xml.sql","stmt":237,"sum":"25e6b7da"}
 {"file":"xml.sql","stmt":237,"edit":[151,0,"[]"]}
@@ -58619,7 +58619,7 @@
 {"file":"xml.sql","stmt":246,"sum":"b5cbe57d"}
 {"file":"xml.sql","stmt":246,"edit":[19,0,".x"]}
 {"file":"xml.sql","stmt":247,"sum":"6054ce9d"}
-{"file":"xml.sql","stmt":247,"edit":[574,1,""],"code":"42601","msg":"unrecognized column option \"premier_name\"","pos":609,"class":"grammar-action-checks"}
+{"file":"xml.sql","stmt":247,"edit":[574,1,""],"code":"42601","msg":"unrecognized column option \"premier_name\"","pos":609}
 {"file":"xml.sql","stmt":248,"sum":"108be691"}
 {"file":"xml.sql","stmt":249,"sum":"0a55663a"}
 {"file":"xml.sql","stmt":249,"edit":[196,0,"(3)"],"code":"42601","msg":"syntax error at or near \"(\"","pos":196}
@@ -58784,14 +58784,14 @@
 {"sql":"select 1 fetch first 1 row with ties","code":"42601","msg":"WITH TIES cannot be specified without ORDER BY clause","pos":-1,"class":"select-clause-checks"}
 {"sql":"select 1 order by 1 fetch first 1 row with ties for update skip locked","code":"42601","msg":"SKIP LOCKED and WITH TIES options cannot be used together","pos":-1,"class":"select-clause-checks"}
 {"sql":"select percentile_cont(p order by p) within group (order by x)","code":"42601","msg":"cannot use multiple ORDER BY clauses with WITHIN GROUP","pos":37,"class":"select-clause-checks"}
-{"sql":"copy x to stdout where a = 1","code":"42601","msg":"WHERE clause not allowed with COPY TO","pos":17,"class":"grammar-action-checks"}
-{"sql":"create table p (a int) partition by magic (a)","code":"22023","msg":"unrecognized partitioning strategy \"magic\"","pos":-1,"class":"grammar-action-checks"}
-{"sql":"alter index i alter column 0 set statistics 1","code":"22023","msg":"column number must be in range from 1 to 32767","pos":27,"class":"grammar-action-checks"}
-{"sql":"create schema if not exists s create table t (a int)","code":"0A000","msg":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","pos":30,"class":"grammar-action-checks"}
-{"sql":"create trigger t before update or update of a on t for each row execute function f()","code":"42601","msg":"duplicate trigger events specified at or near \"on\"","pos":46,"class":"grammar-action-checks"}
-{"sql":"select * from xmltable('/' passing x columns a int bogus 1)","code":"42601","msg":"unrecognized column option \"bogus\"","pos":51,"class":"grammar-action-checks"}
+{"sql":"copy x to stdout where a = 1","code":"42601","msg":"WHERE clause not allowed with COPY TO","pos":17}
+{"sql":"create table p (a int) partition by magic (a)","code":"22023","msg":"unrecognized partitioning strategy \"magic\"","pos":-1}
+{"sql":"alter index i alter column 0 set statistics 1","code":"22023","msg":"column number must be in range from 1 to 32767","pos":27}
+{"sql":"create schema if not exists s create table t (a int)","code":"0A000","msg":"CREATE SCHEMA IF NOT EXISTS cannot include schema elements","pos":30}
+{"sql":"create trigger t before update or update of a on t for each row execute function f()","code":"42601","msg":"duplicate trigger events specified at or near \"on\"","pos":46}
+{"sql":"select * from xmltable('/' passing x columns a int bogus 1)","code":"42601","msg":"unrecognized column option \"bogus\"","pos":51}
 {"sql":"select x over (order by a range between 1 following and current row) from t","code":"42601","msg":"syntax error at or near \"over\"","pos":9}
-{"sql":"select json_object(returning text format json encoding bogus)","code":"22023","msg":"unrecognized JSON encoding: bogus","pos":-1,"class":"grammar-action-checks"}
+{"sql":"select json_object(returning text format json encoding bogus)","code":"22023","msg":"unrecognized JSON encoding: bogus","pos":-1}
 {"sql":"select u&'x' uescape '+'","code":"42601","msg":"invalid Unicode escape character at or near \"'+'\"","pos":21,"class":"uescape"}
 {"sql":"select u&'x' uescape (3) '!'","code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"(\"","pos":21,"class":"bare-column-label"}
 {"sql":"drop operator === (int4)","code":"42601","msg":"missing argument","pos":23,"class":"operator-missing-argument-message"}

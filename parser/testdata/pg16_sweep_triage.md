@@ -79,7 +79,7 @@ L a feature's grammar.
 | pg17-ddl | 1 | 42 (22/15/5) | accepts PostgreSQL 17's DDL | `set_access_method_name` (DEFAULT), `alter_table_cmd` SET EXPRESSION, `a_expr AT LOCAL`, `DomainConstraintElem` NOT NULL in ALTER DOMAIN ADD, `operator_def_elem` without `=` | no | M |
 | utility-option-argument (fixed) | 1 | 55 (0/52/3) | accepts `*`, DEFAULT and `(list)` as an EXPLAIN/VACUUM/ANALYZE option argument | `utility_option_arg` | no | S |
 | publication-object-list (fixed) | 1 | 24 (6/15/3) | accepts what `preprocess_pubobj_list` refuses | `CreatePublicationStmt`, `AlterPublicationStmt`, `PublicationObjSpec` actions | no | S |
-| grammar-action-checks | 1 | 21 (8/6/7) | accepts what a grammar action refuses | `CopyStmt`, `parsePartitionStrategy`, `alter_table_cmd` column number, `CreateSchemaStmt`, `TriggerEvents`, `xmltable_column_option_el`, `frame_extent`, `json_encoding_clause_opt` | no | M |
+| grammar-action-checks (fixed) | 1 | 21 (8/6/7) | accepts what a grammar action refuses | `CopyStmt`, `parsePartitionStrategy`, `alter_table_cmd` column number, `CreateSchemaStmt`, `TriggerEvents`, `xmltable_column_option_el`, `frame_extent`, `json_encoding_clause_opt` | no | M |
 | cte-column-list-parentheses (fixed) | 1 | 12 (0/10/2) | accepts a CTE's column names without parentheses | `opt_name_list` | no | S |
 | constraint-attribute-checks | 1 | 9 (5/1/3) | accepts what `processCASbits` and constraint actions refuse | `ConstraintAttributeSpec`/`processCASbits`, `key_action` SET NULL (cols), `ColConstraintElem` GENERATED | no | S |
 | select-clause-checks | 1 | 8 (3/2/3) | accepts WITH TIES without ORDER BY, with SKIP LOCKED; ORDER BY with WITHIN GROUP | `insertSelectOptions`, `func_application` within `func_expr` | no | S |
@@ -189,7 +189,7 @@ list as `preprocess_pubobj_list` does, and the objects without a kind are
 PostgreSQL 16's `ColId`, `ColId indirection` and `extended_relation_expr`
 forms; all 24 agree.
 
-### grammar-action-checks (risk 1, 21)
+### grammar-action-checks (risk 1, 21; fixed)
 
 Errors PostgreSQL 16's grammar actions raise and the parser's do not, one
 action each.
@@ -209,6 +209,16 @@ f_interval range 'infinity'::interval following and ...)`, is in this class
 too: PostgreSQL 16's `frame_extent` action refuses a lone FOLLOWING start
 (42P20 frame starting from following row cannot end with current row, at
 137); the parser has no such check and refuses at "and" (168).
+
+Each of these actions now raises PostgreSQL 16's error: COPY's
+STDIN/STDOUT with PROGRAM and WHERE with COPY TO, `parsePartitionStrategy`,
+the column number of ALTER COLUMN n SET STATISTICS, CREATE SCHEMA IF NOT
+EXISTS with elements, repeated `TriggerEvents`, the XMLTABLE column options
+(an unknown or `__pg__is_not_null` name, a second PATH, DEFAULT or
+NULL/NOT NULL), the JSON encoding and the five `frame_extent` checks; all 21
+agree. A column number past 2147483647 is still refused as out of range
+where PostgreSQL 16's scanner makes it a float and refuses it as a syntax
+error.
 
 ### cte-column-list-parentheses (risk 1, 12; fixed)
 

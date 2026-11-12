@@ -1,4 +1,7 @@
 {
+  "alter_table.sql": [
+    60
+  ],
   "collate.icu.utf8.sql": [
     115,
     187
@@ -17,6 +20,9 @@
   "constraints.sql": [
     14,
     15
+  ],
+  "copy2.sql": [
+    16
   ],
   "copyselect.sql": [
     18,
@@ -40,6 +46,7 @@
     13
   ],
   "create_table.sql": [
+    76,
     134
   ],
   "domain.sql": [
@@ -114,6 +121,9 @@
     27,
     28
   ],
+  "namespace.sql": [
+    25
+  ],
   "numerology.sql": [
     27,
     28,
@@ -182,7 +192,9 @@
   "sqljson.sql": [
     0,
     22,
-    37
+    37,
+    57,
+    117
   ],
   "sqljson_jsontable.sql": [
     0,
@@ -227,6 +239,7 @@
     50
   ],
   "triggers.sql": [
+    181,
     183,
     1041
   ],
@@ -250,5 +263,8 @@
   "with.sql": [
     298,
     299
+  ],
+  "xml.sql": [
+    221
   ]
 }
