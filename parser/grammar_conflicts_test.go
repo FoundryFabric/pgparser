@@ -14,7 +14,7 @@ import (
 // y.output is goyacc's output for gram.y.
 const (
 	pinnedShiftReduce  = 4
-	pinnedReduceReduce = 1
+	pinnedReduceReduce = 0
 )
 
 var (

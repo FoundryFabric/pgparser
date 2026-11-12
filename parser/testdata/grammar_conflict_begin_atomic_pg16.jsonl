@@ -1,0 +1,260 @@
+{"sql":"create function f() returns int begin atomic end"}
+{"sql":"create function f() returns int begin atomic end; select 1"}
+{"sql":"create function f() returns int begin atomic select 1; end"}
+{"sql":"create function f() returns int begin atomic select 1; end; select 1"}
+{"sql":"create function f() returns int begin atomic return 1; end"}
+{"sql":"create function f() returns int begin atomic return 1; end; select 1"}
+{"sql":"create function f() returns int begin atomic end; end"}
+{"sql":"create function f() returns int begin atomic end; end; select 1"}
+{"sql":"create function f() returns int begin atomic end transaction; end","code":"42601","message":"syntax error at or near \"transaction\"","position":49}
+{"sql":"create function f() returns int begin atomic end transaction; end; select 1","code":"42601","message":"syntax error at or near \"transaction\"","position":49}
+{"sql":"create function f() returns int begin atomic end work; end","code":"42601","message":"syntax error at or near \"work\"","position":49}
+{"sql":"create function f() returns int begin atomic end work; end; select 1","code":"42601","message":"syntax error at or near \"work\"","position":49}
+{"sql":"create function f() returns int begin atomic end and chain; end","code":"42601","message":"syntax error at or near \"and\"","position":49}
+{"sql":"create function f() returns int begin atomic end and chain; end; select 1","code":"42601","message":"syntax error at or near \"and\"","position":49}
+{"sql":"create function f() returns int begin atomic begin; end","code":"42601","message":"syntax error at or near \"begin\"","position":45}
+{"sql":"create function f() returns int begin atomic begin; end; select 1","code":"42601","message":"syntax error at or near \"begin\"","position":45}
+{"sql":"create function f() returns int begin atomic begin work; end","code":"42601","message":"syntax error at or near \"begin\"","position":45}
+{"sql":"create function f() returns int begin atomic begin work; end; select 1","code":"42601","message":"syntax error at or near \"begin\"","position":45}
+{"sql":"create function f() returns int begin atomic begin transaction; end","code":"42601","message":"syntax error at or near \"begin\"","position":45}
+{"sql":"create function f() returns int begin atomic begin transaction; end; select 1","code":"42601","message":"syntax error at or near \"begin\"","position":45}
+{"sql":"create function f() returns int begin atomic begin isolation level serializable; end","code":"42601","message":"syntax error at or near \"begin\"","position":45}
+{"sql":"create function f() returns int begin atomic begin isolation level serializable; end; select 1","code":"42601","message":"syntax error at or near \"begin\"","position":45}
+{"sql":"create function f() returns int begin atomic commit; end"}
+{"sql":"create function f() returns int begin atomic commit; end; select 1"}
+{"sql":"create function f() returns int begin atomic commit and chain; end"}
+{"sql":"create function f() returns int begin atomic commit and chain; end; select 1"}
+{"sql":"create function f() returns int begin atomic abort; end"}
+{"sql":"create function f() returns int begin atomic abort; end; select 1"}
+{"sql":"create function f() returns int begin atomic rollback; end"}
+{"sql":"create function f() returns int begin atomic rollback; end; select 1"}
+{"sql":"create function f() returns int begin atomic start transaction; end"}
+{"sql":"create function f() returns int begin atomic start transaction; end; select 1"}
+{"sql":"create function f() returns int begin atomic savepoint a; end"}
+{"sql":"create function f() returns int begin atomic savepoint a; end; select 1"}
+{"sql":"create function f() returns int begin atomic release a; end"}
+{"sql":"create function f() returns int begin atomic release a; end; select 1"}
+{"sql":"create function f() returns int begin atomic rollback to a; end"}
+{"sql":"create function f() returns int begin atomic rollback to a; end; select 1"}
+{"sql":"create function f() returns int begin atomic prepare transaction 'x'; end"}
+{"sql":"create function f() returns int begin atomic prepare transaction 'x'; end; select 1"}
+{"sql":"create function f() returns int begin atomic insert into t values (1); end"}
+{"sql":"create function f() returns int begin atomic insert into t values (1); end; select 1"}
+{"sql":"create function f() returns int begin atomic ; end"}
+{"sql":"create function f() returns int begin atomic ; end; select 1"}
+{"sql":"create function f() returns int begin atomic select 1; end; end"}
+{"sql":"create function f() returns int begin atomic select 1; end; end; select 1"}
+{"sql":"create function f() returns int begin atomic select 1; begin; end","code":"42601","message":"syntax error at or near \"begin\"","position":55}
+{"sql":"create function f() returns int begin atomic select 1; begin; end; select 1","code":"42601","message":"syntax error at or near \"begin\"","position":55}
+{"sql":"create function f() returns int begin atomic select 1; select 2; end"}
+{"sql":"create function f() returns int begin atomic select 1; select 2; end; select 1"}
+{"sql":"create function f() returns int begin atomic end end","code":"42601","message":"syntax error at or near \"end\"","position":49}
+{"sql":"create function f() returns int begin atomic end end; select 1","code":"42601","message":"syntax error at or near \"end\"","position":49}
+{"sql":"create function f() returns int begin atomic select 1 end","code":"42601","message":"syntax error at end of input","position":57}
+{"sql":"create function f() returns int begin atomic select 1 end; select 1","code":"42601","message":"syntax error at end of input","position":67}
+{"sql":"create function f() returns int begin atomic end transaction end","code":"42601","message":"syntax error at or near \"transaction\"","position":49}
+{"sql":"create function f() returns int begin atomic end transaction end; select 1","code":"42601","message":"syntax error at or near \"transaction\"","position":49}
+{"sql":"create function f() returns int begin atomic begin atomic end; end","code":"42601","message":"syntax error at or near \"begin\"","position":45}
+{"sql":"create function f() returns int begin atomic begin atomic end; end; select 1","code":"42601","message":"syntax error at or near \"begin\"","position":45}
+{"sql":"create function f() returns int begin atomic end; end; end"}
+{"sql":"create function f() returns int begin atomic end; end; end; select 1"}
+{"sql":"create or replace function f() returns int language sql begin atomic end"}
+{"sql":"create or replace function f() returns int language sql begin atomic end; select 1"}
+{"sql":"create or replace function f() returns int language sql begin atomic select 1; end"}
+{"sql":"create or replace function f() returns int language sql begin atomic select 1; end; select 1"}
+{"sql":"create or replace function f() returns int language sql begin atomic return 1; end"}
+{"sql":"create or replace function f() returns int language sql begin atomic return 1; end; select 1"}
+{"sql":"create or replace function f() returns int language sql begin atomic end; end"}
+{"sql":"create or replace function f() returns int language sql begin atomic end; end; select 1"}
+{"sql":"create or replace function f() returns int language sql begin atomic end transaction; end","code":"42601","message":"syntax error at or near \"transaction\"","position":73}
+{"sql":"create or replace function f() returns int language sql begin atomic end transaction; end; select 1","code":"42601","message":"syntax error at or near \"transaction\"","position":73}
+{"sql":"create or replace function f() returns int language sql begin atomic end work; end","code":"42601","message":"syntax error at or near \"work\"","position":73}
+{"sql":"create or replace function f() returns int language sql begin atomic end work; end; select 1","code":"42601","message":"syntax error at or near \"work\"","position":73}
+{"sql":"create or replace function f() returns int language sql begin atomic end and chain; end","code":"42601","message":"syntax error at or near \"and\"","position":73}
+{"sql":"create or replace function f() returns int language sql begin atomic end and chain; end; select 1","code":"42601","message":"syntax error at or near \"and\"","position":73}
+{"sql":"create or replace function f() returns int language sql begin atomic begin; end","code":"42601","message":"syntax error at or near \"begin\"","position":69}
+{"sql":"create or replace function f() returns int language sql begin atomic begin; end; select 1","code":"42601","message":"syntax error at or near \"begin\"","position":69}
+{"sql":"create or replace function f() returns int language sql begin atomic begin work; end","code":"42601","message":"syntax error at or near \"begin\"","position":69}
+{"sql":"create or replace function f() returns int language sql begin atomic begin work; end; select 1","code":"42601","message":"syntax error at or near \"begin\"","position":69}
+{"sql":"create or replace function f() returns int language sql begin atomic begin transaction; end","code":"42601","message":"syntax error at or near \"begin\"","position":69}
+{"sql":"create or replace function f() returns int language sql begin atomic begin transaction; end; select 1","code":"42601","message":"syntax error at or near \"begin\"","position":69}
+{"sql":"create or replace function f() returns int language sql begin atomic begin isolation level serializable; end","code":"42601","message":"syntax error at or near \"begin\"","position":69}
+{"sql":"create or replace function f() returns int language sql begin atomic begin isolation level serializable; end; select 1","code":"42601","message":"syntax error at or near \"begin\"","position":69}
+{"sql":"create or replace function f() returns int language sql begin atomic commit; end"}
+{"sql":"create or replace function f() returns int language sql begin atomic commit; end; select 1"}
+{"sql":"create or replace function f() returns int language sql begin atomic commit and chain; end"}
+{"sql":"create or replace function f() returns int language sql begin atomic commit and chain; end; select 1"}
+{"sql":"create or replace function f() returns int language sql begin atomic abort; end"}
+{"sql":"create or replace function f() returns int language sql begin atomic abort; end; select 1"}
+{"sql":"create or replace function f() returns int language sql begin atomic rollback; end"}
+{"sql":"create or replace function f() returns int language sql begin atomic rollback; end; select 1"}
+{"sql":"create or replace function f() returns int language sql begin atomic start transaction; end"}
+{"sql":"create or replace function f() returns int language sql begin atomic start transaction; end; select 1"}
+{"sql":"create or replace function f() returns int language sql begin atomic savepoint a; end"}
+{"sql":"create or replace function f() returns int language sql begin atomic savepoint a; end; select 1"}
+{"sql":"create or replace function f() returns int language sql begin atomic release a; end"}
+{"sql":"create or replace function f() returns int language sql begin atomic release a; end; select 1"}
+{"sql":"create or replace function f() returns int language sql begin atomic rollback to a; end"}
+{"sql":"create or replace function f() returns int language sql begin atomic rollback to a; end; select 1"}
+{"sql":"create or replace function f() returns int language sql begin atomic prepare transaction 'x'; end"}
+{"sql":"create or replace function f() returns int language sql begin atomic prepare transaction 'x'; end; select 1"}
+{"sql":"create or replace function f() returns int language sql begin atomic insert into t values (1); end"}
+{"sql":"create or replace function f() returns int language sql begin atomic insert into t values (1); end; select 1"}
+{"sql":"create or replace function f() returns int language sql begin atomic ; end"}
+{"sql":"create or replace function f() returns int language sql begin atomic ; end; select 1"}
+{"sql":"create or replace function f() returns int language sql begin atomic select 1; end; end"}
+{"sql":"create or replace function f() returns int language sql begin atomic select 1; end; end; select 1"}
+{"sql":"create or replace function f() returns int language sql begin atomic select 1; begin; end","code":"42601","message":"syntax error at or near \"begin\"","position":79}
+{"sql":"create or replace function f() returns int language sql begin atomic select 1; begin; end; select 1","code":"42601","message":"syntax error at or near \"begin\"","position":79}
+{"sql":"create or replace function f() returns int language sql begin atomic select 1; select 2; end"}
+{"sql":"create or replace function f() returns int language sql begin atomic select 1; select 2; end; select 1"}
+{"sql":"create or replace function f() returns int language sql begin atomic end end","code":"42601","message":"syntax error at or near \"end\"","position":73}
+{"sql":"create or replace function f() returns int language sql begin atomic end end; select 1","code":"42601","message":"syntax error at or near \"end\"","position":73}
+{"sql":"create or replace function f() returns int language sql begin atomic select 1 end","code":"42601","message":"syntax error at end of input","position":81}
+{"sql":"create or replace function f() returns int language sql begin atomic select 1 end; select 1","code":"42601","message":"syntax error at end of input","position":91}
+{"sql":"create or replace function f() returns int language sql begin atomic end transaction end","code":"42601","message":"syntax error at or near \"transaction\"","position":73}
+{"sql":"create or replace function f() returns int language sql begin atomic end transaction end; select 1","code":"42601","message":"syntax error at or near \"transaction\"","position":73}
+{"sql":"create or replace function f() returns int language sql begin atomic begin atomic end; end","code":"42601","message":"syntax error at or near \"begin\"","position":69}
+{"sql":"create or replace function f() returns int language sql begin atomic begin atomic end; end; select 1","code":"42601","message":"syntax error at or near \"begin\"","position":69}
+{"sql":"create or replace function f() returns int language sql begin atomic end; end; end"}
+{"sql":"create or replace function f() returns int language sql begin atomic end; end; end; select 1"}
+{"sql":"create procedure p() begin atomic end"}
+{"sql":"create procedure p() begin atomic end; select 1"}
+{"sql":"create procedure p() begin atomic select 1; end"}
+{"sql":"create procedure p() begin atomic select 1; end; select 1"}
+{"sql":"create procedure p() begin atomic return 1; end"}
+{"sql":"create procedure p() begin atomic return 1; end; select 1"}
+{"sql":"create procedure p() begin atomic end; end"}
+{"sql":"create procedure p() begin atomic end; end; select 1"}
+{"sql":"create procedure p() begin atomic end transaction; end","code":"42601","message":"syntax error at or near \"transaction\"","position":38}
+{"sql":"create procedure p() begin atomic end transaction; end; select 1","code":"42601","message":"syntax error at or near \"transaction\"","position":38}
+{"sql":"create procedure p() begin atomic end work; end","code":"42601","message":"syntax error at or near \"work\"","position":38}
+{"sql":"create procedure p() begin atomic end work; end; select 1","code":"42601","message":"syntax error at or near \"work\"","position":38}
+{"sql":"create procedure p() begin atomic end and chain; end","code":"42601","message":"syntax error at or near \"and\"","position":38}
+{"sql":"create procedure p() begin atomic end and chain; end; select 1","code":"42601","message":"syntax error at or near \"and\"","position":38}
+{"sql":"create procedure p() begin atomic begin; end","code":"42601","message":"syntax error at or near \"begin\"","position":34}
+{"sql":"create procedure p() begin atomic begin; end; select 1","code":"42601","message":"syntax error at or near \"begin\"","position":34}
+{"sql":"create procedure p() begin atomic begin work; end","code":"42601","message":"syntax error at or near \"begin\"","position":34}
+{"sql":"create procedure p() begin atomic begin work; end; select 1","code":"42601","message":"syntax error at or near \"begin\"","position":34}
+{"sql":"create procedure p() begin atomic begin transaction; end","code":"42601","message":"syntax error at or near \"begin\"","position":34}
+{"sql":"create procedure p() begin atomic begin transaction; end; select 1","code":"42601","message":"syntax error at or near \"begin\"","position":34}
+{"sql":"create procedure p() begin atomic begin isolation level serializable; end","code":"42601","message":"syntax error at or near \"begin\"","position":34}
+{"sql":"create procedure p() begin atomic begin isolation level serializable; end; select 1","code":"42601","message":"syntax error at or near \"begin\"","position":34}
+{"sql":"create procedure p() begin atomic commit; end"}
+{"sql":"create procedure p() begin atomic commit; end; select 1"}
+{"sql":"create procedure p() begin atomic commit and chain; end"}
+{"sql":"create procedure p() begin atomic commit and chain; end; select 1"}
+{"sql":"create procedure p() begin atomic abort; end"}
+{"sql":"create procedure p() begin atomic abort; end; select 1"}
+{"sql":"create procedure p() begin atomic rollback; end"}
+{"sql":"create procedure p() begin atomic rollback; end; select 1"}
+{"sql":"create procedure p() begin atomic start transaction; end"}
+{"sql":"create procedure p() begin atomic start transaction; end; select 1"}
+{"sql":"create procedure p() begin atomic savepoint a; end"}
+{"sql":"create procedure p() begin atomic savepoint a; end; select 1"}
+{"sql":"create procedure p() begin atomic release a; end"}
+{"sql":"create procedure p() begin atomic release a; end; select 1"}
+{"sql":"create procedure p() begin atomic rollback to a; end"}
+{"sql":"create procedure p() begin atomic rollback to a; end; select 1"}
+{"sql":"create procedure p() begin atomic prepare transaction 'x'; end"}
+{"sql":"create procedure p() begin atomic prepare transaction 'x'; end; select 1"}
+{"sql":"create procedure p() begin atomic insert into t values (1); end"}
+{"sql":"create procedure p() begin atomic insert into t values (1); end; select 1"}
+{"sql":"create procedure p() begin atomic ; end"}
+{"sql":"create procedure p() begin atomic ; end; select 1"}
+{"sql":"create procedure p() begin atomic select 1; end; end"}
+{"sql":"create procedure p() begin atomic select 1; end; end; select 1"}
+{"sql":"create procedure p() begin atomic select 1; begin; end","code":"42601","message":"syntax error at or near \"begin\"","position":44}
+{"sql":"create procedure p() begin atomic select 1; begin; end; select 1","code":"42601","message":"syntax error at or near \"begin\"","position":44}
+{"sql":"create procedure p() begin atomic select 1; select 2; end"}
+{"sql":"create procedure p() begin atomic select 1; select 2; end; select 1"}
+{"sql":"create procedure p() begin atomic end end","code":"42601","message":"syntax error at or near \"end\"","position":38}
+{"sql":"create procedure p() begin atomic end end; select 1","code":"42601","message":"syntax error at or near \"end\"","position":38}
+{"sql":"create procedure p() begin atomic select 1 end","code":"42601","message":"syntax error at end of input","position":46}
+{"sql":"create procedure p() begin atomic select 1 end; select 1","code":"42601","message":"syntax error at end of input","position":56}
+{"sql":"create procedure p() begin atomic end transaction end","code":"42601","message":"syntax error at or near \"transaction\"","position":38}
+{"sql":"create procedure p() begin atomic end transaction end; select 1","code":"42601","message":"syntax error at or near \"transaction\"","position":38}
+{"sql":"create procedure p() begin atomic begin atomic end; end","code":"42601","message":"syntax error at or near \"begin\"","position":34}
+{"sql":"create procedure p() begin atomic begin atomic end; end; select 1","code":"42601","message":"syntax error at or near \"begin\"","position":34}
+{"sql":"create procedure p() begin atomic end; end; end"}
+{"sql":"create procedure p() begin atomic end; end; end; select 1"}
+{"sql":"create function f() returns int immutable begin atomic end"}
+{"sql":"create function f() returns int immutable begin atomic end; select 1"}
+{"sql":"create function f() returns int immutable begin atomic select 1; end"}
+{"sql":"create function f() returns int immutable begin atomic select 1; end; select 1"}
+{"sql":"create function f() returns int immutable begin atomic return 1; end"}
+{"sql":"create function f() returns int immutable begin atomic return 1; end; select 1"}
+{"sql":"create function f() returns int immutable begin atomic end; end"}
+{"sql":"create function f() returns int immutable begin atomic end; end; select 1"}
+{"sql":"create function f() returns int immutable begin atomic end transaction; end","code":"42601","message":"syntax error at or near \"transaction\"","position":59}
+{"sql":"create function f() returns int immutable begin atomic end transaction; end; select 1","code":"42601","message":"syntax error at or near \"transaction\"","position":59}
+{"sql":"create function f() returns int immutable begin atomic end work; end","code":"42601","message":"syntax error at or near \"work\"","position":59}
+{"sql":"create function f() returns int immutable begin atomic end work; end; select 1","code":"42601","message":"syntax error at or near \"work\"","position":59}
+{"sql":"create function f() returns int immutable begin atomic end and chain; end","code":"42601","message":"syntax error at or near \"and\"","position":59}
+{"sql":"create function f() returns int immutable begin atomic end and chain; end; select 1","code":"42601","message":"syntax error at or near \"and\"","position":59}
+{"sql":"create function f() returns int immutable begin atomic begin; end","code":"42601","message":"syntax error at or near \"begin\"","position":55}
+{"sql":"create function f() returns int immutable begin atomic begin; end; select 1","code":"42601","message":"syntax error at or near \"begin\"","position":55}
+{"sql":"create function f() returns int immutable begin atomic begin work; end","code":"42601","message":"syntax error at or near \"begin\"","position":55}
+{"sql":"create function f() returns int immutable begin atomic begin work; end; select 1","code":"42601","message":"syntax error at or near \"begin\"","position":55}
+{"sql":"create function f() returns int immutable begin atomic begin transaction; end","code":"42601","message":"syntax error at or near \"begin\"","position":55}
+{"sql":"create function f() returns int immutable begin atomic begin transaction; end; select 1","code":"42601","message":"syntax error at or near \"begin\"","position":55}
+{"sql":"create function f() returns int immutable begin atomic begin isolation level serializable; end","code":"42601","message":"syntax error at or near \"begin\"","position":55}
+{"sql":"create function f() returns int immutable begin atomic begin isolation level serializable; end; select 1","code":"42601","message":"syntax error at or near \"begin\"","position":55}
+{"sql":"create function f() returns int immutable begin atomic commit; end"}
+{"sql":"create function f() returns int immutable begin atomic commit; end; select 1"}
+{"sql":"create function f() returns int immutable begin atomic commit and chain; end"}
+{"sql":"create function f() returns int immutable begin atomic commit and chain; end; select 1"}
+{"sql":"create function f() returns int immutable begin atomic abort; end"}
+{"sql":"create function f() returns int immutable begin atomic abort; end; select 1"}
+{"sql":"create function f() returns int immutable begin atomic rollback; end"}
+{"sql":"create function f() returns int immutable begin atomic rollback; end; select 1"}
+{"sql":"create function f() returns int immutable begin atomic start transaction; end"}
+{"sql":"create function f() returns int immutable begin atomic start transaction; end; select 1"}
+{"sql":"create function f() returns int immutable begin atomic savepoint a; end"}
+{"sql":"create function f() returns int immutable begin atomic savepoint a; end; select 1"}
+{"sql":"create function f() returns int immutable begin atomic release a; end"}
+{"sql":"create function f() returns int immutable begin atomic release a; end; select 1"}
+{"sql":"create function f() returns int immutable begin atomic rollback to a; end"}
+{"sql":"create function f() returns int immutable begin atomic rollback to a; end; select 1"}
+{"sql":"create function f() returns int immutable begin atomic prepare transaction 'x'; end"}
+{"sql":"create function f() returns int immutable begin atomic prepare transaction 'x'; end; select 1"}
+{"sql":"create function f() returns int immutable begin atomic insert into t values (1); end"}
+{"sql":"create function f() returns int immutable begin atomic insert into t values (1); end; select 1"}
+{"sql":"create function f() returns int immutable begin atomic ; end"}
+{"sql":"create function f() returns int immutable begin atomic ; end; select 1"}
+{"sql":"create function f() returns int immutable begin atomic select 1; end; end"}
+{"sql":"create function f() returns int immutable begin atomic select 1; end; end; select 1"}
+{"sql":"create function f() returns int immutable begin atomic select 1; begin; end","code":"42601","message":"syntax error at or near \"begin\"","position":65}
+{"sql":"create function f() returns int immutable begin atomic select 1; begin; end; select 1","code":"42601","message":"syntax error at or near \"begin\"","position":65}
+{"sql":"create function f() returns int immutable begin atomic select 1; select 2; end"}
+{"sql":"create function f() returns int immutable begin atomic select 1; select 2; end; select 1"}
+{"sql":"create function f() returns int immutable begin atomic end end","code":"42601","message":"syntax error at or near \"end\"","position":59}
+{"sql":"create function f() returns int immutable begin atomic end end; select 1","code":"42601","message":"syntax error at or near \"end\"","position":59}
+{"sql":"create function f() returns int immutable begin atomic select 1 end","code":"42601","message":"syntax error at end of input","position":67}
+{"sql":"create function f() returns int immutable begin atomic select 1 end; select 1","code":"42601","message":"syntax error at end of input","position":77}
+{"sql":"create function f() returns int immutable begin atomic end transaction end","code":"42601","message":"syntax error at or near \"transaction\"","position":59}
+{"sql":"create function f() returns int immutable begin atomic end transaction end; select 1","code":"42601","message":"syntax error at or near \"transaction\"","position":59}
+{"sql":"create function f() returns int immutable begin atomic begin atomic end; end","code":"42601","message":"syntax error at or near \"begin\"","position":55}
+{"sql":"create function f() returns int immutable begin atomic begin atomic end; end; select 1","code":"42601","message":"syntax error at or near \"begin\"","position":55}
+{"sql":"create function f() returns int immutable begin atomic end; end; end"}
+{"sql":"create function f() returns int immutable begin atomic end; end; end; select 1"}
+{"sql":"begin"}
+{"sql":"begin work"}
+{"sql":"begin transaction isolation level read committed"}
+{"sql":"begin read only"}
+{"sql":"end"}
+{"sql":"end work"}
+{"sql":"end transaction"}
+{"sql":"end and chain"}
+{"sql":"end and no chain"}
+{"sql":"end work and chain"}
+{"sql":"begin; end"}
+{"sql":"begin; select 1; end;"}
+{"sql":"end; begin"}
+{"sql":"start transaction; end"}
+{"sql":"begin atomic","code":"42601","message":"syntax error at or near \"atomic\"","position":6}
+{"sql":"begin atomic end","code":"42601","message":"syntax error at or near \"atomic\"","position":6}
+{"sql":"end atomic","code":"42601","message":"syntax error at or near \"atomic\"","position":4}
+{"sql":"select 1; end"}
+{"sql":"explain end","code":"42601","message":"syntax error at or near \"end\"","position":8}
+{"sql":"explain begin","code":"42601","message":"syntax error at or near \"begin\"","position":8}
