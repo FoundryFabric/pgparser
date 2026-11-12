@@ -87,7 +87,7 @@ L a feature's grammar.
 | with-oids | 1 | 5 (2/1/2) | accepts WITH OIDS | `OptWith`, `alter_table_cmd` SET WITH OIDS | no | S |
 | drop-aggregate-arguments | 1 | 4 (1/1/2) | accepts DROP AGGREGATE without argument types | `DropStmt` AGGREGATE `aggregate_with_argtypes_list` | no | S |
 | partition-command-in-list | 1 | 4 (0/2/2) | accepts ATTACH/DETACH PARTITION in a command list | `AlterTableStmt` `partition_cmd` | no | S |
-| role-name-checks | 1 | 4 (0/1/3) | accepts `ALTER ROLE CURRENT_USER RENAME`; 42601 for 42939 | `RoleId` action, `RenameStmt` | no | S |
+| role-name-checks (fixed) | 1 | 4 (0/1/3) | accepts `ALTER ROLE CURRENT_USER RENAME`; 42601 for 42939 | `RoleId` action, `RenameStmt` | no | S |
 | bare-column-label (fixed but 5) | 2 | 511 (2/502/7) | refuses a keyword as a column label without AS | `target_el: a_expr BareColLabel`, `bare_label_keyword` | no | M |
 | pg17-json-names | 2 | 75 (4/66/5) | refuses PostgreSQL 16's json, json_table and the like as names | `kwlist.h`: 20 PostgreSQL 17 keywords, JSON col_name; `JsonType` | no | M (with pg17-sqljson) |
 | drop-type-typename (fixed) | 2 | 50 (0/47/3) | refuses `DROP TYPE t[]`, `DROP DOMAIN d(3)` | `DropStmt` TYPE/DOMAIN `type_name_list` | yes, all 50 | S |
@@ -301,13 +301,29 @@ argument ORDER BY, DISTINCT or VARIADIC, at WITHIN. All 8 agree.
 | `alter table t attach partition p for values in (1), add column x int` | 42601 syntax error at or near "," at 50 | accepts |
 | `alter table t detach partition p, add column x int` | 42601 syntax error at or near "," at 32 | accepts |
 
-### role-name-checks (risk 1, 4)
+### role-name-checks (risk 1, 4; fixed)
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
 | `alter role current_user rename to x` | 42939 CURRENT_USER cannot be used as a role name here at 11 | accepts |
 | `create role current_user` | 42939 CURRENT_USER cannot be used as a role name here at 12 | 42601 role name cannot be a reserved keyword here at 12 |
 | `create user current_role` | 42939 CURRENT_ROLE cannot be used as a role name here at 12 | 42601 role name cannot be a reserved keyword here at 12 |
+
+`RoleId` now refuses PUBLIC (`42939 role name "public" is reserved`) and
+CURRENT_ROLE, CURRENT_USER and SESSION_USER (`42939 <name> cannot be used as a
+role name here`) at the role, and ALTER ROLE, ALTER USER and ALTER GROUP
+RENAME TO take a `RoleId` on both sides (ALTER GROUP RENAME was missing); all
+4 agree. The libpg_query tree comparison (`pg16sweep libpg`) found the cause
+of the PUBLIC half: `RoleSpec` gave `ROLESPEC_CSTRING` "public" where
+PostgreSQL 16 gives `ROLESPEC_PUBLIC`, for `public` in any case, quoted or
+not, and it accepted `none`, which PostgreSQL refuses there (`42939 role name
+"none" is reserved` at the role). Over the sweep corpus the
+`RoleSpec.roletype` value classes (GrantStmt.grantees 76,
+CreateUserMappingStmt.user 8, AlterUserMappingStmt.user 4,
+CreatePolicyStmt.roles 4, DropUserMappingStmt.user 4) and the matching
+`RoleSpec.rolename` name classes are gone. `RoleSpec` still has no location
+(the `unlocated .../RoleSpec.location` classes). `TestRoleSpecsArePostgreSQL16s`
+pins 1,555 role positions and spellings.
 
 ### bare-column-label (risk 2, 511; fixed but 5)
 

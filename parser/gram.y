@@ -3823,19 +3823,27 @@ RenameStmt:
 				Newname:    $6,
 			}
 		}
-	| ALTER ROLE RoleSpec RENAME TO name
+	| ALTER ROLE RoleId RENAME TO RoleId
 		{
 			$$ = &nodes.RenameStmt{
 				RenameType: nodes.OBJECT_ROLE,
-				Subname:    $3.(*nodes.RoleSpec).Rolename,
+				Subname:    $3,
 				Newname:    $6,
 			}
 		}
-	| ALTER USER RoleSpec RENAME TO name
+	| ALTER USER RoleId RENAME TO RoleId
 		{
 			$$ = &nodes.RenameStmt{
 				RenameType: nodes.OBJECT_ROLE,
-				Subname:    $3.(*nodes.RoleSpec).Rolename,
+				Subname:    $3,
+				Newname:    $6,
+			}
+		}
+	| ALTER GROUP_P RoleId RENAME TO RoleId
+		{
+			$$ = &nodes.RenameStmt{
+				RenameType: nodes.OBJECT_ROLE,
+				Subname:    $3,
 				Newname:    $6,
 			}
 		}
@@ -6173,9 +6181,17 @@ grantee:
 RoleSpec:
 	ColId
 		{
-			$$ = &nodes.RoleSpec{
-				Roletype: int(nodes.ROLESPEC_CSTRING),
-				Rolename: $1,
+			switch $1 {
+			case "public":
+				$$ = &nodes.RoleSpec{Roletype: int(nodes.ROLESPEC_PUBLIC)}
+			case "none":
+				grammarError(pglex, "42939", "role name \"none\" is reserved", "", $<loc>1)
+				return 1
+			default:
+				$$ = &nodes.RoleSpec{
+					Roletype: int(nodes.ROLESPEC_CSTRING),
+					Rolename: $1,
+				}
 			}
 		}
 	| CURRENT_ROLE
@@ -7748,8 +7764,9 @@ RoleId:
 	RoleSpec
 		{
 			spc := $1.(*nodes.RoleSpec)
-			if spc.Roletype != int(nodes.ROLESPEC_CSTRING) {
-				pglex.Error("role name cannot be a reserved keyword here")
+			if msg := roleIdRefusal(spc.Roletype); msg != "" {
+				grammarError(pglex, "42939", msg, "", $<loc>1)
+				return 1
 			}
 			$$ = spc.Rolename
 		}
@@ -18092,6 +18109,22 @@ func checkConstraintAttrs(lex pgLexer, bits int64, kind string, deferrable, notV
 	}
 	grammarError(lex, "0A000", kind+" constraints cannot be marked "+marked, "", -1)
 	return false
+}
+
+// roleIdRefusal is PostgreSQL 16's 42939 message for a role specifier that
+// cannot name a role, as RoleId refuses it, or "" for a name.
+func roleIdRefusal(roletype int) string {
+	switch nodes.RoleSpecType(roletype) {
+	case nodes.ROLESPEC_PUBLIC:
+		return "role name \"public\" is reserved"
+	case nodes.ROLESPEC_CURRENT_ROLE:
+		return "CURRENT_ROLE cannot be used as a role name here"
+	case nodes.ROLESPEC_CURRENT_USER:
+		return "CURRENT_USER cannot be used as a role name here"
+	case nodes.ROLESPEC_SESSION_USER:
+		return "SESSION_USER cannot be used as a role name here"
+	}
+	return ""
 }
 
 // grammarSyntaxError raises a grammar action's parser_yyerror(message), as

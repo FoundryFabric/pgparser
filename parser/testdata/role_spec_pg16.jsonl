@@ -1,0 +1,1555 @@
+{"sql":"grant select on t to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant select on t to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant select on t to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant select on t to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant select on t to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant select on t to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant select on t to none","code":"42939","message":"role name \"none\" is reserved","position":21}
+{"sql":"grant select on t to NONE","code":"42939","message":"role name \"none\" is reserved","position":21}
+{"sql":"grant select on t to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":21}
+{"sql":"grant select on t to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant select on t to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"grant select on t to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"grant select on t to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"grant select on t to user","code":"42601","message":"syntax error at or near \"user\"","position":21}
+{"sql":"grant select on t to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant select on t to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant select on t to group public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant select on t to group PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant select on t to group Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant select on t to group \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant select on t to group \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant select on t to group \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant select on t to group none","code":"42939","message":"role name \"none\" is reserved","position":27}
+{"sql":"grant select on t to group NONE","code":"42939","message":"role name \"none\" is reserved","position":27}
+{"sql":"grant select on t to group \"none\"","code":"42939","message":"role name \"none\" is reserved","position":27}
+{"sql":"grant select on t to group \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant select on t to group current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"grant select on t to group current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"grant select on t to group session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"grant select on t to group user","code":"42601","message":"syntax error at or near \"user\"","position":27}
+{"sql":"grant select on t to group a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant select on t to group \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant select on t to a, public","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"grant select on t to a, PUBLIC","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"grant select on t to a, Public","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"grant select on t to a, \"public\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"grant select on t to a, \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"grant select on t to a, \"Public\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"grant select on t to a, none","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"grant select on t to a, NONE","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"grant select on t to a, \"none\"","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"grant select on t to a, \"NONE\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"grant select on t to a, current_user","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CURRENT_USER"]}
+{"sql":"grant select on t to a, current_role","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CURRENT_ROLE"]}
+{"sql":"grant select on t to a, session_user","roletypes":["ROLESPEC_CSTRING","ROLESPEC_SESSION_USER"]}
+{"sql":"grant select on t to a, user","code":"42601","message":"syntax error at or near \"user\"","position":24}
+{"sql":"grant select on t to a, a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"grant select on t to a, \"a b\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"grant select (c) on t to public with grant option","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant select (c) on t to PUBLIC with grant option","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant select (c) on t to Public with grant option","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant select (c) on t to \"public\" with grant option","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant select (c) on t to \"PUBLIC\" with grant option","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant select (c) on t to \"Public\" with grant option","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant select (c) on t to none with grant option","code":"42939","message":"role name \"none\" is reserved","position":25}
+{"sql":"grant select (c) on t to NONE with grant option","code":"42939","message":"role name \"none\" is reserved","position":25}
+{"sql":"grant select (c) on t to \"none\" with grant option","code":"42939","message":"role name \"none\" is reserved","position":25}
+{"sql":"grant select (c) on t to \"NONE\" with grant option","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant select (c) on t to current_user with grant option","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"grant select (c) on t to current_role with grant option","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"grant select (c) on t to session_user with grant option","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"grant select (c) on t to user with grant option","code":"42601","message":"syntax error at or near \"user\"","position":25}
+{"sql":"grant select (c) on t to a with grant option","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant select (c) on t to \"a b\" with grant option","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"revoke select on t from public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"revoke select on t from PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"revoke select on t from Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"revoke select on t from \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"revoke select on t from \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"revoke select on t from \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"revoke select on t from none","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"revoke select on t from NONE","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"revoke select on t from \"none\"","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"revoke select on t from \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"revoke select on t from current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"revoke select on t from current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"revoke select on t from session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"revoke select on t from user","code":"42601","message":"syntax error at or near \"user\"","position":24}
+{"sql":"revoke select on t from a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"revoke select on t from \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"revoke grant option for select on t from public cascade","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"revoke grant option for select on t from PUBLIC cascade","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"revoke grant option for select on t from Public cascade","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"revoke grant option for select on t from \"public\" cascade","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"revoke grant option for select on t from \"PUBLIC\" cascade","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"revoke grant option for select on t from \"Public\" cascade","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"revoke grant option for select on t from none cascade","code":"42939","message":"role name \"none\" is reserved","position":41}
+{"sql":"revoke grant option for select on t from NONE cascade","code":"42939","message":"role name \"none\" is reserved","position":41}
+{"sql":"revoke grant option for select on t from \"none\" cascade","code":"42939","message":"role name \"none\" is reserved","position":41}
+{"sql":"revoke grant option for select on t from \"NONE\" cascade","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"revoke grant option for select on t from current_user cascade","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"revoke grant option for select on t from current_role cascade","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"revoke grant option for select on t from session_user cascade","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"revoke grant option for select on t from user cascade","code":"42601","message":"syntax error at or near \"user\"","position":41}
+{"sql":"revoke grant option for select on t from a cascade","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"revoke grant option for select on t from \"a b\" cascade","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant select on t to a granted by public","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"grant select on t to a granted by PUBLIC","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"grant select on t to a granted by Public","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"grant select on t to a granted by \"public\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"grant select on t to a granted by \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"grant select on t to a granted by \"Public\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"grant select on t to a granted by none","code":"42939","message":"role name \"none\" is reserved","position":34}
+{"sql":"grant select on t to a granted by NONE","code":"42939","message":"role name \"none\" is reserved","position":34}
+{"sql":"grant select on t to a granted by \"none\"","code":"42939","message":"role name \"none\" is reserved","position":34}
+{"sql":"grant select on t to a granted by \"NONE\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"grant select on t to a granted by current_user","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CURRENT_USER"]}
+{"sql":"grant select on t to a granted by current_role","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CURRENT_ROLE"]}
+{"sql":"grant select on t to a granted by session_user","roletypes":["ROLESPEC_CSTRING","ROLESPEC_SESSION_USER"]}
+{"sql":"grant select on t to a granted by user","code":"42601","message":"syntax error at or near \"user\"","position":34}
+{"sql":"grant select on t to a granted by a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"grant select on t to a granted by \"a b\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"grant usage on schema s to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant usage on schema s to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant usage on schema s to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant usage on schema s to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant usage on schema s to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant usage on schema s to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant usage on schema s to none","code":"42939","message":"role name \"none\" is reserved","position":27}
+{"sql":"grant usage on schema s to NONE","code":"42939","message":"role name \"none\" is reserved","position":27}
+{"sql":"grant usage on schema s to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":27}
+{"sql":"grant usage on schema s to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant usage on schema s to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"grant usage on schema s to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"grant usage on schema s to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"grant usage on schema s to user","code":"42601","message":"syntax error at or near \"user\"","position":27}
+{"sql":"grant usage on schema s to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant usage on schema s to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant all on all tables in schema s to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant all on all tables in schema s to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant all on all tables in schema s to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant all on all tables in schema s to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant all on all tables in schema s to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant all on all tables in schema s to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant all on all tables in schema s to none","code":"42939","message":"role name \"none\" is reserved","position":39}
+{"sql":"grant all on all tables in schema s to NONE","code":"42939","message":"role name \"none\" is reserved","position":39}
+{"sql":"grant all on all tables in schema s to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":39}
+{"sql":"grant all on all tables in schema s to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant all on all tables in schema s to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"grant all on all tables in schema s to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"grant all on all tables in schema s to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"grant all on all tables in schema s to user","code":"42601","message":"syntax error at or near \"user\"","position":39}
+{"sql":"grant all on all tables in schema s to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant all on all tables in schema s to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant execute on function f() to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant execute on function f() to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant execute on function f() to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant execute on function f() to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant execute on function f() to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant execute on function f() to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant execute on function f() to none","code":"42939","message":"role name \"none\" is reserved","position":33}
+{"sql":"grant execute on function f() to NONE","code":"42939","message":"role name \"none\" is reserved","position":33}
+{"sql":"grant execute on function f() to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":33}
+{"sql":"grant execute on function f() to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant execute on function f() to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"grant execute on function f() to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"grant execute on function f() to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"grant execute on function f() to user","code":"42601","message":"syntax error at or near \"user\"","position":33}
+{"sql":"grant execute on function f() to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant execute on function f() to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges grant select on tables to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter default privileges grant select on tables to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter default privileges grant select on tables to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter default privileges grant select on tables to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter default privileges grant select on tables to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges grant select on tables to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges grant select on tables to none","code":"42939","message":"role name \"none\" is reserved","position":51}
+{"sql":"alter default privileges grant select on tables to NONE","code":"42939","message":"role name \"none\" is reserved","position":51}
+{"sql":"alter default privileges grant select on tables to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":51}
+{"sql":"alter default privileges grant select on tables to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges grant select on tables to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter default privileges grant select on tables to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter default privileges grant select on tables to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter default privileges grant select on tables to user","code":"42601","message":"syntax error at or near \"user\"","position":51}
+{"sql":"alter default privileges grant select on tables to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges grant select on tables to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges revoke select on tables from public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter default privileges revoke select on tables from PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter default privileges revoke select on tables from Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter default privileges revoke select on tables from \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter default privileges revoke select on tables from \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges revoke select on tables from \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges revoke select on tables from none","code":"42939","message":"role name \"none\" is reserved","position":54}
+{"sql":"alter default privileges revoke select on tables from NONE","code":"42939","message":"role name \"none\" is reserved","position":54}
+{"sql":"alter default privileges revoke select on tables from \"none\"","code":"42939","message":"role name \"none\" is reserved","position":54}
+{"sql":"alter default privileges revoke select on tables from \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges revoke select on tables from current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter default privileges revoke select on tables from current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter default privileges revoke select on tables from session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter default privileges revoke select on tables from user","code":"42601","message":"syntax error at or near \"user\"","position":54}
+{"sql":"alter default privileges revoke select on tables from a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges revoke select on tables from \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges for role public grant select on tables to a","roletypes":["ROLESPEC_PUBLIC","ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges for role PUBLIC grant select on tables to a","roletypes":["ROLESPEC_PUBLIC","ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges for role Public grant select on tables to a","roletypes":["ROLESPEC_PUBLIC","ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges for role \"public\" grant select on tables to a","roletypes":["ROLESPEC_PUBLIC","ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges for role \"PUBLIC\" grant select on tables to a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges for role \"Public\" grant select on tables to a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges for role none grant select on tables to a","code":"42939","message":"role name \"none\" is reserved","position":34}
+{"sql":"alter default privileges for role NONE grant select on tables to a","code":"42939","message":"role name \"none\" is reserved","position":34}
+{"sql":"alter default privileges for role \"none\" grant select on tables to a","code":"42939","message":"role name \"none\" is reserved","position":34}
+{"sql":"alter default privileges for role \"NONE\" grant select on tables to a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges for role current_user grant select on tables to a","roletypes":["ROLESPEC_CURRENT_USER","ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges for role current_role grant select on tables to a","roletypes":["ROLESPEC_CURRENT_ROLE","ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges for role session_user grant select on tables to a","roletypes":["ROLESPEC_SESSION_USER","ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges for role user grant select on tables to a","code":"42601","message":"syntax error at or near \"user\"","position":34}
+{"sql":"alter default privileges for role a grant select on tables to a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges for role \"a b\" grant select on tables to a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges for user a, public in schema s grant select on tables to a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC","ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges for user a, PUBLIC in schema s grant select on tables to a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC","ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges for user a, Public in schema s grant select on tables to a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC","ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges for user a, \"public\" in schema s grant select on tables to a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC","ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges for user a, \"PUBLIC\" in schema s grant select on tables to a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges for user a, \"Public\" in schema s grant select on tables to a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges for user a, none in schema s grant select on tables to a","code":"42939","message":"role name \"none\" is reserved","position":37}
+{"sql":"alter default privileges for user a, NONE in schema s grant select on tables to a","code":"42939","message":"role name \"none\" is reserved","position":37}
+{"sql":"alter default privileges for user a, \"none\" in schema s grant select on tables to a","code":"42939","message":"role name \"none\" is reserved","position":37}
+{"sql":"alter default privileges for user a, \"NONE\" in schema s grant select on tables to a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges for user a, current_user in schema s grant select on tables to a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CURRENT_USER","ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges for user a, current_role in schema s grant select on tables to a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CURRENT_ROLE","ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges for user a, session_user in schema s grant select on tables to a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_SESSION_USER","ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges for user a, user in schema s grant select on tables to a","code":"42601","message":"syntax error at or near \"user\"","position":37}
+{"sql":"alter default privileges for user a, a in schema s grant select on tables to a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"alter default privileges for user a, \"a b\" in schema s grant select on tables to a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"grant a to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant a to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant a to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant a to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant a to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant a to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant a to none","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"grant a to NONE","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"grant a to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"grant a to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant a to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"grant a to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"grant a to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"grant a to user","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"grant a to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant a to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant a to b, public","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"grant a to b, PUBLIC","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"grant a to b, Public","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"grant a to b, \"public\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"grant a to b, \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"grant a to b, \"Public\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"grant a to b, none","code":"42939","message":"role name \"none\" is reserved","position":14}
+{"sql":"grant a to b, NONE","code":"42939","message":"role name \"none\" is reserved","position":14}
+{"sql":"grant a to b, \"none\"","code":"42939","message":"role name \"none\" is reserved","position":14}
+{"sql":"grant a to b, \"NONE\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"grant a to b, current_user","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CURRENT_USER"]}
+{"sql":"grant a to b, current_role","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CURRENT_ROLE"]}
+{"sql":"grant a to b, session_user","roletypes":["ROLESPEC_CSTRING","ROLESPEC_SESSION_USER"]}
+{"sql":"grant a to b, user","code":"42601","message":"syntax error at or near \"user\"","position":14}
+{"sql":"grant a to b, a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"grant a to b, \"a b\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"revoke a from public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"revoke a from PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"revoke a from Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"revoke a from \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"revoke a from \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"revoke a from \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"revoke a from none","code":"42939","message":"role name \"none\" is reserved","position":14}
+{"sql":"revoke a from NONE","code":"42939","message":"role name \"none\" is reserved","position":14}
+{"sql":"revoke a from \"none\"","code":"42939","message":"role name \"none\" is reserved","position":14}
+{"sql":"revoke a from \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"revoke a from current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"revoke a from current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"revoke a from session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"revoke a from user","code":"42601","message":"syntax error at or near \"user\"","position":14}
+{"sql":"revoke a from a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"revoke a from \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant a to b granted by public","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"grant a to b granted by PUBLIC","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"grant a to b granted by Public","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"grant a to b granted by \"public\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"grant a to b granted by \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"grant a to b granted by \"Public\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"grant a to b granted by none","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"grant a to b granted by NONE","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"grant a to b granted by \"none\"","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"grant a to b granted by \"NONE\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"grant a to b granted by current_user","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CURRENT_USER"]}
+{"sql":"grant a to b granted by current_role","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CURRENT_ROLE"]}
+{"sql":"grant a to b granted by session_user","roletypes":["ROLESPEC_CSTRING","ROLESPEC_SESSION_USER"]}
+{"sql":"grant a to b granted by user","code":"42601","message":"syntax error at or near \"user\"","position":24}
+{"sql":"grant a to b granted by a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"grant a to b granted by \"a b\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"revoke admin option for a from public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"revoke admin option for a from PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"revoke admin option for a from Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"revoke admin option for a from \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"revoke admin option for a from \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"revoke admin option for a from \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"revoke admin option for a from none","code":"42939","message":"role name \"none\" is reserved","position":31}
+{"sql":"revoke admin option for a from NONE","code":"42939","message":"role name \"none\" is reserved","position":31}
+{"sql":"revoke admin option for a from \"none\"","code":"42939","message":"role name \"none\" is reserved","position":31}
+{"sql":"revoke admin option for a from \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"revoke admin option for a from current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"revoke admin option for a from current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"revoke admin option for a from session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"revoke admin option for a from user","code":"42601","message":"syntax error at or near \"user\"","position":31}
+{"sql":"revoke admin option for a from a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"revoke admin option for a from \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"grant a to b with admin option granted by public","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"grant a to b with admin option granted by PUBLIC","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"grant a to b with admin option granted by Public","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"grant a to b with admin option granted by \"public\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"grant a to b with admin option granted by \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"grant a to b with admin option granted by \"Public\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"grant a to b with admin option granted by none","code":"42939","message":"role name \"none\" is reserved","position":42}
+{"sql":"grant a to b with admin option granted by NONE","code":"42939","message":"role name \"none\" is reserved","position":42}
+{"sql":"grant a to b with admin option granted by \"none\"","code":"42939","message":"role name \"none\" is reserved","position":42}
+{"sql":"grant a to b with admin option granted by \"NONE\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"grant a to b with admin option granted by current_user","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CURRENT_USER"]}
+{"sql":"grant a to b with admin option granted by current_role","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CURRENT_ROLE"]}
+{"sql":"grant a to b with admin option granted by session_user","roletypes":["ROLESPEC_CSTRING","ROLESPEC_SESSION_USER"]}
+{"sql":"grant a to b with admin option granted by user","code":"42601","message":"syntax error at or near \"user\"","position":42}
+{"sql":"grant a to b with admin option granted by a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"grant a to b with admin option granted by \"a b\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"alter role public with login","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter role PUBLIC with login","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter role Public with login","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter role \"public\" with login","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter role \"PUBLIC\" with login","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter role \"Public\" with login","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter role none with login","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role NONE with login","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role \"none\" with login","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role \"NONE\" with login","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter role current_user with login","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter role current_role with login","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter role session_user with login","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter role user with login","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role a with login","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter role \"a b\" with login","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter role public set x = 1","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter role PUBLIC set x = 1","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter role Public set x = 1","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter role \"public\" set x = 1","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter role \"PUBLIC\" set x = 1","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter role \"Public\" set x = 1","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter role none set x = 1","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role NONE set x = 1","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role \"none\" set x = 1","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role \"NONE\" set x = 1","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter role current_user set x = 1","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter role current_role set x = 1","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter role session_user set x = 1","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter role user set x = 1","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role a set x = 1","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter role \"a b\" set x = 1","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter role public in database d set x = 1","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter role PUBLIC in database d set x = 1","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter role Public in database d set x = 1","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter role \"public\" in database d set x = 1","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter role \"PUBLIC\" in database d set x = 1","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter role \"Public\" in database d set x = 1","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter role none in database d set x = 1","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role NONE in database d set x = 1","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role \"none\" in database d set x = 1","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role \"NONE\" in database d set x = 1","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter role current_user in database d set x = 1","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter role current_role in database d set x = 1","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter role session_user in database d set x = 1","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter role user in database d set x = 1","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role a in database d set x = 1","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter role \"a b\" in database d set x = 1","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter role public reset all","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter role PUBLIC reset all","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter role Public reset all","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter role \"public\" reset all","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter role \"PUBLIC\" reset all","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter role \"Public\" reset all","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter role none reset all","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role NONE reset all","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role \"none\" reset all","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role \"NONE\" reset all","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter role current_user reset all","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter role current_role reset all","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter role session_user reset all","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter role user reset all","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role a reset all","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter role \"a b\" reset all","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter user public with password 'x'","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter user PUBLIC with password 'x'","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter user Public with password 'x'","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter user \"public\" with password 'x'","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter user \"PUBLIC\" with password 'x'","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter user \"Public\" with password 'x'","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter user none with password 'x'","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user NONE with password 'x'","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user \"none\" with password 'x'","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user \"NONE\" with password 'x'","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter user current_user with password 'x'","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter user current_role with password 'x'","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter user session_user with password 'x'","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter user user with password 'x'","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user a with password 'x'","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter user \"a b\" with password 'x'","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter user public set x = 1","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter user PUBLIC set x = 1","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter user Public set x = 1","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter user \"public\" set x = 1","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter user \"PUBLIC\" set x = 1","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter user \"Public\" set x = 1","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter user none set x = 1","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user NONE set x = 1","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user \"none\" set x = 1","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user \"NONE\" set x = 1","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter user current_user set x = 1","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter user current_role set x = 1","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter user session_user set x = 1","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter user user set x = 1","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user a set x = 1","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter user \"a b\" set x = 1","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter group public add user a","roletypes":["ROLESPEC_PUBLIC","ROLESPEC_CSTRING"]}
+{"sql":"alter group PUBLIC add user a","roletypes":["ROLESPEC_PUBLIC","ROLESPEC_CSTRING"]}
+{"sql":"alter group Public add user a","roletypes":["ROLESPEC_PUBLIC","ROLESPEC_CSTRING"]}
+{"sql":"alter group \"public\" add user a","roletypes":["ROLESPEC_PUBLIC","ROLESPEC_CSTRING"]}
+{"sql":"alter group \"PUBLIC\" add user a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"alter group \"Public\" add user a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"alter group none add user a","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group NONE add user a","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group \"none\" add user a","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group \"NONE\" add user a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"alter group current_user add user a","roletypes":["ROLESPEC_CURRENT_USER","ROLESPEC_CSTRING"]}
+{"sql":"alter group current_role add user a","roletypes":["ROLESPEC_CURRENT_ROLE","ROLESPEC_CSTRING"]}
+{"sql":"alter group session_user add user a","roletypes":["ROLESPEC_SESSION_USER","ROLESPEC_CSTRING"]}
+{"sql":"alter group user add user a","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"alter group a add user a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"alter group \"a b\" add user a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"alter group a drop user public","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"alter group a drop user PUBLIC","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"alter group a drop user Public","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"alter group a drop user \"public\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"alter group a drop user \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"alter group a drop user \"Public\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"alter group a drop user none","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"alter group a drop user NONE","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"alter group a drop user \"none\"","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"alter group a drop user \"NONE\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"alter group a drop user current_user","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CURRENT_USER"]}
+{"sql":"alter group a drop user current_role","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter group a drop user session_user","roletypes":["ROLESPEC_CSTRING","ROLESPEC_SESSION_USER"]}
+{"sql":"alter group a drop user user","code":"42601","message":"syntax error at or near \"user\"","position":24}
+{"sql":"alter group a drop user a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"alter group a drop user \"a b\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"drop role public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"drop role PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"drop role Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"drop role \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"drop role \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop role \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop role none","code":"42939","message":"role name \"none\" is reserved","position":10}
+{"sql":"drop role NONE","code":"42939","message":"role name \"none\" is reserved","position":10}
+{"sql":"drop role \"none\"","code":"42939","message":"role name \"none\" is reserved","position":10}
+{"sql":"drop role \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop role current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"drop role current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"drop role session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"drop role user","code":"42601","message":"syntax error at or near \"user\"","position":10}
+{"sql":"drop role a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop role \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop role if exists a, public","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"drop role if exists a, PUBLIC","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"drop role if exists a, Public","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"drop role if exists a, \"public\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"drop role if exists a, \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"drop role if exists a, \"Public\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"drop role if exists a, none","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"drop role if exists a, NONE","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"drop role if exists a, \"none\"","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"drop role if exists a, \"NONE\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"drop role if exists a, current_user","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CURRENT_USER"]}
+{"sql":"drop role if exists a, current_role","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CURRENT_ROLE"]}
+{"sql":"drop role if exists a, session_user","roletypes":["ROLESPEC_CSTRING","ROLESPEC_SESSION_USER"]}
+{"sql":"drop role if exists a, user","code":"42601","message":"syntax error at or near \"user\"","position":23}
+{"sql":"drop role if exists a, a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"drop role if exists a, \"a b\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"drop user public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"drop user PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"drop user Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"drop user \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"drop user \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop user \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop user none","code":"42939","message":"role name \"none\" is reserved","position":10}
+{"sql":"drop user NONE","code":"42939","message":"role name \"none\" is reserved","position":10}
+{"sql":"drop user \"none\"","code":"42939","message":"role name \"none\" is reserved","position":10}
+{"sql":"drop user \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop user current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"drop user current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"drop user session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"drop user user","code":"42601","message":"syntax error at or near \"user\"","position":10}
+{"sql":"drop user a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop user \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop group public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"drop group PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"drop group Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"drop group \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"drop group \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop group \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop group none","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"drop group NONE","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"drop group \"none\"","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"drop group \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop group current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"drop group current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"drop group session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"drop group user","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"drop group a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop group \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter table t owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter table t owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter table t owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter table t owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter table t owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter table t owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter table t owner to none","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"alter table t owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"alter table t owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"alter table t owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter table t owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter table t owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter table t owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter table t owner to user","code":"42601","message":"syntax error at or near \"user\"","position":23}
+{"sql":"alter table t owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter table t owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter table if exists t owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter table if exists t owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter table if exists t owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter table if exists t owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter table if exists t owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter table if exists t owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter table if exists t owner to none","code":"42939","message":"role name \"none\" is reserved","position":33}
+{"sql":"alter table if exists t owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":33}
+{"sql":"alter table if exists t owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":33}
+{"sql":"alter table if exists t owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter table if exists t owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter table if exists t owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter table if exists t owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter table if exists t owner to user","code":"42601","message":"syntax error at or near \"user\"","position":33}
+{"sql":"alter table if exists t owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter table if exists t owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter function f() owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter function f() owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter function f() owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter function f() owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter function f() owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter function f() owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter function f() owner to none","code":"42939","message":"role name \"none\" is reserved","position":28}
+{"sql":"alter function f() owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":28}
+{"sql":"alter function f() owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":28}
+{"sql":"alter function f() owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter function f() owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter function f() owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter function f() owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter function f() owner to user","code":"42601","message":"syntax error at or near \"user\"","position":28}
+{"sql":"alter function f() owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter function f() owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter procedure p() owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter procedure p() owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter procedure p() owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter procedure p() owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter procedure p() owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter procedure p() owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter procedure p() owner to none","code":"42939","message":"role name \"none\" is reserved","position":29}
+{"sql":"alter procedure p() owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":29}
+{"sql":"alter procedure p() owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":29}
+{"sql":"alter procedure p() owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter procedure p() owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter procedure p() owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter procedure p() owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter procedure p() owner to user","code":"42601","message":"syntax error at or near \"user\"","position":29}
+{"sql":"alter procedure p() owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter procedure p() owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter routine r owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter routine r owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter routine r owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter routine r owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter routine r owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter routine r owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter routine r owner to none","code":"42939","message":"role name \"none\" is reserved","position":25}
+{"sql":"alter routine r owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":25}
+{"sql":"alter routine r owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":25}
+{"sql":"alter routine r owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter routine r owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter routine r owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter routine r owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter routine r owner to user","code":"42601","message":"syntax error at or near \"user\"","position":25}
+{"sql":"alter routine r owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter routine r owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter aggregate g(int) owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter aggregate g(int) owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter aggregate g(int) owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter aggregate g(int) owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter aggregate g(int) owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter aggregate g(int) owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter aggregate g(int) owner to none","code":"42939","message":"role name \"none\" is reserved","position":32}
+{"sql":"alter aggregate g(int) owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":32}
+{"sql":"alter aggregate g(int) owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":32}
+{"sql":"alter aggregate g(int) owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter aggregate g(int) owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter aggregate g(int) owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter aggregate g(int) owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter aggregate g(int) owner to user","code":"42601","message":"syntax error at or near \"user\"","position":32}
+{"sql":"alter aggregate g(int) owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter aggregate g(int) owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter schema s owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter schema s owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter schema s owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter schema s owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter schema s owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter schema s owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter schema s owner to none","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"alter schema s owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"alter schema s owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"alter schema s owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter schema s owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter schema s owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter schema s owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter schema s owner to user","code":"42601","message":"syntax error at or near \"user\"","position":24}
+{"sql":"alter schema s owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter schema s owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter database d owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter database d owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter database d owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter database d owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter database d owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter database d owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter database d owner to none","code":"42939","message":"role name \"none\" is reserved","position":26}
+{"sql":"alter database d owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":26}
+{"sql":"alter database d owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":26}
+{"sql":"alter database d owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter database d owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter database d owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter database d owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter database d owner to user","code":"42601","message":"syntax error at or near \"user\"","position":26}
+{"sql":"alter database d owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter database d owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter type ty owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter type ty owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter type ty owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter type ty owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter type ty owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter type ty owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter type ty owner to none","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"alter type ty owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"alter type ty owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"alter type ty owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter type ty owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter type ty owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter type ty owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter type ty owner to user","code":"42601","message":"syntax error at or near \"user\"","position":23}
+{"sql":"alter type ty owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter type ty owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter domain d owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter domain d owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter domain d owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter domain d owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter domain d owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter domain d owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter domain d owner to none","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"alter domain d owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"alter domain d owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"alter domain d owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter domain d owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter domain d owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter domain d owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter domain d owner to user","code":"42601","message":"syntax error at or near \"user\"","position":24}
+{"sql":"alter domain d owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter domain d owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter tablespace s owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter tablespace s owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter tablespace s owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter tablespace s owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter tablespace s owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter tablespace s owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter tablespace s owner to none","code":"42939","message":"role name \"none\" is reserved","position":28}
+{"sql":"alter tablespace s owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":28}
+{"sql":"alter tablespace s owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":28}
+{"sql":"alter tablespace s owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter tablespace s owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter tablespace s owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter tablespace s owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter tablespace s owner to user","code":"42601","message":"syntax error at or near \"user\"","position":28}
+{"sql":"alter tablespace s owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter tablespace s owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter large object 1 owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter large object 1 owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter large object 1 owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter large object 1 owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter large object 1 owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter large object 1 owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter large object 1 owner to none","code":"42939","message":"role name \"none\" is reserved","position":30}
+{"sql":"alter large object 1 owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":30}
+{"sql":"alter large object 1 owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":30}
+{"sql":"alter large object 1 owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter large object 1 owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter large object 1 owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter large object 1 owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter large object 1 owner to user","code":"42601","message":"syntax error at or near \"user\"","position":30}
+{"sql":"alter large object 1 owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter large object 1 owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter event trigger e owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter event trigger e owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter event trigger e owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter event trigger e owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter event trigger e owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter event trigger e owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter event trigger e owner to none","code":"42939","message":"role name \"none\" is reserved","position":31}
+{"sql":"alter event trigger e owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":31}
+{"sql":"alter event trigger e owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":31}
+{"sql":"alter event trigger e owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter event trigger e owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter event trigger e owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter event trigger e owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter event trigger e owner to user","code":"42601","message":"syntax error at or near \"user\"","position":31}
+{"sql":"alter event trigger e owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter event trigger e owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter foreign data wrapper w owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter foreign data wrapper w owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter foreign data wrapper w owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter foreign data wrapper w owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter foreign data wrapper w owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter foreign data wrapper w owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter foreign data wrapper w owner to none","code":"42939","message":"role name \"none\" is reserved","position":38}
+{"sql":"alter foreign data wrapper w owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":38}
+{"sql":"alter foreign data wrapper w owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":38}
+{"sql":"alter foreign data wrapper w owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter foreign data wrapper w owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter foreign data wrapper w owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter foreign data wrapper w owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter foreign data wrapper w owner to user","code":"42601","message":"syntax error at or near \"user\"","position":38}
+{"sql":"alter foreign data wrapper w owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter foreign data wrapper w owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter server s owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter server s owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter server s owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter server s owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter server s owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter server s owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter server s owner to none","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"alter server s owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"alter server s owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"alter server s owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter server s owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter server s owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter server s owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter server s owner to user","code":"42601","message":"syntax error at or near \"user\"","position":24}
+{"sql":"alter server s owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter server s owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter publication p owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter publication p owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter publication p owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter publication p owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter publication p owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter publication p owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter publication p owner to none","code":"42939","message":"role name \"none\" is reserved","position":29}
+{"sql":"alter publication p owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":29}
+{"sql":"alter publication p owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":29}
+{"sql":"alter publication p owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter publication p owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter publication p owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter publication p owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter publication p owner to user","code":"42601","message":"syntax error at or near \"user\"","position":29}
+{"sql":"alter publication p owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter publication p owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter subscription s owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter subscription s owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter subscription s owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter subscription s owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter subscription s owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter subscription s owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter subscription s owner to none","code":"42939","message":"role name \"none\" is reserved","position":30}
+{"sql":"alter subscription s owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":30}
+{"sql":"alter subscription s owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":30}
+{"sql":"alter subscription s owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter subscription s owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter subscription s owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter subscription s owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter subscription s owner to user","code":"42601","message":"syntax error at or near \"user\"","position":30}
+{"sql":"alter subscription s owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter subscription s owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter materialized view m owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter materialized view m owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter materialized view m owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter materialized view m owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter materialized view m owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter materialized view m owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter materialized view m owner to none","code":"42939","message":"role name \"none\" is reserved","position":35}
+{"sql":"alter materialized view m owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":35}
+{"sql":"alter materialized view m owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":35}
+{"sql":"alter materialized view m owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter materialized view m owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter materialized view m owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter materialized view m owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter materialized view m owner to user","code":"42601","message":"syntax error at or near \"user\"","position":35}
+{"sql":"alter materialized view m owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter materialized view m owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter sequence q owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter sequence q owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter sequence q owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter sequence q owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter sequence q owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter sequence q owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter sequence q owner to none","code":"42939","message":"role name \"none\" is reserved","position":26}
+{"sql":"alter sequence q owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":26}
+{"sql":"alter sequence q owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":26}
+{"sql":"alter sequence q owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter sequence q owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter sequence q owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter sequence q owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter sequence q owner to user","code":"42601","message":"syntax error at or near \"user\"","position":26}
+{"sql":"alter sequence q owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter sequence q owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter view v owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter view v owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter view v owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter view v owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter view v owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter view v owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter view v owner to none","code":"42939","message":"role name \"none\" is reserved","position":22}
+{"sql":"alter view v owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":22}
+{"sql":"alter view v owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":22}
+{"sql":"alter view v owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter view v owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter view v owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter view v owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter view v owner to user","code":"42601","message":"syntax error at or near \"user\"","position":22}
+{"sql":"alter view v owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter view v owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter foreign table ft owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter foreign table ft owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter foreign table ft owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter foreign table ft owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter foreign table ft owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter foreign table ft owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter foreign table ft owner to none","code":"42939","message":"role name \"none\" is reserved","position":32}
+{"sql":"alter foreign table ft owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":32}
+{"sql":"alter foreign table ft owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":32}
+{"sql":"alter foreign table ft owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter foreign table ft owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter foreign table ft owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter foreign table ft owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter foreign table ft owner to user","code":"42601","message":"syntax error at or near \"user\"","position":32}
+{"sql":"alter foreign table ft owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter foreign table ft owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter statistics st owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter statistics st owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter statistics st owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter statistics st owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter statistics st owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter statistics st owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter statistics st owner to none","code":"42939","message":"role name \"none\" is reserved","position":29}
+{"sql":"alter statistics st owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":29}
+{"sql":"alter statistics st owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":29}
+{"sql":"alter statistics st owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter statistics st owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter statistics st owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter statistics st owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter statistics st owner to user","code":"42601","message":"syntax error at or near \"user\"","position":29}
+{"sql":"alter statistics st owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter statistics st owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter collation c owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter collation c owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter collation c owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter collation c owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter collation c owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter collation c owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter collation c owner to none","code":"42939","message":"role name \"none\" is reserved","position":27}
+{"sql":"alter collation c owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":27}
+{"sql":"alter collation c owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":27}
+{"sql":"alter collation c owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter collation c owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter collation c owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter collation c owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter collation c owner to user","code":"42601","message":"syntax error at or near \"user\"","position":27}
+{"sql":"alter collation c owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter collation c owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter conversion c owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter conversion c owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter conversion c owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter conversion c owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter conversion c owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter conversion c owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter conversion c owner to none","code":"42939","message":"role name \"none\" is reserved","position":28}
+{"sql":"alter conversion c owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":28}
+{"sql":"alter conversion c owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":28}
+{"sql":"alter conversion c owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter conversion c owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter conversion c owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter conversion c owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter conversion c owner to user","code":"42601","message":"syntax error at or near \"user\"","position":28}
+{"sql":"alter conversion c owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter conversion c owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter language l owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter language l owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter language l owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter language l owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter language l owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter language l owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter language l owner to none","code":"42939","message":"role name \"none\" is reserved","position":26}
+{"sql":"alter language l owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":26}
+{"sql":"alter language l owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":26}
+{"sql":"alter language l owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter language l owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter language l owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter language l owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter language l owner to user","code":"42601","message":"syntax error at or near \"user\"","position":26}
+{"sql":"alter language l owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter language l owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter operator + (int, int) owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter operator + (int, int) owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter operator + (int, int) owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter operator + (int, int) owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter operator + (int, int) owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter operator + (int, int) owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter operator + (int, int) owner to none","code":"42939","message":"role name \"none\" is reserved","position":37}
+{"sql":"alter operator + (int, int) owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":37}
+{"sql":"alter operator + (int, int) owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":37}
+{"sql":"alter operator + (int, int) owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter operator + (int, int) owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter operator + (int, int) owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter operator + (int, int) owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter operator + (int, int) owner to user","code":"42601","message":"syntax error at or near \"user\"","position":37}
+{"sql":"alter operator + (int, int) owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter operator + (int, int) owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter operator class oc using btree owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter operator class oc using btree owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter operator class oc using btree owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter operator class oc using btree owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter operator class oc using btree owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter operator class oc using btree owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter operator class oc using btree owner to none","code":"42939","message":"role name \"none\" is reserved","position":45}
+{"sql":"alter operator class oc using btree owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":45}
+{"sql":"alter operator class oc using btree owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":45}
+{"sql":"alter operator class oc using btree owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter operator class oc using btree owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter operator class oc using btree owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter operator class oc using btree owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter operator class oc using btree owner to user","code":"42601","message":"syntax error at or near \"user\"","position":45}
+{"sql":"alter operator class oc using btree owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter operator class oc using btree owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter operator family f using btree owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter operator family f using btree owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter operator family f using btree owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter operator family f using btree owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter operator family f using btree owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter operator family f using btree owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter operator family f using btree owner to none","code":"42939","message":"role name \"none\" is reserved","position":45}
+{"sql":"alter operator family f using btree owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":45}
+{"sql":"alter operator family f using btree owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":45}
+{"sql":"alter operator family f using btree owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter operator family f using btree owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter operator family f using btree owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter operator family f using btree owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter operator family f using btree owner to user","code":"42601","message":"syntax error at or near \"user\"","position":45}
+{"sql":"alter operator family f using btree owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter operator family f using btree owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter text search dictionary d owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter text search dictionary d owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter text search dictionary d owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter text search dictionary d owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter text search dictionary d owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter text search dictionary d owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter text search dictionary d owner to none","code":"42939","message":"role name \"none\" is reserved","position":40}
+{"sql":"alter text search dictionary d owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":40}
+{"sql":"alter text search dictionary d owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":40}
+{"sql":"alter text search dictionary d owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter text search dictionary d owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter text search dictionary d owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter text search dictionary d owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter text search dictionary d owner to user","code":"42601","message":"syntax error at or near \"user\"","position":40}
+{"sql":"alter text search dictionary d owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter text search dictionary d owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter text search configuration c owner to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter text search configuration c owner to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter text search configuration c owner to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter text search configuration c owner to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter text search configuration c owner to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter text search configuration c owner to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter text search configuration c owner to none","code":"42939","message":"role name \"none\" is reserved","position":43}
+{"sql":"alter text search configuration c owner to NONE","code":"42939","message":"role name \"none\" is reserved","position":43}
+{"sql":"alter text search configuration c owner to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":43}
+{"sql":"alter text search configuration c owner to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter text search configuration c owner to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter text search configuration c owner to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter text search configuration c owner to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter text search configuration c owner to user","code":"42601","message":"syntax error at or near \"user\"","position":43}
+{"sql":"alter text search configuration c owner to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter text search configuration c owner to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create tablespace s owner public location '/x'","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create tablespace s owner PUBLIC location '/x'","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create tablespace s owner Public location '/x'","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create tablespace s owner \"public\" location '/x'","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create tablespace s owner \"PUBLIC\" location '/x'","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create tablespace s owner \"Public\" location '/x'","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create tablespace s owner none location '/x'","code":"42939","message":"role name \"none\" is reserved","position":26}
+{"sql":"create tablespace s owner NONE location '/x'","code":"42939","message":"role name \"none\" is reserved","position":26}
+{"sql":"create tablespace s owner \"none\" location '/x'","code":"42939","message":"role name \"none\" is reserved","position":26}
+{"sql":"create tablespace s owner \"NONE\" location '/x'","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create tablespace s owner current_user location '/x'","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"create tablespace s owner current_role location '/x'","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"create tablespace s owner session_user location '/x'","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"create tablespace s owner user location '/x'","code":"42601","message":"syntax error at or near \"user\"","position":26}
+{"sql":"create tablespace s owner a location '/x'","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create tablespace s owner \"a b\" location '/x'","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create schema authorization public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create schema authorization PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create schema authorization Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create schema authorization \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create schema authorization \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create schema authorization \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create schema authorization none","code":"42939","message":"role name \"none\" is reserved","position":28}
+{"sql":"create schema authorization NONE","code":"42939","message":"role name \"none\" is reserved","position":28}
+{"sql":"create schema authorization \"none\"","code":"42939","message":"role name \"none\" is reserved","position":28}
+{"sql":"create schema authorization \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create schema authorization current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"create schema authorization current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"create schema authorization session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"create schema authorization user","code":"42601","message":"syntax error at or near \"user\"","position":28}
+{"sql":"create schema authorization a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create schema authorization \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create schema s authorization public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create schema s authorization PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create schema s authorization Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create schema s authorization \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create schema s authorization \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create schema s authorization \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create schema s authorization none","code":"42939","message":"role name \"none\" is reserved","position":30}
+{"sql":"create schema s authorization NONE","code":"42939","message":"role name \"none\" is reserved","position":30}
+{"sql":"create schema s authorization \"none\"","code":"42939","message":"role name \"none\" is reserved","position":30}
+{"sql":"create schema s authorization \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create schema s authorization current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"create schema s authorization current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"create schema s authorization session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"create schema s authorization user","code":"42601","message":"syntax error at or near \"user\"","position":30}
+{"sql":"create schema s authorization a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create schema s authorization \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create schema if not exists authorization public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create schema if not exists authorization PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create schema if not exists authorization Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create schema if not exists authorization \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create schema if not exists authorization \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create schema if not exists authorization \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create schema if not exists authorization none","code":"42939","message":"role name \"none\" is reserved","position":42}
+{"sql":"create schema if not exists authorization NONE","code":"42939","message":"role name \"none\" is reserved","position":42}
+{"sql":"create schema if not exists authorization \"none\"","code":"42939","message":"role name \"none\" is reserved","position":42}
+{"sql":"create schema if not exists authorization \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create schema if not exists authorization current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"create schema if not exists authorization current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"create schema if not exists authorization session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"create schema if not exists authorization user","code":"42601","message":"syntax error at or near \"user\"","position":42}
+{"sql":"create schema if not exists authorization a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create schema if not exists authorization \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create user mapping for public server s","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create user mapping for PUBLIC server s","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create user mapping for Public server s","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create user mapping for \"public\" server s","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create user mapping for \"PUBLIC\" server s","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create user mapping for \"Public\" server s","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create user mapping for none server s","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"create user mapping for NONE server s","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"create user mapping for \"none\" server s","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"create user mapping for \"NONE\" server s","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create user mapping for current_user server s","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"create user mapping for current_role server s","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"create user mapping for session_user server s","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"create user mapping for user server s","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"create user mapping for a server s","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create user mapping for \"a b\" server s","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create user mapping if not exists for public server s options (a 'b')","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create user mapping if not exists for PUBLIC server s options (a 'b')","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create user mapping if not exists for Public server s options (a 'b')","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create user mapping if not exists for \"public\" server s options (a 'b')","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create user mapping if not exists for \"PUBLIC\" server s options (a 'b')","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create user mapping if not exists for \"Public\" server s options (a 'b')","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create user mapping if not exists for none server s options (a 'b')","code":"42939","message":"role name \"none\" is reserved","position":38}
+{"sql":"create user mapping if not exists for NONE server s options (a 'b')","code":"42939","message":"role name \"none\" is reserved","position":38}
+{"sql":"create user mapping if not exists for \"none\" server s options (a 'b')","code":"42939","message":"role name \"none\" is reserved","position":38}
+{"sql":"create user mapping if not exists for \"NONE\" server s options (a 'b')","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create user mapping if not exists for current_user server s options (a 'b')","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"create user mapping if not exists for current_role server s options (a 'b')","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"create user mapping if not exists for session_user server s options (a 'b')","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"create user mapping if not exists for user server s options (a 'b')","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"create user mapping if not exists for a server s options (a 'b')","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create user mapping if not exists for \"a b\" server s options (a 'b')","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter user mapping for public server s options (a 'b')","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter user mapping for PUBLIC server s options (a 'b')","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter user mapping for Public server s options (a 'b')","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter user mapping for \"public\" server s options (a 'b')","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter user mapping for \"PUBLIC\" server s options (a 'b')","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter user mapping for \"Public\" server s options (a 'b')","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter user mapping for none server s options (a 'b')","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"alter user mapping for NONE server s options (a 'b')","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"alter user mapping for \"none\" server s options (a 'b')","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"alter user mapping for \"NONE\" server s options (a 'b')","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter user mapping for current_user server s options (a 'b')","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter user mapping for current_role server s options (a 'b')","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter user mapping for session_user server s options (a 'b')","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter user mapping for user server s options (a 'b')","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter user mapping for a server s options (a 'b')","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter user mapping for \"a b\" server s options (a 'b')","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop user mapping for public server s","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"drop user mapping for PUBLIC server s","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"drop user mapping for Public server s","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"drop user mapping for \"public\" server s","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"drop user mapping for \"PUBLIC\" server s","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop user mapping for \"Public\" server s","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop user mapping for none server s","code":"42939","message":"role name \"none\" is reserved","position":22}
+{"sql":"drop user mapping for NONE server s","code":"42939","message":"role name \"none\" is reserved","position":22}
+{"sql":"drop user mapping for \"none\" server s","code":"42939","message":"role name \"none\" is reserved","position":22}
+{"sql":"drop user mapping for \"NONE\" server s","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop user mapping for current_user server s","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"drop user mapping for current_role server s","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"drop user mapping for session_user server s","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"drop user mapping for user server s","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"drop user mapping for a server s","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop user mapping for \"a b\" server s","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop user mapping if exists for public server s","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"drop user mapping if exists for PUBLIC server s","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"drop user mapping if exists for Public server s","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"drop user mapping if exists for \"public\" server s","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"drop user mapping if exists for \"PUBLIC\" server s","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop user mapping if exists for \"Public\" server s","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop user mapping if exists for none server s","code":"42939","message":"role name \"none\" is reserved","position":32}
+{"sql":"drop user mapping if exists for NONE server s","code":"42939","message":"role name \"none\" is reserved","position":32}
+{"sql":"drop user mapping if exists for \"none\" server s","code":"42939","message":"role name \"none\" is reserved","position":32}
+{"sql":"drop user mapping if exists for \"NONE\" server s","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop user mapping if exists for current_user server s","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"drop user mapping if exists for current_role server s","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"drop user mapping if exists for session_user server s","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"drop user mapping if exists for user server s","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"drop user mapping if exists for a server s","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop user mapping if exists for \"a b\" server s","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create policy p on t to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create policy p on t to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create policy p on t to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create policy p on t to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create policy p on t to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create policy p on t to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create policy p on t to none","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"create policy p on t to NONE","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"create policy p on t to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"create policy p on t to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create policy p on t to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"create policy p on t to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"create policy p on t to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"create policy p on t to user","code":"42601","message":"syntax error at or near \"user\"","position":24}
+{"sql":"create policy p on t to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create policy p on t to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create policy p on t for select to a, public using (true)","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"create policy p on t for select to a, PUBLIC using (true)","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"create policy p on t for select to a, Public using (true)","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"create policy p on t for select to a, \"public\" using (true)","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"create policy p on t for select to a, \"PUBLIC\" using (true)","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"create policy p on t for select to a, \"Public\" using (true)","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"create policy p on t for select to a, none using (true)","code":"42939","message":"role name \"none\" is reserved","position":38}
+{"sql":"create policy p on t for select to a, NONE using (true)","code":"42939","message":"role name \"none\" is reserved","position":38}
+{"sql":"create policy p on t for select to a, \"none\" using (true)","code":"42939","message":"role name \"none\" is reserved","position":38}
+{"sql":"create policy p on t for select to a, \"NONE\" using (true)","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"create policy p on t for select to a, current_user using (true)","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CURRENT_USER"]}
+{"sql":"create policy p on t for select to a, current_role using (true)","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CURRENT_ROLE"]}
+{"sql":"create policy p on t for select to a, session_user using (true)","roletypes":["ROLESPEC_CSTRING","ROLESPEC_SESSION_USER"]}
+{"sql":"create policy p on t for select to a, user using (true)","code":"42601","message":"syntax error at or near \"user\"","position":38}
+{"sql":"create policy p on t for select to a, a using (true)","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"create policy p on t for select to a, \"a b\" using (true)","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"alter policy p on t to public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter policy p on t to PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter policy p on t to Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter policy p on t to \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"alter policy p on t to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter policy p on t to \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter policy p on t to none","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"alter policy p on t to NONE","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"alter policy p on t to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"alter policy p on t to \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter policy p on t to current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter policy p on t to current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"alter policy p on t to session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"alter policy p on t to user","code":"42601","message":"syntax error at or near \"user\"","position":23}
+{"sql":"alter policy p on t to a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"alter policy p on t to \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop owned by public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"drop owned by PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"drop owned by Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"drop owned by \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"drop owned by \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop owned by \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop owned by none","code":"42939","message":"role name \"none\" is reserved","position":14}
+{"sql":"drop owned by NONE","code":"42939","message":"role name \"none\" is reserved","position":14}
+{"sql":"drop owned by \"none\"","code":"42939","message":"role name \"none\" is reserved","position":14}
+{"sql":"drop owned by \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop owned by current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"drop owned by current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"drop owned by session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"drop owned by user","code":"42601","message":"syntax error at or near \"user\"","position":14}
+{"sql":"drop owned by a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop owned by \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"drop owned by a, public cascade","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"drop owned by a, PUBLIC cascade","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"drop owned by a, Public cascade","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"drop owned by a, \"public\" cascade","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"drop owned by a, \"PUBLIC\" cascade","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"drop owned by a, \"Public\" cascade","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"drop owned by a, none cascade","code":"42939","message":"role name \"none\" is reserved","position":17}
+{"sql":"drop owned by a, NONE cascade","code":"42939","message":"role name \"none\" is reserved","position":17}
+{"sql":"drop owned by a, \"none\" cascade","code":"42939","message":"role name \"none\" is reserved","position":17}
+{"sql":"drop owned by a, \"NONE\" cascade","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"drop owned by a, current_user cascade","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CURRENT_USER"]}
+{"sql":"drop owned by a, current_role cascade","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CURRENT_ROLE"]}
+{"sql":"drop owned by a, session_user cascade","roletypes":["ROLESPEC_CSTRING","ROLESPEC_SESSION_USER"]}
+{"sql":"drop owned by a, user cascade","code":"42601","message":"syntax error at or near \"user\"","position":17}
+{"sql":"drop owned by a, a cascade","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"drop owned by a, \"a b\" cascade","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"reassign owned by public to a","roletypes":["ROLESPEC_PUBLIC","ROLESPEC_CSTRING"]}
+{"sql":"reassign owned by PUBLIC to a","roletypes":["ROLESPEC_PUBLIC","ROLESPEC_CSTRING"]}
+{"sql":"reassign owned by Public to a","roletypes":["ROLESPEC_PUBLIC","ROLESPEC_CSTRING"]}
+{"sql":"reassign owned by \"public\" to a","roletypes":["ROLESPEC_PUBLIC","ROLESPEC_CSTRING"]}
+{"sql":"reassign owned by \"PUBLIC\" to a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"reassign owned by \"Public\" to a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"reassign owned by none to a","code":"42939","message":"role name \"none\" is reserved","position":18}
+{"sql":"reassign owned by NONE to a","code":"42939","message":"role name \"none\" is reserved","position":18}
+{"sql":"reassign owned by \"none\" to a","code":"42939","message":"role name \"none\" is reserved","position":18}
+{"sql":"reassign owned by \"NONE\" to a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"reassign owned by current_user to a","roletypes":["ROLESPEC_CURRENT_USER","ROLESPEC_CSTRING"]}
+{"sql":"reassign owned by current_role to a","roletypes":["ROLESPEC_CURRENT_ROLE","ROLESPEC_CSTRING"]}
+{"sql":"reassign owned by session_user to a","roletypes":["ROLESPEC_SESSION_USER","ROLESPEC_CSTRING"]}
+{"sql":"reassign owned by user to a","code":"42601","message":"syntax error at or near \"user\"","position":18}
+{"sql":"reassign owned by a to a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"reassign owned by \"a b\" to a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"reassign owned by a to public","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"reassign owned by a to PUBLIC","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"reassign owned by a to Public","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"reassign owned by a to \"public\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"reassign owned by a to \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"reassign owned by a to \"Public\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"reassign owned by a to none","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"reassign owned by a to NONE","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"reassign owned by a to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"reassign owned by a to \"NONE\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"reassign owned by a to current_user","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CURRENT_USER"]}
+{"sql":"reassign owned by a to current_role","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CURRENT_ROLE"]}
+{"sql":"reassign owned by a to session_user","roletypes":["ROLESPEC_CSTRING","ROLESPEC_SESSION_USER"]}
+{"sql":"reassign owned by a to user","code":"42601","message":"syntax error at or near \"user\"","position":23}
+{"sql":"reassign owned by a to a","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"reassign owned by a to \"a b\"","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING"]}
+{"sql":"create role a in role public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create role a in role PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create role a in role Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create role a in role \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create role a in role \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create role a in role \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create role a in role none","code":"42939","message":"role name \"none\" is reserved","position":22}
+{"sql":"create role a in role NONE","code":"42939","message":"role name \"none\" is reserved","position":22}
+{"sql":"create role a in role \"none\"","code":"42939","message":"role name \"none\" is reserved","position":22}
+{"sql":"create role a in role \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create role a in role current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"create role a in role current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"create role a in role session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"create role a in role user","code":"42601","message":"syntax error at or near \"user\"","position":22}
+{"sql":"create role a in role a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create role a in role \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create role a role public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create role a role PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create role a role Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create role a role \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create role a role \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create role a role \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create role a role none","code":"42939","message":"role name \"none\" is reserved","position":19}
+{"sql":"create role a role NONE","code":"42939","message":"role name \"none\" is reserved","position":19}
+{"sql":"create role a role \"none\"","code":"42939","message":"role name \"none\" is reserved","position":19}
+{"sql":"create role a role \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create role a role current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"create role a role current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"create role a role session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"create role a role user","code":"42601","message":"syntax error at or near \"user\"","position":19}
+{"sql":"create role a role a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create role a role \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create role a admin public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create role a admin PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create role a admin Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create role a admin \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create role a admin \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create role a admin \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create role a admin none","code":"42939","message":"role name \"none\" is reserved","position":20}
+{"sql":"create role a admin NONE","code":"42939","message":"role name \"none\" is reserved","position":20}
+{"sql":"create role a admin \"none\"","code":"42939","message":"role name \"none\" is reserved","position":20}
+{"sql":"create role a admin \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create role a admin current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"create role a admin current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"create role a admin session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"create role a admin user","code":"42601","message":"syntax error at or near \"user\"","position":20}
+{"sql":"create role a admin a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create role a admin \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create role a in group public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create role a in group PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create role a in group Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create role a in group \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create role a in group \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create role a in group \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create role a in group none","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"create role a in group NONE","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"create role a in group \"none\"","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"create role a in group \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create role a in group current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"create role a in group current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"create role a in group session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"create role a in group user","code":"42601","message":"syntax error at or near \"user\"","position":23}
+{"sql":"create role a in group a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create role a in group \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create user a in group public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create user a in group PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create user a in group Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create user a in group \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create user a in group \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create user a in group \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create user a in group none","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"create user a in group NONE","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"create user a in group \"none\"","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"create user a in group \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create user a in group current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"create user a in group current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"create user a in group session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"create user a in group user","code":"42601","message":"syntax error at or near \"user\"","position":23}
+{"sql":"create user a in group a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create user a in group \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create group a user public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create group a user PUBLIC","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create group a user Public","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create group a user \"public\"","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"create group a user \"PUBLIC\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create group a user \"Public\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create group a user none","code":"42939","message":"role name \"none\" is reserved","position":20}
+{"sql":"create group a user NONE","code":"42939","message":"role name \"none\" is reserved","position":20}
+{"sql":"create group a user \"none\"","code":"42939","message":"role name \"none\" is reserved","position":20}
+{"sql":"create group a user \"NONE\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create group a user current_user","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"create group a user current_role","roletypes":["ROLESPEC_CURRENT_ROLE"]}
+{"sql":"create group a user session_user","roletypes":["ROLESPEC_SESSION_USER"]}
+{"sql":"create group a user user","code":"42601","message":"syntax error at or near \"user\"","position":20}
+{"sql":"create group a user a","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create group a user \"a b\"","roletypes":["ROLESPEC_CSTRING"]}
+{"sql":"create role public","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"create role PUBLIC","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"create role Public","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"create role \"public\"","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"create role \"PUBLIC\"","roletypes":[]}
+{"sql":"create role \"Public\"","roletypes":[]}
+{"sql":"create role none","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"create role NONE","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"create role \"none\"","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"create role \"NONE\"","roletypes":[]}
+{"sql":"create role current_user","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"create role current_role","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"create role session_user","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"create role user","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"create role a","roletypes":[]}
+{"sql":"create role \"a b\"","roletypes":[]}
+{"sql":"create role public with login","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"create role PUBLIC with login","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"create role Public with login","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"create role \"public\" with login","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"create role \"PUBLIC\" with login","roletypes":[]}
+{"sql":"create role \"Public\" with login","roletypes":[]}
+{"sql":"create role none with login","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"create role NONE with login","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"create role \"none\" with login","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"create role \"NONE\" with login","roletypes":[]}
+{"sql":"create role current_user with login","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"create role current_role with login","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"create role session_user with login","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"create role user with login","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"create role a with login","roletypes":[]}
+{"sql":"create role \"a b\" with login","roletypes":[]}
+{"sql":"create user public","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"create user PUBLIC","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"create user Public","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"create user \"public\"","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"create user \"PUBLIC\"","roletypes":[]}
+{"sql":"create user \"Public\"","roletypes":[]}
+{"sql":"create user none","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"create user NONE","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"create user \"none\"","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"create user \"NONE\"","roletypes":[]}
+{"sql":"create user current_user","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"create user current_role","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"create user session_user","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"create user user","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"create user a","roletypes":[]}
+{"sql":"create user \"a b\"","roletypes":[]}
+{"sql":"create user public with password 'x'","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"create user PUBLIC with password 'x'","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"create user Public with password 'x'","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"create user \"public\" with password 'x'","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"create user \"PUBLIC\" with password 'x'","roletypes":[]}
+{"sql":"create user \"Public\" with password 'x'","roletypes":[]}
+{"sql":"create user none with password 'x'","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"create user NONE with password 'x'","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"create user \"none\" with password 'x'","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"create user \"NONE\" with password 'x'","roletypes":[]}
+{"sql":"create user current_user with password 'x'","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"create user current_role with password 'x'","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"create user session_user with password 'x'","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"create user user with password 'x'","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"create user a with password 'x'","roletypes":[]}
+{"sql":"create user \"a b\" with password 'x'","roletypes":[]}
+{"sql":"create group public","code":"42939","message":"role name \"public\" is reserved","position":13}
+{"sql":"create group PUBLIC","code":"42939","message":"role name \"public\" is reserved","position":13}
+{"sql":"create group Public","code":"42939","message":"role name \"public\" is reserved","position":13}
+{"sql":"create group \"public\"","code":"42939","message":"role name \"public\" is reserved","position":13}
+{"sql":"create group \"PUBLIC\"","roletypes":[]}
+{"sql":"create group \"Public\"","roletypes":[]}
+{"sql":"create group none","code":"42939","message":"role name \"none\" is reserved","position":13}
+{"sql":"create group NONE","code":"42939","message":"role name \"none\" is reserved","position":13}
+{"sql":"create group \"none\"","code":"42939","message":"role name \"none\" is reserved","position":13}
+{"sql":"create group \"NONE\"","roletypes":[]}
+{"sql":"create group current_user","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":13}
+{"sql":"create group current_role","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":13}
+{"sql":"create group session_user","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":13}
+{"sql":"create group user","code":"42601","message":"syntax error at or near \"user\"","position":13}
+{"sql":"create group a","roletypes":[]}
+{"sql":"create group \"a b\"","roletypes":[]}
+{"sql":"alter role public rename to b","code":"42939","message":"role name \"public\" is reserved","position":11}
+{"sql":"alter role PUBLIC rename to b","code":"42939","message":"role name \"public\" is reserved","position":11}
+{"sql":"alter role Public rename to b","code":"42939","message":"role name \"public\" is reserved","position":11}
+{"sql":"alter role \"public\" rename to b","code":"42939","message":"role name \"public\" is reserved","position":11}
+{"sql":"alter role \"PUBLIC\" rename to b","roletypes":[]}
+{"sql":"alter role \"Public\" rename to b","roletypes":[]}
+{"sql":"alter role none rename to b","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role NONE rename to b","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role \"none\" rename to b","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role \"NONE\" rename to b","roletypes":[]}
+{"sql":"alter role current_user rename to b","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":11}
+{"sql":"alter role current_role rename to b","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":11}
+{"sql":"alter role session_user rename to b","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":11}
+{"sql":"alter role user rename to b","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role a rename to b","roletypes":[]}
+{"sql":"alter role \"a b\" rename to b","roletypes":[]}
+{"sql":"alter role a rename to public","code":"42939","message":"role name \"public\" is reserved","position":23}
+{"sql":"alter role a rename to PUBLIC","code":"42939","message":"role name \"public\" is reserved","position":23}
+{"sql":"alter role a rename to Public","code":"42939","message":"role name \"public\" is reserved","position":23}
+{"sql":"alter role a rename to \"public\"","code":"42939","message":"role name \"public\" is reserved","position":23}
+{"sql":"alter role a rename to \"PUBLIC\"","roletypes":[]}
+{"sql":"alter role a rename to \"Public\"","roletypes":[]}
+{"sql":"alter role a rename to none","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"alter role a rename to NONE","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"alter role a rename to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":23}
+{"sql":"alter role a rename to \"NONE\"","roletypes":[]}
+{"sql":"alter role a rename to current_user","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":23}
+{"sql":"alter role a rename to current_role","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":23}
+{"sql":"alter role a rename to session_user","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":23}
+{"sql":"alter role a rename to user","code":"42601","message":"syntax error at or near \"user\"","position":23}
+{"sql":"alter role a rename to a","roletypes":[]}
+{"sql":"alter role a rename to \"a b\"","roletypes":[]}
+{"sql":"alter user public rename to b","code":"42939","message":"role name \"public\" is reserved","position":11}
+{"sql":"alter user PUBLIC rename to b","code":"42939","message":"role name \"public\" is reserved","position":11}
+{"sql":"alter user Public rename to b","code":"42939","message":"role name \"public\" is reserved","position":11}
+{"sql":"alter user \"public\" rename to b","code":"42939","message":"role name \"public\" is reserved","position":11}
+{"sql":"alter user \"PUBLIC\" rename to b","roletypes":[]}
+{"sql":"alter user \"Public\" rename to b","roletypes":[]}
+{"sql":"alter user none rename to b","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user NONE rename to b","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user \"none\" rename to b","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user \"NONE\" rename to b","roletypes":[]}
+{"sql":"alter user current_user rename to b","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":11}
+{"sql":"alter user current_role rename to b","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":11}
+{"sql":"alter user session_user rename to b","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":11}
+{"sql":"alter user user rename to b","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user a rename to b","roletypes":[]}
+{"sql":"alter user \"a b\" rename to b","roletypes":[]}
+{"sql":"alter group a rename to public","code":"42939","message":"role name \"public\" is reserved","position":24}
+{"sql":"alter group a rename to PUBLIC","code":"42939","message":"role name \"public\" is reserved","position":24}
+{"sql":"alter group a rename to Public","code":"42939","message":"role name \"public\" is reserved","position":24}
+{"sql":"alter group a rename to \"public\"","code":"42939","message":"role name \"public\" is reserved","position":24}
+{"sql":"alter group a rename to \"PUBLIC\"","roletypes":[]}
+{"sql":"alter group a rename to \"Public\"","roletypes":[]}
+{"sql":"alter group a rename to none","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"alter group a rename to NONE","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"alter group a rename to \"none\"","code":"42939","message":"role name \"none\" is reserved","position":24}
+{"sql":"alter group a rename to \"NONE\"","roletypes":[]}
+{"sql":"alter group a rename to current_user","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":24}
+{"sql":"alter group a rename to current_role","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":24}
+{"sql":"alter group a rename to session_user","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":24}
+{"sql":"alter group a rename to user","code":"42601","message":"syntax error at or near \"user\"","position":24}
+{"sql":"alter group a rename to a","roletypes":[]}
+{"sql":"alter group a rename to \"a b\"","roletypes":[]}
+{"sql":"set role public","roletypes":[]}
+{"sql":"set role PUBLIC","roletypes":[]}
+{"sql":"set role Public","roletypes":[]}
+{"sql":"set role \"public\"","roletypes":[]}
+{"sql":"set role \"PUBLIC\"","roletypes":[]}
+{"sql":"set role \"Public\"","roletypes":[]}
+{"sql":"set role none","roletypes":[]}
+{"sql":"set role NONE","roletypes":[]}
+{"sql":"set role \"none\"","roletypes":[]}
+{"sql":"set role \"NONE\"","roletypes":[]}
+{"sql":"set role current_user","code":"42601","message":"syntax error at or near \"current_user\"","position":9}
+{"sql":"set role current_role","code":"42601","message":"syntax error at or near \"current_role\"","position":9}
+{"sql":"set role session_user","code":"42601","message":"syntax error at or near \"session_user\"","position":9}
+{"sql":"set role user","code":"42601","message":"syntax error at or near \"user\"","position":9}
+{"sql":"set role a","roletypes":[]}
+{"sql":"set role \"a b\"","roletypes":[]}
+{"sql":"set local role public","roletypes":[]}
+{"sql":"set local role PUBLIC","roletypes":[]}
+{"sql":"set local role Public","roletypes":[]}
+{"sql":"set local role \"public\"","roletypes":[]}
+{"sql":"set local role \"PUBLIC\"","roletypes":[]}
+{"sql":"set local role \"Public\"","roletypes":[]}
+{"sql":"set local role none","roletypes":[]}
+{"sql":"set local role NONE","roletypes":[]}
+{"sql":"set local role \"none\"","roletypes":[]}
+{"sql":"set local role \"NONE\"","roletypes":[]}
+{"sql":"set local role current_user","code":"42601","message":"syntax error at or near \"current_user\"","position":15}
+{"sql":"set local role current_role","code":"42601","message":"syntax error at or near \"current_role\"","position":15}
+{"sql":"set local role session_user","code":"42601","message":"syntax error at or near \"session_user\"","position":15}
+{"sql":"set local role user","code":"42601","message":"syntax error at or near \"user\"","position":15}
+{"sql":"set local role a","roletypes":[]}
+{"sql":"set local role \"a b\"","roletypes":[]}
+{"sql":"set session authorization public","roletypes":[]}
+{"sql":"set session authorization PUBLIC","roletypes":[]}
+{"sql":"set session authorization Public","roletypes":[]}
+{"sql":"set session authorization \"public\"","roletypes":[]}
+{"sql":"set session authorization \"PUBLIC\"","roletypes":[]}
+{"sql":"set session authorization \"Public\"","roletypes":[]}
+{"sql":"set session authorization none","roletypes":[]}
+{"sql":"set session authorization NONE","roletypes":[]}
+{"sql":"set session authorization \"none\"","roletypes":[]}
+{"sql":"set session authorization \"NONE\"","roletypes":[]}
+{"sql":"set session authorization current_user","code":"42601","message":"syntax error at or near \"current_user\"","position":26}
+{"sql":"set session authorization current_role","code":"42601","message":"syntax error at or near \"current_role\"","position":26}
+{"sql":"set session authorization session_user","code":"42601","message":"syntax error at or near \"session_user\"","position":26}
+{"sql":"set session authorization user","code":"42601","message":"syntax error at or near \"user\"","position":26}
+{"sql":"set session authorization a","roletypes":[]}
+{"sql":"set session authorization \"a b\"","roletypes":[]}
+{"sql":"grant select on t to public, a, current_user, \"public\", session_user","roletypes":["ROLESPEC_PUBLIC","ROLESPEC_CSTRING","ROLESPEC_CURRENT_USER","ROLESPEC_PUBLIC","ROLESPEC_SESSION_USER"]}
+{"sql":"grant select on t to a, group public granted by current_role","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC","ROLESPEC_CURRENT_ROLE"]}
+{"sql":"revoke all on t from \"PUBLIC\", public cascade","roletypes":["ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"alter default privileges for role public, a in schema s grant select on tables to public, current_user","roletypes":["ROLESPEC_PUBLIC","ROLESPEC_CSTRING","ROLESPEC_PUBLIC","ROLESPEC_CURRENT_USER"]}
+{"sql":"alter default privileges for role a revoke all on functions from a, public","roletypes":["ROLESPEC_CSTRING","ROLESPEC_CSTRING","ROLESPEC_PUBLIC"]}
+{"sql":"grant a, b to public, current_user granted by public","roletypes":["ROLESPEC_PUBLIC","ROLESPEC_CURRENT_USER","ROLESPEC_PUBLIC"]}
+{"sql":"create policy p on t as restrictive for all to current_user, public, \"Public\" using (true) with check (true)","roletypes":["ROLESPEC_CURRENT_USER","ROLESPEC_PUBLIC","ROLESPEC_CSTRING"]}
+{"sql":"alter policy p on t rename to q","roletypes":[]}
+{"sql":"create role a in role public, b role current_user admin public","roletypes":["ROLESPEC_PUBLIC","ROLESPEC_CSTRING","ROLESPEC_CURRENT_USER","ROLESPEC_PUBLIC"]}
+{"sql":"create user mapping for current_user server s","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"create user mapping for user server s","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"drop user mapping for user server s","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"reassign owned by public, current_user to public","roletypes":["ROLESPEC_PUBLIC","ROLESPEC_CURRENT_USER","ROLESPEC_PUBLIC"]}
+{"sql":"drop owned by current_role, public, \"public\"","roletypes":["ROLESPEC_CURRENT_ROLE","ROLESPEC_PUBLIC","ROLESPEC_PUBLIC"]}
+{"sql":"create schema s authorization public create table t (a int)","roletypes":["ROLESPEC_PUBLIC"]}
+{"sql":"grant select on t to public with grant option granted by \"public\"","roletypes":["ROLESPEC_PUBLIC","ROLESPEC_PUBLIC"]}
+{"sql":"alter role all set x = 1","roletypes":[]}
+{"sql":"alter role current_user set x = 1","roletypes":["ROLESPEC_CURRENT_USER"]}
+{"sql":"alter user public in database d reset x","roletypes":["ROLESPEC_PUBLIC"]}
