@@ -7970,22 +7970,6 @@ common_table_expr:
 			}
 			$$ = cte
 		}
-	| name '(' name_list ')' AS opt_materialized '(' PreparableStmt ')' opt_search_clause opt_cycle_clause
-		{
-			cte := &nodes.CommonTableExpr{
-				Ctename:         $1,
-				Aliascolnames:   $3,
-				Ctematerialized: int($6),
-				Ctequery:        $8,
-			}
-			if $10 != nil {
-				cte.SearchClause = $10
-			}
-			if $11 != nil {
-				cte.CycleClause = $11
-			}
-			$$ = cte
-		}
 	;
 
 opt_materialized:
@@ -11356,7 +11340,7 @@ any_name:
 	;
 
 opt_name_list:
-	name_list { $$ = $1 }
+	'(' name_list ')' { $$ = $2 }
 	| /* EMPTY */ { $$ = nil }
 	;
 

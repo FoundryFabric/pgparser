@@ -80,7 +80,7 @@ L a feature's grammar.
 | utility-option-argument (fixed) | 1 | 55 (0/52/3) | accepts `*`, DEFAULT and `(list)` as an EXPLAIN/VACUUM/ANALYZE option argument | `utility_option_arg` | no | S |
 | publication-object-list (fixed) | 1 | 24 (6/15/3) | accepts what `preprocess_pubobj_list` refuses | `CreatePublicationStmt`, `AlterPublicationStmt`, `PublicationObjSpec` actions | no | S |
 | grammar-action-checks | 1 | 21 (8/6/7) | accepts what a grammar action refuses | `CopyStmt`, `parsePartitionStrategy`, `alter_table_cmd` column number, `CreateSchemaStmt`, `TriggerEvents`, `xmltable_column_option_el`, `frame_extent`, `json_encoding_clause_opt` | no | M |
-| cte-column-list-parentheses | 1 | 12 (0/10/2) | accepts a CTE's column names without parentheses | `opt_name_list` | no | S |
+| cte-column-list-parentheses (fixed) | 1 | 12 (0/10/2) | accepts a CTE's column names without parentheses | `opt_name_list` | no | S |
 | constraint-attribute-checks | 1 | 9 (5/1/3) | accepts what `processCASbits` and constraint actions refuse | `ConstraintAttributeSpec`/`processCASbits`, `key_action` SET NULL (cols), `ColConstraintElem` GENERATED | no | S |
 | select-clause-checks | 1 | 8 (3/2/3) | accepts WITH TIES without ORDER BY, with SKIP LOCKED; ORDER BY with WITHIN GROUP | `insertSelectOptions`, `func_application` within `func_expr` | no | S |
 | uescape | 1 | 7 (2/4/1) | accepts an invalid UESCAPE character; other message for a UESCAPE not followed by a string | scanner and `base_yylex` UESCAPE handling (`check_uescapechar`) | no | S |
@@ -210,7 +210,7 @@ too: PostgreSQL 16's `frame_extent` action refuses a lone FOLLOWING start
 (42P20 frame starting from following row cannot end with current row, at
 137); the parser has no such check and refuses at "and" (168).
 
-### cte-column-list-parentheses (risk 1, 12)
+### cte-column-list-parentheses (risk 1, 12; fixed)
 
 The parser's `opt_name_list` is `name_list | /* EMPTY */`; PostgreSQL 16's is
 `'(' name_list ')' | /* EMPTY */`, so the parser reads names after a CTE's
@@ -222,6 +222,9 @@ into WITH (`with ROLE regress_test_role`) shows it too.
 | `with x a as (select 1) select 1` | 42601 syntax error at or near "a" at 7 | accepts |
 | `with x a, b as (select 1) select 1` | 42601 syntax error at or near "a" at 7 | accepts |
 | `with ROLE regress_test_role` | 42601 syntax error at or near "regress_test_role" at 10 | 42601 syntax error at end of input at 27 |
+
+`opt_name_list` is now `'(' name_list ')' | /* EMPTY */`, and
+`common_table_expr` takes it in one form; all 12 agree.
 
 ### constraint-attribute-checks (risk 1, 9)
 
