@@ -1,0 +1,869 @@
+{"sql":"create publication p for table t"}
+{"sql":"alter publication p add table t"}
+{"sql":"alter publication p add table s.t"}
+{"sql":"alter publication p set table only t"}
+{"sql":"alter publication p drop table t *"}
+{"sql":"create publication p for table only (t)"}
+{"sql":"alter publication p add table only (t)"}
+{"sql":"alter publication p add table t (a, b)"}
+{"sql":"alter publication p set table t where (a \u003e 1)"}
+{"sql":"alter publication p drop table s.t (a) where (a \u003e 1)"}
+{"sql":"create publication p for tables in schema s"}
+{"sql":"alter publication p add tables in schema s"}
+{"sql":"alter publication p add tables in schema current_schema"}
+{"sql":"alter publication p set x","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p drop s.x","syntaxError":"invalid publication object list","position":25}
+{"sql":"create publication p for c.s.x","syntaxError":"invalid publication object list","position":25}
+{"sql":"alter publication p add c.s.x","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p add a.b.c.d","syntaxError":"improper qualified name (too many dotted names): a.b.c.d","position":24}
+{"sql":"alter publication p set x *","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p drop only x","syntaxError":"invalid publication object list","position":0}
+{"sql":"create publication p for only (x)","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p add only (x)","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p add s.x *","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p set only s.x","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p drop x (a)","syntaxError":"invalid publication object list","position":25}
+{"sql":"create publication p for x (a, b)","syntaxError":"invalid publication object list","position":25}
+{"sql":"alter publication p add x (a, b)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p add x where (a = 1)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p set s.x (a)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p drop s.x where (a = 1)","syntaxError":"invalid publication object list","position":25}
+{"sql":"create publication p for x (a) where (a = 1)","syntaxError":"invalid publication object list","position":25}
+{"sql":"alter publication p add x (a) where (a = 1)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p add only x (a)","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p set x * where (a = 1)","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p drop only (s.x) (a) where (a = 1)","syntaxError":"invalid publication object list","position":0}
+{"sql":"create publication p for current_schema","syntaxError":"invalid publication object list","position":25}
+{"sql":"alter publication p add current_schema","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p add current_schema (a)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p set current_schema where (a = 1)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p drop current_schema.x","syntaxError":"invalid publication object list","position":25}
+{"sql":"create publication p for current_schema *","syntaxError":"invalid publication object list","position":25}
+{"sql":"alter publication p add current_schema *","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p add x[1]","syntaxError":"syntax error at end of input","position":28}
+{"sql":"alter publication p set x ()","syntaxError":"syntax error at or near \")\"","position":27}
+{"sql":"alter publication p drop x where a = 1","syntaxError":"syntax error at or near \"a\"","position":33}
+{"sql":"create publication p for table","syntaxError":"syntax error at end of input","position":30}
+{"sql":"alter publication p add table","syntaxError":"syntax error at end of input","position":29}
+{"sql":"alter publication p add tables in schema","syntaxError":"syntax error at end of input","position":40}
+{"sql":"alter publication p set tables in schema s.t","syntaxError":"syntax error at or near \".\"","position":42}
+{"sql":"alter publication p drop tables in schema s (a)","syntaxError":"syntax error at or near \"(\"","position":44}
+{"sql":"create publication p for table t, table t"}
+{"sql":"alter publication p add table t, table t"}
+{"sql":"alter publication p add table t, table s.t"}
+{"sql":"alter publication p set table t, table only t"}
+{"sql":"alter publication p drop table t, table t *"}
+{"sql":"create publication p for table t, table only (t)"}
+{"sql":"alter publication p add table t, table only (t)"}
+{"sql":"alter publication p add table t, table t (a, b)"}
+{"sql":"alter publication p set table t, table t where (a \u003e 1)"}
+{"sql":"alter publication p drop table t, table s.t (a) where (a \u003e 1)"}
+{"sql":"create publication p for table t, tables in schema s"}
+{"sql":"alter publication p add table t, tables in schema s"}
+{"sql":"alter publication p add table t, tables in schema current_schema"}
+{"sql":"alter publication p set table t, x"}
+{"sql":"alter publication p drop table t, s.x"}
+{"sql":"create publication p for table t, c.s.x"}
+{"sql":"alter publication p add table t, c.s.x"}
+{"sql":"alter publication p add table t, a.b.c.d","syntaxError":"improper qualified name (too many dotted names): a.b.c.d","position":33}
+{"sql":"alter publication p set table t, x *"}
+{"sql":"alter publication p drop table t, only x"}
+{"sql":"create publication p for table t, only (x)"}
+{"sql":"alter publication p add table t, only (x)"}
+{"sql":"alter publication p add table t, s.x *"}
+{"sql":"alter publication p set table t, only s.x"}
+{"sql":"alter publication p drop table t, x (a)"}
+{"sql":"create publication p for table t, x (a, b)"}
+{"sql":"alter publication p add table t, x (a, b)"}
+{"sql":"alter publication p add table t, x where (a = 1)"}
+{"sql":"alter publication p set table t, s.x (a)"}
+{"sql":"alter publication p drop table t, s.x where (a = 1)"}
+{"sql":"create publication p for table t, x (a) where (a = 1)"}
+{"sql":"alter publication p add table t, x (a) where (a = 1)"}
+{"sql":"alter publication p add table t, only x (a)"}
+{"sql":"alter publication p set table t, x * where (a = 1)"}
+{"sql":"alter publication p drop table t, only (s.x) (a) where (a = 1)"}
+{"sql":"create publication p for table t, current_schema","syntaxError":"invalid table name","position":34}
+{"sql":"alter publication p add table t, current_schema","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p add table t, current_schema (a)","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p set table t, current_schema where (a = 1)","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p drop table t, current_schema.x","syntaxError":"invalid table name","position":34}
+{"sql":"create publication p for table t, current_schema *","syntaxError":"invalid table name","position":34}
+{"sql":"alter publication p add table t, current_schema *","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p add table t, x[1]","syntaxError":"syntax error at end of input","position":37}
+{"sql":"alter publication p set table t, x ()","syntaxError":"syntax error at or near \")\"","position":36}
+{"sql":"alter publication p drop table t, x where a = 1","syntaxError":"syntax error at or near \"a\"","position":42}
+{"sql":"create publication p for table t, table","syntaxError":"syntax error at end of input","position":39}
+{"sql":"alter publication p add table t, table","syntaxError":"syntax error at end of input","position":38}
+{"sql":"alter publication p add table t, tables in schema","syntaxError":"syntax error at end of input","position":49}
+{"sql":"alter publication p set table t, tables in schema s.t","syntaxError":"syntax error at or near \".\"","position":51}
+{"sql":"alter publication p drop table t, tables in schema s (a)","syntaxError":"syntax error at or near \"(\"","position":53}
+{"sql":"create publication p for table s.t, table t"}
+{"sql":"alter publication p add table s.t, table t"}
+{"sql":"alter publication p add table s.t, table s.t"}
+{"sql":"alter publication p set table s.t, table only t"}
+{"sql":"alter publication p drop table s.t, table t *"}
+{"sql":"create publication p for table s.t, table only (t)"}
+{"sql":"alter publication p add table s.t, table only (t)"}
+{"sql":"alter publication p add table s.t, table t (a, b)"}
+{"sql":"alter publication p set table s.t, table t where (a \u003e 1)"}
+{"sql":"alter publication p drop table s.t, table s.t (a) where (a \u003e 1)"}
+{"sql":"create publication p for table s.t, tables in schema s"}
+{"sql":"alter publication p add table s.t, tables in schema s"}
+{"sql":"alter publication p add table s.t, tables in schema current_schema"}
+{"sql":"alter publication p set table s.t, x"}
+{"sql":"alter publication p drop table s.t, s.x"}
+{"sql":"create publication p for table s.t, c.s.x"}
+{"sql":"alter publication p add table s.t, c.s.x"}
+{"sql":"alter publication p add table s.t, a.b.c.d","syntaxError":"improper qualified name (too many dotted names): a.b.c.d","position":35}
+{"sql":"alter publication p set table s.t, x *"}
+{"sql":"alter publication p drop table s.t, only x"}
+{"sql":"create publication p for table s.t, only (x)"}
+{"sql":"alter publication p add table s.t, only (x)"}
+{"sql":"alter publication p add table s.t, s.x *"}
+{"sql":"alter publication p set table s.t, only s.x"}
+{"sql":"alter publication p drop table s.t, x (a)"}
+{"sql":"create publication p for table s.t, x (a, b)"}
+{"sql":"alter publication p add table s.t, x (a, b)"}
+{"sql":"alter publication p add table s.t, x where (a = 1)"}
+{"sql":"alter publication p set table s.t, s.x (a)"}
+{"sql":"alter publication p drop table s.t, s.x where (a = 1)"}
+{"sql":"create publication p for table s.t, x (a) where (a = 1)"}
+{"sql":"alter publication p add table s.t, x (a) where (a = 1)"}
+{"sql":"alter publication p add table s.t, only x (a)"}
+{"sql":"alter publication p set table s.t, x * where (a = 1)"}
+{"sql":"alter publication p drop table s.t, only (s.x) (a) where (a = 1)"}
+{"sql":"create publication p for table s.t, current_schema","syntaxError":"invalid table name","position":36}
+{"sql":"alter publication p add table s.t, current_schema","syntaxError":"invalid table name","position":35}
+{"sql":"alter publication p add table s.t, current_schema (a)","syntaxError":"invalid table name","position":35}
+{"sql":"alter publication p set table s.t, current_schema where (a = 1)","syntaxError":"invalid table name","position":35}
+{"sql":"alter publication p drop table s.t, current_schema.x","syntaxError":"invalid table name","position":36}
+{"sql":"create publication p for table s.t, current_schema *","syntaxError":"invalid table name","position":36}
+{"sql":"alter publication p add table s.t, current_schema *","syntaxError":"invalid table name","position":35}
+{"sql":"alter publication p add table s.t, x[1]","syntaxError":"syntax error at end of input","position":39}
+{"sql":"alter publication p set table s.t, x ()","syntaxError":"syntax error at or near \")\"","position":38}
+{"sql":"alter publication p drop table s.t, x where a = 1","syntaxError":"syntax error at or near \"a\"","position":44}
+{"sql":"create publication p for table s.t, table","syntaxError":"syntax error at end of input","position":41}
+{"sql":"alter publication p add table s.t, table","syntaxError":"syntax error at end of input","position":40}
+{"sql":"alter publication p add table s.t, tables in schema","syntaxError":"syntax error at end of input","position":51}
+{"sql":"alter publication p set table s.t, tables in schema s.t","syntaxError":"syntax error at or near \".\"","position":53}
+{"sql":"alter publication p drop table s.t, tables in schema s (a)","syntaxError":"syntax error at or near \"(\"","position":55}
+{"sql":"create publication p for tables in schema s, table t"}
+{"sql":"alter publication p add tables in schema s, table t"}
+{"sql":"alter publication p add tables in schema s, table s.t"}
+{"sql":"alter publication p set tables in schema s, table only t"}
+{"sql":"alter publication p drop tables in schema s, table t *"}
+{"sql":"create publication p for tables in schema s, table only (t)"}
+{"sql":"alter publication p add tables in schema s, table only (t)"}
+{"sql":"alter publication p add tables in schema s, table t (a, b)"}
+{"sql":"alter publication p set tables in schema s, table t where (a \u003e 1)"}
+{"sql":"alter publication p drop tables in schema s, table s.t (a) where (a \u003e 1)"}
+{"sql":"create publication p for tables in schema s, tables in schema s"}
+{"sql":"alter publication p add tables in schema s, tables in schema s"}
+{"sql":"alter publication p add tables in schema s, tables in schema current_schema"}
+{"sql":"alter publication p set tables in schema s, x"}
+{"sql":"alter publication p drop tables in schema s, s.x","syntaxError":"invalid schema name","position":45}
+{"sql":"create publication p for tables in schema s, c.s.x","syntaxError":"invalid schema name","position":45}
+{"sql":"alter publication p add tables in schema s, c.s.x","syntaxError":"invalid schema name","position":44}
+{"sql":"alter publication p add tables in schema s, a.b.c.d","syntaxError":"improper qualified name (too many dotted names): a.b.c.d","position":44}
+{"sql":"alter publication p set tables in schema s, x *","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p drop tables in schema s, only x","syntaxError":"invalid schema name","position":0}
+{"sql":"create publication p for tables in schema s, only (x)","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p add tables in schema s, only (x)","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p add tables in schema s, s.x *","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p set tables in schema s, only s.x","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p drop tables in schema s, x (a)","syntaxError":"column specification not allowed for schema","position":45}
+{"sql":"create publication p for tables in schema s, x (a, b)","syntaxError":"column specification not allowed for schema","position":45}
+{"sql":"alter publication p add tables in schema s, x (a, b)","syntaxError":"column specification not allowed for schema","position":44}
+{"sql":"alter publication p add tables in schema s, x where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":44}
+{"sql":"alter publication p set tables in schema s, s.x (a)","syntaxError":"column specification not allowed for schema","position":44}
+{"sql":"alter publication p drop tables in schema s, s.x where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":45}
+{"sql":"create publication p for tables in schema s, x (a) where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":45}
+{"sql":"alter publication p add tables in schema s, x (a) where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":44}
+{"sql":"alter publication p add tables in schema s, only x (a)","syntaxError":"column specification not allowed for schema","position":0}
+{"sql":"alter publication p set tables in schema s, x * where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":0}
+{"sql":"alter publication p drop tables in schema s, only (s.x) (a) where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":0}
+{"sql":"create publication p for tables in schema s, current_schema"}
+{"sql":"alter publication p add tables in schema s, current_schema"}
+{"sql":"alter publication p add tables in schema s, current_schema (a)","syntaxError":"syntax error at or near \"(\"","position":59}
+{"sql":"alter publication p set tables in schema s, current_schema where (a = 1)","syntaxError":"syntax error at or near \"where\"","position":59}
+{"sql":"alter publication p drop tables in schema s, current_schema.x","syntaxError":"syntax error at or near \".\"","position":59}
+{"sql":"create publication p for tables in schema s, current_schema *","syntaxError":"syntax error at or near \"*\"","position":60}
+{"sql":"alter publication p add tables in schema s, current_schema *","syntaxError":"syntax error at or near \"*\"","position":59}
+{"sql":"alter publication p add tables in schema s, x[1]","syntaxError":"syntax error at end of input","position":48}
+{"sql":"alter publication p set tables in schema s, x ()","syntaxError":"syntax error at or near \")\"","position":47}
+{"sql":"alter publication p drop tables in schema s, x where a = 1","syntaxError":"syntax error at or near \"a\"","position":53}
+{"sql":"create publication p for tables in schema s, table","syntaxError":"syntax error at end of input","position":50}
+{"sql":"alter publication p add tables in schema s, table","syntaxError":"syntax error at end of input","position":49}
+{"sql":"alter publication p add tables in schema s, tables in schema","syntaxError":"syntax error at end of input","position":60}
+{"sql":"alter publication p set tables in schema s, tables in schema s.t","syntaxError":"syntax error at or near \".\"","position":62}
+{"sql":"alter publication p drop tables in schema s, tables in schema s (a)","syntaxError":"syntax error at or near \"(\"","position":64}
+{"sql":"create publication p for tables in schema current_schema, table t"}
+{"sql":"alter publication p add tables in schema current_schema, table t"}
+{"sql":"alter publication p add tables in schema current_schema, table s.t"}
+{"sql":"alter publication p set tables in schema current_schema, table only t"}
+{"sql":"alter publication p drop tables in schema current_schema, table t *"}
+{"sql":"create publication p for tables in schema current_schema, table only (t)"}
+{"sql":"alter publication p add tables in schema current_schema, table only (t)"}
+{"sql":"alter publication p add tables in schema current_schema, table t (a, b)"}
+{"sql":"alter publication p set tables in schema current_schema, table t where (a \u003e 1)"}
+{"sql":"alter publication p drop tables in schema current_schema, table s.t (a) where (a \u003e 1)"}
+{"sql":"create publication p for tables in schema current_schema, tables in schema s"}
+{"sql":"alter publication p add tables in schema current_schema, tables in schema s"}
+{"sql":"alter publication p add tables in schema current_schema, tables in schema current_schema"}
+{"sql":"alter publication p set tables in schema current_schema, x"}
+{"sql":"alter publication p drop tables in schema current_schema, s.x","syntaxError":"invalid schema name","position":58}
+{"sql":"create publication p for tables in schema current_schema, c.s.x","syntaxError":"invalid schema name","position":58}
+{"sql":"alter publication p add tables in schema current_schema, c.s.x","syntaxError":"invalid schema name","position":57}
+{"sql":"alter publication p add tables in schema current_schema, a.b.c.d","syntaxError":"improper qualified name (too many dotted names): a.b.c.d","position":57}
+{"sql":"alter publication p set tables in schema current_schema, x *","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p drop tables in schema current_schema, only x","syntaxError":"invalid schema name","position":0}
+{"sql":"create publication p for tables in schema current_schema, only (x)","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p add tables in schema current_schema, only (x)","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p add tables in schema current_schema, s.x *","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p set tables in schema current_schema, only s.x","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p drop tables in schema current_schema, x (a)","syntaxError":"column specification not allowed for schema","position":58}
+{"sql":"create publication p for tables in schema current_schema, x (a, b)","syntaxError":"column specification not allowed for schema","position":58}
+{"sql":"alter publication p add tables in schema current_schema, x (a, b)","syntaxError":"column specification not allowed for schema","position":57}
+{"sql":"alter publication p add tables in schema current_schema, x where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":57}
+{"sql":"alter publication p set tables in schema current_schema, s.x (a)","syntaxError":"column specification not allowed for schema","position":57}
+{"sql":"alter publication p drop tables in schema current_schema, s.x where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":58}
+{"sql":"create publication p for tables in schema current_schema, x (a) where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":58}
+{"sql":"alter publication p add tables in schema current_schema, x (a) where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":57}
+{"sql":"alter publication p add tables in schema current_schema, only x (a)","syntaxError":"column specification not allowed for schema","position":0}
+{"sql":"alter publication p set tables in schema current_schema, x * where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":0}
+{"sql":"alter publication p drop tables in schema current_schema, only (s.x) (a) where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":0}
+{"sql":"create publication p for tables in schema current_schema, current_schema"}
+{"sql":"alter publication p add tables in schema current_schema, current_schema"}
+{"sql":"alter publication p add tables in schema current_schema, current_schema (a)","syntaxError":"syntax error at or near \"(\"","position":72}
+{"sql":"alter publication p set tables in schema current_schema, current_schema where (a = 1)","syntaxError":"syntax error at or near \"where\"","position":72}
+{"sql":"alter publication p drop tables in schema current_schema, current_schema.x","syntaxError":"syntax error at or near \".\"","position":72}
+{"sql":"create publication p for tables in schema current_schema, current_schema *","syntaxError":"syntax error at or near \"*\"","position":73}
+{"sql":"alter publication p add tables in schema current_schema, current_schema *","syntaxError":"syntax error at or near \"*\"","position":72}
+{"sql":"alter publication p add tables in schema current_schema, x[1]","syntaxError":"syntax error at end of input","position":61}
+{"sql":"alter publication p set tables in schema current_schema, x ()","syntaxError":"syntax error at or near \")\"","position":60}
+{"sql":"alter publication p drop tables in schema current_schema, x where a = 1","syntaxError":"syntax error at or near \"a\"","position":66}
+{"sql":"create publication p for tables in schema current_schema, table","syntaxError":"syntax error at end of input","position":63}
+{"sql":"alter publication p add tables in schema current_schema, table","syntaxError":"syntax error at end of input","position":62}
+{"sql":"alter publication p add tables in schema current_schema, tables in schema","syntaxError":"syntax error at end of input","position":73}
+{"sql":"alter publication p set tables in schema current_schema, tables in schema s.t","syntaxError":"syntax error at or near \".\"","position":75}
+{"sql":"alter publication p drop tables in schema current_schema, tables in schema s (a)","syntaxError":"syntax error at or near \"(\"","position":77}
+{"sql":"create publication p for x, table t","syntaxError":"invalid publication object list","position":25}
+{"sql":"alter publication p add x, table t","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p add x, table s.t","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p set x, table only t","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p drop x, table t *","syntaxError":"invalid publication object list","position":25}
+{"sql":"create publication p for x, table only (t)","syntaxError":"invalid publication object list","position":25}
+{"sql":"alter publication p add x, table only (t)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p add x, table t (a, b)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p set x, table t where (a \u003e 1)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p drop x, table s.t (a) where (a \u003e 1)","syntaxError":"invalid publication object list","position":25}
+{"sql":"create publication p for x, tables in schema s","syntaxError":"invalid publication object list","position":25}
+{"sql":"alter publication p add x, tables in schema s","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p add x, tables in schema current_schema","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p set x, x","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p drop x, s.x","syntaxError":"invalid publication object list","position":25}
+{"sql":"create publication p for x, c.s.x","syntaxError":"invalid publication object list","position":25}
+{"sql":"alter publication p add x, c.s.x","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p add x, a.b.c.d","syntaxError":"improper qualified name (too many dotted names): a.b.c.d","position":27}
+{"sql":"alter publication p set x, x *","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p drop x, only x","syntaxError":"invalid publication object list","position":25}
+{"sql":"create publication p for x, only (x)","syntaxError":"invalid publication object list","position":25}
+{"sql":"alter publication p add x, only (x)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p add x, s.x *","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p set x, only s.x","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p drop x, x (a)","syntaxError":"invalid publication object list","position":25}
+{"sql":"create publication p for x, x (a, b)","syntaxError":"invalid publication object list","position":25}
+{"sql":"alter publication p add x, x (a, b)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p add x, x where (a = 1)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p set x, s.x (a)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p drop x, s.x where (a = 1)","syntaxError":"invalid publication object list","position":25}
+{"sql":"create publication p for x, x (a) where (a = 1)","syntaxError":"invalid publication object list","position":25}
+{"sql":"alter publication p add x, x (a) where (a = 1)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p add x, only x (a)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p set x, x * where (a = 1)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p drop x, only (s.x) (a) where (a = 1)","syntaxError":"invalid publication object list","position":25}
+{"sql":"create publication p for x, current_schema","syntaxError":"invalid publication object list","position":25}
+{"sql":"alter publication p add x, current_schema","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p add x, current_schema (a)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p set x, current_schema where (a = 1)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p drop x, current_schema.x","syntaxError":"invalid publication object list","position":25}
+{"sql":"create publication p for x, current_schema *","syntaxError":"invalid publication object list","position":25}
+{"sql":"alter publication p add x, current_schema *","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p add x, x[1]","syntaxError":"syntax error at end of input","position":31}
+{"sql":"alter publication p set x, x ()","syntaxError":"syntax error at or near \")\"","position":30}
+{"sql":"alter publication p drop x, x where a = 1","syntaxError":"syntax error at or near \"a\"","position":36}
+{"sql":"create publication p for x, table","syntaxError":"syntax error at end of input","position":33}
+{"sql":"alter publication p add x, table","syntaxError":"syntax error at end of input","position":32}
+{"sql":"alter publication p add x, tables in schema","syntaxError":"syntax error at end of input","position":43}
+{"sql":"alter publication p set x, tables in schema s.t","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p drop x, tables in schema s (a)","syntaxError":"invalid publication object list","position":25}
+{"sql":"create publication p for only x, table t","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p add only x, table t","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p add only x, table s.t","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p set only x, table only t","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p drop only x, table t *","syntaxError":"invalid publication object list","position":0}
+{"sql":"create publication p for only x, table only (t)","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p add only x, table only (t)","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p add only x, table t (a, b)","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p set only x, table t where (a \u003e 1)","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p drop only x, table s.t (a) where (a \u003e 1)","syntaxError":"invalid publication object list","position":0}
+{"sql":"create publication p for only x, tables in schema s","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p add only x, tables in schema s","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p add only x, tables in schema current_schema","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p set only x, x","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p drop only x, s.x","syntaxError":"invalid publication object list","position":0}
+{"sql":"create publication p for only x, c.s.x","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p add only x, c.s.x","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p add only x, a.b.c.d","syntaxError":"improper qualified name (too many dotted names): a.b.c.d","position":32}
+{"sql":"alter publication p set only x, x *","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p drop only x, only x","syntaxError":"invalid publication object list","position":0}
+{"sql":"create publication p for only x, only (x)","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p add only x, only (x)","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p add only x, s.x *","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p set only x, only s.x","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p drop only x, x (a)","syntaxError":"invalid publication object list","position":0}
+{"sql":"create publication p for only x, x (a, b)","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p add only x, x (a, b)","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p add only x, x where (a = 1)","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p set only x, s.x (a)","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p drop only x, s.x where (a = 1)","syntaxError":"invalid publication object list","position":0}
+{"sql":"create publication p for only x, x (a) where (a = 1)","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p add only x, x (a) where (a = 1)","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p add only x, only x (a)","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p set only x, x * where (a = 1)","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p drop only x, only (s.x) (a) where (a = 1)","syntaxError":"invalid publication object list","position":0}
+{"sql":"create publication p for only x, current_schema","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p add only x, current_schema","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p add only x, current_schema (a)","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p set only x, current_schema where (a = 1)","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p drop only x, current_schema.x","syntaxError":"invalid publication object list","position":0}
+{"sql":"create publication p for only x, current_schema *","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p add only x, current_schema *","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p add only x, x[1]","syntaxError":"syntax error at end of input","position":36}
+{"sql":"alter publication p set only x, x ()","syntaxError":"syntax error at or near \")\"","position":35}
+{"sql":"alter publication p drop only x, x where a = 1","syntaxError":"syntax error at or near \"a\"","position":41}
+{"sql":"create publication p for only x, table","syntaxError":"syntax error at end of input","position":38}
+{"sql":"alter publication p add only x, table","syntaxError":"syntax error at end of input","position":37}
+{"sql":"alter publication p add only x, tables in schema","syntaxError":"syntax error at end of input","position":48}
+{"sql":"alter publication p set only x, tables in schema s.t","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p drop only x, tables in schema s (a)","syntaxError":"invalid publication object list","position":0}
+{"sql":"create publication p for current_schema, table t","syntaxError":"invalid publication object list","position":25}
+{"sql":"alter publication p add current_schema, table t","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p add current_schema, table s.t","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p set current_schema, table only t","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p drop current_schema, table t *","syntaxError":"invalid publication object list","position":25}
+{"sql":"create publication p for current_schema, table only (t)","syntaxError":"invalid publication object list","position":25}
+{"sql":"alter publication p add current_schema, table only (t)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p add current_schema, table t (a, b)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p set current_schema, table t where (a \u003e 1)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p drop current_schema, table s.t (a) where (a \u003e 1)","syntaxError":"invalid publication object list","position":25}
+{"sql":"create publication p for current_schema, tables in schema s","syntaxError":"invalid publication object list","position":25}
+{"sql":"alter publication p add current_schema, tables in schema s","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p add current_schema, tables in schema current_schema","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p set current_schema, x","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p drop current_schema, s.x","syntaxError":"invalid publication object list","position":25}
+{"sql":"create publication p for current_schema, c.s.x","syntaxError":"invalid publication object list","position":25}
+{"sql":"alter publication p add current_schema, c.s.x","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p add current_schema, a.b.c.d","syntaxError":"improper qualified name (too many dotted names): a.b.c.d","position":40}
+{"sql":"alter publication p set current_schema, x *","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p drop current_schema, only x","syntaxError":"invalid publication object list","position":25}
+{"sql":"create publication p for current_schema, only (x)","syntaxError":"invalid publication object list","position":25}
+{"sql":"alter publication p add current_schema, only (x)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p add current_schema, s.x *","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p set current_schema, only s.x","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p drop current_schema, x (a)","syntaxError":"invalid publication object list","position":25}
+{"sql":"create publication p for current_schema, x (a, b)","syntaxError":"invalid publication object list","position":25}
+{"sql":"alter publication p add current_schema, x (a, b)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p add current_schema, x where (a = 1)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p set current_schema, s.x (a)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p drop current_schema, s.x where (a = 1)","syntaxError":"invalid publication object list","position":25}
+{"sql":"create publication p for current_schema, x (a) where (a = 1)","syntaxError":"invalid publication object list","position":25}
+{"sql":"alter publication p add current_schema, x (a) where (a = 1)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p add current_schema, only x (a)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p set current_schema, x * where (a = 1)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p drop current_schema, only (s.x) (a) where (a = 1)","syntaxError":"invalid publication object list","position":25}
+{"sql":"create publication p for current_schema, current_schema","syntaxError":"invalid publication object list","position":25}
+{"sql":"alter publication p add current_schema, current_schema","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p add current_schema, current_schema (a)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p set current_schema, current_schema where (a = 1)","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p drop current_schema, current_schema.x","syntaxError":"invalid publication object list","position":25}
+{"sql":"create publication p for current_schema, current_schema *","syntaxError":"invalid publication object list","position":25}
+{"sql":"alter publication p add current_schema, current_schema *","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p add current_schema, x[1]","syntaxError":"syntax error at end of input","position":44}
+{"sql":"alter publication p set current_schema, x ()","syntaxError":"syntax error at or near \")\"","position":43}
+{"sql":"alter publication p drop current_schema, x where a = 1","syntaxError":"syntax error at or near \"a\"","position":49}
+{"sql":"create publication p for current_schema, table","syntaxError":"syntax error at end of input","position":46}
+{"sql":"alter publication p add current_schema, table","syntaxError":"syntax error at end of input","position":45}
+{"sql":"alter publication p add current_schema, tables in schema","syntaxError":"syntax error at end of input","position":56}
+{"sql":"alter publication p set current_schema, tables in schema s.t","syntaxError":"invalid publication object list","position":24}
+{"sql":"alter publication p drop current_schema, tables in schema s (a)","syntaxError":"invalid publication object list","position":25}
+{"sql":"create publication p for table t, table y, table t"}
+{"sql":"alter publication p add table t, table y, table t"}
+{"sql":"alter publication p add table t, table y, table s.t"}
+{"sql":"alter publication p set table t, table y, table only t"}
+{"sql":"alter publication p drop table t, table y, table t *"}
+{"sql":"create publication p for table t, table y, table only (t)"}
+{"sql":"alter publication p add table t, table y, table only (t)"}
+{"sql":"alter publication p add table t, table y, table t (a, b)"}
+{"sql":"alter publication p set table t, table y, table t where (a \u003e 1)"}
+{"sql":"alter publication p drop table t, table y, table s.t (a) where (a \u003e 1)"}
+{"sql":"create publication p for table t, table y, tables in schema s"}
+{"sql":"alter publication p add table t, table y, tables in schema s"}
+{"sql":"alter publication p add table t, table y, tables in schema current_schema"}
+{"sql":"alter publication p set table t, table y, x"}
+{"sql":"alter publication p drop table t, table y, s.x"}
+{"sql":"create publication p for table t, table y, c.s.x"}
+{"sql":"alter publication p add table t, table y, c.s.x"}
+{"sql":"alter publication p add table t, table y, a.b.c.d","syntaxError":"improper qualified name (too many dotted names): a.b.c.d","position":42}
+{"sql":"alter publication p set table t, table y, x *"}
+{"sql":"alter publication p drop table t, table y, only x"}
+{"sql":"create publication p for table t, table y, only (x)"}
+{"sql":"alter publication p add table t, table y, only (x)"}
+{"sql":"alter publication p add table t, table y, s.x *"}
+{"sql":"alter publication p set table t, table y, only s.x"}
+{"sql":"alter publication p drop table t, table y, x (a)"}
+{"sql":"create publication p for table t, table y, x (a, b)"}
+{"sql":"alter publication p add table t, table y, x (a, b)"}
+{"sql":"alter publication p add table t, table y, x where (a = 1)"}
+{"sql":"alter publication p set table t, table y, s.x (a)"}
+{"sql":"alter publication p drop table t, table y, s.x where (a = 1)"}
+{"sql":"create publication p for table t, table y, x (a) where (a = 1)"}
+{"sql":"alter publication p add table t, table y, x (a) where (a = 1)"}
+{"sql":"alter publication p add table t, table y, only x (a)"}
+{"sql":"alter publication p set table t, table y, x * where (a = 1)"}
+{"sql":"alter publication p drop table t, table y, only (s.x) (a) where (a = 1)"}
+{"sql":"create publication p for table t, table y, current_schema","syntaxError":"invalid table name","position":43}
+{"sql":"alter publication p add table t, table y, current_schema","syntaxError":"invalid table name","position":42}
+{"sql":"alter publication p add table t, table y, current_schema (a)","syntaxError":"invalid table name","position":42}
+{"sql":"alter publication p set table t, table y, current_schema where (a = 1)","syntaxError":"invalid table name","position":42}
+{"sql":"alter publication p drop table t, table y, current_schema.x","syntaxError":"invalid table name","position":43}
+{"sql":"create publication p for table t, table y, current_schema *","syntaxError":"invalid table name","position":43}
+{"sql":"alter publication p add table t, table y, current_schema *","syntaxError":"invalid table name","position":42}
+{"sql":"alter publication p add table t, table y, x[1]","syntaxError":"syntax error at end of input","position":46}
+{"sql":"alter publication p set table t, table y, x ()","syntaxError":"syntax error at or near \")\"","position":45}
+{"sql":"alter publication p drop table t, table y, x where a = 1","syntaxError":"syntax error at or near \"a\"","position":51}
+{"sql":"create publication p for table t, table y, table","syntaxError":"syntax error at end of input","position":48}
+{"sql":"alter publication p add table t, table y, table","syntaxError":"syntax error at end of input","position":47}
+{"sql":"alter publication p add table t, table y, tables in schema","syntaxError":"syntax error at end of input","position":58}
+{"sql":"alter publication p set table t, table y, tables in schema s.t","syntaxError":"syntax error at or near \".\"","position":60}
+{"sql":"alter publication p drop table t, table y, tables in schema s (a)","syntaxError":"syntax error at or near \"(\"","position":62}
+{"sql":"create publication p for table t, tables in schema s2, table t"}
+{"sql":"alter publication p add table t, tables in schema s2, table t"}
+{"sql":"alter publication p add table t, tables in schema s2, table s.t"}
+{"sql":"alter publication p set table t, tables in schema s2, table only t"}
+{"sql":"alter publication p drop table t, tables in schema s2, table t *"}
+{"sql":"create publication p for table t, tables in schema s2, table only (t)"}
+{"sql":"alter publication p add table t, tables in schema s2, table only (t)"}
+{"sql":"alter publication p add table t, tables in schema s2, table t (a, b)"}
+{"sql":"alter publication p set table t, tables in schema s2, table t where (a \u003e 1)"}
+{"sql":"alter publication p drop table t, tables in schema s2, table s.t (a) where (a \u003e 1)"}
+{"sql":"create publication p for table t, tables in schema s2, tables in schema s"}
+{"sql":"alter publication p add table t, tables in schema s2, tables in schema s"}
+{"sql":"alter publication p add table t, tables in schema s2, tables in schema current_schema"}
+{"sql":"alter publication p set table t, tables in schema s2, x"}
+{"sql":"alter publication p drop table t, tables in schema s2, s.x","syntaxError":"invalid schema name","position":55}
+{"sql":"create publication p for table t, tables in schema s2, c.s.x","syntaxError":"invalid schema name","position":55}
+{"sql":"alter publication p add table t, tables in schema s2, c.s.x","syntaxError":"invalid schema name","position":54}
+{"sql":"alter publication p add table t, tables in schema s2, a.b.c.d","syntaxError":"improper qualified name (too many dotted names): a.b.c.d","position":54}
+{"sql":"alter publication p set table t, tables in schema s2, x *","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p drop table t, tables in schema s2, only x","syntaxError":"invalid schema name","position":0}
+{"sql":"create publication p for table t, tables in schema s2, only (x)","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p add table t, tables in schema s2, only (x)","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p add table t, tables in schema s2, s.x *","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p set table t, tables in schema s2, only s.x","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p drop table t, tables in schema s2, x (a)","syntaxError":"column specification not allowed for schema","position":55}
+{"sql":"create publication p for table t, tables in schema s2, x (a, b)","syntaxError":"column specification not allowed for schema","position":55}
+{"sql":"alter publication p add table t, tables in schema s2, x (a, b)","syntaxError":"column specification not allowed for schema","position":54}
+{"sql":"alter publication p add table t, tables in schema s2, x where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":54}
+{"sql":"alter publication p set table t, tables in schema s2, s.x (a)","syntaxError":"column specification not allowed for schema","position":54}
+{"sql":"alter publication p drop table t, tables in schema s2, s.x where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":55}
+{"sql":"create publication p for table t, tables in schema s2, x (a) where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":55}
+{"sql":"alter publication p add table t, tables in schema s2, x (a) where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":54}
+{"sql":"alter publication p add table t, tables in schema s2, only x (a)","syntaxError":"column specification not allowed for schema","position":0}
+{"sql":"alter publication p set table t, tables in schema s2, x * where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":0}
+{"sql":"alter publication p drop table t, tables in schema s2, only (s.x) (a) where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":0}
+{"sql":"create publication p for table t, tables in schema s2, current_schema"}
+{"sql":"alter publication p add table t, tables in schema s2, current_schema"}
+{"sql":"alter publication p add table t, tables in schema s2, current_schema (a)","syntaxError":"syntax error at or near \"(\"","position":69}
+{"sql":"alter publication p set table t, tables in schema s2, current_schema where (a = 1)","syntaxError":"syntax error at or near \"where\"","position":69}
+{"sql":"alter publication p drop table t, tables in schema s2, current_schema.x","syntaxError":"syntax error at or near \".\"","position":69}
+{"sql":"create publication p for table t, tables in schema s2, current_schema *","syntaxError":"syntax error at or near \"*\"","position":70}
+{"sql":"alter publication p add table t, tables in schema s2, current_schema *","syntaxError":"syntax error at or near \"*\"","position":69}
+{"sql":"alter publication p add table t, tables in schema s2, x[1]","syntaxError":"syntax error at end of input","position":58}
+{"sql":"alter publication p set table t, tables in schema s2, x ()","syntaxError":"syntax error at or near \")\"","position":57}
+{"sql":"alter publication p drop table t, tables in schema s2, x where a = 1","syntaxError":"syntax error at or near \"a\"","position":63}
+{"sql":"create publication p for table t, tables in schema s2, table","syntaxError":"syntax error at end of input","position":60}
+{"sql":"alter publication p add table t, tables in schema s2, table","syntaxError":"syntax error at end of input","position":59}
+{"sql":"alter publication p add table t, tables in schema s2, tables in schema","syntaxError":"syntax error at end of input","position":70}
+{"sql":"alter publication p set table t, tables in schema s2, tables in schema s.t","syntaxError":"syntax error at or near \".\"","position":72}
+{"sql":"alter publication p drop table t, tables in schema s2, tables in schema s (a)","syntaxError":"syntax error at or near \"(\"","position":74}
+{"sql":"create publication p for table t, y, table t"}
+{"sql":"alter publication p add table t, y, table t"}
+{"sql":"alter publication p add table t, y, table s.t"}
+{"sql":"alter publication p set table t, y, table only t"}
+{"sql":"alter publication p drop table t, y, table t *"}
+{"sql":"create publication p for table t, y, table only (t)"}
+{"sql":"alter publication p add table t, y, table only (t)"}
+{"sql":"alter publication p add table t, y, table t (a, b)"}
+{"sql":"alter publication p set table t, y, table t where (a \u003e 1)"}
+{"sql":"alter publication p drop table t, y, table s.t (a) where (a \u003e 1)"}
+{"sql":"create publication p for table t, y, tables in schema s"}
+{"sql":"alter publication p add table t, y, tables in schema s"}
+{"sql":"alter publication p add table t, y, tables in schema current_schema"}
+{"sql":"alter publication p set table t, y, x"}
+{"sql":"alter publication p drop table t, y, s.x"}
+{"sql":"create publication p for table t, y, c.s.x"}
+{"sql":"alter publication p add table t, y, c.s.x"}
+{"sql":"alter publication p add table t, y, a.b.c.d","syntaxError":"improper qualified name (too many dotted names): a.b.c.d","position":36}
+{"sql":"alter publication p set table t, y, x *"}
+{"sql":"alter publication p drop table t, y, only x"}
+{"sql":"create publication p for table t, y, only (x)"}
+{"sql":"alter publication p add table t, y, only (x)"}
+{"sql":"alter publication p add table t, y, s.x *"}
+{"sql":"alter publication p set table t, y, only s.x"}
+{"sql":"alter publication p drop table t, y, x (a)"}
+{"sql":"create publication p for table t, y, x (a, b)"}
+{"sql":"alter publication p add table t, y, x (a, b)"}
+{"sql":"alter publication p add table t, y, x where (a = 1)"}
+{"sql":"alter publication p set table t, y, s.x (a)"}
+{"sql":"alter publication p drop table t, y, s.x where (a = 1)"}
+{"sql":"create publication p for table t, y, x (a) where (a = 1)"}
+{"sql":"alter publication p add table t, y, x (a) where (a = 1)"}
+{"sql":"alter publication p add table t, y, only x (a)"}
+{"sql":"alter publication p set table t, y, x * where (a = 1)"}
+{"sql":"alter publication p drop table t, y, only (s.x) (a) where (a = 1)"}
+{"sql":"create publication p for table t, y, current_schema","syntaxError":"invalid table name","position":37}
+{"sql":"alter publication p add table t, y, current_schema","syntaxError":"invalid table name","position":36}
+{"sql":"alter publication p add table t, y, current_schema (a)","syntaxError":"invalid table name","position":36}
+{"sql":"alter publication p set table t, y, current_schema where (a = 1)","syntaxError":"invalid table name","position":36}
+{"sql":"alter publication p drop table t, y, current_schema.x","syntaxError":"invalid table name","position":37}
+{"sql":"create publication p for table t, y, current_schema *","syntaxError":"invalid table name","position":37}
+{"sql":"alter publication p add table t, y, current_schema *","syntaxError":"invalid table name","position":36}
+{"sql":"alter publication p add table t, y, x[1]","syntaxError":"syntax error at end of input","position":40}
+{"sql":"alter publication p set table t, y, x ()","syntaxError":"syntax error at or near \")\"","position":39}
+{"sql":"alter publication p drop table t, y, x where a = 1","syntaxError":"syntax error at or near \"a\"","position":45}
+{"sql":"create publication p for table t, y, table","syntaxError":"syntax error at end of input","position":42}
+{"sql":"alter publication p add table t, y, table","syntaxError":"syntax error at end of input","position":41}
+{"sql":"alter publication p add table t, y, tables in schema","syntaxError":"syntax error at end of input","position":52}
+{"sql":"alter publication p set table t, y, tables in schema s.t","syntaxError":"syntax error at or near \".\"","position":54}
+{"sql":"alter publication p drop table t, y, tables in schema s (a)","syntaxError":"syntax error at or near \"(\"","position":56}
+{"sql":"create publication p for table t, current_schema, table t","syntaxError":"invalid table name","position":34}
+{"sql":"alter publication p add table t, current_schema, table t","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p add table t, current_schema, table s.t","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p set table t, current_schema, table only t","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p drop table t, current_schema, table t *","syntaxError":"invalid table name","position":34}
+{"sql":"create publication p for table t, current_schema, table only (t)","syntaxError":"invalid table name","position":34}
+{"sql":"alter publication p add table t, current_schema, table only (t)","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p add table t, current_schema, table t (a, b)","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p set table t, current_schema, table t where (a \u003e 1)","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p drop table t, current_schema, table s.t (a) where (a \u003e 1)","syntaxError":"invalid table name","position":34}
+{"sql":"create publication p for table t, current_schema, tables in schema s","syntaxError":"invalid table name","position":34}
+{"sql":"alter publication p add table t, current_schema, tables in schema s","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p add table t, current_schema, tables in schema current_schema","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p set table t, current_schema, x","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p drop table t, current_schema, s.x","syntaxError":"invalid table name","position":34}
+{"sql":"create publication p for table t, current_schema, c.s.x","syntaxError":"invalid table name","position":34}
+{"sql":"alter publication p add table t, current_schema, c.s.x","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p add table t, current_schema, a.b.c.d","syntaxError":"improper qualified name (too many dotted names): a.b.c.d","position":49}
+{"sql":"alter publication p set table t, current_schema, x *","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p drop table t, current_schema, only x","syntaxError":"invalid table name","position":34}
+{"sql":"create publication p for table t, current_schema, only (x)","syntaxError":"invalid table name","position":34}
+{"sql":"alter publication p add table t, current_schema, only (x)","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p add table t, current_schema, s.x *","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p set table t, current_schema, only s.x","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p drop table t, current_schema, x (a)","syntaxError":"invalid table name","position":34}
+{"sql":"create publication p for table t, current_schema, x (a, b)","syntaxError":"invalid table name","position":34}
+{"sql":"alter publication p add table t, current_schema, x (a, b)","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p add table t, current_schema, x where (a = 1)","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p set table t, current_schema, s.x (a)","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p drop table t, current_schema, s.x where (a = 1)","syntaxError":"invalid table name","position":34}
+{"sql":"create publication p for table t, current_schema, x (a) where (a = 1)","syntaxError":"invalid table name","position":34}
+{"sql":"alter publication p add table t, current_schema, x (a) where (a = 1)","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p add table t, current_schema, only x (a)","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p set table t, current_schema, x * where (a = 1)","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p drop table t, current_schema, only (s.x) (a) where (a = 1)","syntaxError":"invalid table name","position":34}
+{"sql":"create publication p for table t, current_schema, current_schema","syntaxError":"invalid table name","position":34}
+{"sql":"alter publication p add table t, current_schema, current_schema","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p add table t, current_schema, current_schema (a)","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p set table t, current_schema, current_schema where (a = 1)","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p drop table t, current_schema, current_schema.x","syntaxError":"invalid table name","position":34}
+{"sql":"create publication p for table t, current_schema, current_schema *","syntaxError":"invalid table name","position":34}
+{"sql":"alter publication p add table t, current_schema, current_schema *","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p add table t, current_schema, x[1]","syntaxError":"syntax error at end of input","position":53}
+{"sql":"alter publication p set table t, current_schema, x ()","syntaxError":"syntax error at or near \")\"","position":52}
+{"sql":"alter publication p drop table t, current_schema, x where a = 1","syntaxError":"syntax error at or near \"a\"","position":58}
+{"sql":"create publication p for table t, current_schema, table","syntaxError":"syntax error at end of input","position":55}
+{"sql":"alter publication p add table t, current_schema, table","syntaxError":"syntax error at end of input","position":54}
+{"sql":"alter publication p add table t, current_schema, tables in schema","syntaxError":"syntax error at end of input","position":65}
+{"sql":"alter publication p set table t, current_schema, tables in schema s.t","syntaxError":"invalid table name","position":33}
+{"sql":"alter publication p drop table t, current_schema, tables in schema s (a)","syntaxError":"invalid table name","position":34}
+{"sql":"create publication p for tables in schema s, table y, table t"}
+{"sql":"alter publication p add tables in schema s, table y, table t"}
+{"sql":"alter publication p add tables in schema s, table y, table s.t"}
+{"sql":"alter publication p set tables in schema s, table y, table only t"}
+{"sql":"alter publication p drop tables in schema s, table y, table t *"}
+{"sql":"create publication p for tables in schema s, table y, table only (t)"}
+{"sql":"alter publication p add tables in schema s, table y, table only (t)"}
+{"sql":"alter publication p add tables in schema s, table y, table t (a, b)"}
+{"sql":"alter publication p set tables in schema s, table y, table t where (a \u003e 1)"}
+{"sql":"alter publication p drop tables in schema s, table y, table s.t (a) where (a \u003e 1)"}
+{"sql":"create publication p for tables in schema s, table y, tables in schema s"}
+{"sql":"alter publication p add tables in schema s, table y, tables in schema s"}
+{"sql":"alter publication p add tables in schema s, table y, tables in schema current_schema"}
+{"sql":"alter publication p set tables in schema s, table y, x"}
+{"sql":"alter publication p drop tables in schema s, table y, s.x"}
+{"sql":"create publication p for tables in schema s, table y, c.s.x"}
+{"sql":"alter publication p add tables in schema s, table y, c.s.x"}
+{"sql":"alter publication p add tables in schema s, table y, a.b.c.d","syntaxError":"improper qualified name (too many dotted names): a.b.c.d","position":53}
+{"sql":"alter publication p set tables in schema s, table y, x *"}
+{"sql":"alter publication p drop tables in schema s, table y, only x"}
+{"sql":"create publication p for tables in schema s, table y, only (x)"}
+{"sql":"alter publication p add tables in schema s, table y, only (x)"}
+{"sql":"alter publication p add tables in schema s, table y, s.x *"}
+{"sql":"alter publication p set tables in schema s, table y, only s.x"}
+{"sql":"alter publication p drop tables in schema s, table y, x (a)"}
+{"sql":"create publication p for tables in schema s, table y, x (a, b)"}
+{"sql":"alter publication p add tables in schema s, table y, x (a, b)"}
+{"sql":"alter publication p add tables in schema s, table y, x where (a = 1)"}
+{"sql":"alter publication p set tables in schema s, table y, s.x (a)"}
+{"sql":"alter publication p drop tables in schema s, table y, s.x where (a = 1)"}
+{"sql":"create publication p for tables in schema s, table y, x (a) where (a = 1)"}
+{"sql":"alter publication p add tables in schema s, table y, x (a) where (a = 1)"}
+{"sql":"alter publication p add tables in schema s, table y, only x (a)"}
+{"sql":"alter publication p set tables in schema s, table y, x * where (a = 1)"}
+{"sql":"alter publication p drop tables in schema s, table y, only (s.x) (a) where (a = 1)"}
+{"sql":"create publication p for tables in schema s, table y, current_schema","syntaxError":"invalid table name","position":54}
+{"sql":"alter publication p add tables in schema s, table y, current_schema","syntaxError":"invalid table name","position":53}
+{"sql":"alter publication p add tables in schema s, table y, current_schema (a)","syntaxError":"invalid table name","position":53}
+{"sql":"alter publication p set tables in schema s, table y, current_schema where (a = 1)","syntaxError":"invalid table name","position":53}
+{"sql":"alter publication p drop tables in schema s, table y, current_schema.x","syntaxError":"invalid table name","position":54}
+{"sql":"create publication p for tables in schema s, table y, current_schema *","syntaxError":"invalid table name","position":54}
+{"sql":"alter publication p add tables in schema s, table y, current_schema *","syntaxError":"invalid table name","position":53}
+{"sql":"alter publication p add tables in schema s, table y, x[1]","syntaxError":"syntax error at end of input","position":57}
+{"sql":"alter publication p set tables in schema s, table y, x ()","syntaxError":"syntax error at or near \")\"","position":56}
+{"sql":"alter publication p drop tables in schema s, table y, x where a = 1","syntaxError":"syntax error at or near \"a\"","position":62}
+{"sql":"create publication p for tables in schema s, table y, table","syntaxError":"syntax error at end of input","position":59}
+{"sql":"alter publication p add tables in schema s, table y, table","syntaxError":"syntax error at end of input","position":58}
+{"sql":"alter publication p add tables in schema s, table y, tables in schema","syntaxError":"syntax error at end of input","position":69}
+{"sql":"alter publication p set tables in schema s, table y, tables in schema s.t","syntaxError":"syntax error at or near \".\"","position":71}
+{"sql":"alter publication p drop tables in schema s, table y, tables in schema s (a)","syntaxError":"syntax error at or near \"(\"","position":73}
+{"sql":"create publication p for tables in schema s, tables in schema s2, table t"}
+{"sql":"alter publication p add tables in schema s, tables in schema s2, table t"}
+{"sql":"alter publication p add tables in schema s, tables in schema s2, table s.t"}
+{"sql":"alter publication p set tables in schema s, tables in schema s2, table only t"}
+{"sql":"alter publication p drop tables in schema s, tables in schema s2, table t *"}
+{"sql":"create publication p for tables in schema s, tables in schema s2, table only (t)"}
+{"sql":"alter publication p add tables in schema s, tables in schema s2, table only (t)"}
+{"sql":"alter publication p add tables in schema s, tables in schema s2, table t (a, b)"}
+{"sql":"alter publication p set tables in schema s, tables in schema s2, table t where (a \u003e 1)"}
+{"sql":"alter publication p drop tables in schema s, tables in schema s2, table s.t (a) where (a \u003e 1)"}
+{"sql":"create publication p for tables in schema s, tables in schema s2, tables in schema s"}
+{"sql":"alter publication p add tables in schema s, tables in schema s2, tables in schema s"}
+{"sql":"alter publication p add tables in schema s, tables in schema s2, tables in schema current_schema"}
+{"sql":"alter publication p set tables in schema s, tables in schema s2, x"}
+{"sql":"alter publication p drop tables in schema s, tables in schema s2, s.x","syntaxError":"invalid schema name","position":66}
+{"sql":"create publication p for tables in schema s, tables in schema s2, c.s.x","syntaxError":"invalid schema name","position":66}
+{"sql":"alter publication p add tables in schema s, tables in schema s2, c.s.x","syntaxError":"invalid schema name","position":65}
+{"sql":"alter publication p add tables in schema s, tables in schema s2, a.b.c.d","syntaxError":"improper qualified name (too many dotted names): a.b.c.d","position":65}
+{"sql":"alter publication p set tables in schema s, tables in schema s2, x *","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p drop tables in schema s, tables in schema s2, only x","syntaxError":"invalid schema name","position":0}
+{"sql":"create publication p for tables in schema s, tables in schema s2, only (x)","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p add tables in schema s, tables in schema s2, only (x)","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p add tables in schema s, tables in schema s2, s.x *","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p set tables in schema s, tables in schema s2, only s.x","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p drop tables in schema s, tables in schema s2, x (a)","syntaxError":"column specification not allowed for schema","position":66}
+{"sql":"create publication p for tables in schema s, tables in schema s2, x (a, b)","syntaxError":"column specification not allowed for schema","position":66}
+{"sql":"alter publication p add tables in schema s, tables in schema s2, x (a, b)","syntaxError":"column specification not allowed for schema","position":65}
+{"sql":"alter publication p add tables in schema s, tables in schema s2, x where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":65}
+{"sql":"alter publication p set tables in schema s, tables in schema s2, s.x (a)","syntaxError":"column specification not allowed for schema","position":65}
+{"sql":"alter publication p drop tables in schema s, tables in schema s2, s.x where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":66}
+{"sql":"create publication p for tables in schema s, tables in schema s2, x (a) where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":66}
+{"sql":"alter publication p add tables in schema s, tables in schema s2, x (a) where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":65}
+{"sql":"alter publication p add tables in schema s, tables in schema s2, only x (a)","syntaxError":"column specification not allowed for schema","position":0}
+{"sql":"alter publication p set tables in schema s, tables in schema s2, x * where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":0}
+{"sql":"alter publication p drop tables in schema s, tables in schema s2, only (s.x) (a) where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":0}
+{"sql":"create publication p for tables in schema s, tables in schema s2, current_schema"}
+{"sql":"alter publication p add tables in schema s, tables in schema s2, current_schema"}
+{"sql":"alter publication p add tables in schema s, tables in schema s2, current_schema (a)","syntaxError":"syntax error at or near \"(\"","position":80}
+{"sql":"alter publication p set tables in schema s, tables in schema s2, current_schema where (a = 1)","syntaxError":"syntax error at or near \"where\"","position":80}
+{"sql":"alter publication p drop tables in schema s, tables in schema s2, current_schema.x","syntaxError":"syntax error at or near \".\"","position":80}
+{"sql":"create publication p for tables in schema s, tables in schema s2, current_schema *","syntaxError":"syntax error at or near \"*\"","position":81}
+{"sql":"alter publication p add tables in schema s, tables in schema s2, current_schema *","syntaxError":"syntax error at or near \"*\"","position":80}
+{"sql":"alter publication p add tables in schema s, tables in schema s2, x[1]","syntaxError":"syntax error at end of input","position":69}
+{"sql":"alter publication p set tables in schema s, tables in schema s2, x ()","syntaxError":"syntax error at or near \")\"","position":68}
+{"sql":"alter publication p drop tables in schema s, tables in schema s2, x where a = 1","syntaxError":"syntax error at or near \"a\"","position":74}
+{"sql":"create publication p for tables in schema s, tables in schema s2, table","syntaxError":"syntax error at end of input","position":71}
+{"sql":"alter publication p add tables in schema s, tables in schema s2, table","syntaxError":"syntax error at end of input","position":70}
+{"sql":"alter publication p add tables in schema s, tables in schema s2, tables in schema","syntaxError":"syntax error at end of input","position":81}
+{"sql":"alter publication p set tables in schema s, tables in schema s2, tables in schema s.t","syntaxError":"syntax error at or near \".\"","position":83}
+{"sql":"alter publication p drop tables in schema s, tables in schema s2, tables in schema s (a)","syntaxError":"syntax error at or near \"(\"","position":85}
+{"sql":"create publication p for tables in schema s, y, table t"}
+{"sql":"alter publication p add tables in schema s, y, table t"}
+{"sql":"alter publication p add tables in schema s, y, table s.t"}
+{"sql":"alter publication p set tables in schema s, y, table only t"}
+{"sql":"alter publication p drop tables in schema s, y, table t *"}
+{"sql":"create publication p for tables in schema s, y, table only (t)"}
+{"sql":"alter publication p add tables in schema s, y, table only (t)"}
+{"sql":"alter publication p add tables in schema s, y, table t (a, b)"}
+{"sql":"alter publication p set tables in schema s, y, table t where (a \u003e 1)"}
+{"sql":"alter publication p drop tables in schema s, y, table s.t (a) where (a \u003e 1)"}
+{"sql":"create publication p for tables in schema s, y, tables in schema s"}
+{"sql":"alter publication p add tables in schema s, y, tables in schema s"}
+{"sql":"alter publication p add tables in schema s, y, tables in schema current_schema"}
+{"sql":"alter publication p set tables in schema s, y, x"}
+{"sql":"alter publication p drop tables in schema s, y, s.x","syntaxError":"invalid schema name","position":48}
+{"sql":"create publication p for tables in schema s, y, c.s.x","syntaxError":"invalid schema name","position":48}
+{"sql":"alter publication p add tables in schema s, y, c.s.x","syntaxError":"invalid schema name","position":47}
+{"sql":"alter publication p add tables in schema s, y, a.b.c.d","syntaxError":"improper qualified name (too many dotted names): a.b.c.d","position":47}
+{"sql":"alter publication p set tables in schema s, y, x *","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p drop tables in schema s, y, only x","syntaxError":"invalid schema name","position":0}
+{"sql":"create publication p for tables in schema s, y, only (x)","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p add tables in schema s, y, only (x)","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p add tables in schema s, y, s.x *","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p set tables in schema s, y, only s.x","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p drop tables in schema s, y, x (a)","syntaxError":"column specification not allowed for schema","position":48}
+{"sql":"create publication p for tables in schema s, y, x (a, b)","syntaxError":"column specification not allowed for schema","position":48}
+{"sql":"alter publication p add tables in schema s, y, x (a, b)","syntaxError":"column specification not allowed for schema","position":47}
+{"sql":"alter publication p add tables in schema s, y, x where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":47}
+{"sql":"alter publication p set tables in schema s, y, s.x (a)","syntaxError":"column specification not allowed for schema","position":47}
+{"sql":"alter publication p drop tables in schema s, y, s.x where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":48}
+{"sql":"create publication p for tables in schema s, y, x (a) where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":48}
+{"sql":"alter publication p add tables in schema s, y, x (a) where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":47}
+{"sql":"alter publication p add tables in schema s, y, only x (a)","syntaxError":"column specification not allowed for schema","position":0}
+{"sql":"alter publication p set tables in schema s, y, x * where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":0}
+{"sql":"alter publication p drop tables in schema s, y, only (s.x) (a) where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":0}
+{"sql":"create publication p for tables in schema s, y, current_schema"}
+{"sql":"alter publication p add tables in schema s, y, current_schema"}
+{"sql":"alter publication p add tables in schema s, y, current_schema (a)","syntaxError":"syntax error at or near \"(\"","position":62}
+{"sql":"alter publication p set tables in schema s, y, current_schema where (a = 1)","syntaxError":"syntax error at or near \"where\"","position":62}
+{"sql":"alter publication p drop tables in schema s, y, current_schema.x","syntaxError":"syntax error at or near \".\"","position":62}
+{"sql":"create publication p for tables in schema s, y, current_schema *","syntaxError":"syntax error at or near \"*\"","position":63}
+{"sql":"alter publication p add tables in schema s, y, current_schema *","syntaxError":"syntax error at or near \"*\"","position":62}
+{"sql":"alter publication p add tables in schema s, y, x[1]","syntaxError":"syntax error at end of input","position":51}
+{"sql":"alter publication p set tables in schema s, y, x ()","syntaxError":"syntax error at or near \")\"","position":50}
+{"sql":"alter publication p drop tables in schema s, y, x where a = 1","syntaxError":"syntax error at or near \"a\"","position":56}
+{"sql":"create publication p for tables in schema s, y, table","syntaxError":"syntax error at end of input","position":53}
+{"sql":"alter publication p add tables in schema s, y, table","syntaxError":"syntax error at end of input","position":52}
+{"sql":"alter publication p add tables in schema s, y, tables in schema","syntaxError":"syntax error at end of input","position":63}
+{"sql":"alter publication p set tables in schema s, y, tables in schema s.t","syntaxError":"syntax error at or near \".\"","position":65}
+{"sql":"alter publication p drop tables in schema s, y, tables in schema s (a)","syntaxError":"syntax error at or near \"(\"","position":67}
+{"sql":"create publication p for tables in schema s, current_schema, table t"}
+{"sql":"alter publication p add tables in schema s, current_schema, table t"}
+{"sql":"alter publication p add tables in schema s, current_schema, table s.t"}
+{"sql":"alter publication p set tables in schema s, current_schema, table only t"}
+{"sql":"alter publication p drop tables in schema s, current_schema, table t *"}
+{"sql":"create publication p for tables in schema s, current_schema, table only (t)"}
+{"sql":"alter publication p add tables in schema s, current_schema, table only (t)"}
+{"sql":"alter publication p add tables in schema s, current_schema, table t (a, b)"}
+{"sql":"alter publication p set tables in schema s, current_schema, table t where (a \u003e 1)"}
+{"sql":"alter publication p drop tables in schema s, current_schema, table s.t (a) where (a \u003e 1)"}
+{"sql":"create publication p for tables in schema s, current_schema, tables in schema s"}
+{"sql":"alter publication p add tables in schema s, current_schema, tables in schema s"}
+{"sql":"alter publication p add tables in schema s, current_schema, tables in schema current_schema"}
+{"sql":"alter publication p set tables in schema s, current_schema, x"}
+{"sql":"alter publication p drop tables in schema s, current_schema, s.x","syntaxError":"invalid schema name","position":61}
+{"sql":"create publication p for tables in schema s, current_schema, c.s.x","syntaxError":"invalid schema name","position":61}
+{"sql":"alter publication p add tables in schema s, current_schema, c.s.x","syntaxError":"invalid schema name","position":60}
+{"sql":"alter publication p add tables in schema s, current_schema, a.b.c.d","syntaxError":"improper qualified name (too many dotted names): a.b.c.d","position":60}
+{"sql":"alter publication p set tables in schema s, current_schema, x *","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p drop tables in schema s, current_schema, only x","syntaxError":"invalid schema name","position":0}
+{"sql":"create publication p for tables in schema s, current_schema, only (x)","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p add tables in schema s, current_schema, only (x)","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p add tables in schema s, current_schema, s.x *","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p set tables in schema s, current_schema, only s.x","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p drop tables in schema s, current_schema, x (a)","syntaxError":"column specification not allowed for schema","position":61}
+{"sql":"create publication p for tables in schema s, current_schema, x (a, b)","syntaxError":"column specification not allowed for schema","position":61}
+{"sql":"alter publication p add tables in schema s, current_schema, x (a, b)","syntaxError":"column specification not allowed for schema","position":60}
+{"sql":"alter publication p add tables in schema s, current_schema, x where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":60}
+{"sql":"alter publication p set tables in schema s, current_schema, s.x (a)","syntaxError":"column specification not allowed for schema","position":60}
+{"sql":"alter publication p drop tables in schema s, current_schema, s.x where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":61}
+{"sql":"create publication p for tables in schema s, current_schema, x (a) where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":61}
+{"sql":"alter publication p add tables in schema s, current_schema, x (a) where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":60}
+{"sql":"alter publication p add tables in schema s, current_schema, only x (a)","syntaxError":"column specification not allowed for schema","position":0}
+{"sql":"alter publication p set tables in schema s, current_schema, x * where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":0}
+{"sql":"alter publication p drop tables in schema s, current_schema, only (s.x) (a) where (a = 1)","syntaxError":"WHERE clause not allowed for schema","position":0}
+{"sql":"create publication p for tables in schema s, current_schema, current_schema"}
+{"sql":"alter publication p add tables in schema s, current_schema, current_schema"}
+{"sql":"alter publication p add tables in schema s, current_schema, current_schema (a)","syntaxError":"syntax error at or near \"(\"","position":75}
+{"sql":"alter publication p set tables in schema s, current_schema, current_schema where (a = 1)","syntaxError":"syntax error at or near \"where\"","position":75}
+{"sql":"alter publication p drop tables in schema s, current_schema, current_schema.x","syntaxError":"syntax error at or near \".\"","position":75}
+{"sql":"create publication p for tables in schema s, current_schema, current_schema *","syntaxError":"syntax error at or near \"*\"","position":76}
+{"sql":"alter publication p add tables in schema s, current_schema, current_schema *","syntaxError":"syntax error at or near \"*\"","position":75}
+{"sql":"alter publication p add tables in schema s, current_schema, x[1]","syntaxError":"syntax error at end of input","position":64}
+{"sql":"alter publication p set tables in schema s, current_schema, x ()","syntaxError":"syntax error at or near \")\"","position":63}
+{"sql":"alter publication p drop tables in schema s, current_schema, x where a = 1","syntaxError":"syntax error at or near \"a\"","position":69}
+{"sql":"create publication p for tables in schema s, current_schema, table","syntaxError":"syntax error at end of input","position":66}
+{"sql":"alter publication p add tables in schema s, current_schema, table","syntaxError":"syntax error at end of input","position":65}
+{"sql":"alter publication p add tables in schema s, current_schema, tables in schema","syntaxError":"syntax error at end of input","position":76}
+{"sql":"alter publication p set tables in schema s, current_schema, tables in schema s.t","syntaxError":"syntax error at or near \".\"","position":78}
+{"sql":"alter publication p drop tables in schema s, current_schema, tables in schema s (a)","syntaxError":"syntax error at or near \"(\"","position":80}
+{"sql":"create publication p for x with (publish = 'insert')","syntaxError":"invalid publication object list","position":25}
+{"sql":"create publication p for x with (","syntaxError":"syntax error at end of input","position":33}
+{"sql":"create publication p for x )","syntaxError":"invalid publication object list","position":25}
+{"sql":"create publication p for x,","syntaxError":"syntax error at end of input","position":27}
+{"sql":"create publication p for x x","syntaxError":"invalid publication object list","position":25}
+{"sql":"create publication p for x;","syntaxError":"invalid publication object list","position":25}
+{"sql":"alter publication p drop x )","syntaxError":"invalid publication object list","position":25}
+{"sql":"alter publication p drop x,","syntaxError":"syntax error at end of input","position":27}
+{"sql":"alter publication p drop x x","syntaxError":"invalid publication object list","position":25}
+{"sql":"create publication p for table t, current_schema with (publish = 'insert')","syntaxError":"invalid table name","position":34}
+{"sql":"create publication p for table t, current_schema with (","syntaxError":"syntax error at end of input","position":55}
+{"sql":"create publication p for table t, current_schema )","syntaxError":"invalid table name","position":34}
+{"sql":"create publication p for table t, current_schema,","syntaxError":"syntax error at end of input","position":49}
+{"sql":"create publication p for table t, current_schema x","syntaxError":"invalid table name","position":34}
+{"sql":"create publication p for table t, current_schema;","syntaxError":"invalid table name","position":34}
+{"sql":"alter publication p drop table t, current_schema )","syntaxError":"invalid table name","position":34}
+{"sql":"alter publication p drop table t, current_schema,","syntaxError":"syntax error at end of input","position":49}
+{"sql":"alter publication p drop table t, current_schema x","syntaxError":"invalid table name","position":34}
+{"sql":"create publication p for tables in schema s, s.x with (publish = 'insert')","syntaxError":"invalid schema name","position":45}
+{"sql":"create publication p for tables in schema s, s.x with (","syntaxError":"syntax error at end of input","position":55}
+{"sql":"create publication p for tables in schema s, s.x )","syntaxError":"invalid schema name","position":45}
+{"sql":"create publication p for tables in schema s, s.x,","syntaxError":"syntax error at end of input","position":49}
+{"sql":"create publication p for tables in schema s, s.x x","syntaxError":"invalid schema name","position":45}
+{"sql":"create publication p for tables in schema s, s.x;","syntaxError":"invalid schema name","position":45}
+{"sql":"alter publication p drop tables in schema s, s.x )","syntaxError":"invalid schema name","position":45}
+{"sql":"alter publication p drop tables in schema s, s.x,","syntaxError":"syntax error at end of input","position":49}
+{"sql":"alter publication p drop tables in schema s, s.x x","syntaxError":"invalid schema name","position":45}
+{"sql":"create publication p for tables in schema s, x (a) with (publish = 'insert')","syntaxError":"column specification not allowed for schema","position":45}
+{"sql":"create publication p for tables in schema s, x (a) with (","syntaxError":"syntax error at end of input","position":57}
+{"sql":"create publication p for tables in schema s, x (a) )","syntaxError":"column specification not allowed for schema","position":45}
+{"sql":"create publication p for tables in schema s, x (a),","syntaxError":"syntax error at end of input","position":51}
+{"sql":"create publication p for tables in schema s, x (a) x","syntaxError":"column specification not allowed for schema","position":45}
+{"sql":"create publication p for tables in schema s, x (a);","syntaxError":"column specification not allowed for schema","position":45}
+{"sql":"alter publication p drop tables in schema s, x (a) )","syntaxError":"column specification not allowed for schema","position":45}
+{"sql":"alter publication p drop tables in schema s, x (a),","syntaxError":"syntax error at end of input","position":51}
+{"sql":"alter publication p drop tables in schema s, x (a) x","syntaxError":"column specification not allowed for schema","position":45}
+{"sql":"create publication p for table t with (publish = 'insert')"}
+{"sql":"create publication p for table t with (","syntaxError":"syntax error at end of input","position":39}
+{"sql":"create publication p for table t )","syntaxError":"syntax error at or near \")\"","position":33}
+{"sql":"create publication p for table t,","syntaxError":"syntax error at end of input","position":33}
+{"sql":"create publication p for table t x","syntaxError":"syntax error at or near \"x\"","position":33}
+{"sql":"create publication p for table t;"}
+{"sql":"alter publication p drop table t )","syntaxError":"syntax error at or near \")\"","position":33}
+{"sql":"alter publication p drop table t,","syntaxError":"syntax error at end of input","position":33}
+{"sql":"alter publication p drop table t x","syntaxError":"syntax error at or near \"x\"","position":33}
+{"sql":"create publication p for only x with (publish = 'insert')","syntaxError":"invalid publication object list","position":0}
+{"sql":"create publication p for only x with (","syntaxError":"syntax error at end of input","position":38}
+{"sql":"create publication p for only x )","syntaxError":"invalid publication object list","position":0}
+{"sql":"create publication p for only x,","syntaxError":"syntax error at end of input","position":32}
+{"sql":"create publication p for only x x","syntaxError":"invalid publication object list","position":0}
+{"sql":"create publication p for only x;","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p drop only x )","syntaxError":"invalid publication object list","position":0}
+{"sql":"alter publication p drop only x,","syntaxError":"syntax error at end of input","position":32}
+{"sql":"alter publication p drop only x x","syntaxError":"invalid publication object list","position":0}
+{"sql":"create publication p for tables in schema s, only x with (publish = 'insert')","syntaxError":"invalid schema name","position":0}
+{"sql":"create publication p for tables in schema s, only x with (","syntaxError":"syntax error at end of input","position":58}
+{"sql":"create publication p for tables in schema s, only x )","syntaxError":"invalid schema name","position":0}
+{"sql":"create publication p for tables in schema s, only x,","syntaxError":"syntax error at end of input","position":52}
+{"sql":"create publication p for tables in schema s, only x x","syntaxError":"invalid schema name","position":0}
+{"sql":"create publication p for tables in schema s, only x;","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p drop tables in schema s, only x )","syntaxError":"invalid schema name","position":0}
+{"sql":"alter publication p drop tables in schema s, only x,","syntaxError":"syntax error at end of input","position":52}
+{"sql":"alter publication p drop tables in schema s, only x x","syntaxError":"invalid schema name","position":0}
+{"sql":"create publication p"}
+{"sql":"create publication p for all tables"}
+{"sql":"create publication p for all tables, x","syntaxError":"syntax error at or near \",\"","position":35}
+{"sql":"create publication p for","syntaxError":"syntax error at end of input","position":24}
+{"sql":"alter publication p add","syntaxError":"syntax error at end of input","position":23}
+{"sql":"alter publication p set (publish = 'insert')"}

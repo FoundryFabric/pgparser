@@ -78,7 +78,7 @@ L a feature's grammar.
 | pg17-merge | 1 | 58 (31/25/2) | accepts PostgreSQL 17's MERGE | `merge_when_clause` (`BY SOURCE`, `BY TARGET`), `MergeStmt` `returning_clause`, `MERGE_ACTION()` | no | M |
 | pg17-ddl | 1 | 42 (22/15/5) | accepts PostgreSQL 17's DDL | `set_access_method_name` (DEFAULT), `alter_table_cmd` SET EXPRESSION, `a_expr AT LOCAL`, `DomainConstraintElem` NOT NULL in ALTER DOMAIN ADD, `operator_def_elem` without `=` | no | M |
 | utility-option-argument | 1 | 55 (0/52/3) | accepts `*`, DEFAULT and `(list)` as an EXPLAIN/VACUUM/ANALYZE option argument | `utility_option_arg` | no | S |
-| publication-object-list | 1 | 24 (6/15/3) | accepts what `preprocess_pubobj_list` refuses | `CreatePublicationStmt`, `AlterPublicationStmt`, `PublicationObjSpec` actions | no | S |
+| publication-object-list (fixed) | 1 | 24 (6/15/3) | accepts what `preprocess_pubobj_list` refuses | `CreatePublicationStmt`, `AlterPublicationStmt`, `PublicationObjSpec` actions | no | S |
 | grammar-action-checks | 1 | 21 (8/6/7) | accepts what a grammar action refuses | `CopyStmt`, `parsePartitionStrategy`, `alter_table_cmd` column number, `CreateSchemaStmt`, `TriggerEvents`, `xmltable_column_option_el`, `frame_extent`, `json_encoding_clause_opt` | no | M |
 | cte-column-list-parentheses | 1 | 12 (0/10/2) | accepts a CTE's column names without parentheses | `opt_name_list` | no | S |
 | constraint-attribute-checks | 1 | 9 (5/1/3) | accepts what `processCASbits` and constraint actions refuse | `ConstraintAttributeSpec`/`processCASbits`, `key_action` SET NULL (cols), `ColConstraintElem` GENERATED | no | S |
@@ -166,7 +166,7 @@ PostgreSQL refuses them.
 | `explain (costs default) select 1` | 42601 syntax error at or near "default" at 15 | accepts |
 | `VACUUM (ANALYZE(3)) vacowned_part2` | 42601 syntax error at or near "(" at 15 | 42601 syntax error at or near "3" at 16 |
 
-### publication-object-list (risk 1, 24)
+### publication-object-list (risk 1, 24; fixed)
 
 PostgreSQL 16's `preprocess_pubobj_list` refuses a list whose first object
 has no TABLE or TABLES IN SCHEMA, CURRENT_SCHEMA as a table, a qualified
@@ -178,6 +178,11 @@ schema name, and a WHERE clause or column list on a schema.
 | `create publication p for current_schema` | 42601 invalid publication object list at 25 | accepts |
 | `alter publication p add tables in schema s, s2 where (a = 1)` | 42601 WHERE clause not allowed for schema at 44 | accepts |
 | `ALTER PUBLICATION testpub2 ADD testpub_tbl1 TABLE` | 42601 invalid publication object list at 31 | 42601 syntax error at or near "TABLE" at 44 |
+
+`CreatePublicationStmt` and `AlterPublicationStmt` now check their object
+list as `preprocess_pubobj_list` does, and the objects without a kind are
+PostgreSQL 16's `ColId`, `ColId indirection` and `extended_relation_expr`
+forms; all 24 agree.
 
 ### grammar-action-checks (risk 1, 21)
 

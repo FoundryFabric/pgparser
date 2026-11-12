@@ -35,6 +35,7 @@ import (
 	grpclause  *GroupClause    // for GROUP BY clause
 	keyaction  *KeyAction      // for FK key_action
 	keyactions *KeyActions     // for FK key_actions
+	pubobjs    []pubObj        // for a publication's objects
 	loc        nodes.ParseLoc  // a token's byte offset, Token.Loc; a nonterminal's is its first symbol's, as Bison's @$ (goyacc copies $1 into $$ before each action)
 }
 
@@ -134,7 +135,7 @@ import (
 %type <node>  target_el where_clause where_or_current_clause
 %type <list>  func_name
 %type <list>  from_clause
-%type <node>  table_ref relation_expr joined_table join_qual
+%type <node>  table_ref relation_expr extended_relation_expr joined_table join_qual
 %type <node>  func_table tablesample_clause
 %type <boolean>  opt_ordinality
 %type <node>  opt_repeatable_clause
@@ -451,8 +452,7 @@ import (
 %type <node>  RowSecurityOptionalExpr RowSecurityOptionalWithCheck
 %type <node>  CreatePublicationStmt AlterPublicationStmt
 %type <list>  opt_definition
-%type <node>  PublicationObjSpec
-%type <list>  pub_obj_list
+%type <pubobjs>  PublicationObjSpec pub_obj_list
 %type <list>  reloptions opt_reloptions reloption_list
 %type <node>  reloption_elem
 %type <node>  CreateSubscriptionStmt AlterSubscriptionStmt DropSubscriptionStmt
@@ -8305,7 +8305,14 @@ relation_expr:
 		{
 			$$ = makeRangeVar($1, $<loc>1)
 		}
-	| qualified_name '*'
+	| extended_relation_expr
+		{
+			$$ = $1
+		}
+	;
+
+extended_relation_expr:
+	qualified_name '*'
 		{
 			rv := makeRangeVar($1, $<loc>1)
 			rv.(*nodes.RangeVar).Inh = true
@@ -15212,10 +15219,14 @@ CreatePublicationStmt:
 		}
 	| CREATE PUBLICATION name FOR pub_obj_list opt_definition
 		{
+			objs, ok := preprocessPubobjList(pglex, $5)
+			if !ok {
+				return 1
+			}
 			$$ = &nodes.CreatePublicationStmt{
 				Pubname:    $3,
 				Options:    $6,
-				Pubobjects: $5,
+				Pubobjects: objs,
 			}
 		}
 	;
@@ -15230,25 +15241,37 @@ AlterPublicationStmt:
 		}
 	| ALTER PUBLICATION name ADD_P pub_obj_list
 		{
+			objs, ok := preprocessPubobjList(pglex, $5)
+			if !ok {
+				return 1
+			}
 			$$ = &nodes.AlterPublicationStmt{
 				Pubname:    $3,
-				Pubobjects: $5,
+				Pubobjects: objs,
 				Action:     nodes.DEFELEM_ADD,
 			}
 		}
 	| ALTER PUBLICATION name SET pub_obj_list
 		{
+			objs, ok := preprocessPubobjList(pglex, $5)
+			if !ok {
+				return 1
+			}
 			$$ = &nodes.AlterPublicationStmt{
 				Pubname:    $3,
-				Pubobjects: $5,
+				Pubobjects: objs,
 				Action:     nodes.DEFELEM_SET,
 			}
 		}
 	| ALTER PUBLICATION name DROP pub_obj_list
 		{
+			objs, ok := preprocessPubobjList(pglex, $5)
+			if !ok {
+				return 1
+			}
 			$$ = &nodes.AlterPublicationStmt{
 				Pubname:    $3,
-				Pubobjects: $5,
+				Pubobjects: objs,
 				Action:     nodes.DEFELEM_DROP,
 			}
 		}
@@ -15273,25 +15296,39 @@ PublicationObjSpec:
 			if $4 != nil {
 				pt.WhereClause = $4.Items[0]
 			}
-			$$ = &nodes.PublicationObjSpec{
+			$$ = []pubObj{{spec: &nodes.PublicationObjSpec{
 				Pubobjtype: nodes.PUBLICATIONOBJ_TABLE,
 				Pubtable:   pt,
-			}
+			}, loc: $<loc>1}}
 		}
 	| TABLES IN_P SCHEMA ColId
 		{
-			$$ = &nodes.PublicationObjSpec{
+			$$ = []pubObj{{spec: &nodes.PublicationObjSpec{
 				Pubobjtype: nodes.PUBLICATIONOBJ_TABLES_IN_SCHEMA,
 				Name:       $4,
-			}
+			}, loc: $<loc>1}}
 		}
 	| TABLES IN_P SCHEMA CURRENT_SCHEMA
 		{
-			$$ = &nodes.PublicationObjSpec{
+			$$ = []pubObj{{spec: &nodes.PublicationObjSpec{
 				Pubobjtype: nodes.PUBLICATIONOBJ_TABLES_IN_CUR_SCHEMA,
-			}
+			}, loc: $<loc>1}}
 		}
-	| relation_expr opt_column_list OptWhereClause
+	| qualified_name opt_column_list OptWhereClause
+		{
+			pt := &nodes.PublicationTable{
+				Relation: makeRangeVar($1, $<loc>1).(*nodes.RangeVar),
+				Columns:  $2,
+			}
+			if $3 != nil {
+				pt.WhereClause = $3.Items[0]
+			}
+			$$ = []pubObj{{spec: &nodes.PublicationObjSpec{
+				Pubobjtype: nodes.PUBLICATIONOBJ_CONTINUATION,
+				Pubtable:   pt,
+			}, loc: $<loc>1, name: len($1.Items) == 1}}
+		}
+	| extended_relation_expr opt_column_list OptWhereClause
 		{
 			pt := &nodes.PublicationTable{
 				Relation: $1.(*nodes.RangeVar),
@@ -15300,16 +15337,16 @@ PublicationObjSpec:
 			if $3 != nil {
 				pt.WhereClause = $3.Items[0]
 			}
-			$$ = &nodes.PublicationObjSpec{
+			$$ = []pubObj{{spec: &nodes.PublicationObjSpec{
 				Pubobjtype: nodes.PUBLICATIONOBJ_CONTINUATION,
 				Pubtable:   pt,
-			}
+			}}}
 		}
 	| CURRENT_SCHEMA
 		{
-			$$ = &nodes.PublicationObjSpec{
+			$$ = []pubObj{{spec: &nodes.PublicationObjSpec{
 				Pubobjtype: nodes.PUBLICATIONOBJ_CONTINUATION,
-			}
+			}, loc: $<loc>1}}
 		}
 	;
 
@@ -15320,9 +15357,9 @@ OptWhereClause:
 
 pub_obj_list:
 	PublicationObjSpec
-		{ $$ = makeList($1) }
+		{ $$ = $1 }
 	| pub_obj_list ',' PublicationObjSpec
-		{ $$ = appendList($1, $3) }
+		{ $$ = append($1, $3...) }
 	;
 
 /*****************************************************************************
@@ -18486,4 +18523,54 @@ func makeRangeVarFromAnyName(names *nodes.List, location nodes.ParseLoc) *nodes.
 		rv.Relname = names.Items[2].(*nodes.String).Str
 	}
 	return rv
+}
+
+// pubObj is one object of a publication's list as the grammar read it, with
+// its location and whether it is a bare name, which PublicationObjSpec does
+// not keep.
+type pubObj struct {
+	spec *nodes.PublicationObjSpec
+	loc  nodes.ParseLoc
+	name bool
+}
+
+// preprocessPubobjList is PostgreSQL 16's preprocess_pubobj_list: the first
+// object is a TABLE or TABLES IN SCHEMA, and an object without one takes the
+// kind before it. A table is not CURRENT_SCHEMA; a schema is a bare name or
+// CURRENT_SCHEMA, with no column list or WHERE clause. Otherwise it raises the
+// error at the object and reports false.
+func preprocessPubobjList(lex pgLexer, objs []pubObj) (*nodes.List, bool) {
+	if objs[0].spec.Pubobjtype == nodes.PUBLICATIONOBJ_CONTINUATION {
+		grammarError(lex, codeSyntaxError, "invalid publication object list", "", objs[0].loc)
+		return nil, false
+	}
+	list := &nodes.List{Items: make([]nodes.Node, len(objs))}
+	kind := objs[0].spec.Pubobjtype
+	for i, o := range objs {
+		list.Items[i] = o.spec
+		if o.spec.Pubobjtype != nodes.PUBLICATIONOBJ_CONTINUATION {
+			kind = o.spec.Pubobjtype
+			continue
+		}
+		pt := o.spec.Pubtable
+		message := ""
+		switch {
+		case kind == nodes.PUBLICATIONOBJ_TABLE:
+			if pt == nil {
+				message = "invalid table name"
+			}
+		case pt == nil:
+		case pt.WhereClause != nil:
+			message = "WHERE clause not allowed for schema"
+		case pt.Columns != nil:
+			message = "column specification not allowed for schema"
+		case !o.name:
+			message = "invalid schema name"
+		}
+		if message != "" {
+			grammarError(lex, codeSyntaxError, message, "", o.loc)
+			return nil, false
+		}
+	}
+	return list, true
 }
