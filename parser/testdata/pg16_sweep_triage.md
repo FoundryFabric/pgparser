@@ -85,7 +85,7 @@ L a feature's grammar.
 | select-clause-checks (fixed) | 1 | 8 (3/2/3) | accepts WITH TIES without ORDER BY, with SKIP LOCKED; ORDER BY with WITHIN GROUP | `insertSelectOptions`, `func_application` within `func_expr` | no | S |
 | uescape | 1 | 7 (2/4/1) | accepts an invalid UESCAPE character; other message for a UESCAPE not followed by a string | scanner and `base_yylex` UESCAPE handling (`check_uescapechar`) | no | S |
 | with-oids | 1 | 5 (2/1/2) | accepts WITH OIDS | `OptWith`, `alter_table_cmd` SET WITH OIDS | no | S |
-| drop-aggregate-arguments | 1 | 4 (1/1/2) | accepts DROP AGGREGATE without argument types | `DropStmt` AGGREGATE `aggregate_with_argtypes_list` | no | S |
+| drop-aggregate-arguments (fixed) | 1 | 4 (1/1/2) | accepts DROP AGGREGATE without argument types | `DropStmt` AGGREGATE `aggregate_with_argtypes_list` | no | S |
 | partition-command-in-list | 1 | 4 (0/2/2) | accepts ATTACH/DETACH PARTITION in a command list | `AlterTableStmt` `partition_cmd` | no | S |
 | role-name-checks (fixed) | 1 | 4 (0/1/3) | accepts `ALTER ROLE CURRENT_USER RENAME`; 42601 for 42939 | `RoleId` action, `RenameStmt` | no | S |
 | bare-column-label (fixed but 5) | 2 | 511 (2/502/7) | refuses a keyword as a column label without AS | `target_el: a_expr BareColLabel`, `bare_label_keyword` | no | M |
@@ -103,7 +103,7 @@ L a feature's grammar.
 | operator-missing-argument-message | 3 | 5 (2/1/2) | hint folded into the message | `oper_argtypes` | no | S |
 | policy-option-message | 3 | 3 (1/1/1) | hint used as the message | `RowSecurityDefaultPermissive` | no | S |
 | not-yet-implemented-errors | 3 | 2 (0/0/2) | 42601 for 0A000 | `a_expr UNIQUE select_with_parens`, `CreateAssertionStmt` | no | S |
-| drop-routine-list-name | 3 | 2 (0/1/1) | refused at `[` instead of at `]` | `function_with_argtypes_list` | no | S |
+| drop-routine-list-name (fixed) | 3 | 2 (0/1/1) | refused at `[` instead of at `]` | `function_with_argtypes_list` | no | S |
 
 Totals: 1,653 statements; 30 classes. Every disagreement is in a class.
 
@@ -286,13 +286,17 @@ argument ORDER BY, DISTINCT or VARIADIC, at WITHIN. All 8 agree.
 
 `create table t () without oids` is accepted by both.
 
-### drop-aggregate-arguments (risk 1, 4)
+### drop-aggregate-arguments (risk 1, 4; fixed)
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
 | `drop aggregate a` | 42601 syntax error at end of input at 16 | accepts |
 | `drop aggregate if exists a, b` | 42601 syntax error at or near "," at 26 | accepts |
 | `drop aggregate newcnt1` (errors.sql) | 42601 syntax error at end of input | accepts |
+
+`DropStmt`'s own `DROP AGGREGATE any_name_list` forms are deleted, so DROP
+AGGREGATE takes only `aggregate_with_argtypes_list`, as PostgreSQL 16's does.
+All 4 agree.
 
 ### partition-command-in-list (risk 1, 4)
 
@@ -490,13 +494,17 @@ missing argument of a unary operator.`; the parser's message is both.
 | `SELECT UNIQUE (SELECT 1)` | 0A000 UNIQUE predicate is not yet implemented (at UNIQUE) | 42601 UNIQUE predicate is not yet implemented (16 bytes later) |
 | `CREATE ASSERTION positive CHECK (1 = 1)` | 0A000 CREATE ASSERTION is not yet implemented | 42601 syntax error at or near "ASSERTION" |
 
-### drop-routine-list-name (risk 3, 2)
+### drop-routine-list-name (risk 3, 2; fixed)
 
 `drop procedure p[]` agrees; in a list, the parser refuses one token early.
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
 | `drop procedure p, q[]` | 42601 syntax error at or near "]" at 20 | 42601 syntax error at or near "[" at 19 |
+
+`DropStmt`'s own `DROP FUNCTION|PROCEDURE|ROUTINE any_name_list` forms are
+deleted, so the list is `function_with_argtypes_list` from its first name, and
+`q[]` is refused at `]`, as in PostgreSQL 16. Both agree.
 
 ## Rerunning
 
@@ -514,3 +522,28 @@ go build -o /tmp/pg16sweep .
 `-other` takes a second parser's results (another branch, built with its own
 `replace`) to count what it fixes. The classes come from `classify.go`'s
 rules; `report.txt` lists any disagreement no rule covers under class "".
+
+## grammar conflicts
+
+PostgreSQL 16's grammar builds with no conflicts. On `ff` before the fixes
+below, gram.y had 10 shift/reduce and 23 reduce/reduce conflicts. goyacc
+settles a shift/reduce conflict by shifting and a reduce/reduce conflict by
+the rule that comes first in gram.y, so each conflict is a choice the parser
+makes without a rule saying so. `TestGrammarConflictsArePinned`
+(`parser/grammar_conflicts_test.go`) pins the counts in `parser/y.output`,
+which `make check-parser` keeps goyacc's output for gram.y, so any change to
+either count must edit the pin. `TestGrammarConflictsArePostgreSQL16s` pins
+PostgreSQL 16.15's answers for the statements that reach each removed
+conflict, one `testdata/grammar_conflict_*_pg16.jsonl` file for each cause.
+
+The conflicts had six causes. Each had a fix that keeps PostgreSQL 16's
+accept/reject, errors and trees, and none was left.
+
+| cause | conflicts | where | what goyacc decided | wrong against PostgreSQL 16 | removed by |
+|---|---|---|---|---|---|
+| `substr_list` had its own `expr_list` form | 2 reduce/reduce, on `)` and `,` | after `SUBSTRING ( a_expr` | the function-argument form, so the extra form was never used | no | #26 |
+| `DropStmt` duplicated `RemoveFuncStmt`, `RemoveAggrStmt`, `DropSubscriptionStmt` and `DropOwnedStmt` with any_name or name lists | 4 shift/reduce, 20 reduce/reduce | after a name in DROP FUNCTION, PROCEDURE, ROUTINE, AGGREGATE (with or without IF EXISTS), DROP SUBSCRIPTION and DROP OWNED BY | an unqualified function name as an any_name; DROP SUBSCRIPTION's name list before the end of input or `;`, but its single name before CASCADE or RESTRICT; DROP OWNED BY's RoleSpec | yes: `drop function f` was the list `[f]`, not an ObjectWithArgs; `drop subscription s, t` and `drop aggregate a` were accepted; `drop function f, s.g(int)` was refused at `(`; `drop procedure p, q[]` was refused at `[`, not `]` | #27 |
+| ALTER COLUMN ADD GENERATED had four identity rules of its own beside `generated_when` | 2 shift/reduce, on AS | after `ALTER COLUMN c ADD GENERATED ALWAYS` or `BY DEFAULT` | the four rules, whose command had no `Def` | yes: no identity constraint in the tree; `as identity ()` was accepted | #28 |
+| BEGIN and END were statements of a BEGIN ATOMIC body | 1 reduce/reduce, on `;` | after `BEGIN ATOMIC ... END` | the end of the body | yes: `begin atomic end transaction; end`, `begin atomic begin; end` and the like were accepted | #29 |
+| a column's REFERENCES had its own list of DEFERRABLE, NOT DEFERRABLE and INITIALLY beside the column's `ConstraintAttr` | 3 shift/reduce, on DEFERRABLE, INITIALLY and NOT | after a column's `REFERENCES ...` | the REFERENCES list, folding the attributes into the foreign key | yes: the attributes are separate constraints in PostgreSQL 16's tree; `references x not null` was refused | #30 |
+| NESTED in a JSON_TABLE column list could be a column name or start a nested path | 1 shift/reduce, on PATH | after NESTED | the nested path | no: PostgreSQL 16 has no JSON_TABLE (`pg17-sqljson`); the choice is kept, by precedence | #31 |

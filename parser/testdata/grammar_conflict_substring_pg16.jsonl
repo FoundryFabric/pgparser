@@ -1,0 +1,145 @@
+{"sql":"select substring()"}
+{"sql":"select x from t where substring() = 1"}
+{"sql":"select substring()::text"}
+{"sql":"values (substring())"}
+{"sql":"select pg_catalog.substring()"}
+{"sql":"select substring(a)"}
+{"sql":"select x from t where substring(a) = 1"}
+{"sql":"select substring(a)::text"}
+{"sql":"values (substring(a))"}
+{"sql":"select pg_catalog.substring(a)"}
+{"sql":"select substring(a, b)"}
+{"sql":"select x from t where substring(a, b) = 1"}
+{"sql":"select substring(a, b)::text"}
+{"sql":"values (substring(a, b))"}
+{"sql":"select pg_catalog.substring(a, b)"}
+{"sql":"select substring(a, b, c)"}
+{"sql":"select x from t where substring(a, b, c) = 1"}
+{"sql":"select substring(a, b, c)::text"}
+{"sql":"values (substring(a, b, c))"}
+{"sql":"select pg_catalog.substring(a, b, c)"}
+{"sql":"select substring(a, b, c, d)"}
+{"sql":"select x from t where substring(a, b, c, d) = 1"}
+{"sql":"select substring(a, b, c, d)::text"}
+{"sql":"values (substring(a, b, c, d))"}
+{"sql":"select pg_catalog.substring(a, b, c, d)"}
+{"sql":"select substring(a from b)"}
+{"sql":"select x from t where substring(a from b) = 1"}
+{"sql":"select substring(a from b)::text"}
+{"sql":"values (substring(a from b))"}
+{"sql":"select pg_catalog.substring(a from b)","code":"42601","message":"syntax error at or near \"from\"","position":30}
+{"sql":"select substring(a from b for c)"}
+{"sql":"select x from t where substring(a from b for c) = 1"}
+{"sql":"select substring(a from b for c)::text"}
+{"sql":"values (substring(a from b for c))"}
+{"sql":"select pg_catalog.substring(a from b for c)","code":"42601","message":"syntax error at or near \"from\"","position":30}
+{"sql":"select substring(a for b)"}
+{"sql":"select x from t where substring(a for b) = 1"}
+{"sql":"select substring(a for b)::text"}
+{"sql":"values (substring(a for b))"}
+{"sql":"select pg_catalog.substring(a for b)","code":"42601","message":"syntax error at or near \"for\"","position":30}
+{"sql":"select substring(a for b from c)"}
+{"sql":"select x from t where substring(a for b from c) = 1"}
+{"sql":"select substring(a for b from c)::text"}
+{"sql":"values (substring(a for b from c))"}
+{"sql":"select pg_catalog.substring(a for b from c)","code":"42601","message":"syntax error at or near \"for\"","position":30}
+{"sql":"select substring(a similar b escape c)"}
+{"sql":"select x from t where substring(a similar b escape c) = 1"}
+{"sql":"select substring(a similar b escape c)::text"}
+{"sql":"values (substring(a similar b escape c))"}
+{"sql":"select pg_catalog.substring(a similar b escape c)","code":"42601","message":"syntax error at or near \"b\"","position":38}
+{"sql":"select substring(a, b => c)"}
+{"sql":"select x from t where substring(a, b => c) = 1"}
+{"sql":"select substring(a, b => c)::text"}
+{"sql":"values (substring(a, b => c))"}
+{"sql":"select pg_catalog.substring(a, b => c)"}
+{"sql":"select substring(a => b)"}
+{"sql":"select x from t where substring(a => b) = 1"}
+{"sql":"select substring(a => b)::text"}
+{"sql":"values (substring(a => b))"}
+{"sql":"select pg_catalog.substring(a => b)"}
+{"sql":"select substring(a := 1)"}
+{"sql":"select x from t where substring(a := 1) = 1"}
+{"sql":"select substring(a := 1)::text"}
+{"sql":"values (substring(a := 1))"}
+{"sql":"select pg_catalog.substring(a := 1)"}
+{"sql":"select substring(variadic a)","code":"42601","message":"syntax error at or near \"variadic\"","position":17}
+{"sql":"select x from t where substring(variadic a) = 1","code":"42601","message":"syntax error at or near \"variadic\"","position":32}
+{"sql":"select substring(variadic a)::text","code":"42601","message":"syntax error at or near \"variadic\"","position":17}
+{"sql":"values (substring(variadic a))","code":"42601","message":"syntax error at or near \"variadic\"","position":18}
+{"sql":"select pg_catalog.substring(variadic a)"}
+{"sql":"select substring(a, variadic b)","code":"42601","message":"syntax error at or near \"variadic\"","position":20}
+{"sql":"select x from t where substring(a, variadic b) = 1","code":"42601","message":"syntax error at or near \"variadic\"","position":35}
+{"sql":"select substring(a, variadic b)::text","code":"42601","message":"syntax error at or near \"variadic\"","position":20}
+{"sql":"values (substring(a, variadic b))","code":"42601","message":"syntax error at or near \"variadic\"","position":21}
+{"sql":"select pg_catalog.substring(a, variadic b)"}
+{"sql":"select substring(a order by b)","code":"42601","message":"syntax error at or near \"order\"","position":19}
+{"sql":"select x from t where substring(a order by b) = 1","code":"42601","message":"syntax error at or near \"order\"","position":34}
+{"sql":"select substring(a order by b)::text","code":"42601","message":"syntax error at or near \"order\"","position":19}
+{"sql":"values (substring(a order by b))","code":"42601","message":"syntax error at or near \"order\"","position":20}
+{"sql":"select pg_catalog.substring(a order by b)"}
+{"sql":"select substring(distinct a)","code":"42601","message":"syntax error at or near \"distinct\"","position":17}
+{"sql":"select x from t where substring(distinct a) = 1","code":"42601","message":"syntax error at or near \"distinct\"","position":32}
+{"sql":"select substring(distinct a)::text","code":"42601","message":"syntax error at or near \"distinct\"","position":17}
+{"sql":"values (substring(distinct a))","code":"42601","message":"syntax error at or near \"distinct\"","position":18}
+{"sql":"select pg_catalog.substring(distinct a)"}
+{"sql":"select substring(all a)","code":"42601","message":"syntax error at or near \"all\"","position":17}
+{"sql":"select x from t where substring(all a) = 1","code":"42601","message":"syntax error at or near \"all\"","position":32}
+{"sql":"select substring(all a)::text","code":"42601","message":"syntax error at or near \"all\"","position":17}
+{"sql":"values (substring(all a))","code":"42601","message":"syntax error at or near \"all\"","position":18}
+{"sql":"select pg_catalog.substring(all a)"}
+{"sql":"select substring(a,)","code":"42601","message":"syntax error at or near \")\"","position":19}
+{"sql":"select x from t where substring(a,) = 1","code":"42601","message":"syntax error at or near \")\"","position":34}
+{"sql":"select substring(a,)::text","code":"42601","message":"syntax error at or near \")\"","position":19}
+{"sql":"values (substring(a,))","code":"42601","message":"syntax error at or near \")\"","position":20}
+{"sql":"select pg_catalog.substring(a,)","code":"42601","message":"syntax error at or near \")\"","position":30}
+{"sql":"select substring(a, )","code":"42601","message":"syntax error at or near \")\"","position":20}
+{"sql":"select x from t where substring(a, ) = 1","code":"42601","message":"syntax error at or near \")\"","position":35}
+{"sql":"select substring(a, )::text","code":"42601","message":"syntax error at or near \")\"","position":20}
+{"sql":"values (substring(a, ))","code":"42601","message":"syntax error at or near \")\"","position":21}
+{"sql":"select pg_catalog.substring(a, )","code":"42601","message":"syntax error at or near \")\"","position":31}
+{"sql":"select substring((a, b))"}
+{"sql":"select x from t where substring((a, b)) = 1"}
+{"sql":"select substring((a, b))::text"}
+{"sql":"values (substring((a, b)))"}
+{"sql":"select pg_catalog.substring((a, b))"}
+{"sql":"select substring(a from)","code":"42601","message":"syntax error at or near \")\"","position":23}
+{"sql":"select x from t where substring(a from) = 1","code":"42601","message":"syntax error at or near \")\"","position":38}
+{"sql":"select substring(a from)::text","code":"42601","message":"syntax error at or near \")\"","position":23}
+{"sql":"values (substring(a from))","code":"42601","message":"syntax error at or near \")\"","position":24}
+{"sql":"select pg_catalog.substring(a from)","code":"42601","message":"syntax error at or near \"from\"","position":30}
+{"sql":"select substring(a for)","code":"42601","message":"syntax error at or near \")\"","position":22}
+{"sql":"select x from t where substring(a for) = 1","code":"42601","message":"syntax error at or near \")\"","position":37}
+{"sql":"select substring(a for)::text","code":"42601","message":"syntax error at or near \")\"","position":22}
+{"sql":"values (substring(a for))","code":"42601","message":"syntax error at or near \")\"","position":23}
+{"sql":"select pg_catalog.substring(a for)","code":"42601","message":"syntax error at or near \"for\"","position":30}
+{"sql":"select substring(a similar b)","code":"42601","message":"syntax error at or near \")\"","position":28}
+{"sql":"select x from t where substring(a similar b) = 1","code":"42601","message":"syntax error at or near \")\"","position":43}
+{"sql":"select substring(a similar b)::text","code":"42601","message":"syntax error at or near \")\"","position":28}
+{"sql":"values (substring(a similar b))","code":"42601","message":"syntax error at or near \")\"","position":29}
+{"sql":"select pg_catalog.substring(a similar b)","code":"42601","message":"syntax error at or near \"b\"","position":38}
+{"sql":"select substring(a from b, c)","code":"42601","message":"syntax error at or near \",\"","position":25}
+{"sql":"select x from t where substring(a from b, c) = 1","code":"42601","message":"syntax error at or near \",\"","position":40}
+{"sql":"select substring(a from b, c)::text","code":"42601","message":"syntax error at or near \",\"","position":25}
+{"sql":"values (substring(a from b, c))","code":"42601","message":"syntax error at or near \",\"","position":26}
+{"sql":"select pg_catalog.substring(a from b, c)","code":"42601","message":"syntax error at or near \"from\"","position":30}
+{"sql":"select substring(a, b from c)","code":"42601","message":"syntax error at or near \"from\"","position":22}
+{"sql":"select x from t where substring(a, b from c) = 1","code":"42601","message":"syntax error at or near \"from\"","position":37}
+{"sql":"select substring(a, b from c)::text","code":"42601","message":"syntax error at or near \"from\"","position":22}
+{"sql":"values (substring(a, b from c))","code":"42601","message":"syntax error at or near \"from\"","position":23}
+{"sql":"select pg_catalog.substring(a, b from c)","code":"42601","message":"syntax error at or near \"from\"","position":33}
+{"sql":"select substring(*)","code":"42601","message":"syntax error at or near \"*\"","position":17}
+{"sql":"select x from t where substring(*) = 1","code":"42601","message":"syntax error at or near \"*\"","position":32}
+{"sql":"select substring(*)::text","code":"42601","message":"syntax error at or near \"*\"","position":17}
+{"sql":"values (substring(*))","code":"42601","message":"syntax error at or near \"*\"","position":18}
+{"sql":"select pg_catalog.substring(*)"}
+{"sql":"select substring(a.*)"}
+{"sql":"select x from t where substring(a.*) = 1"}
+{"sql":"select substring(a.*)::text"}
+{"sql":"values (substring(a.*))"}
+{"sql":"select pg_catalog.substring(a.*)"}
+{"sql":"select substring(1 + 2, 3)"}
+{"sql":"select x from t where substring(1 + 2, 3) = 1"}
+{"sql":"select substring(1 + 2, 3)::text"}
+{"sql":"values (substring(1 + 2, 3))"}
+{"sql":"select pg_catalog.substring(1 + 2, 3)"}
