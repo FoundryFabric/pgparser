@@ -133,19 +133,20 @@ func TestCreateRuleOnSelect(t *testing.T) {
 // CREATE LANGUAGE tests
 // =============================================================================
 
-// TestCreateLanguageSimple tests: CREATE LANGUAGE plpgsql
+// TestCreateLanguageSimple tests: CREATE LANGUAGE plpgsql, which without a
+// handler is CREATE EXTENSION plpgsql, as in PostgreSQL 16.
 func TestCreateLanguageSimple(t *testing.T) {
 	input := "CREATE LANGUAGE plpgsql"
 	result, err := parser.Parse(input)
 	if err != nil {
 		t.Fatalf("Parse error: %v", err)
 	}
-	stmt, ok := result.Items[0].(*nodes.CreatePLangStmt)
+	stmt, ok := result.Items[0].(*nodes.CreateExtensionStmt)
 	if !ok {
-		t.Fatalf("expected *nodes.CreatePLangStmt, got %T", result.Items[0])
+		t.Fatalf("expected *nodes.CreateExtensionStmt, got %T", result.Items[0])
 	}
-	if stmt.Plname != "plpgsql" {
-		t.Errorf("expected plname 'plpgsql', got %q", stmt.Plname)
+	if stmt.Extname != "plpgsql" || stmt.IfNotExists {
+		t.Errorf("got extname %q, if not exists %v; want plpgsql, false", stmt.Extname, stmt.IfNotExists)
 	}
 }
 

@@ -1,0 +1,156 @@
+{"sql":"explain create table t (a int)","code":"42601","message":"syntax error at or near \"int\"","position":26}
+{"sql":"explain create table t ()","code":"42601","message":"syntax error at or near \")\"","position":24}
+{"sql":"explain create temp table t (a int)","code":"42601","message":"syntax error at or near \"int\"","position":31}
+{"sql":"explain create table if not exists t (a int)","code":"42601","message":"syntax error at or near \"int\"","position":40}
+{"sql":"explain create table t (like u)","code":"42601","message":"syntax error at or near \"like\"","position":24}
+{"sql":"explain create table t partition of p for values in (1)","code":"42601","message":"syntax error at or near \"partition\"","position":23}
+{"sql":"explain create table t of ty","code":"42601","message":"syntax error at or near \"of\"","position":23}
+{"sql":"explain create table t as select 1"}
+{"sql":"explain create table t (a) as select 1"}
+{"sql":"explain create table t as select 1 with no data"}
+{"sql":"explain create temp table t as select 1"}
+{"sql":"explain create table if not exists t as select 1"}
+{"sql":"explain create unlogged table t as select 1"}
+{"sql":"explain create table t as execute q"}
+{"sql":"explain create table t as table u"}
+{"sql":"explain create table t as values (1)"}
+{"sql":"explain create table t (a int) as select 1","code":"42601","message":"syntax error at or near \"int\"","position":26}
+{"sql":"explain create materialized view v as select 1"}
+{"sql":"explain create view v as select 1","code":"42601","message":"syntax error at or near \"view\"","position":15}
+{"sql":"explain create table t","code":"42601","message":"syntax error at end of input","position":22}
+{"sql":"explain create table t as","code":"42601","message":"syntax error at end of input","position":25}
+{"sql":"explain create table t using heap as select 1"}
+{"sql":"explain create table t with (fillfactor = 10) as select 1"}
+{"sql":"explain create table t on commit drop as select 1"}
+{"sql":"explain create table t tablespace s as select 1"}
+{"sql":"explain create table t (a int) inherits (u)","code":"42601","message":"syntax error at or near \"int\"","position":26}
+{"sql":"explain analyze create table t (a int)","code":"42601","message":"syntax error at or near \"int\"","position":34}
+{"sql":"explain analyze create table t ()","code":"42601","message":"syntax error at or near \")\"","position":32}
+{"sql":"explain analyze create temp table t (a int)","code":"42601","message":"syntax error at or near \"int\"","position":39}
+{"sql":"explain analyze create table if not exists t (a int)","code":"42601","message":"syntax error at or near \"int\"","position":48}
+{"sql":"explain analyze create table t (like u)","code":"42601","message":"syntax error at or near \"like\"","position":32}
+{"sql":"explain analyze create table t partition of p for values in (1)","code":"42601","message":"syntax error at or near \"partition\"","position":31}
+{"sql":"explain analyze create table t of ty","code":"42601","message":"syntax error at or near \"of\"","position":31}
+{"sql":"explain analyze create table t as select 1"}
+{"sql":"explain analyze create table t (a) as select 1"}
+{"sql":"explain analyze create table t as select 1 with no data"}
+{"sql":"explain analyze create temp table t as select 1"}
+{"sql":"explain analyze create table if not exists t as select 1"}
+{"sql":"explain analyze create unlogged table t as select 1"}
+{"sql":"explain analyze create table t as execute q"}
+{"sql":"explain analyze create table t as table u"}
+{"sql":"explain analyze create table t as values (1)"}
+{"sql":"explain analyze create table t (a int) as select 1","code":"42601","message":"syntax error at or near \"int\"","position":34}
+{"sql":"explain analyze create materialized view v as select 1"}
+{"sql":"explain analyze create view v as select 1","code":"42601","message":"syntax error at or near \"view\"","position":23}
+{"sql":"explain analyze create table t","code":"42601","message":"syntax error at end of input","position":30}
+{"sql":"explain analyze create table t as","code":"42601","message":"syntax error at end of input","position":33}
+{"sql":"explain analyze create table t using heap as select 1"}
+{"sql":"explain analyze create table t with (fillfactor = 10) as select 1"}
+{"sql":"explain analyze create table t on commit drop as select 1"}
+{"sql":"explain analyze create table t tablespace s as select 1"}
+{"sql":"explain analyze create table t (a int) inherits (u)","code":"42601","message":"syntax error at or near \"int\"","position":34}
+{"sql":"explain verbose create table t (a int)","code":"42601","message":"syntax error at or near \"int\"","position":34}
+{"sql":"explain verbose create table t ()","code":"42601","message":"syntax error at or near \")\"","position":32}
+{"sql":"explain verbose create temp table t (a int)","code":"42601","message":"syntax error at or near \"int\"","position":39}
+{"sql":"explain verbose create table if not exists t (a int)","code":"42601","message":"syntax error at or near \"int\"","position":48}
+{"sql":"explain verbose create table t (like u)","code":"42601","message":"syntax error at or near \"like\"","position":32}
+{"sql":"explain verbose create table t partition of p for values in (1)","code":"42601","message":"syntax error at or near \"partition\"","position":31}
+{"sql":"explain verbose create table t of ty","code":"42601","message":"syntax error at or near \"of\"","position":31}
+{"sql":"explain verbose create table t as select 1"}
+{"sql":"explain verbose create table t (a) as select 1"}
+{"sql":"explain verbose create table t as select 1 with no data"}
+{"sql":"explain verbose create temp table t as select 1"}
+{"sql":"explain verbose create table if not exists t as select 1"}
+{"sql":"explain verbose create unlogged table t as select 1"}
+{"sql":"explain verbose create table t as execute q"}
+{"sql":"explain verbose create table t as table u"}
+{"sql":"explain verbose create table t as values (1)"}
+{"sql":"explain verbose create table t (a int) as select 1","code":"42601","message":"syntax error at or near \"int\"","position":34}
+{"sql":"explain verbose create materialized view v as select 1"}
+{"sql":"explain verbose create view v as select 1","code":"42601","message":"syntax error at or near \"view\"","position":23}
+{"sql":"explain verbose create table t","code":"42601","message":"syntax error at end of input","position":30}
+{"sql":"explain verbose create table t as","code":"42601","message":"syntax error at end of input","position":33}
+{"sql":"explain verbose create table t using heap as select 1"}
+{"sql":"explain verbose create table t with (fillfactor = 10) as select 1"}
+{"sql":"explain verbose create table t on commit drop as select 1"}
+{"sql":"explain verbose create table t tablespace s as select 1"}
+{"sql":"explain verbose create table t (a int) inherits (u)","code":"42601","message":"syntax error at or near \"int\"","position":34}
+{"sql":"explain analyze verbose create table t (a int)","code":"42601","message":"syntax error at or near \"int\"","position":42}
+{"sql":"explain analyze verbose create table t ()","code":"42601","message":"syntax error at or near \")\"","position":40}
+{"sql":"explain analyze verbose create temp table t (a int)","code":"42601","message":"syntax error at or near \"int\"","position":47}
+{"sql":"explain analyze verbose create table if not exists t (a int)","code":"42601","message":"syntax error at or near \"int\"","position":56}
+{"sql":"explain analyze verbose create table t (like u)","code":"42601","message":"syntax error at or near \"like\"","position":40}
+{"sql":"explain analyze verbose create table t partition of p for values in (1)","code":"42601","message":"syntax error at or near \"partition\"","position":39}
+{"sql":"explain analyze verbose create table t of ty","code":"42601","message":"syntax error at or near \"of\"","position":39}
+{"sql":"explain analyze verbose create table t as select 1"}
+{"sql":"explain analyze verbose create table t (a) as select 1"}
+{"sql":"explain analyze verbose create table t as select 1 with no data"}
+{"sql":"explain analyze verbose create temp table t as select 1"}
+{"sql":"explain analyze verbose create table if not exists t as select 1"}
+{"sql":"explain analyze verbose create unlogged table t as select 1"}
+{"sql":"explain analyze verbose create table t as execute q"}
+{"sql":"explain analyze verbose create table t as table u"}
+{"sql":"explain analyze verbose create table t as values (1)"}
+{"sql":"explain analyze verbose create table t (a int) as select 1","code":"42601","message":"syntax error at or near \"int\"","position":42}
+{"sql":"explain analyze verbose create materialized view v as select 1"}
+{"sql":"explain analyze verbose create view v as select 1","code":"42601","message":"syntax error at or near \"view\"","position":31}
+{"sql":"explain analyze verbose create table t","code":"42601","message":"syntax error at end of input","position":38}
+{"sql":"explain analyze verbose create table t as","code":"42601","message":"syntax error at end of input","position":41}
+{"sql":"explain analyze verbose create table t using heap as select 1"}
+{"sql":"explain analyze verbose create table t with (fillfactor = 10) as select 1"}
+{"sql":"explain analyze verbose create table t on commit drop as select 1"}
+{"sql":"explain analyze verbose create table t tablespace s as select 1"}
+{"sql":"explain analyze verbose create table t (a int) inherits (u)","code":"42601","message":"syntax error at or near \"int\"","position":42}
+{"sql":"explain (analyze) create table t (a int)","code":"42601","message":"syntax error at or near \"int\"","position":36}
+{"sql":"explain (analyze) create table t ()","code":"42601","message":"syntax error at or near \")\"","position":34}
+{"sql":"explain (analyze) create temp table t (a int)","code":"42601","message":"syntax error at or near \"int\"","position":41}
+{"sql":"explain (analyze) create table if not exists t (a int)","code":"42601","message":"syntax error at or near \"int\"","position":50}
+{"sql":"explain (analyze) create table t (like u)","code":"42601","message":"syntax error at or near \"like\"","position":34}
+{"sql":"explain (analyze) create table t partition of p for values in (1)","code":"42601","message":"syntax error at or near \"partition\"","position":33}
+{"sql":"explain (analyze) create table t of ty","code":"42601","message":"syntax error at or near \"of\"","position":33}
+{"sql":"explain (analyze) create table t as select 1"}
+{"sql":"explain (analyze) create table t (a) as select 1"}
+{"sql":"explain (analyze) create table t as select 1 with no data"}
+{"sql":"explain (analyze) create temp table t as select 1"}
+{"sql":"explain (analyze) create table if not exists t as select 1"}
+{"sql":"explain (analyze) create unlogged table t as select 1"}
+{"sql":"explain (analyze) create table t as execute q"}
+{"sql":"explain (analyze) create table t as table u"}
+{"sql":"explain (analyze) create table t as values (1)"}
+{"sql":"explain (analyze) create table t (a int) as select 1","code":"42601","message":"syntax error at or near \"int\"","position":36}
+{"sql":"explain (analyze) create materialized view v as select 1"}
+{"sql":"explain (analyze) create view v as select 1","code":"42601","message":"syntax error at or near \"view\"","position":25}
+{"sql":"explain (analyze) create table t","code":"42601","message":"syntax error at end of input","position":32}
+{"sql":"explain (analyze) create table t as","code":"42601","message":"syntax error at end of input","position":35}
+{"sql":"explain (analyze) create table t using heap as select 1"}
+{"sql":"explain (analyze) create table t with (fillfactor = 10) as select 1"}
+{"sql":"explain (analyze) create table t on commit drop as select 1"}
+{"sql":"explain (analyze) create table t tablespace s as select 1"}
+{"sql":"explain (analyze) create table t (a int) inherits (u)","code":"42601","message":"syntax error at or near \"int\"","position":36}
+{"sql":"explain (costs off, format json) create table t (a int)","code":"42601","message":"syntax error at or near \"int\"","position":51}
+{"sql":"explain (costs off, format json) create table t ()","code":"42601","message":"syntax error at or near \")\"","position":49}
+{"sql":"explain (costs off, format json) create temp table t (a int)","code":"42601","message":"syntax error at or near \"int\"","position":56}
+{"sql":"explain (costs off, format json) create table if not exists t (a int)","code":"42601","message":"syntax error at or near \"int\"","position":65}
+{"sql":"explain (costs off, format json) create table t (like u)","code":"42601","message":"syntax error at or near \"like\"","position":49}
+{"sql":"explain (costs off, format json) create table t partition of p for values in (1)","code":"42601","message":"syntax error at or near \"partition\"","position":48}
+{"sql":"explain (costs off, format json) create table t of ty","code":"42601","message":"syntax error at or near \"of\"","position":48}
+{"sql":"explain (costs off, format json) create table t as select 1"}
+{"sql":"explain (costs off, format json) create table t (a) as select 1"}
+{"sql":"explain (costs off, format json) create table t as select 1 with no data"}
+{"sql":"explain (costs off, format json) create temp table t as select 1"}
+{"sql":"explain (costs off, format json) create table if not exists t as select 1"}
+{"sql":"explain (costs off, format json) create unlogged table t as select 1"}
+{"sql":"explain (costs off, format json) create table t as execute q"}
+{"sql":"explain (costs off, format json) create table t as table u"}
+{"sql":"explain (costs off, format json) create table t as values (1)"}
+{"sql":"explain (costs off, format json) create table t (a int) as select 1","code":"42601","message":"syntax error at or near \"int\"","position":51}
+{"sql":"explain (costs off, format json) create materialized view v as select 1"}
+{"sql":"explain (costs off, format json) create view v as select 1","code":"42601","message":"syntax error at or near \"view\"","position":40}
+{"sql":"explain (costs off, format json) create table t","code":"42601","message":"syntax error at end of input","position":47}
+{"sql":"explain (costs off, format json) create table t as","code":"42601","message":"syntax error at end of input","position":50}
+{"sql":"explain (costs off, format json) create table t using heap as select 1"}
+{"sql":"explain (costs off, format json) create table t with (fillfactor = 10) as select 1"}
+{"sql":"explain (costs off, format json) create table t on commit drop as select 1"}
+{"sql":"explain (costs off, format json) create table t tablespace s as select 1"}
+{"sql":"explain (costs off, format json) create table t (a int) inherits (u)","code":"42601","message":"syntax error at or near \"int\"","position":51}

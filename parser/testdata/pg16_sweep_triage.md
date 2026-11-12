@@ -560,8 +560,8 @@ parse there. All 3 agree.
 | `CREATE ASSERTION positive CHECK (1 = 1)` | 0A000 CREATE ASSERTION is not yet implemented | 42601 syntax error at or near "ASSERTION" |
 
 `a_expr UNIQUE opt_unique_null_treatment select_with_parens` now raises
-`0A000 UNIQUE predicate is not yet implemented` at UNIQUE, and the new
-`CreateAssertionStmt` (`CREATE ASSERTION any_name CHECK '(' a_expr ')'
+`0A000 UNIQUE predicate is not yet implemented` at UNIQUE, and a new
+production of `stmt` (`CREATE ASSERTION any_name CHECK '(' a_expr ')'
 ConstraintAttributeSpec`) raises `0A000 CREATE ASSERTION is not yet
 implemented` with no position, both through `grammarError`, ending the
 parse. `tests/grammar/sql/phase7_compat.sql` now expects CREATE ASSERTION's
@@ -580,6 +580,108 @@ at the string. Both agree.
 `DropStmt`'s own `DROP FUNCTION|PROCEDURE|ROUTINE any_name_list` forms are
 deleted, so the list is `function_with_argtypes_list` from its first name, and
 `q[]` is refused at `]`, as in PostgreSQL 16. Both agree.
+
+## Rule coverage
+
+`make cover` (`tools/parsercover`) lists the grammar rules whose action no
+test reduces. On `ff` after #32 there were 253 of 2,491. Of the 244 that can
+be reduced (goyacc reduced the other 9 in no state: no other rule used
+their nonterminals, and they are deleted, see below),
+`TestRuleCoverageIsPostgreSQL16s` (`testdata/rule_coverage_pg16.jsonl`) pins
+PostgreSQL 16.15's answers for at least one statement that reduces each,
+taken by the oracle as above; where both accept, libpg_query 16's tree was
+compared with the parser's (`pg16sweep libpg`).
+
+9 of its statements are PostgreSQL 17 grammar that PostgreSQL 16 refuses.
+They are tagged with a class, as the sweep's pg17 rows are, and
+`checkPG16Answers` requires the parser to still differ from PostgreSQL 16 on
+them:
+
+| class | statements | rule |
+|---|---|---|
+| pg17-utility | `cluster (verbose)` | `ClusterStmt: CLUSTER '(' utility_option_list ')'`, with no table |
+| pg17-utility | `copy t from stdin csv force not null *`, `copy t from stdin csv force null *` | `copy_opt_item: FORCE NOT NULL_P '*'`, `FORCE NULL_P '*'` |
+| pg17-sqljson | `select json_query('1', '$' with conditional array wrapper)`, `... without array wrapper` | `json_wrapper_behavior` |
+| pg17-sqljson | `select * from t, lateral json_table(...) j`, `select * from lateral json_table(...)` | `table_ref: LATERAL_P json_table opt_alias_clause` |
+| pg17-ddl | `alter statistics s set statistics default`, with IF EXISTS | `set_statistics_value: DEFAULT` |
+
+The statements' verdicts disagreed with PostgreSQL 16 in three more classes,
+each fixed with its own test data below: `explain-create-table`,
+`key-match-partial` and `grant-on-parameter`. Where both accepted, their
+trees differed from libpg_query's in classes the regression corpus already
+has (missing locations, `ObjectWithArgs.objfuncargs`, a list where
+libpg_query has a `String`), except two, fixed below: `const-bit-typmods`
+and `create-language-extension`.
+
+### grant-on-parameter (risk 2, 1; fixed)
+
+| statement | PostgreSQL 16 | parser |
+|---|---|---|
+| `grant alter system on parameter x to r` | accepts | 42601 syntax error at or near "x" at 32 |
+
+The parser had no `ON PARAMETER` target for GRANT and REVOKE, so
+`privilege: ALTER SYSTEM_P` could never be reduced. GRANT, REVOKE and
+REVOKE GRANT OPTION FOR now take `PARAMETER parameter_name_list`, names as
+SET takes them (a ColId, then any number of `.` ColId), each a `String` in
+`Objects`, with `OBJECT_PARAMETER_ACL`. `testdata/grant_parameter_pg16.jsonl`
+pins 500 statements; all agree, and where both accept, libpg_query's trees
+differ only in the grantee's and grantor's location, which the parser does
+not set anywhere (an `unlocated RoleSpec.location` class all over the
+corpus).
+
+### key-match-partial (risk 1, 1; fixed)
+
+| statement | PostgreSQL 16 | parser |
+|---|---|---|
+| `create table t (a int references u match partial)` | 0A000 MATCH PARTIAL not yet implemented at 35 | accepts |
+
+`key_match: MATCH PARTIAL` now raises `0A000 MATCH PARTIAL not yet
+implemented` at MATCH through `grammarError`, ending the parse.
+`testdata/match_partial_pg16.jsonl` pins 104 statements; all agree.
+
+### explain-create-table (risk 1, 1; fixed)
+
+| statement | PostgreSQL 16 | parser |
+|---|---|---|
+| `explain create table t (a int)` | 42601 syntax error at or near "int" at 26 | accepts |
+
+The fork's `ExplainableStmt` had `CreateStmt`, which PostgreSQL 16's has
+not; it is deleted, and EXPLAIN takes CREATE TABLE only through
+`CreateAsStmt`. `testdata/explain_create_pg16.jsonl` pins 156 statements;
+all agree.
+
+### const-bit-typmods (tree; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `select bit '1'` | `TypeName` `bit`, no typmods | `TypeName` `bit`, typmods `[1]` |
+
+`ConstBit: BitWithoutLength` kept `BitWithoutLength`'s BIT(1) modifier, which
+is a column's default length; it now clears it. The 17 trees that changed
+match libpg_query's. `testdata/const_bit_pg16.jsonl` pins 123 statements;
+all agree.
+
+### create-language-extension (tree; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `create language l` | `CreateExtensionStmt` `l` | `CreatePLangStmt` `l`, no handler |
+| `create or replace trusted procedural language l` | `CreateExtensionStmt` `l`, if_not_exists | `CreatePLangStmt` `l`, replace, trusted |
+
+CREATE LANGUAGE without a handler now builds a `CreateExtensionStmt`, OR
+REPLACE as its IF NOT EXISTS, TRUSTED dropped. The 81 trees that changed
+match libpg_query's. `testdata/create_language_pg16.jsonl` pins 395
+statements; all agree.
+
+### dead rules (deleted)
+
+goyacc reported 9 rules never reduced in any state, because no other rule
+used their nonterminals: `opt_distinct_clause: distinct_clause` and
+`opt_all_clause`, `json_output_clause_opt: json_returning_clause_opt`,
+`json_table_column_option_list: json_table_column_option_el` and its
+recursive form, and `json_table_column_option_el: DEFAULT b_expr`, `PATH
+b_expr`, `NOT NULL_P` and `NULL_P`. They are deleted, with their `%type`
+entries; no tree or verdict changed.
 
 ## Rerunning
 

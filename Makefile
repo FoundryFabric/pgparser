@@ -1,4 +1,4 @@
-.PHONY: all build generate test clean check-parser
+.PHONY: all build generate test clean check-parser cover cover-check
 
 # PostgreSQL source location
 PG_SRC := $(HOME)/Github/postgres
@@ -39,6 +39,27 @@ check-parser:
 		diff -u parser/parser.go $$tmp/parser.go | head -20; rm -rf $$tmp; \
 		echo "parser/parser.go is stale: run make generate-parser and commit it" >&2; exit 1; \
 	fi
+
+# cover measures the parser package's tests with parser/parser.go generated
+# by goyacc -l, so that the grammar actions are seen: statements per file
+# (go test -coverprofile), conditions per file (gobco) and the rules whose
+# action no test reduces. It writes $(COVER_OUT)/head/summary.txt and
+# facts.txt; see tools/parsercover.
+COVER_OUT ?= .cover
+
+cover:
+	go run ./tools/parsercover run -src . -out $(COVER_OUT)/head
+
+# cover-check BASE=<rev> fails for each statement block, condition outcome
+# or rule action the working tree's tests do not reach that BASE's reached
+# or did not have, matched by file, function or rule and normalised source
+# text rather than by line or rule number.
+cover-check:
+	@test -n "$(BASE)" || { echo "usage: make cover-check BASE=<rev>" >&2; exit 2; }
+	@tmp=$$(mktemp -d) && git archive $(BASE) | tar -x -C $$tmp && \
+	go run ./tools/parsercover run -src $$tmp -out $(COVER_OUT)/base; s=$$?; rm -rf $$tmp; exit $$s
+	go run ./tools/parsercover run -src . -out $(COVER_OUT)/head
+	go run ./tools/parsercover check -base $(COVER_OUT)/base/facts.txt -head $(COVER_OUT)/head/facts.txt
 
 clean:
 	rm -f parser/y.go
