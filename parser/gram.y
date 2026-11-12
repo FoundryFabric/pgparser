@@ -10514,11 +10514,6 @@ substr_list:
 		{
 			$$ = &nodes.List{Items: []nodes.Node{$1, $3, $5}}
 		}
-	| expr_list
-		{
-			/* comma-separated form: substring(x, 1, 3) */
-			$$ = $1
-		}
 	;
 
 trim_list:
