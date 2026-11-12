@@ -3943,75 +3943,6 @@ DropStmt:
 				Missing_ok: true,
 			}
 		}
-	/* DROP FUNCTION / PROCEDURE / ROUTINE / AGGREGATE */
-	| DROP FUNCTION any_name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    $3,
-				RemoveType: int(nodes.OBJECT_FUNCTION),
-				Behavior:   int($4),
-			}
-		}
-	| DROP FUNCTION IF_P EXISTS any_name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    $5,
-				RemoveType: int(nodes.OBJECT_FUNCTION),
-				Behavior:   int($6),
-				Missing_ok: true,
-			}
-		}
-	| DROP PROCEDURE any_name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    $3,
-				RemoveType: int(nodes.OBJECT_PROCEDURE),
-				Behavior:   int($4),
-			}
-		}
-	| DROP PROCEDURE IF_P EXISTS any_name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    $5,
-				RemoveType: int(nodes.OBJECT_PROCEDURE),
-				Behavior:   int($6),
-				Missing_ok: true,
-			}
-		}
-	| DROP ROUTINE any_name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    $3,
-				RemoveType: int(nodes.OBJECT_ROUTINE),
-				Behavior:   int($4),
-			}
-		}
-	| DROP ROUTINE IF_P EXISTS any_name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    $5,
-				RemoveType: int(nodes.OBJECT_ROUTINE),
-				Behavior:   int($6),
-				Missing_ok: true,
-			}
-		}
-	| DROP AGGREGATE any_name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    $3,
-				RemoveType: int(nodes.OBJECT_AGGREGATE),
-				Behavior:   int($4),
-			}
-		}
-	| DROP AGGREGATE IF_P EXISTS any_name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    $5,
-				RemoveType: int(nodes.OBJECT_AGGREGATE),
-				Behavior:   int($6),
-				Missing_ok: true,
-			}
-		}
 	/* DROP TRIGGER / POLICY / RULE ON relation */
 	| DROP TRIGGER name ON any_name opt_drop_behavior
 		{
@@ -4082,7 +4013,7 @@ DropStmt:
 				Missing_ok: true,
 			}
 		}
-	/* DROP LANGUAGE / PUBLICATION / SUBSCRIPTION */
+	/* DROP LANGUAGE / PUBLICATION */
 	| DROP LANGUAGE name opt_drop_behavior
 		{
 			$$ = &nodes.DropStmt{
@@ -4113,23 +4044,6 @@ DropStmt:
 			$$ = &nodes.DropStmt{
 				Objects:    makeNameListAsAnyNameList($5),
 				RemoveType: int(nodes.OBJECT_PUBLICATION),
-				Behavior:   int($6),
-				Missing_ok: true,
-			}
-		}
-	| DROP SUBSCRIPTION name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList($3),
-				RemoveType: int(nodes.OBJECT_SUBSCRIPTION),
-				Behavior:   int($4),
-			}
-		}
-	| DROP SUBSCRIPTION IF_P EXISTS name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList($5),
-				RemoveType: int(nodes.OBJECT_SUBSCRIPTION),
 				Behavior:   int($6),
 				Missing_ok: true,
 			}
@@ -4187,15 +4101,6 @@ DropStmt:
 				RemoveType: int(nodes.OBJECT_FOREIGN_SERVER),
 				Behavior:   int($6),
 				Missing_ok: true,
-			}
-		}
-	/* DROP OWNED BY */
-	| DROP OWNED BY name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList($4),
-				RemoveType: int(nodes.OBJECT_ROLE),
-				Behavior:   int($5),
 			}
 		}
 	;

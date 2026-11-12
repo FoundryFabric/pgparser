@@ -9597,7 +9597,7 @@
 {"file":"create_procedure.sql","stmt":25,"sum":"46f7e89c"}
 {"file":"create_procedure.sql","stmt":26,"sum":"0610d630"}
 {"file":"create_procedure.sql","stmt":27,"sum":"b7f09eeb"}
-{"file":"create_procedure.sql","stmt":27,"edit":[31,0,"[]"],"code":"42601","msg":"syntax error at or near \"]\"","pos":32,"class":"drop-routine-list-name"}
+{"file":"create_procedure.sql","stmt":27,"edit":[31,0,"[]"],"code":"42601","msg":"syntax error at or near \"]\"","pos":32}
 {"file":"create_procedure.sql","stmt":28,"sum":"cca37a77"}
 {"file":"create_procedure.sql","stmt":29,"sum":"eb5c34bf"}
 {"file":"create_procedure.sql","stmt":30,"sum":"29ef4e68"}
@@ -12648,8 +12648,8 @@
 {"file":"errors.sql","stmt":28,"sum":"cc3d906b","code":"42601","msg":"syntax error at or near \"314159\"","pos":29}
 {"file":"errors.sql","stmt":29,"sum":"3c31af71"}
 {"file":"errors.sql","stmt":30,"sum":"7fd44ad5","code":"42601","msg":"syntax error at end of input","pos":61}
-{"file":"errors.sql","stmt":30,"edit":[61,0," aggregate"],"code":"42601","msg":"syntax error at end of input","pos":71,"class":"drop-aggregate-arguments"}
-{"file":"errors.sql","stmt":31,"sum":"ec479b98","code":"42601","msg":"syntax error at end of input","pos":48,"class":"drop-aggregate-arguments"}
+{"file":"errors.sql","stmt":30,"edit":[61,0," aggregate"],"code":"42601","msg":"syntax error at end of input","pos":71}
+{"file":"errors.sql","stmt":31,"sum":"ec479b98","code":"42601","msg":"syntax error at end of input","pos":48}
 {"file":"errors.sql","stmt":32,"sum":"c11a9d2f","code":"42601","msg":"syntax error at or near \"314159\"","pos":37}
 {"file":"errors.sql","stmt":32,"edit":[37,6,""],"code":"42601","msg":"syntax error at or near \"(\"","pos":38}
 {"file":"errors.sql","stmt":33,"sum":"b144d4a8"}
@@ -58769,9 +58769,9 @@
 {"sql":"reindex table","code":"42601","msg":"syntax error at end of input","pos":13}
 {"sql":"alter database x refresh collation version","class":"alter-database-refresh-collation"}
 {"sql":"alter database x refresh","code":"42601","msg":"syntax error at end of input","pos":24,"class":"alter-database-refresh-collation"}
-{"sql":"drop aggregate a","code":"42601","msg":"syntax error at end of input","pos":16,"class":"drop-aggregate-arguments"}
+{"sql":"drop aggregate a","code":"42601","msg":"syntax error at end of input","pos":16}
 {"sql":"drop aggregate a(*)"}
-{"sql":"drop aggregate if exists a, b","code":"42601","msg":"syntax error at or near \",\"","pos":26,"class":"drop-aggregate-arguments"}
+{"sql":"drop aggregate if exists a, b","code":"42601","msg":"syntax error at or near \",\"","pos":26}
 {"sql":"drop type t[]"}
 {"sql":"drop domain d(3)"}
 {"sql":"drop type t(1)[]"}
@@ -58797,7 +58797,7 @@
 {"sql":"drop operator === (int4)","code":"42601","msg":"missing argument","pos":23,"class":"operator-missing-argument-message"}
 {"sql":"create policy p on t as ugly using (true)","code":"42601","msg":"unrecognized row security option \"ugly\"","pos":24,"class":"policy-option-message"}
 {"sql":"create role role x with createrole","code":"42601","msg":"unrecognized role option \"x\"","pos":17,"class":"role-option-error-order"}
-{"sql":"drop procedure p, q[]","code":"42601","msg":"syntax error at or near \"]\"","pos":20,"class":"drop-routine-list-name"}
+{"sql":"drop procedure p, q[]","code":"42601","msg":"syntax error at or near \"]\"","pos":20}
 {"sql":"-- Phase 1: infrastructure coverage for core expression nodes\nSELECT CURRENT_DATE"}
 {"sql":"SELECT CURRENT_TIME(3)"}
 {"sql":"SELECT COALESCE(NULL, 1, 2)"}
