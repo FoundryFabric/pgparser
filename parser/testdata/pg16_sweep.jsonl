@@ -32537,7 +32537,7 @@
 {"file":"object_address.sql","stmt":29,"sum":"5cebcf2e"}
 {"file":"object_address.sql","stmt":30,"sum":"77c2ddc2"}
 {"file":"object_address.sql","stmt":31,"sum":"180bb766"}
-{"file":"object_address.sql","stmt":31,"edit":[32,5,""],"code":"42601","msg":"invalid publication object list","pos":33,"class":"publication-object-list"}
+{"file":"object_address.sql","stmt":31,"edit":[32,5,""],"code":"42601","msg":"invalid publication object list","pos":33}
 {"file":"object_address.sql","stmt":32,"sum":"12cb4fab"}
 {"file":"object_address.sql","stmt":33,"sum":"100569e9"}
 {"file":"object_address.sql","stmt":34,"sum":"1dfaa9b3"}
@@ -39623,7 +39623,7 @@
 {"file":"publication.sql","stmt":25,"sum":"61a6c28d"}
 {"file":"publication.sql","stmt":26,"sum":"30ae1ec5"}
 {"file":"publication.sql","stmt":27,"sum":"4b559d64"}
-{"file":"publication.sql","stmt":27,"edit":[93,18,"testpub_tbl2 TABLE"],"code":"42601","msg":"invalid publication object list","pos":93,"class":"publication-object-list"}
+{"file":"publication.sql","stmt":27,"edit":[93,18,"testpub_tbl2 TABLE"],"code":"42601","msg":"invalid publication object list","pos":93}
 {"file":"publication.sql","stmt":28,"sum":"a05836f6"}
 {"file":"publication.sql","stmt":29,"sum":"38309a77"}
 {"file":"publication.sql","stmt":30,"sum":"b7df9cb8"}
@@ -39633,18 +39633,18 @@
 {"file":"publication.sql","stmt":34,"sum":"9914e254"}
 {"file":"publication.sql","stmt":35,"sum":"100569e9"}
 {"file":"publication.sql","stmt":36,"sum":"924f420d"}
-{"file":"publication.sql","stmt":36,"edit":[105,2,"current_timestamp"],"code":"42601","msg":"invalid publication object list","pos":98,"class":"publication-object-list"}
+{"file":"publication.sql","stmt":36,"edit":[105,2,"current_timestamp"],"code":"42601","msg":"invalid publication object list","pos":98}
 {"file":"publication.sql","stmt":37,"sum":"90657b92"}
 {"file":"publication.sql","stmt":38,"sum":"a4126c77"}
 {"file":"publication.sql","stmt":39,"sum":"205fe093"}
 {"file":"publication.sql","stmt":40,"sum":"9e130e7d"}
 {"file":"publication.sql","stmt":41,"sum":"8a9514e1"}
 {"file":"publication.sql","stmt":42,"sum":"100569e9"}
-{"file":"publication.sql","stmt":43,"sum":"aed0ce46","code":"42601","msg":"invalid table name","pos":98,"class":"publication-object-list"}
-{"file":"publication.sql","stmt":44,"sum":"e74bbed7","code":"42601","msg":"invalid schema name","pos":63,"class":"publication-object-list"}
+{"file":"publication.sql","stmt":43,"sum":"aed0ce46","code":"42601","msg":"invalid table name","pos":98}
+{"file":"publication.sql","stmt":44,"sum":"e74bbed7","code":"42601","msg":"invalid schema name","pos":63}
 {"file":"publication.sql","stmt":45,"sum":"61ce4bf1"}
 {"file":"publication.sql","stmt":46,"sum":"fe5a9f41"}
-{"file":"publication.sql","stmt":46,"edit":[76,0," DROP"],"code":"42601","msg":"invalid publication object list","pos":77,"class":"publication-object-list"}
+{"file":"publication.sql","stmt":46,"edit":[76,0," DROP"],"code":"42601","msg":"invalid publication object list","pos":77}
 {"file":"publication.sql","stmt":47,"sum":"fb972436"}
 {"file":"publication.sql","stmt":48,"sum":"d326c308"}
 {"file":"publication.sql","stmt":49,"sum":"e509fd15"}
@@ -39684,8 +39684,8 @@
 {"file":"publication.sql","stmt":76,"sum":"2c1bec36"}
 {"file":"publication.sql","stmt":76,"edit":[69,0," UPDATE"]}
 {"file":"publication.sql","stmt":77,"sum":"669d85a9"}
-{"file":"publication.sql","stmt":77,"edit":[41,20,"testpub_parted TABLE"],"code":"42601","msg":"invalid publication object list","pos":41,"class":"publication-object-list"}
-{"file":"publication.sql","stmt":77,"edit":[41,5,""],"code":"42601","msg":"invalid publication object list","pos":42,"class":"publication-object-list"}
+{"file":"publication.sql","stmt":77,"edit":[41,20,"testpub_parted TABLE"],"code":"42601","msg":"invalid publication object list","pos":41}
+{"file":"publication.sql","stmt":77,"edit":[41,5,""],"code":"42601","msg":"invalid publication object list","pos":42}
 {"file":"publication.sql","stmt":78,"sum":"92cc5340"}
 {"file":"publication.sql","stmt":79,"sum":"99198ff3"}
 {"file":"publication.sql","stmt":80,"sum":"46d8b7e3"}
@@ -39723,7 +39723,7 @@
 {"file":"publication.sql","stmt":108,"sum":"cce74b5d"}
 {"file":"publication.sql","stmt":109,"sum":"547db069"}
 {"file":"publication.sql","stmt":110,"sum":"694e9804","code":"42601","msg":"syntax error at or near \"WHERE\"","pos":75}
-{"file":"publication.sql","stmt":111,"sum":"42c8ea09","code":"42601","msg":"WHERE clause not allowed for schema","pos":76,"class":"publication-object-list"}
+{"file":"publication.sql","stmt":111,"sum":"42c8ea09","code":"42601","msg":"WHERE clause not allowed for schema","pos":76}
 {"file":"publication.sql","stmt":112,"sum":"100569e9"}
 {"file":"publication.sql","stmt":113,"sum":"c31e0849"}
 {"file":"publication.sql","stmt":114,"sum":"1ae3e977"}
@@ -39933,7 +39933,7 @@
 {"file":"publication.sql","stmt":279,"sum":"5c9f772e"}
 {"file":"publication.sql","stmt":280,"sum":"528b0e08"}
 {"file":"publication.sql","stmt":281,"sum":"7109463b"}
-{"file":"publication.sql","stmt":281,"edit":[106,5,""],"code":"42601","msg":"invalid publication object list","pos":107,"class":"publication-object-list"}
+{"file":"publication.sql","stmt":281,"edit":[106,5,""],"code":"42601","msg":"invalid publication object list","pos":107}
 {"file":"publication.sql","stmt":282,"sum":"eca63616"}
 {"file":"publication.sql","stmt":282,"edit":[139,6,"text c"]}
 {"file":"publication.sql","stmt":283,"sum":"133fdcec"}
@@ -39947,7 +39947,7 @@
 {"file":"publication.sql","stmt":290,"sum":"d8c3e2c7"}
 {"file":"publication.sql","stmt":291,"sum":"100569e9"}
 {"file":"publication.sql","stmt":292,"sum":"160b704f"}
-{"file":"publication.sql","stmt":292,"edit":[87,5,""],"code":"42601","msg":"invalid publication object list","pos":88,"class":"publication-object-list"}
+{"file":"publication.sql","stmt":292,"edit":[87,5,""],"code":"42601","msg":"invalid publication object list","pos":88}
 {"file":"publication.sql","stmt":293,"sum":"0be59dcb"}
 {"file":"publication.sql","stmt":294,"sum":"afa74c21"}
 {"file":"publication.sql","stmt":295,"sum":"9d1db09c"}
@@ -40019,7 +40019,7 @@
 {"file":"publication.sql","stmt":354,"sum":"8762d4e9"}
 {"file":"publication.sql","stmt":355,"sum":"24e01572"}
 {"file":"publication.sql","stmt":356,"sum":"18834854"}
-{"file":"publication.sql","stmt":356,"edit":[31,5,""],"code":"42601","msg":"invalid publication object list","pos":32,"class":"publication-object-list"}
+{"file":"publication.sql","stmt":356,"edit":[31,5,""],"code":"42601","msg":"invalid publication object list","pos":32}
 {"file":"publication.sql","stmt":357,"sum":"74f6bab5"}
 {"file":"publication.sql","stmt":358,"sum":"987bc30f"}
 {"file":"publication.sql","stmt":359,"sum":"b7b31d0e"}
@@ -40094,7 +40094,7 @@
 {"file":"publication.sql","stmt":420,"sum":"07390f04"}
 {"file":"publication.sql","stmt":421,"sum":"31a51673"}
 {"file":"publication.sql","stmt":422,"sum":"44466b8b"}
-{"file":"publication.sql","stmt":422,"edit":[68,5,""],"code":"42601","msg":"invalid publication object list","pos":69,"class":"publication-object-list"}
+{"file":"publication.sql","stmt":422,"edit":[68,5,""],"code":"42601","msg":"invalid publication object list","pos":69}
 {"file":"publication.sql","stmt":423,"sum":"eb2a4a14"}
 {"file":"publication.sql","stmt":424,"sum":"1cf7a944"}
 {"file":"publication.sql","stmt":424,"edit":[44,3,""],"code":"42601","msg":"syntax error at end of input","pos":45}
@@ -40142,7 +40142,7 @@
 {"file":"publication.sql","stmt":461,"sum":"cddc481a"}
 {"file":"publication.sql","stmt":462,"sum":"dc054039"}
 {"file":"publication.sql","stmt":463,"sum":"fa4e2028"}
-{"file":"publication.sql","stmt":463,"edit":[31,18,"testpub_tbl1 TABLE"],"code":"42601","msg":"invalid publication object list","pos":31,"class":"publication-object-list"}
+{"file":"publication.sql","stmt":463,"edit":[31,18,"testpub_tbl1 TABLE"],"code":"42601","msg":"invalid publication object list","pos":31}
 {"file":"publication.sql","stmt":464,"sum":"59f05da3"}
 {"file":"publication.sql","stmt":465,"sum":"0f3fc87e"}
 {"file":"publication.sql","stmt":466,"sum":"8bf906b1"}
@@ -40198,7 +40198,7 @@
 {"file":"publication.sql","stmt":506,"sum":"040268d4"}
 {"file":"publication.sql","stmt":507,"sum":"d98fffc2"}
 {"file":"publication.sql","stmt":507,"edit":[0,17,"SEARCH_PATH RESET"],"code":"42601","msg":"syntax error at or near \"SEARCH_PATH\"","pos":0}
-{"file":"publication.sql","stmt":508,"sum":"4fd3c2ec","code":"42601","msg":"invalid publication object list","pos":137,"class":"publication-object-list"}
+{"file":"publication.sql","stmt":508,"sum":"4fd3c2ec","code":"42601","msg":"invalid publication object list","pos":137}
 {"file":"publication.sql","stmt":509,"sum":"1c6fddc0","code":"42601","msg":"syntax error at or near \"CURRENT_SCHEMA\"","pos":115}
 {"file":"publication.sql","stmt":510,"sum":"c47341a6"}
 {"file":"publication.sql","stmt":511,"sum":"5c3863ba"}
@@ -40218,16 +40218,16 @@
 {"file":"publication.sql","stmt":524,"sum":"e6c7ddfa"}
 {"file":"publication.sql","stmt":525,"sum":"de02a678"}
 {"file":"publication.sql","stmt":526,"sum":"aecc7f2e","code":"42601","msg":"syntax error at or near \"(\"","pos":130}
-{"file":"publication.sql","stmt":527,"sum":"cc4209cd","code":"42601","msg":"column specification not allowed for schema","pos":63,"class":"publication-object-list"}
-{"file":"publication.sql","stmt":527,"edit":[48,2,""],"code":"42601","msg":"invalid publication object list","pos":41,"class":"publication-object-list"}
+{"file":"publication.sql","stmt":527,"sum":"cc4209cd","code":"42601","msg":"column specification not allowed for schema","pos":63}
+{"file":"publication.sql","stmt":527,"edit":[48,2,""],"code":"42601","msg":"invalid publication object list","pos":41}
 {"file":"publication.sql","stmt":528,"sum":"e38b6724"}
-{"file":"publication.sql","stmt":528,"edit":[100,2,"create"],"code":"42601","msg":"invalid publication object list","pos":93,"class":"publication-object-list"}
+{"file":"publication.sql","stmt":528,"edit":[100,2,"create"],"code":"42601","msg":"invalid publication object list","pos":93}
 {"file":"publication.sql","stmt":529,"sum":"9cf94d73"}
 {"file":"publication.sql","stmt":530,"sum":"281b5b34"}
 {"file":"publication.sql","stmt":531,"sum":"1179ea01"}
 {"file":"publication.sql","stmt":532,"sum":"711cc121"}
 {"file":"publication.sql","stmt":533,"sum":"28743775"}
-{"file":"publication.sql","stmt":533,"edit":[48,0," TABLES"],"code":"42601","msg":"invalid publication object list","pos":42,"class":"publication-object-list"}
+{"file":"publication.sql","stmt":533,"edit":[48,0," TABLES"],"code":"42601","msg":"invalid publication object list","pos":42}
 {"file":"publication.sql","stmt":534,"sum":"68c14d7c"}
 {"file":"publication.sql","stmt":535,"sum":"713b6e9e"}
 {"file":"publication.sql","stmt":536,"sum":"711cc121"}
@@ -40265,7 +40265,7 @@
 {"file":"publication.sql","stmt":564,"sum":"223446f7"}
 {"file":"publication.sql","stmt":565,"sum":"1109455d"}
 {"file":"publication.sql","stmt":566,"sum":"100569e9"}
-{"file":"publication.sql","stmt":567,"sum":"339c4cb1","code":"42601","msg":"invalid publication object list","pos":137,"class":"publication-object-list"}
+{"file":"publication.sql","stmt":567,"sum":"339c4cb1","code":"42601","msg":"invalid publication object list","pos":137}
 {"file":"publication.sql","stmt":568,"sum":"4441f252"}
 {"file":"publication.sql","stmt":569,"sum":"5c341adf"}
 {"file":"publication.sql","stmt":570,"sum":"69dc3ec5"}
@@ -40316,7 +40316,7 @@
 {"file":"publication.sql","stmt":610,"sum":"3e30b5c6"}
 {"file":"publication.sql","stmt":610,"edit":[16,0,".x"]}
 {"file":"publication.sql","stmt":611,"sum":"adb57a7c"}
-{"file":"publication.sql","stmt":611,"edit":[33,0,".x"],"code":"42601","msg":"invalid publication object list","pos":27,"class":"publication-object-list"}
+{"file":"publication.sql","stmt":611,"edit":[33,0,".x"],"code":"42601","msg":"invalid publication object list","pos":27}
 {"file":"publication.sql","stmt":612,"sum":"b44cbe25"}
 {"file":"publication.sql","stmt":613,"sum":"100569e9"}
 {"file":"publication.sql","stmt":614,"sum":"05cc7ff9"}
@@ -58775,9 +58775,9 @@
 {"sql":"drop type t[]"}
 {"sql":"drop domain d(3)"}
 {"sql":"drop type t(1)[]"}
-{"sql":"create publication p for current_schema","code":"42601","msg":"invalid publication object list","pos":25,"class":"publication-object-list"}
-{"sql":"create publication p for t","code":"42601","msg":"invalid publication object list","pos":25,"class":"publication-object-list"}
-{"sql":"alter publication p add tables in schema s, s2 where (a = 1)","code":"42601","msg":"WHERE clause not allowed for schema","pos":44,"class":"publication-object-list"}
+{"sql":"create publication p for current_schema","code":"42601","msg":"invalid publication object list","pos":25}
+{"sql":"create publication p for t","code":"42601","msg":"invalid publication object list","pos":25}
+{"sql":"alter publication p add tables in schema s, s2 where (a = 1)","code":"42601","msg":"WHERE clause not allowed for schema","pos":44}
 {"sql":"alter table t alter constraint c not deferrable initially deferred","code":"42601","msg":"constraint declared INITIALLY DEFERRED must be DEFERRABLE","pos":48,"class":"constraint-attribute-checks"}
 {"sql":"create table t (a int generated by default as (1) stored)","code":"42601","msg":"for a generated column, GENERATED ALWAYS must be specified","pos":32,"class":"constraint-attribute-checks"}
 {"sql":"create table t (a int references p on update set null (a))","code":"0A000","msg":"a column list with SET NULL is only supported for ON DELETE actions","pos":35,"class":"constraint-attribute-checks"}
