@@ -88,7 +88,7 @@ L a feature's grammar.
 | drop-aggregate-arguments | 1 | 4 (1/1/2) | accepts DROP AGGREGATE without argument types | `DropStmt` AGGREGATE `aggregate_with_argtypes_list` | no | S |
 | partition-command-in-list | 1 | 4 (0/2/2) | accepts ATTACH/DETACH PARTITION in a command list | `AlterTableStmt` `partition_cmd` | no | S |
 | role-name-checks | 1 | 4 (0/1/3) | accepts `ALTER ROLE CURRENT_USER RENAME`; 42601 for 42939 | `RoleId` action, `RenameStmt` | no | S |
-| bare-column-label | 2 | 511 (2/502/7) | refuses a keyword as a column label without AS | `target_el: a_expr BareColLabel`, `bare_label_keyword` | no | M |
+| bare-column-label (fixed but 5) | 2 | 511 (2/502/7) | refuses a keyword as a column label without AS | `target_el: a_expr BareColLabel`, `bare_label_keyword` | no | M |
 | pg17-json-names | 2 | 75 (4/66/5) | refuses PostgreSQL 16's json, json_table and the like as names | `kwlist.h`: 20 PostgreSQL 17 keywords, JSON col_name; `JsonType` | no | M (with pg17-sqljson) |
 | drop-type-typename (fixed) | 2 | 50 (0/47/3) | refuses `DROP TYPE t[]`, `DROP DOMAIN d(3)` | `DropStmt` TYPE/DOMAIN `type_name_list` | yes, all 50 | S |
 | alter-column-optional-keyword | 2 | 7 (0/5/2) | refuses `ALTER a SET (...)`, `ALTER a SET GENERATED` without COLUMN | `alter_table_cmd` `ALTER opt_column ColId` | no | S |
@@ -271,7 +271,7 @@ into WITH (`with ROLE regress_test_role`) shows it too.
 | `create role current_user` | 42939 CURRENT_USER cannot be used as a role name here at 12 | 42601 role name cannot be a reserved keyword here at 12 |
 | `create user current_role` | 42939 CURRENT_ROLE cannot be used as a role name here at 12 | 42601 role name cannot be a reserved keyword here at 12 |
 
-### bare-column-label (risk 2, 511)
+### bare-column-label (risk 2, 511; fixed but 5)
 
 The parser's `target_el` is `a_expr AS ColLabel | a_expr IDENT | a_expr`;
 PostgreSQL 16's (since 14) takes `a_expr BareColLabel`, where a bare label is
@@ -289,6 +289,13 @@ the parser gets past.
 | `select 1 case` | accepts | 42601 syntax error at or near "case" at 9 |
 | `select 1 is, 2` | accepts | 42601 syntax error at or near "," at 11 |
 | `SELECT(3) time with time zone 'T0405+08'` | 42601 syntax error at or near "with" at 15 | 42601 syntax error at or near "time" at 10 |
+
+`target_el` now takes `a_expr BareColLabel`, and 506 of the 511 agree. The
+five left are `U&'...' UESCAPE` followed by something other than a string
+(`+`, `.`, `[`, `(`): with UESCAPE a bare label the parser refuses at the
+next token, PostgreSQL 16's position, but with `syntax error` where
+PostgreSQL says `UESCAPE must be followed by a simple string literal`, the
+message `uescape` is about.
 
 ### pg17-json-names (risk 2, 75)
 

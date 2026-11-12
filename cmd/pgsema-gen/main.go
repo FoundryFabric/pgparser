@@ -44,7 +44,7 @@ type Keyword struct {
 	Name      string // keyword text (lowercase)
 	Token     string // token name in grammar
 	Category  KeywordCategory
-	BareLable bool // can be used as bare label
+	BareLabel bool // a column label without AS (BARE_LABEL)
 }
 
 func generateKeywords(kwlistPath, outDir string) error {
@@ -95,9 +95,10 @@ func generateKeywords(kwlistPath, outDir string) error {
 	// Write Keyword struct
 	fmt.Fprintln(f, "// Keyword represents a PostgreSQL keyword.")
 	fmt.Fprintln(f, "type Keyword struct {")
-	fmt.Fprintln(f, "\tName     string")
-	fmt.Fprintln(f, "\tToken    int")
-	fmt.Fprintln(f, "\tCategory KeywordCategory")
+	fmt.Fprintln(f, "\tName      string")
+	fmt.Fprintln(f, "\tToken     int")
+	fmt.Fprintln(f, "\tCategory  KeywordCategory")
+	fmt.Fprintln(f, "\tBareLabel bool")
 	fmt.Fprintln(f, "}")
 	fmt.Fprintln(f, "")
 
@@ -115,7 +116,7 @@ func generateKeywords(kwlistPath, outDir string) error {
 		case ReservedKeyword:
 			catName = "ReservedKeyword"
 		}
-		fmt.Fprintf(f, "\t{%q, %s, %s},\n", kw.Name, kw.Token, catName)
+		fmt.Fprintf(f, "\t{%q, %s, %s, %t},\n", kw.Name, kw.Token, catName, kw.BareLabel)
 	}
 	fmt.Fprintln(f, "}")
 	fmt.Fprintln(f, "")
@@ -163,7 +164,6 @@ func parseKwlist(path string) ([]Keyword, error) {
 		name := matches[1]
 		token := matches[2]
 		catStr := matches[3]
-		// bareLabel := matches[4] // not used for now
 
 		var cat KeywordCategory
 		switch catStr {
@@ -179,10 +179,20 @@ func parseKwlist(path string) ([]Keyword, error) {
 			return nil, fmt.Errorf("unknown keyword category: %s", catStr)
 		}
 
+		var bare bool
+		switch matches[4] {
+		case "BARE_LABEL":
+			bare = true
+		case "AS_LABEL":
+		default:
+			return nil, fmt.Errorf("unknown keyword label: %s", matches[4])
+		}
+
 		keywords = append(keywords, Keyword{
-			Name:     name,
-			Token:    token,
-			Category: cat,
+			Name:      name,
+			Token:     token,
+			Category:  cat,
+			BareLabel: bare,
 		})
 	}
 

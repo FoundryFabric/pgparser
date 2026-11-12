@@ -227,9 +227,6 @@
   "tsearch.sql": [
     282
   ],
-  "type_sanity.sql": [
-    59
-  ],
   "update.sql": [
     94,
     97,
