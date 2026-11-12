@@ -1,0 +1,1052 @@
+{"sql":"select U&'x'"}
+{"sql":"select U&'x' uescape '!'"}
+{"sql":"select U&'x' uescape 'g'"}
+{"sql":"select U&'x' UESCAPE '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":21}
+{"sql":"select U&'x' uescape 'a'","code":"42601","message":"invalid Unicode escape character at or near \"'a'\"","position":21}
+{"sql":"select U&'x' uescape 'F'","code":"42601","message":"invalid Unicode escape character at or near \"'F'\"","position":21}
+{"sql":"select U&'x' uescape '0'","code":"42601","message":"invalid Unicode escape character at or near \"'0'\"","position":21}
+{"sql":"select U&'x' uescape ' '","code":"42601","message":"invalid Unicode escape character at or near \"' '\"","position":21}
+{"sql":"select U&'x' uescape ''''","code":"42601","message":"invalid Unicode escape character at or near \"''''\"","position":21}
+{"sql":"select U&'x' uescape '\"'","code":"42601","message":"invalid Unicode escape character at or near \"'\"'\"","position":21}
+{"sql":"select U&'x' uescape ''","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":21}
+{"sql":"select U&'x' uescape 'ab'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":21}
+{"sql":"select U&'x' uescape 'é'","code":"42601","message":"invalid Unicode escape character at or near \"'é'\"","position":21}
+{"sql":"select U&'x' uescape '~'"}
+{"sql":"select U&'x' uescape '\\'"}
+{"sql":"select U&'x' uescape E'!'"}
+{"sql":"select U&'x' uescape e'\\t'","code":"42601","message":"invalid Unicode escape character at or near \"e'\\t'\"","position":21}
+{"sql":"select U&'x' uescape E'\\x21'"}
+{"sql":"select U&'x' uescape $$!$$"}
+{"sql":"select U&'x' uescape $q$!$q$"}
+{"sql":"select U&'x' uescape U&'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":21}
+{"sql":"select U&'x' uescape B'1'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"B'1'\"","position":21}
+{"sql":"select U&'x' uescape X'1'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"X'1'\"","position":21}
+{"sql":"select U&'x' uescape N'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"N\"","position":21}
+{"sql":"select U&'x' uescape 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"1\"","position":21}
+{"sql":"select U&'x' uescape 1.5","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"1.5\"","position":21}
+{"sql":"select U&'x' uescape x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":21}
+{"sql":"select U&'x' uescape \"x\"","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"\"x\"\"","position":21}
+{"sql":"select U&'x' uescape (","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":21}
+{"sql":"select U&'x' uescape [","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"[\"","position":21}
+{"sql":"select U&'x' uescape .","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \".\"","position":21}
+{"sql":"select U&'x' uescape +","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"+\"","position":21}
+{"sql":"select U&'x' uescape ,","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \",\"","position":21}
+{"sql":"select U&'x' uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":20}
+{"sql":"select U&'x' uescape -- c","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":25}
+{"sql":"select U&'x' uescape /* c */ '!'"}
+{"sql":"select U&'x' uescape\n'!'"}
+{"sql":"select U&'x' uescape '!'\n'!'","code":"42601","message":"invalid Unicode escape character at or near \"'!'\n'!'\"","position":21}
+{"sql":"select U&'x' uescape '!'\n'!' '!'","code":"42601","message":"invalid Unicode escape character at or near \"'!'\n'!'\"","position":21}
+{"sql":"select U&'x' uescape $1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"$1\"","position":21}
+{"sql":"select U&'x' uescape '!","code":"42601","message":"unterminated quoted string at or near \"'!\"","position":21}
+{"sql":"select U&'x' uescape $$x","code":"42601","message":"unterminated dollar-quoted string at or near \"$$x\"","position":21}
+{"sql":"select U&'x' uescape uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"uescape\"","position":21}
+{"sql":"select U&'x' \"uescape\" '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":23}
+{"sql":"select U&'x' uescapex '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":22}
+{"sql":"select U&'x' uescape '!' uescape '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":33}
+{"sql":"select U&'x' uescape'!'"}
+{"sql":"select U&'x'uescape'!'"}
+{"sql":"select U&'x' uescape '!' || 'z'"}
+{"sql":"select U&'x' uescape(3) '!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":20}
+{"sql":"select U&'x' uescape[] '!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"[\"","position":20}
+{"sql":"select U&'x' uescape.x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \".\"","position":20}
+{"sql":"select U&'x' UeScApE '!'"}
+{"sql":"select U&'x' uescape '!' (","code":"42601","message":"syntax error at or near \"(\"","position":25}
+{"sql":"select u&'d!0061t'"}
+{"sql":"select u&'d!0061t' uescape '!'"}
+{"sql":"select u&'d!0061t' uescape 'g'"}
+{"sql":"select u&'d!0061t' UESCAPE '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":27}
+{"sql":"select u&'d!0061t' uescape 'a'","code":"42601","message":"invalid Unicode escape character at or near \"'a'\"","position":27}
+{"sql":"select u&'d!0061t' uescape 'F'","code":"42601","message":"invalid Unicode escape character at or near \"'F'\"","position":27}
+{"sql":"select u&'d!0061t' uescape '0'","code":"42601","message":"invalid Unicode escape character at or near \"'0'\"","position":27}
+{"sql":"select u&'d!0061t' uescape ' '","code":"42601","message":"invalid Unicode escape character at or near \"' '\"","position":27}
+{"sql":"select u&'d!0061t' uescape ''''","code":"42601","message":"invalid Unicode escape character at or near \"''''\"","position":27}
+{"sql":"select u&'d!0061t' uescape '\"'","code":"42601","message":"invalid Unicode escape character at or near \"'\"'\"","position":27}
+{"sql":"select u&'d!0061t' uescape ''","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":27}
+{"sql":"select u&'d!0061t' uescape 'ab'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":27}
+{"sql":"select u&'d!0061t' uescape 'é'","code":"42601","message":"invalid Unicode escape character at or near \"'é'\"","position":27}
+{"sql":"select u&'d!0061t' uescape '~'"}
+{"sql":"select u&'d!0061t' uescape '\\'"}
+{"sql":"select u&'d!0061t' uescape E'!'"}
+{"sql":"select u&'d!0061t' uescape e'\\t'","code":"42601","message":"invalid Unicode escape character at or near \"e'\\t'\"","position":27}
+{"sql":"select u&'d!0061t' uescape E'\\x21'"}
+{"sql":"select u&'d!0061t' uescape $$!$$"}
+{"sql":"select u&'d!0061t' uescape $q$!$q$"}
+{"sql":"select u&'d!0061t' uescape U&'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":27}
+{"sql":"select u&'d!0061t' uescape B'1'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"B'1'\"","position":27}
+{"sql":"select u&'d!0061t' uescape X'1'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"X'1'\"","position":27}
+{"sql":"select u&'d!0061t' uescape N'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"N\"","position":27}
+{"sql":"select u&'d!0061t' uescape 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"1\"","position":27}
+{"sql":"select u&'d!0061t' uescape 1.5","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"1.5\"","position":27}
+{"sql":"select u&'d!0061t' uescape x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":27}
+{"sql":"select u&'d!0061t' uescape \"x\"","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"\"x\"\"","position":27}
+{"sql":"select u&'d!0061t' uescape (","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":27}
+{"sql":"select u&'d!0061t' uescape [","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"[\"","position":27}
+{"sql":"select u&'d!0061t' uescape .","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \".\"","position":27}
+{"sql":"select u&'d!0061t' uescape +","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"+\"","position":27}
+{"sql":"select u&'d!0061t' uescape ,","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \",\"","position":27}
+{"sql":"select u&'d!0061t' uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":26}
+{"sql":"select u&'d!0061t' uescape -- c","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":31}
+{"sql":"select u&'d!0061t' uescape /* c */ '!'"}
+{"sql":"select u&'d!0061t' uescape\n'!'"}
+{"sql":"select u&'d!0061t' uescape '!'\n'!'","code":"42601","message":"invalid Unicode escape character at or near \"'!'\n'!'\"","position":27}
+{"sql":"select u&'d!0061t' uescape '!'\n'!' '!'","code":"42601","message":"invalid Unicode escape character at or near \"'!'\n'!'\"","position":27}
+{"sql":"select u&'d!0061t' uescape $1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"$1\"","position":27}
+{"sql":"select u&'d!0061t' uescape '!","code":"42601","message":"unterminated quoted string at or near \"'!\"","position":27}
+{"sql":"select u&'d!0061t' uescape $$x","code":"42601","message":"unterminated dollar-quoted string at or near \"$$x\"","position":27}
+{"sql":"select u&'d!0061t' uescape uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"uescape\"","position":27}
+{"sql":"select u&'d!0061t' \"uescape\" '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":29}
+{"sql":"select u&'d!0061t' uescapex '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":28}
+{"sql":"select u&'d!0061t' uescape '!' uescape '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":39}
+{"sql":"select u&'d!0061t' uescape'!'"}
+{"sql":"select u&'d!0061t'uescape'!'"}
+{"sql":"select u&'d!0061t' uescape '!' || 'z'"}
+{"sql":"select u&'d!0061t' uescape(3) '!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":26}
+{"sql":"select u&'d!0061t' uescape[] '!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"[\"","position":26}
+{"sql":"select u&'d!0061t' uescape.x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \".\"","position":26}
+{"sql":"select u&'d!0061t' UeScApE '!'"}
+{"sql":"select u&'d!0061t' uescape '!' (","code":"42601","message":"syntax error at or near \"(\"","position":31}
+{"sql":"select U&'\\0061'"}
+{"sql":"select U&'\\0061' uescape '!'"}
+{"sql":"select U&'\\0061' uescape 'g'"}
+{"sql":"select U&'\\0061' UESCAPE '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":25}
+{"sql":"select U&'\\0061' uescape 'a'","code":"42601","message":"invalid Unicode escape character at or near \"'a'\"","position":25}
+{"sql":"select U&'\\0061' uescape 'F'","code":"42601","message":"invalid Unicode escape character at or near \"'F'\"","position":25}
+{"sql":"select U&'\\0061' uescape '0'","code":"42601","message":"invalid Unicode escape character at or near \"'0'\"","position":25}
+{"sql":"select U&'\\0061' uescape ' '","code":"42601","message":"invalid Unicode escape character at or near \"' '\"","position":25}
+{"sql":"select U&'\\0061' uescape ''''","code":"42601","message":"invalid Unicode escape character at or near \"''''\"","position":25}
+{"sql":"select U&'\\0061' uescape '\"'","code":"42601","message":"invalid Unicode escape character at or near \"'\"'\"","position":25}
+{"sql":"select U&'\\0061' uescape ''","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":25}
+{"sql":"select U&'\\0061' uescape 'ab'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":25}
+{"sql":"select U&'\\0061' uescape 'é'","code":"42601","message":"invalid Unicode escape character at or near \"'é'\"","position":25}
+{"sql":"select U&'\\0061' uescape '~'"}
+{"sql":"select U&'\\0061' uescape '\\'"}
+{"sql":"select U&'\\0061' uescape E'!'"}
+{"sql":"select U&'\\0061' uescape e'\\t'","code":"42601","message":"invalid Unicode escape character at or near \"e'\\t'\"","position":25}
+{"sql":"select U&'\\0061' uescape E'\\x21'"}
+{"sql":"select U&'\\0061' uescape $$!$$"}
+{"sql":"select U&'\\0061' uescape $q$!$q$"}
+{"sql":"select U&'\\0061' uescape U&'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":25}
+{"sql":"select U&'\\0061' uescape B'1'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"B'1'\"","position":25}
+{"sql":"select U&'\\0061' uescape X'1'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"X'1'\"","position":25}
+{"sql":"select U&'\\0061' uescape N'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"N\"","position":25}
+{"sql":"select U&'\\0061' uescape 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"1\"","position":25}
+{"sql":"select U&'\\0061' uescape 1.5","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"1.5\"","position":25}
+{"sql":"select U&'\\0061' uescape x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":25}
+{"sql":"select U&'\\0061' uescape \"x\"","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"\"x\"\"","position":25}
+{"sql":"select U&'\\0061' uescape (","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":25}
+{"sql":"select U&'\\0061' uescape [","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"[\"","position":25}
+{"sql":"select U&'\\0061' uescape .","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \".\"","position":25}
+{"sql":"select U&'\\0061' uescape +","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"+\"","position":25}
+{"sql":"select U&'\\0061' uescape ,","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \",\"","position":25}
+{"sql":"select U&'\\0061' uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":24}
+{"sql":"select U&'\\0061' uescape -- c","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":29}
+{"sql":"select U&'\\0061' uescape /* c */ '!'"}
+{"sql":"select U&'\\0061' uescape\n'!'"}
+{"sql":"select U&'\\0061' uescape '!'\n'!'","code":"42601","message":"invalid Unicode escape character at or near \"'!'\n'!'\"","position":25}
+{"sql":"select U&'\\0061' uescape '!'\n'!' '!'","code":"42601","message":"invalid Unicode escape character at or near \"'!'\n'!'\"","position":25}
+{"sql":"select U&'\\0061' uescape $1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"$1\"","position":25}
+{"sql":"select U&'\\0061' uescape '!","code":"42601","message":"unterminated quoted string at or near \"'!\"","position":25}
+{"sql":"select U&'\\0061' uescape $$x","code":"42601","message":"unterminated dollar-quoted string at or near \"$$x\"","position":25}
+{"sql":"select U&'\\0061' uescape uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"uescape\"","position":25}
+{"sql":"select U&'\\0061' \"uescape\" '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":27}
+{"sql":"select U&'\\0061' uescapex '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":26}
+{"sql":"select U&'\\0061' uescape '!' uescape '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":37}
+{"sql":"select U&'\\0061' uescape'!'"}
+{"sql":"select U&'\\0061'uescape'!'"}
+{"sql":"select U&'\\0061' uescape '!' || 'z'"}
+{"sql":"select U&'\\0061' uescape(3) '!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":24}
+{"sql":"select U&'\\0061' uescape[] '!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"[\"","position":24}
+{"sql":"select U&'\\0061' uescape.x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \".\"","position":24}
+{"sql":"select U&'\\0061' UeScApE '!'"}
+{"sql":"select U&'\\0061' uescape '!' (","code":"42601","message":"syntax error at or near \"(\"","position":29}
+{"sql":"select U&'+000061'"}
+{"sql":"select U&'+000061' uescape '!'"}
+{"sql":"select U&'+000061' uescape 'g'"}
+{"sql":"select U&'+000061' UESCAPE '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":27}
+{"sql":"select U&'+000061' uescape 'a'","code":"42601","message":"invalid Unicode escape character at or near \"'a'\"","position":27}
+{"sql":"select U&'+000061' uescape 'F'","code":"42601","message":"invalid Unicode escape character at or near \"'F'\"","position":27}
+{"sql":"select U&'+000061' uescape '0'","code":"42601","message":"invalid Unicode escape character at or near \"'0'\"","position":27}
+{"sql":"select U&'+000061' uescape ' '","code":"42601","message":"invalid Unicode escape character at or near \"' '\"","position":27}
+{"sql":"select U&'+000061' uescape ''''","code":"42601","message":"invalid Unicode escape character at or near \"''''\"","position":27}
+{"sql":"select U&'+000061' uescape '\"'","code":"42601","message":"invalid Unicode escape character at or near \"'\"'\"","position":27}
+{"sql":"select U&'+000061' uescape ''","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":27}
+{"sql":"select U&'+000061' uescape 'ab'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":27}
+{"sql":"select U&'+000061' uescape 'é'","code":"42601","message":"invalid Unicode escape character at or near \"'é'\"","position":27}
+{"sql":"select U&'+000061' uescape '~'"}
+{"sql":"select U&'+000061' uescape '\\'"}
+{"sql":"select U&'+000061' uescape E'!'"}
+{"sql":"select U&'+000061' uescape e'\\t'","code":"42601","message":"invalid Unicode escape character at or near \"e'\\t'\"","position":27}
+{"sql":"select U&'+000061' uescape E'\\x21'"}
+{"sql":"select U&'+000061' uescape $$!$$"}
+{"sql":"select U&'+000061' uescape $q$!$q$"}
+{"sql":"select U&'+000061' uescape U&'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":27}
+{"sql":"select U&'+000061' uescape B'1'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"B'1'\"","position":27}
+{"sql":"select U&'+000061' uescape X'1'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"X'1'\"","position":27}
+{"sql":"select U&'+000061' uescape N'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"N\"","position":27}
+{"sql":"select U&'+000061' uescape 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"1\"","position":27}
+{"sql":"select U&'+000061' uescape 1.5","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"1.5\"","position":27}
+{"sql":"select U&'+000061' uescape x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":27}
+{"sql":"select U&'+000061' uescape \"x\"","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"\"x\"\"","position":27}
+{"sql":"select U&'+000061' uescape (","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":27}
+{"sql":"select U&'+000061' uescape [","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"[\"","position":27}
+{"sql":"select U&'+000061' uescape .","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \".\"","position":27}
+{"sql":"select U&'+000061' uescape +","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"+\"","position":27}
+{"sql":"select U&'+000061' uescape ,","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \",\"","position":27}
+{"sql":"select U&'+000061' uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":26}
+{"sql":"select U&'+000061' uescape -- c","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":31}
+{"sql":"select U&'+000061' uescape /* c */ '!'"}
+{"sql":"select U&'+000061' uescape\n'!'"}
+{"sql":"select U&'+000061' uescape '!'\n'!'","code":"42601","message":"invalid Unicode escape character at or near \"'!'\n'!'\"","position":27}
+{"sql":"select U&'+000061' uescape '!'\n'!' '!'","code":"42601","message":"invalid Unicode escape character at or near \"'!'\n'!'\"","position":27}
+{"sql":"select U&'+000061' uescape $1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"$1\"","position":27}
+{"sql":"select U&'+000061' uescape '!","code":"42601","message":"unterminated quoted string at or near \"'!\"","position":27}
+{"sql":"select U&'+000061' uescape $$x","code":"42601","message":"unterminated dollar-quoted string at or near \"$$x\"","position":27}
+{"sql":"select U&'+000061' uescape uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"uescape\"","position":27}
+{"sql":"select U&'+000061' \"uescape\" '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":29}
+{"sql":"select U&'+000061' uescapex '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":28}
+{"sql":"select U&'+000061' uescape '!' uescape '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":39}
+{"sql":"select U&'+000061' uescape'!'"}
+{"sql":"select U&'+000061'uescape'!'"}
+{"sql":"select U&'+000061' uescape '!' || 'z'"}
+{"sql":"select U&'+000061' uescape(3) '!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":26}
+{"sql":"select U&'+000061' uescape[] '!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"[\"","position":26}
+{"sql":"select U&'+000061' uescape.x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \".\"","position":26}
+{"sql":"select U&'+000061' UeScApE '!'"}
+{"sql":"select U&'+000061' uescape '!' (","code":"42601","message":"syntax error at or near \"(\"","position":31}
+{"sql":"select U&'\\'","code":"42601","message":"invalid Unicode escape","position":10}
+{"sql":"select U&'\\' uescape '!'"}
+{"sql":"select U&'\\' uescape 'g'"}
+{"sql":"select U&'\\' UESCAPE '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":21}
+{"sql":"select U&'\\' uescape 'a'","code":"42601","message":"invalid Unicode escape character at or near \"'a'\"","position":21}
+{"sql":"select U&'\\' uescape 'F'","code":"42601","message":"invalid Unicode escape character at or near \"'F'\"","position":21}
+{"sql":"select U&'\\' uescape '0'","code":"42601","message":"invalid Unicode escape character at or near \"'0'\"","position":21}
+{"sql":"select U&'\\' uescape ' '","code":"42601","message":"invalid Unicode escape character at or near \"' '\"","position":21}
+{"sql":"select U&'\\' uescape ''''","code":"42601","message":"invalid Unicode escape character at or near \"''''\"","position":21}
+{"sql":"select U&'\\' uescape '\"'","code":"42601","message":"invalid Unicode escape character at or near \"'\"'\"","position":21}
+{"sql":"select U&'\\' uescape ''","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":21}
+{"sql":"select U&'\\' uescape 'ab'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":21}
+{"sql":"select U&'\\' uescape 'é'","code":"42601","message":"invalid Unicode escape character at or near \"'é'\"","position":21}
+{"sql":"select U&'\\' uescape '~'"}
+{"sql":"select U&'\\' uescape '\\'","code":"42601","message":"invalid Unicode escape","position":10}
+{"sql":"select U&'\\' uescape E'!'"}
+{"sql":"select U&'\\' uescape e'\\t'","code":"42601","message":"invalid Unicode escape character at or near \"e'\\t'\"","position":21}
+{"sql":"select U&'\\' uescape E'\\x21'"}
+{"sql":"select U&'\\' uescape $$!$$"}
+{"sql":"select U&'\\' uescape $q$!$q$"}
+{"sql":"select U&'\\' uescape U&'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":21}
+{"sql":"select U&'\\' uescape B'1'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"B'1'\"","position":21}
+{"sql":"select U&'\\' uescape X'1'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"X'1'\"","position":21}
+{"sql":"select U&'\\' uescape N'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"N\"","position":21}
+{"sql":"select U&'\\' uescape 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"1\"","position":21}
+{"sql":"select U&'\\' uescape 1.5","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"1.5\"","position":21}
+{"sql":"select U&'\\' uescape x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":21}
+{"sql":"select U&'\\' uescape \"x\"","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"\"x\"\"","position":21}
+{"sql":"select U&'\\' uescape (","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":21}
+{"sql":"select U&'\\' uescape [","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"[\"","position":21}
+{"sql":"select U&'\\' uescape .","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \".\"","position":21}
+{"sql":"select U&'\\' uescape +","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"+\"","position":21}
+{"sql":"select U&'\\' uescape ,","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \",\"","position":21}
+{"sql":"select U&'\\' uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":20}
+{"sql":"select U&'\\' uescape -- c","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":25}
+{"sql":"select U&'\\' uescape /* c */ '!'"}
+{"sql":"select U&'\\' uescape\n'!'"}
+{"sql":"select U&'\\' uescape '!'\n'!'","code":"42601","message":"invalid Unicode escape character at or near \"'!'\n'!'\"","position":21}
+{"sql":"select U&'\\' uescape '!'\n'!' '!'","code":"42601","message":"invalid Unicode escape character at or near \"'!'\n'!'\"","position":21}
+{"sql":"select U&'\\' uescape $1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"$1\"","position":21}
+{"sql":"select U&'\\' uescape '!","code":"42601","message":"unterminated quoted string at or near \"'!\"","position":21}
+{"sql":"select U&'\\' uescape $$x","code":"42601","message":"unterminated dollar-quoted string at or near \"$$x\"","position":21}
+{"sql":"select U&'\\' uescape uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"uescape\"","position":21}
+{"sql":"select U&'\\' \"uescape\" '!'","code":"42601","message":"invalid Unicode escape","position":10}
+{"sql":"select U&'\\' uescapex '!'","code":"42601","message":"invalid Unicode escape","position":10}
+{"sql":"select U&'\\' uescape '!' uescape '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":33}
+{"sql":"select U&'\\' uescape'!'"}
+{"sql":"select U&'\\'uescape'!'"}
+{"sql":"select U&'\\' uescape '!' || 'z'"}
+{"sql":"select U&'\\' uescape(3) '!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":20}
+{"sql":"select U&'\\' uescape[] '!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"[\"","position":20}
+{"sql":"select U&'\\' uescape.x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \".\"","position":20}
+{"sql":"select U&'\\' UeScApE '!'"}
+{"sql":"select U&'\\' uescape '!' (","code":"42601","message":"syntax error at or near \"(\"","position":25}
+{"sql":"select U&''"}
+{"sql":"select U&'' uescape '!'"}
+{"sql":"select U&'' uescape 'g'"}
+{"sql":"select U&'' UESCAPE '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":20}
+{"sql":"select U&'' uescape 'a'","code":"42601","message":"invalid Unicode escape character at or near \"'a'\"","position":20}
+{"sql":"select U&'' uescape 'F'","code":"42601","message":"invalid Unicode escape character at or near \"'F'\"","position":20}
+{"sql":"select U&'' uescape '0'","code":"42601","message":"invalid Unicode escape character at or near \"'0'\"","position":20}
+{"sql":"select U&'' uescape ' '","code":"42601","message":"invalid Unicode escape character at or near \"' '\"","position":20}
+{"sql":"select U&'' uescape ''''","code":"42601","message":"invalid Unicode escape character at or near \"''''\"","position":20}
+{"sql":"select U&'' uescape '\"'","code":"42601","message":"invalid Unicode escape character at or near \"'\"'\"","position":20}
+{"sql":"select U&'' uescape ''","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":20}
+{"sql":"select U&'' uescape 'ab'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":20}
+{"sql":"select U&'' uescape 'é'","code":"42601","message":"invalid Unicode escape character at or near \"'é'\"","position":20}
+{"sql":"select U&'' uescape '~'"}
+{"sql":"select U&'' uescape '\\'"}
+{"sql":"select U&'' uescape E'!'"}
+{"sql":"select U&'' uescape e'\\t'","code":"42601","message":"invalid Unicode escape character at or near \"e'\\t'\"","position":20}
+{"sql":"select U&'' uescape E'\\x21'"}
+{"sql":"select U&'' uescape $$!$$"}
+{"sql":"select U&'' uescape $q$!$q$"}
+{"sql":"select U&'' uescape U&'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":20}
+{"sql":"select U&'' uescape B'1'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"B'1'\"","position":20}
+{"sql":"select U&'' uescape X'1'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"X'1'\"","position":20}
+{"sql":"select U&'' uescape N'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"N\"","position":20}
+{"sql":"select U&'' uescape 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"1\"","position":20}
+{"sql":"select U&'' uescape 1.5","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"1.5\"","position":20}
+{"sql":"select U&'' uescape x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":20}
+{"sql":"select U&'' uescape \"x\"","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"\"x\"\"","position":20}
+{"sql":"select U&'' uescape (","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":20}
+{"sql":"select U&'' uescape [","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"[\"","position":20}
+{"sql":"select U&'' uescape .","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \".\"","position":20}
+{"sql":"select U&'' uescape +","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"+\"","position":20}
+{"sql":"select U&'' uescape ,","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \",\"","position":20}
+{"sql":"select U&'' uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":19}
+{"sql":"select U&'' uescape -- c","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":24}
+{"sql":"select U&'' uescape /* c */ '!'"}
+{"sql":"select U&'' uescape\n'!'"}
+{"sql":"select U&'' uescape '!'\n'!'","code":"42601","message":"invalid Unicode escape character at or near \"'!'\n'!'\"","position":20}
+{"sql":"select U&'' uescape '!'\n'!' '!'","code":"42601","message":"invalid Unicode escape character at or near \"'!'\n'!'\"","position":20}
+{"sql":"select U&'' uescape $1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"$1\"","position":20}
+{"sql":"select U&'' uescape '!","code":"42601","message":"unterminated quoted string at or near \"'!\"","position":20}
+{"sql":"select U&'' uescape $$x","code":"42601","message":"unterminated dollar-quoted string at or near \"$$x\"","position":20}
+{"sql":"select U&'' uescape uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"uescape\"","position":20}
+{"sql":"select U&'' \"uescape\" '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":22}
+{"sql":"select U&'' uescapex '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":21}
+{"sql":"select U&'' uescape '!' uescape '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":32}
+{"sql":"select U&'' uescape'!'"}
+{"sql":"select U&''uescape'!'"}
+{"sql":"select U&'' uescape '!' || 'z'"}
+{"sql":"select U&'' uescape(3) '!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":19}
+{"sql":"select U&'' uescape[] '!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"[\"","position":19}
+{"sql":"select U&'' uescape.x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \".\"","position":19}
+{"sql":"select U&'' UeScApE '!'"}
+{"sql":"select U&'' uescape '!' (","code":"42601","message":"syntax error at or near \"(\"","position":24}
+{"sql":"select U&'a'\n'b'"}
+{"sql":"select U&'a'\n'b' uescape '!'"}
+{"sql":"select U&'a'\n'b' uescape 'g'"}
+{"sql":"select U&'a'\n'b' UESCAPE '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":25}
+{"sql":"select U&'a'\n'b' uescape 'a'","code":"42601","message":"invalid Unicode escape character at or near \"'a'\"","position":25}
+{"sql":"select U&'a'\n'b' uescape 'F'","code":"42601","message":"invalid Unicode escape character at or near \"'F'\"","position":25}
+{"sql":"select U&'a'\n'b' uescape '0'","code":"42601","message":"invalid Unicode escape character at or near \"'0'\"","position":25}
+{"sql":"select U&'a'\n'b' uescape ' '","code":"42601","message":"invalid Unicode escape character at or near \"' '\"","position":25}
+{"sql":"select U&'a'\n'b' uescape ''''","code":"42601","message":"invalid Unicode escape character at or near \"''''\"","position":25}
+{"sql":"select U&'a'\n'b' uescape '\"'","code":"42601","message":"invalid Unicode escape character at or near \"'\"'\"","position":25}
+{"sql":"select U&'a'\n'b' uescape ''","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":25}
+{"sql":"select U&'a'\n'b' uescape 'ab'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":25}
+{"sql":"select U&'a'\n'b' uescape 'é'","code":"42601","message":"invalid Unicode escape character at or near \"'é'\"","position":25}
+{"sql":"select U&'a'\n'b' uescape '~'"}
+{"sql":"select U&'a'\n'b' uescape '\\'"}
+{"sql":"select U&'a'\n'b' uescape E'!'"}
+{"sql":"select U&'a'\n'b' uescape e'\\t'","code":"42601","message":"invalid Unicode escape character at or near \"e'\\t'\"","position":25}
+{"sql":"select U&'a'\n'b' uescape E'\\x21'"}
+{"sql":"select U&'a'\n'b' uescape $$!$$"}
+{"sql":"select U&'a'\n'b' uescape $q$!$q$"}
+{"sql":"select U&'a'\n'b' uescape U&'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":25}
+{"sql":"select U&'a'\n'b' uescape B'1'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"B'1'\"","position":25}
+{"sql":"select U&'a'\n'b' uescape X'1'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"X'1'\"","position":25}
+{"sql":"select U&'a'\n'b' uescape N'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"N\"","position":25}
+{"sql":"select U&'a'\n'b' uescape 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"1\"","position":25}
+{"sql":"select U&'a'\n'b' uescape 1.5","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"1.5\"","position":25}
+{"sql":"select U&'a'\n'b' uescape x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":25}
+{"sql":"select U&'a'\n'b' uescape \"x\"","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"\"x\"\"","position":25}
+{"sql":"select U&'a'\n'b' uescape (","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":25}
+{"sql":"select U&'a'\n'b' uescape [","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"[\"","position":25}
+{"sql":"select U&'a'\n'b' uescape .","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \".\"","position":25}
+{"sql":"select U&'a'\n'b' uescape +","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"+\"","position":25}
+{"sql":"select U&'a'\n'b' uescape ,","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \",\"","position":25}
+{"sql":"select U&'a'\n'b' uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":24}
+{"sql":"select U&'a'\n'b' uescape -- c","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":29}
+{"sql":"select U&'a'\n'b' uescape /* c */ '!'"}
+{"sql":"select U&'a'\n'b' uescape\n'!'"}
+{"sql":"select U&'a'\n'b' uescape '!'\n'!'","code":"42601","message":"invalid Unicode escape character at or near \"'!'\n'!'\"","position":25}
+{"sql":"select U&'a'\n'b' uescape '!'\n'!' '!'","code":"42601","message":"invalid Unicode escape character at or near \"'!'\n'!'\"","position":25}
+{"sql":"select U&'a'\n'b' uescape $1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"$1\"","position":25}
+{"sql":"select U&'a'\n'b' uescape '!","code":"42601","message":"unterminated quoted string at or near \"'!\"","position":25}
+{"sql":"select U&'a'\n'b' uescape $$x","code":"42601","message":"unterminated dollar-quoted string at or near \"$$x\"","position":25}
+{"sql":"select U&'a'\n'b' uescape uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"uescape\"","position":25}
+{"sql":"select U&'a'\n'b' \"uescape\" '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":27}
+{"sql":"select U&'a'\n'b' uescapex '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":26}
+{"sql":"select U&'a'\n'b' uescape '!' uescape '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":37}
+{"sql":"select U&'a'\n'b' uescape'!'"}
+{"sql":"select U&'a'\n'b'uescape'!'"}
+{"sql":"select U&'a'\n'b' uescape '!' || 'z'"}
+{"sql":"select U&'a'\n'b' uescape(3) '!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":24}
+{"sql":"select U&'a'\n'b' uescape[] '!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"[\"","position":24}
+{"sql":"select U&'a'\n'b' uescape.x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \".\"","position":24}
+{"sql":"select U&'a'\n'b' UeScApE '!'"}
+{"sql":"select U&'a'\n'b' uescape '!' (","code":"42601","message":"syntax error at or near \"(\"","position":29}
+{"sql":"select u&\"x\""}
+{"sql":"select u&\"x\" uescape '!'"}
+{"sql":"select u&\"x\" uescape 'g'"}
+{"sql":"select u&\"x\" UESCAPE '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":21}
+{"sql":"select u&\"x\" uescape 'a'","code":"42601","message":"invalid Unicode escape character at or near \"'a'\"","position":21}
+{"sql":"select u&\"x\" uescape 'F'","code":"42601","message":"invalid Unicode escape character at or near \"'F'\"","position":21}
+{"sql":"select u&\"x\" uescape '0'","code":"42601","message":"invalid Unicode escape character at or near \"'0'\"","position":21}
+{"sql":"select u&\"x\" uescape ' '","code":"42601","message":"invalid Unicode escape character at or near \"' '\"","position":21}
+{"sql":"select u&\"x\" uescape ''''","code":"42601","message":"invalid Unicode escape character at or near \"''''\"","position":21}
+{"sql":"select u&\"x\" uescape '\"'","code":"42601","message":"invalid Unicode escape character at or near \"'\"'\"","position":21}
+{"sql":"select u&\"x\" uescape ''","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":21}
+{"sql":"select u&\"x\" uescape 'ab'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":21}
+{"sql":"select u&\"x\" uescape 'é'","code":"42601","message":"invalid Unicode escape character at or near \"'é'\"","position":21}
+{"sql":"select u&\"x\" uescape '~'"}
+{"sql":"select u&\"x\" uescape '\\'"}
+{"sql":"select u&\"x\" uescape E'!'"}
+{"sql":"select u&\"x\" uescape e'\\t'","code":"42601","message":"invalid Unicode escape character at or near \"e'\\t'\"","position":21}
+{"sql":"select u&\"x\" uescape E'\\x21'"}
+{"sql":"select u&\"x\" uescape $$!$$"}
+{"sql":"select u&\"x\" uescape $q$!$q$"}
+{"sql":"select u&\"x\" uescape U&'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":21}
+{"sql":"select u&\"x\" uescape B'1'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"B'1'\"","position":21}
+{"sql":"select u&\"x\" uescape X'1'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"X'1'\"","position":21}
+{"sql":"select u&\"x\" uescape N'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"N\"","position":21}
+{"sql":"select u&\"x\" uescape 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"1\"","position":21}
+{"sql":"select u&\"x\" uescape 1.5","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"1.5\"","position":21}
+{"sql":"select u&\"x\" uescape x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":21}
+{"sql":"select u&\"x\" uescape \"x\"","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"\"x\"\"","position":21}
+{"sql":"select u&\"x\" uescape (","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":21}
+{"sql":"select u&\"x\" uescape [","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"[\"","position":21}
+{"sql":"select u&\"x\" uescape .","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \".\"","position":21}
+{"sql":"select u&\"x\" uescape +","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"+\"","position":21}
+{"sql":"select u&\"x\" uescape ,","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \",\"","position":21}
+{"sql":"select u&\"x\" uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":20}
+{"sql":"select u&\"x\" uescape -- c","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":25}
+{"sql":"select u&\"x\" uescape /* c */ '!'"}
+{"sql":"select u&\"x\" uescape\n'!'"}
+{"sql":"select u&\"x\" uescape '!'\n'!'","code":"42601","message":"invalid Unicode escape character at or near \"'!'\n'!'\"","position":21}
+{"sql":"select u&\"x\" uescape '!'\n'!' '!'","code":"42601","message":"invalid Unicode escape character at or near \"'!'\n'!'\"","position":21}
+{"sql":"select u&\"x\" uescape $1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"$1\"","position":21}
+{"sql":"select u&\"x\" uescape '!","code":"42601","message":"unterminated quoted string at or near \"'!\"","position":21}
+{"sql":"select u&\"x\" uescape $$x","code":"42601","message":"unterminated dollar-quoted string at or near \"$$x\"","position":21}
+{"sql":"select u&\"x\" uescape uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"uescape\"","position":21}
+{"sql":"select u&\"x\" \"uescape\" '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":23}
+{"sql":"select u&\"x\" uescapex '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":22}
+{"sql":"select u&\"x\" uescape '!' uescape '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":33}
+{"sql":"select u&\"x\" uescape'!'"}
+{"sql":"select u&\"x\"uescape'!'"}
+{"sql":"select u&\"x\" uescape '!' || 'z'"}
+{"sql":"select u&\"x\" uescape(3) '!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":20}
+{"sql":"select u&\"x\" uescape[] '!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"[\"","position":20}
+{"sql":"select u&\"x\" uescape.x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \".\"","position":20}
+{"sql":"select u&\"x\" UeScApE '!'"}
+{"sql":"select u&\"x\" uescape '!' (","code":"42601","message":"syntax error at end of input","position":26}
+{"sql":"select U&\"d!0061t\""}
+{"sql":"select U&\"d!0061t\" uescape '!'"}
+{"sql":"select U&\"d!0061t\" uescape 'g'"}
+{"sql":"select U&\"d!0061t\" UESCAPE '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape 'a'","code":"42601","message":"invalid Unicode escape character at or near \"'a'\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape 'F'","code":"42601","message":"invalid Unicode escape character at or near \"'F'\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape '0'","code":"42601","message":"invalid Unicode escape character at or near \"'0'\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape ' '","code":"42601","message":"invalid Unicode escape character at or near \"' '\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape ''''","code":"42601","message":"invalid Unicode escape character at or near \"''''\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape '\"'","code":"42601","message":"invalid Unicode escape character at or near \"'\"'\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape ''","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape 'ab'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape 'é'","code":"42601","message":"invalid Unicode escape character at or near \"'é'\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape '~'"}
+{"sql":"select U&\"d!0061t\" uescape '\\'"}
+{"sql":"select U&\"d!0061t\" uescape E'!'"}
+{"sql":"select U&\"d!0061t\" uescape e'\\t'","code":"42601","message":"invalid Unicode escape character at or near \"e'\\t'\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape E'\\x21'"}
+{"sql":"select U&\"d!0061t\" uescape $$!$$"}
+{"sql":"select U&\"d!0061t\" uescape $q$!$q$"}
+{"sql":"select U&\"d!0061t\" uescape U&'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape B'1'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"B'1'\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape X'1'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"X'1'\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape N'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"N\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"1\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape 1.5","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"1.5\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape \"x\"","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"\"x\"\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape (","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape [","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"[\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape .","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \".\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape +","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"+\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape ,","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \",\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":26}
+{"sql":"select U&\"d!0061t\" uescape -- c","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":31}
+{"sql":"select U&\"d!0061t\" uescape /* c */ '!'"}
+{"sql":"select U&\"d!0061t\" uescape\n'!'"}
+{"sql":"select U&\"d!0061t\" uescape '!'\n'!'","code":"42601","message":"invalid Unicode escape character at or near \"'!'\n'!'\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape '!'\n'!' '!'","code":"42601","message":"invalid Unicode escape character at or near \"'!'\n'!'\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape $1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"$1\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape '!","code":"42601","message":"unterminated quoted string at or near \"'!\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape $$x","code":"42601","message":"unterminated dollar-quoted string at or near \"$$x\"","position":27}
+{"sql":"select U&\"d!0061t\" uescape uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"uescape\"","position":27}
+{"sql":"select U&\"d!0061t\" \"uescape\" '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":29}
+{"sql":"select U&\"d!0061t\" uescapex '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":28}
+{"sql":"select U&\"d!0061t\" uescape '!' uescape '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":39}
+{"sql":"select U&\"d!0061t\" uescape'!'"}
+{"sql":"select U&\"d!0061t\"uescape'!'"}
+{"sql":"select U&\"d!0061t\" uescape '!' || 'z'"}
+{"sql":"select U&\"d!0061t\" uescape(3) '!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":26}
+{"sql":"select U&\"d!0061t\" uescape[] '!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"[\"","position":26}
+{"sql":"select U&\"d!0061t\" uescape.x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \".\"","position":26}
+{"sql":"select U&\"d!0061t\" UeScApE '!'"}
+{"sql":"select U&\"d!0061t\" uescape '!' (","code":"42601","message":"syntax error at end of input","position":32}
+{"sql":"select U&\"\\\"","code":"42601","message":"invalid Unicode escape","position":10}
+{"sql":"select U&\"\\\" uescape '!'"}
+{"sql":"select U&\"\\\" uescape 'g'"}
+{"sql":"select U&\"\\\" UESCAPE '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":21}
+{"sql":"select U&\"\\\" uescape 'a'","code":"42601","message":"invalid Unicode escape character at or near \"'a'\"","position":21}
+{"sql":"select U&\"\\\" uescape 'F'","code":"42601","message":"invalid Unicode escape character at or near \"'F'\"","position":21}
+{"sql":"select U&\"\\\" uescape '0'","code":"42601","message":"invalid Unicode escape character at or near \"'0'\"","position":21}
+{"sql":"select U&\"\\\" uescape ' '","code":"42601","message":"invalid Unicode escape character at or near \"' '\"","position":21}
+{"sql":"select U&\"\\\" uescape ''''","code":"42601","message":"invalid Unicode escape character at or near \"''''\"","position":21}
+{"sql":"select U&\"\\\" uescape '\"'","code":"42601","message":"invalid Unicode escape character at or near \"'\"'\"","position":21}
+{"sql":"select U&\"\\\" uescape ''","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":21}
+{"sql":"select U&\"\\\" uescape 'ab'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":21}
+{"sql":"select U&\"\\\" uescape 'é'","code":"42601","message":"invalid Unicode escape character at or near \"'é'\"","position":21}
+{"sql":"select U&\"\\\" uescape '~'"}
+{"sql":"select U&\"\\\" uescape '\\'","code":"42601","message":"invalid Unicode escape","position":10}
+{"sql":"select U&\"\\\" uescape E'!'"}
+{"sql":"select U&\"\\\" uescape e'\\t'","code":"42601","message":"invalid Unicode escape character at or near \"e'\\t'\"","position":21}
+{"sql":"select U&\"\\\" uescape E'\\x21'"}
+{"sql":"select U&\"\\\" uescape $$!$$"}
+{"sql":"select U&\"\\\" uescape $q$!$q$"}
+{"sql":"select U&\"\\\" uescape U&'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":21}
+{"sql":"select U&\"\\\" uescape B'1'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"B'1'\"","position":21}
+{"sql":"select U&\"\\\" uescape X'1'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"X'1'\"","position":21}
+{"sql":"select U&\"\\\" uescape N'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"N\"","position":21}
+{"sql":"select U&\"\\\" uescape 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"1\"","position":21}
+{"sql":"select U&\"\\\" uescape 1.5","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"1.5\"","position":21}
+{"sql":"select U&\"\\\" uescape x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":21}
+{"sql":"select U&\"\\\" uescape \"x\"","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"\"x\"\"","position":21}
+{"sql":"select U&\"\\\" uescape (","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":21}
+{"sql":"select U&\"\\\" uescape [","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"[\"","position":21}
+{"sql":"select U&\"\\\" uescape .","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \".\"","position":21}
+{"sql":"select U&\"\\\" uescape +","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"+\"","position":21}
+{"sql":"select U&\"\\\" uescape ,","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \",\"","position":21}
+{"sql":"select U&\"\\\" uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":20}
+{"sql":"select U&\"\\\" uescape -- c","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":25}
+{"sql":"select U&\"\\\" uescape /* c */ '!'"}
+{"sql":"select U&\"\\\" uescape\n'!'"}
+{"sql":"select U&\"\\\" uescape '!'\n'!'","code":"42601","message":"invalid Unicode escape character at or near \"'!'\n'!'\"","position":21}
+{"sql":"select U&\"\\\" uescape '!'\n'!' '!'","code":"42601","message":"invalid Unicode escape character at or near \"'!'\n'!'\"","position":21}
+{"sql":"select U&\"\\\" uescape $1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"$1\"","position":21}
+{"sql":"select U&\"\\\" uescape '!","code":"42601","message":"unterminated quoted string at or near \"'!\"","position":21}
+{"sql":"select U&\"\\\" uescape $$x","code":"42601","message":"unterminated dollar-quoted string at or near \"$$x\"","position":21}
+{"sql":"select U&\"\\\" uescape uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"uescape\"","position":21}
+{"sql":"select U&\"\\\" \"uescape\" '!'","code":"42601","message":"invalid Unicode escape","position":10}
+{"sql":"select U&\"\\\" uescapex '!'","code":"42601","message":"invalid Unicode escape","position":10}
+{"sql":"select U&\"\\\" uescape '!' uescape '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":33}
+{"sql":"select U&\"\\\" uescape'!'"}
+{"sql":"select U&\"\\\"uescape'!'"}
+{"sql":"select U&\"\\\" uescape '!' || 'z'"}
+{"sql":"select U&\"\\\" uescape(3) '!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":20}
+{"sql":"select U&\"\\\" uescape[] '!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"[\"","position":20}
+{"sql":"select U&\"\\\" uescape.x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \".\"","position":20}
+{"sql":"select U&\"\\\" UeScApE '!'"}
+{"sql":"select U&\"\\\" uescape '!' (","code":"42601","message":"syntax error at end of input","position":26}
+{"sql":"select 1 as U&'x'","code":"42601","message":"syntax error at or near \"U&'x'\"","position":12}
+{"sql":"select 1 as U&'x' uescape '!'","code":"42601","message":"syntax error at or near \"U&'x' uescape '!'\"","position":12}
+{"sql":"select 1 as U&'x' uescape '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":26}
+{"sql":"select 1 as U&'x' uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":25}
+{"sql":"select 1 as U&'x' uescape x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":26}
+{"sql":"select 1 as U&'x' uescape (","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":26}
+{"sql":"select 1 as U&'x' uescape ''","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":26}
+{"sql":"select 1 as U&'x' uescape 'ab'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":26}
+{"sql":"select 1 as U&'x' uescape E'!'","code":"42601","message":"syntax error at or near \"U&'x' uescape E'!'\"","position":12}
+{"sql":"select 1 as U&'x' uescape U&'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":26}
+{"sql":"select U&'x' as a"}
+{"sql":"select U&'x' uescape '!' as a"}
+{"sql":"select U&'x' uescape '+' as a","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":21}
+{"sql":"select U&'x' uescape as a","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"as\"","position":21}
+{"sql":"select U&'x' uescape x as a","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":21}
+{"sql":"select U&'x' uescape ( as a","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":21}
+{"sql":"select U&'x' uescape '' as a","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":21}
+{"sql":"select U&'x' uescape 'ab' as a","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":21}
+{"sql":"select U&'x' uescape E'!' as a"}
+{"sql":"select U&'x' uescape U&'!' as a","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":21}
+{"sql":"select U&'x' || 'z'"}
+{"sql":"select U&'x' uescape '+' || 'z'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":21}
+{"sql":"select U&'x' uescape || 'z'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"||\"","position":21}
+{"sql":"select U&'x' uescape x || 'z'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":21}
+{"sql":"select U&'x' uescape ( || 'z'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":21}
+{"sql":"select U&'x' uescape '' || 'z'","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":21}
+{"sql":"select U&'x' uescape 'ab' || 'z'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":21}
+{"sql":"select U&'x' uescape E'!' || 'z'"}
+{"sql":"select U&'x' uescape U&'!' || 'z'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":21}
+{"sql":"select U&'x', 1"}
+{"sql":"select U&'x' uescape '!', 1"}
+{"sql":"select U&'x' uescape '+', 1","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":21}
+{"sql":"select U&'x' uescape, 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \",\"","position":20}
+{"sql":"select U&'x' uescape x, 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":21}
+{"sql":"select U&'x' uescape (, 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":21}
+{"sql":"select U&'x' uescape '', 1","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":21}
+{"sql":"select U&'x' uescape 'ab', 1","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":21}
+{"sql":"select U&'x' uescape E'!', 1"}
+{"sql":"select U&'x' uescape U&'!', 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":21}
+{"sql":"create table U&'x' (a int)","code":"42601","message":"syntax error at or near \"U&'x'\"","position":13}
+{"sql":"create table U&'x' uescape '!' (a int)","code":"42601","message":"syntax error at or near \"U&'x' uescape '!'\"","position":13}
+{"sql":"create table U&'x' uescape '+' (a int)","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":27}
+{"sql":"create table U&'x' uescape (a int)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":27}
+{"sql":"create table U&'x' uescape x (a int)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":27}
+{"sql":"create table U&'x' uescape ( (a int)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":27}
+{"sql":"create table U&'x' uescape '' (a int)","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":27}
+{"sql":"create table U&'x' uescape 'ab' (a int)","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":27}
+{"sql":"create table U&'x' uescape E'!' (a int)","code":"42601","message":"syntax error at or near \"U&'x' uescape E'!'\"","position":13}
+{"sql":"create table U&'x' uescape U&'!' (a int)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":27}
+{"sql":"select * from t where a = U&'x' and b"}
+{"sql":"select * from t where a = U&'x' uescape '!' and b"}
+{"sql":"select * from t where a = U&'x' uescape '+' and b","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":40}
+{"sql":"select * from t where a = U&'x' uescape and b","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"and\"","position":40}
+{"sql":"select * from t where a = U&'x' uescape x and b","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":40}
+{"sql":"select * from t where a = U&'x' uescape ( and b","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":40}
+{"sql":"select * from t where a = U&'x' uescape '' and b","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":40}
+{"sql":"select * from t where a = U&'x' uescape 'ab' and b","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":40}
+{"sql":"select * from t where a = U&'x' uescape E'!' and b"}
+{"sql":"select * from t where a = U&'x' uescape U&'!' and b","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":40}
+{"sql":"insert into t values (U&'x')"}
+{"sql":"insert into t values (U&'x' uescape '!')"}
+{"sql":"insert into t values (U&'x' uescape '+')","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":36}
+{"sql":"insert into t values (U&'x' uescape)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \")\"","position":35}
+{"sql":"insert into t values (U&'x' uescape x)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":36}
+{"sql":"insert into t values (U&'x' uescape ()","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":36}
+{"sql":"insert into t values (U&'x' uescape '')","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":36}
+{"sql":"insert into t values (U&'x' uescape 'ab')","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":36}
+{"sql":"insert into t values (U&'x' uescape E'!')"}
+{"sql":"insert into t values (U&'x' uescape U&'!')","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":36}
+{"sql":"select a from U&'x'","code":"42601","message":"syntax error at or near \"U&'x'\"","position":14}
+{"sql":"select a from U&'x' uescape '!'","code":"42601","message":"syntax error at or near \"U&'x' uescape '!'\"","position":14}
+{"sql":"select a from U&'x' uescape '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":28}
+{"sql":"select a from U&'x' uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":27}
+{"sql":"select a from U&'x' uescape x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":28}
+{"sql":"select a from U&'x' uescape (","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":28}
+{"sql":"select a from U&'x' uescape ''","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":28}
+{"sql":"select a from U&'x' uescape 'ab'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":28}
+{"sql":"select a from U&'x' uescape E'!'","code":"42601","message":"syntax error at or near \"U&'x' uescape E'!'\"","position":14}
+{"sql":"select a from U&'x' uescape U&'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":28}
+{"sql":"select U&'x'.a from t","code":"42601","message":"syntax error at or near \".\"","position":12}
+{"sql":"select U&'x' uescape '!'.a from t","code":"42601","message":"syntax error at or near \".\"","position":24}
+{"sql":"select U&'x' uescape '+'.a from t","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":21}
+{"sql":"select U&'x' uescape.a from t","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \".\"","position":20}
+{"sql":"select U&'x' uescape x.a from t","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":21}
+{"sql":"select U&'x' uescape (.a from t","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":21}
+{"sql":"select U&'x' uescape ''.a from t","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":21}
+{"sql":"select U&'x' uescape 'ab'.a from t","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":21}
+{"sql":"select U&'x' uescape E'!'.a from t","code":"42601","message":"syntax error at or near \".\"","position":25}
+{"sql":"select U&'x' uescape U&'!'.a from t","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":21}
+{"sql":"select 1 U&'x'","code":"42601","message":"syntax error at or near \"U&'x'\"","position":9}
+{"sql":"select 1 U&'x' uescape '!'","code":"42601","message":"syntax error at or near \"U&'x' uescape '!'\"","position":9}
+{"sql":"select 1 U&'x' uescape '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":23}
+{"sql":"select 1 U&'x' uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":22}
+{"sql":"select 1 U&'x' uescape x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":23}
+{"sql":"select 1 U&'x' uescape (","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":23}
+{"sql":"select 1 U&'x' uescape ''","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":23}
+{"sql":"select 1 U&'x' uescape 'ab'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":23}
+{"sql":"select 1 U&'x' uescape E'!'","code":"42601","message":"syntax error at or near \"U&'x' uescape E'!'\"","position":9}
+{"sql":"select 1 U&'x' uescape U&'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":23}
+{"sql":"select 1 as U&'!0061'","code":"42601","message":"syntax error at or near \"U&'!0061'\"","position":12}
+{"sql":"select 1 as U&'!0061' uescape '!'","code":"42601","message":"syntax error at or near \"U&'!0061' uescape '!'\"","position":12}
+{"sql":"select 1 as U&'!0061' uescape '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":30}
+{"sql":"select 1 as U&'!0061' uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":29}
+{"sql":"select 1 as U&'!0061' uescape x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":30}
+{"sql":"select 1 as U&'!0061' uescape (","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":30}
+{"sql":"select 1 as U&'!0061' uescape ''","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":30}
+{"sql":"select 1 as U&'!0061' uescape 'ab'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":30}
+{"sql":"select 1 as U&'!0061' uescape E'!'","code":"42601","message":"syntax error at or near \"U&'!0061' uescape E'!'\"","position":12}
+{"sql":"select 1 as U&'!0061' uescape U&'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":30}
+{"sql":"select U&'!0061' as a"}
+{"sql":"select U&'!0061' uescape '!' as a"}
+{"sql":"select U&'!0061' uescape '+' as a","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":25}
+{"sql":"select U&'!0061' uescape as a","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"as\"","position":25}
+{"sql":"select U&'!0061' uescape x as a","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":25}
+{"sql":"select U&'!0061' uescape ( as a","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":25}
+{"sql":"select U&'!0061' uescape '' as a","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":25}
+{"sql":"select U&'!0061' uescape 'ab' as a","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":25}
+{"sql":"select U&'!0061' uescape E'!' as a"}
+{"sql":"select U&'!0061' uescape U&'!' as a","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":25}
+{"sql":"select U&'!0061' || 'z'"}
+{"sql":"select U&'!0061' uescape '!' || 'z'"}
+{"sql":"select U&'!0061' uescape '+' || 'z'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":25}
+{"sql":"select U&'!0061' uescape || 'z'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"||\"","position":25}
+{"sql":"select U&'!0061' uescape x || 'z'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":25}
+{"sql":"select U&'!0061' uescape ( || 'z'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":25}
+{"sql":"select U&'!0061' uescape '' || 'z'","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":25}
+{"sql":"select U&'!0061' uescape 'ab' || 'z'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":25}
+{"sql":"select U&'!0061' uescape E'!' || 'z'"}
+{"sql":"select U&'!0061' uescape U&'!' || 'z'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":25}
+{"sql":"select U&'!0061', 1"}
+{"sql":"select U&'!0061' uescape '!', 1"}
+{"sql":"select U&'!0061' uescape '+', 1","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":25}
+{"sql":"select U&'!0061' uescape, 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \",\"","position":24}
+{"sql":"select U&'!0061' uescape x, 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":25}
+{"sql":"select U&'!0061' uescape (, 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":25}
+{"sql":"select U&'!0061' uescape '', 1","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":25}
+{"sql":"select U&'!0061' uescape 'ab', 1","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":25}
+{"sql":"select U&'!0061' uescape E'!', 1"}
+{"sql":"select U&'!0061' uescape U&'!', 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":25}
+{"sql":"create table U&'!0061' (a int)","code":"42601","message":"syntax error at or near \"U&'!0061'\"","position":13}
+{"sql":"create table U&'!0061' uescape '!' (a int)","code":"42601","message":"syntax error at or near \"U&'!0061' uescape '!'\"","position":13}
+{"sql":"create table U&'!0061' uescape '+' (a int)","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":31}
+{"sql":"create table U&'!0061' uescape (a int)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":31}
+{"sql":"create table U&'!0061' uescape x (a int)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":31}
+{"sql":"create table U&'!0061' uescape ( (a int)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":31}
+{"sql":"create table U&'!0061' uescape '' (a int)","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":31}
+{"sql":"create table U&'!0061' uescape 'ab' (a int)","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":31}
+{"sql":"create table U&'!0061' uescape E'!' (a int)","code":"42601","message":"syntax error at or near \"U&'!0061' uescape E'!'\"","position":13}
+{"sql":"create table U&'!0061' uescape U&'!' (a int)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":31}
+{"sql":"select * from t where a = U&'!0061' and b"}
+{"sql":"select * from t where a = U&'!0061' uescape '!' and b"}
+{"sql":"select * from t where a = U&'!0061' uescape '+' and b","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":44}
+{"sql":"select * from t where a = U&'!0061' uescape and b","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"and\"","position":44}
+{"sql":"select * from t where a = U&'!0061' uescape x and b","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":44}
+{"sql":"select * from t where a = U&'!0061' uescape ( and b","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":44}
+{"sql":"select * from t where a = U&'!0061' uescape '' and b","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":44}
+{"sql":"select * from t where a = U&'!0061' uescape 'ab' and b","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":44}
+{"sql":"select * from t where a = U&'!0061' uescape E'!' and b"}
+{"sql":"select * from t where a = U&'!0061' uescape U&'!' and b","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":44}
+{"sql":"insert into t values (U&'!0061')"}
+{"sql":"insert into t values (U&'!0061' uescape '!')"}
+{"sql":"insert into t values (U&'!0061' uescape '+')","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":40}
+{"sql":"insert into t values (U&'!0061' uescape)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \")\"","position":39}
+{"sql":"insert into t values (U&'!0061' uescape x)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":40}
+{"sql":"insert into t values (U&'!0061' uescape ()","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":40}
+{"sql":"insert into t values (U&'!0061' uescape '')","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":40}
+{"sql":"insert into t values (U&'!0061' uescape 'ab')","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":40}
+{"sql":"insert into t values (U&'!0061' uescape E'!')"}
+{"sql":"insert into t values (U&'!0061' uescape U&'!')","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":40}
+{"sql":"select a from U&'!0061'","code":"42601","message":"syntax error at or near \"U&'!0061'\"","position":14}
+{"sql":"select a from U&'!0061' uescape '!'","code":"42601","message":"syntax error at or near \"U&'!0061' uescape '!'\"","position":14}
+{"sql":"select a from U&'!0061' uescape '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":32}
+{"sql":"select a from U&'!0061' uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":31}
+{"sql":"select a from U&'!0061' uescape x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":32}
+{"sql":"select a from U&'!0061' uescape (","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":32}
+{"sql":"select a from U&'!0061' uescape ''","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":32}
+{"sql":"select a from U&'!0061' uescape 'ab'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":32}
+{"sql":"select a from U&'!0061' uescape E'!'","code":"42601","message":"syntax error at or near \"U&'!0061' uescape E'!'\"","position":14}
+{"sql":"select a from U&'!0061' uescape U&'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":32}
+{"sql":"select U&'!0061'.a from t","code":"42601","message":"syntax error at or near \".\"","position":16}
+{"sql":"select U&'!0061' uescape '!'.a from t","code":"42601","message":"syntax error at or near \".\"","position":28}
+{"sql":"select U&'!0061' uescape '+'.a from t","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":25}
+{"sql":"select U&'!0061' uescape.a from t","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \".\"","position":24}
+{"sql":"select U&'!0061' uescape x.a from t","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":25}
+{"sql":"select U&'!0061' uescape (.a from t","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":25}
+{"sql":"select U&'!0061' uescape ''.a from t","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":25}
+{"sql":"select U&'!0061' uescape 'ab'.a from t","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":25}
+{"sql":"select U&'!0061' uescape E'!'.a from t","code":"42601","message":"syntax error at or near \".\"","position":29}
+{"sql":"select U&'!0061' uescape U&'!'.a from t","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":25}
+{"sql":"select 1 U&'!0061'","code":"42601","message":"syntax error at or near \"U&'!0061'\"","position":9}
+{"sql":"select 1 U&'!0061' uescape '!'","code":"42601","message":"syntax error at or near \"U&'!0061' uescape '!'\"","position":9}
+{"sql":"select 1 U&'!0061' uescape '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":27}
+{"sql":"select 1 U&'!0061' uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":26}
+{"sql":"select 1 U&'!0061' uescape x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":27}
+{"sql":"select 1 U&'!0061' uescape (","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":27}
+{"sql":"select 1 U&'!0061' uescape ''","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":27}
+{"sql":"select 1 U&'!0061' uescape 'ab'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":27}
+{"sql":"select 1 U&'!0061' uescape E'!'","code":"42601","message":"syntax error at or near \"U&'!0061' uescape E'!'\"","position":9}
+{"sql":"select 1 U&'!0061' uescape U&'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":27}
+{"sql":"select 1 as u&\"x\""}
+{"sql":"select 1 as u&\"x\" uescape '!'"}
+{"sql":"select 1 as u&\"x\" uescape '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":26}
+{"sql":"select 1 as u&\"x\" uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":25}
+{"sql":"select 1 as u&\"x\" uescape x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":26}
+{"sql":"select 1 as u&\"x\" uescape (","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":26}
+{"sql":"select 1 as u&\"x\" uescape ''","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":26}
+{"sql":"select 1 as u&\"x\" uescape 'ab'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":26}
+{"sql":"select 1 as u&\"x\" uescape E'!'"}
+{"sql":"select 1 as u&\"x\" uescape U&'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":26}
+{"sql":"select u&\"x\" as a"}
+{"sql":"select u&\"x\" uescape '!' as a"}
+{"sql":"select u&\"x\" uescape '+' as a","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":21}
+{"sql":"select u&\"x\" uescape as a","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"as\"","position":21}
+{"sql":"select u&\"x\" uescape x as a","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":21}
+{"sql":"select u&\"x\" uescape ( as a","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":21}
+{"sql":"select u&\"x\" uescape '' as a","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":21}
+{"sql":"select u&\"x\" uescape 'ab' as a","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":21}
+{"sql":"select u&\"x\" uescape E'!' as a"}
+{"sql":"select u&\"x\" uescape U&'!' as a","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":21}
+{"sql":"select u&\"x\" || 'z'"}
+{"sql":"select u&\"x\" uescape '+' || 'z'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":21}
+{"sql":"select u&\"x\" uescape || 'z'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"||\"","position":21}
+{"sql":"select u&\"x\" uescape x || 'z'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":21}
+{"sql":"select u&\"x\" uescape ( || 'z'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":21}
+{"sql":"select u&\"x\" uescape '' || 'z'","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":21}
+{"sql":"select u&\"x\" uescape 'ab' || 'z'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":21}
+{"sql":"select u&\"x\" uescape E'!' || 'z'"}
+{"sql":"select u&\"x\" uescape U&'!' || 'z'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":21}
+{"sql":"select u&\"x\", 1"}
+{"sql":"select u&\"x\" uescape '!', 1"}
+{"sql":"select u&\"x\" uescape '+', 1","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":21}
+{"sql":"select u&\"x\" uescape, 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \",\"","position":20}
+{"sql":"select u&\"x\" uescape x, 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":21}
+{"sql":"select u&\"x\" uescape (, 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":21}
+{"sql":"select u&\"x\" uescape '', 1","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":21}
+{"sql":"select u&\"x\" uescape 'ab', 1","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":21}
+{"sql":"select u&\"x\" uescape E'!', 1"}
+{"sql":"select u&\"x\" uescape U&'!', 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":21}
+{"sql":"create table u&\"x\" (a int)"}
+{"sql":"create table u&\"x\" uescape '!' (a int)"}
+{"sql":"create table u&\"x\" uescape '+' (a int)","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":27}
+{"sql":"create table u&\"x\" uescape (a int)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":27}
+{"sql":"create table u&\"x\" uescape x (a int)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":27}
+{"sql":"create table u&\"x\" uescape ( (a int)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":27}
+{"sql":"create table u&\"x\" uescape '' (a int)","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":27}
+{"sql":"create table u&\"x\" uescape 'ab' (a int)","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":27}
+{"sql":"create table u&\"x\" uescape E'!' (a int)"}
+{"sql":"create table u&\"x\" uescape U&'!' (a int)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":27}
+{"sql":"select * from t where a = u&\"x\" and b"}
+{"sql":"select * from t where a = u&\"x\" uescape '!' and b"}
+{"sql":"select * from t where a = u&\"x\" uescape '+' and b","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":40}
+{"sql":"select * from t where a = u&\"x\" uescape and b","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"and\"","position":40}
+{"sql":"select * from t where a = u&\"x\" uescape x and b","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":40}
+{"sql":"select * from t where a = u&\"x\" uescape ( and b","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":40}
+{"sql":"select * from t where a = u&\"x\" uescape '' and b","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":40}
+{"sql":"select * from t where a = u&\"x\" uescape 'ab' and b","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":40}
+{"sql":"select * from t where a = u&\"x\" uescape E'!' and b"}
+{"sql":"select * from t where a = u&\"x\" uescape U&'!' and b","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":40}
+{"sql":"insert into t values (u&\"x\")"}
+{"sql":"insert into t values (u&\"x\" uescape '!')"}
+{"sql":"insert into t values (u&\"x\" uescape '+')","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":36}
+{"sql":"insert into t values (u&\"x\" uescape)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \")\"","position":35}
+{"sql":"insert into t values (u&\"x\" uescape x)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":36}
+{"sql":"insert into t values (u&\"x\" uescape ()","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":36}
+{"sql":"insert into t values (u&\"x\" uescape '')","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":36}
+{"sql":"insert into t values (u&\"x\" uescape 'ab')","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":36}
+{"sql":"insert into t values (u&\"x\" uescape E'!')"}
+{"sql":"insert into t values (u&\"x\" uescape U&'!')","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":36}
+{"sql":"select a from u&\"x\""}
+{"sql":"select a from u&\"x\" uescape '!'"}
+{"sql":"select a from u&\"x\" uescape '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":28}
+{"sql":"select a from u&\"x\" uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":27}
+{"sql":"select a from u&\"x\" uescape x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":28}
+{"sql":"select a from u&\"x\" uescape (","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":28}
+{"sql":"select a from u&\"x\" uescape ''","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":28}
+{"sql":"select a from u&\"x\" uescape 'ab'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":28}
+{"sql":"select a from u&\"x\" uescape E'!'"}
+{"sql":"select a from u&\"x\" uescape U&'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":28}
+{"sql":"select u&\"x\".a from t"}
+{"sql":"select u&\"x\" uescape '!'.a from t"}
+{"sql":"select u&\"x\" uescape '+'.a from t","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":21}
+{"sql":"select u&\"x\" uescape.a from t","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \".\"","position":20}
+{"sql":"select u&\"x\" uescape x.a from t","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":21}
+{"sql":"select u&\"x\" uescape (.a from t","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":21}
+{"sql":"select u&\"x\" uescape ''.a from t","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":21}
+{"sql":"select u&\"x\" uescape 'ab'.a from t","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":21}
+{"sql":"select u&\"x\" uescape E'!'.a from t"}
+{"sql":"select u&\"x\" uescape U&'!'.a from t","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":21}
+{"sql":"select 1 u&\"x\""}
+{"sql":"select 1 u&\"x\" uescape '!'"}
+{"sql":"select 1 u&\"x\" uescape '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":23}
+{"sql":"select 1 u&\"x\" uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":22}
+{"sql":"select 1 u&\"x\" uescape x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":23}
+{"sql":"select 1 u&\"x\" uescape (","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":23}
+{"sql":"select 1 u&\"x\" uescape ''","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":23}
+{"sql":"select 1 u&\"x\" uescape 'ab'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":23}
+{"sql":"select 1 u&\"x\" uescape E'!'"}
+{"sql":"select 1 u&\"x\" uescape U&'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":23}
+{"sql":"select 1 as U&\"!0061\""}
+{"sql":"select 1 as U&\"!0061\" uescape '!'"}
+{"sql":"select 1 as U&\"!0061\" uescape '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":30}
+{"sql":"select 1 as U&\"!0061\" uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":29}
+{"sql":"select 1 as U&\"!0061\" uescape x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":30}
+{"sql":"select 1 as U&\"!0061\" uescape (","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":30}
+{"sql":"select 1 as U&\"!0061\" uescape ''","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":30}
+{"sql":"select 1 as U&\"!0061\" uescape 'ab'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":30}
+{"sql":"select 1 as U&\"!0061\" uescape E'!'"}
+{"sql":"select 1 as U&\"!0061\" uescape U&'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":30}
+{"sql":"select U&\"!0061\" as a"}
+{"sql":"select U&\"!0061\" uescape '!' as a"}
+{"sql":"select U&\"!0061\" uescape '+' as a","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":25}
+{"sql":"select U&\"!0061\" uescape as a","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"as\"","position":25}
+{"sql":"select U&\"!0061\" uescape x as a","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":25}
+{"sql":"select U&\"!0061\" uescape ( as a","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":25}
+{"sql":"select U&\"!0061\" uescape '' as a","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":25}
+{"sql":"select U&\"!0061\" uescape 'ab' as a","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":25}
+{"sql":"select U&\"!0061\" uescape E'!' as a"}
+{"sql":"select U&\"!0061\" uescape U&'!' as a","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":25}
+{"sql":"select U&\"!0061\" || 'z'"}
+{"sql":"select U&\"!0061\" uescape '!' || 'z'"}
+{"sql":"select U&\"!0061\" uescape '+' || 'z'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":25}
+{"sql":"select U&\"!0061\" uescape || 'z'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"||\"","position":25}
+{"sql":"select U&\"!0061\" uescape x || 'z'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":25}
+{"sql":"select U&\"!0061\" uescape ( || 'z'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":25}
+{"sql":"select U&\"!0061\" uescape '' || 'z'","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":25}
+{"sql":"select U&\"!0061\" uescape 'ab' || 'z'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":25}
+{"sql":"select U&\"!0061\" uescape E'!' || 'z'"}
+{"sql":"select U&\"!0061\" uescape U&'!' || 'z'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":25}
+{"sql":"select U&\"!0061\", 1"}
+{"sql":"select U&\"!0061\" uescape '!', 1"}
+{"sql":"select U&\"!0061\" uescape '+', 1","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":25}
+{"sql":"select U&\"!0061\" uescape, 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \",\"","position":24}
+{"sql":"select U&\"!0061\" uescape x, 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":25}
+{"sql":"select U&\"!0061\" uescape (, 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":25}
+{"sql":"select U&\"!0061\" uescape '', 1","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":25}
+{"sql":"select U&\"!0061\" uescape 'ab', 1","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":25}
+{"sql":"select U&\"!0061\" uescape E'!', 1"}
+{"sql":"select U&\"!0061\" uescape U&'!', 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":25}
+{"sql":"create table U&\"!0061\" (a int)"}
+{"sql":"create table U&\"!0061\" uescape '!' (a int)"}
+{"sql":"create table U&\"!0061\" uescape '+' (a int)","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":31}
+{"sql":"create table U&\"!0061\" uescape (a int)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":31}
+{"sql":"create table U&\"!0061\" uescape x (a int)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":31}
+{"sql":"create table U&\"!0061\" uescape ( (a int)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":31}
+{"sql":"create table U&\"!0061\" uescape '' (a int)","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":31}
+{"sql":"create table U&\"!0061\" uescape 'ab' (a int)","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":31}
+{"sql":"create table U&\"!0061\" uescape E'!' (a int)"}
+{"sql":"create table U&\"!0061\" uescape U&'!' (a int)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":31}
+{"sql":"select * from t where a = U&\"!0061\" and b"}
+{"sql":"select * from t where a = U&\"!0061\" uescape '!' and b"}
+{"sql":"select * from t where a = U&\"!0061\" uescape '+' and b","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":44}
+{"sql":"select * from t where a = U&\"!0061\" uescape and b","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"and\"","position":44}
+{"sql":"select * from t where a = U&\"!0061\" uescape x and b","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":44}
+{"sql":"select * from t where a = U&\"!0061\" uescape ( and b","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":44}
+{"sql":"select * from t where a = U&\"!0061\" uescape '' and b","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":44}
+{"sql":"select * from t where a = U&\"!0061\" uescape 'ab' and b","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":44}
+{"sql":"select * from t where a = U&\"!0061\" uescape E'!' and b"}
+{"sql":"select * from t where a = U&\"!0061\" uescape U&'!' and b","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":44}
+{"sql":"insert into t values (U&\"!0061\")"}
+{"sql":"insert into t values (U&\"!0061\" uescape '!')"}
+{"sql":"insert into t values (U&\"!0061\" uescape '+')","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":40}
+{"sql":"insert into t values (U&\"!0061\" uescape)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \")\"","position":39}
+{"sql":"insert into t values (U&\"!0061\" uescape x)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":40}
+{"sql":"insert into t values (U&\"!0061\" uescape ()","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":40}
+{"sql":"insert into t values (U&\"!0061\" uescape '')","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":40}
+{"sql":"insert into t values (U&\"!0061\" uescape 'ab')","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":40}
+{"sql":"insert into t values (U&\"!0061\" uescape E'!')"}
+{"sql":"insert into t values (U&\"!0061\" uescape U&'!')","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":40}
+{"sql":"select a from U&\"!0061\""}
+{"sql":"select a from U&\"!0061\" uescape '!'"}
+{"sql":"select a from U&\"!0061\" uescape '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":32}
+{"sql":"select a from U&\"!0061\" uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":31}
+{"sql":"select a from U&\"!0061\" uescape x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":32}
+{"sql":"select a from U&\"!0061\" uescape (","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":32}
+{"sql":"select a from U&\"!0061\" uescape ''","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":32}
+{"sql":"select a from U&\"!0061\" uescape 'ab'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":32}
+{"sql":"select a from U&\"!0061\" uescape E'!'"}
+{"sql":"select a from U&\"!0061\" uescape U&'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":32}
+{"sql":"select U&\"!0061\".a from t"}
+{"sql":"select U&\"!0061\" uescape '!'.a from t"}
+{"sql":"select U&\"!0061\" uescape '+'.a from t","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":25}
+{"sql":"select U&\"!0061\" uescape.a from t","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \".\"","position":24}
+{"sql":"select U&\"!0061\" uescape x.a from t","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":25}
+{"sql":"select U&\"!0061\" uescape (.a from t","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":25}
+{"sql":"select U&\"!0061\" uescape ''.a from t","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":25}
+{"sql":"select U&\"!0061\" uescape 'ab'.a from t","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":25}
+{"sql":"select U&\"!0061\" uescape E'!'.a from t"}
+{"sql":"select U&\"!0061\" uescape U&'!'.a from t","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":25}
+{"sql":"select 1 U&\"!0061\""}
+{"sql":"select 1 U&\"!0061\" uescape '!'"}
+{"sql":"select 1 U&\"!0061\" uescape '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":27}
+{"sql":"select 1 U&\"!0061\" uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":26}
+{"sql":"select 1 U&\"!0061\" uescape x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":27}
+{"sql":"select 1 U&\"!0061\" uescape (","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":27}
+{"sql":"select 1 U&\"!0061\" uescape ''","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":27}
+{"sql":"select 1 U&\"!0061\" uescape 'ab'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":27}
+{"sql":"select 1 U&\"!0061\" uescape E'!'"}
+{"sql":"select 1 U&\"!0061\" uescape U&'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":27}
+{"sql":"select 1 as U&'\\0061'","code":"42601","message":"syntax error at or near \"U&'\\0061'\"","position":12}
+{"sql":"select 1 as U&'\\0061' uescape '!'","code":"42601","message":"syntax error at or near \"U&'\\0061' uescape '!'\"","position":12}
+{"sql":"select 1 as U&'\\0061' uescape '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":30}
+{"sql":"select 1 as U&'\\0061' uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":29}
+{"sql":"select 1 as U&'\\0061' uescape x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":30}
+{"sql":"select 1 as U&'\\0061' uescape (","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":30}
+{"sql":"select 1 as U&'\\0061' uescape ''","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":30}
+{"sql":"select 1 as U&'\\0061' uescape 'ab'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":30}
+{"sql":"select 1 as U&'\\0061' uescape E'!'","code":"42601","message":"syntax error at or near \"U&'\\0061' uescape E'!'\"","position":12}
+{"sql":"select 1 as U&'\\0061' uescape U&'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":30}
+{"sql":"select U&'\\0061' as a"}
+{"sql":"select U&'\\0061' uescape '!' as a"}
+{"sql":"select U&'\\0061' uescape '+' as a","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":25}
+{"sql":"select U&'\\0061' uescape as a","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"as\"","position":25}
+{"sql":"select U&'\\0061' uescape x as a","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":25}
+{"sql":"select U&'\\0061' uescape ( as a","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":25}
+{"sql":"select U&'\\0061' uescape '' as a","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":25}
+{"sql":"select U&'\\0061' uescape 'ab' as a","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":25}
+{"sql":"select U&'\\0061' uescape E'!' as a"}
+{"sql":"select U&'\\0061' uescape U&'!' as a","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":25}
+{"sql":"select U&'\\0061' || 'z'"}
+{"sql":"select U&'\\0061' uescape '+' || 'z'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":25}
+{"sql":"select U&'\\0061' uescape || 'z'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"||\"","position":25}
+{"sql":"select U&'\\0061' uescape x || 'z'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":25}
+{"sql":"select U&'\\0061' uescape ( || 'z'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":25}
+{"sql":"select U&'\\0061' uescape '' || 'z'","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":25}
+{"sql":"select U&'\\0061' uescape 'ab' || 'z'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":25}
+{"sql":"select U&'\\0061' uescape E'!' || 'z'"}
+{"sql":"select U&'\\0061' uescape U&'!' || 'z'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":25}
+{"sql":"select U&'\\0061', 1"}
+{"sql":"select U&'\\0061' uescape '!', 1"}
+{"sql":"select U&'\\0061' uescape '+', 1","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":25}
+{"sql":"select U&'\\0061' uescape, 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \",\"","position":24}
+{"sql":"select U&'\\0061' uescape x, 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":25}
+{"sql":"select U&'\\0061' uescape (, 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":25}
+{"sql":"select U&'\\0061' uescape '', 1","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":25}
+{"sql":"select U&'\\0061' uescape 'ab', 1","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":25}
+{"sql":"select U&'\\0061' uescape E'!', 1"}
+{"sql":"select U&'\\0061' uescape U&'!', 1","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":25}
+{"sql":"create table U&'\\0061' (a int)","code":"42601","message":"syntax error at or near \"U&'\\0061'\"","position":13}
+{"sql":"create table U&'\\0061' uescape '!' (a int)","code":"42601","message":"syntax error at or near \"U&'\\0061' uescape '!'\"","position":13}
+{"sql":"create table U&'\\0061' uescape '+' (a int)","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":31}
+{"sql":"create table U&'\\0061' uescape (a int)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":31}
+{"sql":"create table U&'\\0061' uescape x (a int)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":31}
+{"sql":"create table U&'\\0061' uescape ( (a int)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":31}
+{"sql":"create table U&'\\0061' uescape '' (a int)","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":31}
+{"sql":"create table U&'\\0061' uescape 'ab' (a int)","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":31}
+{"sql":"create table U&'\\0061' uescape E'!' (a int)","code":"42601","message":"syntax error at or near \"U&'\\0061' uescape E'!'\"","position":13}
+{"sql":"create table U&'\\0061' uescape U&'!' (a int)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":31}
+{"sql":"select * from t where a = U&'\\0061' and b"}
+{"sql":"select * from t where a = U&'\\0061' uescape '!' and b"}
+{"sql":"select * from t where a = U&'\\0061' uescape '+' and b","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":44}
+{"sql":"select * from t where a = U&'\\0061' uescape and b","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"and\"","position":44}
+{"sql":"select * from t where a = U&'\\0061' uescape x and b","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":44}
+{"sql":"select * from t where a = U&'\\0061' uescape ( and b","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":44}
+{"sql":"select * from t where a = U&'\\0061' uescape '' and b","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":44}
+{"sql":"select * from t where a = U&'\\0061' uescape 'ab' and b","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":44}
+{"sql":"select * from t where a = U&'\\0061' uescape E'!' and b"}
+{"sql":"select * from t where a = U&'\\0061' uescape U&'!' and b","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":44}
+{"sql":"insert into t values (U&'\\0061')"}
+{"sql":"insert into t values (U&'\\0061' uescape '!')"}
+{"sql":"insert into t values (U&'\\0061' uescape '+')","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":40}
+{"sql":"insert into t values (U&'\\0061' uescape)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \")\"","position":39}
+{"sql":"insert into t values (U&'\\0061' uescape x)","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":40}
+{"sql":"insert into t values (U&'\\0061' uescape ()","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":40}
+{"sql":"insert into t values (U&'\\0061' uescape '')","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":40}
+{"sql":"insert into t values (U&'\\0061' uescape 'ab')","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":40}
+{"sql":"insert into t values (U&'\\0061' uescape E'!')"}
+{"sql":"insert into t values (U&'\\0061' uescape U&'!')","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":40}
+{"sql":"select a from U&'\\0061'","code":"42601","message":"syntax error at or near \"U&'\\0061'\"","position":14}
+{"sql":"select a from U&'\\0061' uescape '!'","code":"42601","message":"syntax error at or near \"U&'\\0061' uescape '!'\"","position":14}
+{"sql":"select a from U&'\\0061' uescape '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":32}
+{"sql":"select a from U&'\\0061' uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":31}
+{"sql":"select a from U&'\\0061' uescape x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":32}
+{"sql":"select a from U&'\\0061' uescape (","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":32}
+{"sql":"select a from U&'\\0061' uescape ''","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":32}
+{"sql":"select a from U&'\\0061' uescape 'ab'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":32}
+{"sql":"select a from U&'\\0061' uescape E'!'","code":"42601","message":"syntax error at or near \"U&'\\0061' uescape E'!'\"","position":14}
+{"sql":"select a from U&'\\0061' uescape U&'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":32}
+{"sql":"select U&'\\0061'.a from t","code":"42601","message":"syntax error at or near \".\"","position":16}
+{"sql":"select U&'\\0061' uescape '!'.a from t","code":"42601","message":"syntax error at or near \".\"","position":28}
+{"sql":"select U&'\\0061' uescape '+'.a from t","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":25}
+{"sql":"select U&'\\0061' uescape.a from t","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \".\"","position":24}
+{"sql":"select U&'\\0061' uescape x.a from t","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":25}
+{"sql":"select U&'\\0061' uescape (.a from t","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":25}
+{"sql":"select U&'\\0061' uescape ''.a from t","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":25}
+{"sql":"select U&'\\0061' uescape 'ab'.a from t","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":25}
+{"sql":"select U&'\\0061' uescape E'!'.a from t","code":"42601","message":"syntax error at or near \".\"","position":29}
+{"sql":"select U&'\\0061' uescape U&'!'.a from t","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":25}
+{"sql":"select 1 U&'\\0061'","code":"42601","message":"syntax error at or near \"U&'\\0061'\"","position":9}
+{"sql":"select 1 U&'\\0061' uescape '!'","code":"42601","message":"syntax error at or near \"U&'\\0061' uescape '!'\"","position":9}
+{"sql":"select 1 U&'\\0061' uescape '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":27}
+{"sql":"select 1 U&'\\0061' uescape","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":26}
+{"sql":"select 1 U&'\\0061' uescape x","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"x\"","position":27}
+{"sql":"select 1 U&'\\0061' uescape (","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"(\"","position":27}
+{"sql":"select 1 U&'\\0061' uescape ''","code":"42601","message":"invalid Unicode escape character at or near \"''\"","position":27}
+{"sql":"select 1 U&'\\0061' uescape 'ab'","code":"42601","message":"invalid Unicode escape character at or near \"'ab'\"","position":27}
+{"sql":"select 1 U&'\\0061' uescape E'!'","code":"42601","message":"syntax error at or near \"U&'\\0061' uescape E'!'\"","position":9}
+{"sql":"select 1 U&'\\0061' uescape U&'!'","code":"42601","message":"UESCAPE must be followed by a simple string literal at or near \"U&'!'\"","position":27}
+{"sql":"select u&'\\' u&'x' uescape '+'","code":"42601","message":"invalid Unicode escape","position":10}
+{"sql":"select u&'x' u&'\\' uescape '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":27}
+{"sql":"select u&'x' u&'y' uescape '!'","code":"42601","message":"syntax error at or near \"u&'y' uescape '!'\"","position":13}
+{"sql":"select u&'\\' $$abc","code":"42601","message":"unterminated dollar-quoted string at or near \"$$abc\"","position":13}
+{"sql":"select u&'x' uescape '!' u&'y' uescape '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":39}
+{"sql":"select u&'x' 'y' uescape '!'","code":"42601","message":"syntax error at or near \"'y'\"","position":13}
+{"sql":"select u&'!0041' uescape '!' as \"U&\""}
+{"sql":"select u&'x' uescape '!';select u&'x' uescape '+'","code":"42601","message":"invalid Unicode escape character at or near \"'+'\"","position":46}
+{"sql":"select u&'x';select 1 uescape '+'","code":"42601","message":"syntax error at or near \"'+'\"","position":30}
+{"sql":"select 'x' uescape '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":19}
+{"sql":"select e'x' uescape '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":20}
+{"sql":"select $$x$$ uescape '!'","code":"42601","message":"syntax error at or near \"'!'\"","position":21}
+{"sql":"select u&'x' uescape  ","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":22}
+{"sql":"select u&'x' uescape\n","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":21}
+{"sql":"select u&'x' uescape /* c */","code":"42601","message":"UESCAPE must be followed by a simple string literal at end of input","position":28}

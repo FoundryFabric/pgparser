@@ -83,12 +83,12 @@ L a feature's grammar.
 | cte-column-list-parentheses (fixed) | 1 | 12 (0/10/2) | accepts a CTE's column names without parentheses | `opt_name_list` | no | S |
 | constraint-attribute-checks (fixed) | 1 | 9 (5/1/3) | accepts what `processCASbits` and constraint actions refuse | `ConstraintAttributeSpec`/`processCASbits`, `key_action` SET NULL (cols), `ColConstraintElem` GENERATED | no | S |
 | select-clause-checks (fixed) | 1 | 8 (3/2/3) | accepts WITH TIES without ORDER BY, with SKIP LOCKED; ORDER BY with WITHIN GROUP | `insertSelectOptions`, `func_application` within `func_expr` | no | S |
-| uescape | 1 | 7 (2/4/1) | accepts an invalid UESCAPE character; other message for a UESCAPE not followed by a string | scanner and `base_yylex` UESCAPE handling (`check_uescapechar`) | no | S |
+| uescape (fixed) | 1 | 7 (2/4/1) | accepts an invalid UESCAPE character; other message for a UESCAPE not followed by a string | scanner and `base_yylex` UESCAPE handling (`check_uescapechar`) | no | S |
 | with-oids | 1 | 5 (2/1/2) | accepts WITH OIDS | `OptWith`, `alter_table_cmd` SET WITH OIDS | no | S |
 | drop-aggregate-arguments (fixed) | 1 | 4 (1/1/2) | accepts DROP AGGREGATE without argument types | `DropStmt` AGGREGATE `aggregate_with_argtypes_list` | no | S |
 | partition-command-in-list | 1 | 4 (0/2/2) | accepts ATTACH/DETACH PARTITION in a command list | `AlterTableStmt` `partition_cmd` | no | S |
 | role-name-checks (fixed) | 1 | 4 (0/1/3) | accepts `ALTER ROLE CURRENT_USER RENAME`; 42601 for 42939 | `RoleId` action, `RenameStmt` | no | S |
-| bare-column-label (fixed but 5) | 2 | 511 (2/502/7) | refuses a keyword as a column label without AS | `target_el: a_expr BareColLabel`, `bare_label_keyword` | no | M |
+| bare-column-label (fixed) | 2 | 511 (2/502/7) | refuses a keyword as a column label without AS | `target_el: a_expr BareColLabel`, `bare_label_keyword` | no | M |
 | pg17-json-names | 2 | 75 (4/66/5) | refuses PostgreSQL 16's json, json_table and the like as names | `kwlist.h`: 20 PostgreSQL 17 keywords, JSON col_name; `JsonType` | no | M (with pg17-sqljson) |
 | drop-type-typename (fixed) | 2 | 50 (0/47/3) | refuses `DROP TYPE t[]`, `DROP DOMAIN d(3)` | `DropStmt` TYPE/DOMAIN `type_name_list` | yes, all 50 | S |
 | alter-column-optional-keyword | 2 | 7 (0/5/2) | refuses `ALTER a SET (...)`, `ALTER a SET GENERATED` without COLUMN | `alter_table_cmd` `ALTER opt_column ColId` | no | S |
@@ -269,13 +269,24 @@ LOCKED, and a second ORDER BY, OFFSET, LIMIT or WITH, and a limit after WITH
 TIES, as PostgreSQL 16 does; `func_expr` refuses WITHIN GROUP after an
 argument ORDER BY, DISTINCT or VARIADIC, at WITHIN. All 8 agree.
 
-### uescape (risk 1, 7)
+### uescape (risk 1, 7; fixed)
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
 | `select u&'x' uescape '+'` | 42601 invalid Unicode escape character at or near "'+'" at 21 | accepts |
 | `SELECT U&' \' UESCAPE[] '!' AS "tricky"` | 42601 UESCAPE must be followed by a simple string literal at or near "[" at 21 | 42601 invalid Unicode escape at 11 |
 | `SELECT 'tricky' AS U&"\" UESCAPE(3) '!'` | 42601 UESCAPE must be followed by a simple string literal at or near "(" at 32 | 42601 invalid Unicode escape at 22 |
+
+A U& string or identifier is now decoded after the lexer has looked at the
+next token, as PostgreSQL 16's `base_yylex` does. A UESCAPE there must be
+followed by a quoted, escape or dollar-quoted string, or the statement is
+`UESCAPE must be followed by a simple string literal` at that token (or at end
+of input); the string must be one byte that is not a hex digit, `+`, a quote
+or white space, or it is `invalid Unicode escape character` at the string.
+Both come before an error in the U& literal's own escapes, and an error in
+the next token comes before both. The fork scanned for the word UESCAPE and a
+one-character string after it, and without them read UESCAPE as the next
+token. All 7 agree, and so do the 5 `bare-column-label` rows left.
 
 ### with-oids (risk 1, 5)
 
@@ -329,7 +340,7 @@ CreatePolicyStmt.roles 4, DropUserMappingStmt.user 4) and the matching
 (the `unlocated .../RoleSpec.location` classes). `TestRoleSpecsArePostgreSQL16s`
 pins 1,555 role positions and spellings.
 
-### bare-column-label (risk 2, 511; fixed but 5)
+### bare-column-label (risk 2, 511; fixed)
 
 The parser's `target_el` is `a_expr AS ColLabel | a_expr IDENT | a_expr`;
 PostgreSQL 16's (since 14) takes `a_expr BareColLabel`, where a bare label is
@@ -353,7 +364,7 @@ five left are `U&'...' UESCAPE` followed by something other than a string
 (`+`, `.`, `[`, `(`): with UESCAPE a bare label the parser refuses at the
 next token, PostgreSQL 16's position, but with `syntax error` where
 PostgreSQL says `UESCAPE must be followed by a simple string literal`, the
-message `uescape` is about.
+message `uescape` is about. The `uescape` fix makes them agree.
 
 ### pg17-json-names (risk 2, 75)
 

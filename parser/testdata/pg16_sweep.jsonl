@@ -48080,17 +48080,17 @@
 {"file":"strings.sql","stmt":5,"sum":"8b99ac6e"}
 {"file":"strings.sql","stmt":5,"edit":[16,2,"grant"],"code":"42601","msg":"syntax error at or near \"grant\"","pos":16}
 {"file":"strings.sql","stmt":6,"sum":"41f8c211"}
-{"file":"strings.sql","stmt":6,"edit":[21,0,"[]"],"code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"[\"","pos":21,"class":"uescape"}
+{"file":"strings.sql","stmt":6,"edit":[21,0,"[]"],"code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"[\"","pos":21}
 {"file":"strings.sql","stmt":7,"sum":"ba2e5545"}
 {"file":"strings.sql","stmt":8,"sum":"f3d5c2aa","code":"42601","msg":"invalid Unicode escape","pos":17}
 {"file":"strings.sql","stmt":8,"edit":[6,0,"(3)"],"code":"42601","msg":"invalid Unicode escape","pos":20}
 {"file":"strings.sql","stmt":9,"sum":"89c8aba9","code":"42601","msg":"invalid Unicode escape","pos":17}
 {"file":"strings.sql","stmt":9,"edit":[6,0," * "],"code":"42601","msg":"invalid Unicode escape","pos":20}
 {"file":"strings.sql","stmt":9,"edit":[24,0," ) "],"code":"42601","msg":"invalid Unicode escape","pos":17}
-{"file":"strings.sql","stmt":10,"sum":"ec5f4868","code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"+\"","pos":32,"class":"bare-column-label"}
+{"file":"strings.sql","stmt":10,"sum":"ec5f4868","code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"+\"","pos":32}
 {"file":"strings.sql","stmt":10,"edit":[24,7,"distinct"],"code":"42601","msg":"syntax error at or near \"+\"","pos":33}
-{"file":"strings.sql","stmt":11,"sum":"800e8c36","code":"42601","msg":"invalid Unicode escape character at or near \"'+'\"","pos":32,"class":"uescape"}
-{"file":"strings.sql","stmt":11,"edit":[31,0,"."],"code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \".\"","pos":31,"class":"bare-column-label"}
+{"file":"strings.sql","stmt":11,"sum":"800e8c36","code":"42601","msg":"invalid Unicode escape character at or near \"'+'\"","pos":32}
+{"file":"strings.sql","stmt":11,"edit":[31,0,"."],"code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \".\"","pos":31}
 {"file":"strings.sql","stmt":12,"sum":"134e84a5","code":"42601","msg":"invalid Unicode surrogate pair","pos":22}
 {"file":"strings.sql","stmt":12,"edit":[6,0,"(3)"],"code":"42601","msg":"invalid Unicode surrogate pair","pos":25}
 {"file":"strings.sql","stmt":12,"edit":[23,0,"."],"code":"42601","msg":"invalid Unicode surrogate pair","pos":22}
@@ -48125,20 +48125,20 @@
 {"file":"strings.sql","stmt":28,"sum":"8bd60b76"}
 {"file":"strings.sql","stmt":29,"sum":"50e7a7fb"}
 {"file":"strings.sql","stmt":30,"sum":"e7b707f1"}
-{"file":"strings.sql","stmt":30,"edit":[34,0,"[]"],"code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"[\"","pos":34,"class":"bare-column-label"}
+{"file":"strings.sql","stmt":30,"edit":[34,0,"[]"],"code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"[\"","pos":34}
 {"file":"strings.sql","stmt":31,"sum":"41f8c211"}
 {"file":"strings.sql","stmt":31,"edit":[7,6,""]}
-{"file":"strings.sql","stmt":31,"edit":[21,0,"(3)"],"code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"(\"","pos":21,"class":"uescape"}
+{"file":"strings.sql","stmt":31,"edit":[21,0,"(3)"],"code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"(\"","pos":21}
 {"file":"strings.sql","stmt":32,"sum":"ba2e5545"}
-{"file":"strings.sql","stmt":32,"edit":[32,0,"(3)"],"code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"(\"","pos":32,"class":"uescape"}
+{"file":"strings.sql","stmt":32,"edit":[32,0,"(3)"],"code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"(\"","pos":32}
 {"file":"strings.sql","stmt":33,"sum":"f3d5c2aa","code":"42601","msg":"invalid Unicode escape","pos":17}
 {"file":"strings.sql","stmt":33,"edit":[22,0," U&'wrong: \\061'"],"code":"42601","msg":"invalid Unicode escape","pos":17}
 {"file":"strings.sql","stmt":34,"sum":"89c8aba9","code":"42601","msg":"invalid Unicode escape","pos":17}
 {"file":"strings.sql","stmt":34,"edit":[0,24,"U&'wrong: \\+0061' SELECT"],"code":"42601","msg":"invalid Unicode escape","pos":10}
 {"file":"strings.sql","stmt":34,"edit":[24,0," ( "],"code":"42601","msg":"invalid Unicode escape","pos":17}
-{"file":"strings.sql","stmt":35,"sum":"800e8c36","code":"42601","msg":"invalid Unicode escape character at or near \"'+'\"","pos":32,"class":"uescape"}
-{"file":"strings.sql","stmt":35,"edit":[35,0," '+'"],"code":"42601","msg":"invalid Unicode escape character at or near \"'+'\"","pos":32,"class":"uescape"}
-{"file":"strings.sql","stmt":35,"edit":[31,0,"[]"],"code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"[\"","pos":31,"class":"bare-column-label"}
+{"file":"strings.sql","stmt":35,"sum":"800e8c36","code":"42601","msg":"invalid Unicode escape character at or near \"'+'\"","pos":32}
+{"file":"strings.sql","stmt":35,"edit":[35,0," '+'"],"code":"42601","msg":"invalid Unicode escape character at or near \"'+'\"","pos":32}
+{"file":"strings.sql","stmt":35,"edit":[31,0,"[]"],"code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"[\"","pos":31}
 {"file":"strings.sql","stmt":36,"sum":"5204946d"}
 {"file":"strings.sql","stmt":37,"sum":"19512fa5"}
 {"file":"strings.sql","stmt":38,"sum":"6cad1867"}
@@ -58792,8 +58792,8 @@
 {"sql":"select * from xmltable('/' passing x columns a int bogus 1)","code":"42601","msg":"unrecognized column option \"bogus\"","pos":51}
 {"sql":"select x over (order by a range between 1 following and current row) from t","code":"42601","msg":"syntax error at or near \"over\"","pos":9}
 {"sql":"select json_object(returning text format json encoding bogus)","code":"22023","msg":"unrecognized JSON encoding: bogus","pos":-1}
-{"sql":"select u&'x' uescape '+'","code":"42601","msg":"invalid Unicode escape character at or near \"'+'\"","pos":21,"class":"uescape"}
-{"sql":"select u&'x' uescape (3) '!'","code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"(\"","pos":21,"class":"bare-column-label"}
+{"sql":"select u&'x' uescape '+'","code":"42601","msg":"invalid Unicode escape character at or near \"'+'\"","pos":21}
+{"sql":"select u&'x' uescape (3) '!'","code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"(\"","pos":21}
 {"sql":"drop operator === (int4)","code":"42601","msg":"missing argument","pos":23,"class":"operator-missing-argument-message"}
 {"sql":"create policy p on t as ugly using (true)","code":"42601","msg":"unrecognized row security option \"ugly\"","pos":24,"class":"policy-option-message"}
 {"sql":"create role role x with createrole","code":"42601","msg":"unrecognized role option \"x\"","pos":17,"class":"role-option-error-order"}

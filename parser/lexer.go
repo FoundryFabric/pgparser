@@ -108,6 +108,12 @@ type Lexer struct {
 	warnOnFirstEscape bool
 	sawNonASCII       bool
 
+	// ahead is the raw token NextToken read past a U& literal, returned
+	// next; aheadEnd is its tokenEnd.
+	ahead     Token
+	aheadEnd  int
+	haveAhead bool
+
 	// Location tracking
 	savedLoc int
 	// litEnd is the offset just past the closing quote of the last quoted
@@ -147,7 +153,72 @@ func NewLexer(input string) *Lexer {
 	}
 }
 
-// NextToken returns the next token from the input.
+// NextToken returns the next token from the input. A U& string or
+// identifier is decoded here, as parser.c's base_yylex does: it looks at the
+// next raw token, and a UESCAPE there must be followed by a simple string
+// literal (quoted, escape or dollar-quoted) of one character that is not
+// a hex digit, '+', a quote or white space, which then is the escape
+// character. Otherwise the next token is kept for the following call.
+func (l *Lexer) NextToken() Token {
+	tok := l.nextOrAhead()
+	if tok.Type != lex_USCONST && tok.Type != lex_UIDENT {
+		return tok
+	}
+	start, end := tok.Loc, l.tokenEnd()
+	escape := byte('\\')
+	next := l.nextOrAhead()
+	if l.Err != nil {
+		return next
+	}
+	if next.Type == UESCAPE {
+		lit := l.nextRawToken()
+		if l.Err != nil {
+			return lit
+		}
+		end = l.tokenEnd()
+		near := " at end of input"
+		if lit.Loc < len(l.input) {
+			near = " at or near \"" + l.input[lit.Loc:end] + "\""
+		}
+		if lit.Type != lex_SCONST {
+			return l.failAt(codeSyntaxError, "UESCAPE must be followed by a simple string literal"+near, lit.Loc, "")
+		}
+		if len(lit.Str) != 1 || !validUescape(lit.Str[0]) {
+			return l.failAt(codeSyntaxError, "invalid Unicode escape character"+near, lit.Loc, "")
+		}
+		escape = lit.Str[0]
+	} else {
+		l.ahead, l.aheadEnd, l.haveAhead = next, l.tokenEnd(), true
+	}
+	l.start, l.litEnd = start, end
+	decoded, ok := l.decodeUnicodeString(tok.Str, escape, start)
+	if !ok {
+		return Token{Type: lex_EOF, Loc: start}
+	}
+	if tok.Type == lex_UIDENT {
+		return Token{Type: lex_IDENT, Str: l.truncateIdentifier(decoded), Loc: start}
+	}
+	return Token{Type: lex_USCONST, Str: decoded, Loc: start}
+}
+
+// nextOrAhead is the raw token NextToken read ahead, or the next one.
+func (l *Lexer) nextOrAhead() Token {
+	if !l.haveAhead {
+		return l.nextRawToken()
+	}
+	l.haveAhead = false
+	l.start, l.litEnd = l.ahead.Loc, l.aheadEnd
+	return l.ahead
+}
+
+// validUescape reports whether c may be a UESCAPE character, as
+// check_uescapechar has it.
+func validUescape(c byte) bool {
+	return !isHexDigit(c) && c != '+' && c != '\'' && c != '"' && !isSpaceByte(c)
+}
+
+// nextRawToken returns the next token from the input, a U& literal with
+// its body undecoded.
 //
 // It runs the current state until one produces a token. A state that only
 // moves the lexer on (into a literal or comment, to a continued string)
@@ -158,7 +229,7 @@ func NewLexer(input string) *Lexer {
 // which keeps the common path nearly as cheap as a direct return; it tests the
 // token too, so a lexInitial that returned again() without a state change
 // would loop rather than hand the parser lex_AGAIN, which it reads as the end.
-func (l *Lexer) NextToken() Token {
+func (l *Lexer) nextRawToken() Token {
 	// Each state handles end of input, as scan.l's <<EOF>> rules do:
 	// lexInitial returns EOF, lexQuoteContinue the literal, the rest an
 	// "unterminated" error, even when the opening is the last byte.
@@ -688,39 +759,11 @@ func (l *Lexer) lexQuoteContinue() Token {
 	case stateXQ, stateXE:
 		return Token{Type: lex_SCONST, Str: str, Loc: l.start}
 	case stateXUS:
-		// Unicode string: U&'...'
-		// Check for UESCAPE clause
-		escapeChar, err := l.scanUESCAPE()
-		if err != nil {
-			l.Err = err
-			return Token{Type: lex_EOF, Loc: l.start}
-		}
-
-		// Decode the string using the determined escape char
-		decoded, ok := l.decodeUnicodeString(str, byte(escapeChar), l.start)
-		if !ok {
-			return Token{Type: lex_EOF, Loc: l.start}
-		}
-
-		return Token{Type: lex_USCONST, Str: decoded, Loc: l.start}
+		// Unicode string: U&'...', decoded by NextToken.
+		return Token{Type: lex_USCONST, Str: str, Loc: l.start}
 	case stateXUI:
-		// Unicode identifier: U&"..."
-		// Check for UESCAPE clause
-		// fmt.Printf("DEBUG: checking UESCAPE for identifier %s\n", str)
-		escapeChar, err := l.scanUESCAPE()
-		if err != nil {
-			l.Err = err
-			return Token{Type: lex_EOF, Loc: l.start}
-		}
-
-		// Decode the string using the determined escape char
-		decoded, ok := l.decodeUnicodeString(str, byte(escapeChar), l.start)
-		if !ok {
-			return Token{Type: lex_EOF, Loc: l.start}
-		}
-
-		// It's an identifier
-		return Token{Type: lex_IDENT, Str: l.truncateIdentifier(decoded), Loc: l.start}
+		// Unicode identifier: U&"...", decoded by NextToken.
+		return Token{Type: lex_UIDENT, Str: str, Loc: l.start}
 	default:
 		return Token{Type: lex_SCONST, Str: str, Loc: l.start}
 	}
@@ -1321,90 +1364,6 @@ func isValidUnicodeCodepoint(r rune) bool {
 
 func isSpaceByte(c byte) bool {
 	return c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == '\f' || c == '\v'
-}
-
-// scanUESCAPE attempts to scan a UESCAPE clause.
-// It returns the escape character (default backslash) and any error encountered.
-// If no UESCAPE clause is present, it returns '\\' and nil.
-// If a UESCAPE clause is present but invalid, it rewinds and returns '\\', nil,
-// effectively treating "UESCAPE" as the next token.
-func (l *Lexer) scanUESCAPE() (rune, error) {
-	escapeChar := '\\'
-	savedPos := l.pos
-
-	l.skipWhitespaceAndComments()
-
-	if l.pos+7 <= len(l.input) {
-		word := l.input[l.pos : l.pos+7]
-		if strings.EqualFold(word, "UESCAPE") {
-			l.pos += 7
-			l.skipWhitespaceAndComments()
-
-			if l.pos < len(l.input) && l.input[l.pos] == '\'' {
-				l.pos++
-				if l.pos < len(l.input) {
-					ch := l.input[l.pos]
-					escapeChar = rune(ch)
-					l.pos++
-
-					if ch == '\'' && l.pos < len(l.input) && l.input[l.pos] == '\'' {
-						escapeChar = '\''
-						l.pos++
-					}
-
-					if l.pos < len(l.input) && l.input[l.pos] == '\'' {
-						l.pos++
-						return escapeChar, nil
-					}
-				}
-			}
-			// Invalid UESCAPE clause, rollback
-			l.pos = savedPos
-			return '\\', nil
-		}
-	}
-
-	l.pos = savedPos
-	return '\\', nil
-}
-
-// skipWhitespaceAndComments skips whitespace and comments (both -- and /* */).
-func (l *Lexer) skipWhitespaceAndComments() {
-	for l.pos < len(l.input) {
-		ch := l.input[l.pos]
-
-		if isSpaceByte(ch) {
-			l.pos++
-			continue
-		}
-
-		if ch == '-' && l.pos+1 < len(l.input) && l.input[l.pos+1] == '-' {
-			l.skipLineComment()
-			continue
-		}
-
-		if ch == '/' && l.pos+1 < len(l.input) && l.input[l.pos+1] == '*' {
-			l.pos += 2
-			depth := 1
-			for l.pos < len(l.input) && depth > 0 {
-				if l.pos >= len(l.input) {
-					break
-				}
-				if l.input[l.pos] == '*' && l.pos+1 < len(l.input) && l.input[l.pos+1] == '/' {
-					depth--
-					l.pos += 2
-				} else if l.input[l.pos] == '/' && l.pos+1 < len(l.input) && l.input[l.pos+1] == '*' {
-					depth++
-					l.pos += 2
-				} else {
-					l.pos++
-				}
-			}
-			continue
-		}
-
-		break
-	}
 }
 
 // decodeUnicodeString decodes the body s of a U& string or identifier that
