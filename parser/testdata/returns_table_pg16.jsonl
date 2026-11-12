@@ -1,0 +1,39 @@
+{"sql":"create function f() returns table (a int) language sql as 'select 1'"}
+{"sql":"create function f() returns table (a int, b text) language sql as 'select 1, 2'"}
+{"sql":"create function f(x int) returns table (a int) as $$ select $1 $$ language sql"}
+{"sql":"create or replace function f() returns table (a varchar(5)) language sql as 'select 1'"}
+{"sql":"create function f() returns table (a int[]) language sql as 'select 1'"}
+{"sql":"create function f() returns table (a int[][]) language sql as 'select 1'"}
+{"sql":"create function f() returns table (a numeric(10, 2), b int) language sql as 'select 1'"}
+{"sql":"create function f() returns table (a t.c%type) language sql as 'select 1'"}
+{"sql":"create function f() returns table (a setof int) language sql as 'select 1'"}
+{"sql":"create function f() returns table (a pg_catalog.int4) language sql as 'select 1'"}
+{"sql":"create function f() returns table (a s.mytype) language sql as 'select 1'"}
+{"sql":"create function f() returns table (a double precision) language sql as 'select 1'"}
+{"sql":"create function f() returns table (a timestamp with time zone) language sql as 'select 1'"}
+{"sql":"create function f() returns table (a interval day to second) language sql as 'select 1'"}
+{"sql":"create function f() returns table (a bit varying(3)) language sql as 'select 1'"}
+{"sql":"create function f() returns table (a record) language sql as 'select 1'"}
+{"sql":"create function f() returns table (a int, b int, c int) language sql as 'select 1'"}
+{"sql":"create function f() returns table () language sql as 'select 1'","code":"42601","message":"syntax error at or near \")\"","position":35}
+{"sql":"create function f() returns table (int) language sql as 'select 1'","code":"42601","message":"syntax error at or near \"int\"","position":35}
+{"sql":"create function f() returns table (a) language sql as 'select 1'","code":"42601","message":"syntax error at or near \")\"","position":36}
+{"sql":"create function f() returns table (a int) begin atomic select 1; end"}
+{"sql":"create function f(out x int) returns table (a int) language sql as 'select 1'","code":"42601","message":"OUT and INOUT arguments aren't allowed in TABLE functions","position":-1}
+{"sql":"create function f(inout x int) returns table (a int) language sql as 'select 1'","code":"42601","message":"OUT and INOUT arguments aren't allowed in TABLE functions","position":-1}
+{"sql":"create function f() returns table (a int default 1) language sql as 'select 1'","code":"42601","message":"syntax error at or near \"default\"","position":41}
+{"sql":"create function f() returns table (in a int) language sql as 'select 1'","code":"42601","message":"syntax error at or near \"in\"","position":35}
+{"sql":"create function f() returns setof int language sql as 'select 1'"}
+{"sql":"create function f() returns int language sql as 'select 1'"}
+{"sql":"create function f() returns setof record language sql as 'select 1'"}
+{"sql":"create procedure p() returns table (a int) language sql as 'select 1'","code":"42601","message":"syntax error at or near \"table\"","position":29}
+{"sql":"create function f() returns table (a int) strict immutable language plpgsql as $$ begin return; end $$"}
+{"sql":"create function f() returns table (a \"char\") language sql as 'select 1'"}
+{"sql":"create function f() returns table (a char(3) array[4]) language sql as 'select 1'"}
+{"sql":"create function f() returns table (a int, b setof text) language sql as 'select 1'"}
+{"sql":"create function f() returns table (a json, b jsonb) language sql as 'select 1'"}
+{"sql":"create function f() returns table (a int) window language sql as 'select 1'"}
+{"sql":"create function f(variadic x int[]) returns table (a int) language sql as 'select 1'"}
+{"sql":"create function f(in x int, y text) returns table (a int) language sql as 'select 1'"}
+{"sql":"create function f(x int, out y int) returns table (a int) language sql as 'select 1'","code":"42601","message":"OUT and INOUT arguments aren't allowed in TABLE functions","position":-1}
+{"sql":"create function f(x int default 1) returns table (a int) language sql as 'select 1'"}

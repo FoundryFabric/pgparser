@@ -4281,13 +4281,15 @@ CreateFunctionStmt:
 	| CREATE opt_or_replace FUNCTION func_name func_args_with_defaults
 	RETURNS TABLE '(' table_func_column_list ')' opt_createfunc_opt_list opt_routine_body
 		{
-			/* RETURNS TABLE(...) adds table columns to parameter list */
-			params := concatLists($5, $9)
+			params, ok := mergeTableFuncParameters(pglex, $5, $9)
+			if !ok {
+				return 1
+			}
 			n := &nodes.CreateFunctionStmt{
 				IsOrReplace: $2,
 				Funcname:    $4,
 				Parameters:  params,
-				ReturnType:  &nodes.TypeName{Names: makeFuncName("pg_catalog", "record"), Location: -1},
+				ReturnType:  tableFuncTypeName($9, $<loc>7),
 				Options:     $11,
 				SqlBody:     $12,
 			}
@@ -18264,6 +18266,35 @@ func makeDefElem(name string, arg nodes.Node) nodes.Node {
 // makeFuncName converts a function name string to a *nodes.List of String nodes.
 // With one argument, creates an unqualified name.
 // With two arguments, creates a schema-qualified name (e.g. "pg_catalog", "func").
+// mergeTableFuncParameters is PostgreSQL 16's: RETURNS TABLE's columns
+// follow the function's arguments, which may not be OUT or INOUT. Otherwise
+// it raises the error and reports false.
+func mergeTableFuncParameters(lex pgLexer, args, columns *nodes.List) (*nodes.List, bool) {
+	if args != nil {
+		for _, a := range args.Items {
+			if m := a.(*nodes.FunctionParameter).Mode; m == nodes.FUNC_PARAM_OUT || m == nodes.FUNC_PARAM_INOUT {
+				grammarError(lex, codeSyntaxError, "OUT and INOUT arguments aren't allowed in TABLE functions", "", -1)
+				return nil, false
+			}
+		}
+	}
+	return concatLists(args, columns), true
+}
+
+// tableFuncTypeName is PostgreSQL 16's TableFuncTypeName, located at TABLE:
+// RETURNS TABLE returns a set of its one column's type, else a set of
+// record. The one column's TypeName is copied; its lists are shared with
+// the column's.
+func tableFuncTypeName(columns *nodes.List, loc nodes.ParseLoc) *nodes.TypeName {
+	tn := nodes.TypeName{Names: makeFuncName("pg_catalog", "record")}
+	if len(columns.Items) == 1 {
+		tn = *columns.Items[0].(*nodes.FunctionParameter).ArgType
+	}
+	tn.Setof = true
+	tn.Location = loc
+	return &tn
+}
+
 func makeFuncName(parts ...string) *nodes.List {
 	items := make([]nodes.Node, len(parts))
 	for i, p := range parts {

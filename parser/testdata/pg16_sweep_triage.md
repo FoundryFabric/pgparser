@@ -704,6 +704,28 @@ changed over the corpus and test data are statements with a plain `WITH
 CHECK OPTION`. `testdata/view_check_option_pg16.jsonl` pins 35 statements;
 all agree.
 
+### returns-table-setof (tree 31, 6 and 1; verdict 2; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `create function f() returns table (a int) ...` | return type `pg_catalog.int4`, setof, at TABLE | `pg_catalog.record`, not setof, no location |
+| `create function f() returns table (a int, b text) ...` | `pg_catalog.record`, setof, at TABLE | `pg_catalog.record`, not setof, no location |
+| `create function f(out x int) returns table (a int) ...` | `42601 OUT and INOUT arguments aren't allowed in TABLE functions` | accepted |
+
+RETURNS TABLE's return type is PostgreSQL 16's `TableFuncTypeName`: a set
+of the one column's type (its typmods and array bounds too), else a set of
+record, located at TABLE; and its arguments are merged as
+`mergeTableFuncParameters` merges them, refusing OUT and INOUT. This clears
+the `CreateFunctionStmt.returntype/TypeName.setof`, `TypeName.names/String.sval`,
+`returntype/TypeName.typmods` and `returntype/TypeName.location` classes. The
+41 trees that changed over the corpus and test data are RETURNS TABLE
+statements. `testdata/typename_sites_pg16.jsonl` (6 rows) and
+`testdata/generictype_pg16.json` (3 rows) had recorded the record return
+type and now record the column's, as PostgreSQL 16's analysis errors in
+those rows (`return type mismatch in function declared to return
+integer[]`) show. `testdata/returns_table_pg16.jsonl` pins 39 statements;
+all agree.
+
 ## Rerunning
 
 ```
