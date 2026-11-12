@@ -683,6 +683,27 @@ recursive form, and `json_table_column_option_el: DEFAULT b_expr`, `PATH
 b_expr`, `NOT NULL_P` and `NULL_P`. They are deleted, with their `%type`
 entries; no tree or verdict changed.
 
+## Tree meaning
+
+Where both accept, `pg16sweep libpg` compares the parser's tree with
+libpg_query 16's over the whole corpus. These classes are trees whose
+meaning differed, not only their shape or locations; each is fixed with its
+own test data, and the corpus comparison after each fix shows its class gone
+and no other class changed.
+
+### view-check-option (tree 18, verdict 3; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `create view v as select 1 with check option` | `withCheckOption` 2 (CASCADED) | 1 (LOCAL) |
+| `create recursive view v (a) as select 1 with check option` | `0A000 WITH CHECK OPTION not supported on recursive views` at WITH | accepted, the option dropped |
+
+Plain `WITH CHECK OPTION` is CASCADED, as the SQL standard and PostgreSQL 16
+have it; a recursive view refuses any check option. The 33 trees that
+changed over the corpus and test data are statements with a plain `WITH
+CHECK OPTION`. `testdata/view_check_option_pg16.jsonl` pins 35 statements;
+all agree.
+
 ## Rerunning
 
 ```

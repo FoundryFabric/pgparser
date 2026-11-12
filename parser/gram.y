@@ -4178,6 +4178,10 @@ ViewStmt:
 	| CREATE OptTemp RECURSIVE VIEW qualified_name '(' columnList ')' opt_reloptions
 	AS SelectStmt opt_check_option
 		{
+			if $12 != VIEW_CHECK_OPTION_NONE {
+				grammarError(pglex, "0A000", "WITH CHECK OPTION not supported on recursive views", "", $<loc>12)
+				return 1
+			}
 			rv := makeRangeVar($5, $<loc>5).(*nodes.RangeVar)
 			rv.Relpersistence = relpersistenceForTemp($2)
 			/* Create a WITH RECURSIVE CTE wrapper */
@@ -4206,12 +4210,15 @@ ViewStmt:
 				Aliases:         $7,
 				Options:         $9,
 				Query:           sel,
-				WithCheckOption: int($12),
 			}
 		}
 	| CREATE OR REPLACE OptTemp RECURSIVE VIEW qualified_name '(' columnList ')' opt_reloptions
 	AS SelectStmt opt_check_option
 		{
+			if $14 != VIEW_CHECK_OPTION_NONE {
+				grammarError(pglex, "0A000", "WITH CHECK OPTION not supported on recursive views", "", $<loc>14)
+				return 1
+			}
 			rv := makeRangeVar($7, $<loc>7).(*nodes.RangeVar)
 			rv.Relpersistence = relpersistenceForTemp($4)
 			cte := &nodes.CommonTableExpr{
@@ -4240,13 +4247,12 @@ ViewStmt:
 				Options:         $11,
 				Query:           sel,
 				Replace:         true,
-				WithCheckOption: int($14),
 			}
 		}
 	;
 
 opt_check_option:
-	WITH CHECK OPTION              { $$ = int64(VIEW_CHECK_OPTION_LOCAL) }
+	WITH CHECK OPTION              { $$ = int64(VIEW_CHECK_OPTION_CASCADED) }
 	| WITH CASCADED CHECK OPTION   { $$ = int64(VIEW_CHECK_OPTION_CASCADED) }
 	| WITH LOCAL CHECK OPTION      { $$ = int64(VIEW_CHECK_OPTION_LOCAL) }
 	| /* EMPTY */                  { $$ = int64(VIEW_CHECK_OPTION_NONE) }

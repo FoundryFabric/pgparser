@@ -1,0 +1,35 @@
+{"sql":"create view v as select 1 with check option"}
+{"sql":"create view v as select 1 with cascaded check option"}
+{"sql":"create view v as select 1 with local check option"}
+{"sql":"create view v as select 1"}
+{"sql":"create or replace view v as select 1 with check option"}
+{"sql":"create or replace view v as select 1 with local check option"}
+{"sql":"create or replace view v as select 1 with cascaded check option"}
+{"sql":"create temp view v as select 1 with check option"}
+{"sql":"create temporary view v as select * from t with check option"}
+{"sql":"create view v (a, b) as select 1, 2 with check option"}
+{"sql":"create view v (a) with (security_barrier) as select 1 with check option"}
+{"sql":"create view v with (check_option = local) as select 1"}
+{"sql":"create view v with (check_option = cascaded) as select * from t where a > 0 with check option"}
+{"sql":"create recursive view v (a) as select 1 with check option","code":"0A000","message":"WITH CHECK OPTION not supported on recursive views","position":40}
+{"sql":"create or replace recursive view v (a) as select 1 with local check option","code":"0A000","message":"WITH CHECK OPTION not supported on recursive views","position":51}
+{"sql":"create recursive view v (a) as values (1) with cascaded check option","code":"0A000","message":"WITH CHECK OPTION not supported on recursive views","position":42}
+{"sql":"create view v as select * from t where a = 0 with check option"}
+{"sql":"create view v as values (1), (2) with check option"}
+{"sql":"create view v as select 1 union select 2 with check option"}
+{"sql":"create view v as (select 1) with check option"}
+{"sql":"create view s.v as select 1 with check option"}
+{"sql":"create view v as table t with check option"}
+{"sql":"create view v as select 1 with check","code":"42601","message":"syntax error at end of input","position":36}
+{"sql":"create view v as select 1 with option","code":"42601","message":"syntax error at or near \"option\"","position":31}
+{"sql":"create view v as select 1 with cascaded option","code":"42601","message":"syntax error at or near \"option\"","position":40}
+{"sql":"create view v as select 1 with local option","code":"42601","message":"syntax error at or near \"option\"","position":37}
+{"sql":"create view v as select 1 with check option cascaded","code":"42601","message":"syntax error at or near \"cascaded\"","position":44}
+{"sql":"create view v as select 1 with cascaded local check option","code":"42601","message":"syntax error at or near \"local\"","position":40}
+{"sql":"create view v as select 1 with check option with check option","code":"42601","message":"syntax error at or near \"with\"","position":44}
+{"sql":"create view v as select 1 check option","code":"42601","message":"syntax error at or near \"option\"","position":32}
+{"sql":"create materialized view v as select 1 with check option","code":"42601","message":"syntax error at or near \"check\"","position":44}
+{"sql":"create view v as select 1 with no data","code":"42601","message":"syntax error at or near \"no\"","position":31}
+{"sql":"create view v as with x as (select 1) select * from x with check option"}
+{"sql":"create view v as select 1 order by 1 with check option"}
+{"sql":"create view v as select 1 limit 1 with local check option"}
