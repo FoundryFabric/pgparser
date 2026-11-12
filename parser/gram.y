@@ -256,7 +256,7 @@ import (
 %type <node>  createfunc_opt_item common_func_opt_item
 %type <node>  opt_routine_body ReturnStmt routine_body_stmt
 %type <list>  routine_body_stmt_list
-%type <node>  TransactionStmt
+%type <node>  TransactionStmt TransactionStmtLegacy toplevel_stmt
 %type <boolean>  opt_transaction_chain
 %type <node>  ExplainStmt ExplainableStmt
 %type <node>  CopyStmt
@@ -534,7 +534,7 @@ stmtblock:
 	;
 
 stmtmulti:
-	stmtmulti ';' stmt
+	stmtmulti ';' toplevel_stmt
 		{
 			if $3 != nil {
 				$$ = appendList($1, $3)
@@ -542,7 +542,7 @@ stmtmulti:
 				$$ = $1
 			}
 		}
-	| stmt
+	| toplevel_stmt
 		{
 			if $1 != nil {
 				$$ = makeList($1)
@@ -550,6 +550,11 @@ stmtmulti:
 				$$ = nil
 			}
 		}
+	;
+
+toplevel_stmt:
+	stmt                    { $$ = $1 }
+	| TransactionStmtLegacy { $$ = $1 }
 	;
 
 stmt:
@@ -4805,13 +4810,6 @@ TransactionStmt:
 				Chain: $3,
 			}
 		}
-	| BEGIN_P opt_transaction transaction_mode_list_or_empty
-		{
-			$$ = &nodes.TransactionStmt{
-				Kind:    nodes.TRANS_STMT_BEGIN,
-				Options: $3,
-			}
-		}
 	| START TRANSACTION transaction_mode_list_or_empty
 		{
 			$$ = &nodes.TransactionStmt{
@@ -4841,13 +4839,6 @@ TransactionStmt:
 			}
 		}
 	| COMMIT opt_transaction opt_transaction_chain
-		{
-			$$ = &nodes.TransactionStmt{
-				Kind:  nodes.TRANS_STMT_COMMIT,
-				Chain: $3,
-			}
-		}
-	| END_P opt_transaction opt_transaction_chain
 		{
 			$$ = &nodes.TransactionStmt{
 				Kind:  nodes.TRANS_STMT_COMMIT,
@@ -4894,6 +4885,24 @@ TransactionStmt:
 			$$ = &nodes.TransactionStmt{
 				Kind:      nodes.TRANS_STMT_ROLLBACK_TO,
 				Savepoint: $4,
+			}
+		}
+	;
+
+/* BEGIN and END are top-level statements only, not in a BEGIN ATOMIC body. */
+TransactionStmtLegacy:
+	BEGIN_P opt_transaction transaction_mode_list_or_empty
+		{
+			$$ = &nodes.TransactionStmt{
+				Kind:    nodes.TRANS_STMT_BEGIN,
+				Options: $3,
+			}
+		}
+	| END_P opt_transaction opt_transaction_chain
+		{
+			$$ = &nodes.TransactionStmt{
+				Kind:  nodes.TRANS_STMT_COMMIT,
+				Chain: $3,
 			}
 		}
 	;
