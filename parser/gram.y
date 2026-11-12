@@ -10187,17 +10187,24 @@ func_expr_common_subexpr:
 		}
 	| JSON_ARRAY '(' select_no_parens json_format_clause_opt json_returning_clause_opt ')'
 		{
-			$$ = &nodes.JsonArrayQueryConstructor{
-				Query:  $3,
-				Output: asJsonOutput($5),
-				Location: -1,
+			/* JSON_ARRAY leaves out a query's NULLs. */
+			n := &nodes.JsonArrayQueryConstructor{
+				Query:        $3,
+				Output:       asJsonOutput($5),
+				AbsentOnNull: true,
+				Location:     -1,
 			}
+			if $4 != nil {
+				n.Format = $4.(*nodes.JsonFormat)
+			}
+			$$ = n
 		}
 	| JSON_ARRAY '(' json_returning_clause_opt ')'
 		{
 			$$ = &nodes.JsonArrayConstructor{
-				Output:   asJsonOutput($3),
-				Location: -1,
+				Output:       asJsonOutput($3),
+				AbsentOnNull: true,
+				Location:     -1,
 			}
 		}
 	| JSON '(' json_value_expr json_key_uniqueness_constraint_opt ')'
@@ -10628,14 +10635,21 @@ json_format_clause:
 		}
 	| FORMAT_LA JSON ENCODING name
 		{
+			var enc nodes.JsonEncoding
 			switch downcase($4) {
-			case "utf8", "utf16", "utf32":
+			case "utf8":
+				enc = nodes.JS_ENC_UTF8
+			case "utf16":
+				enc = nodes.JS_ENC_UTF16
+			case "utf32":
+				enc = nodes.JS_ENC_UTF32
 			default:
 				grammarError(pglex, "22023", "unrecognized JSON encoding: "+$4, "", -1)
 				return 1
 			}
 			$$ = &nodes.JsonFormat{
 				FormatType: nodes.JS_FORMAT_JSON,
+				Encoding:   enc,
 				Location:   -1,
 			}
 		}

@@ -1092,7 +1092,7 @@ const pgEofCode = 1
 const pgErrCode = 2
 const pgInitialStackSize = 16
 
-//line gram.y:17845
+//line gram.y:17859
 
 // OnConflict action constants
 const (
@@ -31442,24 +31442,31 @@ pgdefault:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
 //line gram.y:10189
 		{
-			pgVAL.node = &nodes.JsonArrayQueryConstructor{
-				Query:    pgDollar[3].node,
-				Output:   asJsonOutput(pgDollar[5].node),
-				Location: -1,
+			/* JSON_ARRAY leaves out a query's NULLs. */
+			n := &nodes.JsonArrayQueryConstructor{
+				Query:        pgDollar[3].node,
+				Output:       asJsonOutput(pgDollar[5].node),
+				AbsentOnNull: true,
+				Location:     -1,
 			}
+			if pgDollar[4].node != nil {
+				n.Format = pgDollar[4].node.(*nodes.JsonFormat)
+			}
+			pgVAL.node = n
 		}
 	case 1487:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:10197
+//line gram.y:10203
 		{
 			pgVAL.node = &nodes.JsonArrayConstructor{
-				Output:   asJsonOutput(pgDollar[3].node),
-				Location: -1,
+				Output:       asJsonOutput(pgDollar[3].node),
+				AbsentOnNull: true,
+				Location:     -1,
 			}
 		}
 	case 1488:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:10204
+//line gram.y:10211
 		{
 			pgVAL.node = &nodes.JsonParseExpr{
 				Expr:       pgDollar[3].node.(*nodes.JsonValueExpr),
@@ -31469,7 +31476,7 @@ pgdefault:
 		}
 	case 1489:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:10212
+//line gram.y:10219
 		{
 			pgVAL.node = &nodes.JsonScalarExpr{
 				Expr:     pgDollar[3].node,
@@ -31478,7 +31485,7 @@ pgdefault:
 		}
 	case 1490:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:10219
+//line gram.y:10226
 		{
 			pgVAL.node = &nodes.JsonSerializeExpr{
 				Expr:     pgDollar[3].node.(*nodes.JsonValueExpr),
@@ -31488,7 +31495,7 @@ pgdefault:
 		}
 	case 1491:
 		pgDollar = pgS[pgpt-11 : pgpt+1]
-//line gram.y:10229
+//line gram.y:10236
 		{
 			onEmpty, onError := splitJsonBehaviorClause(pgDollar[10].node)
 			pgVAL.node = &nodes.JsonFuncExpr{
@@ -31506,7 +31513,7 @@ pgdefault:
 		}
 	case 1492:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:10246
+//line gram.y:10253
 		{
 			pgVAL.node = &nodes.JsonFuncExpr{
 				Op:          nodes.JSON_EXISTS_OP,
@@ -31519,7 +31526,7 @@ pgdefault:
 		}
 	case 1493:
 		pgDollar = pgS[pgpt-9 : pgpt+1]
-//line gram.y:10258
+//line gram.y:10265
 		{
 			onEmpty, onError := splitJsonBehaviorClause(pgDollar[8].node)
 			pgVAL.node = &nodes.JsonFuncExpr{
@@ -31535,7 +31542,7 @@ pgdefault:
 		}
 	case 1494:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10272
+//line gram.y:10279
 		{
 			pgVAL.node = &nodes.FuncCall{
 				Funcname: makeFuncName("merge_action"),
@@ -31544,122 +31551,122 @@ pgdefault:
 		}
 	case 1495:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10285
+//line gram.y:10292
 		{
 			pgVAL.list = makeList2(makeStringConst(pgDollar[1].str, pgDollar[1].loc), pgDollar[3].node)
 		}
 	case 1496:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10291
+//line gram.y:10298
 		{
 			pgVAL.str = pgDollar[1].str
 		}
 	case 1497:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10292
+//line gram.y:10299
 		{
 			pgVAL.str = "year"
 		}
 	case 1498:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10293
+//line gram.y:10300
 		{
 			pgVAL.str = "month"
 		}
 	case 1499:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10294
+//line gram.y:10301
 		{
 			pgVAL.str = "day"
 		}
 	case 1500:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10295
+//line gram.y:10302
 		{
 			pgVAL.str = "hour"
 		}
 	case 1501:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10296
+//line gram.y:10303
 		{
 			pgVAL.str = "minute"
 		}
 	case 1502:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10297
+//line gram.y:10304
 		{
 			pgVAL.str = "second"
 		}
 	case 1503:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10298
+//line gram.y:10305
 		{
 			pgVAL.str = pgDollar[1].str
 		}
 	case 1504:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10302
+//line gram.y:10309
 		{
 			pgVAL.str = "NFC"
 		}
 	case 1505:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10303
+//line gram.y:10310
 		{
 			pgVAL.str = "NFD"
 		}
 	case 1506:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10304
+//line gram.y:10311
 		{
 			pgVAL.str = "NFKC"
 		}
 	case 1507:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10305
+//line gram.y:10312
 		{
 			pgVAL.str = "NFKD"
 		}
 	case 1508:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
-//line gram.y:10310
+//line gram.y:10317
 		{
 			pgVAL.list = &nodes.List{Items: []nodes.Node{pgDollar[1].node, pgDollar[3].node, pgDollar[5].node, pgDollar[7].node}}
 		}
 	case 1509:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:10314
+//line gram.y:10321
 		{
 			pgVAL.list = &nodes.List{Items: []nodes.Node{pgDollar[1].node, pgDollar[3].node, pgDollar[5].node}}
 		}
 	case 1510:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10321
+//line gram.y:10328
 		{
 			/* note: arguments reversed per PG convention */
 			pgVAL.list = makeList2(pgDollar[3].node, pgDollar[1].node)
 		}
 	case 1511:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:10329
+//line gram.y:10336
 		{
 			pgVAL.list = &nodes.List{Items: []nodes.Node{pgDollar[1].node, pgDollar[3].node, pgDollar[5].node}}
 		}
 	case 1512:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:10333
+//line gram.y:10340
 		{
 			pgVAL.list = &nodes.List{Items: []nodes.Node{pgDollar[1].node, pgDollar[5].node, pgDollar[3].node}}
 		}
 	case 1513:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10337
+//line gram.y:10344
 		{
 			pgVAL.list = makeList2(pgDollar[1].node, pgDollar[3].node)
 		}
 	case 1514:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10341
+//line gram.y:10348
 		{
 			pgVAL.list = &nodes.List{Items: []nodes.Node{
 				pgDollar[1].node,
@@ -31669,85 +31676,85 @@ pgdefault:
 		}
 	case 1515:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:10349
+//line gram.y:10356
 		{
 			pgVAL.list = &nodes.List{Items: []nodes.Node{pgDollar[1].node, pgDollar[3].node, pgDollar[5].node}}
 		}
 	case 1516:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10356
+//line gram.y:10363
 		{
 			pgVAL.list = prependList(pgDollar[1].node, pgDollar[3].list)
 		}
 	case 1517:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10360
+//line gram.y:10367
 		{
 			pgVAL.list = pgDollar[2].list
 		}
 	case 1518:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10364
+//line gram.y:10371
 		{
 			pgVAL.list = pgDollar[1].list
 		}
 	case 1519:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10377
+//line gram.y:10384
 		{
 			pgVAL.node = pgDollar[2].node
 		}
 	case 1520:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10379
+//line gram.y:10386
 		{
 			pgVAL.node = makeNullAConst(-1)
 		}
 	case 1521:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10384
+//line gram.y:10391
 		{
 			pgVAL.node = makeIntConst(int64(nodes.XML_STANDALONE_YES), -1)
 		}
 	case 1522:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10386
+//line gram.y:10393
 		{
 			pgVAL.node = makeIntConst(int64(nodes.XML_STANDALONE_NO), -1)
 		}
 	case 1523:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:10388
+//line gram.y:10395
 		{
 			pgVAL.node = makeIntConst(int64(nodes.XML_STANDALONE_NO_VALUE), -1)
 		}
 	case 1524:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:10390
+//line gram.y:10397
 		{
 			pgVAL.node = makeIntConst(int64(nodes.XML_STANDALONE_OMITTED), -1)
 		}
 	case 1525:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:10394
+//line gram.y:10401
 		{
 			pgVAL.list = pgDollar[3].list
 		}
 	case 1526:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10399
+//line gram.y:10406
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 1527:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10401
+//line gram.y:10408
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
 		}
 	case 1528:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10406
+//line gram.y:10413
 		{
 			pgVAL.node = &nodes.ResTarget{
 				Name:     pgDollar[3].str,
@@ -31757,7 +31764,7 @@ pgdefault:
 		}
 	case 1529:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10414
+//line gram.y:10421
 		{
 			pgVAL.node = &nodes.ResTarget{
 				Val:      pgDollar[1].node,
@@ -31766,79 +31773,79 @@ pgdefault:
 		}
 	case 1530:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10423
+//line gram.y:10430
 		{
 			pgVAL.ival = int64(nodes.XMLOPTION_DOCUMENT)
 		}
 	case 1531:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10424
+//line gram.y:10431
 		{
 			pgVAL.ival = int64(nodes.XMLOPTION_CONTENT)
 		}
 	case 1532:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10428
+//line gram.y:10435
 		{
 			pgVAL.ival = 1
 		}
 	case 1533:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10429
+//line gram.y:10436
 		{
 			pgVAL.ival = 0
 		}
 	case 1534:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:10430
+//line gram.y:10437
 		{
 			pgVAL.ival = 0
 		}
 	case 1535:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10434
+//line gram.y:10441
 		{
 			pgVAL.ival = 1
 		}
 	case 1536:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10435
+//line gram.y:10442
 		{
 			pgVAL.ival = 0
 		}
 	case 1537:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:10436
+//line gram.y:10443
 		{
 			pgVAL.ival = 0
 		}
 	case 1538:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10441
+//line gram.y:10448
 		{
 			pgVAL.node = pgDollar[2].node
 		}
 	case 1539:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10443
+//line gram.y:10450
 		{
 			pgVAL.node = pgDollar[2].node
 		}
 	case 1540:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10445
+//line gram.y:10452
 		{
 			pgVAL.node = pgDollar[3].node
 		}
 	case 1541:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:10447
+//line gram.y:10454
 		{
 			pgVAL.node = pgDollar[3].node
 		}
 	case 1544:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
-//line gram.y:10463
+//line gram.y:10470
 		{
 			pgVAL.node = &nodes.RangeTableFunc{
 				Rowexpr:  pgDollar[3].node,
@@ -31849,7 +31856,7 @@ pgdefault:
 		}
 	case 1545:
 		pgDollar = pgS[pgpt-12 : pgpt+1]
-//line gram.y:10473
+//line gram.y:10480
 		{
 			pgVAL.node = &nodes.RangeTableFunc{
 				Rowexpr:    pgDollar[8].node,
@@ -31861,19 +31868,19 @@ pgdefault:
 		}
 	case 1546:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10486
+//line gram.y:10493
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 1547:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10488
+//line gram.y:10495
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
 		}
 	case 1548:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10493
+//line gram.y:10500
 		{
 			pgVAL.node = &nodes.RangeTableFuncCol{
 				Colname:  pgDollar[1].str,
@@ -31883,7 +31890,7 @@ pgdefault:
 		}
 	case 1549:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10501
+//line gram.y:10508
 		{
 			fc := &nodes.RangeTableFuncCol{
 				Colname:  pgDollar[1].str,
@@ -31922,7 +31929,7 @@ pgdefault:
 		}
 	case 1550:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10538
+//line gram.y:10545
 		{
 			pgVAL.node = &nodes.RangeTableFuncCol{
 				Colname:       pgDollar[1].str,
@@ -31932,19 +31939,19 @@ pgdefault:
 		}
 	case 1551:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10549
+//line gram.y:10556
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 1552:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10551
+//line gram.y:10558
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[2].node)
 		}
 	case 1553:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10556
+//line gram.y:10563
 		{
 			if pgDollar[1].str == "__pg__is_not_null" {
 				grammarError(pglex, codeSyntaxError, "option name \"__pg__is_not_null\" cannot be used in XMLTABLE", "", pgDollar[1].loc)
@@ -31954,43 +31961,43 @@ pgdefault:
 		}
 	case 1554:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10564
+//line gram.y:10571
 		{
 			pgVAL.node = &nodes.DefElem{Defname: "default", Arg: pgDollar[2].node, Location: pgDollar[1].loc}
 		}
 	case 1555:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10568
+//line gram.y:10575
 		{
 			pgVAL.node = &nodes.DefElem{Defname: "__pg__is_not_null", Arg: &nodes.Boolean{Boolval: true}, Location: pgDollar[1].loc}
 		}
 	case 1556:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10572
+//line gram.y:10579
 		{
 			pgVAL.node = &nodes.DefElem{Defname: "__pg__is_not_null", Arg: &nodes.Boolean{Boolval: false}, Location: pgDollar[1].loc}
 		}
 	case 1557:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10576
+//line gram.y:10583
 		{
 			pgVAL.node = &nodes.DefElem{Defname: "path", Arg: pgDollar[2].node, Location: pgDollar[1].loc}
 		}
 	case 1558:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10583
+//line gram.y:10590
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 1559:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10585
+//line gram.y:10592
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
 		}
 	case 1560:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10590
+//line gram.y:10597
 		{
 			pgVAL.node = &nodes.ResTarget{
 				Name:     pgDollar[3].str,
@@ -32000,7 +32007,7 @@ pgdefault:
 		}
 	case 1561:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10598
+//line gram.y:10605
 		{
 			pgVAL.node = &nodes.ResTarget{
 				Val:      pgDollar[2].node,
@@ -32009,7 +32016,7 @@ pgdefault:
 		}
 	case 1562:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10614
+//line gram.y:10621
 		{
 			pgVAL.node = &nodes.JsonValueExpr{
 				RawExpr: pgDollar[1].node,
@@ -32017,7 +32024,7 @@ pgdefault:
 		}
 	case 1563:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10623
+//line gram.y:10630
 		{
 			pgVAL.node = &nodes.JsonFormat{
 				FormatType: nodes.JS_FORMAT_JSON,
@@ -32026,34 +32033,41 @@ pgdefault:
 		}
 	case 1564:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:10630
+//line gram.y:10637
 		{
+			var enc nodes.JsonEncoding
 			switch downcase(pgDollar[4].str) {
-			case "utf8", "utf16", "utf32":
+			case "utf8":
+				enc = nodes.JS_ENC_UTF8
+			case "utf16":
+				enc = nodes.JS_ENC_UTF16
+			case "utf32":
+				enc = nodes.JS_ENC_UTF32
 			default:
 				grammarError(pglex, "22023", "unrecognized JSON encoding: "+pgDollar[4].str, "", -1)
 				return 1
 			}
 			pgVAL.node = &nodes.JsonFormat{
 				FormatType: nodes.JS_FORMAT_JSON,
+				Encoding:   enc,
 				Location:   -1,
 			}
 		}
 	case 1565:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10645
+//line gram.y:10659
 		{
 			pgVAL.node = pgDollar[1].node
 		}
 	case 1566:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:10646
+//line gram.y:10660
 		{
 			pgVAL.node = nil
 		}
 	case 1567:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10651
+//line gram.y:10665
 		{
 			pgVAL.node = &nodes.JsonOutput{
 				TypeName: pgDollar[2].typename,
@@ -32061,13 +32075,13 @@ pgdefault:
 		}
 	case 1568:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:10657
+//line gram.y:10671
 		{
 			pgVAL.node = nil
 		}
 	case 1569:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10662
+//line gram.y:10676
 		{
 			pgVAL.node = &nodes.JsonBehavior{
 				Btype:    nodes.JSON_BEHAVIOR_DEFAULT,
@@ -32077,7 +32091,7 @@ pgdefault:
 		}
 	case 1570:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10670
+//line gram.y:10684
 		{
 			pgVAL.node = &nodes.JsonBehavior{
 				Btype:    nodes.JsonBehaviorType(pgDollar[1].ival),
@@ -32086,248 +32100,248 @@ pgdefault:
 		}
 	case 1571:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10679
+//line gram.y:10693
 		{
 			pgVAL.ival = int64(nodes.JSON_BEHAVIOR_ERROR)
 		}
 	case 1572:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10680
+//line gram.y:10694
 		{
 			pgVAL.ival = int64(nodes.JSON_BEHAVIOR_NULL)
 		}
 	case 1573:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10681
+//line gram.y:10695
 		{
 			pgVAL.ival = int64(nodes.JSON_BEHAVIOR_TRUE)
 		}
 	case 1574:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10682
+//line gram.y:10696
 		{
 			pgVAL.ival = int64(nodes.JSON_BEHAVIOR_FALSE)
 		}
 	case 1575:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10683
+//line gram.y:10697
 		{
 			pgVAL.ival = int64(nodes.JSON_BEHAVIOR_UNKNOWN)
 		}
 	case 1576:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10684
+//line gram.y:10698
 		{
 			pgVAL.ival = int64(nodes.JSON_BEHAVIOR_EMPTY_ARRAY)
 		}
 	case 1577:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10685
+//line gram.y:10699
 		{
 			pgVAL.ival = int64(nodes.JSON_BEHAVIOR_EMPTY_OBJECT)
 		}
 	case 1578:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10687
+//line gram.y:10701
 		{
 			pgVAL.ival = int64(nodes.JSON_BEHAVIOR_EMPTY_ARRAY)
 		}
 	case 1579:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:10692
+//line gram.y:10706
 		{
 			/* Returns a list of 2: [on_empty, on_error] */
 			pgVAL.node = &nodes.List{Items: []nodes.Node{pgDollar[1].node, pgDollar[4].node}}
 		}
 	case 1580:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10697
+//line gram.y:10711
 		{
 			pgVAL.node = &nodes.List{Items: []nodes.Node{pgDollar[1].node, nil}}
 		}
 	case 1581:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10701
+//line gram.y:10715
 		{
 			pgVAL.node = &nodes.List{Items: []nodes.Node{nil, pgDollar[1].node}}
 		}
 	case 1582:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:10705
+//line gram.y:10719
 		{
 			pgVAL.node = nil
 		}
 	case 1583:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10710
+//line gram.y:10724
 		{
 			pgVAL.node = pgDollar[1].node
 		}
 	case 1584:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:10712
+//line gram.y:10726
 		{
 			pgVAL.node = nil
 		}
 	case 1585:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10716
+//line gram.y:10730
 		{
 			pgVAL.ival = int64(nodes.JSW_NONE)
 		}
 	case 1586:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10717
+//line gram.y:10731
 		{
 			pgVAL.ival = int64(nodes.JSW_NONE)
 		}
 	case 1587:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10718
+//line gram.y:10732
 		{
 			pgVAL.ival = int64(nodes.JSW_UNCONDITIONAL)
 		}
 	case 1588:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10719
+//line gram.y:10733
 		{
 			pgVAL.ival = int64(nodes.JSW_UNCONDITIONAL)
 		}
 	case 1589:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:10720
+//line gram.y:10734
 		{
 			pgVAL.ival = int64(nodes.JSW_CONDITIONAL)
 		}
 	case 1590:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10721
+//line gram.y:10735
 		{
 			pgVAL.ival = int64(nodes.JSW_CONDITIONAL)
 		}
 	case 1591:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:10722
+//line gram.y:10736
 		{
 			pgVAL.ival = int64(nodes.JSW_UNCONDITIONAL)
 		}
 	case 1592:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10723
+//line gram.y:10737
 		{
 			pgVAL.ival = int64(nodes.JSW_UNCONDITIONAL)
 		}
 	case 1593:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:10724
+//line gram.y:10738
 		{
 			pgVAL.ival = int64(nodes.JSW_UNSPEC)
 		}
 	case 1594:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:10728
+//line gram.y:10742
 		{
 			pgVAL.ival = int64(nodes.JS_QUOTES_KEEP)
 		}
 	case 1595:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10729
+//line gram.y:10743
 		{
 			pgVAL.ival = int64(nodes.JS_QUOTES_KEEP)
 		}
 	case 1596:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:10730
+//line gram.y:10744
 		{
 			pgVAL.ival = int64(nodes.JS_QUOTES_OMIT)
 		}
 	case 1597:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10731
+//line gram.y:10745
 		{
 			pgVAL.ival = int64(nodes.JS_QUOTES_OMIT)
 		}
 	case 1598:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:10732
+//line gram.y:10746
 		{
 			pgVAL.ival = int64(nodes.JS_QUOTES_UNSPEC)
 		}
 	case 1599:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10736
+//line gram.y:10750
 		{
 			pgVAL.ival = int64(nodes.JS_TYPE_ANY)
 		}
 	case 1600:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10737
+//line gram.y:10751
 		{
 			pgVAL.ival = int64(nodes.JS_TYPE_ANY)
 		}
 	case 1601:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10738
+//line gram.y:10752
 		{
 			pgVAL.ival = int64(nodes.JS_TYPE_ARRAY)
 		}
 	case 1602:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10739
+//line gram.y:10753
 		{
 			pgVAL.ival = int64(nodes.JS_TYPE_OBJECT)
 		}
 	case 1603:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10740
+//line gram.y:10754
 		{
 			pgVAL.ival = int64(nodes.JS_TYPE_SCALAR)
 		}
 	case 1604:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10744
+//line gram.y:10758
 		{
 			pgVAL.ival = 1
 		}
 	case 1605:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10745
+//line gram.y:10759
 		{
 			pgVAL.ival = 1
 		}
 	case 1606:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10746
+//line gram.y:10760
 		{
 			pgVAL.ival = 0
 		}
 	case 1607:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10747
+//line gram.y:10761
 		{
 			pgVAL.ival = 0
 		}
 	case 1608:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:10748
+//line gram.y:10762
 		{
 			pgVAL.ival = 0
 		}
 	case 1609:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10753
+//line gram.y:10767
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 1610:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10755
+//line gram.y:10769
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
 		}
 	case 1611:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10760
+//line gram.y:10774
 		{
 			pgVAL.node = &nodes.JsonKeyValue{
 				Key:   pgDollar[1].node,
@@ -32336,7 +32350,7 @@ pgdefault:
 		}
 	case 1612:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10767
+//line gram.y:10781
 		{
 			pgVAL.node = &nodes.JsonKeyValue{
 				Key:   pgDollar[1].node,
@@ -32345,79 +32359,79 @@ pgdefault:
 		}
 	case 1613:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10776
+//line gram.y:10790
 		{
 			pgVAL.ival = 0
 		}
 	case 1614:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10777
+//line gram.y:10791
 		{
 			pgVAL.ival = 1
 		}
 	case 1615:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:10778
+//line gram.y:10792
 		{
 			pgVAL.ival = 0
 		}
 	case 1616:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10782
+//line gram.y:10796
 		{
 			pgVAL.ival = 0
 		}
 	case 1617:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10783
+//line gram.y:10797
 		{
 			pgVAL.ival = 1
 		}
 	case 1618:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:10784
+//line gram.y:10798
 		{
 			pgVAL.ival = 1
 		}
 	case 1619:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10789
+//line gram.y:10803
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 1620:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10791
+//line gram.y:10805
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
 		}
 	case 1621:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10795
+//line gram.y:10809
 		{
 			pgVAL.list = pgDollar[2].list
 		}
 	case 1622:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:10796
+//line gram.y:10810
 		{
 			pgVAL.list = nil
 		}
 	case 1623:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10801
+//line gram.y:10815
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 1624:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10803
+//line gram.y:10817
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
 		}
 	case 1625:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10808
+//line gram.y:10822
 		{
 			pgVAL.node = &nodes.JsonArgument{
 				Val:  pgDollar[1].node.(*nodes.JsonValueExpr),
@@ -32426,7 +32440,7 @@ pgdefault:
 		}
 	case 1626:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
-//line gram.y:10819
+//line gram.y:10833
 		{
 			pgVAL.node = &nodes.JsonObjectAgg{
 				Constructor: &nodes.JsonAggConstructor{
@@ -32440,7 +32454,7 @@ pgdefault:
 		}
 	case 1627:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
-//line gram.y:10832
+//line gram.y:10846
 		{
 			pgVAL.node = &nodes.JsonArrayAgg{
 				Constructor: &nodes.JsonAggConstructor{
@@ -32454,19 +32468,19 @@ pgdefault:
 		}
 	case 1628:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10846
+//line gram.y:10860
 		{
 			pgVAL.list = pgDollar[3].list
 		}
 	case 1629:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:10847
+//line gram.y:10861
 		{
 			pgVAL.list = nil
 		}
 	case 1630:
 		pgDollar = pgS[pgpt-13 : pgpt+1]
-//line gram.y:10863
+//line gram.y:10877
 		{
 			pgVAL.node = &nodes.JsonTable{
 				ContextItem: pgDollar[3].node.(*nodes.JsonValueExpr),
@@ -32483,31 +32497,31 @@ pgdefault:
 		}
 	case 1631:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10880
+//line gram.y:10894
 		{
 			pgVAL.str = pgDollar[2].str
 		}
 	case 1632:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:10881
+//line gram.y:10895
 		{
 			pgVAL.str = ""
 		}
 	case 1633:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10886
+//line gram.y:10900
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 1634:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10888
+//line gram.y:10902
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
 		}
 	case 1635:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10893
+//line gram.y:10907
 		{
 			pgVAL.node = &nodes.JsonTableColumn{
 				Coltype:  nodes.JTC_FOR_ORDINALITY,
@@ -32517,7 +32531,7 @@ pgdefault:
 		}
 	case 1636:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:10903
+//line gram.y:10917
 		{
 			onEmpty, onError := splitJsonBehaviorClause(pgDollar[6].node)
 			pgVAL.node = &nodes.JsonTableColumn{
@@ -32534,7 +32548,7 @@ pgdefault:
 		}
 	case 1637:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
-//line gram.y:10920
+//line gram.y:10934
 		{
 			onEmpty, onError := splitJsonBehaviorClause(pgDollar[7].node)
 			pgVAL.node = &nodes.JsonTableColumn{
@@ -32552,7 +32566,7 @@ pgdefault:
 		}
 	case 1638:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:10937
+//line gram.y:10951
 		{
 			pgVAL.node = &nodes.JsonTableColumn{
 				Coltype:  nodes.JTC_EXISTS,
@@ -32565,7 +32579,7 @@ pgdefault:
 		}
 	case 1639:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:10949
+//line gram.y:10963
 		{
 			pgVAL.node = &nodes.JsonTableColumn{
 				Coltype: nodes.JTC_NESTED,
@@ -32580,7 +32594,7 @@ pgdefault:
 		}
 	case 1640:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:10965
+//line gram.y:10979
 		{
 			pgVAL.node = &nodes.JsonTablePathSpec{
 				String:   makeStringConst(pgDollar[2].str, -1),
@@ -32589,55 +32603,55 @@ pgdefault:
 		}
 	case 1641:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:10972
+//line gram.y:10986
 		{
 			pgVAL.node = nil
 		}
 	case 1642:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10976
+//line gram.y:10990
 		{
 			pgVAL.str = ""
 		}
 	case 1643:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:10977
+//line gram.y:10991
 		{
 			pgVAL.str = ""
 		}
 	case 1644:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10982
+//line gram.y:10996
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 1645:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:10986
+//line gram.y:11000
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
 		}
 	case 1646:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:10993
+//line gram.y:11007
 		{
 			pgVAL.list = pgDollar[1].list
 		}
 	case 1647:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:10997
+//line gram.y:11011
 		{
 			pgVAL.list = nil
 		}
 	case 1648:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11003
+//line gram.y:11017
 		{
 			pgVAL.node = pgDollar[1].node
 		}
 	case 1649:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11005
+//line gram.y:11019
 		{
 			pgVAL.node = &nodes.NamedArgExpr{
 				Name:      pgDollar[1].str,
@@ -32648,7 +32662,7 @@ pgdefault:
 		}
 	case 1650:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11014
+//line gram.y:11028
 		{
 			pgVAL.node = &nodes.NamedArgExpr{
 				Name:      pgDollar[1].str,
@@ -32659,13 +32673,13 @@ pgdefault:
 		}
 	case 1651:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11026
+//line gram.y:11040
 		{
 			pgVAL.list = makeList(&nodes.String{Str: pgDollar[1].str})
 		}
 	case 1652:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11030
+//line gram.y:11044
 		{
 			if !checkNames(pglex, pgDollar[2].list) {
 				return 1
@@ -32674,7 +32688,7 @@ pgdefault:
 		}
 	case 1653:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11040
+//line gram.y:11054
 		{
 			pgVAL.node = &nodes.ColumnRef{
 				Fields:   &nodes.List{Items: []nodes.Node{&nodes.String{Str: pgDollar[1].str}}},
@@ -32683,7 +32697,7 @@ pgdefault:
 		}
 	case 1654:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11047
+//line gram.y:11061
 		{
 			// Replicate PostgreSQL's makeColumnRef() logic:
 			// If indirection contains A_Indices (subscripts), split the list.
@@ -32738,127 +32752,127 @@ pgdefault:
 		}
 	case 1655:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11103
+//line gram.y:11117
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 1656:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11107
+//line gram.y:11121
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[2].node)
 		}
 	case 1657:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11114
+//line gram.y:11128
 		{
 			pgVAL.node = &nodes.String{Str: pgDollar[2].str}
 		}
 	case 1658:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11118
+//line gram.y:11132
 		{
 			pgVAL.node = &nodes.A_Star{}
 		}
 	case 1659:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11122
+//line gram.y:11136
 		{
 			pgVAL.node = &nodes.A_Indices{Uidx: pgDollar[2].node}
 		}
 	case 1660:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:11126
+//line gram.y:11140
 		{
 			pgVAL.node = &nodes.A_Indices{IsSlice: true, Lidx: pgDollar[2].node, Uidx: pgDollar[4].node}
 		}
 	case 1661:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11132
+//line gram.y:11146
 		{
 			pgVAL.node = pgDollar[1].node
 		}
 	case 1662:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:11133
+//line gram.y:11147
 		{
 			pgVAL.node = nil
 		}
 	case 1663:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:11142
+//line gram.y:11156
 		{
 			pgVAL.list = nil
 		}
 	case 1664:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11144
+//line gram.y:11158
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[2].node)
 		}
 	case 1665:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11151
+//line gram.y:11165
 		{
 			pgVAL.list = makeList(&nodes.String{Str: pgDollar[2].str})
 		}
 	case 1666:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11155
+//line gram.y:11169
 		{
 			pgVAL.list = appendList(pgDollar[1].list, &nodes.String{Str: pgDollar[3].str})
 		}
 	case 1667:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11162
+//line gram.y:11176
 		{
 			pgVAL.node = &nodes.A_Const{Val: &nodes.Integer{Ival: pgDollar[1].ival}, Location: pgDollar[1].loc}
 		}
 	case 1668:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11166
+//line gram.y:11180
 		{
 			pgVAL.node = &nodes.A_Const{Val: &nodes.Float{Fval: pgDollar[1].str}, Location: pgDollar[1].loc}
 		}
 	case 1669:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11170
+//line gram.y:11184
 		{
 			pgVAL.node = &nodes.A_Const{Val: &nodes.String{Str: pgDollar[1].str}, Location: pgDollar[1].loc}
 		}
 	case 1670:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11174
+//line gram.y:11188
 		{
 			pgVAL.node = &nodes.A_Const{Val: &nodes.BitString{Bsval: pgDollar[1].str}, Location: pgDollar[1].loc}
 		}
 	case 1671:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11178
+//line gram.y:11192
 		{
 			pgVAL.node = &nodes.A_Const{Val: &nodes.BitString{Bsval: pgDollar[1].str}, Location: pgDollar[1].loc}
 		}
 	case 1672:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11182
+//line gram.y:11196
 		{
 			pgVAL.node = &nodes.A_Const{Val: &nodes.Boolean{Boolval: true}, Location: pgDollar[1].loc}
 		}
 	case 1673:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11186
+//line gram.y:11200
 		{
 			pgVAL.node = &nodes.A_Const{Val: &nodes.Boolean{Boolval: false}, Location: pgDollar[1].loc}
 		}
 	case 1674:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11190
+//line gram.y:11204
 		{
 			pgVAL.node = &nodes.A_Const{Isnull: true, Location: pgDollar[1].loc}
 		}
 	case 1675:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11194
+//line gram.y:11208
 		{
 			/* generic type 'literal' syntax */
 			t := makeTypeNameFromNameList(pgDollar[1].list).(*nodes.TypeName)
@@ -32867,7 +32881,7 @@ pgdefault:
 		}
 	case 1676:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:11201
+//line gram.y:11215
 		{
 			/* generic syntax with a type modifier */
 			t := makeTypeNameFromNameList(pgDollar[1].list).(*nodes.TypeName)
@@ -32879,14 +32893,14 @@ pgdefault:
 		}
 	case 1677:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11211
+//line gram.y:11225
 		{
 			pgDollar[1].typename.Location = pgDollar[1].loc
 			pgVAL.node = makeStringConstCast(pgDollar[2].str, pgDollar[2].loc, pgDollar[1].typename)
 		}
 	case 1678:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11216
+//line gram.y:11230
 		{
 			t := pgDollar[1].typename
 			t.Location = pgDollar[1].loc
@@ -32897,7 +32911,7 @@ pgdefault:
 		}
 	case 1679:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:11225
+//line gram.y:11239
 		{
 			t := pgDollar[1].typename
 			t.Location = pgDollar[1].loc
@@ -32906,97 +32920,97 @@ pgdefault:
 		}
 	case 1680:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11234
+//line gram.y:11248
 		{
 			pgVAL.ival = pgDollar[1].ival
 		}
 	case 1681:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11238
+//line gram.y:11252
 		{
 			pgVAL.str = pgDollar[1].str
 		}
 	case 1682:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11243
+//line gram.y:11257
 		{
 			pgVAL.str = pgDollar[1].str
 		}
 	case 1683:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11244
+//line gram.y:11258
 		{
 			pgVAL.str = pgDollar[1].str
 		}
 	case 1684:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11245
+//line gram.y:11259
 		{
 			pgVAL.str = pgDollar[1].str
 		}
 	case 1685:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11249
+//line gram.y:11263
 		{
 			pgVAL.str = pgDollar[1].str
 		}
 	case 1686:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11250
+//line gram.y:11264
 		{
 			pgVAL.str = pgDollar[1].str
 		}
 	case 1687:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11251
+//line gram.y:11265
 		{
 			pgVAL.str = pgDollar[1].str
 		}
 	case 1688:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11252
+//line gram.y:11266
 		{
 			pgVAL.str = pgDollar[1].str
 		}
 	case 1689:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11253
+//line gram.y:11267
 		{
 			pgVAL.str = pgDollar[1].str
 		}
 	case 1690:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11259
+//line gram.y:11273
 		{
 			pgVAL.str = pgDollar[1].str
 		}
 	case 1691:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11260
+//line gram.y:11274
 		{
 			pgVAL.str = pgDollar[1].str
 		}
 	case 1692:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11264
+//line gram.y:11278
 		{
 			pgVAL.str = pgDollar[1].str
 		}
 	case 1693:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11268
+//line gram.y:11282
 		{
 			pgVAL.str = pgDollar[1].str
 		}
 	case 1694:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11273
+//line gram.y:11287
 		{
 			pgVAL.list = makeList(&nodes.String{Str: pgDollar[1].str})
 		}
 	case 1695:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11277
+//line gram.y:11291
 		{
 			l := prependList(&nodes.String{Str: pgDollar[1].str}, pgDollar[2].list)
 			if !checkNames(pglex, pgDollar[2].list) || !checkRangeVarNames(pglex, l, pgDollar[1].loc) {
@@ -33006,55 +33020,55 @@ pgdefault:
 		}
 	case 1696:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11288
+//line gram.y:11302
 		{
 			pgVAL.list = makeList(&nodes.String{Str: pgDollar[1].str})
 		}
 	case 1697:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11292
+//line gram.y:11306
 		{
 			pgVAL.list = prependList(&nodes.String{Str: pgDollar[1].str}, pgDollar[2].list)
 		}
 	case 1698:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11298
+//line gram.y:11312
 		{
 			pgVAL.list = pgDollar[2].list
 		}
 	case 1699:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:11299
+//line gram.y:11313
 		{
 			pgVAL.list = nil
 		}
 	case 1700:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11304
+//line gram.y:11318
 		{
 			pgVAL.list = makeList(&nodes.String{Str: pgDollar[1].str})
 		}
 	case 1701:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11308
+//line gram.y:11322
 		{
 			pgVAL.list = appendList(pgDollar[1].list, &nodes.String{Str: pgDollar[3].str})
 		}
 	case 1702:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11315
+//line gram.y:11329
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 1703:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11319
+//line gram.y:11333
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
 		}
 	case 1704:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11332
+//line gram.y:11346
 		{
 			pgVAL.typename = pgDollar[1].typename
 			pgVAL.typename.Location = pgDollar[1].loc
@@ -33064,7 +33078,7 @@ pgdefault:
 		}
 	case 1705:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11340
+//line gram.y:11354
 		{
 			pgVAL.typename = pgDollar[2].typename
 			pgVAL.typename.Location = pgDollar[2].loc
@@ -33075,7 +33089,7 @@ pgdefault:
 		}
 	case 1706:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:11349
+//line gram.y:11363
 		{
 			pgVAL.typename = pgDollar[1].typename
 			pgVAL.typename.Location = pgDollar[1].loc
@@ -33083,7 +33097,7 @@ pgdefault:
 		}
 	case 1707:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:11355
+//line gram.y:11369
 		{
 			pgVAL.typename = pgDollar[2].typename
 			pgVAL.typename.Location = pgDollar[2].loc
@@ -33092,7 +33106,7 @@ pgdefault:
 		}
 	case 1708:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11362
+//line gram.y:11376
 		{
 			pgVAL.typename = pgDollar[1].typename
 			pgVAL.typename.Location = pgDollar[1].loc
@@ -33100,7 +33114,7 @@ pgdefault:
 		}
 	case 1709:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11368
+//line gram.y:11382
 		{
 			pgVAL.typename = pgDollar[2].typename
 			pgVAL.typename.Location = pgDollar[2].loc
@@ -33109,55 +33123,55 @@ pgdefault:
 		}
 	case 1710:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11378
+//line gram.y:11392
 		{
 			pgVAL.list = appendList(pgDollar[1].list, &nodes.Integer{Ival: -1})
 		}
 	case 1711:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:11382
+//line gram.y:11396
 		{
 			pgVAL.list = appendList(pgDollar[1].list, &nodes.Integer{Ival: pgDollar[3].ival})
 		}
 	case 1712:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:11386
+//line gram.y:11400
 		{
 			pgVAL.list = nil
 		}
 	case 1713:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11392
+//line gram.y:11406
 		{
 			pgVAL.typename = pgDollar[1].typename
 		}
 	case 1714:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11393
+//line gram.y:11407
 		{
 			pgVAL.typename = pgDollar[1].typename
 		}
 	case 1715:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11394
+//line gram.y:11408
 		{
 			pgVAL.typename = pgDollar[1].typename
 		}
 	case 1716:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11395
+//line gram.y:11409
 		{
 			pgVAL.typename = pgDollar[1].typename
 		}
 	case 1717:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11396
+//line gram.y:11410
 		{
 			pgVAL.typename = pgDollar[1].typename
 		}
 	case 1718:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11398
+//line gram.y:11412
 		{
 			pgVAL.typename = pgDollar[1].typename
 			if pgDollar[2].list != nil {
@@ -33166,26 +33180,26 @@ pgdefault:
 		}
 	case 1719:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:11405
+//line gram.y:11419
 		{
 			pgVAL.typename = pgDollar[1].typename
 			pgVAL.typename.Typmods = makeList2(makeIntConst(int64(nodes.INTERVAL_FULL_RANGE), -1), makeIntConst(pgDollar[3].ival, pgDollar[3].loc))
 		}
 	case 1720:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11409
+//line gram.y:11423
 		{
 			pgVAL.typename = makeTypeName("bool")
 		}
 	case 1721:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11410
+//line gram.y:11424
 		{
 			pgVAL.typename = makeTypeName("json")
 		}
 	case 1722:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11415
+//line gram.y:11429
 		{
 			pgVAL.typename = &nodes.TypeName{
 				Names:    makeList(&nodes.String{Str: pgDollar[1].str}),
@@ -33195,7 +33209,7 @@ pgdefault:
 		}
 	case 1723:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11423
+//line gram.y:11437
 		{
 			pgVAL.typename = &nodes.TypeName{
 				Names:    prependList(&nodes.String{Str: pgDollar[1].str}, pgDollar[2].list),
@@ -33205,82 +33219,82 @@ pgdefault:
 		}
 	case 1724:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11433
+//line gram.y:11447
 		{
 			pgVAL.list = pgDollar[2].list
 		}
 	case 1725:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:11434
+//line gram.y:11448
 		{
 			pgVAL.list = nil
 		}
 	case 1726:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11438
+//line gram.y:11452
 		{
 			pgVAL.typename = makeTypeName("int4")
 		}
 	case 1727:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11439
+//line gram.y:11453
 		{
 			pgVAL.typename = makeTypeName("int4")
 		}
 	case 1728:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11440
+//line gram.y:11454
 		{
 			pgVAL.typename = makeTypeName("int2")
 		}
 	case 1729:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11441
+//line gram.y:11455
 		{
 			pgVAL.typename = makeTypeName("int8")
 		}
 	case 1730:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11442
+//line gram.y:11456
 		{
 			pgVAL.typename = makeTypeName("float4")
 		}
 	case 1731:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11444
+//line gram.y:11458
 		{
 			pgVAL.typename = pgDollar[2].typename
 		}
 	case 1732:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11447
+//line gram.y:11461
 		{
 			pgVAL.typename = makeTypeName("float8")
 		}
 	case 1733:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11449
+//line gram.y:11463
 		{
 			pgVAL.typename = makeTypeName("numeric")
 			pgVAL.typename.Typmods = pgDollar[2].list
 		}
 	case 1734:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11454
+//line gram.y:11468
 		{
 			pgVAL.typename = makeTypeName("numeric")
 			pgVAL.typename.Typmods = pgDollar[2].list
 		}
 	case 1735:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11459
+//line gram.y:11473
 		{
 			pgVAL.typename = makeTypeName("numeric")
 			pgVAL.typename.Typmods = pgDollar[2].list
 		}
 	case 1736:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11467
+//line gram.y:11481
 		{
 			if pgDollar[2].ival <= 24 {
 				pgVAL.typename = makeTypeName("float4")
@@ -33290,13 +33304,13 @@ pgdefault:
 		}
 	case 1737:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:11475
+//line gram.y:11489
 		{
 			pgVAL.typename = makeTypeName("float8")
 		}
 	case 1738:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:11482
+//line gram.y:11496
 		{
 			if pgDollar[2].boolean {
 				pgVAL.typename = makeTypeName("varchar")
@@ -33307,7 +33321,7 @@ pgdefault:
 		}
 	case 1739:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11491
+//line gram.y:11505
 		{
 			if pgDollar[2].boolean {
 				pgVAL.typename = makeTypeName("varchar")
@@ -33317,7 +33331,7 @@ pgdefault:
 		}
 	case 1740:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:11499
+//line gram.y:11513
 		{
 			if pgDollar[2].boolean {
 				pgVAL.typename = makeTypeName("varchar")
@@ -33328,7 +33342,7 @@ pgdefault:
 		}
 	case 1741:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11508
+//line gram.y:11522
 		{
 			if pgDollar[2].boolean {
 				pgVAL.typename = makeTypeName("varchar")
@@ -33338,7 +33352,7 @@ pgdefault:
 		}
 	case 1742:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:11516
+//line gram.y:11530
 		{
 			if pgDollar[3].boolean {
 				pgVAL.typename = makeTypeName("varchar")
@@ -33349,7 +33363,7 @@ pgdefault:
 		}
 	case 1743:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11525
+//line gram.y:11539
 		{
 			if pgDollar[3].boolean {
 				pgVAL.typename = makeTypeName("varchar")
@@ -33359,7 +33373,7 @@ pgdefault:
 		}
 	case 1744:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:11533
+//line gram.y:11547
 		{
 			if pgDollar[3].boolean {
 				pgVAL.typename = makeTypeName("varchar")
@@ -33370,7 +33384,7 @@ pgdefault:
 		}
 	case 1745:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11542
+//line gram.y:11556
 		{
 			if pgDollar[3].boolean {
 				pgVAL.typename = makeTypeName("varchar")
@@ -33380,7 +33394,7 @@ pgdefault:
 		}
 	case 1746:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:11550
+//line gram.y:11564
 		{
 			if pgDollar[2].boolean {
 				pgVAL.typename = makeTypeName("varchar")
@@ -33391,7 +33405,7 @@ pgdefault:
 		}
 	case 1747:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11559
+//line gram.y:11573
 		{
 			if pgDollar[2].boolean {
 				pgVAL.typename = makeTypeName("varchar")
@@ -33401,44 +33415,44 @@ pgdefault:
 		}
 	case 1748:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:11567
+//line gram.y:11581
 		{
 			pgVAL.typename = makeTypeName("varchar")
 			pgVAL.typename.Typmods = makeList(&nodes.Integer{Ival: pgDollar[3].ival})
 		}
 	case 1749:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11572
+//line gram.y:11586
 		{
 			pgVAL.typename = makeTypeName("varchar")
 		}
 	case 1750:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11578
+//line gram.y:11592
 		{
 			pgVAL.boolean = true
 		}
 	case 1751:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:11579
+//line gram.y:11593
 		{
 			pgVAL.boolean = false
 		}
 	case 1752:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11583
+//line gram.y:11597
 		{
 			pgVAL.typename = pgDollar[1].typename
 		}
 	case 1753:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11584
+//line gram.y:11598
 		{
 			pgVAL.typename = pgDollar[1].typename
 		}
 	case 1754:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:11589
+//line gram.y:11603
 		{
 			if pgDollar[2].boolean {
 				pgVAL.typename = makeTypeName("varbit")
@@ -33449,7 +33463,7 @@ pgdefault:
 		}
 	case 1755:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11601
+//line gram.y:11615
 		{
 			if pgDollar[2].boolean {
 				pgVAL.typename = makeTypeName("varbit")
@@ -33460,43 +33474,43 @@ pgdefault:
 		}
 	case 1756:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11612
+//line gram.y:11626
 		{
 			pgVAL.typename = pgDollar[1].typename
 		}
 	case 1757:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11613
+//line gram.y:11627
 		{
 			pgVAL.typename = pgDollar[1].typename
 		}
 	case 1758:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11614
+//line gram.y:11628
 		{
 			pgVAL.typename = pgDollar[1].typename
 		}
 	case 1759:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11615
+//line gram.y:11629
 		{
 			pgVAL.typename = pgDollar[1].typename
 		}
 	case 1760:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11616
+//line gram.y:11630
 		{
 			pgVAL.typename = makeTypeName("json")
 		}
 	case 1761:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11620
+//line gram.y:11634
 		{
 			pgVAL.typename = pgDollar[1].typename
 		}
 	case 1762:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11622
+//line gram.y:11636
 		{
 			/* A constant's BIT has no length; a column's is BIT(1). */
 			pgVAL.typename = pgDollar[1].typename
@@ -33504,7 +33518,7 @@ pgdefault:
 		}
 	case 1763:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:11631
+//line gram.y:11645
 		{
 			if pgDollar[2].boolean {
 				pgVAL.typename = makeTypeName("varchar")
@@ -33515,7 +33529,7 @@ pgdefault:
 		}
 	case 1764:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11640
+//line gram.y:11654
 		{
 			if pgDollar[2].boolean {
 				pgVAL.typename = makeTypeName("varchar")
@@ -33526,7 +33540,7 @@ pgdefault:
 		}
 	case 1765:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:11649
+//line gram.y:11663
 		{
 			if pgDollar[2].boolean {
 				pgVAL.typename = makeTypeName("varchar")
@@ -33537,7 +33551,7 @@ pgdefault:
 		}
 	case 1766:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11658
+//line gram.y:11672
 		{
 			if pgDollar[2].boolean {
 				pgVAL.typename = makeTypeName("varchar")
@@ -33547,7 +33561,7 @@ pgdefault:
 		}
 	case 1767:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:11666
+//line gram.y:11680
 		{
 			if pgDollar[3].boolean {
 				pgVAL.typename = makeTypeName("varchar")
@@ -33558,7 +33572,7 @@ pgdefault:
 		}
 	case 1768:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11675
+//line gram.y:11689
 		{
 			if pgDollar[3].boolean {
 				pgVAL.typename = makeTypeName("varchar")
@@ -33568,7 +33582,7 @@ pgdefault:
 		}
 	case 1769:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:11683
+//line gram.y:11697
 		{
 			if pgDollar[3].boolean {
 				pgVAL.typename = makeTypeName("varchar")
@@ -33579,7 +33593,7 @@ pgdefault:
 		}
 	case 1770:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11692
+//line gram.y:11706
 		{
 			if pgDollar[3].boolean {
 				pgVAL.typename = makeTypeName("varchar")
@@ -33589,7 +33603,7 @@ pgdefault:
 		}
 	case 1771:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:11700
+//line gram.y:11714
 		{
 			if pgDollar[2].boolean {
 				pgVAL.typename = makeTypeName("varchar")
@@ -33600,7 +33614,7 @@ pgdefault:
 		}
 	case 1772:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11709
+//line gram.y:11723
 		{
 			if pgDollar[2].boolean {
 				pgVAL.typename = makeTypeName("varchar")
@@ -33610,20 +33624,20 @@ pgdefault:
 		}
 	case 1773:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:11717
+//line gram.y:11731
 		{
 			pgVAL.typename = makeTypeName("varchar")
 			pgVAL.typename.Typmods = makeList(&nodes.Integer{Ival: pgDollar[3].ival})
 		}
 	case 1774:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11722
+//line gram.y:11736
 		{
 			pgVAL.typename = makeTypeName("varchar")
 		}
 	case 1775:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:11729
+//line gram.y:11743
 		{
 			if pgDollar[5].boolean {
 				pgVAL.typename = makeTypeName("timestamptz")
@@ -33634,7 +33648,7 @@ pgdefault:
 		}
 	case 1776:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11738
+//line gram.y:11752
 		{
 			if pgDollar[2].boolean {
 				pgVAL.typename = makeTypeName("timestamptz")
@@ -33644,7 +33658,7 @@ pgdefault:
 		}
 	case 1777:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:11746
+//line gram.y:11760
 		{
 			if pgDollar[5].boolean {
 				pgVAL.typename = makeTypeName("timetz")
@@ -33655,7 +33669,7 @@ pgdefault:
 		}
 	case 1778:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11755
+//line gram.y:11769
 		{
 			if pgDollar[2].boolean {
 				pgVAL.typename = makeTypeName("timetz")
@@ -33665,226 +33679,226 @@ pgdefault:
 		}
 	case 1779:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11766
+//line gram.y:11780
 		{
 			pgVAL.typename = makeTypeName("interval")
 		}
 	case 1780:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11772
+//line gram.y:11786
 		{
 			pgVAL.boolean = true
 		}
 	case 1781:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11773
+//line gram.y:11787
 		{
 			pgVAL.boolean = false
 		}
 	case 1782:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:11774
+//line gram.y:11788
 		{
 			pgVAL.boolean = false
 		}
 	case 1783:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11779
+//line gram.y:11793
 		{
 			pgVAL.list = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_YEAR), pgDollar[1].loc))
 		}
 	case 1784:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11781
+//line gram.y:11795
 		{
 			pgVAL.list = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_MONTH), pgDollar[1].loc))
 		}
 	case 1785:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11783
+//line gram.y:11797
 		{
 			pgVAL.list = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_DAY), pgDollar[1].loc))
 		}
 	case 1786:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11785
+//line gram.y:11799
 		{
 			pgVAL.list = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_HOUR), pgDollar[1].loc))
 		}
 	case 1787:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11787
+//line gram.y:11801
 		{
 			pgVAL.list = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_MINUTE), pgDollar[1].loc))
 		}
 	case 1788:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11789
+//line gram.y:11803
 		{
 			pgVAL.list = pgDollar[1].list
 		}
 	case 1789:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11791
+//line gram.y:11805
 		{
 			pgVAL.list = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_YEAR|nodes.INTERVAL_MASK_MONTH), pgDollar[1].loc))
 		}
 	case 1790:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11795
+//line gram.y:11809
 		{
 			pgVAL.list = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_DAY|nodes.INTERVAL_MASK_HOUR), pgDollar[1].loc))
 		}
 	case 1791:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11799
+//line gram.y:11813
 		{
 			pgVAL.list = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_DAY|nodes.INTERVAL_MASK_HOUR|nodes.INTERVAL_MASK_MINUTE), pgDollar[1].loc))
 		}
 	case 1792:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11803
+//line gram.y:11817
 		{
 			pgVAL.list = pgDollar[3].list
 			pgVAL.list.Items[0] = makeIntConst(int64(nodes.INTERVAL_MASK_DAY|nodes.INTERVAL_MASK_HOUR|nodes.INTERVAL_MASK_MINUTE|nodes.INTERVAL_MASK_SECOND), pgDollar[1].loc)
 		}
 	case 1793:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11808
+//line gram.y:11822
 		{
 			pgVAL.list = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_HOUR|nodes.INTERVAL_MASK_MINUTE), pgDollar[1].loc))
 		}
 	case 1794:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11812
+//line gram.y:11826
 		{
 			pgVAL.list = pgDollar[3].list
 			pgVAL.list.Items[0] = makeIntConst(int64(nodes.INTERVAL_MASK_HOUR|nodes.INTERVAL_MASK_MINUTE|nodes.INTERVAL_MASK_SECOND), pgDollar[1].loc)
 		}
 	case 1795:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:11817
+//line gram.y:11831
 		{
 			pgVAL.list = pgDollar[3].list
 			pgVAL.list.Items[0] = makeIntConst(int64(nodes.INTERVAL_MASK_MINUTE|nodes.INTERVAL_MASK_SECOND), pgDollar[1].loc)
 		}
 	case 1796:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:11822
+//line gram.y:11836
 		{
 			pgVAL.list = nil
 		}
 	case 1797:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11827
+//line gram.y:11841
 		{
 			pgVAL.list = makeList(makeIntConst(int64(nodes.INTERVAL_MASK_SECOND), pgDollar[1].loc))
 		}
 	case 1798:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:11831
+//line gram.y:11845
 		{
 			pgVAL.list = makeList2(makeIntConst(int64(nodes.INTERVAL_MASK_SECOND), pgDollar[1].loc), makeIntConst(pgDollar[3].ival, pgDollar[3].loc))
 		}
 	case 1799:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11844
+//line gram.y:11858
 		{
 			pgVAL.node = &nodes.CheckPointStmt{}
 		}
 	case 1800:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11857
+//line gram.y:11871
 		{
 			pgVAL.node = &nodes.DiscardStmt{Target: nodes.DISCARD_ALL}
 		}
 	case 1801:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11861
+//line gram.y:11875
 		{
 			pgVAL.node = &nodes.DiscardStmt{Target: nodes.DISCARD_TEMP}
 		}
 	case 1802:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11865
+//line gram.y:11879
 		{
 			pgVAL.node = &nodes.DiscardStmt{Target: nodes.DISCARD_TEMP}
 		}
 	case 1803:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11869
+//line gram.y:11883
 		{
 			pgVAL.node = &nodes.DiscardStmt{Target: nodes.DISCARD_PLANS}
 		}
 	case 1804:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11873
+//line gram.y:11887
 		{
 			pgVAL.node = &nodes.DiscardStmt{Target: nodes.DISCARD_SEQUENCES}
 		}
 	case 1805:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11886
+//line gram.y:11900
 		{
 			pgVAL.node = &nodes.ListenStmt{Conditionname: pgDollar[2].str}
 		}
 	case 1806:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11899
+//line gram.y:11913
 		{
 			pgVAL.node = &nodes.UnlistenStmt{Conditionname: pgDollar[2].str}
 		}
 	case 1807:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11903
+//line gram.y:11917
 		{
 			pgVAL.node = &nodes.UnlistenStmt{Conditionname: ""}
 		}
 	case 1808:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11916
+//line gram.y:11930
 		{
 			pgVAL.node = &nodes.NotifyStmt{Conditionname: pgDollar[2].str}
 		}
 	case 1809:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:11920
+//line gram.y:11934
 		{
 			pgVAL.node = &nodes.NotifyStmt{Conditionname: pgDollar[2].str, Payload: pgDollar[4].str}
 		}
 	case 1810:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11933
+//line gram.y:11947
 		{
 			pgVAL.node = &nodes.LoadStmt{Filename: pgDollar[2].str}
 		}
 	case 1811:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11939
+//line gram.y:11953
 		{
 			pgVAL.str = pgDollar[1].str
 		}
 	case 1812:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11950
+//line gram.y:11964
 		{
 			pgVAL.node = &nodes.ClosePortalStmt{Portalname: pgDollar[2].str}
 		}
 	case 1813:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:11954
+//line gram.y:11968
 		{
 			pgVAL.node = &nodes.ClosePortalStmt{Portalname: ""}
 		}
 	case 1814:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11960
+//line gram.y:11974
 		{
 			pgVAL.str = pgDollar[1].str
 		}
 	case 1815:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:11971
+//line gram.y:11985
 		{
 			pgVAL.node = &nodes.ConstraintsSetStmt{
 				Constraints: pgDollar[3].list,
@@ -33893,43 +33907,43 @@ pgdefault:
 		}
 	case 1816:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11981
+//line gram.y:11995
 		{
 			pgVAL.list = nil
 		}
 	case 1817:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11985
+//line gram.y:11999
 		{
 			pgVAL.list = pgDollar[1].list
 		}
 	case 1818:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11991
+//line gram.y:12005
 		{
 			pgVAL.boolean = true
 		}
 	case 1819:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11992
+//line gram.y:12006
 		{
 			pgVAL.boolean = false
 		}
 	case 1820:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:11997
+//line gram.y:12011
 		{
 			pgVAL.list = makeList(makeRangeVar(pgDollar[1].list, pgDollar[1].loc))
 		}
 	case 1821:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12001
+//line gram.y:12015
 		{
 			pgVAL.list = appendList(pgDollar[1].list, makeRangeVar(pgDollar[3].list, pgDollar[3].loc))
 		}
 	case 1822:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12014
+//line gram.y:12028
 		{
 			n := pgDollar[2].node.(*nodes.VariableSetStmt)
 			n.IsLocal = false
@@ -33937,7 +33951,7 @@ pgdefault:
 		}
 	case 1823:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12020
+//line gram.y:12034
 		{
 			n := pgDollar[3].node.(*nodes.VariableSetStmt)
 			n.IsLocal = true
@@ -33945,7 +33959,7 @@ pgdefault:
 		}
 	case 1824:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12026
+//line gram.y:12040
 		{
 			n := pgDollar[3].node.(*nodes.VariableSetStmt)
 			n.IsLocal = false
@@ -33953,7 +33967,7 @@ pgdefault:
 		}
 	case 1825:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12035
+//line gram.y:12049
 		{
 			pgVAL.node = &nodes.VariableSetStmt{
 				Kind: nodes.VAR_SET_MULTI,
@@ -33963,7 +33977,7 @@ pgdefault:
 		}
 	case 1826:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:12043
+//line gram.y:12057
 		{
 			pgVAL.node = &nodes.VariableSetStmt{
 				Kind: nodes.VAR_SET_MULTI,
@@ -33973,13 +33987,13 @@ pgdefault:
 		}
 	case 1827:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12051
+//line gram.y:12065
 		{
 			pgVAL.node = pgDollar[1].node
 		}
 	case 1828:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12058
+//line gram.y:12072
 		{
 			pgVAL.node = &nodes.VariableSetStmt{
 				Kind: nodes.VAR_SET_VALUE,
@@ -33989,7 +34003,7 @@ pgdefault:
 		}
 	case 1829:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12066
+//line gram.y:12080
 		{
 			pgVAL.node = &nodes.VariableSetStmt{
 				Kind: nodes.VAR_SET_VALUE,
@@ -33999,7 +34013,7 @@ pgdefault:
 		}
 	case 1830:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12074
+//line gram.y:12088
 		{
 			pgVAL.node = &nodes.VariableSetStmt{
 				Kind: nodes.VAR_SET_DEFAULT,
@@ -34008,7 +34022,7 @@ pgdefault:
 		}
 	case 1831:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12081
+//line gram.y:12095
 		{
 			pgVAL.node = &nodes.VariableSetStmt{
 				Kind: nodes.VAR_SET_DEFAULT,
@@ -34017,13 +34031,13 @@ pgdefault:
 		}
 	case 1832:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12091
+//line gram.y:12105
 		{
 			pgVAL.node = pgDollar[1].node
 		}
 	case 1833:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12095
+//line gram.y:12109
 		{
 			pgVAL.node = &nodes.VariableSetStmt{
 				Kind: nodes.VAR_SET_CURRENT,
@@ -34032,7 +34046,7 @@ pgdefault:
 		}
 	case 1834:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12102
+//line gram.y:12116
 		{
 			n := &nodes.VariableSetStmt{
 				Kind: nodes.VAR_SET_VALUE,
@@ -34047,14 +34061,14 @@ pgdefault:
 		}
 	case 1835:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12115
+//line gram.y:12129
 		{
 			grammarError(pglex, "0A000", "current database cannot be changed", "", pgDollar[2].loc)
 			return 1
 		}
 	case 1836:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12120
+//line gram.y:12134
 		{
 			pgVAL.node = &nodes.VariableSetStmt{
 				Kind: nodes.VAR_SET_VALUE,
@@ -34064,7 +34078,7 @@ pgdefault:
 		}
 	case 1837:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12128
+//line gram.y:12142
 		{
 			n := &nodes.VariableSetStmt{
 				Kind: nodes.VAR_SET_VALUE,
@@ -34079,7 +34093,7 @@ pgdefault:
 		}
 	case 1838:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12141
+//line gram.y:12155
 		{
 			pgVAL.node = &nodes.VariableSetStmt{
 				Kind: nodes.VAR_SET_VALUE,
@@ -34089,7 +34103,7 @@ pgdefault:
 		}
 	case 1839:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12149
+//line gram.y:12163
 		{
 			pgVAL.node = &nodes.VariableSetStmt{
 				Kind: nodes.VAR_SET_VALUE,
@@ -34099,7 +34113,7 @@ pgdefault:
 		}
 	case 1840:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12157
+//line gram.y:12171
 		{
 			pgVAL.node = &nodes.VariableSetStmt{
 				Kind: nodes.VAR_SET_DEFAULT,
@@ -34108,7 +34122,7 @@ pgdefault:
 		}
 	case 1841:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12164
+//line gram.y:12178
 		{
 			var val string
 			if pgDollar[3].ival == int64(nodes.XMLOPTION_DOCUMENT) {
@@ -34124,7 +34138,7 @@ pgdefault:
 		}
 	case 1842:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12178
+//line gram.y:12192
 		{
 			pgVAL.node = &nodes.VariableSetStmt{
 				Kind: nodes.VAR_SET_MULTI,
@@ -34134,175 +34148,175 @@ pgdefault:
 		}
 	case 1843:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12189
+//line gram.y:12203
 		{
 			pgVAL.str = pgDollar[1].str
 		}
 	case 1844:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12193
+//line gram.y:12207
 		{
 			pgVAL.str = pgDollar[1].str + "." + pgDollar[3].str
 		}
 	case 1845:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12200
+//line gram.y:12214
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 1846:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12204
+//line gram.y:12218
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
 		}
 	case 1847:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12211
+//line gram.y:12225
 		{
 			pgVAL.node = makeStringConst(pgDollar[1].str, pgDollar[1].loc)
 		}
 	case 1848:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12215
+//line gram.y:12229
 		{
 			pgVAL.node = &nodes.A_Const{Val: pgDollar[1].node, Location: pgDollar[1].loc}
 		}
 	case 1849:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12222
+//line gram.y:12236
 		{
 			pgVAL.node = makeStringConst(pgDollar[1].str, pgDollar[1].loc)
 		}
 	case 1850:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12226
+//line gram.y:12240
 		{
 			pgVAL.node = makeStringConst(pgDollar[1].str, pgDollar[1].loc)
 		}
 	case 1851:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12230
+//line gram.y:12244
 		{
 			pgVAL.node = &nodes.A_Const{Val: pgDollar[1].node, Location: pgDollar[1].loc}
 		}
 	case 1852:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12234
+//line gram.y:12248
 		{
 			pgVAL.node = nil
 		}
 	case 1853:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12238
+//line gram.y:12252
 		{
 			pgVAL.node = nil
 		}
 	case 1854:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12244
+//line gram.y:12258
 		{
 			pgVAL.str = pgDollar[1].str
 		}
 	case 1855:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12245
+//line gram.y:12259
 		{
 			pgVAL.str = ""
 		}
 	case 1856:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:12246
+//line gram.y:12260
 		{
 			pgVAL.str = ""
 		}
 	case 1857:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12250
+//line gram.y:12264
 		{
 			pgVAL.str = "read uncommitted"
 		}
 	case 1858:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12251
+//line gram.y:12265
 		{
 			pgVAL.str = "read committed"
 		}
 	case 1859:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12252
+//line gram.y:12266
 		{
 			pgVAL.str = "repeatable read"
 		}
 	case 1860:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12253
+//line gram.y:12267
 		{
 			pgVAL.str = "serializable"
 		}
 	case 1861:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12258
+//line gram.y:12272
 		{
 			pgVAL.node = makeDefElem("transaction_isolation", makeStringConst(pgDollar[3].str, pgDollar[3].loc))
 		}
 	case 1862:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12262
+//line gram.y:12276
 		{
 			pgVAL.node = makeDefElem("transaction_read_only", makeIntConst(1, pgDollar[1].loc))
 		}
 	case 1863:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12266
+//line gram.y:12280
 		{
 			pgVAL.node = makeDefElem("transaction_read_only", makeIntConst(0, pgDollar[1].loc))
 		}
 	case 1864:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12270
+//line gram.y:12284
 		{
 			pgVAL.node = makeDefElem("transaction_deferrable", makeIntConst(1, pgDollar[1].loc))
 		}
 	case 1865:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12274
+//line gram.y:12288
 		{
 			pgVAL.node = makeDefElem("transaction_deferrable", makeIntConst(0, pgDollar[1].loc))
 		}
 	case 1866:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12281
+//line gram.y:12295
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 1867:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12285
+//line gram.y:12299
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
 		}
 	case 1868:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12289
+//line gram.y:12303
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[2].node)
 		}
 	case 1869:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12295
+//line gram.y:12309
 		{
 			pgVAL.list = pgDollar[1].list
 		}
 	case 1870:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:12296
+//line gram.y:12310
 		{
 			pgVAL.list = nil
 		}
 	case 1871:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12307
+//line gram.y:12321
 		{
 			pgVAL.node = &nodes.VariableShowStmt{
 				Name: pgDollar[2].str,
@@ -34310,7 +34324,7 @@ pgdefault:
 		}
 	case 1872:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12313
+//line gram.y:12327
 		{
 			pgVAL.node = &nodes.VariableShowStmt{
 				Name: "timezone",
@@ -34318,7 +34332,7 @@ pgdefault:
 		}
 	case 1873:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:12319
+//line gram.y:12333
 		{
 			pgVAL.node = &nodes.VariableShowStmt{
 				Name: "transaction_isolation",
@@ -34326,7 +34340,7 @@ pgdefault:
 		}
 	case 1874:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12325
+//line gram.y:12339
 		{
 			pgVAL.node = &nodes.VariableShowStmt{
 				Name: "session_authorization",
@@ -34334,7 +34348,7 @@ pgdefault:
 		}
 	case 1875:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12331
+//line gram.y:12345
 		{
 			pgVAL.node = &nodes.VariableShowStmt{
 				Name: "all",
@@ -34342,19 +34356,19 @@ pgdefault:
 		}
 	case 1876:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12346
+//line gram.y:12360
 		{
 			pgVAL.node = pgDollar[2].node
 		}
 	case 1877:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12353
+//line gram.y:12367
 		{
 			pgVAL.node = pgDollar[1].node
 		}
 	case 1878:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12357
+//line gram.y:12371
 		{
 			pgVAL.node = &nodes.VariableSetStmt{
 				Kind: nodes.VAR_RESET,
@@ -34363,7 +34377,7 @@ pgdefault:
 		}
 	case 1879:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12364
+//line gram.y:12378
 		{
 			pgVAL.node = &nodes.VariableSetStmt{
 				Kind: nodes.VAR_RESET,
@@ -34372,7 +34386,7 @@ pgdefault:
 		}
 	case 1880:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12371
+//line gram.y:12385
 		{
 			pgVAL.node = &nodes.VariableSetStmt{
 				Kind: nodes.VAR_RESET,
@@ -34381,7 +34395,7 @@ pgdefault:
 		}
 	case 1881:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12381
+//line gram.y:12395
 		{
 			pgVAL.node = &nodes.VariableSetStmt{
 				Kind: nodes.VAR_RESET,
@@ -34390,7 +34404,7 @@ pgdefault:
 		}
 	case 1882:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12388
+//line gram.y:12402
 		{
 			pgVAL.node = &nodes.VariableSetStmt{
 				Kind: nodes.VAR_RESET_ALL,
@@ -34398,7 +34412,7 @@ pgdefault:
 		}
 	case 1883:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:12403
+//line gram.y:12417
 		{
 			pgVAL.node = &nodes.PrepareStmt{
 				Name:     pgDollar[2].str,
@@ -34408,61 +34422,61 @@ pgdefault:
 		}
 	case 1884:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12413
+//line gram.y:12427
 		{
 			pgVAL.list = pgDollar[2].list
 		}
 	case 1885:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:12414
+//line gram.y:12428
 		{
 			pgVAL.list = nil
 		}
 	case 1886:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12419
+//line gram.y:12433
 		{
 			pgVAL.list = makeList(pgDollar[1].typename)
 		}
 	case 1887:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12423
+//line gram.y:12437
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].typename)
 		}
 	case 1888:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12429
+//line gram.y:12443
 		{
 			pgVAL.node = pgDollar[1].node
 		}
 	case 1889:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12430
+//line gram.y:12444
 		{
 			pgVAL.node = pgDollar[1].node
 		}
 	case 1890:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12431
+//line gram.y:12445
 		{
 			pgVAL.node = pgDollar[1].node
 		}
 	case 1891:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12432
+//line gram.y:12446
 		{
 			pgVAL.node = pgDollar[1].node
 		}
 	case 1892:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12433
+//line gram.y:12447
 		{
 			pgVAL.node = pgDollar[1].node
 		}
 	case 1893:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12438
+//line gram.y:12452
 		{
 			pgVAL.node = &nodes.ExecuteStmt{
 				Name:   pgDollar[2].str,
@@ -34471,19 +34485,19 @@ pgdefault:
 		}
 	case 1894:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12447
+//line gram.y:12461
 		{
 			pgVAL.list = pgDollar[2].list
 		}
 	case 1895:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:12448
+//line gram.y:12462
 		{
 			pgVAL.list = nil
 		}
 	case 1896:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12453
+//line gram.y:12467
 		{
 			pgVAL.node = &nodes.DeallocateStmt{
 				Name: pgDollar[2].str,
@@ -34491,7 +34505,7 @@ pgdefault:
 		}
 	case 1897:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12459
+//line gram.y:12473
 		{
 			pgVAL.node = &nodes.DeallocateStmt{
 				Name: pgDollar[3].str,
@@ -34499,7 +34513,7 @@ pgdefault:
 		}
 	case 1898:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12465
+//line gram.y:12479
 		{
 			pgVAL.node = &nodes.DeallocateStmt{
 				IsAll: true,
@@ -34507,7 +34521,7 @@ pgdefault:
 		}
 	case 1899:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12471
+//line gram.y:12485
 		{
 			pgVAL.node = &nodes.DeallocateStmt{
 				IsAll: true,
@@ -34515,7 +34529,7 @@ pgdefault:
 		}
 	case 1900:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:12486
+//line gram.y:12500
 		{
 			pgVAL.node = &nodes.TruncateStmt{
 				Relations:   pgDollar[3].list,
@@ -34525,37 +34539,37 @@ pgdefault:
 		}
 	case 1901:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12496
+//line gram.y:12510
 		{
 			pgVAL.boolean = false
 		}
 	case 1902:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12497
+//line gram.y:12511
 		{
 			pgVAL.boolean = true
 		}
 	case 1903:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:12498
+//line gram.y:12512
 		{
 			pgVAL.boolean = false
 		}
 	case 1906:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12508
+//line gram.y:12522
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 1907:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12512
+//line gram.y:12526
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
 		}
 	case 1908:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:12525
+//line gram.y:12539
 		{
 			pgVAL.node = &nodes.LockStmt{
 				Relations: pgDollar[3].list,
@@ -34565,79 +34579,79 @@ pgdefault:
 		}
 	case 1909:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12535
+//line gram.y:12549
 		{
 			pgVAL.ival = pgDollar[2].ival
 		}
 	case 1910:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:12536
+//line gram.y:12550
 		{
 			pgVAL.ival = int64(nodes.AccessExclusiveLock)
 		}
 	case 1911:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12540
+//line gram.y:12554
 		{
 			pgVAL.ival = int64(nodes.AccessShareLock)
 		}
 	case 1912:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12541
+//line gram.y:12555
 		{
 			pgVAL.ival = int64(nodes.RowShareLock)
 		}
 	case 1913:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12542
+//line gram.y:12556
 		{
 			pgVAL.ival = int64(nodes.RowExclusiveLock)
 		}
 	case 1914:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12543
+//line gram.y:12557
 		{
 			pgVAL.ival = int64(nodes.ShareUpdateExclusiveLock)
 		}
 	case 1915:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12544
+//line gram.y:12558
 		{
 			pgVAL.ival = int64(nodes.ShareLock)
 		}
 	case 1916:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12545
+//line gram.y:12559
 		{
 			pgVAL.ival = int64(nodes.ShareRowExclusiveLock)
 		}
 	case 1917:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12546
+//line gram.y:12560
 		{
 			pgVAL.ival = int64(nodes.ExclusiveLock)
 		}
 	case 1918:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12547
+//line gram.y:12561
 		{
 			pgVAL.ival = int64(nodes.AccessExclusiveLock)
 		}
 	case 1919:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12551
+//line gram.y:12565
 		{
 			pgVAL.boolean = true
 		}
 	case 1920:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:12552
+//line gram.y:12566
 		{
 			pgVAL.boolean = false
 		}
 	case 1921:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:12563
+//line gram.y:12577
 		{
 			n := &nodes.VacuumStmt{
 				IsVacuumCmd: true,
@@ -34663,7 +34677,7 @@ pgdefault:
 		}
 	case 1922:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:12587
+//line gram.y:12601
 		{
 			pgVAL.node = &nodes.VacuumStmt{
 				Options:     pgDollar[3].list,
@@ -34673,7 +34687,7 @@ pgdefault:
 		}
 	case 1923:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12598
+//line gram.y:12612
 		{
 			n := &nodes.VacuumStmt{
 				IsVacuumCmd: false,
@@ -34686,7 +34700,7 @@ pgdefault:
 		}
 	case 1924:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:12609
+//line gram.y:12623
 		{
 			pgVAL.node = &nodes.VacuumStmt{
 				Options:     pgDollar[3].list,
@@ -34696,55 +34710,55 @@ pgdefault:
 		}
 	case 1927:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12624
+//line gram.y:12638
 		{
 			pgVAL.boolean = true
 		}
 	case 1928:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:12625
+//line gram.y:12639
 		{
 			pgVAL.boolean = false
 		}
 	case 1929:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12629
+//line gram.y:12643
 		{
 			pgVAL.boolean = true
 		}
 	case 1930:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:12630
+//line gram.y:12644
 		{
 			pgVAL.boolean = false
 		}
 	case 1931:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12634
+//line gram.y:12648
 		{
 			pgVAL.boolean = true
 		}
 	case 1932:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:12635
+//line gram.y:12649
 		{
 			pgVAL.boolean = false
 		}
 	case 1933:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12639
+//line gram.y:12653
 		{
 			pgVAL.boolean = true
 		}
 	case 1934:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:12640
+//line gram.y:12654
 		{
 			pgVAL.boolean = false
 		}
 	case 1935:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12645
+//line gram.y:12659
 		{
 			pgVAL.node = &nodes.VacuumRelation{
 				Relation: makeRangeVar(pgDollar[1].list, pgDollar[1].loc).(*nodes.RangeVar),
@@ -34753,31 +34767,31 @@ pgdefault:
 		}
 	case 1936:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12655
+//line gram.y:12669
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 1937:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12659
+//line gram.y:12673
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
 		}
 	case 1938:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12665
+//line gram.y:12679
 		{
 			pgVAL.list = pgDollar[1].list
 		}
 	case 1939:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:12666
+//line gram.y:12680
 		{
 			pgVAL.list = nil
 		}
 	case 1940:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:12677
+//line gram.y:12691
 		{
 			pgVAL.node = &nodes.ClusterStmt{
 				Relation:  makeRangeVar(pgDollar[5].list, pgDollar[5].loc).(*nodes.RangeVar),
@@ -34787,7 +34801,7 @@ pgdefault:
 		}
 	case 1941:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:12685
+//line gram.y:12699
 		{
 			pgVAL.node = &nodes.ClusterStmt{
 				Params: pgDollar[3].list,
@@ -34795,7 +34809,7 @@ pgdefault:
 		}
 	case 1942:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:12691
+//line gram.y:12705
 		{
 			n := &nodes.ClusterStmt{
 				Relation:  makeRangeVar(pgDollar[3].list, pgDollar[3].loc).(*nodes.RangeVar),
@@ -34808,7 +34822,7 @@ pgdefault:
 		}
 	case 1943:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12702
+//line gram.y:12716
 		{
 			n := &nodes.ClusterStmt{}
 			if pgDollar[2].boolean {
@@ -34818,7 +34832,7 @@ pgdefault:
 		}
 	case 1944:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:12711
+//line gram.y:12725
 		{
 			n := &nodes.ClusterStmt{
 				Relation:  makeRangeVar(pgDollar[5].list, pgDollar[5].loc).(*nodes.RangeVar),
@@ -34831,19 +34845,19 @@ pgdefault:
 		}
 	case 1945:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:12724
+//line gram.y:12738
 		{
 			pgVAL.str = pgDollar[2].str
 		}
 	case 1946:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:12725
+//line gram.y:12739
 		{
 			pgVAL.str = ""
 		}
 	case 1947:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:12736
+//line gram.y:12750
 		{
 			n := &nodes.ReindexStmt{
 				Kind:     nodes.ReindexObjectType(pgDollar[3].ival),
@@ -34857,7 +34871,7 @@ pgdefault:
 		}
 	case 1948:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:12748
+//line gram.y:12762
 		{
 			n := &nodes.ReindexStmt{
 				Kind:   nodes.REINDEX_OBJECT_SCHEMA,
@@ -34871,7 +34885,7 @@ pgdefault:
 		}
 	case 1949:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:12760
+//line gram.y:12774
 		{
 			n := &nodes.ReindexStmt{
 				Kind:   nodes.ReindexObjectType(pgDollar[3].ival),
@@ -34885,43 +34899,43 @@ pgdefault:
 		}
 	case 1950:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12774
+//line gram.y:12788
 		{
 			pgVAL.ival = int64(nodes.REINDEX_OBJECT_INDEX)
 		}
 	case 1951:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12775
+//line gram.y:12789
 		{
 			pgVAL.ival = int64(nodes.REINDEX_OBJECT_TABLE)
 		}
 	case 1952:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12779
+//line gram.y:12793
 		{
 			pgVAL.ival = int64(nodes.REINDEX_OBJECT_SYSTEM)
 		}
 	case 1953:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12780
+//line gram.y:12794
 		{
 			pgVAL.ival = int64(nodes.REINDEX_OBJECT_DATABASE)
 		}
 	case 1954:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:12784
+//line gram.y:12798
 		{
 			pgVAL.list = pgDollar[2].list
 		}
 	case 1955:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:12785
+//line gram.y:12799
 		{
 			pgVAL.list = nil
 		}
 	case 1956:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:12796
+//line gram.y:12810
 		{
 			pgVAL.node = &nodes.CommentStmt{
 				Objtype: nodes.ObjectType(pgDollar[3].ival),
@@ -34931,7 +34945,7 @@ pgdefault:
 		}
 	case 1957:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:12804
+//line gram.y:12818
 		{
 			pgVAL.node = &nodes.CommentStmt{
 				Objtype: nodes.OBJECT_COLUMN,
@@ -34941,7 +34955,7 @@ pgdefault:
 		}
 	case 1958:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:12812
+//line gram.y:12826
 		{
 			pgVAL.node = &nodes.CommentStmt{
 				Objtype: nodes.ObjectType(pgDollar[3].ival),
@@ -34951,7 +34965,7 @@ pgdefault:
 		}
 	case 1959:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:12820
+//line gram.y:12834
 		{
 			pgVAL.node = &nodes.CommentStmt{
 				Objtype: nodes.OBJECT_TYPE,
@@ -34961,7 +34975,7 @@ pgdefault:
 		}
 	case 1960:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:12828
+//line gram.y:12842
 		{
 			pgVAL.node = &nodes.CommentStmt{
 				Objtype: nodes.OBJECT_DOMAIN,
@@ -34971,7 +34985,7 @@ pgdefault:
 		}
 	case 1961:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:12836
+//line gram.y:12850
 		{
 			pgVAL.node = &nodes.CommentStmt{
 				Objtype: nodes.OBJECT_AGGREGATE,
@@ -34981,7 +34995,7 @@ pgdefault:
 		}
 	case 1962:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:12844
+//line gram.y:12858
 		{
 			pgVAL.node = &nodes.CommentStmt{
 				Objtype: nodes.OBJECT_FUNCTION,
@@ -34991,7 +35005,7 @@ pgdefault:
 		}
 	case 1963:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:12852
+//line gram.y:12866
 		{
 			pgVAL.node = &nodes.CommentStmt{
 				Objtype: nodes.OBJECT_PROCEDURE,
@@ -35001,7 +35015,7 @@ pgdefault:
 		}
 	case 1964:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:12860
+//line gram.y:12874
 		{
 			pgVAL.node = &nodes.CommentStmt{
 				Objtype: nodes.OBJECT_ROUTINE,
@@ -35011,7 +35025,7 @@ pgdefault:
 		}
 	case 1965:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:12868
+//line gram.y:12882
 		{
 			pgVAL.node = &nodes.CommentStmt{
 				Objtype: nodes.OBJECT_OPERATOR,
@@ -35021,7 +35035,7 @@ pgdefault:
 		}
 	case 1966:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:12876
+//line gram.y:12890
 		{
 			pgVAL.node = &nodes.CommentStmt{
 				Objtype: nodes.OBJECT_TABCONSTRAINT,
@@ -35031,7 +35045,7 @@ pgdefault:
 		}
 	case 1967:
 		pgDollar = pgS[pgpt-9 : pgpt+1]
-//line gram.y:12884
+//line gram.y:12898
 		{
 			pgVAL.node = &nodes.CommentStmt{
 				Objtype: nodes.OBJECT_DOMCONSTRAINT,
@@ -35041,7 +35055,7 @@ pgdefault:
 		}
 	case 1968:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:12892
+//line gram.y:12906
 		{
 			pgVAL.node = &nodes.CommentStmt{
 				Objtype: nodes.ObjectType(pgDollar[3].ival),
@@ -35051,7 +35065,7 @@ pgdefault:
 		}
 	case 1969:
 		pgDollar = pgS[pgpt-9 : pgpt+1]
-//line gram.y:12900
+//line gram.y:12914
 		{
 			pgVAL.node = &nodes.CommentStmt{
 				Objtype: nodes.OBJECT_TRANSFORM,
@@ -35061,7 +35075,7 @@ pgdefault:
 		}
 	case 1970:
 		pgDollar = pgS[pgpt-9 : pgpt+1]
-//line gram.y:12908
+//line gram.y:12922
 		{
 			pgVAL.node = &nodes.CommentStmt{
 				Objtype: nodes.OBJECT_OPCLASS,
@@ -35071,7 +35085,7 @@ pgdefault:
 		}
 	case 1971:
 		pgDollar = pgS[pgpt-9 : pgpt+1]
-//line gram.y:12916
+//line gram.y:12930
 		{
 			pgVAL.node = &nodes.CommentStmt{
 				Objtype: nodes.OBJECT_OPFAMILY,
@@ -35081,7 +35095,7 @@ pgdefault:
 		}
 	case 1972:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
-//line gram.y:12924
+//line gram.y:12938
 		{
 			pgVAL.node = &nodes.CommentStmt{
 				Objtype: nodes.OBJECT_LARGEOBJECT,
@@ -35091,7 +35105,7 @@ pgdefault:
 		}
 	case 1973:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:12932
+//line gram.y:12946
 		{
 			pgVAL.node = &nodes.CommentStmt{
 				Objtype: nodes.OBJECT_FDW,
@@ -35101,7 +35115,7 @@ pgdefault:
 		}
 	case 1974:
 		pgDollar = pgS[pgpt-10 : pgpt+1]
-//line gram.y:12940
+//line gram.y:12954
 		{
 			pgVAL.node = &nodes.CommentStmt{
 				Objtype: nodes.OBJECT_CAST,
@@ -35111,7 +35125,7 @@ pgdefault:
 		}
 	case 1975:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
-//line gram.y:12948
+//line gram.y:12962
 		{
 			pgVAL.node = &nodes.CommentStmt{
 				Objtype: nodes.OBJECT_EVENT_TRIGGER,
@@ -35121,79 +35135,79 @@ pgdefault:
 		}
 	case 1976:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12958
+//line gram.y:12972
 		{
 			pgVAL.str = pgDollar[1].str
 		}
 	case 1977:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12959
+//line gram.y:12973
 		{
 			pgVAL.str = ""
 		}
 	case 1978:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12963
+//line gram.y:12977
 		{
 			pgVAL.ival = int64(nodes.OBJECT_SCHEMA)
 		}
 	case 1979:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12964
+//line gram.y:12978
 		{
 			pgVAL.ival = int64(nodes.OBJECT_DATABASE)
 		}
 	case 1980:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12965
+//line gram.y:12979
 		{
 			pgVAL.ival = int64(nodes.OBJECT_ROLE)
 		}
 	case 1981:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12966
+//line gram.y:12980
 		{
 			pgVAL.ival = int64(nodes.OBJECT_TABLESPACE)
 		}
 	case 1982:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12967
+//line gram.y:12981
 		{
 			pgVAL.ival = int64(nodes.OBJECT_SUBSCRIPTION)
 		}
 	case 1983:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12968
+//line gram.y:12982
 		{
 			pgVAL.ival = int64(nodes.OBJECT_PUBLICATION)
 		}
 	case 1984:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12969
+//line gram.y:12983
 		{
 			pgVAL.ival = int64(nodes.OBJECT_FOREIGN_SERVER)
 		}
 	case 1985:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12973
+//line gram.y:12987
 		{
 			pgVAL.ival = int64(nodes.OBJECT_POLICY)
 		}
 	case 1986:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12974
+//line gram.y:12988
 		{
 			pgVAL.ival = int64(nodes.OBJECT_RULE)
 		}
 	case 1987:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:12975
+//line gram.y:12989
 		{
 			pgVAL.ival = int64(nodes.OBJECT_TRIGGER)
 		}
 	case 1988:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:12986
+//line gram.y:13000
 		{
 			pgVAL.node = &nodes.SecLabelStmt{
 				Objtype:  nodes.ObjectType(pgDollar[5].ival),
@@ -35204,7 +35218,7 @@ pgdefault:
 		}
 	case 1989:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:12995
+//line gram.y:13009
 		{
 			pgVAL.node = &nodes.SecLabelStmt{
 				Objtype:  nodes.OBJECT_COLUMN,
@@ -35215,7 +35229,7 @@ pgdefault:
 		}
 	case 1990:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:13004
+//line gram.y:13018
 		{
 			pgVAL.node = &nodes.SecLabelStmt{
 				Objtype:  nodes.ObjectType(pgDollar[5].ival),
@@ -35226,7 +35240,7 @@ pgdefault:
 		}
 	case 1991:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:13013
+//line gram.y:13027
 		{
 			pgVAL.node = &nodes.SecLabelStmt{
 				Objtype:  nodes.OBJECT_TYPE,
@@ -35237,7 +35251,7 @@ pgdefault:
 		}
 	case 1992:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:13022
+//line gram.y:13036
 		{
 			pgVAL.node = &nodes.SecLabelStmt{
 				Objtype:  nodes.OBJECT_DOMAIN,
@@ -35248,7 +35262,7 @@ pgdefault:
 		}
 	case 1993:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:13031
+//line gram.y:13045
 		{
 			pgVAL.node = &nodes.SecLabelStmt{
 				Objtype:  nodes.OBJECT_AGGREGATE,
@@ -35259,7 +35273,7 @@ pgdefault:
 		}
 	case 1994:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:13040
+//line gram.y:13054
 		{
 			pgVAL.node = &nodes.SecLabelStmt{
 				Objtype:  nodes.OBJECT_FUNCTION,
@@ -35270,7 +35284,7 @@ pgdefault:
 		}
 	case 1995:
 		pgDollar = pgS[pgpt-9 : pgpt+1]
-//line gram.y:13049
+//line gram.y:13063
 		{
 			pgVAL.node = &nodes.SecLabelStmt{
 				Objtype:  nodes.OBJECT_LARGEOBJECT,
@@ -35281,7 +35295,7 @@ pgdefault:
 		}
 	case 1996:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:13058
+//line gram.y:13072
 		{
 			pgVAL.node = &nodes.SecLabelStmt{
 				Objtype:  nodes.OBJECT_PROCEDURE,
@@ -35292,7 +35306,7 @@ pgdefault:
 		}
 	case 1997:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:13067
+//line gram.y:13081
 		{
 			pgVAL.node = &nodes.SecLabelStmt{
 				Objtype:  nodes.OBJECT_ROUTINE,
@@ -35303,7 +35317,7 @@ pgdefault:
 		}
 	case 1998:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
-//line gram.y:13085
+//line gram.y:13099
 		{
 			pgVAL.node = &nodes.DeclareCursorStmt{
 				Portalname: pgDollar[2].str,
@@ -35313,61 +35327,61 @@ pgdefault:
 		}
 	case 1999:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:13096
+//line gram.y:13110
 		{
 			pgVAL.ival = 0
 		}
 	case 2000:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:13100
+//line gram.y:13114
 		{
 			pgVAL.ival = pgDollar[1].ival | nodes.CURSOR_OPT_NO_SCROLL
 		}
 	case 2001:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:13104
+//line gram.y:13118
 		{
 			pgVAL.ival = pgDollar[1].ival | nodes.CURSOR_OPT_SCROLL
 		}
 	case 2002:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:13108
+//line gram.y:13122
 		{
 			pgVAL.ival = pgDollar[1].ival | nodes.CURSOR_OPT_BINARY
 		}
 	case 2003:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:13112
+//line gram.y:13126
 		{
 			pgVAL.ival = pgDollar[1].ival | nodes.CURSOR_OPT_ASENSITIVE
 		}
 	case 2004:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:13116
+//line gram.y:13130
 		{
 			pgVAL.ival = pgDollar[1].ival | nodes.CURSOR_OPT_INSENSITIVE
 		}
 	case 2005:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:13123
+//line gram.y:13137
 		{
 			pgVAL.ival = 0
 		}
 	case 2006:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:13127
+//line gram.y:13141
 		{
 			pgVAL.ival = nodes.CURSOR_OPT_HOLD
 		}
 	case 2007:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:13131
+//line gram.y:13145
 		{
 			pgVAL.ival = 0
 		}
 	case 2008:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:13144
+//line gram.y:13158
 		{
 			n := pgDollar[2].node.(*nodes.FetchStmt)
 			n.Ismove = false
@@ -35375,7 +35389,7 @@ pgdefault:
 		}
 	case 2009:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:13150
+//line gram.y:13164
 		{
 			n := pgDollar[2].node.(*nodes.FetchStmt)
 			n.Ismove = true
@@ -35383,7 +35397,7 @@ pgdefault:
 		}
 	case 2010:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:13159
+//line gram.y:13173
 		{
 			pgVAL.node = &nodes.FetchStmt{
 				Direction:  nodes.FETCH_FORWARD,
@@ -35393,7 +35407,7 @@ pgdefault:
 		}
 	case 2011:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:13167
+//line gram.y:13181
 		{
 			pgVAL.node = &nodes.FetchStmt{
 				Direction:  nodes.FETCH_FORWARD,
@@ -35403,7 +35417,7 @@ pgdefault:
 		}
 	case 2012:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:13175
+//line gram.y:13189
 		{
 			pgVAL.node = &nodes.FetchStmt{
 				Direction:  nodes.FETCH_FORWARD,
@@ -35413,7 +35427,7 @@ pgdefault:
 		}
 	case 2013:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:13183
+//line gram.y:13197
 		{
 			pgVAL.node = &nodes.FetchStmt{
 				Direction:  nodes.FETCH_BACKWARD,
@@ -35423,7 +35437,7 @@ pgdefault:
 		}
 	case 2014:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:13191
+//line gram.y:13205
 		{
 			pgVAL.node = &nodes.FetchStmt{
 				Direction:  nodes.FETCH_ABSOLUTE,
@@ -35433,7 +35447,7 @@ pgdefault:
 		}
 	case 2015:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:13199
+//line gram.y:13213
 		{
 			pgVAL.node = &nodes.FetchStmt{
 				Direction:  nodes.FETCH_ABSOLUTE,
@@ -35443,7 +35457,7 @@ pgdefault:
 		}
 	case 2016:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:13207
+//line gram.y:13221
 		{
 			pgVAL.node = &nodes.FetchStmt{
 				Direction:  nodes.FETCH_ABSOLUTE,
@@ -35453,7 +35467,7 @@ pgdefault:
 		}
 	case 2017:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:13215
+//line gram.y:13229
 		{
 			pgVAL.node = &nodes.FetchStmt{
 				Direction:  nodes.FETCH_RELATIVE,
@@ -35463,7 +35477,7 @@ pgdefault:
 		}
 	case 2018:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:13223
+//line gram.y:13237
 		{
 			pgVAL.node = &nodes.FetchStmt{
 				Direction:  nodes.FETCH_FORWARD,
@@ -35473,7 +35487,7 @@ pgdefault:
 		}
 	case 2019:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:13231
+//line gram.y:13245
 		{
 			pgVAL.node = &nodes.FetchStmt{
 				Direction:  nodes.FETCH_FORWARD,
@@ -35483,7 +35497,7 @@ pgdefault:
 		}
 	case 2020:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:13239
+//line gram.y:13253
 		{
 			pgVAL.node = &nodes.FetchStmt{
 				Direction:  nodes.FETCH_FORWARD,
@@ -35493,7 +35507,7 @@ pgdefault:
 		}
 	case 2021:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:13247
+//line gram.y:13261
 		{
 			pgVAL.node = &nodes.FetchStmt{
 				Direction:  nodes.FETCH_FORWARD,
@@ -35503,7 +35517,7 @@ pgdefault:
 		}
 	case 2022:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:13255
+//line gram.y:13269
 		{
 			pgVAL.node = &nodes.FetchStmt{
 				Direction:  nodes.FETCH_FORWARD,
@@ -35513,7 +35527,7 @@ pgdefault:
 		}
 	case 2023:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:13263
+//line gram.y:13277
 		{
 			pgVAL.node = &nodes.FetchStmt{
 				Direction:  nodes.FETCH_BACKWARD,
@@ -35523,7 +35537,7 @@ pgdefault:
 		}
 	case 2024:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:13271
+//line gram.y:13285
 		{
 			pgVAL.node = &nodes.FetchStmt{
 				Direction:  nodes.FETCH_BACKWARD,
@@ -35533,7 +35547,7 @@ pgdefault:
 		}
 	case 2025:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:13279
+//line gram.y:13293
 		{
 			pgVAL.node = &nodes.FetchStmt{
 				Direction:  nodes.FETCH_BACKWARD,
@@ -35543,7 +35557,7 @@ pgdefault:
 		}
 	case 2030:
 		pgDollar = pgS[pgpt-10 : pgpt+1]
-//line gram.y:13306
+//line gram.y:13320
 		{
 			m := &nodes.MergeStmt{}
 			if pgDollar[1].node != nil {
@@ -35558,35 +35572,17 @@ pgdefault:
 		}
 	case 2031:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:13322
+//line gram.y:13336
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 2032:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:13326
+//line gram.y:13340
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[2].node)
 		}
 	case 2033:
-		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:13333
-		{
-			n := pgDollar[4].node.(*nodes.MergeWhenClause)
-			n.Kind = nodes.MergeMatchKind(pgDollar[1].ival)
-			n.Condition = pgDollar[2].node
-			pgVAL.node = n
-		}
-	case 2034:
-		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:13340
-		{
-			n := pgDollar[4].node.(*nodes.MergeWhenClause)
-			n.Kind = nodes.MergeMatchKind(pgDollar[1].ival)
-			n.Condition = pgDollar[2].node
-			pgVAL.node = n
-		}
-	case 2035:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
 //line gram.y:13347
 		{
@@ -35595,9 +35591,27 @@ pgdefault:
 			n.Condition = pgDollar[2].node
 			pgVAL.node = n
 		}
+	case 2034:
+		pgDollar = pgS[pgpt-4 : pgpt+1]
+//line gram.y:13354
+		{
+			n := pgDollar[4].node.(*nodes.MergeWhenClause)
+			n.Kind = nodes.MergeMatchKind(pgDollar[1].ival)
+			n.Condition = pgDollar[2].node
+			pgVAL.node = n
+		}
+	case 2035:
+		pgDollar = pgS[pgpt-4 : pgpt+1]
+//line gram.y:13361
+		{
+			n := pgDollar[4].node.(*nodes.MergeWhenClause)
+			n.Kind = nodes.MergeMatchKind(pgDollar[1].ival)
+			n.Condition = pgDollar[2].node
+			pgVAL.node = n
+		}
 	case 2036:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:13354
+//line gram.y:13368
 		{
 			pgVAL.node = &nodes.MergeWhenClause{
 				Kind:        nodes.MergeMatchKind(pgDollar[1].ival),
@@ -35607,7 +35621,7 @@ pgdefault:
 		}
 	case 2037:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:13362
+//line gram.y:13376
 		{
 			pgVAL.node = &nodes.MergeWhenClause{
 				Kind:        nodes.MergeMatchKind(pgDollar[1].ival),
@@ -35617,43 +35631,43 @@ pgdefault:
 		}
 	case 2038:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:13373
+//line gram.y:13387
 		{
 			pgVAL.ival = int64(nodes.MERGE_WHEN_MATCHED)
 		}
 	case 2039:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:13377
+//line gram.y:13391
 		{
 			pgVAL.ival = int64(nodes.MERGE_WHEN_NOT_MATCHED_BY_SOURCE)
 		}
 	case 2040:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:13384
+//line gram.y:13398
 		{
 			pgVAL.ival = int64(nodes.MERGE_WHEN_NOT_MATCHED_BY_TARGET)
 		}
 	case 2041:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:13388
+//line gram.y:13402
 		{
 			pgVAL.ival = int64(nodes.MERGE_WHEN_NOT_MATCHED_BY_TARGET)
 		}
 	case 2042:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:13395
+//line gram.y:13409
 		{
 			pgVAL.node = pgDollar[2].node
 		}
 	case 2043:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:13399
+//line gram.y:13413
 		{
 			pgVAL.node = nil
 		}
 	case 2044:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:13406
+//line gram.y:13420
 		{
 			pgVAL.node = &nodes.MergeWhenClause{
 				CommandType: nodes.CMD_UPDATE,
@@ -35663,7 +35677,7 @@ pgdefault:
 		}
 	case 2045:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:13417
+//line gram.y:13431
 		{
 			pgVAL.node = &nodes.MergeWhenClause{
 				CommandType: nodes.CMD_DELETE,
@@ -35672,7 +35686,7 @@ pgdefault:
 		}
 	case 2046:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:13427
+//line gram.y:13441
 		{
 			pgVAL.node = &nodes.MergeWhenClause{
 				CommandType: nodes.CMD_INSERT,
@@ -35682,7 +35696,7 @@ pgdefault:
 		}
 	case 2047:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:13435
+//line gram.y:13449
 		{
 			pgVAL.node = &nodes.MergeWhenClause{
 				CommandType: nodes.CMD_INSERT,
@@ -35692,7 +35706,7 @@ pgdefault:
 		}
 	case 2048:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:13443
+//line gram.y:13457
 		{
 			pgVAL.node = &nodes.MergeWhenClause{
 				CommandType: nodes.CMD_INSERT,
@@ -35703,7 +35717,7 @@ pgdefault:
 		}
 	case 2049:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:13452
+//line gram.y:13466
 		{
 			pgVAL.node = &nodes.MergeWhenClause{
 				CommandType: nodes.CMD_INSERT,
@@ -35714,7 +35728,7 @@ pgdefault:
 		}
 	case 2050:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:13461
+//line gram.y:13475
 		{
 			pgVAL.node = &nodes.MergeWhenClause{
 				CommandType: nodes.CMD_INSERT,
@@ -35723,25 +35737,25 @@ pgdefault:
 		}
 	case 2051:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:13471
+//line gram.y:13485
 		{
 			pgVAL.list = pgDollar[3].list
 		}
 	case 2052:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:13478
+//line gram.y:13492
 		{
 			pgVAL.ival = int64(nodes.OVERRIDING_USER_VALUE)
 		}
 	case 2053:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:13482
+//line gram.y:13496
 		{
 			pgVAL.ival = int64(nodes.OVERRIDING_SYSTEM_VALUE)
 		}
 	case 2054:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:13495
+//line gram.y:13509
 		{
 			pgVAL.node = &nodes.CallStmt{
 				Funccall: pgDollar[2].node.(*nodes.FuncCall),
@@ -35749,7 +35763,7 @@ pgdefault:
 		}
 	case 2055:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:13510
+//line gram.y:13524
 		{
 			pgVAL.node = &nodes.DoStmt{
 				Args: pgDollar[2].list,
@@ -35757,19 +35771,19 @@ pgdefault:
 		}
 	case 2056:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:13519
+//line gram.y:13533
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 2057:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:13523
+//line gram.y:13537
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[2].node)
 		}
 	case 2058:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:13530
+//line gram.y:13544
 		{
 			pgVAL.node = &nodes.DefElem{
 				Defname: "as",
@@ -35778,7 +35792,7 @@ pgdefault:
 		}
 	case 2059:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:13537
+//line gram.y:13551
 		{
 			pgVAL.node = &nodes.DefElem{
 				Defname: "language",
@@ -35787,31 +35801,31 @@ pgdefault:
 		}
 	case 2060:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:13546
+//line gram.y:13560
 		{
 			pgVAL.str = pgDollar[2].str
 		}
 	case 2061:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:13547
+//line gram.y:13561
 		{
 			pgVAL.str = ""
 		}
 	case 2062:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:13551
+//line gram.y:13565
 		{
 			pgVAL.str = pgDollar[1].str
 		}
 	case 2063:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:13552
+//line gram.y:13566
 		{
 			pgVAL.str = ""
 		}
 	case 2064:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:13563
+//line gram.y:13577
 		{
 			pgVAL.node = &nodes.AlterFunctionStmt{
 				Objtype: nodes.OBJECT_FUNCTION,
@@ -35821,7 +35835,7 @@ pgdefault:
 		}
 	case 2065:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:13571
+//line gram.y:13585
 		{
 			pgVAL.node = &nodes.AlterFunctionStmt{
 				Objtype: nodes.OBJECT_PROCEDURE,
@@ -35831,7 +35845,7 @@ pgdefault:
 		}
 	case 2066:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:13579
+//line gram.y:13593
 		{
 			pgVAL.node = &nodes.AlterFunctionStmt{
 				Objtype: nodes.OBJECT_ROUTINE,
@@ -35841,19 +35855,19 @@ pgdefault:
 		}
 	case 2067:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:13590
+//line gram.y:13604
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 2068:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:13592
+//line gram.y:13606
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[2].node)
 		}
 	case 2071:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:13609
+//line gram.y:13623
 		{
 			pgVAL.node = &nodes.DropStmt{
 				RemoveType: int(nodes.OBJECT_FUNCTION),
@@ -35864,7 +35878,7 @@ pgdefault:
 		}
 	case 2072:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:13618
+//line gram.y:13632
 		{
 			pgVAL.node = &nodes.DropStmt{
 				RemoveType: int(nodes.OBJECT_FUNCTION),
@@ -35875,7 +35889,7 @@ pgdefault:
 		}
 	case 2073:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:13627
+//line gram.y:13641
 		{
 			pgVAL.node = &nodes.DropStmt{
 				RemoveType: int(nodes.OBJECT_PROCEDURE),
@@ -35886,7 +35900,7 @@ pgdefault:
 		}
 	case 2074:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:13636
+//line gram.y:13650
 		{
 			pgVAL.node = &nodes.DropStmt{
 				RemoveType: int(nodes.OBJECT_PROCEDURE),
@@ -35897,7 +35911,7 @@ pgdefault:
 		}
 	case 2075:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:13645
+//line gram.y:13659
 		{
 			pgVAL.node = &nodes.DropStmt{
 				RemoveType: int(nodes.OBJECT_ROUTINE),
@@ -35908,7 +35922,7 @@ pgdefault:
 		}
 	case 2076:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:13654
+//line gram.y:13668
 		{
 			pgVAL.node = &nodes.DropStmt{
 				RemoveType: int(nodes.OBJECT_ROUTINE),
@@ -35919,7 +35933,7 @@ pgdefault:
 		}
 	case 2077:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:13672
+//line gram.y:13686
 		{
 			pgVAL.node = &nodes.DropStmt{
 				RemoveType: int(nodes.OBJECT_AGGREGATE),
@@ -35930,7 +35944,7 @@ pgdefault:
 		}
 	case 2078:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:13681
+//line gram.y:13695
 		{
 			pgVAL.node = &nodes.DropStmt{
 				RemoveType: int(nodes.OBJECT_AGGREGATE),
@@ -35941,7 +35955,7 @@ pgdefault:
 		}
 	case 2079:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:13699
+//line gram.y:13713
 		{
 			pgVAL.node = &nodes.DropStmt{
 				RemoveType: int(nodes.OBJECT_OPERATOR),
@@ -35952,7 +35966,7 @@ pgdefault:
 		}
 	case 2080:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:13708
+//line gram.y:13722
 		{
 			pgVAL.node = &nodes.DropStmt{
 				RemoveType: int(nodes.OBJECT_OPERATOR),
@@ -35963,19 +35977,19 @@ pgdefault:
 		}
 	case 2081:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:13726
+//line gram.y:13740
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 2082:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:13728
+//line gram.y:13742
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
 		}
 	case 2083:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:13733
+//line gram.y:13747
 		{
 			pgVAL.node = &nodes.ObjectWithArgs{
 				Objname: pgDollar[1].list,
@@ -35984,7 +35998,7 @@ pgdefault:
 		}
 	case 2084:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:13740
+//line gram.y:13754
 		{
 			pgVAL.node = &nodes.ObjectWithArgs{
 				Objname:         &nodes.List{Items: []nodes.Node{&nodes.String{Str: pgDollar[1].str}}},
@@ -35993,7 +36007,7 @@ pgdefault:
 		}
 	case 2085:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:13747
+//line gram.y:13761
 		{
 			pgVAL.node = &nodes.ObjectWithArgs{
 				Objname:         &nodes.List{Items: []nodes.Node{&nodes.String{Str: pgDollar[1].str}}},
@@ -36002,7 +36016,7 @@ pgdefault:
 		}
 	case 2086:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:13754
+//line gram.y:13768
 		{
 			if !checkNames(pglex, pgDollar[2].list) {
 				return 1
@@ -36014,31 +36028,31 @@ pgdefault:
 		}
 	case 2087:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:13767
+//line gram.y:13781
 		{
 			pgVAL.list = pgDollar[2].list
 		}
 	case 2088:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:13769
+//line gram.y:13783
 		{
 			pgVAL.list = nil
 		}
 	case 2089:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:13774
+//line gram.y:13788
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 2090:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:13776
+//line gram.y:13790
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
 		}
 	case 2091:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:13787
+//line gram.y:13801
 		{
 			pgVAL.node = &nodes.ObjectWithArgs{
 				Objname: pgDollar[1].list,
@@ -36047,31 +36061,31 @@ pgdefault:
 		}
 	case 2092:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:13797
+//line gram.y:13811
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 2093:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:13799
+//line gram.y:13813
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
 		}
 	case 2094:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:13810
+//line gram.y:13824
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 2095:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:13812
+//line gram.y:13826
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
 		}
 	case 2096:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:13817
+//line gram.y:13831
 		{
 			pgVAL.node = &nodes.ObjectWithArgs{
 				Objname: pgDollar[1].list,
@@ -36080,34 +36094,34 @@ pgdefault:
 		}
 	case 2097:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:13827
+//line gram.y:13841
 		{
 			grammarError(pglex, codeSyntaxError, "missing argument", "Use NONE to denote the missing argument of a unary operator.", pgDollar[3].loc)
 			return 1
 		}
 	case 2098:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:13832
+//line gram.y:13846
 		{
 			pgVAL.list = &nodes.List{Items: []nodes.Node{pgDollar[2].typename, pgDollar[4].typename}}
 		}
 	case 2099:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:13836
+//line gram.y:13850
 		{
 			/* left unary */
 			pgVAL.list = &nodes.List{Items: []nodes.Node{nil, pgDollar[4].typename}}
 		}
 	case 2100:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:13841
+//line gram.y:13855
 		{
 			/* right unary */
 			pgVAL.list = &nodes.List{Items: []nodes.Node{pgDollar[2].typename, nil}}
 		}
 	case 2101:
 		pgDollar = pgS[pgpt-17 : pgpt+1]
-//line gram.y:13857
+//line gram.y:13871
 		{
 			eventsInt := pgDollar[6].list.Items[0].(*nodes.Integer).Ival
 			var columns *nodes.List
@@ -36133,7 +36147,7 @@ pgdefault:
 		}
 	case 2102:
 		pgDollar = pgS[pgpt-21 : pgpt+1]
-//line gram.y:13884
+//line gram.y:13898
 		{
 			eventsInt := pgDollar[7].list.Items[0].(*nodes.Integer).Ival
 			var columns *nodes.List
@@ -36169,31 +36183,31 @@ pgdefault:
 		}
 	case 2103:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:13920
+//line gram.y:13934
 		{
 			pgVAL.ival = int64(nodes.TRIGGER_TYPE_BEFORE)
 		}
 	case 2104:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:13921
+//line gram.y:13935
 		{
 			pgVAL.ival = int64(nodes.TRIGGER_TYPE_AFTER)
 		}
 	case 2105:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:13922
+//line gram.y:13936
 		{
 			pgVAL.ival = int64(nodes.TRIGGER_TYPE_INSTEAD)
 		}
 	case 2106:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:13927
+//line gram.y:13941
 		{
 			pgVAL.list = pgDollar[1].list
 		}
 	case 2107:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:13929
+//line gram.y:13943
 		{
 			events1 := pgDollar[1].list.Items[0].(*nodes.Integer).Ival
 			events2 := pgDollar[3].list.Items[0].(*nodes.Integer).Ival
@@ -36220,7 +36234,7 @@ pgdefault:
 		}
 	case 2108:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:13957
+//line gram.y:13971
 		{
 			pgVAL.list = &nodes.List{Items: []nodes.Node{
 				&nodes.Integer{Ival: int64(nodes.TRIGGER_TYPE_INSERT)},
@@ -36229,7 +36243,7 @@ pgdefault:
 		}
 	case 2109:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:13964
+//line gram.y:13978
 		{
 			pgVAL.list = &nodes.List{Items: []nodes.Node{
 				&nodes.Integer{Ival: int64(nodes.TRIGGER_TYPE_DELETE)},
@@ -36238,7 +36252,7 @@ pgdefault:
 		}
 	case 2110:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:13971
+//line gram.y:13985
 		{
 			pgVAL.list = &nodes.List{Items: []nodes.Node{
 				&nodes.Integer{Ival: int64(nodes.TRIGGER_TYPE_UPDATE)},
@@ -36247,7 +36261,7 @@ pgdefault:
 		}
 	case 2111:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:13978
+//line gram.y:13992
 		{
 			pgVAL.list = &nodes.List{Items: []nodes.Node{
 				&nodes.Integer{Ival: int64(nodes.TRIGGER_TYPE_UPDATE)},
@@ -36256,7 +36270,7 @@ pgdefault:
 		}
 	case 2112:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:13985
+//line gram.y:13999
 		{
 			pgVAL.list = &nodes.List{Items: []nodes.Node{
 				&nodes.Integer{Ival: int64(nodes.TRIGGER_TYPE_TRUNCATE)},
@@ -36265,31 +36279,31 @@ pgdefault:
 		}
 	case 2113:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:13995
+//line gram.y:14009
 		{
 			pgVAL.list = pgDollar[2].list
 		}
 	case 2114:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:13997
+//line gram.y:14011
 		{
 			pgVAL.list = nil
 		}
 	case 2115:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14002
+//line gram.y:14016
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 2116:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14004
+//line gram.y:14018
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[2].node)
 		}
 	case 2117:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:14009
+//line gram.y:14023
 		{
 			pgVAL.node = &nodes.TriggerTransition{
 				Name:    pgDollar[4].str,
@@ -36299,133 +36313,133 @@ pgdefault:
 		}
 	case 2118:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14019
+//line gram.y:14033
 		{
 			pgVAL.boolean = true
 		}
 	case 2119:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14020
+//line gram.y:14034
 		{
 			pgVAL.boolean = false
 		}
 	case 2120:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14024
+//line gram.y:14038
 		{
 			pgVAL.boolean = true
 		}
 	case 2121:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14025
+//line gram.y:14039
 		{
 			pgVAL.boolean = false
 		}
 	case 2122:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14029
+//line gram.y:14043
 		{
 			pgVAL.str = pgDollar[1].str
 		}
 	case 2123:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:14034
+//line gram.y:14048
 		{
 			pgVAL.boolean = pgDollar[3].boolean
 		}
 	case 2124:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:14036
+//line gram.y:14050
 		{
 			pgVAL.boolean = false
 		}
 	case 2127:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14045
+//line gram.y:14059
 		{
 			pgVAL.boolean = true
 		}
 	case 2128:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14046
+//line gram.y:14060
 		{
 			pgVAL.boolean = false
 		}
 	case 2129:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:14050
+//line gram.y:14064
 		{
 			pgVAL.node = pgDollar[3].node
 		}
 	case 2130:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:14051
+//line gram.y:14065
 		{
 			pgVAL.node = nil
 		}
 	case 2133:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14061
+//line gram.y:14075
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 2134:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:14063
+//line gram.y:14077
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
 		}
 	case 2135:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:14065
+//line gram.y:14079
 		{
 			pgVAL.list = nil
 		}
 	case 2136:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14070
+//line gram.y:14084
 		{
 			pgVAL.node = &nodes.String{Str: intToString(pgDollar[1].ival)}
 		}
 	case 2137:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14072
+//line gram.y:14086
 		{
 			pgVAL.node = &nodes.String{Str: pgDollar[1].str}
 		}
 	case 2138:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14074
+//line gram.y:14088
 		{
 			pgVAL.node = &nodes.String{Str: pgDollar[1].str}
 		}
 	case 2139:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14076
+//line gram.y:14090
 		{
 			pgVAL.node = &nodes.String{Str: pgDollar[1].str}
 		}
 	case 2140:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14081
+//line gram.y:14095
 		{
 			pgVAL.node = makeRangeVar(pgDollar[2].list, pgDollar[2].loc)
 		}
 	case 2141:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:14083
+//line gram.y:14097
 		{
 			pgVAL.node = nil
 		}
 	case 2142:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:14088
+//line gram.y:14102
 		{
 			pgVAL.ival = 0
 		}
 	case 2143:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14090
+//line gram.y:14104
 		{
 			if !checkConstraintAttrConflict(pglex, pgDollar[1].ival|pgDollar[2].ival, pgDollar[2].loc) {
 				return 1
@@ -36434,73 +36448,73 @@ pgdefault:
 		}
 	case 2144:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14099
+//line gram.y:14113
 		{
 			pgVAL.ival = int64(nodes.CAS_NOT_DEFERRABLE)
 		}
 	case 2145:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14100
+//line gram.y:14114
 		{
 			pgVAL.ival = int64(nodes.CAS_DEFERRABLE)
 		}
 	case 2146:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14101
+//line gram.y:14115
 		{
 			pgVAL.ival = int64(nodes.CAS_INITIALLY_IMMEDIATE)
 		}
 	case 2147:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14102
+//line gram.y:14116
 		{
 			pgVAL.ival = int64(nodes.CAS_INITIALLY_DEFERRED)
 		}
 	case 2148:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14103
+//line gram.y:14117
 		{
 			pgVAL.ival = int64(nodes.CAS_NOT_VALID)
 		}
 	case 2149:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14104
+//line gram.y:14118
 		{
 			pgVAL.ival = int64(nodes.CAS_NO_INHERIT)
 		}
 	case 2150:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14108
+//line gram.y:14122
 		{
 			pgVAL.boolean = true
 		}
 	case 2151:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:14109
+//line gram.y:14123
 		{
 			pgVAL.boolean = false
 		}
 	case 2152:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14113
+//line gram.y:14127
 		{
 			pgVAL.boolean = false
 		}
 	case 2153:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:14114
+//line gram.y:14128
 		{
 			pgVAL.boolean = true
 		}
 	case 2154:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:14115
+//line gram.y:14129
 		{
 			pgVAL.boolean = false
 		}
 	case 2155:
 		pgDollar = pgS[pgpt-11 : pgpt+1]
-//line gram.y:14127
+//line gram.y:14141
 		{
 			pgVAL.node = &nodes.CreateEventTrigStmt{
 				Trigname:  pgDollar[4].str,
@@ -36510,7 +36524,7 @@ pgdefault:
 		}
 	case 2156:
 		pgDollar = pgS[pgpt-13 : pgpt+1]
-//line gram.y:14137
+//line gram.y:14151
 		{
 			pgVAL.node = &nodes.CreateEventTrigStmt{
 				Trigname:   pgDollar[4].str,
@@ -36521,19 +36535,19 @@ pgdefault:
 		}
 	case 2157:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14149
+//line gram.y:14163
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 2158:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:14151
+//line gram.y:14165
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
 		}
 	case 2159:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:14156
+//line gram.y:14170
 		{
 			pgVAL.node = &nodes.DefElem{
 				Defname: pgDollar[1].str,
@@ -36542,19 +36556,19 @@ pgdefault:
 		}
 	case 2160:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14166
+//line gram.y:14180
 		{
 			pgVAL.list = makeList(&nodes.String{Str: pgDollar[1].str})
 		}
 	case 2161:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:14168
+//line gram.y:14182
 		{
 			pgVAL.list = appendList(pgDollar[1].list, &nodes.String{Str: pgDollar[3].str})
 		}
 	case 2162:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:14173
+//line gram.y:14187
 		{
 			pgVAL.node = &nodes.AlterEventTrigStmt{
 				Trigname:  pgDollar[4].str,
@@ -36563,31 +36577,31 @@ pgdefault:
 		}
 	case 2163:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14182
+//line gram.y:14196
 		{
 			pgVAL.ival = int64(nodes.TRIGGER_FIRES_ON_ORIGIN)
 		}
 	case 2164:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14183
+//line gram.y:14197
 		{
 			pgVAL.ival = int64(nodes.TRIGGER_FIRES_ON_REPLICA)
 		}
 	case 2165:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14184
+//line gram.y:14198
 		{
 			pgVAL.ival = int64(nodes.TRIGGER_FIRES_ALWAYS)
 		}
 	case 2166:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14185
+//line gram.y:14199
 		{
 			pgVAL.ival = int64(nodes.TRIGGER_DISABLED)
 		}
 	case 2167:
 		pgDollar = pgS[pgpt-13 : pgpt+1]
-//line gram.y:14198
+//line gram.y:14212
 		{
 			pgVAL.node = &nodes.RuleStmt{
 				Replace:     pgDollar[2].boolean,
@@ -36601,25 +36615,25 @@ pgdefault:
 		}
 	case 2168:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14213
+//line gram.y:14227
 		{
 			pgVAL.list = nil
 		}
 	case 2169:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14215
+//line gram.y:14229
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 2170:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:14217
+//line gram.y:14231
 		{
 			pgVAL.list = pgDollar[2].list
 		}
 	case 2171:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:14222
+//line gram.y:14236
 		{
 			if pgDollar[3].node != nil {
 				pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
@@ -36629,7 +36643,7 @@ pgdefault:
 		}
 	case 2172:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14230
+//line gram.y:14244
 		{
 			if pgDollar[1].node != nil {
 				pgVAL.list = makeList(pgDollar[1].node)
@@ -36639,91 +36653,91 @@ pgdefault:
 		}
 	case 2173:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14240
+//line gram.y:14254
 		{
 			pgVAL.node = pgDollar[1].node
 		}
 	case 2174:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14241
+//line gram.y:14255
 		{
 			pgVAL.node = pgDollar[1].node
 		}
 	case 2175:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14242
+//line gram.y:14256
 		{
 			pgVAL.node = pgDollar[1].node
 		}
 	case 2176:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14243
+//line gram.y:14257
 		{
 			pgVAL.node = pgDollar[1].node
 		}
 	case 2177:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14244
+//line gram.y:14258
 		{
 			pgVAL.node = pgDollar[1].node
 		}
 	case 2178:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14248
+//line gram.y:14262
 		{
 			pgVAL.node = pgDollar[1].node
 		}
 	case 2179:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:14249
+//line gram.y:14263
 		{
 			pgVAL.node = nil
 		}
 	case 2180:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14253
+//line gram.y:14267
 		{
 			pgVAL.ival = int64(nodes.CMD_SELECT)
 		}
 	case 2181:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14254
+//line gram.y:14268
 		{
 			pgVAL.ival = int64(nodes.CMD_UPDATE)
 		}
 	case 2182:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14255
+//line gram.y:14269
 		{
 			pgVAL.ival = int64(nodes.CMD_DELETE)
 		}
 	case 2183:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14256
+//line gram.y:14270
 		{
 			pgVAL.ival = int64(nodes.CMD_INSERT)
 		}
 	case 2184:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14260
+//line gram.y:14274
 		{
 			pgVAL.boolean = true
 		}
 	case 2185:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14261
+//line gram.y:14275
 		{
 			pgVAL.boolean = false
 		}
 	case 2186:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:14262
+//line gram.y:14276
 		{
 			pgVAL.boolean = false
 		}
 	case 2187:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:14273
+//line gram.y:14287
 		{
 			/* Without a handler, CREATE LANGUAGE is CREATE EXTENSION; TRUSTED is ignored. */
 			pgVAL.node = &nodes.CreateExtensionStmt{
@@ -36733,7 +36747,7 @@ pgdefault:
 		}
 	case 2188:
 		pgDollar = pgS[pgpt-10 : pgpt+1]
-//line gram.y:14282
+//line gram.y:14296
 		{
 			pgVAL.node = &nodes.CreatePLangStmt{
 				Replace:     pgDollar[2].boolean,
@@ -36746,61 +36760,61 @@ pgdefault:
 		}
 	case 2189:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14295
+//line gram.y:14309
 		{
 			pgVAL.boolean = true
 		}
 	case 2190:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:14296
+//line gram.y:14310
 		{
 			pgVAL.boolean = false
 		}
 	case 2191:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14301
+//line gram.y:14315
 		{
 			pgVAL.list = &nodes.List{Items: []nodes.Node{&nodes.String{Str: pgDollar[1].str}}}
 		}
 	case 2192:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14303
+//line gram.y:14317
 		{
 			pgVAL.list = prependList(&nodes.String{Str: pgDollar[1].str}, pgDollar[2].list)
 		}
 	case 2193:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14307
+//line gram.y:14321
 		{
 			pgVAL.list = pgDollar[2].list
 		}
 	case 2194:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:14308
+//line gram.y:14322
 		{
 			pgVAL.list = nil
 		}
 	case 2195:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14312
+//line gram.y:14326
 		{
 			pgVAL.list = pgDollar[2].list
 		}
 	case 2196:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14313
+//line gram.y:14327
 		{
 			pgVAL.list = nil
 		}
 	case 2197:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:14314
+//line gram.y:14328
 		{
 			pgVAL.list = nil
 		}
 	case 2200:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
-//line gram.y:14331
+//line gram.y:14345
 		{
 			pgVAL.node = &nodes.CreateFdwStmt{
 				Fdwname:     pgDollar[5].str,
@@ -36810,55 +36824,55 @@ pgdefault:
 		}
 	case 2201:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14342
+//line gram.y:14356
 		{
 			pgVAL.node = makeDefElem("handler", pgDollar[2].list)
 		}
 	case 2202:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14346
+//line gram.y:14360
 		{
 			pgVAL.node = makeDefElem("handler", nil)
 		}
 	case 2203:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14350
+//line gram.y:14364
 		{
 			pgVAL.node = makeDefElem("validator", pgDollar[2].list)
 		}
 	case 2204:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14354
+//line gram.y:14368
 		{
 			pgVAL.node = makeDefElem("validator", nil)
 		}
 	case 2205:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14361
+//line gram.y:14375
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 2206:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14363
+//line gram.y:14377
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[2].node)
 		}
 	case 2207:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14367
+//line gram.y:14381
 		{
 			pgVAL.list = pgDollar[1].list
 		}
 	case 2208:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:14368
+//line gram.y:14382
 		{
 			pgVAL.list = nil
 		}
 	case 2209:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
-//line gram.y:14379
+//line gram.y:14393
 		{
 			pgVAL.node = &nodes.AlterFdwStmt{
 				Fdwname:     pgDollar[5].str,
@@ -36868,7 +36882,7 @@ pgdefault:
 		}
 	case 2210:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:14387
+//line gram.y:14401
 		{
 			pgVAL.node = &nodes.AlterFdwStmt{
 				Fdwname:     pgDollar[5].str,
@@ -36877,55 +36891,55 @@ pgdefault:
 		}
 	case 2211:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:14403
+//line gram.y:14417
 		{
 			pgVAL.list = pgDollar[3].list
 		}
 	case 2212:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:14405
+//line gram.y:14419
 		{
 			pgVAL.list = nil
 		}
 	case 2213:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14410
+//line gram.y:14424
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 2214:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:14412
+//line gram.y:14426
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
 		}
 	case 2215:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:14417
+//line gram.y:14431
 		{
 			pgVAL.list = pgDollar[3].list
 		}
 	case 2216:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14422
+//line gram.y:14436
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 2217:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:14424
+//line gram.y:14438
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
 		}
 	case 2218:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14429
+//line gram.y:14443
 		{
 			pgVAL.node = pgDollar[1].node
 		}
 	case 2219:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14433
+//line gram.y:14447
 		{
 			n := pgDollar[2].node.(*nodes.DefElem)
 			n.Defaction = int(nodes.DEFELEM_SET)
@@ -36933,7 +36947,7 @@ pgdefault:
 		}
 	case 2220:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14439
+//line gram.y:14453
 		{
 			n := pgDollar[2].node.(*nodes.DefElem)
 			n.Defaction = int(nodes.DEFELEM_ADD)
@@ -36941,7 +36955,7 @@ pgdefault:
 		}
 	case 2221:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14445
+//line gram.y:14459
 		{
 			pgVAL.node = &nodes.DefElem{
 				Defname:   pgDollar[2].str,
@@ -36951,7 +36965,7 @@ pgdefault:
 		}
 	case 2222:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14456
+//line gram.y:14470
 		{
 			pgVAL.node = &nodes.DefElem{
 				Defname:  pgDollar[1].str,
@@ -36961,19 +36975,19 @@ pgdefault:
 		}
 	case 2223:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14466
+//line gram.y:14480
 		{
 			pgVAL.str = pgDollar[1].str
 		}
 	case 2224:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14470
+//line gram.y:14484
 		{
 			pgVAL.node = &nodes.String{Str: pgDollar[1].str}
 		}
 	case 2225:
 		pgDollar = pgS[pgpt-10 : pgpt+1]
-//line gram.y:14482
+//line gram.y:14496
 		{
 			pgVAL.node = &nodes.CreateForeignServerStmt{
 				Servername:  pgDollar[3].str,
@@ -36986,7 +37000,7 @@ pgdefault:
 		}
 	case 2226:
 		pgDollar = pgS[pgpt-13 : pgpt+1]
-//line gram.y:14494
+//line gram.y:14508
 		{
 			pgVAL.node = &nodes.CreateForeignServerStmt{
 				Servername:  pgDollar[6].str,
@@ -36999,43 +37013,43 @@ pgdefault:
 		}
 	case 2227:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14507
+//line gram.y:14521
 		{
 			pgVAL.str = pgDollar[2].str
 		}
 	case 2228:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:14508
+//line gram.y:14522
 		{
 			pgVAL.str = ""
 		}
 	case 2229:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14512
+//line gram.y:14526
 		{
 			pgVAL.str = pgDollar[2].str
 		}
 	case 2230:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14513
+//line gram.y:14527
 		{
 			pgVAL.str = ""
 		}
 	case 2231:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14517
+//line gram.y:14531
 		{
 			pgVAL.str = pgDollar[1].str
 		}
 	case 2232:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:14518
+//line gram.y:14532
 		{
 			pgVAL.str = ""
 		}
 	case 2233:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:14529
+//line gram.y:14543
 		{
 			pgVAL.node = &nodes.AlterForeignServerStmt{
 				Servername: pgDollar[3].str,
@@ -37046,7 +37060,7 @@ pgdefault:
 		}
 	case 2234:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:14538
+//line gram.y:14552
 		{
 			pgVAL.node = &nodes.AlterForeignServerStmt{
 				Servername: pgDollar[3].str,
@@ -37056,7 +37070,7 @@ pgdefault:
 		}
 	case 2235:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:14546
+//line gram.y:14560
 		{
 			pgVAL.node = &nodes.AlterForeignServerStmt{
 				Servername: pgDollar[3].str,
@@ -37065,7 +37079,7 @@ pgdefault:
 		}
 	case 2236:
 		pgDollar = pgS[pgpt-11 : pgpt+1]
-//line gram.y:14564
+//line gram.y:14578
 		{
 			rv := makeRangeVar(pgDollar[4].list, pgDollar[4].loc)
 			rv.(*nodes.RangeVar).Relpersistence = 'p'
@@ -37082,7 +37096,7 @@ pgdefault:
 		}
 	case 2237:
 		pgDollar = pgS[pgpt-14 : pgpt+1]
-//line gram.y:14581
+//line gram.y:14595
 		{
 			rv := makeRangeVar(pgDollar[7].list, pgDollar[7].loc)
 			rv.(*nodes.RangeVar).Relpersistence = 'p'
@@ -37099,7 +37113,7 @@ pgdefault:
 		}
 	case 2238:
 		pgDollar = pgS[pgpt-12 : pgpt+1]
-//line gram.y:14598
+//line gram.y:14612
 		{
 			rv := makeRangeVar(pgDollar[4].list, pgDollar[4].loc)
 			inh := makeRangeVar(pgDollar[7].list, pgDollar[7].loc)
@@ -37118,7 +37132,7 @@ pgdefault:
 		}
 	case 2239:
 		pgDollar = pgS[pgpt-15 : pgpt+1]
-//line gram.y:14617
+//line gram.y:14631
 		{
 			rv := makeRangeVar(pgDollar[7].list, pgDollar[7].loc)
 			inh := makeRangeVar(pgDollar[10].list, pgDollar[10].loc)
@@ -37137,7 +37151,7 @@ pgdefault:
 		}
 	case 2240:
 		pgDollar = pgS[pgpt-11 : pgpt+1]
-//line gram.y:14644
+//line gram.y:14658
 		{
 			var listType nodes.ImportForeignSchemaType
 			var tableList *nodes.List
@@ -37157,19 +37171,19 @@ pgdefault:
 		}
 	case 2241:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14664
+//line gram.y:14678
 		{
 			pgVAL.ival = int64(nodes.FDW_IMPORT_SCHEMA_LIMIT_TO)
 		}
 	case 2242:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14665
+//line gram.y:14679
 		{
 			pgVAL.ival = int64(nodes.FDW_IMPORT_SCHEMA_EXCEPT)
 		}
 	case 2243:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:14670
+//line gram.y:14684
 		{
 			pgVAL.node = &importQualification{
 				listType:  nodes.ImportForeignSchemaType(pgDollar[1].ival),
@@ -37178,13 +37192,13 @@ pgdefault:
 		}
 	case 2244:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:14677
+//line gram.y:14691
 		{
 			pgVAL.node = nil
 		}
 	case 2245:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:14690
+//line gram.y:14704
 		{
 			pgVAL.node = &nodes.CreateUserMappingStmt{
 				User:        pgDollar[5].node.(*nodes.RoleSpec),
@@ -37195,7 +37209,7 @@ pgdefault:
 		}
 	case 2246:
 		pgDollar = pgS[pgpt-11 : pgpt+1]
-//line gram.y:14699
+//line gram.y:14713
 		{
 			pgVAL.node = &nodes.CreateUserMappingStmt{
 				User:        pgDollar[8].node.(*nodes.RoleSpec),
@@ -37206,13 +37220,13 @@ pgdefault:
 		}
 	case 2247:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14710
+//line gram.y:14724
 		{
 			pgVAL.node = pgDollar[1].node
 		}
 	case 2248:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14712
+//line gram.y:14726
 		{
 			pgVAL.node = &nodes.RoleSpec{
 				Roletype: int(nodes.ROLESPEC_CURRENT_USER),
@@ -37220,7 +37234,7 @@ pgdefault:
 		}
 	case 2249:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
-//line gram.y:14721
+//line gram.y:14735
 		{
 			pgVAL.node = &nodes.DropUserMappingStmt{
 				User:       pgDollar[5].node.(*nodes.RoleSpec),
@@ -37230,7 +37244,7 @@ pgdefault:
 		}
 	case 2250:
 		pgDollar = pgS[pgpt-9 : pgpt+1]
-//line gram.y:14729
+//line gram.y:14743
 		{
 			pgVAL.node = &nodes.DropUserMappingStmt{
 				User:       pgDollar[7].node.(*nodes.RoleSpec),
@@ -37240,7 +37254,7 @@ pgdefault:
 		}
 	case 2251:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:14740
+//line gram.y:14754
 		{
 			pgVAL.node = &nodes.AlterUserMappingStmt{
 				User:       pgDollar[5].node.(*nodes.RoleSpec),
@@ -37250,7 +37264,7 @@ pgdefault:
 		}
 	case 2252:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
-//line gram.y:14758
+//line gram.y:14772
 		{
 			var owner *nodes.RoleSpec
 			if pgDollar[4].node != nil {
@@ -37265,19 +37279,19 @@ pgdefault:
 		}
 	case 2253:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14773
+//line gram.y:14787
 		{
 			pgVAL.node = pgDollar[2].node
 		}
 	case 2254:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:14774
+//line gram.y:14788
 		{
 			pgVAL.node = nil
 		}
 	case 2255:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:14779
+//line gram.y:14793
 		{
 			pgVAL.node = &nodes.DropTableSpaceStmt{
 				Tablespacename: pgDollar[3].str,
@@ -37286,7 +37300,7 @@ pgdefault:
 		}
 	case 2256:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:14786
+//line gram.y:14800
 		{
 			pgVAL.node = &nodes.DropTableSpaceStmt{
 				Tablespacename: pgDollar[5].str,
@@ -37295,7 +37309,7 @@ pgdefault:
 		}
 	case 2257:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:14796
+//line gram.y:14810
 		{
 			pgVAL.node = &nodes.AlterTableSpaceOptionsStmt{
 				Tablespacename: pgDollar[3].str,
@@ -37305,7 +37319,7 @@ pgdefault:
 		}
 	case 2258:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:14804
+//line gram.y:14818
 		{
 			pgVAL.node = &nodes.AlterTableSpaceOptionsStmt{
 				Tablespacename: pgDollar[3].str,
@@ -37315,49 +37329,49 @@ pgdefault:
 		}
 	case 2259:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:14814
+//line gram.y:14828
 		{
 			pgVAL.list = pgDollar[2].list
 		}
 	case 2260:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14818
+//line gram.y:14832
 		{
 			pgVAL.list = pgDollar[2].list
 		}
 	case 2261:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:14819
+//line gram.y:14833
 		{
 			pgVAL.list = nil
 		}
 	case 2262:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14824
+//line gram.y:14838
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 2263:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:14826
+//line gram.y:14840
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
 		}
 	case 2264:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:14831
+//line gram.y:14845
 		{
 			pgVAL.node = makeDefElem(pgDollar[1].str, pgDollar[3].node)
 		}
 	case 2265:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14835
+//line gram.y:14849
 		{
 			pgVAL.node = makeDefElem(pgDollar[1].str, nil)
 		}
 	case 2266:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:14839
+//line gram.y:14853
 		{
 			pgVAL.node = &nodes.DefElem{
 				Defnamespace: pgDollar[1].str,
@@ -37368,7 +37382,7 @@ pgdefault:
 		}
 	case 2267:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:14848
+//line gram.y:14862
 		{
 			pgVAL.node = &nodes.DefElem{
 				Defnamespace: pgDollar[1].str,
@@ -37378,7 +37392,7 @@ pgdefault:
 		}
 	case 2268:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:14865
+//line gram.y:14879
 		{
 			pgVAL.node = &nodes.CreateExtensionStmt{
 				Extname:     pgDollar[3].str,
@@ -37388,7 +37402,7 @@ pgdefault:
 		}
 	case 2269:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:14873
+//line gram.y:14887
 		{
 			pgVAL.node = &nodes.CreateExtensionStmt{
 				Extname:     pgDollar[6].str,
@@ -37398,37 +37412,37 @@ pgdefault:
 		}
 	case 2270:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14884
+//line gram.y:14898
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[2].node)
 		}
 	case 2271:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:14886
+//line gram.y:14900
 		{
 			pgVAL.list = nil
 		}
 	case 2272:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14891
+//line gram.y:14905
 		{
 			pgVAL.node = makeDefElem("schema", &nodes.String{Str: pgDollar[2].str})
 		}
 	case 2273:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14895
+//line gram.y:14909
 		{
 			pgVAL.node = makeDefElem("new_version", &nodes.String{Str: pgDollar[2].str})
 		}
 	case 2274:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:14899
+//line gram.y:14913
 		{
 			pgVAL.node = makeDefElem("cascade", &nodes.Boolean{Boolval: true})
 		}
 	case 2275:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:14912
+//line gram.y:14926
 		{
 			pgVAL.node = &nodes.AlterExtensionStmt{
 				Extname: pgDollar[3].str,
@@ -37437,25 +37451,25 @@ pgdefault:
 		}
 	case 2276:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14922
+//line gram.y:14936
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[2].node)
 		}
 	case 2277:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:14924
+//line gram.y:14938
 		{
 			pgVAL.list = nil
 		}
 	case 2278:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:14929
+//line gram.y:14943
 		{
 			pgVAL.node = makeDefElem("new_version", &nodes.String{Str: pgDollar[2].str})
 		}
 	case 2279:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:14942
+//line gram.y:14956
 		{
 			pgVAL.node = &nodes.AlterExtensionContentsStmt{
 				Extname: pgDollar[3].str,
@@ -37466,7 +37480,7 @@ pgdefault:
 		}
 	case 2280:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:14951
+//line gram.y:14965
 		{
 			pgVAL.node = &nodes.AlterExtensionContentsStmt{
 				Extname: pgDollar[3].str,
@@ -37477,7 +37491,7 @@ pgdefault:
 		}
 	case 2281:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:14960
+//line gram.y:14974
 		{
 			pgVAL.node = &nodes.AlterExtensionContentsStmt{
 				Extname: pgDollar[3].str,
@@ -37488,7 +37502,7 @@ pgdefault:
 		}
 	case 2282:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:14969
+//line gram.y:14983
 		{
 			pgVAL.node = &nodes.AlterExtensionContentsStmt{
 				Extname: pgDollar[3].str,
@@ -37499,7 +37513,7 @@ pgdefault:
 		}
 	case 2283:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:14978
+//line gram.y:14992
 		{
 			pgVAL.node = &nodes.AlterExtensionContentsStmt{
 				Extname: pgDollar[3].str,
@@ -37510,7 +37524,7 @@ pgdefault:
 		}
 	case 2284:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:14987
+//line gram.y:15001
 		{
 			pgVAL.node = &nodes.AlterExtensionContentsStmt{
 				Extname: pgDollar[3].str,
@@ -37521,7 +37535,7 @@ pgdefault:
 		}
 	case 2285:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:14996
+//line gram.y:15010
 		{
 			pgVAL.node = &nodes.AlterExtensionContentsStmt{
 				Extname: pgDollar[3].str,
@@ -37532,7 +37546,7 @@ pgdefault:
 		}
 	case 2286:
 		pgDollar = pgS[pgpt-9 : pgpt+1]
-//line gram.y:15005
+//line gram.y:15019
 		{
 			pgVAL.node = &nodes.AlterExtensionContentsStmt{
 				Extname: pgDollar[3].str,
@@ -37543,7 +37557,7 @@ pgdefault:
 		}
 	case 2287:
 		pgDollar = pgS[pgpt-9 : pgpt+1]
-//line gram.y:15014
+//line gram.y:15028
 		{
 			pgVAL.node = &nodes.AlterExtensionContentsStmt{
 				Extname: pgDollar[3].str,
@@ -37554,7 +37568,7 @@ pgdefault:
 		}
 	case 2288:
 		pgDollar = pgS[pgpt-10 : pgpt+1]
-//line gram.y:15023
+//line gram.y:15037
 		{
 			pgVAL.node = &nodes.AlterExtensionContentsStmt{
 				Extname: pgDollar[3].str,
@@ -37565,7 +37579,7 @@ pgdefault:
 		}
 	case 2289:
 		pgDollar = pgS[pgpt-9 : pgpt+1]
-//line gram.y:15032
+//line gram.y:15046
 		{
 			pgVAL.node = &nodes.AlterExtensionContentsStmt{
 				Extname: pgDollar[3].str,
@@ -37576,7 +37590,7 @@ pgdefault:
 		}
 	case 2290:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15041
+//line gram.y:15055
 		{
 			pgVAL.node = &nodes.AlterExtensionContentsStmt{
 				Extname: pgDollar[3].str,
@@ -37587,7 +37601,7 @@ pgdefault:
 		}
 	case 2291:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15050
+//line gram.y:15064
 		{
 			pgVAL.node = &nodes.AlterExtensionContentsStmt{
 				Extname: pgDollar[3].str,
@@ -37598,7 +37612,7 @@ pgdefault:
 		}
 	case 2292:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:15068
+//line gram.y:15082
 		{
 			pgVAL.node = &nodes.CreateAmStmt{
 				Amname:      pgDollar[4].str,
@@ -37608,19 +37622,19 @@ pgdefault:
 		}
 	case 2293:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:15078
+//line gram.y:15092
 		{
 			pgVAL.ival = nodes.AMTYPE_INDEX
 		}
 	case 2294:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:15079
+//line gram.y:15093
 		{
 			pgVAL.ival = nodes.AMTYPE_TABLE
 		}
 	case 2295:
 		pgDollar = pgS[pgpt-10 : pgpt+1]
-//line gram.y:15092
+//line gram.y:15106
 		{
 			pgVAL.node = &nodes.CreatePolicyStmt{
 				PolicyName: pgDollar[3].str,
@@ -37634,7 +37648,7 @@ pgdefault:
 		}
 	case 2296:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:15108
+//line gram.y:15122
 		{
 			pgVAL.node = &nodes.AlterPolicyStmt{
 				PolicyName: pgDollar[3].str,
@@ -37646,37 +37660,37 @@ pgdefault:
 		}
 	case 2297:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:15120
+//line gram.y:15134
 		{
 			pgVAL.node = pgDollar[3].node
 		}
 	case 2298:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:15121
+//line gram.y:15135
 		{
 			pgVAL.node = nil
 		}
 	case 2299:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:15125
+//line gram.y:15139
 		{
 			pgVAL.node = pgDollar[4].node
 		}
 	case 2300:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:15126
+//line gram.y:15140
 		{
 			pgVAL.node = nil
 		}
 	case 2301:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:15130
+//line gram.y:15144
 		{
 			pgVAL.list = pgDollar[2].list
 		}
 	case 2302:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:15132
+//line gram.y:15146
 		{
 			/* Default is PUBLIC */
 			pgVAL.list = makeList(&nodes.RoleSpec{
@@ -37686,19 +37700,19 @@ pgdefault:
 		}
 	case 2303:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:15142
+//line gram.y:15156
 		{
 			pgVAL.list = pgDollar[2].list
 		}
 	case 2304:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:15143
+//line gram.y:15157
 		{
 			pgVAL.list = nil
 		}
 	case 2305:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:15148
+//line gram.y:15162
 		{
 			if pgDollar[2].str == "permissive" {
 				pgVAL.boolean = true
@@ -37711,55 +37725,55 @@ pgdefault:
 		}
 	case 2306:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:15158
+//line gram.y:15172
 		{
 			pgVAL.boolean = true
 		}
 	case 2307:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:15162
+//line gram.y:15176
 		{
 			pgVAL.str = pgDollar[2].str
 		}
 	case 2308:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:15163
+//line gram.y:15177
 		{
 			pgVAL.str = "all"
 		}
 	case 2309:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:15167
+//line gram.y:15181
 		{
 			pgVAL.str = "all"
 		}
 	case 2310:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:15168
+//line gram.y:15182
 		{
 			pgVAL.str = "select"
 		}
 	case 2311:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:15169
+//line gram.y:15183
 		{
 			pgVAL.str = "insert"
 		}
 	case 2312:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:15170
+//line gram.y:15184
 		{
 			pgVAL.str = "update"
 		}
 	case 2313:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:15171
+//line gram.y:15185
 		{
 			pgVAL.str = "delete"
 		}
 	case 2314:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:15182
+//line gram.y:15196
 		{
 			pgVAL.node = &nodes.CreatePublicationStmt{
 				Pubname: pgDollar[3].str,
@@ -37768,7 +37782,7 @@ pgdefault:
 		}
 	case 2315:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
-//line gram.y:15189
+//line gram.y:15203
 		{
 			pgVAL.node = &nodes.CreatePublicationStmt{
 				Pubname:      pgDollar[3].str,
@@ -37778,7 +37792,7 @@ pgdefault:
 		}
 	case 2316:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15197
+//line gram.y:15211
 		{
 			objs, ok := preprocessPubobjList(pglex, pgDollar[5].pubobjs)
 			if !ok {
@@ -37792,7 +37806,7 @@ pgdefault:
 		}
 	case 2317:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:15212
+//line gram.y:15226
 		{
 			pgVAL.node = &nodes.AlterPublicationStmt{
 				Pubname: pgDollar[3].str,
@@ -37801,7 +37815,7 @@ pgdefault:
 		}
 	case 2318:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:15219
+//line gram.y:15233
 		{
 			objs, ok := preprocessPubobjList(pglex, pgDollar[5].pubobjs)
 			if !ok {
@@ -37815,7 +37829,7 @@ pgdefault:
 		}
 	case 2319:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:15231
+//line gram.y:15245
 		{
 			objs, ok := preprocessPubobjList(pglex, pgDollar[5].pubobjs)
 			if !ok {
@@ -37829,7 +37843,7 @@ pgdefault:
 		}
 	case 2320:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:15243
+//line gram.y:15257
 		{
 			objs, ok := preprocessPubobjList(pglex, pgDollar[5].pubobjs)
 			if !ok {
@@ -37843,19 +37857,19 @@ pgdefault:
 		}
 	case 2321:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:15257
+//line gram.y:15271
 		{
 			pgVAL.list = pgDollar[2].list
 		}
 	case 2322:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:15258
+//line gram.y:15272
 		{
 			pgVAL.list = nil
 		}
 	case 2323:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:15263
+//line gram.y:15277
 		{
 			var cols *nodes.List
 			if pgDollar[3].list != nil {
@@ -37875,7 +37889,7 @@ pgdefault:
 		}
 	case 2324:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:15281
+//line gram.y:15295
 		{
 			pgVAL.pubobjs = []pubObj{{spec: &nodes.PublicationObjSpec{
 				Pubobjtype: nodes.PUBLICATIONOBJ_TABLES_IN_SCHEMA,
@@ -37884,7 +37898,7 @@ pgdefault:
 		}
 	case 2325:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:15288
+//line gram.y:15302
 		{
 			pgVAL.pubobjs = []pubObj{{spec: &nodes.PublicationObjSpec{
 				Pubobjtype: nodes.PUBLICATIONOBJ_TABLES_IN_CUR_SCHEMA,
@@ -37892,7 +37906,7 @@ pgdefault:
 		}
 	case 2326:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:15294
+//line gram.y:15308
 		{
 			pt := &nodes.PublicationTable{
 				Relation: makeRangeVar(pgDollar[1].list, pgDollar[1].loc).(*nodes.RangeVar),
@@ -37908,7 +37922,7 @@ pgdefault:
 		}
 	case 2327:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:15308
+//line gram.y:15322
 		{
 			pt := &nodes.PublicationTable{
 				Relation: pgDollar[1].node.(*nodes.RangeVar),
@@ -37924,7 +37938,7 @@ pgdefault:
 		}
 	case 2328:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:15322
+//line gram.y:15336
 		{
 			pgVAL.pubobjs = []pubObj{{spec: &nodes.PublicationObjSpec{
 				Pubobjtype: nodes.PUBLICATIONOBJ_CONTINUATION,
@@ -37932,31 +37946,31 @@ pgdefault:
 		}
 	case 2329:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:15330
+//line gram.y:15344
 		{
 			pgVAL.list = makeList(pgDollar[3].node)
 		}
 	case 2330:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:15331
+//line gram.y:15345
 		{
 			pgVAL.list = nil
 		}
 	case 2331:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:15336
+//line gram.y:15350
 		{
 			pgVAL.pubobjs = pgDollar[1].pubobjs
 		}
 	case 2332:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:15338
+//line gram.y:15352
 		{
 			pgVAL.pubobjs = append(pgDollar[1].pubobjs, pgDollar[3].pubobjs...)
 		}
 	case 2333:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:15349
+//line gram.y:15363
 		{
 			pgVAL.node = &nodes.CreateSubscriptionStmt{
 				Subname:     pgDollar[3].str,
@@ -37967,7 +37981,7 @@ pgdefault:
 		}
 	case 2334:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:15361
+//line gram.y:15375
 		{
 			pgVAL.node = &nodes.AlterSubscriptionStmt{
 				Kind:    nodes.ALTER_SUBSCRIPTION_OPTIONS,
@@ -37977,7 +37991,7 @@ pgdefault:
 		}
 	case 2335:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:15369
+//line gram.y:15383
 		{
 			pgVAL.node = &nodes.AlterSubscriptionStmt{
 				Kind:     nodes.ALTER_SUBSCRIPTION_CONNECTION,
@@ -37987,7 +38001,7 @@ pgdefault:
 		}
 	case 2336:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15377
+//line gram.y:15391
 		{
 			pgVAL.node = &nodes.AlterSubscriptionStmt{
 				Kind:    nodes.ALTER_SUBSCRIPTION_REFRESH,
@@ -37997,7 +38011,7 @@ pgdefault:
 		}
 	case 2337:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
-//line gram.y:15385
+//line gram.y:15399
 		{
 			pgVAL.node = &nodes.AlterSubscriptionStmt{
 				Kind:        nodes.ALTER_SUBSCRIPTION_ADD_PUBLICATION,
@@ -38008,7 +38022,7 @@ pgdefault:
 		}
 	case 2338:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
-//line gram.y:15394
+//line gram.y:15408
 		{
 			pgVAL.node = &nodes.AlterSubscriptionStmt{
 				Kind:        nodes.ALTER_SUBSCRIPTION_DROP_PUBLICATION,
@@ -38019,7 +38033,7 @@ pgdefault:
 		}
 	case 2339:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
-//line gram.y:15403
+//line gram.y:15417
 		{
 			pgVAL.node = &nodes.AlterSubscriptionStmt{
 				Kind:        nodes.ALTER_SUBSCRIPTION_SET_PUBLICATION,
@@ -38030,7 +38044,7 @@ pgdefault:
 		}
 	case 2340:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:15412
+//line gram.y:15426
 		{
 			pgVAL.node = &nodes.AlterSubscriptionStmt{
 				Kind:    nodes.ALTER_SUBSCRIPTION_ENABLED,
@@ -38040,7 +38054,7 @@ pgdefault:
 		}
 	case 2341:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:15420
+//line gram.y:15434
 		{
 			pgVAL.node = &nodes.AlterSubscriptionStmt{
 				Kind:    nodes.ALTER_SUBSCRIPTION_ENABLED,
@@ -38050,7 +38064,7 @@ pgdefault:
 		}
 	case 2342:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:15428
+//line gram.y:15442
 		{
 			pgVAL.node = &nodes.AlterSubscriptionStmt{
 				Kind:    nodes.ALTER_SUBSCRIPTION_SKIP,
@@ -38060,7 +38074,7 @@ pgdefault:
 		}
 	case 2343:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:15439
+//line gram.y:15453
 		{
 			pgVAL.node = &nodes.DropSubscriptionStmt{
 				Subname:   pgDollar[3].str,
@@ -38070,7 +38084,7 @@ pgdefault:
 		}
 	case 2344:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15447
+//line gram.y:15461
 		{
 			pgVAL.node = &nodes.DropSubscriptionStmt{
 				Subname:   pgDollar[5].str,
@@ -38080,7 +38094,7 @@ pgdefault:
 		}
 	case 2345:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:15465
+//line gram.y:15479
 		{
 			pgVAL.node = &nodes.AlterObjectDependsStmt{
 				ObjectType: nodes.OBJECT_FUNCTION,
@@ -38091,7 +38105,7 @@ pgdefault:
 		}
 	case 2346:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:15474
+//line gram.y:15488
 		{
 			pgVAL.node = &nodes.AlterObjectDependsStmt{
 				ObjectType: nodes.OBJECT_PROCEDURE,
@@ -38102,7 +38116,7 @@ pgdefault:
 		}
 	case 2347:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:15483
+//line gram.y:15497
 		{
 			pgVAL.node = &nodes.AlterObjectDependsStmt{
 				ObjectType: nodes.OBJECT_ROUTINE,
@@ -38113,7 +38127,7 @@ pgdefault:
 		}
 	case 2348:
 		pgDollar = pgS[pgpt-10 : pgpt+1]
-//line gram.y:15492
+//line gram.y:15506
 		{
 			pgVAL.node = &nodes.AlterObjectDependsStmt{
 				ObjectType: nodes.OBJECT_TRIGGER,
@@ -38125,7 +38139,7 @@ pgdefault:
 		}
 	case 2349:
 		pgDollar = pgS[pgpt-9 : pgpt+1]
-//line gram.y:15502
+//line gram.y:15516
 		{
 			pgVAL.node = &nodes.AlterObjectDependsStmt{
 				ObjectType: nodes.OBJECT_MATVIEW,
@@ -38136,7 +38150,7 @@ pgdefault:
 		}
 	case 2350:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:15511
+//line gram.y:15525
 		{
 			pgVAL.node = &nodes.AlterObjectDependsStmt{
 				ObjectType: nodes.OBJECT_INDEX,
@@ -38147,19 +38161,19 @@ pgdefault:
 		}
 	case 2351:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:15523
+//line gram.y:15537
 		{
 			pgVAL.boolean = true
 		}
 	case 2352:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:15525
+//line gram.y:15539
 		{
 			pgVAL.boolean = false
 		}
 	case 2353:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15536
+//line gram.y:15550
 		{
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_AGGREGATE,
@@ -38169,7 +38183,7 @@ pgdefault:
 		}
 	case 2354:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15544
+//line gram.y:15558
 		{
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_COLLATION,
@@ -38179,7 +38193,7 @@ pgdefault:
 		}
 	case 2355:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15552
+//line gram.y:15566
 		{
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_CONVERSION,
@@ -38189,7 +38203,7 @@ pgdefault:
 		}
 	case 2356:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15560
+//line gram.y:15574
 		{
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_DOMAIN,
@@ -38199,7 +38213,7 @@ pgdefault:
 		}
 	case 2357:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15568
+//line gram.y:15582
 		{
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_EXTENSION,
@@ -38209,7 +38223,7 @@ pgdefault:
 		}
 	case 2358:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15576
+//line gram.y:15590
 		{
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_FUNCTION,
@@ -38219,7 +38233,7 @@ pgdefault:
 		}
 	case 2359:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15584
+//line gram.y:15598
 		{
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_OPERATOR,
@@ -38229,7 +38243,7 @@ pgdefault:
 		}
 	case 2360:
 		pgDollar = pgS[pgpt-9 : pgpt+1]
-//line gram.y:15592
+//line gram.y:15606
 		{
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_OPCLASS,
@@ -38239,7 +38253,7 @@ pgdefault:
 		}
 	case 2361:
 		pgDollar = pgS[pgpt-9 : pgpt+1]
-//line gram.y:15600
+//line gram.y:15614
 		{
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_OPFAMILY,
@@ -38249,7 +38263,7 @@ pgdefault:
 		}
 	case 2362:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15608
+//line gram.y:15622
 		{
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_PROCEDURE,
@@ -38259,7 +38273,7 @@ pgdefault:
 		}
 	case 2363:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15616
+//line gram.y:15630
 		{
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_ROUTINE,
@@ -38269,7 +38283,7 @@ pgdefault:
 		}
 	case 2364:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15624
+//line gram.y:15638
 		{
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_TABLE,
@@ -38279,7 +38293,7 @@ pgdefault:
 		}
 	case 2365:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:15632
+//line gram.y:15646
 		{
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_TABLE,
@@ -38290,7 +38304,7 @@ pgdefault:
 		}
 	case 2366:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15641
+//line gram.y:15655
 		{
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_STATISTIC_EXT,
@@ -38300,7 +38314,7 @@ pgdefault:
 		}
 	case 2367:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:15649
+//line gram.y:15663
 		{
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_TSPARSER,
@@ -38310,7 +38324,7 @@ pgdefault:
 		}
 	case 2368:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:15657
+//line gram.y:15671
 		{
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_TSDICTIONARY,
@@ -38320,7 +38334,7 @@ pgdefault:
 		}
 	case 2369:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:15665
+//line gram.y:15679
 		{
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_TSTEMPLATE,
@@ -38330,7 +38344,7 @@ pgdefault:
 		}
 	case 2370:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:15673
+//line gram.y:15687
 		{
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_TSCONFIGURATION,
@@ -38340,7 +38354,7 @@ pgdefault:
 		}
 	case 2371:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15681
+//line gram.y:15695
 		{
 			rv := makeRangeVarFromAnyName(pgDollar[3].list, pgDollar[3].loc)
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
@@ -38351,7 +38365,7 @@ pgdefault:
 		}
 	case 2372:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:15690
+//line gram.y:15704
 		{
 			rv := makeRangeVarFromAnyName(pgDollar[5].list, pgDollar[5].loc)
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
@@ -38363,7 +38377,7 @@ pgdefault:
 		}
 	case 2373:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15700
+//line gram.y:15714
 		{
 			rv := makeRangeVarFromAnyName(pgDollar[3].list, pgDollar[3].loc)
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
@@ -38374,7 +38388,7 @@ pgdefault:
 		}
 	case 2374:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:15709
+//line gram.y:15723
 		{
 			rv := makeRangeVarFromAnyName(pgDollar[5].list, pgDollar[5].loc)
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
@@ -38386,7 +38400,7 @@ pgdefault:
 		}
 	case 2375:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
-//line gram.y:15719
+//line gram.y:15733
 		{
 			rv := makeRangeVarFromAnyName(pgDollar[4].list, pgDollar[4].loc)
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
@@ -38397,7 +38411,7 @@ pgdefault:
 		}
 	case 2376:
 		pgDollar = pgS[pgpt-9 : pgpt+1]
-//line gram.y:15728
+//line gram.y:15742
 		{
 			rv := makeRangeVarFromAnyName(pgDollar[6].list, pgDollar[6].loc)
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
@@ -38409,7 +38423,7 @@ pgdefault:
 		}
 	case 2377:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
-//line gram.y:15738
+//line gram.y:15752
 		{
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_FOREIGN_TABLE,
@@ -38419,7 +38433,7 @@ pgdefault:
 		}
 	case 2378:
 		pgDollar = pgS[pgpt-9 : pgpt+1]
-//line gram.y:15746
+//line gram.y:15760
 		{
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_FOREIGN_TABLE,
@@ -38430,7 +38444,7 @@ pgdefault:
 		}
 	case 2379:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15755
+//line gram.y:15769
 		{
 			pgVAL.node = &nodes.AlterObjectSchemaStmt{
 				ObjectType: nodes.OBJECT_TYPE,
@@ -38440,7 +38454,7 @@ pgdefault:
 		}
 	case 2380:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
-//line gram.y:15772
+//line gram.y:15786
 		{
 			pgVAL.node = &nodes.AlterOperatorStmt{
 				Opername: pgDollar[3].node.(*nodes.ObjectWithArgs),
@@ -38449,19 +38463,19 @@ pgdefault:
 		}
 	case 2381:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:15782
+//line gram.y:15796
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 2382:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:15784
+//line gram.y:15798
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
 		}
 	case 2383:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:15789
+//line gram.y:15803
 		{
 			pgVAL.node = &nodes.DefElem{
 				Defname:  pgDollar[1].str,
@@ -38470,7 +38484,7 @@ pgdefault:
 		}
 	case 2384:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:15796
+//line gram.y:15810
 		{
 			pgVAL.node = &nodes.DefElem{
 				Defname:  pgDollar[1].str,
@@ -38480,7 +38494,7 @@ pgdefault:
 		}
 	case 2385:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:15804
+//line gram.y:15818
 		{
 			pgVAL.node = &nodes.DefElem{
 				Defname:  pgDollar[1].str,
@@ -38489,37 +38503,37 @@ pgdefault:
 		}
 	case 2386:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:15814
+//line gram.y:15828
 		{
 			pgVAL.node = pgDollar[1].typename
 		}
 	case 2387:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:15816
+//line gram.y:15830
 		{
 			pgVAL.node = &nodes.String{Str: pgDollar[1].str}
 		}
 	case 2388:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:15818
+//line gram.y:15832
 		{
 			pgVAL.node = pgDollar[1].list
 		}
 	case 2389:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:15820
+//line gram.y:15834
 		{
 			pgVAL.node = pgDollar[1].node
 		}
 	case 2390:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:15822
+//line gram.y:15836
 		{
 			pgVAL.node = &nodes.String{Str: pgDollar[1].str}
 		}
 	case 2391:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
-//line gram.y:15833
+//line gram.y:15847
 		{
 			pgVAL.node = &nodes.AlterTypeStmt{
 				TypeName: pgDollar[3].list,
@@ -38528,7 +38542,7 @@ pgdefault:
 		}
 	case 2392:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15849
+//line gram.y:15863
 		{
 			pgVAL.node = &nodes.AlterOwnerStmt{
 				ObjectType: nodes.OBJECT_AGGREGATE,
@@ -38538,7 +38552,7 @@ pgdefault:
 		}
 	case 2393:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15857
+//line gram.y:15871
 		{
 			pgVAL.node = &nodes.AlterOwnerStmt{
 				ObjectType: nodes.OBJECT_COLLATION,
@@ -38548,7 +38562,7 @@ pgdefault:
 		}
 	case 2394:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15865
+//line gram.y:15879
 		{
 			pgVAL.node = &nodes.AlterOwnerStmt{
 				ObjectType: nodes.OBJECT_CONVERSION,
@@ -38558,7 +38572,7 @@ pgdefault:
 		}
 	case 2395:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15873
+//line gram.y:15887
 		{
 			pgVAL.node = &nodes.AlterOwnerStmt{
 				ObjectType: nodes.OBJECT_DATABASE,
@@ -38568,7 +38582,7 @@ pgdefault:
 		}
 	case 2396:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15881
+//line gram.y:15895
 		{
 			pgVAL.node = &nodes.AlterOwnerStmt{
 				ObjectType: nodes.OBJECT_DOMAIN,
@@ -38578,7 +38592,7 @@ pgdefault:
 		}
 	case 2397:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15889
+//line gram.y:15903
 		{
 			pgVAL.node = &nodes.AlterOwnerStmt{
 				ObjectType: nodes.OBJECT_FUNCTION,
@@ -38588,7 +38602,7 @@ pgdefault:
 		}
 	case 2398:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
-//line gram.y:15897
+//line gram.y:15911
 		{
 			pgVAL.node = &nodes.AlterOwnerStmt{
 				ObjectType: nodes.OBJECT_LANGUAGE,
@@ -38598,7 +38612,7 @@ pgdefault:
 		}
 	case 2399:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
-//line gram.y:15905
+//line gram.y:15919
 		{
 			pgVAL.node = &nodes.AlterOwnerStmt{
 				ObjectType: nodes.OBJECT_LARGEOBJECT,
@@ -38608,7 +38622,7 @@ pgdefault:
 		}
 	case 2400:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15913
+//line gram.y:15927
 		{
 			pgVAL.node = &nodes.AlterOwnerStmt{
 				ObjectType: nodes.OBJECT_OPERATOR,
@@ -38618,7 +38632,7 @@ pgdefault:
 		}
 	case 2401:
 		pgDollar = pgS[pgpt-9 : pgpt+1]
-//line gram.y:15921
+//line gram.y:15935
 		{
 			pgVAL.node = &nodes.AlterOwnerStmt{
 				ObjectType: nodes.OBJECT_OPCLASS,
@@ -38628,7 +38642,7 @@ pgdefault:
 		}
 	case 2402:
 		pgDollar = pgS[pgpt-9 : pgpt+1]
-//line gram.y:15929
+//line gram.y:15943
 		{
 			pgVAL.node = &nodes.AlterOwnerStmt{
 				ObjectType: nodes.OBJECT_OPFAMILY,
@@ -38638,7 +38652,7 @@ pgdefault:
 		}
 	case 2403:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15937
+//line gram.y:15951
 		{
 			pgVAL.node = &nodes.AlterOwnerStmt{
 				ObjectType: nodes.OBJECT_PROCEDURE,
@@ -38648,7 +38662,7 @@ pgdefault:
 		}
 	case 2404:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15945
+//line gram.y:15959
 		{
 			pgVAL.node = &nodes.AlterOwnerStmt{
 				ObjectType: nodes.OBJECT_ROUTINE,
@@ -38658,7 +38672,7 @@ pgdefault:
 		}
 	case 2405:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15953
+//line gram.y:15967
 		{
 			pgVAL.node = &nodes.AlterOwnerStmt{
 				ObjectType: nodes.OBJECT_SCHEMA,
@@ -38668,7 +38682,7 @@ pgdefault:
 		}
 	case 2406:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15961
+//line gram.y:15975
 		{
 			pgVAL.node = &nodes.AlterOwnerStmt{
 				ObjectType: nodes.OBJECT_TYPE,
@@ -38678,7 +38692,7 @@ pgdefault:
 		}
 	case 2407:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15969
+//line gram.y:15983
 		{
 			pgVAL.node = &nodes.AlterOwnerStmt{
 				ObjectType: nodes.OBJECT_TABLESPACE,
@@ -38688,7 +38702,7 @@ pgdefault:
 		}
 	case 2408:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:15977
+//line gram.y:15991
 		{
 			pgVAL.node = &nodes.AlterOwnerStmt{
 				ObjectType: nodes.OBJECT_STATISTIC_EXT,
@@ -38698,7 +38712,7 @@ pgdefault:
 		}
 	case 2409:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:15985
+//line gram.y:15999
 		{
 			pgVAL.node = &nodes.AlterOwnerStmt{
 				ObjectType: nodes.OBJECT_TSDICTIONARY,
@@ -38708,7 +38722,7 @@ pgdefault:
 		}
 	case 2410:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:15993
+//line gram.y:16007
 		{
 			pgVAL.node = &nodes.AlterOwnerStmt{
 				ObjectType: nodes.OBJECT_TSCONFIGURATION,
@@ -38718,7 +38732,7 @@ pgdefault:
 		}
 	case 2411:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:16001
+//line gram.y:16015
 		{
 			pgVAL.node = &nodes.AlterOwnerStmt{
 				ObjectType: nodes.OBJECT_FDW,
@@ -38728,7 +38742,7 @@ pgdefault:
 		}
 	case 2412:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:16009
+//line gram.y:16023
 		{
 			pgVAL.node = &nodes.AlterOwnerStmt{
 				ObjectType: nodes.OBJECT_FOREIGN_SERVER,
@@ -38738,7 +38752,7 @@ pgdefault:
 		}
 	case 2413:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
-//line gram.y:16017
+//line gram.y:16031
 		{
 			pgVAL.node = &nodes.AlterOwnerStmt{
 				ObjectType: nodes.OBJECT_EVENT_TRIGGER,
@@ -38748,7 +38762,7 @@ pgdefault:
 		}
 	case 2414:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:16025
+//line gram.y:16039
 		{
 			pgVAL.node = &nodes.AlterOwnerStmt{
 				ObjectType: nodes.OBJECT_PUBLICATION,
@@ -38758,7 +38772,7 @@ pgdefault:
 		}
 	case 2415:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:16033
+//line gram.y:16047
 		{
 			pgVAL.node = &nodes.AlterOwnerStmt{
 				ObjectType: nodes.OBJECT_SUBSCRIPTION,
@@ -38768,7 +38782,7 @@ pgdefault:
 		}
 	case 2416:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:16050
+//line gram.y:16064
 		{
 			pgVAL.node = &nodes.AlterDefaultPrivilegesStmt{
 				Options: pgDollar[4].list,
@@ -38777,19 +38791,19 @@ pgdefault:
 		}
 	case 2417:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:16060
+//line gram.y:16074
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[2].node)
 		}
 	case 2418:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:16062
+//line gram.y:16076
 		{
 			pgVAL.list = nil
 		}
 	case 2419:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:16067
+//line gram.y:16081
 		{
 			pgVAL.node = &nodes.DefElem{
 				Defname:  "schemas",
@@ -38799,7 +38813,7 @@ pgdefault:
 		}
 	case 2420:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:16075
+//line gram.y:16089
 		{
 			pgVAL.node = &nodes.DefElem{
 				Defname:  "roles",
@@ -38809,7 +38823,7 @@ pgdefault:
 		}
 	case 2421:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:16083
+//line gram.y:16097
 		{
 			pgVAL.node = &nodes.DefElem{
 				Defname:  "roles",
@@ -38819,7 +38833,7 @@ pgdefault:
 		}
 	case 2422:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:16094
+//line gram.y:16108
 		{
 			pgVAL.node = &nodes.GrantStmt{
 				IsGrant:     true,
@@ -38833,7 +38847,7 @@ pgdefault:
 		}
 	case 2423:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:16106
+//line gram.y:16120
 		{
 			pgVAL.node = &nodes.GrantStmt{
 				IsGrant:    false,
@@ -38847,7 +38861,7 @@ pgdefault:
 		}
 	case 2424:
 		pgDollar = pgS[pgpt-11 : pgpt+1]
-//line gram.y:16118
+//line gram.y:16132
 		{
 			pgVAL.node = &nodes.GrantStmt{
 				IsGrant:     false,
@@ -38862,43 +38876,43 @@ pgdefault:
 		}
 	case 2425:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:16134
+//line gram.y:16148
 		{
 			pgVAL.ival = int64(nodes.OBJECT_TABLE)
 		}
 	case 2426:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:16136
+//line gram.y:16150
 		{
 			pgVAL.ival = int64(nodes.OBJECT_FUNCTION)
 		}
 	case 2427:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:16138
+//line gram.y:16152
 		{
 			pgVAL.ival = int64(nodes.OBJECT_FUNCTION)
 		}
 	case 2428:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:16140
+//line gram.y:16154
 		{
 			pgVAL.ival = int64(nodes.OBJECT_SEQUENCE)
 		}
 	case 2429:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:16142
+//line gram.y:16156
 		{
 			pgVAL.ival = int64(nodes.OBJECT_TYPE)
 		}
 	case 2430:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:16144
+//line gram.y:16158
 		{
 			pgVAL.ival = int64(nodes.OBJECT_SCHEMA)
 		}
 	case 2431:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:16155
+//line gram.y:16169
 		{
 			pgVAL.node = &nodes.AlterTSDictionaryStmt{
 				Dictname: pgDollar[5].list,
@@ -38907,7 +38921,7 @@ pgdefault:
 		}
 	case 2432:
 		pgDollar = pgS[pgpt-11 : pgpt+1]
-//line gram.y:16171
+//line gram.y:16185
 		{
 			pgVAL.node = &nodes.AlterTSConfigurationStmt{
 				Kind:      nodes.ALTER_TSCONFIG_ADD_MAPPING,
@@ -38918,7 +38932,7 @@ pgdefault:
 		}
 	case 2433:
 		pgDollar = pgS[pgpt-11 : pgpt+1]
-//line gram.y:16180
+//line gram.y:16194
 		{
 			pgVAL.node = &nodes.AlterTSConfigurationStmt{
 				Kind:      nodes.ALTER_TSCONFIG_ALTER_MAPPING_FOR_TOKEN,
@@ -38930,7 +38944,7 @@ pgdefault:
 		}
 	case 2434:
 		pgDollar = pgS[pgpt-11 : pgpt+1]
-//line gram.y:16190
+//line gram.y:16204
 		{
 			pgVAL.node = &nodes.AlterTSConfigurationStmt{
 				Kind:    nodes.ALTER_TSCONFIG_REPLACE_DICT,
@@ -38941,7 +38955,7 @@ pgdefault:
 		}
 	case 2435:
 		pgDollar = pgS[pgpt-13 : pgpt+1]
-//line gram.y:16199
+//line gram.y:16213
 		{
 			pgVAL.node = &nodes.AlterTSConfigurationStmt{
 				Kind:      nodes.ALTER_TSCONFIG_REPLACE_DICT_FOR_TOKEN,
@@ -38953,7 +38967,7 @@ pgdefault:
 		}
 	case 2436:
 		pgDollar = pgS[pgpt-9 : pgpt+1]
-//line gram.y:16209
+//line gram.y:16223
 		{
 			pgVAL.node = &nodes.AlterTSConfigurationStmt{
 				Kind:      nodes.ALTER_TSCONFIG_DROP_MAPPING,
@@ -38963,7 +38977,7 @@ pgdefault:
 		}
 	case 2437:
 		pgDollar = pgS[pgpt-11 : pgpt+1]
-//line gram.y:16217
+//line gram.y:16231
 		{
 			pgVAL.node = &nodes.AlterTSConfigurationStmt{
 				Kind:      nodes.ALTER_TSCONFIG_DROP_MAPPING,
@@ -38974,7 +38988,7 @@ pgdefault:
 		}
 	case 2438:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:16235
+//line gram.y:16249
 		{
 			pgVAL.node = &nodes.CreateStatsStmt{
 				Defnames:    pgDollar[3].list,
@@ -38986,7 +39000,7 @@ pgdefault:
 		}
 	case 2439:
 		pgDollar = pgS[pgpt-11 : pgpt+1]
-//line gram.y:16245
+//line gram.y:16259
 		{
 			pgVAL.node = &nodes.CreateStatsStmt{
 				Defnames:    pgDollar[6].list,
@@ -38998,43 +39012,43 @@ pgdefault:
 		}
 	case 2440:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:16258
+//line gram.y:16272
 		{
 			pgVAL.list = pgDollar[1].list
 		}
 	case 2441:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:16260
+//line gram.y:16274
 		{
 			pgVAL.list = nil
 		}
 	case 2442:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:16265
+//line gram.y:16279
 		{
 			pgVAL.list = pgDollar[2].list
 		}
 	case 2443:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:16267
+//line gram.y:16281
 		{
 			pgVAL.list = nil
 		}
 	case 2444:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:16272
+//line gram.y:16286
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 2445:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:16274
+//line gram.y:16288
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
 		}
 	case 2446:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:16279
+//line gram.y:16293
 		{
 			pgVAL.node = &nodes.StatsElem{
 				Name: pgDollar[1].str,
@@ -39042,7 +39056,7 @@ pgdefault:
 		}
 	case 2447:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:16285
+//line gram.y:16299
 		{
 			pgVAL.node = &nodes.StatsElem{
 				Expr: pgDollar[1].node,
@@ -39050,7 +39064,7 @@ pgdefault:
 		}
 	case 2448:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:16291
+//line gram.y:16305
 		{
 			pgVAL.node = &nodes.StatsElem{
 				Expr: pgDollar[2].node,
@@ -39058,7 +39072,7 @@ pgdefault:
 		}
 	case 2449:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:16306
+//line gram.y:16320
 		{
 			n := &nodes.AlterStatsStmt{
 				Defnames:  pgDollar[3].list,
@@ -39071,7 +39085,7 @@ pgdefault:
 		}
 	case 2450:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:16317
+//line gram.y:16331
 		{
 			n := &nodes.AlterStatsStmt{
 				Defnames:  pgDollar[5].list,
@@ -39084,19 +39098,19 @@ pgdefault:
 		}
 	case 2451:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:16331
+//line gram.y:16345
 		{
 			pgVAL.node = &nodes.Integer{Ival: pgDollar[1].ival}
 		}
 	case 2452:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:16333
+//line gram.y:16347
 		{
 			pgVAL.node = nil
 		}
 	case 2453:
 		pgDollar = pgS[pgpt-13 : pgpt+1]
-//line gram.y:16344
+//line gram.y:16358
 		{
 			pgVAL.node = &nodes.CreateOpClassStmt{
 				Opclassname:  pgDollar[4].list,
@@ -39109,19 +39123,19 @@ pgdefault:
 		}
 	case 2454:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:16358
+//line gram.y:16372
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 2455:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:16360
+//line gram.y:16374
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
 		}
 	case 2456:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:16365
+//line gram.y:16379
 		{
 			owa := &nodes.ObjectWithArgs{
 				Objname: pgDollar[3].list,
@@ -39135,7 +39149,7 @@ pgdefault:
 		}
 	case 2457:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:16377
+//line gram.y:16391
 		{
 			pgVAL.node = &nodes.CreateOpClassItem{
 				Itemtype:    nodes.OPCLASS_ITEM_OPERATOR,
@@ -39146,7 +39160,7 @@ pgdefault:
 		}
 	case 2458:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:16386
+//line gram.y:16400
 		{
 			pgVAL.node = &nodes.CreateOpClassItem{
 				Itemtype: nodes.OPCLASS_ITEM_FUNCTION,
@@ -39156,7 +39170,7 @@ pgdefault:
 		}
 	case 2459:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:16394
+//line gram.y:16408
 		{
 			pgVAL.node = &nodes.CreateOpClassItem{
 				Itemtype:  nodes.OPCLASS_ITEM_FUNCTION,
@@ -39167,7 +39181,7 @@ pgdefault:
 		}
 	case 2460:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:16403
+//line gram.y:16417
 		{
 			pgVAL.node = &nodes.CreateOpClassItem{
 				Itemtype:   nodes.OPCLASS_ITEM_STORAGETYPE,
@@ -39176,61 +39190,61 @@ pgdefault:
 		}
 	case 2461:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:16413
+//line gram.y:16427
 		{
 			pgVAL.boolean = true
 		}
 	case 2462:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:16415
+//line gram.y:16429
 		{
 			pgVAL.boolean = false
 		}
 	case 2463:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:16420
+//line gram.y:16434
 		{
 			pgVAL.list = pgDollar[2].list
 		}
 	case 2464:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:16422
+//line gram.y:16436
 		{
 			pgVAL.list = nil
 		}
 	case 2465:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:16427
+//line gram.y:16441
 		{
 			pgVAL.list = nil
 		}
 	case 2466:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
-//line gram.y:16429
+//line gram.y:16443
 		{
 			pgVAL.list = pgDollar[4].list
 		}
 	case 2467:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:16431
+//line gram.y:16445
 		{
 			pgVAL.list = nil
 		}
 	case 2468:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:16436
+//line gram.y:16450
 		{
 			pgVAL.boolean = true
 		}
 	case 2469:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:16438
+//line gram.y:16452
 		{
 			pgVAL.boolean = false
 		}
 	case 2470:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:16449
+//line gram.y:16463
 		{
 			pgVAL.node = &nodes.CreateOpFamilyStmt{
 				Opfamilyname: pgDollar[4].list,
@@ -39239,7 +39253,7 @@ pgdefault:
 		}
 	case 2471:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:16465
+//line gram.y:16479
 		{
 			pgVAL.node = &nodes.AlterOpFamilyStmt{
 				Opfamilyname: pgDollar[4].list,
@@ -39250,7 +39264,7 @@ pgdefault:
 		}
 	case 2472:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:16474
+//line gram.y:16488
 		{
 			pgVAL.node = &nodes.AlterOpFamilyStmt{
 				Opfamilyname: pgDollar[4].list,
@@ -39261,19 +39275,19 @@ pgdefault:
 		}
 	case 2473:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:16486
+//line gram.y:16500
 		{
 			pgVAL.list = makeList(pgDollar[1].node)
 		}
 	case 2474:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:16488
+//line gram.y:16502
 		{
 			pgVAL.list = appendList(pgDollar[1].list, pgDollar[3].node)
 		}
 	case 2475:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:16493
+//line gram.y:16507
 		{
 			pgVAL.node = &nodes.CreateOpClassItem{
 				Itemtype:  nodes.OPCLASS_ITEM_OPERATOR,
@@ -39283,7 +39297,7 @@ pgdefault:
 		}
 	case 2476:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:16501
+//line gram.y:16515
 		{
 			pgVAL.node = &nodes.CreateOpClassItem{
 				Itemtype:  nodes.OPCLASS_ITEM_FUNCTION,
@@ -39293,7 +39307,7 @@ pgdefault:
 		}
 	case 2477:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
-//line gram.y:16518
+//line gram.y:16532
 		{
 			pgVAL.node = &nodes.DropStmt{
 				Objects:    makeList(prependList(&nodes.String{Str: pgDollar[6].str}, pgDollar[4].list)),
@@ -39303,7 +39317,7 @@ pgdefault:
 		}
 	case 2478:
 		pgDollar = pgS[pgpt-9 : pgpt+1]
-//line gram.y:16526
+//line gram.y:16540
 		{
 			pgVAL.node = &nodes.DropStmt{
 				Objects:    makeList(prependList(&nodes.String{Str: pgDollar[8].str}, pgDollar[6].list)),
@@ -39314,7 +39328,7 @@ pgdefault:
 		}
 	case 2479:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
-//line gram.y:16538
+//line gram.y:16552
 		{
 			pgVAL.node = &nodes.DropStmt{
 				Objects:    makeList(prependList(&nodes.String{Str: pgDollar[6].str}, pgDollar[4].list)),
@@ -39324,7 +39338,7 @@ pgdefault:
 		}
 	case 2480:
 		pgDollar = pgS[pgpt-9 : pgpt+1]
-//line gram.y:16546
+//line gram.y:16560
 		{
 			pgVAL.node = &nodes.DropStmt{
 				Objects:    makeList(prependList(&nodes.String{Str: pgDollar[8].str}, pgDollar[6].list)),
@@ -39335,7 +39349,7 @@ pgdefault:
 		}
 	case 2481:
 		pgDollar = pgS[pgpt-11 : pgpt+1]
-//line gram.y:16564
+//line gram.y:16578
 		{
 			pgVAL.node = &nodes.CreateCastStmt{
 				Sourcetype: pgDollar[4].typename,
@@ -39346,7 +39360,7 @@ pgdefault:
 		}
 	case 2482:
 		pgDollar = pgS[pgpt-10 : pgpt+1]
-//line gram.y:16573
+//line gram.y:16587
 		{
 			pgVAL.node = &nodes.CreateCastStmt{
 				Sourcetype: pgDollar[4].typename,
@@ -39356,7 +39370,7 @@ pgdefault:
 		}
 	case 2483:
 		pgDollar = pgS[pgpt-10 : pgpt+1]
-//line gram.y:16581
+//line gram.y:16595
 		{
 			pgVAL.node = &nodes.CreateCastStmt{
 				Sourcetype: pgDollar[4].typename,
@@ -39367,25 +39381,25 @@ pgdefault:
 		}
 	case 2484:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:16593
+//line gram.y:16607
 		{
 			pgVAL.ival = int64(nodes.COERCION_IMPLICIT)
 		}
 	case 2485:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:16595
+//line gram.y:16609
 		{
 			pgVAL.ival = int64(nodes.COERCION_ASSIGNMENT)
 		}
 	case 2486:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:16597
+//line gram.y:16611
 		{
 			pgVAL.ival = int64(nodes.COERCION_EXPLICIT)
 		}
 	case 2487:
 		pgDollar = pgS[pgpt-9 : pgpt+1]
-//line gram.y:16602
+//line gram.y:16616
 		{
 			pgVAL.node = &nodes.DropStmt{
 				RemoveType: int(nodes.OBJECT_CAST),
@@ -39396,19 +39410,19 @@ pgdefault:
 		}
 	case 2488:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:16614
+//line gram.y:16628
 		{
 			pgVAL.boolean = true
 		}
 	case 2489:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:16616
+//line gram.y:16630
 		{
 			pgVAL.boolean = false
 		}
 	case 2490:
 		pgDollar = pgS[pgpt-10 : pgpt+1]
-//line gram.y:16627
+//line gram.y:16641
 		{
 			items := pgDollar[9].list.Items
 			var fromsql *nodes.ObjectWithArgs
@@ -39429,31 +39443,31 @@ pgdefault:
 		}
 	case 2491:
 		pgDollar = pgS[pgpt-11 : pgpt+1]
-//line gram.y:16649
+//line gram.y:16663
 		{
 			pgVAL.list = makeList2(pgDollar[5].node, pgDollar[11].node)
 		}
 	case 2492:
 		pgDollar = pgS[pgpt-11 : pgpt+1]
-//line gram.y:16653
+//line gram.y:16667
 		{
 			pgVAL.list = makeList2(pgDollar[11].node, pgDollar[5].node)
 		}
 	case 2493:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:16657
+//line gram.y:16671
 		{
 			pgVAL.list = makeList2(pgDollar[5].node, nil)
 		}
 	case 2494:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:16661
+//line gram.y:16675
 		{
 			pgVAL.list = makeList2(nil, pgDollar[5].node)
 		}
 	case 2495:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:16668
+//line gram.y:16682
 		{
 			pgVAL.node = &nodes.DropStmt{
 				RemoveType: int(nodes.OBJECT_TRANSFORM),
@@ -39464,7 +39478,7 @@ pgdefault:
 		}
 	case 2496:
 		pgDollar = pgS[pgpt-10 : pgpt+1]
-//line gram.y:16686
+//line gram.y:16700
 		{
 			pgVAL.node = &nodes.CreateConversionStmt{
 				ConversionName:  pgDollar[4].list,
@@ -39476,7 +39490,7 @@ pgdefault:
 		}
 	case 2497:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:16705
+//line gram.y:16719
 		{
 			pgVAL.node = &nodes.DropOwnedStmt{
 				Roles:    pgDollar[4].list,
@@ -39485,7 +39499,7 @@ pgdefault:
 		}
 	case 2498:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:16715
+//line gram.y:16729
 		{
 			pgVAL.node = &nodes.ReassignOwnedStmt{
 				Roles:   pgDollar[4].list,
@@ -39494,7 +39508,7 @@ pgdefault:
 		}
 	case 2499:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
-//line gram.y:16731
+//line gram.y:16745
 		{
 			into := pgDollar[4].node.(*nodes.IntoClause)
 			into.Rel.Relpersistence = relpersistenceForTemp(pgDollar[2].ival)
@@ -39508,7 +39522,7 @@ pgdefault:
 		}
 	case 2500:
 		pgDollar = pgS[pgpt-10 : pgpt+1]
-//line gram.y:16743
+//line gram.y:16757
 		{
 			into := pgDollar[7].node.(*nodes.IntoClause)
 			into.Rel.Relpersistence = relpersistenceForTemp(pgDollar[2].ival)
@@ -39522,7 +39536,7 @@ pgdefault:
 		}
 	case 2501:
 		pgDollar = pgS[pgpt-9 : pgpt+1]
-//line gram.y:16755
+//line gram.y:16769
 		{
 			into := pgDollar[4].node.(*nodes.IntoClause)
 			into.Rel.Relpersistence = relpersistenceForTemp(pgDollar[2].ival)
@@ -39539,7 +39553,7 @@ pgdefault:
 		}
 	case 2502:
 		pgDollar = pgS[pgpt-12 : pgpt+1]
-//line gram.y:16770
+//line gram.y:16784
 		{
 			into := pgDollar[7].node.(*nodes.IntoClause)
 			into.Rel.Relpersistence = relpersistenceForTemp(pgDollar[2].ival)
@@ -39557,7 +39571,7 @@ pgdefault:
 		}
 	case 2503:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:16789
+//line gram.y:16803
 		{
 			rv := makeRangeVarFromAnyName(pgDollar[1].list, pgDollar[1].loc)
 			pgVAL.node = &nodes.IntoClause{
@@ -39571,37 +39585,37 @@ pgdefault:
 		}
 	case 2504:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
-//line gram.y:16804
+//line gram.y:16818
 		{
 			pgVAL.boolean = true
 		}
 	case 2505:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
-//line gram.y:16806
+//line gram.y:16820
 		{
 			pgVAL.boolean = false
 		}
 	case 2506:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:16808
+//line gram.y:16822
 		{
 			pgVAL.boolean = true
 		}
 	case 2507:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:16813
+//line gram.y:16827
 		{
 			pgVAL.ival = int64(nodes.RELPERSISTENCE_UNLOGGED)
 		}
 	case 2508:
 		pgDollar = pgS[pgpt-0 : pgpt+1]
-//line gram.y:16815
+//line gram.y:16829
 		{
 			pgVAL.ival = int64(nodes.RELPERSISTENCE_PERMANENT)
 		}
 	case 2509:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
-//line gram.y:16820
+//line gram.y:16834
 		{
 			into := pgDollar[5].node.(*nodes.IntoClause)
 			into.Rel.Relpersistence = byte(pgDollar[2].ival)
@@ -39615,7 +39629,7 @@ pgdefault:
 		}
 	case 2510:
 		pgDollar = pgS[pgpt-11 : pgpt+1]
-//line gram.y:16832
+//line gram.y:16846
 		{
 			into := pgDollar[8].node.(*nodes.IntoClause)
 			into.Rel.Relpersistence = byte(pgDollar[2].ival)
@@ -39629,7 +39643,7 @@ pgdefault:
 		}
 	case 2511:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
-//line gram.y:16847
+//line gram.y:16861
 		{
 			rv := makeRangeVarFromAnyName(pgDollar[1].list, pgDollar[1].loc)
 			pgVAL.node = &nodes.IntoClause{
@@ -39642,7 +39656,7 @@ pgdefault:
 		}
 	case 2512:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
-//line gram.y:16867
+//line gram.y:16881
 		{
 			rv := makeRangeVarFromAnyName(pgDollar[5].list, pgDollar[5].loc)
 			pgVAL.node = &nodes.RefreshMatViewStmt{
@@ -39653,19 +39667,19 @@ pgdefault:
 		}
 	case 2513:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:16879
+//line gram.y:16893
 		{
 			pgVAL.str = pgDollar[1].str
 		}
 	case 2514:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:16880
+//line gram.y:16894
 		{
 			pgVAL.str = pgDollar[1].str
 		}
 	case 2515:
 		pgDollar = pgS[pgpt-1 : pgpt+1]
-//line gram.y:16881
+//line gram.y:16895
 		{
 			pgVAL.str = pgDollar[1].str
 		}

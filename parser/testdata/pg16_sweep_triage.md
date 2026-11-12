@@ -726,6 +726,24 @@ those rows (`return type mismatch in function declared to return
 integer[]`) show. `testdata/returns_table_pg16.jsonl` pins 39 statements;
 all agree.
 
+### json-array-absent-on-null (tree 15 and 10; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `select json_array(returning text)` | `absent_on_null` true | false |
+| `select json_array(select 1)` | `absent_on_null` true | false |
+| `select json_array(select 1 format json encoding utf8)` | format JSON, encoding UTF8 | no format |
+| `select json_array('1' format json encoding utf16)` | encoding UTF16 | encoding default |
+
+JSON_ARRAY leaves out NULLs unless told otherwise; the two forms without a
+NULL clause now say so. The query form kept no FORMAT clause, and FORMAT
+JSON ENCODING kept no encoding; both are kept now. A missing FORMAT is
+still nil where libpg_query has a default `JsonFormat` (the
+`JsonArrayQueryConstructor.format` and `JsonValueExpr.format` presence
+classes), which is the same meaning. The 53 trees that changed over the
+corpus and test data are JSON_ARRAY statements or have an encoding.
+`testdata/json_array_pg16.jsonl` pins 42 statements; all agree.
+
 ## Rerunning
 
 ```
