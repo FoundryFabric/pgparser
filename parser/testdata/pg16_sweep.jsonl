@@ -14074,7 +14074,7 @@
 {"file":"foreign_data.sql","stmt":151,"sum":"61b1be10"}
 {"file":"foreign_data.sql","stmt":152,"sum":"f1b8a310"}
 {"file":"foreign_data.sql","stmt":153,"sum":"d2e0d291"}
-{"file":"foreign_data.sql","stmt":153,"edit":[12,7,"current_role"],"code":"42939","msg":"CURRENT_ROLE cannot be used as a role name here","pos":12,"class":"role-name-checks"}
+{"file":"foreign_data.sql","stmt":153,"edit":[12,7,"current_role"],"code":"42939","msg":"CURRENT_ROLE cannot be used as a role name here","pos":12}
 {"file":"foreign_data.sql","stmt":154,"sum":"62b1bfa3"}
 {"file":"foreign_data.sql","stmt":155,"sum":"c67cc9cd"}
 {"file":"foreign_data.sql","stmt":155,"edit":[24,7,""]}
@@ -58757,9 +58757,9 @@
 {"sql":"grant r to authorization","class":"role-spec-keywords"}
 {"sql":"create schema s authorization authorization","class":"role-spec-keywords"}
 {"sql":"alter group g add user verbose","class":"role-spec-keywords"}
-{"sql":"alter role current_user rename to x","code":"42939","msg":"CURRENT_USER cannot be used as a role name here","pos":11,"class":"role-name-checks"}
-{"sql":"create role current_user","code":"42939","msg":"CURRENT_USER cannot be used as a role name here","pos":12,"class":"role-name-checks"}
-{"sql":"create user current_role","code":"42939","msg":"CURRENT_ROLE cannot be used as a role name here","pos":12,"class":"role-name-checks"}
+{"sql":"alter role current_user rename to x","code":"42939","msg":"CURRENT_USER cannot be used as a role name here","pos":11}
+{"sql":"create role current_user","code":"42939","msg":"CURRENT_USER cannot be used as a role name here","pos":12}
+{"sql":"create user current_role","code":"42939","msg":"CURRENT_ROLE cannot be used as a role name here","pos":12}
 {"sql":"alter role r","class":"alter-role-no-options"}
 {"sql":"alter user r","class":"alter-role-no-options"}
 {"sql":"alter role r with"}
