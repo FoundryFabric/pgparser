@@ -32,3 +32,6 @@ go.work
 gramy_diff_report.md
 parser_rules.txt
 postgres_rules.txt
+
+# make cover output
+.cover/
