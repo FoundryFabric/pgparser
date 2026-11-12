@@ -83,26 +83,26 @@ L a feature's grammar.
 | cte-column-list-parentheses (fixed) | 1 | 12 (0/10/2) | accepts a CTE's column names without parentheses | `opt_name_list` | no | S |
 | constraint-attribute-checks (fixed) | 1 | 9 (5/1/3) | accepts what `processCASbits` and constraint actions refuse | `ConstraintAttributeSpec`/`processCASbits`, `key_action` SET NULL (cols), `ColConstraintElem` GENERATED | no | S |
 | select-clause-checks (fixed) | 1 | 8 (3/2/3) | accepts WITH TIES without ORDER BY, with SKIP LOCKED; ORDER BY with WITHIN GROUP | `insertSelectOptions`, `func_application` within `func_expr` | no | S |
-| uescape | 1 | 7 (2/4/1) | accepts an invalid UESCAPE character; other message for a UESCAPE not followed by a string | scanner and `base_yylex` UESCAPE handling (`check_uescapechar`) | no | S |
-| with-oids | 1 | 5 (2/1/2) | accepts WITH OIDS | `OptWith`, `alter_table_cmd` SET WITH OIDS | no | S |
+| uescape (fixed) | 1 | 7 (2/4/1) | accepts an invalid UESCAPE character; other message for a UESCAPE not followed by a string | scanner and `base_yylex` UESCAPE handling (`check_uescapechar`) | no | S |
+| with-oids (fixed) | 1 | 5 (2/1/2) | accepts WITH OIDS | `OptWith`, `alter_table_cmd` SET WITH OIDS | no | S |
 | drop-aggregate-arguments (fixed) | 1 | 4 (1/1/2) | accepts DROP AGGREGATE without argument types | `DropStmt` AGGREGATE `aggregate_with_argtypes_list` | no | S |
-| partition-command-in-list | 1 | 4 (0/2/2) | accepts ATTACH/DETACH PARTITION in a command list | `AlterTableStmt` `partition_cmd` | no | S |
+| partition-command-in-list (fixed) | 1 | 4 (0/2/2) | accepts ATTACH/DETACH PARTITION in a command list | `AlterTableStmt` `partition_cmd` | no | S |
 | role-name-checks (fixed) | 1 | 4 (0/1/3) | accepts `ALTER ROLE CURRENT_USER RENAME`; 42601 for 42939 | `RoleId` action, `RenameStmt` | no | S |
-| bare-column-label (fixed but 5) | 2 | 511 (2/502/7) | refuses a keyword as a column label without AS | `target_el: a_expr BareColLabel`, `bare_label_keyword` | no | M |
+| bare-column-label (fixed) | 2 | 511 (2/502/7) | refuses a keyword as a column label without AS | `target_el: a_expr BareColLabel`, `bare_label_keyword` | no | M |
 | pg17-json-names | 2 | 75 (4/66/5) | refuses PostgreSQL 16's json, json_table and the like as names | `kwlist.h`: 20 PostgreSQL 17 keywords, JSON col_name; `JsonType` | no | M (with pg17-sqljson) |
 | drop-type-typename (fixed) | 2 | 50 (0/47/3) | refuses `DROP TYPE t[]`, `DROP DOMAIN d(3)` | `DropStmt` TYPE/DOMAIN `type_name_list` | yes, all 50 | S |
-| alter-column-optional-keyword | 2 | 7 (0/5/2) | refuses `ALTER a SET (...)`, `ALTER a SET GENERATED` without COLUMN | `alter_table_cmd` `ALTER opt_column ColId` | no | S |
-| alter-role-no-options | 2 | 4 (0/2/2) | refuses `ALTER ROLE r` | `AlterRoleStmt` `opt_with AlterOptRoleList` | no | S |
-| reindex-optional-name | 2 | 4 (1/0/3) | refuses `REINDEX SYSTEM`, `REINDEX DATABASE` | `ReindexStmt` `opt_single_name` | no | S |
-| role-spec-keywords | 2 | 4 (0/1/3) | refuses a type_func_name keyword as a role | `RoleSpec: NonReservedWord` | no | S |
+| alter-column-optional-keyword (fixed) | 2 | 7 (0/5/2) | refuses `ALTER a SET (...)`, `ALTER a SET GENERATED` without COLUMN | `alter_table_cmd` `ALTER opt_column ColId` | no | S |
+| alter-role-no-options (fixed) | 2 | 4 (0/2/2) | refuses `ALTER ROLE r` | `AlterRoleStmt` `opt_with AlterOptRoleList` | no | S |
+| reindex-optional-name (fixed) | 2 | 4 (1/0/3) | refuses `REINDEX SYSTEM`, `REINDEX DATABASE` | `ReindexStmt` `opt_single_name` | no | S |
+| role-spec-keywords (fixed) | 2 | 4 (0/1/3) | refuses a type_func_name keyword as a role | `RoleSpec: NonReservedWord` | no | S |
 | copy-generic-options (fixed) | 2 | 4 (0/2/2) | refuses a reserved keyword as a COPY option name; accepts DEFAULT as its argument | `copy_generic_opt_elem: ColLabel copy_generic_opt_arg` | no | S |
-| alter-database-refresh-collation | 2 | 3 (0/0/3) | refuses `ALTER DATABASE x REFRESH COLLATION VERSION` | `AlterDatabaseRefreshCollStmt` | no | S |
-| column-options-qualified-name | 2 | 3 (0/1/2) | refuses `ALTER COLUMN a SET (x.y = 1)` | `alter_table_cmd` SET/RESET `reloptions` (`reloption_elem`) | no | S |
+| alter-database-refresh-collation (fixed) | 2 | 3 (0/0/3) | refuses `ALTER DATABASE x REFRESH COLLATION VERSION` | `AlterDatabaseRefreshCollStmt` | no | S |
+| column-options-qualified-name (fixed) | 2 | 3 (0/1/2) | refuses `ALTER COLUMN a SET (x.y = 1)` | `alter_table_cmd` SET/RESET `reloptions` (`reloption_elem`) | no | S |
 | alter-extension-member (fixed) | 2 | 2 (0/0/2) | refuses ALTER EXTENSION ADD CAST, ADD TRANSFORM | `AlterExtensionContentsStmt` | yes, both | S |
-| role-option-error-order | 3 | 7 (0/6/1) | syntax error at the next token for PostgreSQL's `unrecognized role option` | `CreateOptRoleElem`/`AlterOptRoleElem: IDENT` | no | S |
-| operator-missing-argument-message | 3 | 5 (2/1/2) | hint folded into the message | `oper_argtypes` | no | S |
-| policy-option-message | 3 | 3 (1/1/1) | hint used as the message | `RowSecurityDefaultPermissive` | no | S |
-| not-yet-implemented-errors | 3 | 2 (0/0/2) | 42601 for 0A000 | `a_expr UNIQUE select_with_parens`, `CreateAssertionStmt` | no | S |
+| role-option-error-order (fixed) | 3 | 7 (0/6/1) | syntax error at the next token for PostgreSQL's `unrecognized role option` | `CreateOptRoleElem`/`AlterOptRoleElem: IDENT` | no | S |
+| operator-missing-argument-message (fixed) | 3 | 5 (2/1/2) | hint folded into the message | `oper_argtypes` | no | S |
+| policy-option-message (fixed) | 3 | 3 (1/1/1) | hint used as the message | `RowSecurityDefaultPermissive` | no | S |
+| not-yet-implemented-errors (fixed) | 3 | 2 (0/0/2) | 42601 for 0A000 | `a_expr UNIQUE select_with_parens`, `CreateAssertionStmt` | no | S |
 | drop-routine-list-name (fixed) | 3 | 2 (0/1/1) | refused at `[` instead of at `]` | `function_with_argtypes_list` | no | S |
 
 Totals: 1,653 statements; 30 classes. Every disagreement is in a class.
@@ -269,7 +269,7 @@ LOCKED, and a second ORDER BY, OFFSET, LIMIT or WITH, and a limit after WITH
 TIES, as PostgreSQL 16 does; `func_expr` refuses WITHIN GROUP after an
 argument ORDER BY, DISTINCT or VARIADIC, at WITHIN. All 8 agree.
 
-### uescape (risk 1, 7)
+### uescape (risk 1, 7; fixed)
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
@@ -277,7 +277,18 @@ argument ORDER BY, DISTINCT or VARIADIC, at WITHIN. All 8 agree.
 | `SELECT U&' \' UESCAPE[] '!' AS "tricky"` | 42601 UESCAPE must be followed by a simple string literal at or near "[" at 21 | 42601 invalid Unicode escape at 11 |
 | `SELECT 'tricky' AS U&"\" UESCAPE(3) '!'` | 42601 UESCAPE must be followed by a simple string literal at or near "(" at 32 | 42601 invalid Unicode escape at 22 |
 
-### with-oids (risk 1, 5)
+A U& string or identifier is now decoded after the lexer has looked at the
+next token, as PostgreSQL 16's `base_yylex` does. A UESCAPE there must be
+followed by a quoted, escape or dollar-quoted string, or the statement is
+`UESCAPE must be followed by a simple string literal` at that token (or at end
+of input); the string must be one byte that is not a hex digit, `+`, a quote
+or white space, or it is `invalid Unicode escape character` at the string.
+Both come before an error in the U& literal's own escapes, and an error in
+the next token comes before both. The fork scanned for the word UESCAPE and a
+one-character string after it, and without them read UESCAPE as the next
+token. All 7 agree, and so do the 5 `bare-column-label` rows left.
+
+### with-oids (risk 1, 5; fixed)
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
@@ -285,6 +296,10 @@ argument ORDER BY, DISTINCT or VARIADIC, at WITHIN. All 8 agree.
 | `alter table t set with oids` | 42601 syntax error at or near "with" at 18 | accepts |
 
 `create table t () without oids` is accepted by both.
+
+`OptWith` no longer has `WITH OIDS`, and `alter_table_cmd` no longer has
+`SET WITH OIDS`, as in PostgreSQL 16, which keeps only WITHOUT OIDS. All 5
+agree.
 
 ### drop-aggregate-arguments (risk 1, 4; fixed)
 
@@ -298,12 +313,19 @@ argument ORDER BY, DISTINCT or VARIADIC, at WITHIN. All 8 agree.
 AGGREGATE takes only `aggregate_with_argtypes_list`, as PostgreSQL 16's does.
 All 4 agree.
 
-### partition-command-in-list (risk 1, 4)
+### partition-command-in-list (risk 1, 4; fixed)
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
 | `alter table t attach partition p for values in (1), add column x int` | 42601 syntax error at or near "," at 50 | accepts |
 | `alter table t detach partition p, add column x int` | 42601 syntax error at or near "," at 32 | accepts |
+
+ATTACH PARTITION and DETACH PARTITION are now PostgreSQL 16's
+`partition_cmd`, which only `ALTER TABLE [IF EXISTS] relation_expr` takes,
+alone; they are no longer `alter_table_cmd`s, so they are refused in a
+command list and after ALTER FOREIGN TABLE, VIEW, MATERIALIZED VIEW, SEQUENCE
+and INDEX (which keeps its own `ATTACH PARTITION qualified_name`). All 4
+agree.
 
 ### role-name-checks (risk 1, 4; fixed)
 
@@ -329,7 +351,7 @@ CreatePolicyStmt.roles 4, DropUserMappingStmt.user 4) and the matching
 (the `unlocated .../RoleSpec.location` classes). `TestRoleSpecsArePostgreSQL16s`
 pins 1,555 role positions and spellings.
 
-### bare-column-label (risk 2, 511; fixed but 5)
+### bare-column-label (risk 2, 511; fixed)
 
 The parser's `target_el` is `a_expr AS ColLabel | a_expr IDENT | a_expr`;
 PostgreSQL 16's (since 14) takes `a_expr BareColLabel`, where a bare label is
@@ -353,7 +375,7 @@ five left are `U&'...' UESCAPE` followed by something other than a string
 (`+`, `.`, `[`, `(`): with UESCAPE a bare label the parser refuses at the
 next token, PostgreSQL 16's position, but with `syntax error` where
 PostgreSQL says `UESCAPE must be followed by a simple string literal`, the
-message `uescape` is about.
+message `uescape` is about. The `uescape` fix makes them agree.
 
 ### pg17-json-names (risk 2, 75)
 
@@ -383,7 +405,7 @@ type names spelled with them are refused. Fixed with pg17-sqljson.
 | `drop type t(1)[]` | accepts | 42601 syntax error at or near "(" at 11 |
 | `DROP TYPE foo_t[1:2]` | 42601 syntax error at or near ":" at 17 | 42601 syntax error at or near "[" at 15 |
 
-### alter-column-optional-keyword (risk 2, 7)
+### alter-column-optional-keyword (risk 2, 7; fixed)
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
@@ -393,7 +415,13 @@ type names spelled with them are refused. Fixed with pg17-sqljson.
 
 `alter table t alter a set not null` is accepted by both.
 
-### alter-role-no-options (risk 2, 4)
+`alter_table_cmd`'s ALTER forms are now PostgreSQL 16's `ALTER opt_column
+ColId ...` (and `ALTER opt_column Iconst SET STATISTICS`), one rule each, so
+COLUMN is optional in DROP EXPRESSION, DROP IDENTITY, the identity options
+(SET GENERATED, RESTART, SET ...) and SET/RESET `(...)` too. The 16 rules
+without COLUMN that duplicated others are deleted. All 7 agree.
+
+### alter-role-no-options (risk 2, 4; fixed)
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
@@ -401,7 +429,11 @@ type names spelled with them are refused. Fixed with pg17-sqljson.
 | `alter user r` | accepts | 42601 syntax error at end of input at 12 |
 | `ALTER ROLE REPLICATION` | accepts | 42601 syntax error at end of input at 23 |
 
-### reindex-optional-name (risk 2, 4)
+`AlterRoleStmt` now has `ALTER ROLE|USER RoleSpec` with no options, which is
+PostgreSQL 16's `opt_with AlterOptRoleList` with both empty; the tree is an
+AlterRoleStmt with no options. All 4 agree.
+
+### reindex-optional-name (risk 2, 4; fixed)
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
@@ -409,13 +441,21 @@ type names spelled with them are refused. Fixed with pg17-sqljson.
 | `reindex database` | accepts | 42601 syntax error at end of input at 16 |
 | `REINDEX (CONCURRENTLY) SYSTEM` (create_index.sql) | accepts | 42601 syntax error at end of input |
 
-### role-spec-keywords (risk 2, 4)
+REINDEX SYSTEM and REINDEX DATABASE now take PostgreSQL 16's
+`opt_single_name`, so the name may be left out (`ReindexStmt.Name` is empty).
+All 4 agree.
+
+### role-spec-keywords (risk 2, 4; fixed)
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
 | `grant r to authorization` | accepts | 42601 syntax error at or near "authorization" at 11 |
 | `create schema s authorization authorization` | accepts | 42601 syntax error at or near "authorization" at 30 |
 | `alter group g add user verbose` | accepts | 42601 syntax error at or near "verbose" at 23 |
+
+`RoleSpec` is now `NonReservedWord`, as PostgreSQL 16's is, so a
+type_func_name keyword (`authorization`, `verbose`, `left` and the rest) is a
+role wherever a role is taken. All 4 agree.
 
 ### copy-generic-options (risk 2, 4; fixed)
 
@@ -427,7 +467,7 @@ type names spelled with them are refused. Fixed with pg17-sqljson.
 COPY's options are now `ColLabel copy_generic_opt_arg`, whose argument has
 `'*'` and `'(' list ')'` but not DEFAULT; all 4 agree.
 
-### alter-database-refresh-collation (risk 2, 3)
+### alter-database-refresh-collation (risk 2, 3; fixed)
 
 PostgreSQL 16 (since 15) parses `ALTER DATABASE name REFRESH COLLATION
 VERSION`. `tests/grammar/sql/phase7_compat.sql` pins it as a syntax error,
@@ -443,7 +483,11 @@ changes those fixtures.
 | `alter database x refresh collation version` | accepts | 42601 syntax error at or near "refresh" at 17 |
 | `alter database x refresh` | 42601 syntax error at end of input at 24 | 42601 syntax error at or near "refresh" at 17 |
 
-### column-options-qualified-name (risk 2, 3)
+`AlterDatabaseRefreshCollStmt` (`ALTER DATABASE name REFRESH COLLATION
+VERSION`) is new, with its node in `nodes`; the tree is libpg_query's.
+`tests/grammar/sql/phase7_compat.sql` now expects it to parse. All 3 agree.
+
+### column-options-qualified-name (risk 2, 3; fixed)
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
@@ -452,6 +496,9 @@ changes those fixtures.
 
 `alter table t set (toast.autovacuum_enabled = false)` is accepted by both.
 
+A column's SET and RESET now take `reloptions`, as PostgreSQL 16's do, so an
+option name may be qualified (`x.y`), as a relation's may. All 3 agree.
+
 ### alter-extension-member (risk 2, 2; fixed by #15)
 
 | statement | PostgreSQL 16 | parser |
@@ -459,7 +506,7 @@ changes those fixtures.
 | `ALTER EXTENSION hstore ADD CAST (text AS hstore)` | accepts | 42601 syntax error at or near "CAST" |
 | `ALTER EXTENSION hstore ADD TRANSFORM FOR jsonb LANGUAGE plpgsql` | accepts | 42601 syntax error at or near "TRANSFORM" |
 
-### role-option-error-order (risk 3, 7)
+### role-option-error-order (risk 3, 7; fixed)
 
 PostgreSQL raises `unrecognized role option` from the `IDENT` alternative's
 action when it reduces it, before it looks at the next token; the parser
@@ -472,7 +519,15 @@ reports a syntax error at the next token first. Alone at the end
 | `ALTER ROLE ROLE regress_hasprivs RENAME TO regress_tenant` | 42601 unrecognized role option "regress_hasprivs" at 16 | 42601 syntax error at or near "RENAME" at 33 |
 | `CREATE USER MAPPING regress_addr_user SERVER "integer"` | 42601 unrecognized role option "regress_addr_user" at 21 | 42601 syntax error at or near "SERVER" at 39 |
 
-### operator-missing-argument-message (risk 3, 5)
+The `IDENT` alternative now raises `unrecognized role option` through
+`grammarError` and ends the parse when it is reduced, at the word, before
+the parser looks at the next token; it set the error and went on, so a
+syntax error at the next token replaced it. UNENCRYPTED PASSWORD, which had
+the same fault, is now PostgreSQL 16's `0A000 UNENCRYPTED PASSWORD is no
+longer supported` at UNENCRYPTED, with its hint (it was 42601 at the end of
+the option). All 7 agree.
+
+### operator-missing-argument-message (risk 3, 5; fixed)
 
 PostgreSQL's message is `missing argument`, with HINT `Use NONE to denote the
 missing argument of a unary operator.`; the parser's message is both.
@@ -481,18 +536,38 @@ missing argument of a unary operator.`; the parser's message is both.
 |---|---|---|
 | `drop operator === (int4)` | 42601 missing argument at 23 | 42601 missing argument, use NONE to denote the missing argument of a unary operator at 23 |
 
-### policy-option-message (risk 3, 3)
+`oper_argtypes` now raises PostgreSQL 16's `missing argument` with its HINT
+`Use NONE to denote the missing argument of a unary operator.` at the closing
+parenthesis through `grammarError`, and ends the parse there, so a token
+after it no longer replaces the error. All 5 agree.
+
+### policy-option-message (risk 3, 3; fixed)
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
 | `create policy p on t as ugly using (true)` | 42601 unrecognized row security option "ugly" at 24 | 42601 only PERMISSIVE or RESTRICTIVE policies are supported at 24 |
 
-### not-yet-implemented-errors (risk 3, 2)
+`RowSecurityDefaultPermissive` now raises PostgreSQL 16's `unrecognized row
+security option "<word>"` with HINT `Only PERMISSIVE or RESTRICTIVE policies
+are supported currently.` at the word through `grammarError`, and ends the
+parse there. All 3 agree.
+
+### not-yet-implemented-errors (risk 3, 2; fixed)
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
 | `SELECT UNIQUE (SELECT 1)` | 0A000 UNIQUE predicate is not yet implemented (at UNIQUE) | 42601 UNIQUE predicate is not yet implemented (16 bytes later) |
 | `CREATE ASSERTION positive CHECK (1 = 1)` | 0A000 CREATE ASSERTION is not yet implemented | 42601 syntax error at or near "ASSERTION" |
+
+`a_expr UNIQUE opt_unique_null_treatment select_with_parens` now raises
+`0A000 UNIQUE predicate is not yet implemented` at UNIQUE, and the new
+`CreateAssertionStmt` (`CREATE ASSERTION any_name CHECK '(' a_expr ')'
+ConstraintAttributeSpec`) raises `0A000 CREATE ASSERTION is not yet
+implemented` with no position, both through `grammarError`, ending the
+parse. `tests/grammar/sql/phase7_compat.sql` now expects CREATE ASSERTION's
+message. `SET CATALOG 'x'`, whose action had the same fault and made `Parse`
+panic (a nil statement), is now `0A000 current database cannot be changed`
+at the string. Both agree.
 
 ### drop-routine-list-name (risk 3, 2; fixed)
 

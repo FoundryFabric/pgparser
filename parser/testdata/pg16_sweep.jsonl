@@ -1786,7 +1786,7 @@
 {"file":"alter_table.sql","stmt":483,"sum":"2d917dba"}
 {"file":"alter_table.sql","stmt":484,"sum":"e3531cfb"}
 {"file":"alter_table.sql","stmt":485,"sum":"e3fb2622"}
-{"file":"alter_table.sql","stmt":485,"edit":[35,0,"(3)"],"code":"42601","msg":"syntax error at or near \"3\"","pos":36,"class":"alter-column-optional-keyword"}
+{"file":"alter_table.sql","stmt":485,"edit":[35,0,"(3)"],"code":"42601","msg":"syntax error at or near \"3\"","pos":36}
 {"file":"alter_table.sql","stmt":486,"sum":"d56e4687"}
 {"file":"alter_table.sql","stmt":486,"edit":[18,0," atacc1"]}
 {"file":"alter_table.sql","stmt":487,"sum":"7bc8b809"}
@@ -1803,7 +1803,7 @@
 {"file":"alter_table.sql","stmt":497,"sum":"d069057a"}
 {"file":"alter_table.sql","stmt":498,"sum":"0cf242f7"}
 {"file":"alter_table.sql","stmt":499,"sum":"395dc0a0"}
-{"file":"alter_table.sql","stmt":499,"edit":[30,0,"(3)"],"code":"42601","msg":"syntax error at or near \"3\"","pos":31,"class":"alter-column-optional-keyword"}
+{"file":"alter_table.sql","stmt":499,"edit":[30,0,"(3)"],"code":"42601","msg":"syntax error at or near \"3\"","pos":31}
 {"file":"alter_table.sql","stmt":500,"sum":"58966e4c"}
 {"file":"alter_table.sql","stmt":500,"edit":[27,4,"false"]}
 {"file":"alter_table.sql","stmt":501,"sum":"b73054c2"}
@@ -1903,8 +1903,8 @@
 {"file":"alter_table.sql","stmt":580,"sum":"d56e4687"}
 {"file":"alter_table.sql","stmt":581,"sum":"7e5a8950"}
 {"file":"alter_table.sql","stmt":582,"sum":"057b1e3e"}
-{"file":"alter_table.sql","stmt":583,"sum":"3d8328e3","code":"42601","msg":"syntax error at or near \"WITH\"","pos":80,"class":"with-oids"}
-{"file":"alter_table.sql","stmt":583,"edit":[85,4,"as"],"code":"42601","msg":"syntax error at or near \"WITH\"","pos":80,"class":"with-oids"}
+{"file":"alter_table.sql","stmt":583,"sum":"3d8328e3","code":"42601","msg":"syntax error at or near \"WITH\"","pos":80}
+{"file":"alter_table.sql","stmt":583,"edit":[85,4,"as"],"code":"42601","msg":"syntax error at or near \"WITH\"","pos":80}
 {"file":"alter_table.sql","stmt":584,"sum":"22f68a5d"}
 {"file":"alter_table.sql","stmt":585,"sum":"8cc60379"}
 {"file":"alter_table.sql","stmt":586,"sum":"ac5bb5b0"}
@@ -2249,7 +2249,7 @@
 {"file":"alter_table.sql","stmt":863,"sum":"bc4cbf4e"}
 {"file":"alter_table.sql","stmt":863,"edit":[20,0,".x"]}
 {"file":"alter_table.sql","stmt":864,"sum":"d01c5fe4"}
-{"file":"alter_table.sql","stmt":864,"edit":[36,0,"(3)"],"code":"42601","msg":"syntax error at or near \"3\"","pos":37,"class":"alter-column-optional-keyword"}
+{"file":"alter_table.sql","stmt":864,"edit":[36,0,"(3)"],"code":"42601","msg":"syntax error at or near \"3\"","pos":37}
 {"file":"alter_table.sql","stmt":865,"sum":"223313b6"}
 {"file":"alter_table.sql","stmt":866,"sum":"bb76a8b3"}
 {"file":"alter_table.sql","stmt":867,"sum":"7f9535ba"}
@@ -2391,7 +2391,7 @@
 {"file":"alter_table.sql","stmt":975,"sum":"334bd0fc"}
 {"file":"alter_table.sql","stmt":976,"sum":"68348a7e"}
 {"file":"alter_table.sql","stmt":977,"sum":"363b290c"}
-{"file":"alter_table.sql","stmt":977,"edit":[53,0,"."],"code":"42601","msg":"syntax error at or near \"=\"","pos":55,"class":"column-options-qualified-name"}
+{"file":"alter_table.sql","stmt":977,"edit":[53,0,"."],"code":"42601","msg":"syntax error at or near \"=\"","pos":55}
 {"file":"alter_table.sql","stmt":978,"sum":"5f92be5c"}
 {"file":"alter_table.sql","stmt":979,"sum":"7ccad87d"}
 {"file":"alter_table.sql","stmt":980,"sum":"b1fa5468"}
@@ -7222,7 +7222,7 @@
 {"file":"conversion.sql","stmt":1,"sum":"aadb58cf"}
 {"file":"conversion.sql","stmt":3,"sum":"55041b18"}
 {"file":"conversion.sql","stmt":3,"edit":[41,23,"NOCREATEROLE NOCREATEDB"]}
-{"file":"conversion.sql","stmt":3,"edit":[35,0," regress_conversion_user"],"code":"42601","msg":"unrecognized role option \"regress_conversion_user\"","pos":36,"class":"role-option-error-order"}
+{"file":"conversion.sql","stmt":3,"edit":[35,0," regress_conversion_user"],"code":"42601","msg":"unrecognized role option \"regress_conversion_user\"","pos":36}
 {"file":"conversion.sql","stmt":4,"sum":"b71eeed6"}
 {"file":"conversion.sql","stmt":5,"sum":"6aa499a0"}
 {"file":"conversion.sql","stmt":6,"sum":"b637ef1a"}
@@ -8931,7 +8931,7 @@
 {"file":"create_index.sql","stmt":515,"edit":[61,0,".x"]}
 {"file":"create_index.sql","stmt":516,"sum":"27b4f981"}
 {"file":"create_index.sql","stmt":517,"sum":"e83b3214"}
-{"file":"create_index.sql","stmt":518,"sum":"2c86d1f4","class":"reindex-optional-name"}
+{"file":"create_index.sql","stmt":518,"sum":"2c86d1f4"}
 {"file":"create_index.sql","stmt":519,"sum":"80c95702"}
 {"file":"create_index.sql","stmt":520,"sum":"1153d636"}
 {"file":"create_index.sql","stmt":521,"sum":"be8e8ccf"}
@@ -9721,7 +9721,7 @@
 {"file":"create_role.sql","stmt":22,"sum":"81f772c1"}
 {"file":"create_role.sql","stmt":22,"edit":[112,0," NOREPLICATION"]}
 {"file":"create_role.sql","stmt":23,"sum":"f82c437b"}
-{"file":"create_role.sql","stmt":23,"edit":[11,19,""],"class":"alter-role-no-options"}
+{"file":"create_role.sql","stmt":23,"edit":[11,19,""]}
 {"file":"create_role.sql","stmt":24,"sum":"2948d492"}
 {"file":"create_role.sql","stmt":25,"sum":"64303a87"}
 {"file":"create_role.sql","stmt":26,"sum":"ca14c2e0"}
@@ -9746,7 +9746,7 @@
 {"file":"create_role.sql","stmt":42,"sum":"0645ff40"}
 {"file":"create_role.sql","stmt":43,"sum":"57d94b81"}
 {"file":"create_role.sql","stmt":43,"edit":[70,0," ROLE"],"code":"42601","msg":"unrecognized role option \"regress_nosuch_admin_recursive\"","pos":76}
-{"file":"create_role.sql","stmt":43,"edit":[71,36,"ADMIN regress_nosuch_admin_recursive"],"code":"42601","msg":"unrecognized role option \"regress_nosuch_admin_recursive\"","pos":77,"class":"role-option-error-order"}
+{"file":"create_role.sql","stmt":43,"edit":[71,36,"ADMIN regress_nosuch_admin_recursive"],"code":"42601","msg":"unrecognized role option \"regress_nosuch_admin_recursive\"","pos":77}
 {"file":"create_role.sql","stmt":44,"sum":"6ffef3d5"}
 {"file":"create_role.sql","stmt":45,"sum":"d6d5fec7"}
 {"file":"create_role.sql","stmt":46,"sum":"c1ec4796"}
@@ -9754,7 +9754,7 @@
 {"file":"create_role.sql","stmt":48,"sum":"5504a32e"}
 {"file":"create_role.sql","stmt":49,"sum":"7c3e42d0"}
 {"file":"create_role.sql","stmt":50,"sum":"5ff2d442"}
-{"file":"create_role.sql","stmt":50,"edit":[10,0," ROLE"],"code":"42601","msg":"unrecognized role option \"regress_hasprivs\"","pos":16,"class":"role-option-error-order"}
+{"file":"create_role.sql","stmt":50,"edit":[10,0," ROLE"],"code":"42601","msg":"unrecognized role option \"regress_hasprivs\"","pos":16}
 {"file":"create_role.sql","stmt":51,"sum":"1e4f1c5f"}
 {"file":"create_role.sql","stmt":52,"sum":"190cdbe7"}
 {"file":"create_role.sql","stmt":53,"sum":"0468f901"}
@@ -9925,7 +9925,7 @@
 {"file":"create_table.sql","stmt":29,"edit":[271,0,".x"]}
 {"file":"create_table.sql","stmt":30,"sum":"138cc495"}
 {"file":"create_table.sql","stmt":31,"sum":"58789cae"}
-{"file":"create_table.sql","stmt":32,"sum":"ca9c6fed","code":"42601","msg":"syntax error at or near \"OIDS\"","pos":85,"class":"with-oids"}
+{"file":"create_table.sql","stmt":32,"sum":"ca9c6fed","code":"42601","msg":"syntax error at or near \"OIDS\"","pos":85}
 {"file":"create_table.sql","stmt":33,"sum":"2210394a"}
 {"file":"create_table.sql","stmt":34,"sum":"7f9268bb"}
 {"file":"create_table.sql","stmt":35,"sum":"8b0c699c"}
@@ -12671,11 +12671,11 @@
 {"file":"errors.sql","stmt":45,"sum":"ad9fff5e","code":"42601","msg":"syntax error at or near \",\"","pos":41}
 {"file":"errors.sql","stmt":46,"sum":"3271ede4","code":"42601","msg":"syntax error at or near \"(\"","pos":39}
 {"file":"errors.sql","stmt":47,"sum":"757c08ea","code":"42601","msg":"syntax error at or near \")\"","pos":49}
-{"file":"errors.sql","stmt":48,"sum":"a35c58e3","code":"42601","msg":"missing argument","pos":43,"class":"operator-missing-argument-message"}
-{"file":"errors.sql","stmt":48,"edit":[44,0," ) "],"code":"42601","msg":"missing argument","pos":43,"class":"operator-missing-argument-message"}
+{"file":"errors.sql","stmt":48,"sum":"a35c58e3","code":"42601","msg":"missing argument","pos":43}
+{"file":"errors.sql","stmt":48,"edit":[44,0," ) "],"code":"42601","msg":"missing argument","pos":43}
 {"file":"errors.sql","stmt":49,"sum":"53b9c1af"}
 {"file":"errors.sql","stmt":49,"edit":[58,4,"current_catalog"],"code":"42601","msg":"syntax error at or near \"current_catalog\"","pos":58}
-{"file":"errors.sql","stmt":50,"sum":"953a6f68","code":"42601","msg":"missing argument","pos":42,"class":"operator-missing-argument-message"}
+{"file":"errors.sql","stmt":50,"sum":"953a6f68","code":"42601","msg":"missing argument","pos":42}
 {"file":"errors.sql","stmt":51,"sum":"d396d16e","code":"42601","msg":"syntax error at or near \",\"","pos":35}
 {"file":"errors.sql","stmt":52,"sum":"bf4876b5"}
 {"file":"errors.sql","stmt":53,"sum":"d3160e26"}
@@ -12780,7 +12780,7 @@
 {"file":"event_trigger.sql","stmt":48,"sum":"92f75dc8"}
 {"file":"event_trigger.sql","stmt":49,"sum":"49b8b7ea"}
 {"file":"event_trigger.sql","stmt":50,"sum":"bc1e9ab4"}
-{"file":"event_trigger.sql","stmt":50,"edit":[51,16,""],"class":"alter-role-no-options"}
+{"file":"event_trigger.sql","stmt":50,"edit":[51,16,""]}
 {"file":"event_trigger.sql","stmt":51,"sum":"f6dfd691"}
 {"file":"event_trigger.sql","stmt":52,"sum":"18ef076e"}
 {"file":"event_trigger.sql","stmt":53,"sum":"eca36957"}
@@ -12794,7 +12794,7 @@
 {"file":"event_trigger.sql","stmt":60,"sum":"a7b5cfce"}
 {"file":"event_trigger.sql","stmt":61,"sum":"8b098796"}
 {"file":"event_trigger.sql","stmt":62,"sum":"8d848bed"}
-{"file":"event_trigger.sql","stmt":62,"edit":[38,0," authorization"],"code":"42601","msg":"syntax error at or near \"regress_evt_user\"","pos":53,"class":"role-spec-keywords"}
+{"file":"event_trigger.sql","stmt":62,"edit":[38,0," authorization"],"code":"42601","msg":"syntax error at or near \"regress_evt_user\"","pos":53}
 {"file":"event_trigger.sql","stmt":63,"sum":"992a960f"}
 {"file":"event_trigger.sql","stmt":64,"sum":"17b1cedd"}
 {"file":"event_trigger.sql","stmt":65,"sum":"175c98eb"}
@@ -15276,7 +15276,7 @@
 {"file":"foreign_key.sql","stmt":647,"edit":[28,0,".x"]}
 {"file":"foreign_key.sql","stmt":648,"sum":"16476614"}
 {"file":"foreign_key.sql","stmt":649,"sum":"544030d2"}
-{"file":"foreign_key.sql","stmt":649,"edit":[92,0," , "],"code":"42601","msg":"syntax error at or near \",\"","pos":93,"class":"partition-command-in-list"}
+{"file":"foreign_key.sql","stmt":649,"edit":[92,0," , "],"code":"42601","msg":"syntax error at or near \",\"","pos":93}
 {"file":"foreign_key.sql","stmt":650,"sum":"f3cebdae"}
 {"file":"foreign_key.sql","stmt":651,"sum":"a416d081"}
 {"file":"foreign_key.sql","stmt":652,"sum":"68d108f1"}
@@ -18006,7 +18006,7 @@
 {"file":"identity.sql","stmt":191,"sum":"dab4f8a4"}
 {"file":"identity.sql","stmt":192,"sum":"36e0612e"}
 {"file":"identity.sql","stmt":193,"sum":"532f5284"}
-{"file":"identity.sql","stmt":193,"edit":[52,6,""],"class":"alter-column-optional-keyword"}
+{"file":"identity.sql","stmt":193,"edit":[52,6,""]}
 {"file":"identity.sql","stmt":193,"edit":[61,0," * "],"code":"42601","msg":"syntax error at or near \"*\"","pos":62}
 {"file":"identity.sql","stmt":194,"sum":"0c5c4ade"}
 {"file":"identity.sql","stmt":194,"edit":[31,0,".x"]}
@@ -32531,7 +32531,7 @@
 {"file":"object_address.sql","stmt":24,"edit":[31,4,""]}
 {"file":"object_address.sql","stmt":25,"sum":"aa15d60c"}
 {"file":"object_address.sql","stmt":26,"sum":"0540cec5"}
-{"file":"object_address.sql","stmt":26,"edit":[20,3,""],"code":"42601","msg":"unrecognized role option \"regress_addr_user\"","pos":21,"class":"role-option-error-order"}
+{"file":"object_address.sql","stmt":26,"edit":[20,3,""],"code":"42601","msg":"unrecognized role option \"regress_addr_user\"","pos":21}
 {"file":"object_address.sql","stmt":27,"sum":"82d8a9c2"}
 {"file":"object_address.sql","stmt":28,"sum":"0f4dc196"}
 {"file":"object_address.sql","stmt":29,"sum":"5cebcf2e"}
@@ -39902,7 +39902,7 @@
 {"file":"publication.sql","stmt":253,"sum":"832b4051"}
 {"file":"publication.sql","stmt":253,"edit":[106,1,""]}
 {"file":"publication.sql","stmt":254,"sum":"8a8e3b9d"}
-{"file":"publication.sql","stmt":254,"edit":[58,0,"(3)"],"code":"42601","msg":"syntax error at or near \"3\"","pos":59,"class":"alter-column-optional-keyword"}
+{"file":"publication.sql","stmt":254,"edit":[58,0,"(3)"],"code":"42601","msg":"syntax error at or near \"3\"","pos":59}
 {"file":"publication.sql","stmt":255,"sum":"5b4ce2ee"}
 {"file":"publication.sql","stmt":256,"sum":"b0be70fb"}
 {"file":"publication.sql","stmt":257,"sum":"e95df940"}
@@ -42121,7 +42121,7 @@
 {"file":"roleattributes.sql","stmt":17,"edit":[64,0,"(3)"]}
 {"file":"roleattributes.sql","stmt":17,"edit":[93,0,".x"]}
 {"file":"roleattributes.sql","stmt":18,"sum":"48259b34"}
-{"file":"roleattributes.sql","stmt":18,"edit":[11,0," ROLE"],"code":"42601","msg":"unrecognized role option \"regress_test_createrole\"","pos":17,"class":"role-option-error-order"}
+{"file":"roleattributes.sql","stmt":18,"edit":[11,0," ROLE"],"code":"42601","msg":"unrecognized role option \"regress_test_createrole\"","pos":17}
 {"file":"roleattributes.sql","stmt":19,"sum":"c0315c37"}
 {"file":"roleattributes.sql","stmt":19,"edit":[121,0,".x"]}
 {"file":"roleattributes.sql","stmt":19,"edit":[6,0,"(3)"]}
@@ -42129,7 +42129,7 @@
 {"file":"roleattributes.sql","stmt":21,"sum":"c0315c37"}
 {"file":"roleattributes.sql","stmt":22,"sum":"d0391f6a"}
 {"file":"roleattributes.sql","stmt":22,"edit":[40,10,""]}
-{"file":"roleattributes.sql","stmt":22,"edit":[10,0," ROLE"],"code":"42601","msg":"unrecognized role option \"regress_test_createrole\"","pos":16,"class":"role-option-error-order"}
+{"file":"roleattributes.sql","stmt":22,"edit":[10,0," ROLE"],"code":"42601","msg":"unrecognized role option \"regress_test_createrole\"","pos":16}
 {"file":"roleattributes.sql","stmt":23,"sum":"c0315c37"}
 {"file":"roleattributes.sql","stmt":23,"edit":[36,0," rolinherit"]}
 {"file":"roleattributes.sql","stmt":24,"sum":"9c0b2a04"}
@@ -42249,8 +42249,8 @@
 {"file":"rowsecurity.sql","stmt":33,"sum":"1166d263"}
 {"file":"rowsecurity.sql","stmt":34,"sum":"ed971b3d"}
 {"file":"rowsecurity.sql","stmt":35,"sum":"0e3f93ca"}
-{"file":"rowsecurity.sql","stmt":36,"sum":"78d0e81c","code":"42601","msg":"unrecognized row security option \"ugly\"","pos":72,"class":"policy-option-message"}
-{"file":"rowsecurity.sql","stmt":36,"edit":[153,0," current_user"],"code":"42601","msg":"unrecognized row security option \"ugly\"","pos":72,"class":"policy-option-message"}
+{"file":"rowsecurity.sql","stmt":36,"sum":"78d0e81c","code":"42601","msg":"unrecognized row security option \"ugly\"","pos":72}
+{"file":"rowsecurity.sql","stmt":36,"edit":[153,0," current_user"],"code":"42601","msg":"unrecognized row security option \"ugly\"","pos":72}
 {"file":"rowsecurity.sql","stmt":37,"sum":"8e5aada4"}
 {"file":"rowsecurity.sql","stmt":38,"sum":"896a1c30"}
 {"file":"rowsecurity.sql","stmt":39,"sum":"48fe6d0a"}
@@ -48080,17 +48080,17 @@
 {"file":"strings.sql","stmt":5,"sum":"8b99ac6e"}
 {"file":"strings.sql","stmt":5,"edit":[16,2,"grant"],"code":"42601","msg":"syntax error at or near \"grant\"","pos":16}
 {"file":"strings.sql","stmt":6,"sum":"41f8c211"}
-{"file":"strings.sql","stmt":6,"edit":[21,0,"[]"],"code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"[\"","pos":21,"class":"uescape"}
+{"file":"strings.sql","stmt":6,"edit":[21,0,"[]"],"code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"[\"","pos":21}
 {"file":"strings.sql","stmt":7,"sum":"ba2e5545"}
 {"file":"strings.sql","stmt":8,"sum":"f3d5c2aa","code":"42601","msg":"invalid Unicode escape","pos":17}
 {"file":"strings.sql","stmt":8,"edit":[6,0,"(3)"],"code":"42601","msg":"invalid Unicode escape","pos":20}
 {"file":"strings.sql","stmt":9,"sum":"89c8aba9","code":"42601","msg":"invalid Unicode escape","pos":17}
 {"file":"strings.sql","stmt":9,"edit":[6,0," * "],"code":"42601","msg":"invalid Unicode escape","pos":20}
 {"file":"strings.sql","stmt":9,"edit":[24,0," ) "],"code":"42601","msg":"invalid Unicode escape","pos":17}
-{"file":"strings.sql","stmt":10,"sum":"ec5f4868","code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"+\"","pos":32,"class":"bare-column-label"}
+{"file":"strings.sql","stmt":10,"sum":"ec5f4868","code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"+\"","pos":32}
 {"file":"strings.sql","stmt":10,"edit":[24,7,"distinct"],"code":"42601","msg":"syntax error at or near \"+\"","pos":33}
-{"file":"strings.sql","stmt":11,"sum":"800e8c36","code":"42601","msg":"invalid Unicode escape character at or near \"'+'\"","pos":32,"class":"uescape"}
-{"file":"strings.sql","stmt":11,"edit":[31,0,"."],"code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \".\"","pos":31,"class":"bare-column-label"}
+{"file":"strings.sql","stmt":11,"sum":"800e8c36","code":"42601","msg":"invalid Unicode escape character at or near \"'+'\"","pos":32}
+{"file":"strings.sql","stmt":11,"edit":[31,0,"."],"code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \".\"","pos":31}
 {"file":"strings.sql","stmt":12,"sum":"134e84a5","code":"42601","msg":"invalid Unicode surrogate pair","pos":22}
 {"file":"strings.sql","stmt":12,"edit":[6,0,"(3)"],"code":"42601","msg":"invalid Unicode surrogate pair","pos":25}
 {"file":"strings.sql","stmt":12,"edit":[23,0,"."],"code":"42601","msg":"invalid Unicode surrogate pair","pos":22}
@@ -48125,20 +48125,20 @@
 {"file":"strings.sql","stmt":28,"sum":"8bd60b76"}
 {"file":"strings.sql","stmt":29,"sum":"50e7a7fb"}
 {"file":"strings.sql","stmt":30,"sum":"e7b707f1"}
-{"file":"strings.sql","stmt":30,"edit":[34,0,"[]"],"code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"[\"","pos":34,"class":"bare-column-label"}
+{"file":"strings.sql","stmt":30,"edit":[34,0,"[]"],"code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"[\"","pos":34}
 {"file":"strings.sql","stmt":31,"sum":"41f8c211"}
 {"file":"strings.sql","stmt":31,"edit":[7,6,""]}
-{"file":"strings.sql","stmt":31,"edit":[21,0,"(3)"],"code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"(\"","pos":21,"class":"uescape"}
+{"file":"strings.sql","stmt":31,"edit":[21,0,"(3)"],"code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"(\"","pos":21}
 {"file":"strings.sql","stmt":32,"sum":"ba2e5545"}
-{"file":"strings.sql","stmt":32,"edit":[32,0,"(3)"],"code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"(\"","pos":32,"class":"uescape"}
+{"file":"strings.sql","stmt":32,"edit":[32,0,"(3)"],"code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"(\"","pos":32}
 {"file":"strings.sql","stmt":33,"sum":"f3d5c2aa","code":"42601","msg":"invalid Unicode escape","pos":17}
 {"file":"strings.sql","stmt":33,"edit":[22,0," U&'wrong: \\061'"],"code":"42601","msg":"invalid Unicode escape","pos":17}
 {"file":"strings.sql","stmt":34,"sum":"89c8aba9","code":"42601","msg":"invalid Unicode escape","pos":17}
 {"file":"strings.sql","stmt":34,"edit":[0,24,"U&'wrong: \\+0061' SELECT"],"code":"42601","msg":"invalid Unicode escape","pos":10}
 {"file":"strings.sql","stmt":34,"edit":[24,0," ( "],"code":"42601","msg":"invalid Unicode escape","pos":17}
-{"file":"strings.sql","stmt":35,"sum":"800e8c36","code":"42601","msg":"invalid Unicode escape character at or near \"'+'\"","pos":32,"class":"uescape"}
-{"file":"strings.sql","stmt":35,"edit":[35,0," '+'"],"code":"42601","msg":"invalid Unicode escape character at or near \"'+'\"","pos":32,"class":"uescape"}
-{"file":"strings.sql","stmt":35,"edit":[31,0,"[]"],"code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"[\"","pos":31,"class":"bare-column-label"}
+{"file":"strings.sql","stmt":35,"sum":"800e8c36","code":"42601","msg":"invalid Unicode escape character at or near \"'+'\"","pos":32}
+{"file":"strings.sql","stmt":35,"edit":[35,0," '+'"],"code":"42601","msg":"invalid Unicode escape character at or near \"'+'\"","pos":32}
+{"file":"strings.sql","stmt":35,"edit":[31,0,"[]"],"code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"[\"","pos":31}
 {"file":"strings.sql","stmt":36,"sum":"5204946d"}
 {"file":"strings.sql","stmt":37,"sum":"19512fa5"}
 {"file":"strings.sql","stmt":38,"sum":"6cad1867"}
@@ -52448,7 +52448,7 @@
 {"file":"triggers.sql","stmt":645,"sum":"9ac18732"}
 {"file":"triggers.sql","stmt":646,"sum":"487e9508"}
 {"file":"triggers.sql","stmt":647,"sum":"344ef64e"}
-{"file":"triggers.sql","stmt":647,"edit":[93,0," , "],"code":"42601","msg":"syntax error at or near \",\"","pos":94,"class":"partition-command-in-list"}
+{"file":"triggers.sql","stmt":647,"edit":[93,0," , "],"code":"42601","msg":"syntax error at or near \",\"","pos":94}
 {"file":"triggers.sql","stmt":648,"sum":"34b04ca2"}
 {"file":"triggers.sql","stmt":649,"sum":"83cd2b70"}
 {"file":"triggers.sql","stmt":650,"sum":"0a3e38c2"}
@@ -58725,8 +58725,8 @@
 {"sql":"select now() at local","code":"42601","msg":"syntax error at or near \"local\"","pos":16,"class":"pg17-ddl"}
 {"sql":"alter domain d add not null","code":"42601","msg":"syntax error at or near \"not\"","pos":19,"class":"pg17-ddl"}
 {"sql":"alter operator === (int, int) set (merges)","code":"42601","msg":"syntax error at or near \")\"","pos":41,"class":"pg17-ddl"}
-{"sql":"create table t () with oids","code":"42601","msg":"syntax error at or near \"oids\"","pos":23,"class":"with-oids"}
-{"sql":"alter table t set with oids","code":"42601","msg":"syntax error at or near \"with\"","pos":18,"class":"with-oids"}
+{"sql":"create table t () with oids","code":"42601","msg":"syntax error at or near \"oids\"","pos":23}
+{"sql":"alter table t set with oids","code":"42601","msg":"syntax error at or near \"with\"","pos":18}
 {"sql":"create table t () without oids"}
 {"sql":"select 1 name"}
 {"sql":"select 1 type"}
@@ -58746,29 +58746,29 @@
 {"sql":"with x a as (select 1) select 1","code":"42601","msg":"syntax error at or near \"a\"","pos":7}
 {"sql":"with x a, b as (select 1) select 1","code":"42601","msg":"syntax error at or near \"a\"","pos":7}
 {"sql":"with x (a, b) as (select 1, 2) select 1"}
-{"sql":"alter table t alter a set (n_distinct = 1)","class":"alter-column-optional-keyword"}
-{"sql":"alter table t alter a set generated by default","class":"alter-column-optional-keyword"}
+{"sql":"alter table t alter a set (n_distinct = 1)"}
+{"sql":"alter table t alter a set generated by default"}
 {"sql":"alter table t alter a set not null"}
-{"sql":"alter table t alter column a set (x.y = 1)","class":"column-options-qualified-name"}
-{"sql":"alter table t alter column a reset (x.y)","class":"column-options-qualified-name"}
+{"sql":"alter table t alter column a set (x.y = 1)"}
+{"sql":"alter table t alter column a reset (x.y)"}
 {"sql":"alter table t set (toast.autovacuum_enabled = false)"}
-{"sql":"alter table t attach partition p for values in (1), add column x int","code":"42601","msg":"syntax error at or near \",\"","pos":50,"class":"partition-command-in-list"}
-{"sql":"alter table t detach partition p, add column x int","code":"42601","msg":"syntax error at or near \",\"","pos":32,"class":"partition-command-in-list"}
-{"sql":"grant r to authorization","class":"role-spec-keywords"}
-{"sql":"create schema s authorization authorization","class":"role-spec-keywords"}
-{"sql":"alter group g add user verbose","class":"role-spec-keywords"}
+{"sql":"alter table t attach partition p for values in (1), add column x int","code":"42601","msg":"syntax error at or near \",\"","pos":50}
+{"sql":"alter table t detach partition p, add column x int","code":"42601","msg":"syntax error at or near \",\"","pos":32}
+{"sql":"grant r to authorization"}
+{"sql":"create schema s authorization authorization"}
+{"sql":"alter group g add user verbose"}
 {"sql":"alter role current_user rename to x","code":"42939","msg":"CURRENT_USER cannot be used as a role name here","pos":11}
 {"sql":"create role current_user","code":"42939","msg":"CURRENT_USER cannot be used as a role name here","pos":12}
 {"sql":"create user current_role","code":"42939","msg":"CURRENT_ROLE cannot be used as a role name here","pos":12}
-{"sql":"alter role r","class":"alter-role-no-options"}
-{"sql":"alter user r","class":"alter-role-no-options"}
+{"sql":"alter role r"}
+{"sql":"alter user r"}
 {"sql":"alter role r with"}
-{"sql":"reindex system","class":"reindex-optional-name"}
-{"sql":"reindex database","class":"reindex-optional-name"}
-{"sql":"reindex (verbose) system","class":"reindex-optional-name"}
+{"sql":"reindex system"}
+{"sql":"reindex database"}
+{"sql":"reindex (verbose) system"}
 {"sql":"reindex table","code":"42601","msg":"syntax error at end of input","pos":13}
-{"sql":"alter database x refresh collation version","class":"alter-database-refresh-collation"}
-{"sql":"alter database x refresh","code":"42601","msg":"syntax error at end of input","pos":24,"class":"alter-database-refresh-collation"}
+{"sql":"alter database x refresh collation version"}
+{"sql":"alter database x refresh","code":"42601","msg":"syntax error at end of input","pos":24}
 {"sql":"drop aggregate a","code":"42601","msg":"syntax error at end of input","pos":16}
 {"sql":"drop aggregate a(*)"}
 {"sql":"drop aggregate if exists a, b","code":"42601","msg":"syntax error at or near \",\"","pos":26}
@@ -58792,18 +58792,18 @@
 {"sql":"select * from xmltable('/' passing x columns a int bogus 1)","code":"42601","msg":"unrecognized column option \"bogus\"","pos":51}
 {"sql":"select x over (order by a range between 1 following and current row) from t","code":"42601","msg":"syntax error at or near \"over\"","pos":9}
 {"sql":"select json_object(returning text format json encoding bogus)","code":"22023","msg":"unrecognized JSON encoding: bogus","pos":-1}
-{"sql":"select u&'x' uescape '+'","code":"42601","msg":"invalid Unicode escape character at or near \"'+'\"","pos":21,"class":"uescape"}
-{"sql":"select u&'x' uescape (3) '!'","code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"(\"","pos":21,"class":"bare-column-label"}
-{"sql":"drop operator === (int4)","code":"42601","msg":"missing argument","pos":23,"class":"operator-missing-argument-message"}
-{"sql":"create policy p on t as ugly using (true)","code":"42601","msg":"unrecognized row security option \"ugly\"","pos":24,"class":"policy-option-message"}
-{"sql":"create role role x with createrole","code":"42601","msg":"unrecognized role option \"x\"","pos":17,"class":"role-option-error-order"}
+{"sql":"select u&'x' uescape '+'","code":"42601","msg":"invalid Unicode escape character at or near \"'+'\"","pos":21}
+{"sql":"select u&'x' uescape (3) '!'","code":"42601","msg":"UESCAPE must be followed by a simple string literal at or near \"(\"","pos":21}
+{"sql":"drop operator === (int4)","code":"42601","msg":"missing argument","pos":23}
+{"sql":"create policy p on t as ugly using (true)","code":"42601","msg":"unrecognized row security option \"ugly\"","pos":24}
+{"sql":"create role role x with createrole","code":"42601","msg":"unrecognized role option \"x\"","pos":17}
 {"sql":"drop procedure p, q[]","code":"42601","msg":"syntax error at or near \"]\"","pos":20}
 {"sql":"-- Phase 1: infrastructure coverage for core expression nodes\nSELECT CURRENT_DATE"}
 {"sql":"SELECT CURRENT_TIME(3)"}
 {"sql":"SELECT COALESCE(NULL, 1, 2)"}
 {"sql":"SELECT GREATEST(1, 2), LEAST(2, 3)"}
 {"sql":"-- Phase 2: core expression grammar gaps\nSELECT TREAT('1' AS int)"}
-{"sql":"-- expect-error: UNIQUE predicate is not yet implemented\nSELECT UNIQUE (SELECT 1)","code":"0A000","msg":"UNIQUE predicate is not yet implemented","pos":64,"class":"not-yet-implemented-errors"}
+{"sql":"-- expect-error: UNIQUE predicate is not yet implemented\nSELECT UNIQUE (SELECT 1)","code":"0A000","msg":"UNIQUE predicate is not yet implemented","pos":64}
 {"sql":"SELECT ROW()"}
 {"sql":"SELECT 1 OPERATOR(pg_catalog.=) ANY (SELECT 1)"}
 {"sql":"SELECT (SELECT 1)[1]"}
@@ -58846,7 +58846,7 @@
 {"sql":"-- %TYPE for function param/return types\nCREATE FUNCTION foo(x hobbies_r.name%TYPE) RETURNS hobbies_r.person%TYPE AS 'select 1' LANGUAGE SQL"}
 {"sql":"CREATE FUNCTION bar(SETOF mytable.col%TYPE) RETURNS void AS 'select 1' LANGUAGE SQL"}
 {"sql":"-- Task 1: TRANSFORM in CREATE FUNCTION\nCREATE FUNCTION my_func(jsonb) RETURNS int LANGUAGE sql TRANSFORM FOR TYPE jsonb AS $$ SELECT 1; $$"}
-{"sql":"-- oper_argtypes single-arg error should report missing argument\n-- expect-error: missing argument\nDROP OPERATOR +(integer)","code":"42601","msg":"missing argument","pos":122,"class":"operator-missing-argument-message"}
+{"sql":"-- oper_argtypes single-arg error should report missing argument\n-- expect-error: missing argument\nDROP OPERATOR +(integer)","code":"42601","msg":"missing argument","pos":122}
 {"sql":"-- Task 2: LOGGED/UNLOGGED sequences\nCREATE SEQUENCE s_logged AS integer LOGGED"}
 {"sql":"CREATE SEQUENCE s_unlogged AS integer UNLOGGED"}
 {"sql":"-- Phase 6: extractor behavior coverage\n-- psql terminators should end statements mid-line\nSELECT 1"}
@@ -58857,8 +58857,8 @@
 {"sql":"SELECT 6"}
 {"sql":"-- BEGIN ATOMIC block should not split on internal semicolons\nCREATE FUNCTION atomic_fun(a int) RETURNS int LANGUAGE SQL\nBEGIN ATOMIC\n  SELECT a + 1;\n  SELECT a + 2;\nEND"}
 {"sql":"-- CREATE RULE DO (...) should keep semicolons inside parens\nCREATE RULE r1 AS ON INSERT TO foo DO (\n  INSERT INTO foo VALUES (1);\n  UPDATE foo SET a = 2;\n)"}
-{"sql":"-- Grammar compatibility fixtures for postgres features missing in pgparser.\n-- expect-error: syntax error\nALTER DATABASE mydb REFRESH COLLATION VERSION","class":"alter-database-refresh-collation"}
+{"sql":"-- Grammar compatibility fixtures for postgres features missing in pgparser.\n-- expect-error: syntax error\nALTER DATABASE mydb REFRESH COLLATION VERSION"}
 {"sql":"-- expect-error: syntax error\nALTER TYPE mood DROP VALUE 'sad'","code":"42601","msg":"syntax error at or near \"VALUE\"","pos":51}
 {"sql":"-- expect-error: syntax error\nALTER EXTENSION hstore ADD CAST (text AS hstore)"}
 {"sql":"-- expect-error: syntax error\nALTER EXTENSION hstore ADD TRANSFORM FOR jsonb LANGUAGE plpgsql"}
-{"sql":"-- expect-error: syntax error\nCREATE ASSERTION positive CHECK (1 = 1)","code":"0A000","msg":"CREATE ASSERTION is not yet implemented","pos":-1,"class":"not-yet-implemented-errors"}
+{"sql":"-- expect-error: syntax error\nCREATE ASSERTION positive CHECK (1 = 1)","code":"0A000","msg":"CREATE ASSERTION is not yet implemented","pos":-1}

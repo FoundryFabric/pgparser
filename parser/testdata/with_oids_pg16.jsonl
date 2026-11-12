@@ -1,0 +1,376 @@
+{"sql":"create table t (a int) with oids","code":"42601","message":"syntax error at or near \"oids\"","position":28}
+{"sql":"create table t (a int) WITH OIDS","code":"42601","message":"syntax error at or near \"OIDS\"","position":28}
+{"sql":"create table t (a int) without oids"}
+{"sql":"create table t (a int) WITHOUT OIDS"}
+{"sql":"create table t (a int) with (fillfactor = 10)"}
+{"sql":"create table t (a int) with oids, with (a)","code":"42601","message":"syntax error at or near \"oids\"","position":28}
+{"sql":"create table t (a int) with oids (a)","code":"42601","message":"syntax error at or near \"oids\"","position":28}
+{"sql":"create table t (a int) with (oids)"}
+{"sql":"create table t (a int) with (oids = true)"}
+{"sql":"create table t (a int) without oids, with (a)","code":"42601","message":"syntax error at or near \",\"","position":35}
+{"sql":"create table t (a int) with oid","code":"42601","message":"syntax error at or near \"oid\"","position":28}
+{"sql":"create table t (a int) without oid","code":"42601","message":"syntax error at or near \"oid\"","position":31}
+{"sql":"create table t (a int) with","code":"42601","message":"syntax error at end of input","position":27}
+{"sql":"create table t (a int) without","code":"42601","message":"syntax error at end of input","position":30}
+{"sql":"create table t (a int) with oids with oids","code":"42601","message":"syntax error at or near \"oids\"","position":28}
+{"sql":"create table t (a int) without oids without oids","code":"42601","message":"syntax error at or near \"without\"","position":36}
+{"sql":"create table t (a int) with oids on commit drop","code":"42601","message":"syntax error at or near \"oids\"","position":28}
+{"sql":"create table t (a int) without oids on commit drop"}
+{"sql":"create table t (a int) with oids tablespace x","code":"42601","message":"syntax error at or near \"oids\"","position":28}
+{"sql":"create table t (a int) without oids tablespace x"}
+{"sql":"create table t () with oids","code":"42601","message":"syntax error at or near \"oids\"","position":23}
+{"sql":"create table t () WITH OIDS","code":"42601","message":"syntax error at or near \"OIDS\"","position":23}
+{"sql":"create table t () without oids"}
+{"sql":"create table t () WITHOUT OIDS"}
+{"sql":"create table t () with (fillfactor = 10)"}
+{"sql":"create table t () with oids, with (a)","code":"42601","message":"syntax error at or near \"oids\"","position":23}
+{"sql":"create table t () with oids (a)","code":"42601","message":"syntax error at or near \"oids\"","position":23}
+{"sql":"create table t () with (oids)"}
+{"sql":"create table t () with (oids = true)"}
+{"sql":"create table t () without oids, with (a)","code":"42601","message":"syntax error at or near \",\"","position":30}
+{"sql":"create table t () with oid","code":"42601","message":"syntax error at or near \"oid\"","position":23}
+{"sql":"create table t () without oid","code":"42601","message":"syntax error at or near \"oid\"","position":26}
+{"sql":"create table t () with","code":"42601","message":"syntax error at end of input","position":22}
+{"sql":"create table t () without","code":"42601","message":"syntax error at end of input","position":25}
+{"sql":"create table t () with oids with oids","code":"42601","message":"syntax error at or near \"oids\"","position":23}
+{"sql":"create table t () without oids without oids","code":"42601","message":"syntax error at or near \"without\"","position":31}
+{"sql":"create table t () with oids on commit drop","code":"42601","message":"syntax error at or near \"oids\"","position":23}
+{"sql":"create table t () without oids on commit drop"}
+{"sql":"create table t () with oids tablespace x","code":"42601","message":"syntax error at or near \"oids\"","position":23}
+{"sql":"create table t () without oids tablespace x"}
+{"sql":"create temp table t (a int) with oids","code":"42601","message":"syntax error at or near \"oids\"","position":33}
+{"sql":"create temp table t (a int) WITH OIDS","code":"42601","message":"syntax error at or near \"OIDS\"","position":33}
+{"sql":"create temp table t (a int) without oids"}
+{"sql":"create temp table t (a int) WITHOUT OIDS"}
+{"sql":"create temp table t (a int) with (fillfactor = 10)"}
+{"sql":"create temp table t (a int) with oids, with (a)","code":"42601","message":"syntax error at or near \"oids\"","position":33}
+{"sql":"create temp table t (a int) with oids (a)","code":"42601","message":"syntax error at or near \"oids\"","position":33}
+{"sql":"create temp table t (a int) with (oids)"}
+{"sql":"create temp table t (a int) with (oids = true)"}
+{"sql":"create temp table t (a int) without oids, with (a)","code":"42601","message":"syntax error at or near \",\"","position":40}
+{"sql":"create temp table t (a int) with oid","code":"42601","message":"syntax error at or near \"oid\"","position":33}
+{"sql":"create temp table t (a int) without oid","code":"42601","message":"syntax error at or near \"oid\"","position":36}
+{"sql":"create temp table t (a int) with","code":"42601","message":"syntax error at end of input","position":32}
+{"sql":"create temp table t (a int) without","code":"42601","message":"syntax error at end of input","position":35}
+{"sql":"create temp table t (a int) with oids with oids","code":"42601","message":"syntax error at or near \"oids\"","position":33}
+{"sql":"create temp table t (a int) without oids without oids","code":"42601","message":"syntax error at or near \"without\"","position":41}
+{"sql":"create temp table t (a int) with oids on commit drop","code":"42601","message":"syntax error at or near \"oids\"","position":33}
+{"sql":"create temp table t (a int) without oids on commit drop"}
+{"sql":"create temp table t (a int) with oids tablespace x","code":"42601","message":"syntax error at or near \"oids\"","position":33}
+{"sql":"create temp table t (a int) without oids tablespace x"}
+{"sql":"create unlogged table t (a int) with oids","code":"42601","message":"syntax error at or near \"oids\"","position":37}
+{"sql":"create unlogged table t (a int) WITH OIDS","code":"42601","message":"syntax error at or near \"OIDS\"","position":37}
+{"sql":"create unlogged table t (a int) without oids"}
+{"sql":"create unlogged table t (a int) WITHOUT OIDS"}
+{"sql":"create unlogged table t (a int) with (fillfactor = 10)"}
+{"sql":"create unlogged table t (a int) with oids, with (a)","code":"42601","message":"syntax error at or near \"oids\"","position":37}
+{"sql":"create unlogged table t (a int) with oids (a)","code":"42601","message":"syntax error at or near \"oids\"","position":37}
+{"sql":"create unlogged table t (a int) with (oids)"}
+{"sql":"create unlogged table t (a int) with (oids = true)"}
+{"sql":"create unlogged table t (a int) without oids, with (a)","code":"42601","message":"syntax error at or near \",\"","position":44}
+{"sql":"create unlogged table t (a int) with oid","code":"42601","message":"syntax error at or near \"oid\"","position":37}
+{"sql":"create unlogged table t (a int) without oid","code":"42601","message":"syntax error at or near \"oid\"","position":40}
+{"sql":"create unlogged table t (a int) with","code":"42601","message":"syntax error at end of input","position":36}
+{"sql":"create unlogged table t (a int) without","code":"42601","message":"syntax error at end of input","position":39}
+{"sql":"create unlogged table t (a int) with oids with oids","code":"42601","message":"syntax error at or near \"oids\"","position":37}
+{"sql":"create unlogged table t (a int) without oids without oids","code":"42601","message":"syntax error at or near \"without\"","position":45}
+{"sql":"create unlogged table t (a int) with oids on commit drop","code":"42601","message":"syntax error at or near \"oids\"","position":37}
+{"sql":"create unlogged table t (a int) without oids on commit drop"}
+{"sql":"create unlogged table t (a int) with oids tablespace x","code":"42601","message":"syntax error at or near \"oids\"","position":37}
+{"sql":"create unlogged table t (a int) without oids tablespace x"}
+{"sql":"create table t partition of p for values in (1) with oids","code":"42601","message":"syntax error at or near \"oids\"","position":53}
+{"sql":"create table t partition of p for values in (1) WITH OIDS","code":"42601","message":"syntax error at or near \"OIDS\"","position":53}
+{"sql":"create table t partition of p for values in (1) without oids"}
+{"sql":"create table t partition of p for values in (1) WITHOUT OIDS"}
+{"sql":"create table t partition of p for values in (1) with (fillfactor = 10)"}
+{"sql":"create table t partition of p for values in (1) with oids, with (a)","code":"42601","message":"syntax error at or near \"oids\"","position":53}
+{"sql":"create table t partition of p for values in (1) with oids (a)","code":"42601","message":"syntax error at or near \"oids\"","position":53}
+{"sql":"create table t partition of p for values in (1) with (oids)"}
+{"sql":"create table t partition of p for values in (1) with (oids = true)"}
+{"sql":"create table t partition of p for values in (1) without oids, with (a)","code":"42601","message":"syntax error at or near \",\"","position":60}
+{"sql":"create table t partition of p for values in (1) with oid","code":"42601","message":"syntax error at or near \"oid\"","position":53}
+{"sql":"create table t partition of p for values in (1) without oid","code":"42601","message":"syntax error at or near \"oid\"","position":56}
+{"sql":"create table t partition of p for values in (1) with","code":"42601","message":"syntax error at end of input","position":52}
+{"sql":"create table t partition of p for values in (1) without","code":"42601","message":"syntax error at end of input","position":55}
+{"sql":"create table t partition of p for values in (1) with oids with oids","code":"42601","message":"syntax error at or near \"oids\"","position":53}
+{"sql":"create table t partition of p for values in (1) without oids without oids","code":"42601","message":"syntax error at or near \"without\"","position":61}
+{"sql":"create table t partition of p for values in (1) with oids on commit drop","code":"42601","message":"syntax error at or near \"oids\"","position":53}
+{"sql":"create table t partition of p for values in (1) without oids on commit drop"}
+{"sql":"create table t partition of p for values in (1) with oids tablespace x","code":"42601","message":"syntax error at or near \"oids\"","position":53}
+{"sql":"create table t partition of p for values in (1) without oids tablespace x"}
+{"sql":"create table t of ty with oids","code":"42601","message":"syntax error at or near \"oids\"","position":26}
+{"sql":"create table t of ty WITH OIDS","code":"42601","message":"syntax error at or near \"OIDS\"","position":26}
+{"sql":"create table t of ty without oids"}
+{"sql":"create table t of ty WITHOUT OIDS"}
+{"sql":"create table t of ty with (fillfactor = 10)"}
+{"sql":"create table t of ty with oids, with (a)","code":"42601","message":"syntax error at or near \"oids\"","position":26}
+{"sql":"create table t of ty with oids (a)","code":"42601","message":"syntax error at or near \"oids\"","position":26}
+{"sql":"create table t of ty with (oids)"}
+{"sql":"create table t of ty with (oids = true)"}
+{"sql":"create table t of ty without oids, with (a)","code":"42601","message":"syntax error at or near \",\"","position":33}
+{"sql":"create table t of ty with oid","code":"42601","message":"syntax error at or near \"oid\"","position":26}
+{"sql":"create table t of ty without oid","code":"42601","message":"syntax error at or near \"oid\"","position":29}
+{"sql":"create table t of ty with","code":"42601","message":"syntax error at end of input","position":25}
+{"sql":"create table t of ty without","code":"42601","message":"syntax error at end of input","position":28}
+{"sql":"create table t of ty with oids with oids","code":"42601","message":"syntax error at or near \"oids\"","position":26}
+{"sql":"create table t of ty without oids without oids","code":"42601","message":"syntax error at or near \"without\"","position":34}
+{"sql":"create table t of ty with oids on commit drop","code":"42601","message":"syntax error at or near \"oids\"","position":26}
+{"sql":"create table t of ty without oids on commit drop"}
+{"sql":"create table t of ty with oids tablespace x","code":"42601","message":"syntax error at or near \"oids\"","position":26}
+{"sql":"create table t of ty without oids tablespace x"}
+{"sql":"create table t (a int) partition by list (a) with oids","code":"42601","message":"syntax error at or near \"oids\"","position":50}
+{"sql":"create table t (a int) partition by list (a) WITH OIDS","code":"42601","message":"syntax error at or near \"OIDS\"","position":50}
+{"sql":"create table t (a int) partition by list (a) without oids"}
+{"sql":"create table t (a int) partition by list (a) WITHOUT OIDS"}
+{"sql":"create table t (a int) partition by list (a) with (fillfactor = 10)"}
+{"sql":"create table t (a int) partition by list (a) with oids, with (a)","code":"42601","message":"syntax error at or near \"oids\"","position":50}
+{"sql":"create table t (a int) partition by list (a) with oids (a)","code":"42601","message":"syntax error at or near \"oids\"","position":50}
+{"sql":"create table t (a int) partition by list (a) with (oids)"}
+{"sql":"create table t (a int) partition by list (a) with (oids = true)"}
+{"sql":"create table t (a int) partition by list (a) without oids, with (a)","code":"42601","message":"syntax error at or near \",\"","position":57}
+{"sql":"create table t (a int) partition by list (a) with oid","code":"42601","message":"syntax error at or near \"oid\"","position":50}
+{"sql":"create table t (a int) partition by list (a) without oid","code":"42601","message":"syntax error at or near \"oid\"","position":53}
+{"sql":"create table t (a int) partition by list (a) with","code":"42601","message":"syntax error at end of input","position":49}
+{"sql":"create table t (a int) partition by list (a) without","code":"42601","message":"syntax error at end of input","position":52}
+{"sql":"create table t (a int) partition by list (a) with oids with oids","code":"42601","message":"syntax error at or near \"oids\"","position":50}
+{"sql":"create table t (a int) partition by list (a) without oids without oids","code":"42601","message":"syntax error at or near \"without\"","position":58}
+{"sql":"create table t (a int) partition by list (a) with oids on commit drop","code":"42601","message":"syntax error at or near \"oids\"","position":50}
+{"sql":"create table t (a int) partition by list (a) without oids on commit drop"}
+{"sql":"create table t (a int) partition by list (a) with oids tablespace x","code":"42601","message":"syntax error at or near \"oids\"","position":50}
+{"sql":"create table t (a int) partition by list (a) without oids tablespace x"}
+{"sql":"create table t as select 1 with oids","code":"42601","message":"syntax error at or near \"oids\"","position":32}
+{"sql":"create table t as select 1 WITH OIDS","code":"42601","message":"syntax error at or near \"OIDS\"","position":32}
+{"sql":"create table t as select 1 without oids","code":"42601","message":"syntax error at or near \"without\"","position":27}
+{"sql":"create table t as select 1 WITHOUT OIDS","code":"42601","message":"syntax error at or near \"WITHOUT\"","position":27}
+{"sql":"create table t as select 1 with (fillfactor = 10)","code":"42601","message":"syntax error at or near \"(\"","position":32}
+{"sql":"create table t as select 1 with oids, with (a)","code":"42601","message":"syntax error at or near \"oids\"","position":32}
+{"sql":"create table t as select 1 with oids (a)","code":"42601","message":"syntax error at or near \"oids\"","position":32}
+{"sql":"create table t as select 1 with (oids)","code":"42601","message":"syntax error at or near \"(\"","position":32}
+{"sql":"create table t as select 1 with (oids = true)","code":"42601","message":"syntax error at or near \"(\"","position":32}
+{"sql":"create table t as select 1 without oids, with (a)","code":"42601","message":"syntax error at or near \"without\"","position":27}
+{"sql":"create table t as select 1 with oid","code":"42601","message":"syntax error at or near \"oid\"","position":32}
+{"sql":"create table t as select 1 without oid","code":"42601","message":"syntax error at or near \"without\"","position":27}
+{"sql":"create table t as select 1 with","code":"42601","message":"syntax error at end of input","position":31}
+{"sql":"create table t as select 1 without","code":"42601","message":"syntax error at or near \"without\"","position":27}
+{"sql":"create table t as select 1 with oids with oids","code":"42601","message":"syntax error at or near \"oids\"","position":32}
+{"sql":"create table t as select 1 without oids without oids","code":"42601","message":"syntax error at or near \"without\"","position":27}
+{"sql":"create table t as select 1 with oids on commit drop","code":"42601","message":"syntax error at or near \"oids\"","position":32}
+{"sql":"create table t as select 1 without oids on commit drop","code":"42601","message":"syntax error at or near \"without\"","position":27}
+{"sql":"create table t as select 1 with oids tablespace x","code":"42601","message":"syntax error at or near \"oids\"","position":32}
+{"sql":"create table t as select 1 without oids tablespace x","code":"42601","message":"syntax error at or near \"without\"","position":27}
+{"sql":"create table t (a) with oids as select 1","code":"42601","message":"syntax error at or near \"oids\"","position":24}
+{"sql":"create table t (a) WITH OIDS as select 1","code":"42601","message":"syntax error at or near \"OIDS\"","position":24}
+{"sql":"create table t (a) without oids as select 1"}
+{"sql":"create table t (a) WITHOUT OIDS as select 1"}
+{"sql":"create table t (a) with (fillfactor = 10) as select 1"}
+{"sql":"create table t (a) with oids, with (a) as select 1","code":"42601","message":"syntax error at or near \"oids\"","position":24}
+{"sql":"create table t (a) with oids (a) as select 1","code":"42601","message":"syntax error at or near \"oids\"","position":24}
+{"sql":"create table t (a) with (oids) as select 1"}
+{"sql":"create table t (a) with (oids = true) as select 1"}
+{"sql":"create table t (a) without oids, with (a) as select 1","code":"42601","message":"syntax error at or near \",\"","position":31}
+{"sql":"create table t (a) with oid as select 1","code":"42601","message":"syntax error at or near \"oid\"","position":24}
+{"sql":"create table t (a) without oid as select 1","code":"42601","message":"syntax error at or near \"oid\"","position":27}
+{"sql":"create table t (a) with as select 1","code":"42601","message":"syntax error at or near \"as\"","position":24}
+{"sql":"create table t (a) without as select 1","code":"42601","message":"syntax error at or near \"as\"","position":27}
+{"sql":"create table t (a) with oids with oids as select 1","code":"42601","message":"syntax error at or near \"oids\"","position":24}
+{"sql":"create table t (a) without oids without oids as select 1","code":"42601","message":"syntax error at or near \"without\"","position":32}
+{"sql":"create table t (a) with oids on commit drop as select 1","code":"42601","message":"syntax error at or near \"oids\"","position":24}
+{"sql":"create table t (a) without oids on commit drop as select 1"}
+{"sql":"create table t (a) with oids tablespace x as select 1","code":"42601","message":"syntax error at or near \"oids\"","position":24}
+{"sql":"create table t (a) without oids tablespace x as select 1"}
+{"sql":"create materialized view m with oids as select 1","code":"42601","message":"syntax error at or near \"oids\"","position":32}
+{"sql":"create materialized view m WITH OIDS as select 1","code":"42601","message":"syntax error at or near \"OIDS\"","position":32}
+{"sql":"create materialized view m without oids as select 1","code":"42601","message":"syntax error at or near \"without\"","position":27}
+{"sql":"create materialized view m WITHOUT OIDS as select 1","code":"42601","message":"syntax error at or near \"WITHOUT\"","position":27}
+{"sql":"create materialized view m with (fillfactor = 10) as select 1"}
+{"sql":"create materialized view m with oids, with (a) as select 1","code":"42601","message":"syntax error at or near \"oids\"","position":32}
+{"sql":"create materialized view m with oids (a) as select 1","code":"42601","message":"syntax error at or near \"oids\"","position":32}
+{"sql":"create materialized view m with (oids) as select 1"}
+{"sql":"create materialized view m with (oids = true) as select 1"}
+{"sql":"create materialized view m without oids, with (a) as select 1","code":"42601","message":"syntax error at or near \"without\"","position":27}
+{"sql":"create materialized view m with oid as select 1","code":"42601","message":"syntax error at or near \"oid\"","position":32}
+{"sql":"create materialized view m without oid as select 1","code":"42601","message":"syntax error at or near \"without\"","position":27}
+{"sql":"create materialized view m with as select 1","code":"42601","message":"syntax error at or near \"as\"","position":32}
+{"sql":"create materialized view m without as select 1","code":"42601","message":"syntax error at or near \"without\"","position":27}
+{"sql":"create materialized view m with oids with oids as select 1","code":"42601","message":"syntax error at or near \"oids\"","position":32}
+{"sql":"create materialized view m without oids without oids as select 1","code":"42601","message":"syntax error at or near \"without\"","position":27}
+{"sql":"create materialized view m with oids on commit drop as select 1","code":"42601","message":"syntax error at or near \"oids\"","position":32}
+{"sql":"create materialized view m without oids on commit drop as select 1","code":"42601","message":"syntax error at or near \"without\"","position":27}
+{"sql":"create materialized view m with oids tablespace x as select 1","code":"42601","message":"syntax error at or near \"oids\"","position":32}
+{"sql":"create materialized view m without oids tablespace x as select 1","code":"42601","message":"syntax error at or near \"without\"","position":27}
+{"sql":"create table t (like s) with oids","code":"42601","message":"syntax error at or near \"oids\"","position":29}
+{"sql":"create table t (like s) WITH OIDS","code":"42601","message":"syntax error at or near \"OIDS\"","position":29}
+{"sql":"create table t (like s) without oids"}
+{"sql":"create table t (like s) WITHOUT OIDS"}
+{"sql":"create table t (like s) with (fillfactor = 10)"}
+{"sql":"create table t (like s) with oids, with (a)","code":"42601","message":"syntax error at or near \"oids\"","position":29}
+{"sql":"create table t (like s) with oids (a)","code":"42601","message":"syntax error at or near \"oids\"","position":29}
+{"sql":"create table t (like s) with (oids)"}
+{"sql":"create table t (like s) with (oids = true)"}
+{"sql":"create table t (like s) without oids, with (a)","code":"42601","message":"syntax error at or near \",\"","position":36}
+{"sql":"create table t (like s) with oid","code":"42601","message":"syntax error at or near \"oid\"","position":29}
+{"sql":"create table t (like s) without oid","code":"42601","message":"syntax error at or near \"oid\"","position":32}
+{"sql":"create table t (like s) with","code":"42601","message":"syntax error at end of input","position":28}
+{"sql":"create table t (like s) without","code":"42601","message":"syntax error at end of input","position":31}
+{"sql":"create table t (like s) with oids with oids","code":"42601","message":"syntax error at or near \"oids\"","position":29}
+{"sql":"create table t (like s) without oids without oids","code":"42601","message":"syntax error at or near \"without\"","position":37}
+{"sql":"create table t (like s) with oids on commit drop","code":"42601","message":"syntax error at or near \"oids\"","position":29}
+{"sql":"create table t (like s) without oids on commit drop"}
+{"sql":"create table t (like s) with oids tablespace x","code":"42601","message":"syntax error at or near \"oids\"","position":29}
+{"sql":"create table t (like s) without oids tablespace x"}
+{"sql":"create table if not exists t (a int) with oids","code":"42601","message":"syntax error at or near \"oids\"","position":42}
+{"sql":"create table if not exists t (a int) WITH OIDS","code":"42601","message":"syntax error at or near \"OIDS\"","position":42}
+{"sql":"create table if not exists t (a int) without oids"}
+{"sql":"create table if not exists t (a int) WITHOUT OIDS"}
+{"sql":"create table if not exists t (a int) with (fillfactor = 10)"}
+{"sql":"create table if not exists t (a int) with oids, with (a)","code":"42601","message":"syntax error at or near \"oids\"","position":42}
+{"sql":"create table if not exists t (a int) with oids (a)","code":"42601","message":"syntax error at or near \"oids\"","position":42}
+{"sql":"create table if not exists t (a int) with (oids)"}
+{"sql":"create table if not exists t (a int) with (oids = true)"}
+{"sql":"create table if not exists t (a int) without oids, with (a)","code":"42601","message":"syntax error at or near \",\"","position":49}
+{"sql":"create table if not exists t (a int) with oid","code":"42601","message":"syntax error at or near \"oid\"","position":42}
+{"sql":"create table if not exists t (a int) without oid","code":"42601","message":"syntax error at or near \"oid\"","position":45}
+{"sql":"create table if not exists t (a int) with","code":"42601","message":"syntax error at end of input","position":41}
+{"sql":"create table if not exists t (a int) without","code":"42601","message":"syntax error at end of input","position":44}
+{"sql":"create table if not exists t (a int) with oids with oids","code":"42601","message":"syntax error at or near \"oids\"","position":42}
+{"sql":"create table if not exists t (a int) without oids without oids","code":"42601","message":"syntax error at or near \"without\"","position":50}
+{"sql":"create table if not exists t (a int) with oids on commit drop","code":"42601","message":"syntax error at or near \"oids\"","position":42}
+{"sql":"create table if not exists t (a int) without oids on commit drop"}
+{"sql":"create table if not exists t (a int) with oids tablespace x","code":"42601","message":"syntax error at or near \"oids\"","position":42}
+{"sql":"create table if not exists t (a int) without oids tablespace x"}
+{"sql":"create table t (a int) inherits (p) with oids","code":"42601","message":"syntax error at or near \"oids\"","position":41}
+{"sql":"create table t (a int) inherits (p) WITH OIDS","code":"42601","message":"syntax error at or near \"OIDS\"","position":41}
+{"sql":"create table t (a int) inherits (p) without oids"}
+{"sql":"create table t (a int) inherits (p) WITHOUT OIDS"}
+{"sql":"create table t (a int) inherits (p) with (fillfactor = 10)"}
+{"sql":"create table t (a int) inherits (p) with oids, with (a)","code":"42601","message":"syntax error at or near \"oids\"","position":41}
+{"sql":"create table t (a int) inherits (p) with oids (a)","code":"42601","message":"syntax error at or near \"oids\"","position":41}
+{"sql":"create table t (a int) inherits (p) with (oids)"}
+{"sql":"create table t (a int) inherits (p) with (oids = true)"}
+{"sql":"create table t (a int) inherits (p) without oids, with (a)","code":"42601","message":"syntax error at or near \",\"","position":48}
+{"sql":"create table t (a int) inherits (p) with oid","code":"42601","message":"syntax error at or near \"oid\"","position":41}
+{"sql":"create table t (a int) inherits (p) without oid","code":"42601","message":"syntax error at or near \"oid\"","position":44}
+{"sql":"create table t (a int) inherits (p) with","code":"42601","message":"syntax error at end of input","position":40}
+{"sql":"create table t (a int) inherits (p) without","code":"42601","message":"syntax error at end of input","position":43}
+{"sql":"create table t (a int) inherits (p) with oids with oids","code":"42601","message":"syntax error at or near \"oids\"","position":41}
+{"sql":"create table t (a int) inherits (p) without oids without oids","code":"42601","message":"syntax error at or near \"without\"","position":49}
+{"sql":"create table t (a int) inherits (p) with oids on commit drop","code":"42601","message":"syntax error at or near \"oids\"","position":41}
+{"sql":"create table t (a int) inherits (p) without oids on commit drop"}
+{"sql":"create table t (a int) inherits (p) with oids tablespace x","code":"42601","message":"syntax error at or near \"oids\"","position":41}
+{"sql":"create table t (a int) inherits (p) without oids tablespace x"}
+{"sql":"alter table t set with oids","code":"42601","message":"syntax error at or near \"with\"","position":18}
+{"sql":"alter table t set without oids"}
+{"sql":"alter table t SET WITH OIDS","code":"42601","message":"syntax error at or near \"WITH\"","position":18}
+{"sql":"alter table t set with (a = 1)","code":"42601","message":"syntax error at or near \"with\"","position":18}
+{"sql":"alter table t set with","code":"42601","message":"syntax error at or near \"with\"","position":18}
+{"sql":"alter table t set without","code":"42601","message":"syntax error at end of input","position":25}
+{"sql":"alter table t set oids","code":"42601","message":"syntax error at or near \"oids\"","position":18}
+{"sql":"alter table t set without oids, add column b int"}
+{"sql":"alter table t add column b int, set without oids"}
+{"sql":"alter table t set with oids, add column b int","code":"42601","message":"syntax error at or near \"with\"","position":18}
+{"sql":"alter table t set without oids, set with oids","code":"42601","message":"syntax error at or near \"with\"","position":36}
+{"sql":"alter table t set without oid","code":"42601","message":"syntax error at or near \"oid\"","position":26}
+{"sql":"alter table t set without oids cascade","code":"42601","message":"syntax error at or near \"cascade\"","position":31}
+{"sql":"alter table t reset (oids)"}
+{"sql":"alter table if exists t set with oids","code":"42601","message":"syntax error at or near \"with\"","position":28}
+{"sql":"alter table if exists t set without oids"}
+{"sql":"alter table if exists t SET WITH OIDS","code":"42601","message":"syntax error at or near \"WITH\"","position":28}
+{"sql":"alter table if exists t set with (a = 1)","code":"42601","message":"syntax error at or near \"with\"","position":28}
+{"sql":"alter table if exists t set with","code":"42601","message":"syntax error at or near \"with\"","position":28}
+{"sql":"alter table if exists t set without","code":"42601","message":"syntax error at end of input","position":35}
+{"sql":"alter table if exists t set oids","code":"42601","message":"syntax error at or near \"oids\"","position":28}
+{"sql":"alter table if exists t set without oids, add column b int"}
+{"sql":"alter table if exists t add column b int, set without oids"}
+{"sql":"alter table if exists t set with oids, add column b int","code":"42601","message":"syntax error at or near \"with\"","position":28}
+{"sql":"alter table if exists t set without oids, set with oids","code":"42601","message":"syntax error at or near \"with\"","position":46}
+{"sql":"alter table if exists t set without oid","code":"42601","message":"syntax error at or near \"oid\"","position":36}
+{"sql":"alter table if exists t set without oids cascade","code":"42601","message":"syntax error at or near \"cascade\"","position":41}
+{"sql":"alter table if exists t reset (oids)"}
+{"sql":"alter table only t set with oids","code":"42601","message":"syntax error at or near \"with\"","position":23}
+{"sql":"alter table only t set without oids"}
+{"sql":"alter table only t SET WITH OIDS","code":"42601","message":"syntax error at or near \"WITH\"","position":23}
+{"sql":"alter table only t set with (a = 1)","code":"42601","message":"syntax error at or near \"with\"","position":23}
+{"sql":"alter table only t set with","code":"42601","message":"syntax error at or near \"with\"","position":23}
+{"sql":"alter table only t set without","code":"42601","message":"syntax error at end of input","position":30}
+{"sql":"alter table only t set oids","code":"42601","message":"syntax error at or near \"oids\"","position":23}
+{"sql":"alter table only t set without oids, add column b int"}
+{"sql":"alter table only t add column b int, set without oids"}
+{"sql":"alter table only t set with oids, add column b int","code":"42601","message":"syntax error at or near \"with\"","position":23}
+{"sql":"alter table only t set without oids, set with oids","code":"42601","message":"syntax error at or near \"with\"","position":41}
+{"sql":"alter table only t set without oid","code":"42601","message":"syntax error at or near \"oid\"","position":31}
+{"sql":"alter table only t set without oids cascade","code":"42601","message":"syntax error at or near \"cascade\"","position":36}
+{"sql":"alter table only t reset (oids)"}
+{"sql":"alter index i set with oids","code":"42601","message":"syntax error at or near \"with\"","position":18}
+{"sql":"alter index i set without oids"}
+{"sql":"alter index i SET WITH OIDS","code":"42601","message":"syntax error at or near \"WITH\"","position":18}
+{"sql":"alter index i set with (a = 1)","code":"42601","message":"syntax error at or near \"with\"","position":18}
+{"sql":"alter index i set with","code":"42601","message":"syntax error at or near \"with\"","position":18}
+{"sql":"alter index i set without","code":"42601","message":"syntax error at end of input","position":25}
+{"sql":"alter index i set oids","code":"42601","message":"syntax error at or near \"oids\"","position":18}
+{"sql":"alter index i set without oids, add column b int"}
+{"sql":"alter index i add column b int, set without oids"}
+{"sql":"alter index i set with oids, add column b int","code":"42601","message":"syntax error at or near \"with\"","position":18}
+{"sql":"alter index i set without oids, set with oids","code":"42601","message":"syntax error at or near \"with\"","position":36}
+{"sql":"alter index i set without oid","code":"42601","message":"syntax error at or near \"oid\"","position":26}
+{"sql":"alter index i set without oids cascade","code":"42601","message":"syntax error at or near \"cascade\"","position":31}
+{"sql":"alter index i reset (oids)"}
+{"sql":"alter view v set with oids","code":"42601","message":"syntax error at or near \"with\"","position":17}
+{"sql":"alter view v set without oids"}
+{"sql":"alter view v SET WITH OIDS","code":"42601","message":"syntax error at or near \"WITH\"","position":17}
+{"sql":"alter view v set with (a = 1)","code":"42601","message":"syntax error at or near \"with\"","position":17}
+{"sql":"alter view v set with","code":"42601","message":"syntax error at or near \"with\"","position":17}
+{"sql":"alter view v set without","code":"42601","message":"syntax error at end of input","position":24}
+{"sql":"alter view v set oids","code":"42601","message":"syntax error at or near \"oids\"","position":17}
+{"sql":"alter view v set without oids, add column b int"}
+{"sql":"alter view v add column b int, set without oids"}
+{"sql":"alter view v set with oids, add column b int","code":"42601","message":"syntax error at or near \"with\"","position":17}
+{"sql":"alter view v set without oids, set with oids","code":"42601","message":"syntax error at or near \"with\"","position":35}
+{"sql":"alter view v set without oid","code":"42601","message":"syntax error at or near \"oid\"","position":25}
+{"sql":"alter view v set without oids cascade","code":"42601","message":"syntax error at or near \"cascade\"","position":30}
+{"sql":"alter view v reset (oids)"}
+{"sql":"alter materialized view m set with oids","code":"42601","message":"syntax error at or near \"with\"","position":30}
+{"sql":"alter materialized view m set without oids"}
+{"sql":"alter materialized view m SET WITH OIDS","code":"42601","message":"syntax error at or near \"WITH\"","position":30}
+{"sql":"alter materialized view m set with (a = 1)","code":"42601","message":"syntax error at or near \"with\"","position":30}
+{"sql":"alter materialized view m set with","code":"42601","message":"syntax error at or near \"with\"","position":30}
+{"sql":"alter materialized view m set without","code":"42601","message":"syntax error at end of input","position":37}
+{"sql":"alter materialized view m set oids","code":"42601","message":"syntax error at or near \"oids\"","position":30}
+{"sql":"alter materialized view m set without oids, add column b int"}
+{"sql":"alter materialized view m add column b int, set without oids"}
+{"sql":"alter materialized view m set with oids, add column b int","code":"42601","message":"syntax error at or near \"with\"","position":30}
+{"sql":"alter materialized view m set without oids, set with oids","code":"42601","message":"syntax error at or near \"with\"","position":48}
+{"sql":"alter materialized view m set without oid","code":"42601","message":"syntax error at or near \"oid\"","position":38}
+{"sql":"alter materialized view m set without oids cascade","code":"42601","message":"syntax error at or near \"cascade\"","position":43}
+{"sql":"alter materialized view m reset (oids)"}
+{"sql":"alter foreign table f set with oids","code":"42601","message":"syntax error at or near \"with\"","position":26}
+{"sql":"alter foreign table f set without oids"}
+{"sql":"alter foreign table f SET WITH OIDS","code":"42601","message":"syntax error at or near \"WITH\"","position":26}
+{"sql":"alter foreign table f set with (a = 1)","code":"42601","message":"syntax error at or near \"with\"","position":26}
+{"sql":"alter foreign table f set with","code":"42601","message":"syntax error at or near \"with\"","position":26}
+{"sql":"alter foreign table f set without","code":"42601","message":"syntax error at end of input","position":33}
+{"sql":"alter foreign table f set oids","code":"42601","message":"syntax error at or near \"oids\"","position":26}
+{"sql":"alter foreign table f set without oids, add column b int"}
+{"sql":"alter foreign table f add column b int, set without oids"}
+{"sql":"alter foreign table f set with oids, add column b int","code":"42601","message":"syntax error at or near \"with\"","position":26}
+{"sql":"alter foreign table f set without oids, set with oids","code":"42601","message":"syntax error at or near \"with\"","position":44}
+{"sql":"alter foreign table f set without oid","code":"42601","message":"syntax error at or near \"oid\"","position":34}
+{"sql":"alter foreign table f set without oids cascade","code":"42601","message":"syntax error at or near \"cascade\"","position":39}
+{"sql":"alter foreign table f reset (oids)"}
+{"sql":"alter sequence s set with oids","code":"42601","message":"syntax error at or near \"with\"","position":21}
+{"sql":"alter sequence s set without oids"}
+{"sql":"alter sequence s SET WITH OIDS","code":"42601","message":"syntax error at or near \"WITH\"","position":21}
+{"sql":"alter sequence s set with (a = 1)","code":"42601","message":"syntax error at or near \"with\"","position":21}
+{"sql":"alter sequence s set with","code":"42601","message":"syntax error at or near \"with\"","position":21}
+{"sql":"alter sequence s set without","code":"42601","message":"syntax error at end of input","position":28}
+{"sql":"alter sequence s set oids","code":"42601","message":"syntax error at or near \"oids\"","position":21}
+{"sql":"alter sequence s set without oids, add column b int"}
+{"sql":"alter sequence s add column b int, set without oids"}
+{"sql":"alter sequence s set with oids, add column b int","code":"42601","message":"syntax error at or near \"with\"","position":21}
+{"sql":"alter sequence s set without oids, set with oids","code":"42601","message":"syntax error at or near \"with\"","position":39}
+{"sql":"alter sequence s set without oid","code":"42601","message":"syntax error at or near \"oid\"","position":29}
+{"sql":"alter sequence s set without oids cascade","code":"42601","message":"syntax error at or near \"cascade\"","position":34}
+{"sql":"alter sequence s reset (oids)"}
+{"sql":"create table t (a int) with oids; select 1","code":"42601","message":"syntax error at or near \"oids\"","position":28}
+{"sql":"create table t (a int) without oids; select 1"}
+{"sql":"create temp table t (a int) on commit drop with oids","code":"42601","message":"syntax error at or near \"with\"","position":43}
+{"sql":"create table t (oids int) with (oids)"}

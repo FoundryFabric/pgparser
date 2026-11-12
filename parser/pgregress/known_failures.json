@@ -3,22 +3,20 @@
     326
   ],
   "alter_table.sql": [
-    60
+    60,
+    583
   ],
   "collate.icu.utf8.sql": [
-    115,
-    187
+    115
   ],
   "collate.linux.utf8.sql": [
-    123,
-    180
+    123
   ],
   "collate.sql": [
     79
   ],
   "collate.windows.win1252.sql": [
-    94,
-    151
+    94
   ],
   "constraints.sql": [
     14,
@@ -41,14 +39,14 @@
     67
   ],
   "create_index.sql": [
-    2,
-    518
+    2
   ],
   "create_operator.sql": [
     10,
     13
   ],
   "create_table.sql": [
+    32,
     76,
     134
   ],
@@ -230,6 +228,7 @@
     8,
     9,
     10,
+    11,
     12,
     13,
     14,
@@ -246,6 +245,7 @@
     27,
     33,
     34,
+    35,
     416
   ],
   "subscription.sql": [

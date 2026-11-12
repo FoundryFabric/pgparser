@@ -231,7 +231,7 @@ import (
 %type <partbound>  PartitionBoundSpec ForValues
 %type <node>  AlterTableStmt RenameStmt DropStmt
 %type <list>  alter_table_cmds
-%type <node>  alter_table_cmd
+%type <node>  alter_table_cmd partition_cmd
 %type <ival>  opt_drop_behavior
 %type <ival>  object_type_any_name
 %type <list>  any_name_list
@@ -327,7 +327,7 @@ import (
 %type <node>  grant_role_opt
 %type <node>  grant_role_opt_value
 %type <ival>  add_drop
-%type <node>  CreatedbStmt AlterDatabaseStmt AlterDatabaseSetStmt DropdbStmt AlterSystemStmt
+%type <node>  CreatedbStmt AlterDatabaseStmt AlterDatabaseSetStmt DropdbStmt AlterSystemStmt AlterDatabaseRefreshCollStmt
 %type <list>  createdb_opt_list createdb_opt_items
 %type <node>  createdb_opt_item
 %type <str>   createdb_opt_name
@@ -443,7 +443,7 @@ import (
 %type <node>  CreateTableSpaceStmt DropTableSpaceStmt
 %type <node>  OptTableSpaceOwner
 %type <node>  AlterTblSpcStmt
-%type <node>  CreateAmStmt
+%type <node>  CreateAmStmt CreateAssertionStmt
 %type <ival>  am_type
 %type <node>  CreatePolicyStmt AlterPolicyStmt
 %type <boolean>  RowSecurityDefaultPermissive
@@ -776,6 +776,7 @@ stmt:
 		{
 			$$ = $1
 		}
+	| AlterDatabaseRefreshCollStmt
 	| AlterDatabaseSetStmt
 		{
 			$$ = $1
@@ -933,6 +934,7 @@ stmt:
 			$$ = $1
 		}
 	| CreateAmStmt
+	| CreateAssertionStmt
 		{
 			$$ = $1
 		}
@@ -1559,7 +1561,6 @@ OptAccessMethod:
 
 OptWith:
 	WITH reloptions				{ $$ = $2 }
-	| WITH OIDS					{ $$ = nil /* deprecated */ }
 	| WITHOUT OIDS				{ $$ = nil }
 	| /* EMPTY */				{ $$ = nil }
 	;
@@ -2304,6 +2305,23 @@ AlterTableStmt:
 				Missing_ok: true,
 			}
 		}
+	| ALTER TABLE relation_expr partition_cmd
+		{
+			$$ = &nodes.AlterTableStmt{
+				Relation: $3.(*nodes.RangeVar),
+				Cmds:     makeList($4),
+				ObjType:  int(nodes.OBJECT_TABLE),
+			}
+		}
+	| ALTER TABLE IF_P EXISTS relation_expr partition_cmd
+		{
+			$$ = &nodes.AlterTableStmt{
+				Relation:   $5.(*nodes.RangeVar),
+				Cmds:       makeList($6),
+				ObjType:    int(nodes.OBJECT_TABLE),
+				Missing_ok: true,
+			}
+		}
 	| ALTER INDEX qualified_name alter_table_cmds
 		{
 			rv := makeRangeVarFromAnyName($3, $<loc>3)
@@ -2480,6 +2498,56 @@ alter_table_cmds:
 		{ $$ = appendList($1, $3) }
 	;
 
+opt_column:
+	COLUMN
+	| /* EMPTY */
+	;
+
+partition_cmd:
+	ATTACH PARTITION qualified_name ForValues
+		{
+			rv := makeRangeVar($3, $<loc>3)
+			$$ = &nodes.AlterTableCmd{
+				Subtype: int(nodes.AT_AttachPartition),
+				Def:     &nodes.PartitionCmd{
+					Name:  rv.(*nodes.RangeVar),
+					Bound: $4,
+				},
+			}
+		}
+	| DETACH PARTITION qualified_name
+		{
+			rv := makeRangeVar($3, $<loc>3)
+			$$ = &nodes.AlterTableCmd{
+				Subtype: int(nodes.AT_DetachPartition),
+				Def:     &nodes.PartitionCmd{
+					Name: rv.(*nodes.RangeVar),
+				},
+			}
+		}
+	| DETACH PARTITION qualified_name CONCURRENTLY
+		{
+			rv := makeRangeVar($3, $<loc>3)
+			$$ = &nodes.AlterTableCmd{
+				Subtype: int(nodes.AT_DetachPartition),
+				Def:     &nodes.PartitionCmd{
+					Name:       rv.(*nodes.RangeVar),
+					Concurrent: true,
+				},
+			}
+		}
+	| DETACH PARTITION qualified_name FINALIZE
+		{
+			rv := makeRangeVar($3, $<loc>3)
+			$$ = &nodes.AlterTableCmd{
+				Subtype: int(nodes.AT_DetachPartitionFinalize),
+				Def:     &nodes.PartitionCmd{
+					Name: rv.(*nodes.RangeVar),
+				},
+			}
+		}
+	;
+
 alter_table_cmd:
 	ADD_P columnDef
 		{
@@ -2520,7 +2588,7 @@ alter_table_cmd:
 				Missing_ok: true,
 			}
 		}
-	| ALTER COLUMN ColId SET DEFAULT a_expr
+	| ALTER opt_column ColId SET DEFAULT a_expr
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_ColumnDefault),
@@ -2528,28 +2596,28 @@ alter_table_cmd:
 				Def:     $6,
 			}
 		}
-	| ALTER COLUMN ColId DROP DEFAULT
+	| ALTER opt_column ColId DROP DEFAULT
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_ColumnDefault),
 				Name:    $3,
 			}
 		}
-	| ALTER COLUMN ColId SET NOT NULL_P
+	| ALTER opt_column ColId SET NOT NULL_P
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetNotNull),
 				Name:    $3,
 			}
 		}
-	| ALTER COLUMN ColId DROP NOT NULL_P
+	| ALTER opt_column ColId DROP NOT NULL_P
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_DropNotNull),
 				Name:    $3,
 			}
 		}
-	| ALTER COLUMN ColId TYPE_P Typename opt_collate_clause
+	| ALTER opt_column ColId TYPE_P Typename opt_collate_clause
 		{
 			coldef := &nodes.ColumnDef{TypeName: $5}
 			if $6 != nil {
@@ -2593,7 +2661,7 @@ alter_table_cmd:
 			}
 		}
 	/* ALTER COLUMN ... TYPE ... USING */
-	| ALTER COLUMN ColId SET DATA_P TYPE_P Typename opt_collate_clause
+	| ALTER opt_column ColId SET DATA_P TYPE_P Typename opt_collate_clause
 		{
 			coldef := &nodes.ColumnDef{TypeName: $7}
 			if $8 != nil {
@@ -2605,7 +2673,7 @@ alter_table_cmd:
 				Def:     coldef,
 			}
 		}
-	| ALTER COLUMN ColId TYPE_P Typename opt_collate_clause USING a_expr
+	| ALTER opt_column ColId TYPE_P Typename opt_collate_clause USING a_expr
 		{
 			coldef := &nodes.ColumnDef{TypeName: $5}
 			if $6 != nil {
@@ -2617,7 +2685,7 @@ alter_table_cmd:
 				Def:     coldef,
 			}
 		}
-	| ALTER COLUMN ColId SET DATA_P TYPE_P Typename opt_collate_clause USING a_expr
+	| ALTER opt_column ColId SET DATA_P TYPE_P Typename opt_collate_clause USING a_expr
 		{
 			coldef := &nodes.ColumnDef{TypeName: $7}
 			if $8 != nil {
@@ -2629,98 +2697,13 @@ alter_table_cmd:
 				Def:     coldef,
 			}
 		}
-	| ALTER ColId TYPE_P Typename opt_collate_clause
-		{
-			coldef := &nodes.ColumnDef{TypeName: $4}
-			if $5 != nil {
-				coldef.CollClause = $5.(*nodes.CollateClause)
-			}
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_AlterColumnType),
-				Name:    $2,
-				Def:     coldef,
-			}
-		}
-	| ALTER ColId SET DATA_P TYPE_P Typename opt_collate_clause
-		{
-			coldef := &nodes.ColumnDef{TypeName: $6}
-			if $7 != nil {
-				coldef.CollClause = $7.(*nodes.CollateClause)
-			}
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_AlterColumnType),
-				Name:    $2,
-				Def:     coldef,
-			}
-		}
-	| ALTER ColId SET DATA_P TYPE_P Typename opt_collate_clause USING a_expr
-		{
-			coldef := &nodes.ColumnDef{TypeName: $6}
-			if $7 != nil {
-				coldef.CollClause = $7.(*nodes.CollateClause)
-			}
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_AlterColumnType),
-				Name:    $2,
-				Def:     coldef,
-			}
-		}
-	| ALTER ColId SET DEFAULT a_expr
-		{
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_ColumnDefault),
-				Name:    $2,
-				Def:     $5,
-			}
-		}
-	| ALTER ColId DROP DEFAULT
-		{
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_ColumnDefault),
-				Name:    $2,
-			}
-		}
-	| ALTER ColId SET NOT NULL_P
-		{
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_SetNotNull),
-				Name:    $2,
-			}
-		}
-	| ALTER ColId DROP NOT NULL_P
-		{
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_DropNotNull),
-				Name:    $2,
-			}
-		}
-	| ALTER ColId TYPE_P Typename opt_collate_clause USING a_expr
-		{
-			coldef := &nodes.ColumnDef{TypeName: $4}
-			if $5 != nil {
-				coldef.CollClause = $5.(*nodes.CollateClause)
-			}
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_AlterColumnType),
-				Name:    $2,
-				Def:     coldef,
-			}
-		}
 	/* ALTER FOREIGN TABLE <name> ALTER [COLUMN] <colname> OPTIONS */
-	| ALTER COLUMN ColId alter_generic_options
+	| ALTER opt_column ColId alter_generic_options
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_AlterColumnGenericOptions),
 				Name:    $3,
 				Def:     $4,
-			}
-		}
-	| ALTER ColId alter_generic_options
-		{
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_AlterColumnGenericOptions),
-				Name:    $2,
-				Def:     $3,
 			}
 		}
 	/* VALIDATE CONSTRAINT */
@@ -2757,49 +2740,6 @@ alter_table_cmd:
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_DropInherit),
 				Def:     rv,
-			}
-		}
-	/* ATTACH / DETACH PARTITION */
-	| ATTACH PARTITION qualified_name ForValues
-		{
-			rv := makeRangeVar($3, $<loc>3)
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_AttachPartition),
-				Def:     &nodes.PartitionCmd{
-					Name:  rv.(*nodes.RangeVar),
-					Bound: $4,
-				},
-			}
-		}
-	| DETACH PARTITION qualified_name
-		{
-			rv := makeRangeVar($3, $<loc>3)
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_DetachPartition),
-				Def:     &nodes.PartitionCmd{
-					Name: rv.(*nodes.RangeVar),
-				},
-			}
-		}
-	| DETACH PARTITION qualified_name CONCURRENTLY
-		{
-			rv := makeRangeVar($3, $<loc>3)
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_DetachPartition),
-				Def:     &nodes.PartitionCmd{
-					Name:       rv.(*nodes.RangeVar),
-					Concurrent: true,
-				},
-			}
-		}
-	| DETACH PARTITION qualified_name FINALIZE
-		{
-			rv := makeRangeVar($3, $<loc>3)
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_DetachPartitionFinalize),
-				Def:     &nodes.PartitionCmd{
-					Name: rv.(*nodes.RangeVar),
-				},
 			}
 		}
 	/* ENABLE/DISABLE TRIGGER */
@@ -3020,7 +2960,7 @@ alter_table_cmd:
 			}
 		}
 	/* SET STORAGE */
-	| ALTER COLUMN ColId SET STORAGE ColId
+	| ALTER opt_column ColId SET STORAGE ColId
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetStorage),
@@ -3028,7 +2968,7 @@ alter_table_cmd:
 				Def:     &nodes.String{Str: $6},
 			}
 		}
-	| ALTER COLUMN ColId SET STORAGE DEFAULT
+	| ALTER opt_column ColId SET STORAGE DEFAULT
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetStorage),
@@ -3036,24 +2976,8 @@ alter_table_cmd:
 				Def:     &nodes.String{Str: "default"},
 			}
 		}
-	| ALTER ColId SET STORAGE ColId
-		{
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_SetStorage),
-				Name:    $2,
-				Def:     &nodes.String{Str: $5},
-			}
-		}
-	| ALTER ColId SET STORAGE DEFAULT
-		{
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_SetStorage),
-				Name:    $2,
-				Def:     &nodes.String{Str: "default"},
-			}
-		}
 	/* SET STATISTICS */
-	| ALTER COLUMN ColId SET STATISTICS SignedIconst
+	| ALTER opt_column ColId SET STATISTICS SignedIconst
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetStatistics),
@@ -3061,15 +2985,7 @@ alter_table_cmd:
 				Def:     makeIntConst($6, -1),
 			}
 		}
-	| ALTER ColId SET STATISTICS SignedIconst
-		{
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_SetStatistics),
-				Name:    $2,
-				Def:     makeIntConst($5, -1),
-			}
-		}
-	| ALTER COLUMN Iconst SET STATISTICS SignedIconst
+	| ALTER opt_column Iconst SET STATISTICS SignedIconst
 		{
 			if !checkColumnNumber(pglex, $3, $<loc>3) {
 				return 1
@@ -3080,19 +2996,8 @@ alter_table_cmd:
 				Def:     makeIntConst($6, -1),
 			}
 		}
-	| ALTER Iconst SET STATISTICS SignedIconst
-		{
-			if !checkColumnNumber(pglex, $2, $<loc>2) {
-				return 1
-			}
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_SetStatistics),
-				Num:     int16($2),
-				Def:     makeIntConst($5, -1),
-			}
-		}
 	/* SET COMPRESSION */
-	| ALTER COLUMN ColId SET column_compression
+	| ALTER opt_column ColId SET column_compression
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetCompression),
@@ -3100,16 +3005,8 @@ alter_table_cmd:
 				Def:     &nodes.String{Str: $5},
 			}
 		}
-	| ALTER ColId SET column_compression
-		{
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_SetCompression),
-				Name:    $2,
-				Def:     &nodes.String{Str: $4},
-			}
-		}
 	/* SET/DROP EXPRESSION */
-	| ALTER COLUMN ColId SET EXPRESSION AS '(' a_expr ')'
+	| ALTER opt_column ColId SET EXPRESSION AS '(' a_expr ')'
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetExpression),
@@ -3117,22 +3014,14 @@ alter_table_cmd:
 				Def:     $8,
 			}
 		}
-	| ALTER ColId SET EXPRESSION AS '(' a_expr ')'
-		{
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_SetExpression),
-				Name:    $2,
-				Def:     $7,
-			}
-		}
-	| ALTER COLUMN ColId DROP EXPRESSION
+	| ALTER opt_column ColId DROP EXPRESSION
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_DropExpression),
 				Name:    $3,
 			}
 		}
-	| ALTER COLUMN ColId DROP EXPRESSION IF_P EXISTS
+	| ALTER opt_column ColId DROP EXPRESSION IF_P EXISTS
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype:    int(nodes.AT_DropExpression),
@@ -3141,14 +3030,14 @@ alter_table_cmd:
 			}
 		}
 	/* DROP/SET IDENTITY */
-	| ALTER COLUMN ColId DROP IDENTITY_P
+	| ALTER opt_column ColId DROP IDENTITY_P
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_DropIdentity),
 				Name:    $3,
 			}
 		}
-	| ALTER COLUMN ColId DROP IDENTITY_P IF_P EXISTS
+	| ALTER opt_column ColId DROP IDENTITY_P IF_P EXISTS
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype:    int(nodes.AT_DropIdentity),
@@ -3157,7 +3046,7 @@ alter_table_cmd:
 			}
 		}
 	/* ADD GENERATED identity */
-	| ALTER COLUMN ColId ADD_P GENERATED generated_when AS IDENTITY_P OptParenthesizedSeqOptList
+	| ALTER opt_column ColId ADD_P GENERATED generated_when AS IDENTITY_P OptParenthesizedSeqOptList
 		{
 			c := &nodes.Constraint{
 				Contype:       nodes.CONSTR_IDENTITY,
@@ -3171,22 +3060,8 @@ alter_table_cmd:
 				Def:     c,
 			}
 		}
-	| ALTER ColId ADD_P GENERATED generated_when AS IDENTITY_P OptParenthesizedSeqOptList
-		{
-			c := &nodes.Constraint{
-				Contype:       nodes.CONSTR_IDENTITY,
-				GeneratedWhen: byte($5),
-				Options:       $8,
-				Location:      $<loc>4,
-			}
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_AddIdentity),
-				Name:    $2,
-				Def:     c,
-			}
-		}
 	/* SET GENERATED / identity options */
-	| ALTER COLUMN ColId alter_identity_column_option_list
+	| ALTER opt_column ColId alter_identity_column_option_list
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetIdentity),
@@ -3195,29 +3070,23 @@ alter_table_cmd:
 			}
 		}
 	/* ALTER COLUMN ... SET (options) / RESET (options) */
-	| ALTER COLUMN ColId SET '(' def_list ')'
+	| ALTER opt_column ColId SET reloptions
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetOptions),
 				Name:    $3,
-				Def:     $6,
+				Def:     $5,
 			}
 		}
-	| ALTER COLUMN ColId RESET '(' def_list ')'
+	| ALTER opt_column ColId RESET reloptions
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_ResetOptions),
 				Name:    $3,
-				Def:     $6,
+				Def:     $5,
 			}
 		}
-	/* SET WITH/WITHOUT OIDS (deprecated but still parsed) */
-	| SET WITH OIDS
-		{
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_DropOids), /* deprecated, reuse DropOids */
-			}
-		}
+	/* SET WITHOUT OIDS (deprecated but still parsed) */
 	| SET WITHOUT OIDS
 		{
 			$$ = &nodes.AlterTableCmd{
@@ -6065,7 +5934,7 @@ grantee:
 	;
 
 RoleSpec:
-	ColId
+	NonReservedWord
 		{
 			switch $1 {
 			case "public":
@@ -6265,8 +6134,8 @@ AlterOptRoleElem:
 		}
 	| UNENCRYPTED PASSWORD Sconst
 		{
-			pglex.Error("UNENCRYPTED PASSWORD is no longer supported")
-			$$ = nil
+			grammarError(pglex, "0A000", "UNENCRYPTED PASSWORD is no longer supported", "Remove UNENCRYPTED to store the password in encrypted form instead.", $<loc>1)
+			return 1
 		}
 	| INHERIT
 		{
@@ -6314,8 +6183,8 @@ AlterOptRoleElem:
 			case "noinherit":
 				$$ = makeDefElem("inherit", &nodes.Boolean{Boolval: false})
 			default:
-				pglex.Error("unrecognized role option \"" + $1 + "\"")
-				$$ = nil
+				grammarError(pglex, codeSyntaxError, "unrecognized role option \""+$1+"\"", "", $<loc>1)
+				return 1
 			}
 		}
 	;
@@ -6370,6 +6239,13 @@ AlterRoleStmt:
 				Options: prependList($4, $5),
 			}
 		}
+	| ALTER ROLE RoleSpec
+		{
+			$$ = &nodes.AlterRoleStmt{
+				Role:   $3.(*nodes.RoleSpec),
+				Action: 1,
+			}
+		}
 	| ALTER USER RoleSpec WITH AlterOptRoleList
 		{
 			$$ = &nodes.AlterRoleStmt{
@@ -6384,6 +6260,13 @@ AlterRoleStmt:
 				Role:    $3.(*nodes.RoleSpec),
 				Action:  1,
 				Options: prependList($4, $5),
+			}
+		}
+	| ALTER USER RoleSpec
+		{
+			$$ = &nodes.AlterRoleStmt{
+				Role:   $3.(*nodes.RoleSpec),
+				Action: 1,
 			}
 		}
 	;
@@ -6636,6 +6519,13 @@ AlterDatabaseStmt:
 				Dbname:  $3,
 				Options: makeList(makeDefElem("tablespace", &nodes.String{Str: $6})),
 			}
+		}
+	;
+
+AlterDatabaseRefreshCollStmt:
+	ALTER DATABASE name REFRESH COLLATION VERSION_P
+		{
+			$$ = &nodes.AlterDatabaseRefreshCollStmt{Dbname: $3}
 		}
 	;
 
@@ -9153,8 +9043,8 @@ a_expr:
 		}
 	| UNIQUE opt_unique_null_treatment select_with_parens
 		{
-			pglex.Error("UNIQUE predicate is not yet implemented")
-			$$ = nil
+			grammarError(pglex, "0A000", "UNIQUE predicate is not yet implemented", "", $<loc>1)
+			return 1
 		}
 	| a_expr COLLATE any_name
 		{
@@ -12185,8 +12075,8 @@ set_rest_more:
 		}
 	| CATALOG_P Sconst
 		{
-			pglex.Error("current database cannot be changed")
-			$$ = nil
+			grammarError(pglex, "0A000", "current database cannot be changed", "", $<loc>2)
+			return 1
 		}
 	| SCHEMA Sconst
 		{
@@ -12828,7 +12718,7 @@ ReindexStmt:
 			}
 			$$ = n
 		}
-	| REINDEX opt_reindex_option_list reindex_target_multitable opt_concurrently name
+	| REINDEX opt_reindex_option_list reindex_target_multitable opt_concurrently opt_single_name
 		{
 			n := &nodes.ReindexStmt{
 				Kind:   nodes.ReindexObjectType($3),
@@ -13897,8 +13787,8 @@ operator_with_argtypes:
 oper_argtypes:
 	'(' Typename ')'
 		{
-			pglex.Error("missing argument, use NONE to denote the missing argument of a unary operator")
-			$$ = nil
+			grammarError(pglex, codeSyntaxError, "missing argument", "Use NONE to denote the missing argument of a unary operator.", $<loc>3)
+			return 1
 		}
 	| '(' Typename ',' Typename ')'
 		{
@@ -15136,6 +15026,14 @@ AlterExtensionContentsStmt:
  *
  *****************************************************************************/
 
+CreateAssertionStmt:
+	CREATE ASSERTION any_name CHECK '(' a_expr ')' ConstraintAttributeSpec
+		{
+			grammarError(pglex, "0A000", "CREATE ASSERTION is not yet implemented", "", -1)
+			return 1
+		}
+	;
+
 CreateAmStmt:
 	CREATE ACCESS METHOD name TYPE_P am_type HANDLER handler_name
 		{
@@ -15224,8 +15122,8 @@ RowSecurityDefaultPermissive:
 			} else if $2 == "restrictive" {
 				$$ = false
 			} else {
-				pglex.Error("only PERMISSIVE or RESTRICTIVE policies are supported")
-				$$ = true
+				grammarError(pglex, codeSyntaxError, "unrecognized row security option \""+$2+"\"", "Only PERMISSIVE or RESTRICTIVE policies are supported currently.", $<loc>2)
+				return 1
 			}
 		}
 	| /* EMPTY */    { $$ = true }

@@ -1499,6 +1499,13 @@ type AlterDatabaseStmt struct {
 
 func (n *AlterDatabaseStmt) Tag() NodeTag { return T_AlterDatabaseStmt }
 
+// AlterDatabaseRefreshCollStmt - ALTER DATABASE ... REFRESH COLLATION VERSION
+type AlterDatabaseRefreshCollStmt struct {
+	Dbname string
+}
+
+func (n *AlterDatabaseRefreshCollStmt) Tag() NodeTag { return T_AlterDatabaseRefreshCollStmt }
+
 // AlterDatabaseSetStmt - ALTER DATABASE SET/RESET
 type AlterDatabaseSetStmt struct {
 	Dbname  string
