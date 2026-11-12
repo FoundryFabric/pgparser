@@ -91,7 +91,7 @@ L a feature's grammar.
 | bare-column-label (fixed) | 2 | 511 (2/502/7) | refuses a keyword as a column label without AS | `target_el: a_expr BareColLabel`, `bare_label_keyword` | no | M |
 | pg17-json-names | 2 | 75 (4/66/5) | refuses PostgreSQL 16's json, json_table and the like as names | `kwlist.h`: 20 PostgreSQL 17 keywords, JSON col_name; `JsonType` | no | M (with pg17-sqljson) |
 | drop-type-typename (fixed) | 2 | 50 (0/47/3) | refuses `DROP TYPE t[]`, `DROP DOMAIN d(3)` | `DropStmt` TYPE/DOMAIN `type_name_list` | yes, all 50 | S |
-| alter-column-optional-keyword | 2 | 7 (0/5/2) | refuses `ALTER a SET (...)`, `ALTER a SET GENERATED` without COLUMN | `alter_table_cmd` `ALTER opt_column ColId` | no | S |
+| alter-column-optional-keyword (fixed) | 2 | 7 (0/5/2) | refuses `ALTER a SET (...)`, `ALTER a SET GENERATED` without COLUMN | `alter_table_cmd` `ALTER opt_column ColId` | no | S |
 | alter-role-no-options | 2 | 4 (0/2/2) | refuses `ALTER ROLE r` | `AlterRoleStmt` `opt_with AlterOptRoleList` | no | S |
 | reindex-optional-name | 2 | 4 (1/0/3) | refuses `REINDEX SYSTEM`, `REINDEX DATABASE` | `ReindexStmt` `opt_single_name` | no | S |
 | role-spec-keywords | 2 | 4 (0/1/3) | refuses a type_func_name keyword as a role | `RoleSpec: NonReservedWord` | no | S |
@@ -405,7 +405,7 @@ type names spelled with them are refused. Fixed with pg17-sqljson.
 | `drop type t(1)[]` | accepts | 42601 syntax error at or near "(" at 11 |
 | `DROP TYPE foo_t[1:2]` | 42601 syntax error at or near ":" at 17 | 42601 syntax error at or near "[" at 15 |
 
-### alter-column-optional-keyword (risk 2, 7)
+### alter-column-optional-keyword (risk 2, 7; fixed)
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
@@ -414,6 +414,12 @@ type names spelled with them are refused. Fixed with pg17-sqljson.
 | `alter table parent alter a set(3) not null` | 42601 syntax error at or near "3" at 31 | 42601 syntax error at or near "(" at 30 |
 
 `alter table t alter a set not null` is accepted by both.
+
+`alter_table_cmd`'s ALTER forms are now PostgreSQL 16's `ALTER opt_column
+ColId ...` (and `ALTER opt_column Iconst SET STATISTICS`), one rule each, so
+COLUMN is optional in DROP EXPRESSION, DROP IDENTITY, the identity options
+(SET GENERATED, RESTART, SET ...) and SET/RESET `(...)` too. The 16 rules
+without COLUMN that duplicated others are deleted. All 7 agree.
 
 ### alter-role-no-options (risk 2, 4)
 

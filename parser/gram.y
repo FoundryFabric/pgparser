@@ -2496,6 +2496,11 @@ alter_table_cmds:
 		{ $$ = appendList($1, $3) }
 	;
 
+opt_column:
+	COLUMN
+	| /* EMPTY */
+	;
+
 partition_cmd:
 	ATTACH PARTITION qualified_name ForValues
 		{
@@ -2581,7 +2586,7 @@ alter_table_cmd:
 				Missing_ok: true,
 			}
 		}
-	| ALTER COLUMN ColId SET DEFAULT a_expr
+	| ALTER opt_column ColId SET DEFAULT a_expr
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_ColumnDefault),
@@ -2589,28 +2594,28 @@ alter_table_cmd:
 				Def:     $6,
 			}
 		}
-	| ALTER COLUMN ColId DROP DEFAULT
+	| ALTER opt_column ColId DROP DEFAULT
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_ColumnDefault),
 				Name:    $3,
 			}
 		}
-	| ALTER COLUMN ColId SET NOT NULL_P
+	| ALTER opt_column ColId SET NOT NULL_P
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetNotNull),
 				Name:    $3,
 			}
 		}
-	| ALTER COLUMN ColId DROP NOT NULL_P
+	| ALTER opt_column ColId DROP NOT NULL_P
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_DropNotNull),
 				Name:    $3,
 			}
 		}
-	| ALTER COLUMN ColId TYPE_P Typename opt_collate_clause
+	| ALTER opt_column ColId TYPE_P Typename opt_collate_clause
 		{
 			coldef := &nodes.ColumnDef{TypeName: $5}
 			if $6 != nil {
@@ -2654,7 +2659,7 @@ alter_table_cmd:
 			}
 		}
 	/* ALTER COLUMN ... TYPE ... USING */
-	| ALTER COLUMN ColId SET DATA_P TYPE_P Typename opt_collate_clause
+	| ALTER opt_column ColId SET DATA_P TYPE_P Typename opt_collate_clause
 		{
 			coldef := &nodes.ColumnDef{TypeName: $7}
 			if $8 != nil {
@@ -2666,7 +2671,7 @@ alter_table_cmd:
 				Def:     coldef,
 			}
 		}
-	| ALTER COLUMN ColId TYPE_P Typename opt_collate_clause USING a_expr
+	| ALTER opt_column ColId TYPE_P Typename opt_collate_clause USING a_expr
 		{
 			coldef := &nodes.ColumnDef{TypeName: $5}
 			if $6 != nil {
@@ -2678,7 +2683,7 @@ alter_table_cmd:
 				Def:     coldef,
 			}
 		}
-	| ALTER COLUMN ColId SET DATA_P TYPE_P Typename opt_collate_clause USING a_expr
+	| ALTER opt_column ColId SET DATA_P TYPE_P Typename opt_collate_clause USING a_expr
 		{
 			coldef := &nodes.ColumnDef{TypeName: $7}
 			if $8 != nil {
@@ -2690,98 +2695,13 @@ alter_table_cmd:
 				Def:     coldef,
 			}
 		}
-	| ALTER ColId TYPE_P Typename opt_collate_clause
-		{
-			coldef := &nodes.ColumnDef{TypeName: $4}
-			if $5 != nil {
-				coldef.CollClause = $5.(*nodes.CollateClause)
-			}
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_AlterColumnType),
-				Name:    $2,
-				Def:     coldef,
-			}
-		}
-	| ALTER ColId SET DATA_P TYPE_P Typename opt_collate_clause
-		{
-			coldef := &nodes.ColumnDef{TypeName: $6}
-			if $7 != nil {
-				coldef.CollClause = $7.(*nodes.CollateClause)
-			}
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_AlterColumnType),
-				Name:    $2,
-				Def:     coldef,
-			}
-		}
-	| ALTER ColId SET DATA_P TYPE_P Typename opt_collate_clause USING a_expr
-		{
-			coldef := &nodes.ColumnDef{TypeName: $6}
-			if $7 != nil {
-				coldef.CollClause = $7.(*nodes.CollateClause)
-			}
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_AlterColumnType),
-				Name:    $2,
-				Def:     coldef,
-			}
-		}
-	| ALTER ColId SET DEFAULT a_expr
-		{
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_ColumnDefault),
-				Name:    $2,
-				Def:     $5,
-			}
-		}
-	| ALTER ColId DROP DEFAULT
-		{
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_ColumnDefault),
-				Name:    $2,
-			}
-		}
-	| ALTER ColId SET NOT NULL_P
-		{
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_SetNotNull),
-				Name:    $2,
-			}
-		}
-	| ALTER ColId DROP NOT NULL_P
-		{
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_DropNotNull),
-				Name:    $2,
-			}
-		}
-	| ALTER ColId TYPE_P Typename opt_collate_clause USING a_expr
-		{
-			coldef := &nodes.ColumnDef{TypeName: $4}
-			if $5 != nil {
-				coldef.CollClause = $5.(*nodes.CollateClause)
-			}
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_AlterColumnType),
-				Name:    $2,
-				Def:     coldef,
-			}
-		}
 	/* ALTER FOREIGN TABLE <name> ALTER [COLUMN] <colname> OPTIONS */
-	| ALTER COLUMN ColId alter_generic_options
+	| ALTER opt_column ColId alter_generic_options
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_AlterColumnGenericOptions),
 				Name:    $3,
 				Def:     $4,
-			}
-		}
-	| ALTER ColId alter_generic_options
-		{
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_AlterColumnGenericOptions),
-				Name:    $2,
-				Def:     $3,
 			}
 		}
 	/* VALIDATE CONSTRAINT */
@@ -3038,7 +2958,7 @@ alter_table_cmd:
 			}
 		}
 	/* SET STORAGE */
-	| ALTER COLUMN ColId SET STORAGE ColId
+	| ALTER opt_column ColId SET STORAGE ColId
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetStorage),
@@ -3046,7 +2966,7 @@ alter_table_cmd:
 				Def:     &nodes.String{Str: $6},
 			}
 		}
-	| ALTER COLUMN ColId SET STORAGE DEFAULT
+	| ALTER opt_column ColId SET STORAGE DEFAULT
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetStorage),
@@ -3054,24 +2974,8 @@ alter_table_cmd:
 				Def:     &nodes.String{Str: "default"},
 			}
 		}
-	| ALTER ColId SET STORAGE ColId
-		{
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_SetStorage),
-				Name:    $2,
-				Def:     &nodes.String{Str: $5},
-			}
-		}
-	| ALTER ColId SET STORAGE DEFAULT
-		{
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_SetStorage),
-				Name:    $2,
-				Def:     &nodes.String{Str: "default"},
-			}
-		}
 	/* SET STATISTICS */
-	| ALTER COLUMN ColId SET STATISTICS SignedIconst
+	| ALTER opt_column ColId SET STATISTICS SignedIconst
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetStatistics),
@@ -3079,15 +2983,7 @@ alter_table_cmd:
 				Def:     makeIntConst($6, -1),
 			}
 		}
-	| ALTER ColId SET STATISTICS SignedIconst
-		{
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_SetStatistics),
-				Name:    $2,
-				Def:     makeIntConst($5, -1),
-			}
-		}
-	| ALTER COLUMN Iconst SET STATISTICS SignedIconst
+	| ALTER opt_column Iconst SET STATISTICS SignedIconst
 		{
 			if !checkColumnNumber(pglex, $3, $<loc>3) {
 				return 1
@@ -3098,19 +2994,8 @@ alter_table_cmd:
 				Def:     makeIntConst($6, -1),
 			}
 		}
-	| ALTER Iconst SET STATISTICS SignedIconst
-		{
-			if !checkColumnNumber(pglex, $2, $<loc>2) {
-				return 1
-			}
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_SetStatistics),
-				Num:     int16($2),
-				Def:     makeIntConst($5, -1),
-			}
-		}
 	/* SET COMPRESSION */
-	| ALTER COLUMN ColId SET column_compression
+	| ALTER opt_column ColId SET column_compression
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetCompression),
@@ -3118,16 +3003,8 @@ alter_table_cmd:
 				Def:     &nodes.String{Str: $5},
 			}
 		}
-	| ALTER ColId SET column_compression
-		{
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_SetCompression),
-				Name:    $2,
-				Def:     &nodes.String{Str: $4},
-			}
-		}
 	/* SET/DROP EXPRESSION */
-	| ALTER COLUMN ColId SET EXPRESSION AS '(' a_expr ')'
+	| ALTER opt_column ColId SET EXPRESSION AS '(' a_expr ')'
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetExpression),
@@ -3135,22 +3012,14 @@ alter_table_cmd:
 				Def:     $8,
 			}
 		}
-	| ALTER ColId SET EXPRESSION AS '(' a_expr ')'
-		{
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_SetExpression),
-				Name:    $2,
-				Def:     $7,
-			}
-		}
-	| ALTER COLUMN ColId DROP EXPRESSION
+	| ALTER opt_column ColId DROP EXPRESSION
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_DropExpression),
 				Name:    $3,
 			}
 		}
-	| ALTER COLUMN ColId DROP EXPRESSION IF_P EXISTS
+	| ALTER opt_column ColId DROP EXPRESSION IF_P EXISTS
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype:    int(nodes.AT_DropExpression),
@@ -3159,14 +3028,14 @@ alter_table_cmd:
 			}
 		}
 	/* DROP/SET IDENTITY */
-	| ALTER COLUMN ColId DROP IDENTITY_P
+	| ALTER opt_column ColId DROP IDENTITY_P
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_DropIdentity),
 				Name:    $3,
 			}
 		}
-	| ALTER COLUMN ColId DROP IDENTITY_P IF_P EXISTS
+	| ALTER opt_column ColId DROP IDENTITY_P IF_P EXISTS
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype:    int(nodes.AT_DropIdentity),
@@ -3175,7 +3044,7 @@ alter_table_cmd:
 			}
 		}
 	/* ADD GENERATED identity */
-	| ALTER COLUMN ColId ADD_P GENERATED generated_when AS IDENTITY_P OptParenthesizedSeqOptList
+	| ALTER opt_column ColId ADD_P GENERATED generated_when AS IDENTITY_P OptParenthesizedSeqOptList
 		{
 			c := &nodes.Constraint{
 				Contype:       nodes.CONSTR_IDENTITY,
@@ -3189,22 +3058,8 @@ alter_table_cmd:
 				Def:     c,
 			}
 		}
-	| ALTER ColId ADD_P GENERATED generated_when AS IDENTITY_P OptParenthesizedSeqOptList
-		{
-			c := &nodes.Constraint{
-				Contype:       nodes.CONSTR_IDENTITY,
-				GeneratedWhen: byte($5),
-				Options:       $8,
-				Location:      $<loc>4,
-			}
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_AddIdentity),
-				Name:    $2,
-				Def:     c,
-			}
-		}
 	/* SET GENERATED / identity options */
-	| ALTER COLUMN ColId alter_identity_column_option_list
+	| ALTER opt_column ColId alter_identity_column_option_list
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetIdentity),
@@ -3213,7 +3068,7 @@ alter_table_cmd:
 			}
 		}
 	/* ALTER COLUMN ... SET (options) / RESET (options) */
-	| ALTER COLUMN ColId SET '(' def_list ')'
+	| ALTER opt_column ColId SET '(' def_list ')'
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetOptions),
@@ -3221,7 +3076,7 @@ alter_table_cmd:
 				Def:     $6,
 			}
 		}
-	| ALTER COLUMN ColId RESET '(' def_list ')'
+	| ALTER opt_column ColId RESET '(' def_list ')'
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_ResetOptions),
