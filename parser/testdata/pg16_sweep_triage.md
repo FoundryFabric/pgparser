@@ -86,7 +86,7 @@ L a feature's grammar.
 | uescape (fixed) | 1 | 7 (2/4/1) | accepts an invalid UESCAPE character; other message for a UESCAPE not followed by a string | scanner and `base_yylex` UESCAPE handling (`check_uescapechar`) | no | S |
 | with-oids (fixed) | 1 | 5 (2/1/2) | accepts WITH OIDS | `OptWith`, `alter_table_cmd` SET WITH OIDS | no | S |
 | drop-aggregate-arguments (fixed) | 1 | 4 (1/1/2) | accepts DROP AGGREGATE without argument types | `DropStmt` AGGREGATE `aggregate_with_argtypes_list` | no | S |
-| partition-command-in-list | 1 | 4 (0/2/2) | accepts ATTACH/DETACH PARTITION in a command list | `AlterTableStmt` `partition_cmd` | no | S |
+| partition-command-in-list (fixed) | 1 | 4 (0/2/2) | accepts ATTACH/DETACH PARTITION in a command list | `AlterTableStmt` `partition_cmd` | no | S |
 | role-name-checks (fixed) | 1 | 4 (0/1/3) | accepts `ALTER ROLE CURRENT_USER RENAME`; 42601 for 42939 | `RoleId` action, `RenameStmt` | no | S |
 | bare-column-label (fixed) | 2 | 511 (2/502/7) | refuses a keyword as a column label without AS | `target_el: a_expr BareColLabel`, `bare_label_keyword` | no | M |
 | pg17-json-names | 2 | 75 (4/66/5) | refuses PostgreSQL 16's json, json_table and the like as names | `kwlist.h`: 20 PostgreSQL 17 keywords, JSON col_name; `JsonType` | no | M (with pg17-sqljson) |
@@ -313,12 +313,19 @@ agree.
 AGGREGATE takes only `aggregate_with_argtypes_list`, as PostgreSQL 16's does.
 All 4 agree.
 
-### partition-command-in-list (risk 1, 4)
+### partition-command-in-list (risk 1, 4; fixed)
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
 | `alter table t attach partition p for values in (1), add column x int` | 42601 syntax error at or near "," at 50 | accepts |
 | `alter table t detach partition p, add column x int` | 42601 syntax error at or near "," at 32 | accepts |
+
+ATTACH PARTITION and DETACH PARTITION are now PostgreSQL 16's
+`partition_cmd`, which only `ALTER TABLE [IF EXISTS] relation_expr` takes,
+alone; they are no longer `alter_table_cmd`s, so they are refused in a
+command list and after ALTER FOREIGN TABLE, VIEW, MATERIALIZED VIEW, SEQUENCE
+and INDEX (which keeps its own `ATTACH PARTITION qualified_name`). All 4
+agree.
 
 ### role-name-checks (risk 1, 4; fixed)
 

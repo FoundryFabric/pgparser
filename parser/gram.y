@@ -231,7 +231,7 @@ import (
 %type <partbound>  PartitionBoundSpec ForValues
 %type <node>  AlterTableStmt RenameStmt DropStmt
 %type <list>  alter_table_cmds
-%type <node>  alter_table_cmd
+%type <node>  alter_table_cmd partition_cmd
 %type <ival>  opt_drop_behavior
 %type <ival>  object_type_any_name
 %type <list>  any_name_list
@@ -2303,6 +2303,23 @@ AlterTableStmt:
 				Missing_ok: true,
 			}
 		}
+	| ALTER TABLE relation_expr partition_cmd
+		{
+			$$ = &nodes.AlterTableStmt{
+				Relation: $3.(*nodes.RangeVar),
+				Cmds:     makeList($4),
+				ObjType:  int(nodes.OBJECT_TABLE),
+			}
+		}
+	| ALTER TABLE IF_P EXISTS relation_expr partition_cmd
+		{
+			$$ = &nodes.AlterTableStmt{
+				Relation:   $5.(*nodes.RangeVar),
+				Cmds:       makeList($6),
+				ObjType:    int(nodes.OBJECT_TABLE),
+				Missing_ok: true,
+			}
+		}
 	| ALTER INDEX qualified_name alter_table_cmds
 		{
 			rv := makeRangeVarFromAnyName($3, $<loc>3)
@@ -2477,6 +2494,51 @@ alter_table_cmds:
 		{ $$ = makeList($1) }
 	| alter_table_cmds ',' alter_table_cmd
 		{ $$ = appendList($1, $3) }
+	;
+
+partition_cmd:
+	ATTACH PARTITION qualified_name ForValues
+		{
+			rv := makeRangeVar($3, $<loc>3)
+			$$ = &nodes.AlterTableCmd{
+				Subtype: int(nodes.AT_AttachPartition),
+				Def:     &nodes.PartitionCmd{
+					Name:  rv.(*nodes.RangeVar),
+					Bound: $4,
+				},
+			}
+		}
+	| DETACH PARTITION qualified_name
+		{
+			rv := makeRangeVar($3, $<loc>3)
+			$$ = &nodes.AlterTableCmd{
+				Subtype: int(nodes.AT_DetachPartition),
+				Def:     &nodes.PartitionCmd{
+					Name: rv.(*nodes.RangeVar),
+				},
+			}
+		}
+	| DETACH PARTITION qualified_name CONCURRENTLY
+		{
+			rv := makeRangeVar($3, $<loc>3)
+			$$ = &nodes.AlterTableCmd{
+				Subtype: int(nodes.AT_DetachPartition),
+				Def:     &nodes.PartitionCmd{
+					Name:       rv.(*nodes.RangeVar),
+					Concurrent: true,
+				},
+			}
+		}
+	| DETACH PARTITION qualified_name FINALIZE
+		{
+			rv := makeRangeVar($3, $<loc>3)
+			$$ = &nodes.AlterTableCmd{
+				Subtype: int(nodes.AT_DetachPartitionFinalize),
+				Def:     &nodes.PartitionCmd{
+					Name: rv.(*nodes.RangeVar),
+				},
+			}
+		}
 	;
 
 alter_table_cmd:
@@ -2756,49 +2818,6 @@ alter_table_cmd:
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_DropInherit),
 				Def:     rv,
-			}
-		}
-	/* ATTACH / DETACH PARTITION */
-	| ATTACH PARTITION qualified_name ForValues
-		{
-			rv := makeRangeVar($3, $<loc>3)
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_AttachPartition),
-				Def:     &nodes.PartitionCmd{
-					Name:  rv.(*nodes.RangeVar),
-					Bound: $4,
-				},
-			}
-		}
-	| DETACH PARTITION qualified_name
-		{
-			rv := makeRangeVar($3, $<loc>3)
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_DetachPartition),
-				Def:     &nodes.PartitionCmd{
-					Name: rv.(*nodes.RangeVar),
-				},
-			}
-		}
-	| DETACH PARTITION qualified_name CONCURRENTLY
-		{
-			rv := makeRangeVar($3, $<loc>3)
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_DetachPartition),
-				Def:     &nodes.PartitionCmd{
-					Name:       rv.(*nodes.RangeVar),
-					Concurrent: true,
-				},
-			}
-		}
-	| DETACH PARTITION qualified_name FINALIZE
-		{
-			rv := makeRangeVar($3, $<loc>3)
-			$$ = &nodes.AlterTableCmd{
-				Subtype: int(nodes.AT_DetachPartitionFinalize),
-				Def:     &nodes.PartitionCmd{
-					Name: rv.(*nodes.RangeVar),
-				},
 			}
 		}
 	/* ENABLE/DISABLE TRIGGER */

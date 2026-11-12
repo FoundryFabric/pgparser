@@ -1,0 +1,1268 @@
+{"sql":"alter table t attach partition p for values in (1)"}
+{"sql":"alter table t attach partition p for values in (1), add column x int","code":"42601","message":"syntax error at or near \",\"","position":50}
+{"sql":"alter table t add column x int, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter table t attach partition p for values in (1), drop column x","code":"42601","message":"syntax error at or near \",\"","position":50}
+{"sql":"alter table t drop column x, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":29}
+{"sql":"alter table t attach partition p for values in (1), set without cluster","code":"42601","message":"syntax error at or near \",\"","position":50}
+{"sql":"alter table t set without cluster, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":35}
+{"sql":"alter table t attach partition p for values from (1) to (2)"}
+{"sql":"alter table t attach partition p for values from (1) to (2), add column x int","code":"42601","message":"syntax error at or near \",\"","position":59}
+{"sql":"alter table t add column x int, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter table t attach partition p for values from (1) to (2), drop column x","code":"42601","message":"syntax error at or near \",\"","position":59}
+{"sql":"alter table t drop column x, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":29}
+{"sql":"alter table t attach partition p for values from (1) to (2), set without cluster","code":"42601","message":"syntax error at or near \",\"","position":59}
+{"sql":"alter table t set without cluster, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":35}
+{"sql":"alter table t attach partition p default"}
+{"sql":"alter table t attach partition p default, add column x int","code":"42601","message":"syntax error at or near \",\"","position":40}
+{"sql":"alter table t add column x int, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter table t attach partition p default, drop column x","code":"42601","message":"syntax error at or near \",\"","position":40}
+{"sql":"alter table t drop column x, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":29}
+{"sql":"alter table t attach partition p default, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":40}
+{"sql":"alter table t set without cluster, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":35}
+{"sql":"alter table t attach partition p for values with (modulus 2, remainder 0)"}
+{"sql":"alter table t attach partition p for values with (modulus 2, remainder 0), add column x int","code":"42601","message":"syntax error at or near \",\"","position":73}
+{"sql":"alter table t add column x int, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter table t attach partition p for values with (modulus 2, remainder 0), drop column x","code":"42601","message":"syntax error at or near \",\"","position":73}
+{"sql":"alter table t drop column x, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":29}
+{"sql":"alter table t attach partition p for values with (modulus 2, remainder 0), set without cluster","code":"42601","message":"syntax error at or near \",\"","position":73}
+{"sql":"alter table t set without cluster, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":35}
+{"sql":"alter table t attach partition s.p default"}
+{"sql":"alter table t attach partition s.p default, add column x int","code":"42601","message":"syntax error at or near \",\"","position":42}
+{"sql":"alter table t add column x int, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter table t attach partition s.p default, drop column x","code":"42601","message":"syntax error at or near \",\"","position":42}
+{"sql":"alter table t drop column x, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":29}
+{"sql":"alter table t attach partition s.p default, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":42}
+{"sql":"alter table t set without cluster, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":35}
+{"sql":"alter table t attach partition p","code":"42601","message":"syntax error at end of input","position":32}
+{"sql":"alter table t attach partition p, add column x int","code":"42601","message":"syntax error at or near \",\"","position":32}
+{"sql":"alter table t add column x int, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter table t attach partition p, drop column x","code":"42601","message":"syntax error at or near \",\"","position":32}
+{"sql":"alter table t drop column x, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":29}
+{"sql":"alter table t attach partition p, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":32}
+{"sql":"alter table t set without cluster, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":35}
+{"sql":"alter table t detach partition p"}
+{"sql":"alter table t detach partition p, add column x int","code":"42601","message":"syntax error at or near \",\"","position":32}
+{"sql":"alter table t add column x int, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter table t detach partition p, drop column x","code":"42601","message":"syntax error at or near \",\"","position":32}
+{"sql":"alter table t drop column x, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":29}
+{"sql":"alter table t detach partition p, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":32}
+{"sql":"alter table t set without cluster, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":35}
+{"sql":"alter table t detach partition p concurrently"}
+{"sql":"alter table t detach partition p concurrently, add column x int","code":"42601","message":"syntax error at or near \",\"","position":45}
+{"sql":"alter table t add column x int, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter table t detach partition p concurrently, drop column x","code":"42601","message":"syntax error at or near \",\"","position":45}
+{"sql":"alter table t drop column x, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":29}
+{"sql":"alter table t detach partition p concurrently, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":45}
+{"sql":"alter table t set without cluster, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":35}
+{"sql":"alter table t detach partition p finalize"}
+{"sql":"alter table t detach partition p finalize, add column x int","code":"42601","message":"syntax error at or near \",\"","position":41}
+{"sql":"alter table t add column x int, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter table t detach partition p finalize, drop column x","code":"42601","message":"syntax error at or near \",\"","position":41}
+{"sql":"alter table t drop column x, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":29}
+{"sql":"alter table t detach partition p finalize, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":41}
+{"sql":"alter table t set without cluster, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":35}
+{"sql":"alter table t detach partition s.p"}
+{"sql":"alter table t detach partition s.p, add column x int","code":"42601","message":"syntax error at or near \",\"","position":34}
+{"sql":"alter table t add column x int, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter table t detach partition s.p, drop column x","code":"42601","message":"syntax error at or near \",\"","position":34}
+{"sql":"alter table t drop column x, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":29}
+{"sql":"alter table t detach partition s.p, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":34}
+{"sql":"alter table t set without cluster, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":35}
+{"sql":"alter table t detach partition","code":"42601","message":"syntax error at end of input","position":30}
+{"sql":"alter table t detach partition, add column x int","code":"42601","message":"syntax error at or near \",\"","position":30}
+{"sql":"alter table t add column x int, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter table t detach partition, drop column x","code":"42601","message":"syntax error at or near \",\"","position":30}
+{"sql":"alter table t drop column x, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":29}
+{"sql":"alter table t detach partition, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":30}
+{"sql":"alter table t set without cluster, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":35}
+{"sql":"alter table t attach partition p default, detach partition q","code":"42601","message":"syntax error at or near \",\"","position":40}
+{"sql":"alter table t detach partition p, detach partition q","code":"42601","message":"syntax error at or near \",\"","position":32}
+{"sql":"alter table if exists t attach partition p for values in (1)"}
+{"sql":"alter table if exists t attach partition p for values in (1), add column x int","code":"42601","message":"syntax error at or near \",\"","position":60}
+{"sql":"alter table if exists t add column x int, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":42}
+{"sql":"alter table if exists t attach partition p for values in (1), drop column x","code":"42601","message":"syntax error at or near \",\"","position":60}
+{"sql":"alter table if exists t drop column x, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":39}
+{"sql":"alter table if exists t attach partition p for values in (1), set without cluster","code":"42601","message":"syntax error at or near \",\"","position":60}
+{"sql":"alter table if exists t set without cluster, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":45}
+{"sql":"alter table if exists t attach partition p for values from (1) to (2)"}
+{"sql":"alter table if exists t attach partition p for values from (1) to (2), add column x int","code":"42601","message":"syntax error at or near \",\"","position":69}
+{"sql":"alter table if exists t add column x int, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":42}
+{"sql":"alter table if exists t attach partition p for values from (1) to (2), drop column x","code":"42601","message":"syntax error at or near \",\"","position":69}
+{"sql":"alter table if exists t drop column x, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":39}
+{"sql":"alter table if exists t attach partition p for values from (1) to (2), set without cluster","code":"42601","message":"syntax error at or near \",\"","position":69}
+{"sql":"alter table if exists t set without cluster, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":45}
+{"sql":"alter table if exists t attach partition p default"}
+{"sql":"alter table if exists t attach partition p default, add column x int","code":"42601","message":"syntax error at or near \",\"","position":50}
+{"sql":"alter table if exists t add column x int, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":42}
+{"sql":"alter table if exists t attach partition p default, drop column x","code":"42601","message":"syntax error at or near \",\"","position":50}
+{"sql":"alter table if exists t drop column x, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":39}
+{"sql":"alter table if exists t attach partition p default, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":50}
+{"sql":"alter table if exists t set without cluster, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":45}
+{"sql":"alter table if exists t attach partition p for values with (modulus 2, remainder 0)"}
+{"sql":"alter table if exists t attach partition p for values with (modulus 2, remainder 0), add column x int","code":"42601","message":"syntax error at or near \",\"","position":83}
+{"sql":"alter table if exists t add column x int, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":42}
+{"sql":"alter table if exists t attach partition p for values with (modulus 2, remainder 0), drop column x","code":"42601","message":"syntax error at or near \",\"","position":83}
+{"sql":"alter table if exists t drop column x, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":39}
+{"sql":"alter table if exists t attach partition p for values with (modulus 2, remainder 0), set without cluster","code":"42601","message":"syntax error at or near \",\"","position":83}
+{"sql":"alter table if exists t set without cluster, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":45}
+{"sql":"alter table if exists t attach partition s.p default"}
+{"sql":"alter table if exists t attach partition s.p default, add column x int","code":"42601","message":"syntax error at or near \",\"","position":52}
+{"sql":"alter table if exists t add column x int, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":42}
+{"sql":"alter table if exists t attach partition s.p default, drop column x","code":"42601","message":"syntax error at or near \",\"","position":52}
+{"sql":"alter table if exists t drop column x, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":39}
+{"sql":"alter table if exists t attach partition s.p default, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":52}
+{"sql":"alter table if exists t set without cluster, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":45}
+{"sql":"alter table if exists t attach partition p","code":"42601","message":"syntax error at end of input","position":42}
+{"sql":"alter table if exists t attach partition p, add column x int","code":"42601","message":"syntax error at or near \",\"","position":42}
+{"sql":"alter table if exists t add column x int, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":42}
+{"sql":"alter table if exists t attach partition p, drop column x","code":"42601","message":"syntax error at or near \",\"","position":42}
+{"sql":"alter table if exists t drop column x, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":39}
+{"sql":"alter table if exists t attach partition p, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":42}
+{"sql":"alter table if exists t set without cluster, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":45}
+{"sql":"alter table if exists t detach partition p"}
+{"sql":"alter table if exists t detach partition p, add column x int","code":"42601","message":"syntax error at or near \",\"","position":42}
+{"sql":"alter table if exists t add column x int, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":42}
+{"sql":"alter table if exists t detach partition p, drop column x","code":"42601","message":"syntax error at or near \",\"","position":42}
+{"sql":"alter table if exists t drop column x, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":39}
+{"sql":"alter table if exists t detach partition p, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":42}
+{"sql":"alter table if exists t set without cluster, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":45}
+{"sql":"alter table if exists t detach partition p concurrently"}
+{"sql":"alter table if exists t detach partition p concurrently, add column x int","code":"42601","message":"syntax error at or near \",\"","position":55}
+{"sql":"alter table if exists t add column x int, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":42}
+{"sql":"alter table if exists t detach partition p concurrently, drop column x","code":"42601","message":"syntax error at or near \",\"","position":55}
+{"sql":"alter table if exists t drop column x, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":39}
+{"sql":"alter table if exists t detach partition p concurrently, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":55}
+{"sql":"alter table if exists t set without cluster, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":45}
+{"sql":"alter table if exists t detach partition p finalize"}
+{"sql":"alter table if exists t detach partition p finalize, add column x int","code":"42601","message":"syntax error at or near \",\"","position":51}
+{"sql":"alter table if exists t add column x int, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":42}
+{"sql":"alter table if exists t detach partition p finalize, drop column x","code":"42601","message":"syntax error at or near \",\"","position":51}
+{"sql":"alter table if exists t drop column x, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":39}
+{"sql":"alter table if exists t detach partition p finalize, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":51}
+{"sql":"alter table if exists t set without cluster, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":45}
+{"sql":"alter table if exists t detach partition s.p"}
+{"sql":"alter table if exists t detach partition s.p, add column x int","code":"42601","message":"syntax error at or near \",\"","position":44}
+{"sql":"alter table if exists t add column x int, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":42}
+{"sql":"alter table if exists t detach partition s.p, drop column x","code":"42601","message":"syntax error at or near \",\"","position":44}
+{"sql":"alter table if exists t drop column x, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":39}
+{"sql":"alter table if exists t detach partition s.p, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":44}
+{"sql":"alter table if exists t set without cluster, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":45}
+{"sql":"alter table if exists t detach partition","code":"42601","message":"syntax error at end of input","position":40}
+{"sql":"alter table if exists t detach partition, add column x int","code":"42601","message":"syntax error at or near \",\"","position":40}
+{"sql":"alter table if exists t add column x int, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":42}
+{"sql":"alter table if exists t detach partition, drop column x","code":"42601","message":"syntax error at or near \",\"","position":40}
+{"sql":"alter table if exists t drop column x, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":39}
+{"sql":"alter table if exists t detach partition, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":40}
+{"sql":"alter table if exists t set without cluster, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":45}
+{"sql":"alter table if exists t attach partition p default, detach partition q","code":"42601","message":"syntax error at or near \",\"","position":50}
+{"sql":"alter table if exists t detach partition p, detach partition q","code":"42601","message":"syntax error at or near \",\"","position":42}
+{"sql":"alter table only t attach partition p for values in (1)"}
+{"sql":"alter table only t attach partition p for values in (1), add column x int","code":"42601","message":"syntax error at or near \",\"","position":55}
+{"sql":"alter table only t add column x int, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":37}
+{"sql":"alter table only t attach partition p for values in (1), drop column x","code":"42601","message":"syntax error at or near \",\"","position":55}
+{"sql":"alter table only t drop column x, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":34}
+{"sql":"alter table only t attach partition p for values in (1), set without cluster","code":"42601","message":"syntax error at or near \",\"","position":55}
+{"sql":"alter table only t set without cluster, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":40}
+{"sql":"alter table only t attach partition p for values from (1) to (2)"}
+{"sql":"alter table only t attach partition p for values from (1) to (2), add column x int","code":"42601","message":"syntax error at or near \",\"","position":64}
+{"sql":"alter table only t add column x int, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":37}
+{"sql":"alter table only t attach partition p for values from (1) to (2), drop column x","code":"42601","message":"syntax error at or near \",\"","position":64}
+{"sql":"alter table only t drop column x, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":34}
+{"sql":"alter table only t attach partition p for values from (1) to (2), set without cluster","code":"42601","message":"syntax error at or near \",\"","position":64}
+{"sql":"alter table only t set without cluster, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":40}
+{"sql":"alter table only t attach partition p default"}
+{"sql":"alter table only t attach partition p default, add column x int","code":"42601","message":"syntax error at or near \",\"","position":45}
+{"sql":"alter table only t add column x int, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":37}
+{"sql":"alter table only t attach partition p default, drop column x","code":"42601","message":"syntax error at or near \",\"","position":45}
+{"sql":"alter table only t drop column x, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":34}
+{"sql":"alter table only t attach partition p default, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":45}
+{"sql":"alter table only t set without cluster, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":40}
+{"sql":"alter table only t attach partition p for values with (modulus 2, remainder 0)"}
+{"sql":"alter table only t attach partition p for values with (modulus 2, remainder 0), add column x int","code":"42601","message":"syntax error at or near \",\"","position":78}
+{"sql":"alter table only t add column x int, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":37}
+{"sql":"alter table only t attach partition p for values with (modulus 2, remainder 0), drop column x","code":"42601","message":"syntax error at or near \",\"","position":78}
+{"sql":"alter table only t drop column x, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":34}
+{"sql":"alter table only t attach partition p for values with (modulus 2, remainder 0), set without cluster","code":"42601","message":"syntax error at or near \",\"","position":78}
+{"sql":"alter table only t set without cluster, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":40}
+{"sql":"alter table only t attach partition s.p default"}
+{"sql":"alter table only t attach partition s.p default, add column x int","code":"42601","message":"syntax error at or near \",\"","position":47}
+{"sql":"alter table only t add column x int, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":37}
+{"sql":"alter table only t attach partition s.p default, drop column x","code":"42601","message":"syntax error at or near \",\"","position":47}
+{"sql":"alter table only t drop column x, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":34}
+{"sql":"alter table only t attach partition s.p default, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":47}
+{"sql":"alter table only t set without cluster, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":40}
+{"sql":"alter table only t attach partition p","code":"42601","message":"syntax error at end of input","position":37}
+{"sql":"alter table only t attach partition p, add column x int","code":"42601","message":"syntax error at or near \",\"","position":37}
+{"sql":"alter table only t add column x int, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":37}
+{"sql":"alter table only t attach partition p, drop column x","code":"42601","message":"syntax error at or near \",\"","position":37}
+{"sql":"alter table only t drop column x, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":34}
+{"sql":"alter table only t attach partition p, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":37}
+{"sql":"alter table only t set without cluster, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":40}
+{"sql":"alter table only t detach partition p"}
+{"sql":"alter table only t detach partition p, add column x int","code":"42601","message":"syntax error at or near \",\"","position":37}
+{"sql":"alter table only t add column x int, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":37}
+{"sql":"alter table only t detach partition p, drop column x","code":"42601","message":"syntax error at or near \",\"","position":37}
+{"sql":"alter table only t drop column x, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":34}
+{"sql":"alter table only t detach partition p, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":37}
+{"sql":"alter table only t set without cluster, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":40}
+{"sql":"alter table only t detach partition p concurrently"}
+{"sql":"alter table only t detach partition p concurrently, add column x int","code":"42601","message":"syntax error at or near \",\"","position":50}
+{"sql":"alter table only t add column x int, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":37}
+{"sql":"alter table only t detach partition p concurrently, drop column x","code":"42601","message":"syntax error at or near \",\"","position":50}
+{"sql":"alter table only t drop column x, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":34}
+{"sql":"alter table only t detach partition p concurrently, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":50}
+{"sql":"alter table only t set without cluster, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":40}
+{"sql":"alter table only t detach partition p finalize"}
+{"sql":"alter table only t detach partition p finalize, add column x int","code":"42601","message":"syntax error at or near \",\"","position":46}
+{"sql":"alter table only t add column x int, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":37}
+{"sql":"alter table only t detach partition p finalize, drop column x","code":"42601","message":"syntax error at or near \",\"","position":46}
+{"sql":"alter table only t drop column x, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":34}
+{"sql":"alter table only t detach partition p finalize, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":46}
+{"sql":"alter table only t set without cluster, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":40}
+{"sql":"alter table only t detach partition s.p"}
+{"sql":"alter table only t detach partition s.p, add column x int","code":"42601","message":"syntax error at or near \",\"","position":39}
+{"sql":"alter table only t add column x int, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":37}
+{"sql":"alter table only t detach partition s.p, drop column x","code":"42601","message":"syntax error at or near \",\"","position":39}
+{"sql":"alter table only t drop column x, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":34}
+{"sql":"alter table only t detach partition s.p, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":39}
+{"sql":"alter table only t set without cluster, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":40}
+{"sql":"alter table only t detach partition","code":"42601","message":"syntax error at end of input","position":35}
+{"sql":"alter table only t detach partition, add column x int","code":"42601","message":"syntax error at or near \",\"","position":35}
+{"sql":"alter table only t add column x int, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":37}
+{"sql":"alter table only t detach partition, drop column x","code":"42601","message":"syntax error at or near \",\"","position":35}
+{"sql":"alter table only t drop column x, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":34}
+{"sql":"alter table only t detach partition, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":35}
+{"sql":"alter table only t set without cluster, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":40}
+{"sql":"alter table only t attach partition p default, detach partition q","code":"42601","message":"syntax error at or near \",\"","position":45}
+{"sql":"alter table only t detach partition p, detach partition q","code":"42601","message":"syntax error at or near \",\"","position":37}
+{"sql":"alter table t* attach partition p for values in (1)"}
+{"sql":"alter table t* attach partition p for values in (1), add column x int","code":"42601","message":"syntax error at or near \",\"","position":51}
+{"sql":"alter table t* add column x int, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":33}
+{"sql":"alter table t* attach partition p for values in (1), drop column x","code":"42601","message":"syntax error at or near \",\"","position":51}
+{"sql":"alter table t* drop column x, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":30}
+{"sql":"alter table t* attach partition p for values in (1), set without cluster","code":"42601","message":"syntax error at or near \",\"","position":51}
+{"sql":"alter table t* set without cluster, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter table t* attach partition p for values from (1) to (2)"}
+{"sql":"alter table t* attach partition p for values from (1) to (2), add column x int","code":"42601","message":"syntax error at or near \",\"","position":60}
+{"sql":"alter table t* add column x int, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":33}
+{"sql":"alter table t* attach partition p for values from (1) to (2), drop column x","code":"42601","message":"syntax error at or near \",\"","position":60}
+{"sql":"alter table t* drop column x, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":30}
+{"sql":"alter table t* attach partition p for values from (1) to (2), set without cluster","code":"42601","message":"syntax error at or near \",\"","position":60}
+{"sql":"alter table t* set without cluster, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter table t* attach partition p default"}
+{"sql":"alter table t* attach partition p default, add column x int","code":"42601","message":"syntax error at or near \",\"","position":41}
+{"sql":"alter table t* add column x int, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":33}
+{"sql":"alter table t* attach partition p default, drop column x","code":"42601","message":"syntax error at or near \",\"","position":41}
+{"sql":"alter table t* drop column x, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":30}
+{"sql":"alter table t* attach partition p default, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":41}
+{"sql":"alter table t* set without cluster, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter table t* attach partition p for values with (modulus 2, remainder 0)"}
+{"sql":"alter table t* attach partition p for values with (modulus 2, remainder 0), add column x int","code":"42601","message":"syntax error at or near \",\"","position":74}
+{"sql":"alter table t* add column x int, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":33}
+{"sql":"alter table t* attach partition p for values with (modulus 2, remainder 0), drop column x","code":"42601","message":"syntax error at or near \",\"","position":74}
+{"sql":"alter table t* drop column x, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":30}
+{"sql":"alter table t* attach partition p for values with (modulus 2, remainder 0), set without cluster","code":"42601","message":"syntax error at or near \",\"","position":74}
+{"sql":"alter table t* set without cluster, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter table t* attach partition s.p default"}
+{"sql":"alter table t* attach partition s.p default, add column x int","code":"42601","message":"syntax error at or near \",\"","position":43}
+{"sql":"alter table t* add column x int, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":33}
+{"sql":"alter table t* attach partition s.p default, drop column x","code":"42601","message":"syntax error at or near \",\"","position":43}
+{"sql":"alter table t* drop column x, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":30}
+{"sql":"alter table t* attach partition s.p default, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":43}
+{"sql":"alter table t* set without cluster, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter table t* attach partition p","code":"42601","message":"syntax error at end of input","position":33}
+{"sql":"alter table t* attach partition p, add column x int","code":"42601","message":"syntax error at or near \",\"","position":33}
+{"sql":"alter table t* add column x int, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":33}
+{"sql":"alter table t* attach partition p, drop column x","code":"42601","message":"syntax error at or near \",\"","position":33}
+{"sql":"alter table t* drop column x, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":30}
+{"sql":"alter table t* attach partition p, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":33}
+{"sql":"alter table t* set without cluster, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter table t* detach partition p"}
+{"sql":"alter table t* detach partition p, add column x int","code":"42601","message":"syntax error at or near \",\"","position":33}
+{"sql":"alter table t* add column x int, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":33}
+{"sql":"alter table t* detach partition p, drop column x","code":"42601","message":"syntax error at or near \",\"","position":33}
+{"sql":"alter table t* drop column x, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":30}
+{"sql":"alter table t* detach partition p, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":33}
+{"sql":"alter table t* set without cluster, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":36}
+{"sql":"alter table t* detach partition p concurrently"}
+{"sql":"alter table t* detach partition p concurrently, add column x int","code":"42601","message":"syntax error at or near \",\"","position":46}
+{"sql":"alter table t* add column x int, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":33}
+{"sql":"alter table t* detach partition p concurrently, drop column x","code":"42601","message":"syntax error at or near \",\"","position":46}
+{"sql":"alter table t* drop column x, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":30}
+{"sql":"alter table t* detach partition p concurrently, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":46}
+{"sql":"alter table t* set without cluster, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":36}
+{"sql":"alter table t* detach partition p finalize"}
+{"sql":"alter table t* detach partition p finalize, add column x int","code":"42601","message":"syntax error at or near \",\"","position":42}
+{"sql":"alter table t* add column x int, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":33}
+{"sql":"alter table t* detach partition p finalize, drop column x","code":"42601","message":"syntax error at or near \",\"","position":42}
+{"sql":"alter table t* drop column x, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":30}
+{"sql":"alter table t* detach partition p finalize, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":42}
+{"sql":"alter table t* set without cluster, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":36}
+{"sql":"alter table t* detach partition s.p"}
+{"sql":"alter table t* detach partition s.p, add column x int","code":"42601","message":"syntax error at or near \",\"","position":35}
+{"sql":"alter table t* add column x int, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":33}
+{"sql":"alter table t* detach partition s.p, drop column x","code":"42601","message":"syntax error at or near \",\"","position":35}
+{"sql":"alter table t* drop column x, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":30}
+{"sql":"alter table t* detach partition s.p, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":35}
+{"sql":"alter table t* set without cluster, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":36}
+{"sql":"alter table t* detach partition","code":"42601","message":"syntax error at end of input","position":31}
+{"sql":"alter table t* detach partition, add column x int","code":"42601","message":"syntax error at or near \",\"","position":31}
+{"sql":"alter table t* add column x int, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":33}
+{"sql":"alter table t* detach partition, drop column x","code":"42601","message":"syntax error at or near \",\"","position":31}
+{"sql":"alter table t* drop column x, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":30}
+{"sql":"alter table t* detach partition, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":31}
+{"sql":"alter table t* set without cluster, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":36}
+{"sql":"alter table t* attach partition p default, detach partition q","code":"42601","message":"syntax error at or near \",\"","position":41}
+{"sql":"alter table t* detach partition p, detach partition q","code":"42601","message":"syntax error at or near \",\"","position":33}
+{"sql":"alter table if exists only s.t attach partition p for values in (1)"}
+{"sql":"alter table if exists only s.t attach partition p for values in (1), add column x int","code":"42601","message":"syntax error at or near \",\"","position":67}
+{"sql":"alter table if exists only s.t add column x int, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":49}
+{"sql":"alter table if exists only s.t attach partition p for values in (1), drop column x","code":"42601","message":"syntax error at or near \",\"","position":67}
+{"sql":"alter table if exists only s.t drop column x, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":46}
+{"sql":"alter table if exists only s.t attach partition p for values in (1), set without cluster","code":"42601","message":"syntax error at or near \",\"","position":67}
+{"sql":"alter table if exists only s.t set without cluster, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":52}
+{"sql":"alter table if exists only s.t attach partition p for values from (1) to (2)"}
+{"sql":"alter table if exists only s.t attach partition p for values from (1) to (2), add column x int","code":"42601","message":"syntax error at or near \",\"","position":76}
+{"sql":"alter table if exists only s.t add column x int, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":49}
+{"sql":"alter table if exists only s.t attach partition p for values from (1) to (2), drop column x","code":"42601","message":"syntax error at or near \",\"","position":76}
+{"sql":"alter table if exists only s.t drop column x, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":46}
+{"sql":"alter table if exists only s.t attach partition p for values from (1) to (2), set without cluster","code":"42601","message":"syntax error at or near \",\"","position":76}
+{"sql":"alter table if exists only s.t set without cluster, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":52}
+{"sql":"alter table if exists only s.t attach partition p default"}
+{"sql":"alter table if exists only s.t attach partition p default, add column x int","code":"42601","message":"syntax error at or near \",\"","position":57}
+{"sql":"alter table if exists only s.t add column x int, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":49}
+{"sql":"alter table if exists only s.t attach partition p default, drop column x","code":"42601","message":"syntax error at or near \",\"","position":57}
+{"sql":"alter table if exists only s.t drop column x, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":46}
+{"sql":"alter table if exists only s.t attach partition p default, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":57}
+{"sql":"alter table if exists only s.t set without cluster, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":52}
+{"sql":"alter table if exists only s.t attach partition p for values with (modulus 2, remainder 0)"}
+{"sql":"alter table if exists only s.t attach partition p for values with (modulus 2, remainder 0), add column x int","code":"42601","message":"syntax error at or near \",\"","position":90}
+{"sql":"alter table if exists only s.t add column x int, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":49}
+{"sql":"alter table if exists only s.t attach partition p for values with (modulus 2, remainder 0), drop column x","code":"42601","message":"syntax error at or near \",\"","position":90}
+{"sql":"alter table if exists only s.t drop column x, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":46}
+{"sql":"alter table if exists only s.t attach partition p for values with (modulus 2, remainder 0), set without cluster","code":"42601","message":"syntax error at or near \",\"","position":90}
+{"sql":"alter table if exists only s.t set without cluster, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":52}
+{"sql":"alter table if exists only s.t attach partition s.p default"}
+{"sql":"alter table if exists only s.t attach partition s.p default, add column x int","code":"42601","message":"syntax error at or near \",\"","position":59}
+{"sql":"alter table if exists only s.t add column x int, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":49}
+{"sql":"alter table if exists only s.t attach partition s.p default, drop column x","code":"42601","message":"syntax error at or near \",\"","position":59}
+{"sql":"alter table if exists only s.t drop column x, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":46}
+{"sql":"alter table if exists only s.t attach partition s.p default, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":59}
+{"sql":"alter table if exists only s.t set without cluster, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":52}
+{"sql":"alter table if exists only s.t attach partition p","code":"42601","message":"syntax error at end of input","position":49}
+{"sql":"alter table if exists only s.t attach partition p, add column x int","code":"42601","message":"syntax error at or near \",\"","position":49}
+{"sql":"alter table if exists only s.t add column x int, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":49}
+{"sql":"alter table if exists only s.t attach partition p, drop column x","code":"42601","message":"syntax error at or near \",\"","position":49}
+{"sql":"alter table if exists only s.t drop column x, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":46}
+{"sql":"alter table if exists only s.t attach partition p, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":49}
+{"sql":"alter table if exists only s.t set without cluster, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":52}
+{"sql":"alter table if exists only s.t detach partition p"}
+{"sql":"alter table if exists only s.t detach partition p, add column x int","code":"42601","message":"syntax error at or near \",\"","position":49}
+{"sql":"alter table if exists only s.t add column x int, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":49}
+{"sql":"alter table if exists only s.t detach partition p, drop column x","code":"42601","message":"syntax error at or near \",\"","position":49}
+{"sql":"alter table if exists only s.t drop column x, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":46}
+{"sql":"alter table if exists only s.t detach partition p, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":49}
+{"sql":"alter table if exists only s.t set without cluster, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":52}
+{"sql":"alter table if exists only s.t detach partition p concurrently"}
+{"sql":"alter table if exists only s.t detach partition p concurrently, add column x int","code":"42601","message":"syntax error at or near \",\"","position":62}
+{"sql":"alter table if exists only s.t add column x int, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":49}
+{"sql":"alter table if exists only s.t detach partition p concurrently, drop column x","code":"42601","message":"syntax error at or near \",\"","position":62}
+{"sql":"alter table if exists only s.t drop column x, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":46}
+{"sql":"alter table if exists only s.t detach partition p concurrently, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":62}
+{"sql":"alter table if exists only s.t set without cluster, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":52}
+{"sql":"alter table if exists only s.t detach partition p finalize"}
+{"sql":"alter table if exists only s.t detach partition p finalize, add column x int","code":"42601","message":"syntax error at or near \",\"","position":58}
+{"sql":"alter table if exists only s.t add column x int, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":49}
+{"sql":"alter table if exists only s.t detach partition p finalize, drop column x","code":"42601","message":"syntax error at or near \",\"","position":58}
+{"sql":"alter table if exists only s.t drop column x, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":46}
+{"sql":"alter table if exists only s.t detach partition p finalize, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":58}
+{"sql":"alter table if exists only s.t set without cluster, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":52}
+{"sql":"alter table if exists only s.t detach partition s.p"}
+{"sql":"alter table if exists only s.t detach partition s.p, add column x int","code":"42601","message":"syntax error at or near \",\"","position":51}
+{"sql":"alter table if exists only s.t add column x int, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":49}
+{"sql":"alter table if exists only s.t detach partition s.p, drop column x","code":"42601","message":"syntax error at or near \",\"","position":51}
+{"sql":"alter table if exists only s.t drop column x, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":46}
+{"sql":"alter table if exists only s.t detach partition s.p, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":51}
+{"sql":"alter table if exists only s.t set without cluster, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":52}
+{"sql":"alter table if exists only s.t detach partition","code":"42601","message":"syntax error at end of input","position":47}
+{"sql":"alter table if exists only s.t detach partition, add column x int","code":"42601","message":"syntax error at or near \",\"","position":47}
+{"sql":"alter table if exists only s.t add column x int, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":49}
+{"sql":"alter table if exists only s.t detach partition, drop column x","code":"42601","message":"syntax error at or near \",\"","position":47}
+{"sql":"alter table if exists only s.t drop column x, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":46}
+{"sql":"alter table if exists only s.t detach partition, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":47}
+{"sql":"alter table if exists only s.t set without cluster, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":52}
+{"sql":"alter table if exists only s.t attach partition p default, detach partition q","code":"42601","message":"syntax error at or near \",\"","position":57}
+{"sql":"alter table if exists only s.t detach partition p, detach partition q","code":"42601","message":"syntax error at or near \",\"","position":49}
+{"sql":"alter foreign table t attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":22}
+{"sql":"alter foreign table t attach partition p for values in (1), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":22}
+{"sql":"alter foreign table t add column x int, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":40}
+{"sql":"alter foreign table t attach partition p for values in (1), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":22}
+{"sql":"alter foreign table t drop column x, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":37}
+{"sql":"alter foreign table t attach partition p for values in (1), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":22}
+{"sql":"alter foreign table t set without cluster, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":43}
+{"sql":"alter foreign table t attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":22}
+{"sql":"alter foreign table t attach partition p for values from (1) to (2), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":22}
+{"sql":"alter foreign table t add column x int, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":40}
+{"sql":"alter foreign table t attach partition p for values from (1) to (2), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":22}
+{"sql":"alter foreign table t drop column x, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":37}
+{"sql":"alter foreign table t attach partition p for values from (1) to (2), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":22}
+{"sql":"alter foreign table t set without cluster, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":43}
+{"sql":"alter foreign table t attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":22}
+{"sql":"alter foreign table t attach partition p default, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":22}
+{"sql":"alter foreign table t add column x int, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":40}
+{"sql":"alter foreign table t attach partition p default, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":22}
+{"sql":"alter foreign table t drop column x, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":37}
+{"sql":"alter foreign table t attach partition p default, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":22}
+{"sql":"alter foreign table t set without cluster, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":43}
+{"sql":"alter foreign table t attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":22}
+{"sql":"alter foreign table t attach partition p for values with (modulus 2, remainder 0), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":22}
+{"sql":"alter foreign table t add column x int, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":40}
+{"sql":"alter foreign table t attach partition p for values with (modulus 2, remainder 0), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":22}
+{"sql":"alter foreign table t drop column x, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":37}
+{"sql":"alter foreign table t attach partition p for values with (modulus 2, remainder 0), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":22}
+{"sql":"alter foreign table t set without cluster, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":43}
+{"sql":"alter foreign table t attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":22}
+{"sql":"alter foreign table t attach partition s.p default, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":22}
+{"sql":"alter foreign table t add column x int, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":40}
+{"sql":"alter foreign table t attach partition s.p default, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":22}
+{"sql":"alter foreign table t drop column x, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":37}
+{"sql":"alter foreign table t attach partition s.p default, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":22}
+{"sql":"alter foreign table t set without cluster, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":43}
+{"sql":"alter foreign table t attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":22}
+{"sql":"alter foreign table t attach partition p, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":22}
+{"sql":"alter foreign table t add column x int, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":40}
+{"sql":"alter foreign table t attach partition p, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":22}
+{"sql":"alter foreign table t drop column x, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":37}
+{"sql":"alter foreign table t attach partition p, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":22}
+{"sql":"alter foreign table t set without cluster, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":43}
+{"sql":"alter foreign table t detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":22}
+{"sql":"alter foreign table t detach partition p, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":22}
+{"sql":"alter foreign table t add column x int, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":40}
+{"sql":"alter foreign table t detach partition p, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":22}
+{"sql":"alter foreign table t drop column x, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":37}
+{"sql":"alter foreign table t detach partition p, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":22}
+{"sql":"alter foreign table t set without cluster, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":43}
+{"sql":"alter foreign table t detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":22}
+{"sql":"alter foreign table t detach partition p concurrently, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":22}
+{"sql":"alter foreign table t add column x int, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":40}
+{"sql":"alter foreign table t detach partition p concurrently, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":22}
+{"sql":"alter foreign table t drop column x, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":37}
+{"sql":"alter foreign table t detach partition p concurrently, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":22}
+{"sql":"alter foreign table t set without cluster, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":43}
+{"sql":"alter foreign table t detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":22}
+{"sql":"alter foreign table t detach partition p finalize, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":22}
+{"sql":"alter foreign table t add column x int, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":40}
+{"sql":"alter foreign table t detach partition p finalize, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":22}
+{"sql":"alter foreign table t drop column x, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":37}
+{"sql":"alter foreign table t detach partition p finalize, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":22}
+{"sql":"alter foreign table t set without cluster, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":43}
+{"sql":"alter foreign table t detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":22}
+{"sql":"alter foreign table t detach partition s.p, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":22}
+{"sql":"alter foreign table t add column x int, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":40}
+{"sql":"alter foreign table t detach partition s.p, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":22}
+{"sql":"alter foreign table t drop column x, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":37}
+{"sql":"alter foreign table t detach partition s.p, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":22}
+{"sql":"alter foreign table t set without cluster, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":43}
+{"sql":"alter foreign table t detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":22}
+{"sql":"alter foreign table t detach partition, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":22}
+{"sql":"alter foreign table t add column x int, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":40}
+{"sql":"alter foreign table t detach partition, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":22}
+{"sql":"alter foreign table t drop column x, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":37}
+{"sql":"alter foreign table t detach partition, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":22}
+{"sql":"alter foreign table t set without cluster, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":43}
+{"sql":"alter foreign table t attach partition p default, detach partition q","code":"42601","message":"syntax error at or near \"attach\"","position":22}
+{"sql":"alter foreign table t detach partition p, detach partition q","code":"42601","message":"syntax error at or near \"detach\"","position":22}
+{"sql":"alter foreign table if exists t attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter foreign table if exists t attach partition p for values in (1), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter foreign table if exists t add column x int, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":50}
+{"sql":"alter foreign table if exists t attach partition p for values in (1), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter foreign table if exists t drop column x, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":47}
+{"sql":"alter foreign table if exists t attach partition p for values in (1), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter foreign table if exists t set without cluster, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":53}
+{"sql":"alter foreign table if exists t attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter foreign table if exists t attach partition p for values from (1) to (2), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter foreign table if exists t add column x int, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":50}
+{"sql":"alter foreign table if exists t attach partition p for values from (1) to (2), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter foreign table if exists t drop column x, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":47}
+{"sql":"alter foreign table if exists t attach partition p for values from (1) to (2), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter foreign table if exists t set without cluster, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":53}
+{"sql":"alter foreign table if exists t attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter foreign table if exists t attach partition p default, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter foreign table if exists t add column x int, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":50}
+{"sql":"alter foreign table if exists t attach partition p default, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter foreign table if exists t drop column x, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":47}
+{"sql":"alter foreign table if exists t attach partition p default, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter foreign table if exists t set without cluster, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":53}
+{"sql":"alter foreign table if exists t attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter foreign table if exists t attach partition p for values with (modulus 2, remainder 0), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter foreign table if exists t add column x int, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":50}
+{"sql":"alter foreign table if exists t attach partition p for values with (modulus 2, remainder 0), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter foreign table if exists t drop column x, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":47}
+{"sql":"alter foreign table if exists t attach partition p for values with (modulus 2, remainder 0), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter foreign table if exists t set without cluster, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":53}
+{"sql":"alter foreign table if exists t attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter foreign table if exists t attach partition s.p default, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter foreign table if exists t add column x int, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":50}
+{"sql":"alter foreign table if exists t attach partition s.p default, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter foreign table if exists t drop column x, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":47}
+{"sql":"alter foreign table if exists t attach partition s.p default, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter foreign table if exists t set without cluster, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":53}
+{"sql":"alter foreign table if exists t attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter foreign table if exists t attach partition p, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter foreign table if exists t add column x int, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":50}
+{"sql":"alter foreign table if exists t attach partition p, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter foreign table if exists t drop column x, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":47}
+{"sql":"alter foreign table if exists t attach partition p, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter foreign table if exists t set without cluster, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":53}
+{"sql":"alter foreign table if exists t detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter foreign table if exists t detach partition p, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter foreign table if exists t add column x int, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":50}
+{"sql":"alter foreign table if exists t detach partition p, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter foreign table if exists t drop column x, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":47}
+{"sql":"alter foreign table if exists t detach partition p, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter foreign table if exists t set without cluster, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":53}
+{"sql":"alter foreign table if exists t detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter foreign table if exists t detach partition p concurrently, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter foreign table if exists t add column x int, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":50}
+{"sql":"alter foreign table if exists t detach partition p concurrently, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter foreign table if exists t drop column x, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":47}
+{"sql":"alter foreign table if exists t detach partition p concurrently, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter foreign table if exists t set without cluster, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":53}
+{"sql":"alter foreign table if exists t detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter foreign table if exists t detach partition p finalize, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter foreign table if exists t add column x int, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":50}
+{"sql":"alter foreign table if exists t detach partition p finalize, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter foreign table if exists t drop column x, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":47}
+{"sql":"alter foreign table if exists t detach partition p finalize, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter foreign table if exists t set without cluster, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":53}
+{"sql":"alter foreign table if exists t detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter foreign table if exists t detach partition s.p, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter foreign table if exists t add column x int, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":50}
+{"sql":"alter foreign table if exists t detach partition s.p, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter foreign table if exists t drop column x, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":47}
+{"sql":"alter foreign table if exists t detach partition s.p, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter foreign table if exists t set without cluster, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":53}
+{"sql":"alter foreign table if exists t detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter foreign table if exists t detach partition, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter foreign table if exists t add column x int, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":50}
+{"sql":"alter foreign table if exists t detach partition, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter foreign table if exists t drop column x, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":47}
+{"sql":"alter foreign table if exists t detach partition, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter foreign table if exists t set without cluster, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":53}
+{"sql":"alter foreign table if exists t attach partition p default, detach partition q","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter foreign table if exists t detach partition p, detach partition q","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter view v attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":13}
+{"sql":"alter view v attach partition p for values in (1), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":13}
+{"sql":"alter view v add column x int, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":31}
+{"sql":"alter view v attach partition p for values in (1), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":13}
+{"sql":"alter view v drop column x, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":28}
+{"sql":"alter view v attach partition p for values in (1), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":13}
+{"sql":"alter view v set without cluster, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":34}
+{"sql":"alter view v attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":13}
+{"sql":"alter view v attach partition p for values from (1) to (2), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":13}
+{"sql":"alter view v add column x int, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":31}
+{"sql":"alter view v attach partition p for values from (1) to (2), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":13}
+{"sql":"alter view v drop column x, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":28}
+{"sql":"alter view v attach partition p for values from (1) to (2), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":13}
+{"sql":"alter view v set without cluster, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":34}
+{"sql":"alter view v attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":13}
+{"sql":"alter view v attach partition p default, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":13}
+{"sql":"alter view v add column x int, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":31}
+{"sql":"alter view v attach partition p default, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":13}
+{"sql":"alter view v drop column x, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":28}
+{"sql":"alter view v attach partition p default, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":13}
+{"sql":"alter view v set without cluster, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":34}
+{"sql":"alter view v attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":13}
+{"sql":"alter view v attach partition p for values with (modulus 2, remainder 0), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":13}
+{"sql":"alter view v add column x int, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":31}
+{"sql":"alter view v attach partition p for values with (modulus 2, remainder 0), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":13}
+{"sql":"alter view v drop column x, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":28}
+{"sql":"alter view v attach partition p for values with (modulus 2, remainder 0), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":13}
+{"sql":"alter view v set without cluster, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":34}
+{"sql":"alter view v attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":13}
+{"sql":"alter view v attach partition s.p default, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":13}
+{"sql":"alter view v add column x int, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":31}
+{"sql":"alter view v attach partition s.p default, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":13}
+{"sql":"alter view v drop column x, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":28}
+{"sql":"alter view v attach partition s.p default, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":13}
+{"sql":"alter view v set without cluster, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":34}
+{"sql":"alter view v attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":13}
+{"sql":"alter view v attach partition p, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":13}
+{"sql":"alter view v add column x int, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":31}
+{"sql":"alter view v attach partition p, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":13}
+{"sql":"alter view v drop column x, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":28}
+{"sql":"alter view v attach partition p, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":13}
+{"sql":"alter view v set without cluster, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":34}
+{"sql":"alter view v detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":13}
+{"sql":"alter view v detach partition p, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":13}
+{"sql":"alter view v add column x int, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":31}
+{"sql":"alter view v detach partition p, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":13}
+{"sql":"alter view v drop column x, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":28}
+{"sql":"alter view v detach partition p, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":13}
+{"sql":"alter view v set without cluster, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":34}
+{"sql":"alter view v detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":13}
+{"sql":"alter view v detach partition p concurrently, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":13}
+{"sql":"alter view v add column x int, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":31}
+{"sql":"alter view v detach partition p concurrently, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":13}
+{"sql":"alter view v drop column x, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":28}
+{"sql":"alter view v detach partition p concurrently, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":13}
+{"sql":"alter view v set without cluster, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":34}
+{"sql":"alter view v detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":13}
+{"sql":"alter view v detach partition p finalize, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":13}
+{"sql":"alter view v add column x int, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":31}
+{"sql":"alter view v detach partition p finalize, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":13}
+{"sql":"alter view v drop column x, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":28}
+{"sql":"alter view v detach partition p finalize, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":13}
+{"sql":"alter view v set without cluster, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":34}
+{"sql":"alter view v detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":13}
+{"sql":"alter view v detach partition s.p, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":13}
+{"sql":"alter view v add column x int, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":31}
+{"sql":"alter view v detach partition s.p, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":13}
+{"sql":"alter view v drop column x, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":28}
+{"sql":"alter view v detach partition s.p, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":13}
+{"sql":"alter view v set without cluster, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":34}
+{"sql":"alter view v detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":13}
+{"sql":"alter view v detach partition, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":13}
+{"sql":"alter view v add column x int, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":31}
+{"sql":"alter view v detach partition, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":13}
+{"sql":"alter view v drop column x, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":28}
+{"sql":"alter view v detach partition, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":13}
+{"sql":"alter view v set without cluster, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":34}
+{"sql":"alter view v attach partition p default, detach partition q","code":"42601","message":"syntax error at or near \"attach\"","position":13}
+{"sql":"alter view v detach partition p, detach partition q","code":"42601","message":"syntax error at or near \"detach\"","position":13}
+{"sql":"alter view if exists v attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":23}
+{"sql":"alter view if exists v attach partition p for values in (1), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":23}
+{"sql":"alter view if exists v add column x int, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":41}
+{"sql":"alter view if exists v attach partition p for values in (1), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":23}
+{"sql":"alter view if exists v drop column x, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":38}
+{"sql":"alter view if exists v attach partition p for values in (1), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":23}
+{"sql":"alter view if exists v set without cluster, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":44}
+{"sql":"alter view if exists v attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":23}
+{"sql":"alter view if exists v attach partition p for values from (1) to (2), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":23}
+{"sql":"alter view if exists v add column x int, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":41}
+{"sql":"alter view if exists v attach partition p for values from (1) to (2), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":23}
+{"sql":"alter view if exists v drop column x, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":38}
+{"sql":"alter view if exists v attach partition p for values from (1) to (2), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":23}
+{"sql":"alter view if exists v set without cluster, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":44}
+{"sql":"alter view if exists v attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":23}
+{"sql":"alter view if exists v attach partition p default, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":23}
+{"sql":"alter view if exists v add column x int, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":41}
+{"sql":"alter view if exists v attach partition p default, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":23}
+{"sql":"alter view if exists v drop column x, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":38}
+{"sql":"alter view if exists v attach partition p default, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":23}
+{"sql":"alter view if exists v set without cluster, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":44}
+{"sql":"alter view if exists v attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":23}
+{"sql":"alter view if exists v attach partition p for values with (modulus 2, remainder 0), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":23}
+{"sql":"alter view if exists v add column x int, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":41}
+{"sql":"alter view if exists v attach partition p for values with (modulus 2, remainder 0), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":23}
+{"sql":"alter view if exists v drop column x, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":38}
+{"sql":"alter view if exists v attach partition p for values with (modulus 2, remainder 0), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":23}
+{"sql":"alter view if exists v set without cluster, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":44}
+{"sql":"alter view if exists v attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":23}
+{"sql":"alter view if exists v attach partition s.p default, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":23}
+{"sql":"alter view if exists v add column x int, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":41}
+{"sql":"alter view if exists v attach partition s.p default, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":23}
+{"sql":"alter view if exists v drop column x, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":38}
+{"sql":"alter view if exists v attach partition s.p default, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":23}
+{"sql":"alter view if exists v set without cluster, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":44}
+{"sql":"alter view if exists v attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":23}
+{"sql":"alter view if exists v attach partition p, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":23}
+{"sql":"alter view if exists v add column x int, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":41}
+{"sql":"alter view if exists v attach partition p, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":23}
+{"sql":"alter view if exists v drop column x, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":38}
+{"sql":"alter view if exists v attach partition p, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":23}
+{"sql":"alter view if exists v set without cluster, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":44}
+{"sql":"alter view if exists v detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":23}
+{"sql":"alter view if exists v detach partition p, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":23}
+{"sql":"alter view if exists v add column x int, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":41}
+{"sql":"alter view if exists v detach partition p, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":23}
+{"sql":"alter view if exists v drop column x, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":38}
+{"sql":"alter view if exists v detach partition p, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":23}
+{"sql":"alter view if exists v set without cluster, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":44}
+{"sql":"alter view if exists v detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":23}
+{"sql":"alter view if exists v detach partition p concurrently, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":23}
+{"sql":"alter view if exists v add column x int, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":41}
+{"sql":"alter view if exists v detach partition p concurrently, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":23}
+{"sql":"alter view if exists v drop column x, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":38}
+{"sql":"alter view if exists v detach partition p concurrently, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":23}
+{"sql":"alter view if exists v set without cluster, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":44}
+{"sql":"alter view if exists v detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":23}
+{"sql":"alter view if exists v detach partition p finalize, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":23}
+{"sql":"alter view if exists v add column x int, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":41}
+{"sql":"alter view if exists v detach partition p finalize, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":23}
+{"sql":"alter view if exists v drop column x, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":38}
+{"sql":"alter view if exists v detach partition p finalize, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":23}
+{"sql":"alter view if exists v set without cluster, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":44}
+{"sql":"alter view if exists v detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":23}
+{"sql":"alter view if exists v detach partition s.p, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":23}
+{"sql":"alter view if exists v add column x int, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":41}
+{"sql":"alter view if exists v detach partition s.p, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":23}
+{"sql":"alter view if exists v drop column x, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":38}
+{"sql":"alter view if exists v detach partition s.p, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":23}
+{"sql":"alter view if exists v set without cluster, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":44}
+{"sql":"alter view if exists v detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":23}
+{"sql":"alter view if exists v detach partition, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":23}
+{"sql":"alter view if exists v add column x int, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":41}
+{"sql":"alter view if exists v detach partition, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":23}
+{"sql":"alter view if exists v drop column x, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":38}
+{"sql":"alter view if exists v detach partition, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":23}
+{"sql":"alter view if exists v set without cluster, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":44}
+{"sql":"alter view if exists v attach partition p default, detach partition q","code":"42601","message":"syntax error at or near \"attach\"","position":23}
+{"sql":"alter view if exists v detach partition p, detach partition q","code":"42601","message":"syntax error at or near \"detach\"","position":23}
+{"sql":"alter materialized view m attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":26}
+{"sql":"alter materialized view m attach partition p for values in (1), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":26}
+{"sql":"alter materialized view m add column x int, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":44}
+{"sql":"alter materialized view m attach partition p for values in (1), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":26}
+{"sql":"alter materialized view m drop column x, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":41}
+{"sql":"alter materialized view m attach partition p for values in (1), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":26}
+{"sql":"alter materialized view m set without cluster, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":47}
+{"sql":"alter materialized view m attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":26}
+{"sql":"alter materialized view m attach partition p for values from (1) to (2), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":26}
+{"sql":"alter materialized view m add column x int, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":44}
+{"sql":"alter materialized view m attach partition p for values from (1) to (2), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":26}
+{"sql":"alter materialized view m drop column x, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":41}
+{"sql":"alter materialized view m attach partition p for values from (1) to (2), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":26}
+{"sql":"alter materialized view m set without cluster, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":47}
+{"sql":"alter materialized view m attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":26}
+{"sql":"alter materialized view m attach partition p default, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":26}
+{"sql":"alter materialized view m add column x int, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":44}
+{"sql":"alter materialized view m attach partition p default, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":26}
+{"sql":"alter materialized view m drop column x, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":41}
+{"sql":"alter materialized view m attach partition p default, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":26}
+{"sql":"alter materialized view m set without cluster, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":47}
+{"sql":"alter materialized view m attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":26}
+{"sql":"alter materialized view m attach partition p for values with (modulus 2, remainder 0), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":26}
+{"sql":"alter materialized view m add column x int, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":44}
+{"sql":"alter materialized view m attach partition p for values with (modulus 2, remainder 0), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":26}
+{"sql":"alter materialized view m drop column x, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":41}
+{"sql":"alter materialized view m attach partition p for values with (modulus 2, remainder 0), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":26}
+{"sql":"alter materialized view m set without cluster, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":47}
+{"sql":"alter materialized view m attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":26}
+{"sql":"alter materialized view m attach partition s.p default, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":26}
+{"sql":"alter materialized view m add column x int, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":44}
+{"sql":"alter materialized view m attach partition s.p default, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":26}
+{"sql":"alter materialized view m drop column x, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":41}
+{"sql":"alter materialized view m attach partition s.p default, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":26}
+{"sql":"alter materialized view m set without cluster, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":47}
+{"sql":"alter materialized view m attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":26}
+{"sql":"alter materialized view m attach partition p, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":26}
+{"sql":"alter materialized view m add column x int, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":44}
+{"sql":"alter materialized view m attach partition p, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":26}
+{"sql":"alter materialized view m drop column x, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":41}
+{"sql":"alter materialized view m attach partition p, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":26}
+{"sql":"alter materialized view m set without cluster, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":47}
+{"sql":"alter materialized view m detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":26}
+{"sql":"alter materialized view m detach partition p, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":26}
+{"sql":"alter materialized view m add column x int, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":44}
+{"sql":"alter materialized view m detach partition p, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":26}
+{"sql":"alter materialized view m drop column x, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":41}
+{"sql":"alter materialized view m detach partition p, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":26}
+{"sql":"alter materialized view m set without cluster, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":47}
+{"sql":"alter materialized view m detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":26}
+{"sql":"alter materialized view m detach partition p concurrently, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":26}
+{"sql":"alter materialized view m add column x int, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":44}
+{"sql":"alter materialized view m detach partition p concurrently, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":26}
+{"sql":"alter materialized view m drop column x, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":41}
+{"sql":"alter materialized view m detach partition p concurrently, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":26}
+{"sql":"alter materialized view m set without cluster, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":47}
+{"sql":"alter materialized view m detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":26}
+{"sql":"alter materialized view m detach partition p finalize, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":26}
+{"sql":"alter materialized view m add column x int, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":44}
+{"sql":"alter materialized view m detach partition p finalize, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":26}
+{"sql":"alter materialized view m drop column x, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":41}
+{"sql":"alter materialized view m detach partition p finalize, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":26}
+{"sql":"alter materialized view m set without cluster, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":47}
+{"sql":"alter materialized view m detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":26}
+{"sql":"alter materialized view m detach partition s.p, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":26}
+{"sql":"alter materialized view m add column x int, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":44}
+{"sql":"alter materialized view m detach partition s.p, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":26}
+{"sql":"alter materialized view m drop column x, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":41}
+{"sql":"alter materialized view m detach partition s.p, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":26}
+{"sql":"alter materialized view m set without cluster, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":47}
+{"sql":"alter materialized view m detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":26}
+{"sql":"alter materialized view m detach partition, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":26}
+{"sql":"alter materialized view m add column x int, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":44}
+{"sql":"alter materialized view m detach partition, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":26}
+{"sql":"alter materialized view m drop column x, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":41}
+{"sql":"alter materialized view m detach partition, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":26}
+{"sql":"alter materialized view m set without cluster, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":47}
+{"sql":"alter materialized view m attach partition p default, detach partition q","code":"42601","message":"syntax error at or near \"attach\"","position":26}
+{"sql":"alter materialized view m detach partition p, detach partition q","code":"42601","message":"syntax error at or near \"detach\"","position":26}
+{"sql":"alter materialized view if exists m attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter materialized view if exists m attach partition p for values in (1), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter materialized view if exists m add column x int, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":54}
+{"sql":"alter materialized view if exists m attach partition p for values in (1), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter materialized view if exists m drop column x, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":51}
+{"sql":"alter materialized view if exists m attach partition p for values in (1), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter materialized view if exists m set without cluster, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":57}
+{"sql":"alter materialized view if exists m attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter materialized view if exists m attach partition p for values from (1) to (2), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter materialized view if exists m add column x int, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":54}
+{"sql":"alter materialized view if exists m attach partition p for values from (1) to (2), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter materialized view if exists m drop column x, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":51}
+{"sql":"alter materialized view if exists m attach partition p for values from (1) to (2), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter materialized view if exists m set without cluster, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":57}
+{"sql":"alter materialized view if exists m attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter materialized view if exists m attach partition p default, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter materialized view if exists m add column x int, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":54}
+{"sql":"alter materialized view if exists m attach partition p default, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter materialized view if exists m drop column x, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":51}
+{"sql":"alter materialized view if exists m attach partition p default, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter materialized view if exists m set without cluster, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":57}
+{"sql":"alter materialized view if exists m attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter materialized view if exists m attach partition p for values with (modulus 2, remainder 0), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter materialized view if exists m add column x int, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":54}
+{"sql":"alter materialized view if exists m attach partition p for values with (modulus 2, remainder 0), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter materialized view if exists m drop column x, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":51}
+{"sql":"alter materialized view if exists m attach partition p for values with (modulus 2, remainder 0), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter materialized view if exists m set without cluster, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":57}
+{"sql":"alter materialized view if exists m attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter materialized view if exists m attach partition s.p default, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter materialized view if exists m add column x int, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":54}
+{"sql":"alter materialized view if exists m attach partition s.p default, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter materialized view if exists m drop column x, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":51}
+{"sql":"alter materialized view if exists m attach partition s.p default, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter materialized view if exists m set without cluster, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":57}
+{"sql":"alter materialized view if exists m attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter materialized view if exists m attach partition p, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter materialized view if exists m add column x int, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":54}
+{"sql":"alter materialized view if exists m attach partition p, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter materialized view if exists m drop column x, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":51}
+{"sql":"alter materialized view if exists m attach partition p, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter materialized view if exists m set without cluster, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":57}
+{"sql":"alter materialized view if exists m detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":36}
+{"sql":"alter materialized view if exists m detach partition p, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":36}
+{"sql":"alter materialized view if exists m add column x int, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":54}
+{"sql":"alter materialized view if exists m detach partition p, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":36}
+{"sql":"alter materialized view if exists m drop column x, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":51}
+{"sql":"alter materialized view if exists m detach partition p, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":36}
+{"sql":"alter materialized view if exists m set without cluster, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":57}
+{"sql":"alter materialized view if exists m detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":36}
+{"sql":"alter materialized view if exists m detach partition p concurrently, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":36}
+{"sql":"alter materialized view if exists m add column x int, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":54}
+{"sql":"alter materialized view if exists m detach partition p concurrently, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":36}
+{"sql":"alter materialized view if exists m drop column x, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":51}
+{"sql":"alter materialized view if exists m detach partition p concurrently, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":36}
+{"sql":"alter materialized view if exists m set without cluster, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":57}
+{"sql":"alter materialized view if exists m detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":36}
+{"sql":"alter materialized view if exists m detach partition p finalize, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":36}
+{"sql":"alter materialized view if exists m add column x int, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":54}
+{"sql":"alter materialized view if exists m detach partition p finalize, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":36}
+{"sql":"alter materialized view if exists m drop column x, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":51}
+{"sql":"alter materialized view if exists m detach partition p finalize, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":36}
+{"sql":"alter materialized view if exists m set without cluster, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":57}
+{"sql":"alter materialized view if exists m detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":36}
+{"sql":"alter materialized view if exists m detach partition s.p, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":36}
+{"sql":"alter materialized view if exists m add column x int, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":54}
+{"sql":"alter materialized view if exists m detach partition s.p, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":36}
+{"sql":"alter materialized view if exists m drop column x, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":51}
+{"sql":"alter materialized view if exists m detach partition s.p, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":36}
+{"sql":"alter materialized view if exists m set without cluster, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":57}
+{"sql":"alter materialized view if exists m detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":36}
+{"sql":"alter materialized view if exists m detach partition, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":36}
+{"sql":"alter materialized view if exists m add column x int, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":54}
+{"sql":"alter materialized view if exists m detach partition, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":36}
+{"sql":"alter materialized view if exists m drop column x, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":51}
+{"sql":"alter materialized view if exists m detach partition, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":36}
+{"sql":"alter materialized view if exists m set without cluster, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":57}
+{"sql":"alter materialized view if exists m attach partition p default, detach partition q","code":"42601","message":"syntax error at or near \"attach\"","position":36}
+{"sql":"alter materialized view if exists m detach partition p, detach partition q","code":"42601","message":"syntax error at or near \"detach\"","position":36}
+{"sql":"alter sequence s attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":17}
+{"sql":"alter sequence s attach partition p for values in (1), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":17}
+{"sql":"alter sequence s add column x int, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":35}
+{"sql":"alter sequence s attach partition p for values in (1), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":17}
+{"sql":"alter sequence s drop column x, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter sequence s attach partition p for values in (1), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":17}
+{"sql":"alter sequence s set without cluster, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":38}
+{"sql":"alter sequence s attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":17}
+{"sql":"alter sequence s attach partition p for values from (1) to (2), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":17}
+{"sql":"alter sequence s add column x int, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":35}
+{"sql":"alter sequence s attach partition p for values from (1) to (2), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":17}
+{"sql":"alter sequence s drop column x, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter sequence s attach partition p for values from (1) to (2), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":17}
+{"sql":"alter sequence s set without cluster, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":38}
+{"sql":"alter sequence s attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":17}
+{"sql":"alter sequence s attach partition p default, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":17}
+{"sql":"alter sequence s add column x int, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":35}
+{"sql":"alter sequence s attach partition p default, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":17}
+{"sql":"alter sequence s drop column x, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter sequence s attach partition p default, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":17}
+{"sql":"alter sequence s set without cluster, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":38}
+{"sql":"alter sequence s attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":17}
+{"sql":"alter sequence s attach partition p for values with (modulus 2, remainder 0), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":17}
+{"sql":"alter sequence s add column x int, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":35}
+{"sql":"alter sequence s attach partition p for values with (modulus 2, remainder 0), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":17}
+{"sql":"alter sequence s drop column x, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter sequence s attach partition p for values with (modulus 2, remainder 0), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":17}
+{"sql":"alter sequence s set without cluster, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":38}
+{"sql":"alter sequence s attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":17}
+{"sql":"alter sequence s attach partition s.p default, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":17}
+{"sql":"alter sequence s add column x int, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":35}
+{"sql":"alter sequence s attach partition s.p default, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":17}
+{"sql":"alter sequence s drop column x, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter sequence s attach partition s.p default, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":17}
+{"sql":"alter sequence s set without cluster, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":38}
+{"sql":"alter sequence s attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":17}
+{"sql":"alter sequence s attach partition p, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":17}
+{"sql":"alter sequence s add column x int, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":35}
+{"sql":"alter sequence s attach partition p, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":17}
+{"sql":"alter sequence s drop column x, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter sequence s attach partition p, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":17}
+{"sql":"alter sequence s set without cluster, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":38}
+{"sql":"alter sequence s detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":17}
+{"sql":"alter sequence s detach partition p, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":17}
+{"sql":"alter sequence s add column x int, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":35}
+{"sql":"alter sequence s detach partition p, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":17}
+{"sql":"alter sequence s drop column x, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter sequence s detach partition p, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":17}
+{"sql":"alter sequence s set without cluster, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":38}
+{"sql":"alter sequence s detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":17}
+{"sql":"alter sequence s detach partition p concurrently, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":17}
+{"sql":"alter sequence s add column x int, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":35}
+{"sql":"alter sequence s detach partition p concurrently, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":17}
+{"sql":"alter sequence s drop column x, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter sequence s detach partition p concurrently, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":17}
+{"sql":"alter sequence s set without cluster, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":38}
+{"sql":"alter sequence s detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":17}
+{"sql":"alter sequence s detach partition p finalize, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":17}
+{"sql":"alter sequence s add column x int, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":35}
+{"sql":"alter sequence s detach partition p finalize, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":17}
+{"sql":"alter sequence s drop column x, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter sequence s detach partition p finalize, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":17}
+{"sql":"alter sequence s set without cluster, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":38}
+{"sql":"alter sequence s detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":17}
+{"sql":"alter sequence s detach partition s.p, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":17}
+{"sql":"alter sequence s add column x int, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":35}
+{"sql":"alter sequence s detach partition s.p, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":17}
+{"sql":"alter sequence s drop column x, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter sequence s detach partition s.p, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":17}
+{"sql":"alter sequence s set without cluster, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":38}
+{"sql":"alter sequence s detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":17}
+{"sql":"alter sequence s detach partition, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":17}
+{"sql":"alter sequence s add column x int, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":35}
+{"sql":"alter sequence s detach partition, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":17}
+{"sql":"alter sequence s drop column x, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter sequence s detach partition, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":17}
+{"sql":"alter sequence s set without cluster, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":38}
+{"sql":"alter sequence s attach partition p default, detach partition q","code":"42601","message":"syntax error at or near \"attach\"","position":17}
+{"sql":"alter sequence s detach partition p, detach partition q","code":"42601","message":"syntax error at or near \"detach\"","position":17}
+{"sql":"alter sequence if exists s attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":27}
+{"sql":"alter sequence if exists s attach partition p for values in (1), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":27}
+{"sql":"alter sequence if exists s add column x int, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":45}
+{"sql":"alter sequence if exists s attach partition p for values in (1), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":27}
+{"sql":"alter sequence if exists s drop column x, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":42}
+{"sql":"alter sequence if exists s attach partition p for values in (1), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":27}
+{"sql":"alter sequence if exists s set without cluster, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":48}
+{"sql":"alter sequence if exists s attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":27}
+{"sql":"alter sequence if exists s attach partition p for values from (1) to (2), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":27}
+{"sql":"alter sequence if exists s add column x int, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":45}
+{"sql":"alter sequence if exists s attach partition p for values from (1) to (2), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":27}
+{"sql":"alter sequence if exists s drop column x, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":42}
+{"sql":"alter sequence if exists s attach partition p for values from (1) to (2), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":27}
+{"sql":"alter sequence if exists s set without cluster, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":48}
+{"sql":"alter sequence if exists s attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":27}
+{"sql":"alter sequence if exists s attach partition p default, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":27}
+{"sql":"alter sequence if exists s add column x int, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":45}
+{"sql":"alter sequence if exists s attach partition p default, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":27}
+{"sql":"alter sequence if exists s drop column x, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":42}
+{"sql":"alter sequence if exists s attach partition p default, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":27}
+{"sql":"alter sequence if exists s set without cluster, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":48}
+{"sql":"alter sequence if exists s attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":27}
+{"sql":"alter sequence if exists s attach partition p for values with (modulus 2, remainder 0), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":27}
+{"sql":"alter sequence if exists s add column x int, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":45}
+{"sql":"alter sequence if exists s attach partition p for values with (modulus 2, remainder 0), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":27}
+{"sql":"alter sequence if exists s drop column x, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":42}
+{"sql":"alter sequence if exists s attach partition p for values with (modulus 2, remainder 0), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":27}
+{"sql":"alter sequence if exists s set without cluster, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":48}
+{"sql":"alter sequence if exists s attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":27}
+{"sql":"alter sequence if exists s attach partition s.p default, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":27}
+{"sql":"alter sequence if exists s add column x int, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":45}
+{"sql":"alter sequence if exists s attach partition s.p default, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":27}
+{"sql":"alter sequence if exists s drop column x, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":42}
+{"sql":"alter sequence if exists s attach partition s.p default, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":27}
+{"sql":"alter sequence if exists s set without cluster, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":48}
+{"sql":"alter sequence if exists s attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":27}
+{"sql":"alter sequence if exists s attach partition p, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":27}
+{"sql":"alter sequence if exists s add column x int, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":45}
+{"sql":"alter sequence if exists s attach partition p, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":27}
+{"sql":"alter sequence if exists s drop column x, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":42}
+{"sql":"alter sequence if exists s attach partition p, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":27}
+{"sql":"alter sequence if exists s set without cluster, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":48}
+{"sql":"alter sequence if exists s detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":27}
+{"sql":"alter sequence if exists s detach partition p, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":27}
+{"sql":"alter sequence if exists s add column x int, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":45}
+{"sql":"alter sequence if exists s detach partition p, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":27}
+{"sql":"alter sequence if exists s drop column x, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":42}
+{"sql":"alter sequence if exists s detach partition p, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":27}
+{"sql":"alter sequence if exists s set without cluster, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":48}
+{"sql":"alter sequence if exists s detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":27}
+{"sql":"alter sequence if exists s detach partition p concurrently, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":27}
+{"sql":"alter sequence if exists s add column x int, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":45}
+{"sql":"alter sequence if exists s detach partition p concurrently, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":27}
+{"sql":"alter sequence if exists s drop column x, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":42}
+{"sql":"alter sequence if exists s detach partition p concurrently, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":27}
+{"sql":"alter sequence if exists s set without cluster, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":48}
+{"sql":"alter sequence if exists s detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":27}
+{"sql":"alter sequence if exists s detach partition p finalize, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":27}
+{"sql":"alter sequence if exists s add column x int, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":45}
+{"sql":"alter sequence if exists s detach partition p finalize, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":27}
+{"sql":"alter sequence if exists s drop column x, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":42}
+{"sql":"alter sequence if exists s detach partition p finalize, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":27}
+{"sql":"alter sequence if exists s set without cluster, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":48}
+{"sql":"alter sequence if exists s detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":27}
+{"sql":"alter sequence if exists s detach partition s.p, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":27}
+{"sql":"alter sequence if exists s add column x int, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":45}
+{"sql":"alter sequence if exists s detach partition s.p, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":27}
+{"sql":"alter sequence if exists s drop column x, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":42}
+{"sql":"alter sequence if exists s detach partition s.p, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":27}
+{"sql":"alter sequence if exists s set without cluster, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":48}
+{"sql":"alter sequence if exists s detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":27}
+{"sql":"alter sequence if exists s detach partition, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":27}
+{"sql":"alter sequence if exists s add column x int, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":45}
+{"sql":"alter sequence if exists s detach partition, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":27}
+{"sql":"alter sequence if exists s drop column x, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":42}
+{"sql":"alter sequence if exists s detach partition, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":27}
+{"sql":"alter sequence if exists s set without cluster, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":48}
+{"sql":"alter sequence if exists s attach partition p default, detach partition q","code":"42601","message":"syntax error at or near \"attach\"","position":27}
+{"sql":"alter sequence if exists s detach partition p, detach partition q","code":"42601","message":"syntax error at or near \"detach\"","position":27}
+{"sql":"alter index i attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"for\"","position":33}
+{"sql":"alter index i attach partition p for values in (1), add column x int","code":"42601","message":"syntax error at or near \"for\"","position":33}
+{"sql":"alter index i add column x int, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter index i attach partition p for values in (1), drop column x","code":"42601","message":"syntax error at or near \"for\"","position":33}
+{"sql":"alter index i drop column x, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":29}
+{"sql":"alter index i attach partition p for values in (1), set without cluster","code":"42601","message":"syntax error at or near \"for\"","position":33}
+{"sql":"alter index i set without cluster, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":35}
+{"sql":"alter index i attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"for\"","position":33}
+{"sql":"alter index i attach partition p for values from (1) to (2), add column x int","code":"42601","message":"syntax error at or near \"for\"","position":33}
+{"sql":"alter index i add column x int, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter index i attach partition p for values from (1) to (2), drop column x","code":"42601","message":"syntax error at or near \"for\"","position":33}
+{"sql":"alter index i drop column x, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":29}
+{"sql":"alter index i attach partition p for values from (1) to (2), set without cluster","code":"42601","message":"syntax error at or near \"for\"","position":33}
+{"sql":"alter index i set without cluster, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":35}
+{"sql":"alter index i attach partition p default","code":"42601","message":"syntax error at or near \"default\"","position":33}
+{"sql":"alter index i attach partition p default, add column x int","code":"42601","message":"syntax error at or near \"default\"","position":33}
+{"sql":"alter index i add column x int, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter index i attach partition p default, drop column x","code":"42601","message":"syntax error at or near \"default\"","position":33}
+{"sql":"alter index i drop column x, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":29}
+{"sql":"alter index i attach partition p default, set without cluster","code":"42601","message":"syntax error at or near \"default\"","position":33}
+{"sql":"alter index i set without cluster, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":35}
+{"sql":"alter index i attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"for\"","position":33}
+{"sql":"alter index i attach partition p for values with (modulus 2, remainder 0), add column x int","code":"42601","message":"syntax error at or near \"for\"","position":33}
+{"sql":"alter index i add column x int, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter index i attach partition p for values with (modulus 2, remainder 0), drop column x","code":"42601","message":"syntax error at or near \"for\"","position":33}
+{"sql":"alter index i drop column x, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":29}
+{"sql":"alter index i attach partition p for values with (modulus 2, remainder 0), set without cluster","code":"42601","message":"syntax error at or near \"for\"","position":33}
+{"sql":"alter index i set without cluster, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":35}
+{"sql":"alter index i attach partition s.p default","code":"42601","message":"syntax error at or near \"default\"","position":35}
+{"sql":"alter index i attach partition s.p default, add column x int","code":"42601","message":"syntax error at or near \"default\"","position":35}
+{"sql":"alter index i add column x int, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter index i attach partition s.p default, drop column x","code":"42601","message":"syntax error at or near \"default\"","position":35}
+{"sql":"alter index i drop column x, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":29}
+{"sql":"alter index i attach partition s.p default, set without cluster","code":"42601","message":"syntax error at or near \"default\"","position":35}
+{"sql":"alter index i set without cluster, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":35}
+{"sql":"alter index i attach partition p"}
+{"sql":"alter index i attach partition p, add column x int","code":"42601","message":"syntax error at or near \",\"","position":32}
+{"sql":"alter index i add column x int, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":32}
+{"sql":"alter index i attach partition p, drop column x","code":"42601","message":"syntax error at or near \",\"","position":32}
+{"sql":"alter index i drop column x, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":29}
+{"sql":"alter index i attach partition p, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":32}
+{"sql":"alter index i set without cluster, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":35}
+{"sql":"alter index i detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":14}
+{"sql":"alter index i detach partition p, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":14}
+{"sql":"alter index i add column x int, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter index i detach partition p, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":14}
+{"sql":"alter index i drop column x, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":29}
+{"sql":"alter index i detach partition p, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":14}
+{"sql":"alter index i set without cluster, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":35}
+{"sql":"alter index i detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":14}
+{"sql":"alter index i detach partition p concurrently, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":14}
+{"sql":"alter index i add column x int, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter index i detach partition p concurrently, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":14}
+{"sql":"alter index i drop column x, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":29}
+{"sql":"alter index i detach partition p concurrently, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":14}
+{"sql":"alter index i set without cluster, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":35}
+{"sql":"alter index i detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":14}
+{"sql":"alter index i detach partition p finalize, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":14}
+{"sql":"alter index i add column x int, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter index i detach partition p finalize, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":14}
+{"sql":"alter index i drop column x, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":29}
+{"sql":"alter index i detach partition p finalize, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":14}
+{"sql":"alter index i set without cluster, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":35}
+{"sql":"alter index i detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":14}
+{"sql":"alter index i detach partition s.p, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":14}
+{"sql":"alter index i add column x int, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter index i detach partition s.p, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":14}
+{"sql":"alter index i drop column x, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":29}
+{"sql":"alter index i detach partition s.p, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":14}
+{"sql":"alter index i set without cluster, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":35}
+{"sql":"alter index i detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":14}
+{"sql":"alter index i detach partition, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":14}
+{"sql":"alter index i add column x int, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":32}
+{"sql":"alter index i detach partition, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":14}
+{"sql":"alter index i drop column x, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":29}
+{"sql":"alter index i detach partition, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":14}
+{"sql":"alter index i set without cluster, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":35}
+{"sql":"alter index i attach partition p default, detach partition q","code":"42601","message":"syntax error at or near \"default\"","position":33}
+{"sql":"alter index i detach partition p, detach partition q","code":"42601","message":"syntax error at or near \"detach\"","position":14}
+{"sql":"alter index if exists i attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":24}
+{"sql":"alter index if exists i attach partition p for values in (1), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":24}
+{"sql":"alter index if exists i add column x int, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":42}
+{"sql":"alter index if exists i attach partition p for values in (1), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":24}
+{"sql":"alter index if exists i drop column x, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":39}
+{"sql":"alter index if exists i attach partition p for values in (1), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":24}
+{"sql":"alter index if exists i set without cluster, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":45}
+{"sql":"alter index if exists i attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":24}
+{"sql":"alter index if exists i attach partition p for values from (1) to (2), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":24}
+{"sql":"alter index if exists i add column x int, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":42}
+{"sql":"alter index if exists i attach partition p for values from (1) to (2), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":24}
+{"sql":"alter index if exists i drop column x, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":39}
+{"sql":"alter index if exists i attach partition p for values from (1) to (2), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":24}
+{"sql":"alter index if exists i set without cluster, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":45}
+{"sql":"alter index if exists i attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":24}
+{"sql":"alter index if exists i attach partition p default, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":24}
+{"sql":"alter index if exists i add column x int, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":42}
+{"sql":"alter index if exists i attach partition p default, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":24}
+{"sql":"alter index if exists i drop column x, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":39}
+{"sql":"alter index if exists i attach partition p default, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":24}
+{"sql":"alter index if exists i set without cluster, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":45}
+{"sql":"alter index if exists i attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":24}
+{"sql":"alter index if exists i attach partition p for values with (modulus 2, remainder 0), add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":24}
+{"sql":"alter index if exists i add column x int, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":42}
+{"sql":"alter index if exists i attach partition p for values with (modulus 2, remainder 0), drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":24}
+{"sql":"alter index if exists i drop column x, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":39}
+{"sql":"alter index if exists i attach partition p for values with (modulus 2, remainder 0), set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":24}
+{"sql":"alter index if exists i set without cluster, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":45}
+{"sql":"alter index if exists i attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":24}
+{"sql":"alter index if exists i attach partition s.p default, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":24}
+{"sql":"alter index if exists i add column x int, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":42}
+{"sql":"alter index if exists i attach partition s.p default, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":24}
+{"sql":"alter index if exists i drop column x, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":39}
+{"sql":"alter index if exists i attach partition s.p default, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":24}
+{"sql":"alter index if exists i set without cluster, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":45}
+{"sql":"alter index if exists i attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":24}
+{"sql":"alter index if exists i attach partition p, add column x int","code":"42601","message":"syntax error at or near \"attach\"","position":24}
+{"sql":"alter index if exists i add column x int, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":42}
+{"sql":"alter index if exists i attach partition p, drop column x","code":"42601","message":"syntax error at or near \"attach\"","position":24}
+{"sql":"alter index if exists i drop column x, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":39}
+{"sql":"alter index if exists i attach partition p, set without cluster","code":"42601","message":"syntax error at or near \"attach\"","position":24}
+{"sql":"alter index if exists i set without cluster, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":45}
+{"sql":"alter index if exists i detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":24}
+{"sql":"alter index if exists i detach partition p, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":24}
+{"sql":"alter index if exists i add column x int, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":42}
+{"sql":"alter index if exists i detach partition p, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":24}
+{"sql":"alter index if exists i drop column x, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":39}
+{"sql":"alter index if exists i detach partition p, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":24}
+{"sql":"alter index if exists i set without cluster, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":45}
+{"sql":"alter index if exists i detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":24}
+{"sql":"alter index if exists i detach partition p concurrently, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":24}
+{"sql":"alter index if exists i add column x int, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":42}
+{"sql":"alter index if exists i detach partition p concurrently, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":24}
+{"sql":"alter index if exists i drop column x, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":39}
+{"sql":"alter index if exists i detach partition p concurrently, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":24}
+{"sql":"alter index if exists i set without cluster, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":45}
+{"sql":"alter index if exists i detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":24}
+{"sql":"alter index if exists i detach partition p finalize, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":24}
+{"sql":"alter index if exists i add column x int, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":42}
+{"sql":"alter index if exists i detach partition p finalize, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":24}
+{"sql":"alter index if exists i drop column x, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":39}
+{"sql":"alter index if exists i detach partition p finalize, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":24}
+{"sql":"alter index if exists i set without cluster, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":45}
+{"sql":"alter index if exists i detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":24}
+{"sql":"alter index if exists i detach partition s.p, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":24}
+{"sql":"alter index if exists i add column x int, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":42}
+{"sql":"alter index if exists i detach partition s.p, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":24}
+{"sql":"alter index if exists i drop column x, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":39}
+{"sql":"alter index if exists i detach partition s.p, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":24}
+{"sql":"alter index if exists i set without cluster, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":45}
+{"sql":"alter index if exists i detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":24}
+{"sql":"alter index if exists i detach partition, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":24}
+{"sql":"alter index if exists i add column x int, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":42}
+{"sql":"alter index if exists i detach partition, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":24}
+{"sql":"alter index if exists i drop column x, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":39}
+{"sql":"alter index if exists i detach partition, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":24}
+{"sql":"alter index if exists i set without cluster, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":45}
+{"sql":"alter index if exists i attach partition p default, detach partition q","code":"42601","message":"syntax error at or near \"attach\"","position":24}
+{"sql":"alter index if exists i detach partition p, detach partition q","code":"42601","message":"syntax error at or near \"detach\"","position":24}
+{"sql":"alter index s.i attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"for\"","position":35}
+{"sql":"alter index s.i attach partition p for values in (1), add column x int","code":"42601","message":"syntax error at or near \"for\"","position":35}
+{"sql":"alter index s.i add column x int, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":34}
+{"sql":"alter index s.i attach partition p for values in (1), drop column x","code":"42601","message":"syntax error at or near \"for\"","position":35}
+{"sql":"alter index s.i drop column x, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":31}
+{"sql":"alter index s.i attach partition p for values in (1), set without cluster","code":"42601","message":"syntax error at or near \"for\"","position":35}
+{"sql":"alter index s.i set without cluster, attach partition p for values in (1)","code":"42601","message":"syntax error at or near \"attach\"","position":37}
+{"sql":"alter index s.i attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"for\"","position":35}
+{"sql":"alter index s.i attach partition p for values from (1) to (2), add column x int","code":"42601","message":"syntax error at or near \"for\"","position":35}
+{"sql":"alter index s.i add column x int, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":34}
+{"sql":"alter index s.i attach partition p for values from (1) to (2), drop column x","code":"42601","message":"syntax error at or near \"for\"","position":35}
+{"sql":"alter index s.i drop column x, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":31}
+{"sql":"alter index s.i attach partition p for values from (1) to (2), set without cluster","code":"42601","message":"syntax error at or near \"for\"","position":35}
+{"sql":"alter index s.i set without cluster, attach partition p for values from (1) to (2)","code":"42601","message":"syntax error at or near \"attach\"","position":37}
+{"sql":"alter index s.i attach partition p default","code":"42601","message":"syntax error at or near \"default\"","position":35}
+{"sql":"alter index s.i attach partition p default, add column x int","code":"42601","message":"syntax error at or near \"default\"","position":35}
+{"sql":"alter index s.i add column x int, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":34}
+{"sql":"alter index s.i attach partition p default, drop column x","code":"42601","message":"syntax error at or near \"default\"","position":35}
+{"sql":"alter index s.i drop column x, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":31}
+{"sql":"alter index s.i attach partition p default, set without cluster","code":"42601","message":"syntax error at or near \"default\"","position":35}
+{"sql":"alter index s.i set without cluster, attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":37}
+{"sql":"alter index s.i attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"for\"","position":35}
+{"sql":"alter index s.i attach partition p for values with (modulus 2, remainder 0), add column x int","code":"42601","message":"syntax error at or near \"for\"","position":35}
+{"sql":"alter index s.i add column x int, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":34}
+{"sql":"alter index s.i attach partition p for values with (modulus 2, remainder 0), drop column x","code":"42601","message":"syntax error at or near \"for\"","position":35}
+{"sql":"alter index s.i drop column x, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":31}
+{"sql":"alter index s.i attach partition p for values with (modulus 2, remainder 0), set without cluster","code":"42601","message":"syntax error at or near \"for\"","position":35}
+{"sql":"alter index s.i set without cluster, attach partition p for values with (modulus 2, remainder 0)","code":"42601","message":"syntax error at or near \"attach\"","position":37}
+{"sql":"alter index s.i attach partition s.p default","code":"42601","message":"syntax error at or near \"default\"","position":37}
+{"sql":"alter index s.i attach partition s.p default, add column x int","code":"42601","message":"syntax error at or near \"default\"","position":37}
+{"sql":"alter index s.i add column x int, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":34}
+{"sql":"alter index s.i attach partition s.p default, drop column x","code":"42601","message":"syntax error at or near \"default\"","position":37}
+{"sql":"alter index s.i drop column x, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":31}
+{"sql":"alter index s.i attach partition s.p default, set without cluster","code":"42601","message":"syntax error at or near \"default\"","position":37}
+{"sql":"alter index s.i set without cluster, attach partition s.p default","code":"42601","message":"syntax error at or near \"attach\"","position":37}
+{"sql":"alter index s.i attach partition p"}
+{"sql":"alter index s.i attach partition p, add column x int","code":"42601","message":"syntax error at or near \",\"","position":34}
+{"sql":"alter index s.i add column x int, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":34}
+{"sql":"alter index s.i attach partition p, drop column x","code":"42601","message":"syntax error at or near \",\"","position":34}
+{"sql":"alter index s.i drop column x, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":31}
+{"sql":"alter index s.i attach partition p, set without cluster","code":"42601","message":"syntax error at or near \",\"","position":34}
+{"sql":"alter index s.i set without cluster, attach partition p","code":"42601","message":"syntax error at or near \"attach\"","position":37}
+{"sql":"alter index s.i detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":16}
+{"sql":"alter index s.i detach partition p, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":16}
+{"sql":"alter index s.i add column x int, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":34}
+{"sql":"alter index s.i detach partition p, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":16}
+{"sql":"alter index s.i drop column x, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":31}
+{"sql":"alter index s.i detach partition p, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":16}
+{"sql":"alter index s.i set without cluster, detach partition p","code":"42601","message":"syntax error at or near \"detach\"","position":37}
+{"sql":"alter index s.i detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":16}
+{"sql":"alter index s.i detach partition p concurrently, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":16}
+{"sql":"alter index s.i add column x int, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":34}
+{"sql":"alter index s.i detach partition p concurrently, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":16}
+{"sql":"alter index s.i drop column x, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":31}
+{"sql":"alter index s.i detach partition p concurrently, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":16}
+{"sql":"alter index s.i set without cluster, detach partition p concurrently","code":"42601","message":"syntax error at or near \"detach\"","position":37}
+{"sql":"alter index s.i detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":16}
+{"sql":"alter index s.i detach partition p finalize, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":16}
+{"sql":"alter index s.i add column x int, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":34}
+{"sql":"alter index s.i detach partition p finalize, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":16}
+{"sql":"alter index s.i drop column x, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":31}
+{"sql":"alter index s.i detach partition p finalize, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":16}
+{"sql":"alter index s.i set without cluster, detach partition p finalize","code":"42601","message":"syntax error at or near \"detach\"","position":37}
+{"sql":"alter index s.i detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":16}
+{"sql":"alter index s.i detach partition s.p, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":16}
+{"sql":"alter index s.i add column x int, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":34}
+{"sql":"alter index s.i detach partition s.p, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":16}
+{"sql":"alter index s.i drop column x, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":31}
+{"sql":"alter index s.i detach partition s.p, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":16}
+{"sql":"alter index s.i set without cluster, detach partition s.p","code":"42601","message":"syntax error at or near \"detach\"","position":37}
+{"sql":"alter index s.i detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":16}
+{"sql":"alter index s.i detach partition, add column x int","code":"42601","message":"syntax error at or near \"detach\"","position":16}
+{"sql":"alter index s.i add column x int, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":34}
+{"sql":"alter index s.i detach partition, drop column x","code":"42601","message":"syntax error at or near \"detach\"","position":16}
+{"sql":"alter index s.i drop column x, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":31}
+{"sql":"alter index s.i detach partition, set without cluster","code":"42601","message":"syntax error at or near \"detach\"","position":16}
+{"sql":"alter index s.i set without cluster, detach partition","code":"42601","message":"syntax error at or near \"detach\"","position":37}
+{"sql":"alter index s.i attach partition p default, detach partition q","code":"42601","message":"syntax error at or near \"default\"","position":35}
+{"sql":"alter index s.i detach partition p, detach partition q","code":"42601","message":"syntax error at or near \"detach\"","position":16}
+{"sql":"alter table t attach partition p default; select 1"}
+{"sql":"alter table t detach partition p ,","code":"42601","message":"syntax error at or near \",\"","position":33}
+{"sql":"alter table t detach partition p concurrently finalize","code":"42601","message":"syntax error at or near \"finalize\"","position":46}
+{"sql":"alter table all in tablespace a attach partition p default","code":"42601","message":"syntax error at or near \"attach\"","position":32}
