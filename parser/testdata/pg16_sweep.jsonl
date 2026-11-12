@@ -12794,7 +12794,7 @@
 {"file":"event_trigger.sql","stmt":60,"sum":"a7b5cfce"}
 {"file":"event_trigger.sql","stmt":61,"sum":"8b098796"}
 {"file":"event_trigger.sql","stmt":62,"sum":"8d848bed"}
-{"file":"event_trigger.sql","stmt":62,"edit":[38,0," authorization"],"code":"42601","msg":"syntax error at or near \"regress_evt_user\"","pos":53,"class":"role-spec-keywords"}
+{"file":"event_trigger.sql","stmt":62,"edit":[38,0," authorization"],"code":"42601","msg":"syntax error at or near \"regress_evt_user\"","pos":53}
 {"file":"event_trigger.sql","stmt":63,"sum":"992a960f"}
 {"file":"event_trigger.sql","stmt":64,"sum":"17b1cedd"}
 {"file":"event_trigger.sql","stmt":65,"sum":"175c98eb"}
@@ -58754,9 +58754,9 @@
 {"sql":"alter table t set (toast.autovacuum_enabled = false)"}
 {"sql":"alter table t attach partition p for values in (1), add column x int","code":"42601","msg":"syntax error at or near \",\"","pos":50}
 {"sql":"alter table t detach partition p, add column x int","code":"42601","msg":"syntax error at or near \",\"","pos":32}
-{"sql":"grant r to authorization","class":"role-spec-keywords"}
-{"sql":"create schema s authorization authorization","class":"role-spec-keywords"}
-{"sql":"alter group g add user verbose","class":"role-spec-keywords"}
+{"sql":"grant r to authorization"}
+{"sql":"create schema s authorization authorization"}
+{"sql":"alter group g add user verbose"}
 {"sql":"alter role current_user rename to x","code":"42939","msg":"CURRENT_USER cannot be used as a role name here","pos":11}
 {"sql":"create role current_user","code":"42939","msg":"CURRENT_USER cannot be used as a role name here","pos":12}
 {"sql":"create user current_role","code":"42939","msg":"CURRENT_ROLE cannot be used as a role name here","pos":12}

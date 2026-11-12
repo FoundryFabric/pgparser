@@ -5934,7 +5934,7 @@ grantee:
 	;
 
 RoleSpec:
-	ColId
+	NonReservedWord
 		{
 			switch $1 {
 			case "public":

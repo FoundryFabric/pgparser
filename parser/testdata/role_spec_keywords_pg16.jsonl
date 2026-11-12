@@ -1,0 +1,1120 @@
+{"sql":"grant r to authorization"}
+{"sql":"grant r to binary"}
+{"sql":"grant r to collation"}
+{"sql":"grant r to concurrently"}
+{"sql":"grant r to cross"}
+{"sql":"grant r to current_schema"}
+{"sql":"grant r to freeze"}
+{"sql":"grant r to full"}
+{"sql":"grant r to ilike"}
+{"sql":"grant r to inner"}
+{"sql":"grant r to is"}
+{"sql":"grant r to isnull"}
+{"sql":"grant r to join"}
+{"sql":"grant r to left"}
+{"sql":"grant r to like"}
+{"sql":"grant r to natural"}
+{"sql":"grant r to notnull"}
+{"sql":"grant r to outer"}
+{"sql":"grant r to overlaps"}
+{"sql":"grant r to right"}
+{"sql":"grant r to similar"}
+{"sql":"grant r to tablesample"}
+{"sql":"grant r to verbose"}
+{"sql":"grant r to AUTHORIZATION"}
+{"sql":"grant r to \"verbose\""}
+{"sql":"grant r to select","code":"42601","message":"syntax error at or near \"select\"","position":11}
+{"sql":"grant r to name"}
+{"sql":"grant r to r"}
+{"sql":"grant r to u, authorization"}
+{"sql":"grant r to u, binary"}
+{"sql":"grant r to u, collation"}
+{"sql":"grant r to u, concurrently"}
+{"sql":"grant r to u, cross"}
+{"sql":"grant r to u, current_schema"}
+{"sql":"grant r to u, freeze"}
+{"sql":"grant r to u, full"}
+{"sql":"grant r to u, ilike"}
+{"sql":"grant r to u, inner"}
+{"sql":"grant r to u, is"}
+{"sql":"grant r to u, isnull"}
+{"sql":"grant r to u, join"}
+{"sql":"grant r to u, left"}
+{"sql":"grant r to u, like"}
+{"sql":"grant r to u, natural"}
+{"sql":"grant r to u, notnull"}
+{"sql":"grant r to u, outer"}
+{"sql":"grant r to u, overlaps"}
+{"sql":"grant r to u, right"}
+{"sql":"grant r to u, similar"}
+{"sql":"grant r to u, tablesample"}
+{"sql":"grant r to u, verbose"}
+{"sql":"grant r to u, AUTHORIZATION"}
+{"sql":"grant r to u, \"verbose\""}
+{"sql":"grant r to u, select","code":"42601","message":"syntax error at or near \"select\"","position":14}
+{"sql":"grant r to u, name"}
+{"sql":"grant r to u, r"}
+{"sql":"revoke r from authorization"}
+{"sql":"revoke r from binary"}
+{"sql":"revoke r from collation"}
+{"sql":"revoke r from concurrently"}
+{"sql":"revoke r from cross"}
+{"sql":"revoke r from current_schema"}
+{"sql":"revoke r from freeze"}
+{"sql":"revoke r from full"}
+{"sql":"revoke r from ilike"}
+{"sql":"revoke r from inner"}
+{"sql":"revoke r from is"}
+{"sql":"revoke r from isnull"}
+{"sql":"revoke r from join"}
+{"sql":"revoke r from left"}
+{"sql":"revoke r from like"}
+{"sql":"revoke r from natural"}
+{"sql":"revoke r from notnull"}
+{"sql":"revoke r from outer"}
+{"sql":"revoke r from overlaps"}
+{"sql":"revoke r from right"}
+{"sql":"revoke r from similar"}
+{"sql":"revoke r from tablesample"}
+{"sql":"revoke r from verbose"}
+{"sql":"revoke r from AUTHORIZATION"}
+{"sql":"revoke r from \"verbose\""}
+{"sql":"revoke r from select","code":"42601","message":"syntax error at or near \"select\"","position":14}
+{"sql":"revoke r from name"}
+{"sql":"revoke r from r"}
+{"sql":"grant select on t to authorization"}
+{"sql":"grant select on t to binary"}
+{"sql":"grant select on t to collation"}
+{"sql":"grant select on t to concurrently"}
+{"sql":"grant select on t to cross"}
+{"sql":"grant select on t to current_schema"}
+{"sql":"grant select on t to freeze"}
+{"sql":"grant select on t to full"}
+{"sql":"grant select on t to ilike"}
+{"sql":"grant select on t to inner"}
+{"sql":"grant select on t to is"}
+{"sql":"grant select on t to isnull"}
+{"sql":"grant select on t to join"}
+{"sql":"grant select on t to left"}
+{"sql":"grant select on t to like"}
+{"sql":"grant select on t to natural"}
+{"sql":"grant select on t to notnull"}
+{"sql":"grant select on t to outer"}
+{"sql":"grant select on t to overlaps"}
+{"sql":"grant select on t to right"}
+{"sql":"grant select on t to similar"}
+{"sql":"grant select on t to tablesample"}
+{"sql":"grant select on t to verbose"}
+{"sql":"grant select on t to AUTHORIZATION"}
+{"sql":"grant select on t to \"verbose\""}
+{"sql":"grant select on t to select","code":"42601","message":"syntax error at or near \"select\"","position":21}
+{"sql":"grant select on t to name"}
+{"sql":"grant select on t to r"}
+{"sql":"revoke select on t from authorization cascade"}
+{"sql":"revoke select on t from binary cascade"}
+{"sql":"revoke select on t from collation cascade"}
+{"sql":"revoke select on t from concurrently cascade"}
+{"sql":"revoke select on t from cross cascade"}
+{"sql":"revoke select on t from current_schema cascade"}
+{"sql":"revoke select on t from freeze cascade"}
+{"sql":"revoke select on t from full cascade"}
+{"sql":"revoke select on t from ilike cascade"}
+{"sql":"revoke select on t from inner cascade"}
+{"sql":"revoke select on t from is cascade"}
+{"sql":"revoke select on t from isnull cascade"}
+{"sql":"revoke select on t from join cascade"}
+{"sql":"revoke select on t from left cascade"}
+{"sql":"revoke select on t from like cascade"}
+{"sql":"revoke select on t from natural cascade"}
+{"sql":"revoke select on t from notnull cascade"}
+{"sql":"revoke select on t from outer cascade"}
+{"sql":"revoke select on t from overlaps cascade"}
+{"sql":"revoke select on t from right cascade"}
+{"sql":"revoke select on t from similar cascade"}
+{"sql":"revoke select on t from tablesample cascade"}
+{"sql":"revoke select on t from verbose cascade"}
+{"sql":"revoke select on t from AUTHORIZATION cascade"}
+{"sql":"revoke select on t from \"verbose\" cascade"}
+{"sql":"revoke select on t from select cascade","code":"42601","message":"syntax error at or near \"select\"","position":24}
+{"sql":"revoke select on t from name cascade"}
+{"sql":"revoke select on t from r cascade"}
+{"sql":"grant select on t to u granted by authorization"}
+{"sql":"grant select on t to u granted by binary"}
+{"sql":"grant select on t to u granted by collation"}
+{"sql":"grant select on t to u granted by concurrently"}
+{"sql":"grant select on t to u granted by cross"}
+{"sql":"grant select on t to u granted by current_schema"}
+{"sql":"grant select on t to u granted by freeze"}
+{"sql":"grant select on t to u granted by full"}
+{"sql":"grant select on t to u granted by ilike"}
+{"sql":"grant select on t to u granted by inner"}
+{"sql":"grant select on t to u granted by is"}
+{"sql":"grant select on t to u granted by isnull"}
+{"sql":"grant select on t to u granted by join"}
+{"sql":"grant select on t to u granted by left"}
+{"sql":"grant select on t to u granted by like"}
+{"sql":"grant select on t to u granted by natural"}
+{"sql":"grant select on t to u granted by notnull"}
+{"sql":"grant select on t to u granted by outer"}
+{"sql":"grant select on t to u granted by overlaps"}
+{"sql":"grant select on t to u granted by right"}
+{"sql":"grant select on t to u granted by similar"}
+{"sql":"grant select on t to u granted by tablesample"}
+{"sql":"grant select on t to u granted by verbose"}
+{"sql":"grant select on t to u granted by AUTHORIZATION"}
+{"sql":"grant select on t to u granted by \"verbose\""}
+{"sql":"grant select on t to u granted by select","code":"42601","message":"syntax error at or near \"select\"","position":34}
+{"sql":"grant select on t to u granted by name"}
+{"sql":"grant select on t to u granted by r"}
+{"sql":"grant r to u granted by authorization"}
+{"sql":"grant r to u granted by binary"}
+{"sql":"grant r to u granted by collation"}
+{"sql":"grant r to u granted by concurrently"}
+{"sql":"grant r to u granted by cross"}
+{"sql":"grant r to u granted by current_schema"}
+{"sql":"grant r to u granted by freeze"}
+{"sql":"grant r to u granted by full"}
+{"sql":"grant r to u granted by ilike"}
+{"sql":"grant r to u granted by inner"}
+{"sql":"grant r to u granted by is"}
+{"sql":"grant r to u granted by isnull"}
+{"sql":"grant r to u granted by join"}
+{"sql":"grant r to u granted by left"}
+{"sql":"grant r to u granted by like"}
+{"sql":"grant r to u granted by natural"}
+{"sql":"grant r to u granted by notnull"}
+{"sql":"grant r to u granted by outer"}
+{"sql":"grant r to u granted by overlaps"}
+{"sql":"grant r to u granted by right"}
+{"sql":"grant r to u granted by similar"}
+{"sql":"grant r to u granted by tablesample"}
+{"sql":"grant r to u granted by verbose"}
+{"sql":"grant r to u granted by AUTHORIZATION"}
+{"sql":"grant r to u granted by \"verbose\""}
+{"sql":"grant r to u granted by select","code":"42601","message":"syntax error at or near \"select\"","position":24}
+{"sql":"grant r to u granted by name"}
+{"sql":"grant r to u granted by r"}
+{"sql":"alter table t owner to authorization"}
+{"sql":"alter table t owner to binary"}
+{"sql":"alter table t owner to collation"}
+{"sql":"alter table t owner to concurrently"}
+{"sql":"alter table t owner to cross"}
+{"sql":"alter table t owner to current_schema"}
+{"sql":"alter table t owner to freeze"}
+{"sql":"alter table t owner to full"}
+{"sql":"alter table t owner to ilike"}
+{"sql":"alter table t owner to inner"}
+{"sql":"alter table t owner to is"}
+{"sql":"alter table t owner to isnull"}
+{"sql":"alter table t owner to join"}
+{"sql":"alter table t owner to left"}
+{"sql":"alter table t owner to like"}
+{"sql":"alter table t owner to natural"}
+{"sql":"alter table t owner to notnull"}
+{"sql":"alter table t owner to outer"}
+{"sql":"alter table t owner to overlaps"}
+{"sql":"alter table t owner to right"}
+{"sql":"alter table t owner to similar"}
+{"sql":"alter table t owner to tablesample"}
+{"sql":"alter table t owner to verbose"}
+{"sql":"alter table t owner to AUTHORIZATION"}
+{"sql":"alter table t owner to \"verbose\""}
+{"sql":"alter table t owner to select","code":"42601","message":"syntax error at or near \"select\"","position":23}
+{"sql":"alter table t owner to name"}
+{"sql":"alter table t owner to r"}
+{"sql":"alter function f() owner to authorization"}
+{"sql":"alter function f() owner to binary"}
+{"sql":"alter function f() owner to collation"}
+{"sql":"alter function f() owner to concurrently"}
+{"sql":"alter function f() owner to cross"}
+{"sql":"alter function f() owner to current_schema"}
+{"sql":"alter function f() owner to freeze"}
+{"sql":"alter function f() owner to full"}
+{"sql":"alter function f() owner to ilike"}
+{"sql":"alter function f() owner to inner"}
+{"sql":"alter function f() owner to is"}
+{"sql":"alter function f() owner to isnull"}
+{"sql":"alter function f() owner to join"}
+{"sql":"alter function f() owner to left"}
+{"sql":"alter function f() owner to like"}
+{"sql":"alter function f() owner to natural"}
+{"sql":"alter function f() owner to notnull"}
+{"sql":"alter function f() owner to outer"}
+{"sql":"alter function f() owner to overlaps"}
+{"sql":"alter function f() owner to right"}
+{"sql":"alter function f() owner to similar"}
+{"sql":"alter function f() owner to tablesample"}
+{"sql":"alter function f() owner to verbose"}
+{"sql":"alter function f() owner to AUTHORIZATION"}
+{"sql":"alter function f() owner to \"verbose\""}
+{"sql":"alter function f() owner to select","code":"42601","message":"syntax error at or near \"select\"","position":28}
+{"sql":"alter function f() owner to name"}
+{"sql":"alter function f() owner to r"}
+{"sql":"create schema s authorization authorization"}
+{"sql":"create schema s authorization binary"}
+{"sql":"create schema s authorization collation"}
+{"sql":"create schema s authorization concurrently"}
+{"sql":"create schema s authorization cross"}
+{"sql":"create schema s authorization current_schema"}
+{"sql":"create schema s authorization freeze"}
+{"sql":"create schema s authorization full"}
+{"sql":"create schema s authorization ilike"}
+{"sql":"create schema s authorization inner"}
+{"sql":"create schema s authorization is"}
+{"sql":"create schema s authorization isnull"}
+{"sql":"create schema s authorization join"}
+{"sql":"create schema s authorization left"}
+{"sql":"create schema s authorization like"}
+{"sql":"create schema s authorization natural"}
+{"sql":"create schema s authorization notnull"}
+{"sql":"create schema s authorization outer"}
+{"sql":"create schema s authorization overlaps"}
+{"sql":"create schema s authorization right"}
+{"sql":"create schema s authorization similar"}
+{"sql":"create schema s authorization tablesample"}
+{"sql":"create schema s authorization verbose"}
+{"sql":"create schema s authorization AUTHORIZATION"}
+{"sql":"create schema s authorization \"verbose\""}
+{"sql":"create schema s authorization select","code":"42601","message":"syntax error at or near \"select\"","position":30}
+{"sql":"create schema s authorization name"}
+{"sql":"create schema s authorization r"}
+{"sql":"create schema authorization authorization"}
+{"sql":"create schema authorization binary"}
+{"sql":"create schema authorization collation"}
+{"sql":"create schema authorization concurrently"}
+{"sql":"create schema authorization cross"}
+{"sql":"create schema authorization current_schema"}
+{"sql":"create schema authorization freeze"}
+{"sql":"create schema authorization full"}
+{"sql":"create schema authorization ilike"}
+{"sql":"create schema authorization inner"}
+{"sql":"create schema authorization is"}
+{"sql":"create schema authorization isnull"}
+{"sql":"create schema authorization join"}
+{"sql":"create schema authorization left"}
+{"sql":"create schema authorization like"}
+{"sql":"create schema authorization natural"}
+{"sql":"create schema authorization notnull"}
+{"sql":"create schema authorization outer"}
+{"sql":"create schema authorization overlaps"}
+{"sql":"create schema authorization right"}
+{"sql":"create schema authorization similar"}
+{"sql":"create schema authorization tablesample"}
+{"sql":"create schema authorization verbose"}
+{"sql":"create schema authorization AUTHORIZATION"}
+{"sql":"create schema authorization \"verbose\""}
+{"sql":"create schema authorization select","code":"42601","message":"syntax error at or near \"select\"","position":28}
+{"sql":"create schema authorization name"}
+{"sql":"create schema authorization r"}
+{"sql":"alter group g add user authorization"}
+{"sql":"alter group g add user binary"}
+{"sql":"alter group g add user collation"}
+{"sql":"alter group g add user concurrently"}
+{"sql":"alter group g add user cross"}
+{"sql":"alter group g add user current_schema"}
+{"sql":"alter group g add user freeze"}
+{"sql":"alter group g add user full"}
+{"sql":"alter group g add user ilike"}
+{"sql":"alter group g add user inner"}
+{"sql":"alter group g add user is"}
+{"sql":"alter group g add user isnull"}
+{"sql":"alter group g add user join"}
+{"sql":"alter group g add user left"}
+{"sql":"alter group g add user like"}
+{"sql":"alter group g add user natural"}
+{"sql":"alter group g add user notnull"}
+{"sql":"alter group g add user outer"}
+{"sql":"alter group g add user overlaps"}
+{"sql":"alter group g add user right"}
+{"sql":"alter group g add user similar"}
+{"sql":"alter group g add user tablesample"}
+{"sql":"alter group g add user verbose"}
+{"sql":"alter group g add user AUTHORIZATION"}
+{"sql":"alter group g add user \"verbose\""}
+{"sql":"alter group g add user select","code":"42601","message":"syntax error at or near \"select\"","position":23}
+{"sql":"alter group g add user name"}
+{"sql":"alter group g add user r"}
+{"sql":"alter group g drop user authorization, u"}
+{"sql":"alter group g drop user binary, u"}
+{"sql":"alter group g drop user collation, u"}
+{"sql":"alter group g drop user concurrently, u"}
+{"sql":"alter group g drop user cross, u"}
+{"sql":"alter group g drop user current_schema, u"}
+{"sql":"alter group g drop user freeze, u"}
+{"sql":"alter group g drop user full, u"}
+{"sql":"alter group g drop user ilike, u"}
+{"sql":"alter group g drop user inner, u"}
+{"sql":"alter group g drop user is, u"}
+{"sql":"alter group g drop user isnull, u"}
+{"sql":"alter group g drop user join, u"}
+{"sql":"alter group g drop user left, u"}
+{"sql":"alter group g drop user like, u"}
+{"sql":"alter group g drop user natural, u"}
+{"sql":"alter group g drop user notnull, u"}
+{"sql":"alter group g drop user outer, u"}
+{"sql":"alter group g drop user overlaps, u"}
+{"sql":"alter group g drop user right, u"}
+{"sql":"alter group g drop user similar, u"}
+{"sql":"alter group g drop user tablesample, u"}
+{"sql":"alter group g drop user verbose, u"}
+{"sql":"alter group g drop user AUTHORIZATION, u"}
+{"sql":"alter group g drop user \"verbose\", u"}
+{"sql":"alter group g drop user select, u","code":"42601","message":"syntax error at or near \"select\"","position":24}
+{"sql":"alter group g drop user name, u"}
+{"sql":"alter group g drop user r, u"}
+{"sql":"drop role authorization"}
+{"sql":"drop role binary"}
+{"sql":"drop role collation"}
+{"sql":"drop role concurrently"}
+{"sql":"drop role cross"}
+{"sql":"drop role current_schema"}
+{"sql":"drop role freeze"}
+{"sql":"drop role full"}
+{"sql":"drop role ilike"}
+{"sql":"drop role inner"}
+{"sql":"drop role is"}
+{"sql":"drop role isnull"}
+{"sql":"drop role join"}
+{"sql":"drop role left"}
+{"sql":"drop role like"}
+{"sql":"drop role natural"}
+{"sql":"drop role notnull"}
+{"sql":"drop role outer"}
+{"sql":"drop role overlaps"}
+{"sql":"drop role right"}
+{"sql":"drop role similar"}
+{"sql":"drop role tablesample"}
+{"sql":"drop role verbose"}
+{"sql":"drop role AUTHORIZATION"}
+{"sql":"drop role \"verbose\""}
+{"sql":"drop role select","code":"42601","message":"syntax error at or near \"select\"","position":10}
+{"sql":"drop role name"}
+{"sql":"drop role r"}
+{"sql":"drop user if exists authorization"}
+{"sql":"drop user if exists binary"}
+{"sql":"drop user if exists collation"}
+{"sql":"drop user if exists concurrently"}
+{"sql":"drop user if exists cross"}
+{"sql":"drop user if exists current_schema"}
+{"sql":"drop user if exists freeze"}
+{"sql":"drop user if exists full"}
+{"sql":"drop user if exists ilike"}
+{"sql":"drop user if exists inner"}
+{"sql":"drop user if exists is"}
+{"sql":"drop user if exists isnull"}
+{"sql":"drop user if exists join"}
+{"sql":"drop user if exists left"}
+{"sql":"drop user if exists like"}
+{"sql":"drop user if exists natural"}
+{"sql":"drop user if exists notnull"}
+{"sql":"drop user if exists outer"}
+{"sql":"drop user if exists overlaps"}
+{"sql":"drop user if exists right"}
+{"sql":"drop user if exists similar"}
+{"sql":"drop user if exists tablesample"}
+{"sql":"drop user if exists verbose"}
+{"sql":"drop user if exists AUTHORIZATION"}
+{"sql":"drop user if exists \"verbose\""}
+{"sql":"drop user if exists select","code":"42601","message":"syntax error at or near \"select\"","position":20}
+{"sql":"drop user if exists name"}
+{"sql":"drop user if exists r"}
+{"sql":"drop owned by authorization"}
+{"sql":"drop owned by binary"}
+{"sql":"drop owned by collation"}
+{"sql":"drop owned by concurrently"}
+{"sql":"drop owned by cross"}
+{"sql":"drop owned by current_schema"}
+{"sql":"drop owned by freeze"}
+{"sql":"drop owned by full"}
+{"sql":"drop owned by ilike"}
+{"sql":"drop owned by inner"}
+{"sql":"drop owned by is"}
+{"sql":"drop owned by isnull"}
+{"sql":"drop owned by join"}
+{"sql":"drop owned by left"}
+{"sql":"drop owned by like"}
+{"sql":"drop owned by natural"}
+{"sql":"drop owned by notnull"}
+{"sql":"drop owned by outer"}
+{"sql":"drop owned by overlaps"}
+{"sql":"drop owned by right"}
+{"sql":"drop owned by similar"}
+{"sql":"drop owned by tablesample"}
+{"sql":"drop owned by verbose"}
+{"sql":"drop owned by AUTHORIZATION"}
+{"sql":"drop owned by \"verbose\""}
+{"sql":"drop owned by select","code":"42601","message":"syntax error at or near \"select\"","position":14}
+{"sql":"drop owned by name"}
+{"sql":"drop owned by r"}
+{"sql":"reassign owned by authorization to u"}
+{"sql":"reassign owned by binary to u"}
+{"sql":"reassign owned by collation to u"}
+{"sql":"reassign owned by concurrently to u"}
+{"sql":"reassign owned by cross to u"}
+{"sql":"reassign owned by current_schema to u"}
+{"sql":"reassign owned by freeze to u"}
+{"sql":"reassign owned by full to u"}
+{"sql":"reassign owned by ilike to u"}
+{"sql":"reassign owned by inner to u"}
+{"sql":"reassign owned by is to u"}
+{"sql":"reassign owned by isnull to u"}
+{"sql":"reassign owned by join to u"}
+{"sql":"reassign owned by left to u"}
+{"sql":"reassign owned by like to u"}
+{"sql":"reassign owned by natural to u"}
+{"sql":"reassign owned by notnull to u"}
+{"sql":"reassign owned by outer to u"}
+{"sql":"reassign owned by overlaps to u"}
+{"sql":"reassign owned by right to u"}
+{"sql":"reassign owned by similar to u"}
+{"sql":"reassign owned by tablesample to u"}
+{"sql":"reassign owned by verbose to u"}
+{"sql":"reassign owned by AUTHORIZATION to u"}
+{"sql":"reassign owned by \"verbose\" to u"}
+{"sql":"reassign owned by select to u","code":"42601","message":"syntax error at or near \"select\"","position":18}
+{"sql":"reassign owned by name to u"}
+{"sql":"reassign owned by r to u"}
+{"sql":"reassign owned by u to authorization"}
+{"sql":"reassign owned by u to binary"}
+{"sql":"reassign owned by u to collation"}
+{"sql":"reassign owned by u to concurrently"}
+{"sql":"reassign owned by u to cross"}
+{"sql":"reassign owned by u to current_schema"}
+{"sql":"reassign owned by u to freeze"}
+{"sql":"reassign owned by u to full"}
+{"sql":"reassign owned by u to ilike"}
+{"sql":"reassign owned by u to inner"}
+{"sql":"reassign owned by u to is"}
+{"sql":"reassign owned by u to isnull"}
+{"sql":"reassign owned by u to join"}
+{"sql":"reassign owned by u to left"}
+{"sql":"reassign owned by u to like"}
+{"sql":"reassign owned by u to natural"}
+{"sql":"reassign owned by u to notnull"}
+{"sql":"reassign owned by u to outer"}
+{"sql":"reassign owned by u to overlaps"}
+{"sql":"reassign owned by u to right"}
+{"sql":"reassign owned by u to similar"}
+{"sql":"reassign owned by u to tablesample"}
+{"sql":"reassign owned by u to verbose"}
+{"sql":"reassign owned by u to AUTHORIZATION"}
+{"sql":"reassign owned by u to \"verbose\""}
+{"sql":"reassign owned by u to select","code":"42601","message":"syntax error at or near \"select\"","position":23}
+{"sql":"reassign owned by u to name"}
+{"sql":"reassign owned by u to r"}
+{"sql":"create user mapping for authorization server s"}
+{"sql":"create user mapping for binary server s"}
+{"sql":"create user mapping for collation server s"}
+{"sql":"create user mapping for concurrently server s"}
+{"sql":"create user mapping for cross server s"}
+{"sql":"create user mapping for current_schema server s"}
+{"sql":"create user mapping for freeze server s"}
+{"sql":"create user mapping for full server s"}
+{"sql":"create user mapping for ilike server s"}
+{"sql":"create user mapping for inner server s"}
+{"sql":"create user mapping for is server s"}
+{"sql":"create user mapping for isnull server s"}
+{"sql":"create user mapping for join server s"}
+{"sql":"create user mapping for left server s"}
+{"sql":"create user mapping for like server s"}
+{"sql":"create user mapping for natural server s"}
+{"sql":"create user mapping for notnull server s"}
+{"sql":"create user mapping for outer server s"}
+{"sql":"create user mapping for overlaps server s"}
+{"sql":"create user mapping for right server s"}
+{"sql":"create user mapping for similar server s"}
+{"sql":"create user mapping for tablesample server s"}
+{"sql":"create user mapping for verbose server s"}
+{"sql":"create user mapping for AUTHORIZATION server s"}
+{"sql":"create user mapping for \"verbose\" server s"}
+{"sql":"create user mapping for select server s","code":"42601","message":"syntax error at or near \"select\"","position":24}
+{"sql":"create user mapping for name server s"}
+{"sql":"create user mapping for r server s"}
+{"sql":"drop user mapping for authorization server s"}
+{"sql":"drop user mapping for binary server s"}
+{"sql":"drop user mapping for collation server s"}
+{"sql":"drop user mapping for concurrently server s"}
+{"sql":"drop user mapping for cross server s"}
+{"sql":"drop user mapping for current_schema server s"}
+{"sql":"drop user mapping for freeze server s"}
+{"sql":"drop user mapping for full server s"}
+{"sql":"drop user mapping for ilike server s"}
+{"sql":"drop user mapping for inner server s"}
+{"sql":"drop user mapping for is server s"}
+{"sql":"drop user mapping for isnull server s"}
+{"sql":"drop user mapping for join server s"}
+{"sql":"drop user mapping for left server s"}
+{"sql":"drop user mapping for like server s"}
+{"sql":"drop user mapping for natural server s"}
+{"sql":"drop user mapping for notnull server s"}
+{"sql":"drop user mapping for outer server s"}
+{"sql":"drop user mapping for overlaps server s"}
+{"sql":"drop user mapping for right server s"}
+{"sql":"drop user mapping for similar server s"}
+{"sql":"drop user mapping for tablesample server s"}
+{"sql":"drop user mapping for verbose server s"}
+{"sql":"drop user mapping for AUTHORIZATION server s"}
+{"sql":"drop user mapping for \"verbose\" server s"}
+{"sql":"drop user mapping for select server s","code":"42601","message":"syntax error at or near \"select\"","position":22}
+{"sql":"drop user mapping for name server s"}
+{"sql":"drop user mapping for r server s"}
+{"sql":"alter default privileges for role authorization grant select on tables to u"}
+{"sql":"alter default privileges for role binary grant select on tables to u"}
+{"sql":"alter default privileges for role collation grant select on tables to u"}
+{"sql":"alter default privileges for role concurrently grant select on tables to u"}
+{"sql":"alter default privileges for role cross grant select on tables to u"}
+{"sql":"alter default privileges for role current_schema grant select on tables to u"}
+{"sql":"alter default privileges for role freeze grant select on tables to u"}
+{"sql":"alter default privileges for role full grant select on tables to u"}
+{"sql":"alter default privileges for role ilike grant select on tables to u"}
+{"sql":"alter default privileges for role inner grant select on tables to u"}
+{"sql":"alter default privileges for role is grant select on tables to u"}
+{"sql":"alter default privileges for role isnull grant select on tables to u"}
+{"sql":"alter default privileges for role join grant select on tables to u"}
+{"sql":"alter default privileges for role left grant select on tables to u"}
+{"sql":"alter default privileges for role like grant select on tables to u"}
+{"sql":"alter default privileges for role natural grant select on tables to u"}
+{"sql":"alter default privileges for role notnull grant select on tables to u"}
+{"sql":"alter default privileges for role outer grant select on tables to u"}
+{"sql":"alter default privileges for role overlaps grant select on tables to u"}
+{"sql":"alter default privileges for role right grant select on tables to u"}
+{"sql":"alter default privileges for role similar grant select on tables to u"}
+{"sql":"alter default privileges for role tablesample grant select on tables to u"}
+{"sql":"alter default privileges for role verbose grant select on tables to u"}
+{"sql":"alter default privileges for role AUTHORIZATION grant select on tables to u"}
+{"sql":"alter default privileges for role \"verbose\" grant select on tables to u"}
+{"sql":"alter default privileges for role select grant select on tables to u","code":"42601","message":"syntax error at or near \"select\"","position":34}
+{"sql":"alter default privileges for role name grant select on tables to u"}
+{"sql":"alter default privileges for role r grant select on tables to u"}
+{"sql":"alter default privileges grant select on tables to authorization"}
+{"sql":"alter default privileges grant select on tables to binary"}
+{"sql":"alter default privileges grant select on tables to collation"}
+{"sql":"alter default privileges grant select on tables to concurrently"}
+{"sql":"alter default privileges grant select on tables to cross"}
+{"sql":"alter default privileges grant select on tables to current_schema"}
+{"sql":"alter default privileges grant select on tables to freeze"}
+{"sql":"alter default privileges grant select on tables to full"}
+{"sql":"alter default privileges grant select on tables to ilike"}
+{"sql":"alter default privileges grant select on tables to inner"}
+{"sql":"alter default privileges grant select on tables to is"}
+{"sql":"alter default privileges grant select on tables to isnull"}
+{"sql":"alter default privileges grant select on tables to join"}
+{"sql":"alter default privileges grant select on tables to left"}
+{"sql":"alter default privileges grant select on tables to like"}
+{"sql":"alter default privileges grant select on tables to natural"}
+{"sql":"alter default privileges grant select on tables to notnull"}
+{"sql":"alter default privileges grant select on tables to outer"}
+{"sql":"alter default privileges grant select on tables to overlaps"}
+{"sql":"alter default privileges grant select on tables to right"}
+{"sql":"alter default privileges grant select on tables to similar"}
+{"sql":"alter default privileges grant select on tables to tablesample"}
+{"sql":"alter default privileges grant select on tables to verbose"}
+{"sql":"alter default privileges grant select on tables to AUTHORIZATION"}
+{"sql":"alter default privileges grant select on tables to \"verbose\""}
+{"sql":"alter default privileges grant select on tables to select","code":"42601","message":"syntax error at or near \"select\"","position":51}
+{"sql":"alter default privileges grant select on tables to name"}
+{"sql":"alter default privileges grant select on tables to r"}
+{"sql":"create policy p on t to authorization"}
+{"sql":"create policy p on t to binary"}
+{"sql":"create policy p on t to collation"}
+{"sql":"create policy p on t to concurrently"}
+{"sql":"create policy p on t to cross"}
+{"sql":"create policy p on t to current_schema"}
+{"sql":"create policy p on t to freeze"}
+{"sql":"create policy p on t to full"}
+{"sql":"create policy p on t to ilike"}
+{"sql":"create policy p on t to inner"}
+{"sql":"create policy p on t to is"}
+{"sql":"create policy p on t to isnull"}
+{"sql":"create policy p on t to join"}
+{"sql":"create policy p on t to left"}
+{"sql":"create policy p on t to like"}
+{"sql":"create policy p on t to natural"}
+{"sql":"create policy p on t to notnull"}
+{"sql":"create policy p on t to outer"}
+{"sql":"create policy p on t to overlaps"}
+{"sql":"create policy p on t to right"}
+{"sql":"create policy p on t to similar"}
+{"sql":"create policy p on t to tablesample"}
+{"sql":"create policy p on t to verbose"}
+{"sql":"create policy p on t to AUTHORIZATION"}
+{"sql":"create policy p on t to \"verbose\""}
+{"sql":"create policy p on t to select","code":"42601","message":"syntax error at or near \"select\"","position":24}
+{"sql":"create policy p on t to name"}
+{"sql":"create policy p on t to r"}
+{"sql":"alter policy p on t to authorization"}
+{"sql":"alter policy p on t to binary"}
+{"sql":"alter policy p on t to collation"}
+{"sql":"alter policy p on t to concurrently"}
+{"sql":"alter policy p on t to cross"}
+{"sql":"alter policy p on t to current_schema"}
+{"sql":"alter policy p on t to freeze"}
+{"sql":"alter policy p on t to full"}
+{"sql":"alter policy p on t to ilike"}
+{"sql":"alter policy p on t to inner"}
+{"sql":"alter policy p on t to is"}
+{"sql":"alter policy p on t to isnull"}
+{"sql":"alter policy p on t to join"}
+{"sql":"alter policy p on t to left"}
+{"sql":"alter policy p on t to like"}
+{"sql":"alter policy p on t to natural"}
+{"sql":"alter policy p on t to notnull"}
+{"sql":"alter policy p on t to outer"}
+{"sql":"alter policy p on t to overlaps"}
+{"sql":"alter policy p on t to right"}
+{"sql":"alter policy p on t to similar"}
+{"sql":"alter policy p on t to tablesample"}
+{"sql":"alter policy p on t to verbose"}
+{"sql":"alter policy p on t to AUTHORIZATION"}
+{"sql":"alter policy p on t to \"verbose\""}
+{"sql":"alter policy p on t to select","code":"42601","message":"syntax error at or near \"select\"","position":23}
+{"sql":"alter policy p on t to name"}
+{"sql":"alter policy p on t to r"}
+{"sql":"alter role authorization with login"}
+{"sql":"alter role binary with login"}
+{"sql":"alter role collation with login"}
+{"sql":"alter role concurrently with login"}
+{"sql":"alter role cross with login"}
+{"sql":"alter role current_schema with login"}
+{"sql":"alter role freeze with login"}
+{"sql":"alter role full with login"}
+{"sql":"alter role ilike with login"}
+{"sql":"alter role inner with login"}
+{"sql":"alter role is with login"}
+{"sql":"alter role isnull with login"}
+{"sql":"alter role join with login"}
+{"sql":"alter role left with login"}
+{"sql":"alter role like with login"}
+{"sql":"alter role natural with login"}
+{"sql":"alter role notnull with login"}
+{"sql":"alter role outer with login"}
+{"sql":"alter role overlaps with login"}
+{"sql":"alter role right with login"}
+{"sql":"alter role similar with login"}
+{"sql":"alter role tablesample with login"}
+{"sql":"alter role verbose with login"}
+{"sql":"alter role AUTHORIZATION with login"}
+{"sql":"alter role \"verbose\" with login"}
+{"sql":"alter role select with login","code":"42601","message":"syntax error at or near \"select\"","position":11}
+{"sql":"alter role name with login"}
+{"sql":"alter role r with login"}
+{"sql":"alter role authorization"}
+{"sql":"alter role binary"}
+{"sql":"alter role collation"}
+{"sql":"alter role concurrently"}
+{"sql":"alter role cross"}
+{"sql":"alter role current_schema"}
+{"sql":"alter role freeze"}
+{"sql":"alter role full"}
+{"sql":"alter role ilike"}
+{"sql":"alter role inner"}
+{"sql":"alter role is"}
+{"sql":"alter role isnull"}
+{"sql":"alter role join"}
+{"sql":"alter role left"}
+{"sql":"alter role like"}
+{"sql":"alter role natural"}
+{"sql":"alter role notnull"}
+{"sql":"alter role outer"}
+{"sql":"alter role overlaps"}
+{"sql":"alter role right"}
+{"sql":"alter role similar"}
+{"sql":"alter role tablesample"}
+{"sql":"alter role verbose"}
+{"sql":"alter role AUTHORIZATION"}
+{"sql":"alter role \"verbose\""}
+{"sql":"alter role select","code":"42601","message":"syntax error at or near \"select\"","position":11}
+{"sql":"alter role name"}
+{"sql":"alter role r"}
+{"sql":"alter user authorization set a = 1"}
+{"sql":"alter user binary set a = 1"}
+{"sql":"alter user collation set a = 1"}
+{"sql":"alter user concurrently set a = 1"}
+{"sql":"alter user cross set a = 1"}
+{"sql":"alter user current_schema set a = 1"}
+{"sql":"alter user freeze set a = 1"}
+{"sql":"alter user full set a = 1"}
+{"sql":"alter user ilike set a = 1"}
+{"sql":"alter user inner set a = 1"}
+{"sql":"alter user is set a = 1"}
+{"sql":"alter user isnull set a = 1"}
+{"sql":"alter user join set a = 1"}
+{"sql":"alter user left set a = 1"}
+{"sql":"alter user like set a = 1"}
+{"sql":"alter user natural set a = 1"}
+{"sql":"alter user notnull set a = 1"}
+{"sql":"alter user outer set a = 1"}
+{"sql":"alter user overlaps set a = 1"}
+{"sql":"alter user right set a = 1"}
+{"sql":"alter user similar set a = 1"}
+{"sql":"alter user tablesample set a = 1"}
+{"sql":"alter user verbose set a = 1"}
+{"sql":"alter user AUTHORIZATION set a = 1"}
+{"sql":"alter user \"verbose\" set a = 1"}
+{"sql":"alter user select set a = 1","code":"42601","message":"syntax error at or near \"select\"","position":11}
+{"sql":"alter user name set a = 1"}
+{"sql":"alter user r set a = 1"}
+{"sql":"alter role authorization reset all"}
+{"sql":"alter role binary reset all"}
+{"sql":"alter role collation reset all"}
+{"sql":"alter role concurrently reset all"}
+{"sql":"alter role cross reset all"}
+{"sql":"alter role current_schema reset all"}
+{"sql":"alter role freeze reset all"}
+{"sql":"alter role full reset all"}
+{"sql":"alter role ilike reset all"}
+{"sql":"alter role inner reset all"}
+{"sql":"alter role is reset all"}
+{"sql":"alter role isnull reset all"}
+{"sql":"alter role join reset all"}
+{"sql":"alter role left reset all"}
+{"sql":"alter role like reset all"}
+{"sql":"alter role natural reset all"}
+{"sql":"alter role notnull reset all"}
+{"sql":"alter role outer reset all"}
+{"sql":"alter role overlaps reset all"}
+{"sql":"alter role right reset all"}
+{"sql":"alter role similar reset all"}
+{"sql":"alter role tablesample reset all"}
+{"sql":"alter role verbose reset all"}
+{"sql":"alter role AUTHORIZATION reset all"}
+{"sql":"alter role \"verbose\" reset all"}
+{"sql":"alter role select reset all","code":"42601","message":"syntax error at or near \"select\"","position":11}
+{"sql":"alter role name reset all"}
+{"sql":"alter role r reset all"}
+{"sql":"create role r in role authorization"}
+{"sql":"create role r in role binary"}
+{"sql":"create role r in role collation"}
+{"sql":"create role r in role concurrently"}
+{"sql":"create role r in role cross"}
+{"sql":"create role r in role current_schema"}
+{"sql":"create role r in role freeze"}
+{"sql":"create role r in role full"}
+{"sql":"create role r in role ilike"}
+{"sql":"create role r in role inner"}
+{"sql":"create role r in role is"}
+{"sql":"create role r in role isnull"}
+{"sql":"create role r in role join"}
+{"sql":"create role r in role left"}
+{"sql":"create role r in role like"}
+{"sql":"create role r in role natural"}
+{"sql":"create role r in role notnull"}
+{"sql":"create role r in role outer"}
+{"sql":"create role r in role overlaps"}
+{"sql":"create role r in role right"}
+{"sql":"create role r in role similar"}
+{"sql":"create role r in role tablesample"}
+{"sql":"create role r in role verbose"}
+{"sql":"create role r in role AUTHORIZATION"}
+{"sql":"create role r in role \"verbose\""}
+{"sql":"create role r in role select","code":"42601","message":"syntax error at or near \"select\"","position":22}
+{"sql":"create role r in role name"}
+{"sql":"create role r in role r"}
+{"sql":"create role r role authorization"}
+{"sql":"create role r role binary"}
+{"sql":"create role r role collation"}
+{"sql":"create role r role concurrently"}
+{"sql":"create role r role cross"}
+{"sql":"create role r role current_schema"}
+{"sql":"create role r role freeze"}
+{"sql":"create role r role full"}
+{"sql":"create role r role ilike"}
+{"sql":"create role r role inner"}
+{"sql":"create role r role is"}
+{"sql":"create role r role isnull"}
+{"sql":"create role r role join"}
+{"sql":"create role r role left"}
+{"sql":"create role r role like"}
+{"sql":"create role r role natural"}
+{"sql":"create role r role notnull"}
+{"sql":"create role r role outer"}
+{"sql":"create role r role overlaps"}
+{"sql":"create role r role right"}
+{"sql":"create role r role similar"}
+{"sql":"create role r role tablesample"}
+{"sql":"create role r role verbose"}
+{"sql":"create role r role AUTHORIZATION"}
+{"sql":"create role r role \"verbose\""}
+{"sql":"create role r role select","code":"42601","message":"syntax error at or near \"select\"","position":19}
+{"sql":"create role r role name"}
+{"sql":"create role r role r"}
+{"sql":"create role r admin authorization"}
+{"sql":"create role r admin binary"}
+{"sql":"create role r admin collation"}
+{"sql":"create role r admin concurrently"}
+{"sql":"create role r admin cross"}
+{"sql":"create role r admin current_schema"}
+{"sql":"create role r admin freeze"}
+{"sql":"create role r admin full"}
+{"sql":"create role r admin ilike"}
+{"sql":"create role r admin inner"}
+{"sql":"create role r admin is"}
+{"sql":"create role r admin isnull"}
+{"sql":"create role r admin join"}
+{"sql":"create role r admin left"}
+{"sql":"create role r admin like"}
+{"sql":"create role r admin natural"}
+{"sql":"create role r admin notnull"}
+{"sql":"create role r admin outer"}
+{"sql":"create role r admin overlaps"}
+{"sql":"create role r admin right"}
+{"sql":"create role r admin similar"}
+{"sql":"create role r admin tablesample"}
+{"sql":"create role r admin verbose"}
+{"sql":"create role r admin AUTHORIZATION"}
+{"sql":"create role r admin \"verbose\""}
+{"sql":"create role r admin select","code":"42601","message":"syntax error at or near \"select\"","position":20}
+{"sql":"create role r admin name"}
+{"sql":"create role r admin r"}
+{"sql":"alter tablespace x owner to authorization"}
+{"sql":"alter tablespace x owner to binary"}
+{"sql":"alter tablespace x owner to collation"}
+{"sql":"alter tablespace x owner to concurrently"}
+{"sql":"alter tablespace x owner to cross"}
+{"sql":"alter tablespace x owner to current_schema"}
+{"sql":"alter tablespace x owner to freeze"}
+{"sql":"alter tablespace x owner to full"}
+{"sql":"alter tablespace x owner to ilike"}
+{"sql":"alter tablespace x owner to inner"}
+{"sql":"alter tablespace x owner to is"}
+{"sql":"alter tablespace x owner to isnull"}
+{"sql":"alter tablespace x owner to join"}
+{"sql":"alter tablespace x owner to left"}
+{"sql":"alter tablespace x owner to like"}
+{"sql":"alter tablespace x owner to natural"}
+{"sql":"alter tablespace x owner to notnull"}
+{"sql":"alter tablespace x owner to outer"}
+{"sql":"alter tablespace x owner to overlaps"}
+{"sql":"alter tablespace x owner to right"}
+{"sql":"alter tablespace x owner to similar"}
+{"sql":"alter tablespace x owner to tablesample"}
+{"sql":"alter tablespace x owner to verbose"}
+{"sql":"alter tablespace x owner to AUTHORIZATION"}
+{"sql":"alter tablespace x owner to \"verbose\""}
+{"sql":"alter tablespace x owner to select","code":"42601","message":"syntax error at or near \"select\"","position":28}
+{"sql":"alter tablespace x owner to name"}
+{"sql":"alter tablespace x owner to r"}
+{"sql":"create tablespace x owner authorization location 'y'"}
+{"sql":"create tablespace x owner binary location 'y'"}
+{"sql":"create tablespace x owner collation location 'y'"}
+{"sql":"create tablespace x owner concurrently location 'y'"}
+{"sql":"create tablespace x owner cross location 'y'"}
+{"sql":"create tablespace x owner current_schema location 'y'"}
+{"sql":"create tablespace x owner freeze location 'y'"}
+{"sql":"create tablespace x owner full location 'y'"}
+{"sql":"create tablespace x owner ilike location 'y'"}
+{"sql":"create tablespace x owner inner location 'y'"}
+{"sql":"create tablespace x owner is location 'y'"}
+{"sql":"create tablespace x owner isnull location 'y'"}
+{"sql":"create tablespace x owner join location 'y'"}
+{"sql":"create tablespace x owner left location 'y'"}
+{"sql":"create tablespace x owner like location 'y'"}
+{"sql":"create tablespace x owner natural location 'y'"}
+{"sql":"create tablespace x owner notnull location 'y'"}
+{"sql":"create tablespace x owner outer location 'y'"}
+{"sql":"create tablespace x owner overlaps location 'y'"}
+{"sql":"create tablespace x owner right location 'y'"}
+{"sql":"create tablespace x owner similar location 'y'"}
+{"sql":"create tablespace x owner tablesample location 'y'"}
+{"sql":"create tablespace x owner verbose location 'y'"}
+{"sql":"create tablespace x owner AUTHORIZATION location 'y'"}
+{"sql":"create tablespace x owner \"verbose\" location 'y'"}
+{"sql":"create tablespace x owner select location 'y'","code":"42601","message":"syntax error at or near \"select\"","position":26}
+{"sql":"create tablespace x owner name location 'y'"}
+{"sql":"create tablespace x owner r location 'y'"}
+{"sql":"set role authorization"}
+{"sql":"set role binary"}
+{"sql":"set role collation"}
+{"sql":"set role concurrently"}
+{"sql":"set role cross"}
+{"sql":"set role current_schema"}
+{"sql":"set role freeze"}
+{"sql":"set role full"}
+{"sql":"set role ilike"}
+{"sql":"set role inner"}
+{"sql":"set role is"}
+{"sql":"set role isnull"}
+{"sql":"set role join"}
+{"sql":"set role left"}
+{"sql":"set role like"}
+{"sql":"set role natural"}
+{"sql":"set role notnull"}
+{"sql":"set role outer"}
+{"sql":"set role overlaps"}
+{"sql":"set role right"}
+{"sql":"set role similar"}
+{"sql":"set role tablesample"}
+{"sql":"set role verbose"}
+{"sql":"set role AUTHORIZATION"}
+{"sql":"set role \"verbose\""}
+{"sql":"set role select","code":"42601","message":"syntax error at or near \"select\"","position":9}
+{"sql":"set role name"}
+{"sql":"set role r"}
+{"sql":"set session authorization authorization"}
+{"sql":"set session authorization binary"}
+{"sql":"set session authorization collation"}
+{"sql":"set session authorization concurrently"}
+{"sql":"set session authorization cross"}
+{"sql":"set session authorization current_schema"}
+{"sql":"set session authorization freeze"}
+{"sql":"set session authorization full"}
+{"sql":"set session authorization ilike"}
+{"sql":"set session authorization inner"}
+{"sql":"set session authorization is"}
+{"sql":"set session authorization isnull"}
+{"sql":"set session authorization join"}
+{"sql":"set session authorization left"}
+{"sql":"set session authorization like"}
+{"sql":"set session authorization natural"}
+{"sql":"set session authorization notnull"}
+{"sql":"set session authorization outer"}
+{"sql":"set session authorization overlaps"}
+{"sql":"set session authorization right"}
+{"sql":"set session authorization similar"}
+{"sql":"set session authorization tablesample"}
+{"sql":"set session authorization verbose"}
+{"sql":"set session authorization AUTHORIZATION"}
+{"sql":"set session authorization \"verbose\""}
+{"sql":"set session authorization select","code":"42601","message":"syntax error at or near \"select\"","position":26}
+{"sql":"set session authorization name"}
+{"sql":"set session authorization r"}
+{"sql":"grant r to authorization with admin option"}
+{"sql":"grant r to binary with admin option"}
+{"sql":"grant r to collation with admin option"}
+{"sql":"grant r to concurrently with admin option"}
+{"sql":"grant r to cross with admin option"}
+{"sql":"grant r to current_schema with admin option"}
+{"sql":"grant r to freeze with admin option"}
+{"sql":"grant r to full with admin option"}
+{"sql":"grant r to ilike with admin option"}
+{"sql":"grant r to inner with admin option"}
+{"sql":"grant r to is with admin option"}
+{"sql":"grant r to isnull with admin option"}
+{"sql":"grant r to join with admin option"}
+{"sql":"grant r to left with admin option"}
+{"sql":"grant r to like with admin option"}
+{"sql":"grant r to natural with admin option"}
+{"sql":"grant r to notnull with admin option"}
+{"sql":"grant r to outer with admin option"}
+{"sql":"grant r to overlaps with admin option"}
+{"sql":"grant r to right with admin option"}
+{"sql":"grant r to similar with admin option"}
+{"sql":"grant r to tablesample with admin option"}
+{"sql":"grant r to verbose with admin option"}
+{"sql":"grant r to AUTHORIZATION with admin option"}
+{"sql":"grant r to \"verbose\" with admin option"}
+{"sql":"grant r to select with admin option","code":"42601","message":"syntax error at or near \"select\"","position":11}
+{"sql":"grant r to name with admin option"}
+{"sql":"grant r to r with admin option"}
+{"sql":"alter group authorization add user u"}
+{"sql":"alter group binary add user u"}
+{"sql":"alter group collation add user u"}
+{"sql":"alter group concurrently add user u"}
+{"sql":"alter group cross add user u"}
+{"sql":"alter group current_schema add user u"}
+{"sql":"alter group freeze add user u"}
+{"sql":"alter group full add user u"}
+{"sql":"alter group ilike add user u"}
+{"sql":"alter group inner add user u"}
+{"sql":"alter group is add user u"}
+{"sql":"alter group isnull add user u"}
+{"sql":"alter group join add user u"}
+{"sql":"alter group left add user u"}
+{"sql":"alter group like add user u"}
+{"sql":"alter group natural add user u"}
+{"sql":"alter group notnull add user u"}
+{"sql":"alter group outer add user u"}
+{"sql":"alter group overlaps add user u"}
+{"sql":"alter group right add user u"}
+{"sql":"alter group similar add user u"}
+{"sql":"alter group tablesample add user u"}
+{"sql":"alter group verbose add user u"}
+{"sql":"alter group AUTHORIZATION add user u"}
+{"sql":"alter group \"verbose\" add user u"}
+{"sql":"alter group select add user u","code":"42601","message":"syntax error at or near \"select\"","position":12}
+{"sql":"alter group name add user u"}
+{"sql":"alter group r add user u"}
+{"sql":"alter role authorization rename to x"}
+{"sql":"alter role binary rename to x"}
+{"sql":"alter role collation rename to x"}
+{"sql":"alter role concurrently rename to x"}
+{"sql":"alter role cross rename to x"}
+{"sql":"alter role current_schema rename to x"}
+{"sql":"alter role freeze rename to x"}
+{"sql":"alter role full rename to x"}
+{"sql":"alter role ilike rename to x"}
+{"sql":"alter role inner rename to x"}
+{"sql":"alter role is rename to x"}
+{"sql":"alter role isnull rename to x"}
+{"sql":"alter role join rename to x"}
+{"sql":"alter role left rename to x"}
+{"sql":"alter role like rename to x"}
+{"sql":"alter role natural rename to x"}
+{"sql":"alter role notnull rename to x"}
+{"sql":"alter role outer rename to x"}
+{"sql":"alter role overlaps rename to x"}
+{"sql":"alter role right rename to x"}
+{"sql":"alter role similar rename to x"}
+{"sql":"alter role tablesample rename to x"}
+{"sql":"alter role verbose rename to x"}
+{"sql":"alter role AUTHORIZATION rename to x"}
+{"sql":"alter role \"verbose\" rename to x"}
+{"sql":"alter role select rename to x","code":"42601","message":"syntax error at or near \"select\"","position":11}
+{"sql":"alter role name rename to x"}
+{"sql":"alter role r rename to x"}
+{"sql":"create role authorization"}
+{"sql":"create role binary"}
+{"sql":"create role collation"}
+{"sql":"create role concurrently"}
+{"sql":"create role cross"}
+{"sql":"create role current_schema"}
+{"sql":"create role freeze"}
+{"sql":"create role full"}
+{"sql":"create role ilike"}
+{"sql":"create role inner"}
+{"sql":"create role is"}
+{"sql":"create role isnull"}
+{"sql":"create role join"}
+{"sql":"create role left"}
+{"sql":"create role like"}
+{"sql":"create role natural"}
+{"sql":"create role notnull"}
+{"sql":"create role outer"}
+{"sql":"create role overlaps"}
+{"sql":"create role right"}
+{"sql":"create role similar"}
+{"sql":"create role tablesample"}
+{"sql":"create role verbose"}
+{"sql":"create role AUTHORIZATION"}
+{"sql":"create role \"verbose\""}
+{"sql":"create role select","code":"42601","message":"syntax error at or near \"select\"","position":12}
+{"sql":"create role name"}
+{"sql":"create role r"}
+{"sql":"comment on role authorization is 'x'","code":"42601","message":"syntax error at or near \"authorization\"","position":16}
+{"sql":"comment on role binary is 'x'","code":"42601","message":"syntax error at or near \"binary\"","position":16}
+{"sql":"comment on role collation is 'x'","code":"42601","message":"syntax error at or near \"collation\"","position":16}
+{"sql":"comment on role concurrently is 'x'","code":"42601","message":"syntax error at or near \"concurrently\"","position":16}
+{"sql":"comment on role cross is 'x'","code":"42601","message":"syntax error at or near \"cross\"","position":16}
+{"sql":"comment on role current_schema is 'x'","code":"42601","message":"syntax error at or near \"current_schema\"","position":16}
+{"sql":"comment on role freeze is 'x'","code":"42601","message":"syntax error at or near \"freeze\"","position":16}
+{"sql":"comment on role full is 'x'","code":"42601","message":"syntax error at or near \"full\"","position":16}
+{"sql":"comment on role ilike is 'x'","code":"42601","message":"syntax error at or near \"ilike\"","position":16}
+{"sql":"comment on role inner is 'x'","code":"42601","message":"syntax error at or near \"inner\"","position":16}
+{"sql":"comment on role is is 'x'","code":"42601","message":"syntax error at or near \"is\"","position":16}
+{"sql":"comment on role isnull is 'x'","code":"42601","message":"syntax error at or near \"isnull\"","position":16}
+{"sql":"comment on role join is 'x'","code":"42601","message":"syntax error at or near \"join\"","position":16}
+{"sql":"comment on role left is 'x'","code":"42601","message":"syntax error at or near \"left\"","position":16}
+{"sql":"comment on role like is 'x'","code":"42601","message":"syntax error at or near \"like\"","position":16}
+{"sql":"comment on role natural is 'x'","code":"42601","message":"syntax error at or near \"natural\"","position":16}
+{"sql":"comment on role notnull is 'x'","code":"42601","message":"syntax error at or near \"notnull\"","position":16}
+{"sql":"comment on role outer is 'x'","code":"42601","message":"syntax error at or near \"outer\"","position":16}
+{"sql":"comment on role overlaps is 'x'","code":"42601","message":"syntax error at or near \"overlaps\"","position":16}
+{"sql":"comment on role right is 'x'","code":"42601","message":"syntax error at or near \"right\"","position":16}
+{"sql":"comment on role similar is 'x'","code":"42601","message":"syntax error at or near \"similar\"","position":16}
+{"sql":"comment on role tablesample is 'x'","code":"42601","message":"syntax error at or near \"tablesample\"","position":16}
+{"sql":"comment on role verbose is 'x'","code":"42601","message":"syntax error at or near \"verbose\"","position":16}
+{"sql":"comment on role AUTHORIZATION is 'x'","code":"42601","message":"syntax error at or near \"AUTHORIZATION\"","position":16}
+{"sql":"comment on role \"verbose\" is 'x'"}
+{"sql":"comment on role select is 'x'","code":"42601","message":"syntax error at or near \"select\"","position":16}
+{"sql":"comment on role name is 'x'"}
+{"sql":"comment on role r is 'x'"}

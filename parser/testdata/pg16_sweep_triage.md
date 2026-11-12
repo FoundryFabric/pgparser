@@ -94,7 +94,7 @@ L a feature's grammar.
 | alter-column-optional-keyword (fixed) | 2 | 7 (0/5/2) | refuses `ALTER a SET (...)`, `ALTER a SET GENERATED` without COLUMN | `alter_table_cmd` `ALTER opt_column ColId` | no | S |
 | alter-role-no-options (fixed) | 2 | 4 (0/2/2) | refuses `ALTER ROLE r` | `AlterRoleStmt` `opt_with AlterOptRoleList` | no | S |
 | reindex-optional-name (fixed) | 2 | 4 (1/0/3) | refuses `REINDEX SYSTEM`, `REINDEX DATABASE` | `ReindexStmt` `opt_single_name` | no | S |
-| role-spec-keywords | 2 | 4 (0/1/3) | refuses a type_func_name keyword as a role | `RoleSpec: NonReservedWord` | no | S |
+| role-spec-keywords (fixed) | 2 | 4 (0/1/3) | refuses a type_func_name keyword as a role | `RoleSpec: NonReservedWord` | no | S |
 | copy-generic-options (fixed) | 2 | 4 (0/2/2) | refuses a reserved keyword as a COPY option name; accepts DEFAULT as its argument | `copy_generic_opt_elem: ColLabel copy_generic_opt_arg` | no | S |
 | alter-database-refresh-collation (fixed) | 2 | 3 (0/0/3) | refuses `ALTER DATABASE x REFRESH COLLATION VERSION` | `AlterDatabaseRefreshCollStmt` | no | S |
 | column-options-qualified-name (fixed) | 2 | 3 (0/1/2) | refuses `ALTER COLUMN a SET (x.y = 1)` | `alter_table_cmd` SET/RESET `reloptions` (`reloption_elem`) | no | S |
@@ -445,13 +445,17 @@ REINDEX SYSTEM and REINDEX DATABASE now take PostgreSQL 16's
 `opt_single_name`, so the name may be left out (`ReindexStmt.Name` is empty).
 All 4 agree.
 
-### role-spec-keywords (risk 2, 4)
+### role-spec-keywords (risk 2, 4; fixed)
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
 | `grant r to authorization` | accepts | 42601 syntax error at or near "authorization" at 11 |
 | `create schema s authorization authorization` | accepts | 42601 syntax error at or near "authorization" at 30 |
 | `alter group g add user verbose` | accepts | 42601 syntax error at or near "verbose" at 23 |
+
+`RoleSpec` is now `NonReservedWord`, as PostgreSQL 16's is, so a
+type_func_name keyword (`authorization`, `verbose`, `left` and the rest) is a
+role wherever a role is taken. All 4 agree.
 
 ### copy-generic-options (risk 2, 4; fixed)
 
