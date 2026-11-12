@@ -14291,11 +14291,10 @@ opt_instead:
 CreatePLangStmt:
 	CREATE opt_or_replace opt_trusted opt_procedural LANGUAGE name
 		{
-			/* Parameterless form - creates extension */
-			$$ = &nodes.CreatePLangStmt{
-				Replace:   $2,
-				Plname:    $6,
-				Pltrusted: $3,
+			/* Without a handler, CREATE LANGUAGE is CREATE EXTENSION; TRUSTED is ignored. */
+			$$ = &nodes.CreateExtensionStmt{
+				Extname:     $6,
+				IfNotExists: $2,
 			}
 		}
 	| CREATE opt_or_replace opt_trusted opt_procedural LANGUAGE name

@@ -661,6 +661,18 @@ is a column's default length; it now clears it. The 17 trees that changed
 match libpg_query's. `testdata/const_bit_pg16.jsonl` pins 123 statements;
 all agree.
 
+### create-language-extension (tree; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `create language l` | `CreateExtensionStmt` `l` | `CreatePLangStmt` `l`, no handler |
+| `create or replace trusted procedural language l` | `CreateExtensionStmt` `l`, if_not_exists | `CreatePLangStmt` `l`, replace, trusted |
+
+CREATE LANGUAGE without a handler now builds a `CreateExtensionStmt`, OR
+REPLACE as its IF NOT EXISTS, TRUSTED dropped. The 81 trees that changed
+match libpg_query's. `testdata/create_language_pg16.jsonl` pins 395
+statements; all agree.
+
 ## Rerunning
 
 ```

@@ -1,0 +1,395 @@
+{"sql":"create language l"}
+{"sql":"create language l handler h"}
+{"sql":"create language l handler h inline i validator v"}
+{"sql":"create language l handler s.h no validator"}
+{"sql":"create language l handler","code":"42601","message":"syntax error at end of input","position":25}
+{"sql":"create language l x","code":"42601","message":"syntax error at or near \"x\"","position":18}
+{"sql":"create language l;"}
+{"sql":"create language \"L\""}
+{"sql":"create language \"L\" handler h"}
+{"sql":"create language \"L\" handler h inline i validator v"}
+{"sql":"create language \"L\" handler s.h no validator"}
+{"sql":"create language \"L\" handler","code":"42601","message":"syntax error at end of input","position":27}
+{"sql":"create language \"L\" x","code":"42601","message":"syntax error at or near \"x\"","position":20}
+{"sql":"create language \"L\";"}
+{"sql":"create language plpgsql"}
+{"sql":"create language plpgsql handler h"}
+{"sql":"create language plpgsql handler h inline i validator v"}
+{"sql":"create language plpgsql handler s.h no validator"}
+{"sql":"create language plpgsql handler","code":"42601","message":"syntax error at end of input","position":31}
+{"sql":"create language plpgsql x","code":"42601","message":"syntax error at or near \"x\"","position":24}
+{"sql":"create language plpgsql;"}
+{"sql":"create language language"}
+{"sql":"create language language handler h"}
+{"sql":"create language language handler h inline i validator v"}
+{"sql":"create language language handler s.h no validator"}
+{"sql":"create language language handler","code":"42601","message":"syntax error at end of input","position":32}
+{"sql":"create language language x","code":"42601","message":"syntax error at or near \"x\"","position":25}
+{"sql":"create language language;"}
+{"sql":"create language s.l","code":"42601","message":"syntax error at or near \".\"","position":17}
+{"sql":"create language s.l handler h","code":"42601","message":"syntax error at or near \".\"","position":17}
+{"sql":"create language s.l handler h inline i validator v","code":"42601","message":"syntax error at or near \".\"","position":17}
+{"sql":"create language s.l handler s.h no validator","code":"42601","message":"syntax error at or near \".\"","position":17}
+{"sql":"create language s.l handler","code":"42601","message":"syntax error at or near \".\"","position":17}
+{"sql":"create language s.l x","code":"42601","message":"syntax error at or near \".\"","position":17}
+{"sql":"create language s.l;","code":"42601","message":"syntax error at or near \".\"","position":17}
+{"sql":"create language 'l'","code":"42601","message":"syntax error at or near \"'l'\"","position":16}
+{"sql":"create language 'l' handler h","code":"42601","message":"syntax error at or near \"'l'\"","position":16}
+{"sql":"create language 'l' handler h inline i validator v","code":"42601","message":"syntax error at or near \"'l'\"","position":16}
+{"sql":"create language 'l' handler s.h no validator","code":"42601","message":"syntax error at or near \"'l'\"","position":16}
+{"sql":"create language 'l' handler","code":"42601","message":"syntax error at or near \"'l'\"","position":16}
+{"sql":"create language 'l' x","code":"42601","message":"syntax error at or near \"'l'\"","position":16}
+{"sql":"create language 'l';","code":"42601","message":"syntax error at or near \"'l'\"","position":16}
+{"sql":"create language ","code":"42601","message":"syntax error at end of input","position":16}
+{"sql":"create language  handler h","code":"42601","message":"syntax error at or near \"h\"","position":25}
+{"sql":"create language  handler h inline i validator v","code":"42601","message":"syntax error at or near \"h\"","position":25}
+{"sql":"create language  handler s.h no validator","code":"42601","message":"syntax error at or near \"s\"","position":25}
+{"sql":"create language  handler"}
+{"sql":"create language  x"}
+{"sql":"create language ;","code":"42601","message":"syntax error at or near \";\"","position":16}
+{"sql":"create procedural language l"}
+{"sql":"create procedural language l handler h"}
+{"sql":"create procedural language l handler h inline i validator v"}
+{"sql":"create procedural language l handler s.h no validator"}
+{"sql":"create procedural language l handler","code":"42601","message":"syntax error at end of input","position":36}
+{"sql":"create procedural language l x","code":"42601","message":"syntax error at or near \"x\"","position":29}
+{"sql":"create procedural language l;"}
+{"sql":"create procedural language \"L\""}
+{"sql":"create procedural language \"L\" handler h"}
+{"sql":"create procedural language \"L\" handler h inline i validator v"}
+{"sql":"create procedural language \"L\" handler s.h no validator"}
+{"sql":"create procedural language \"L\" handler","code":"42601","message":"syntax error at end of input","position":38}
+{"sql":"create procedural language \"L\" x","code":"42601","message":"syntax error at or near \"x\"","position":31}
+{"sql":"create procedural language \"L\";"}
+{"sql":"create procedural language plpgsql"}
+{"sql":"create procedural language plpgsql handler h"}
+{"sql":"create procedural language plpgsql handler h inline i validator v"}
+{"sql":"create procedural language plpgsql handler s.h no validator"}
+{"sql":"create procedural language plpgsql handler","code":"42601","message":"syntax error at end of input","position":42}
+{"sql":"create procedural language plpgsql x","code":"42601","message":"syntax error at or near \"x\"","position":35}
+{"sql":"create procedural language plpgsql;"}
+{"sql":"create procedural language language"}
+{"sql":"create procedural language language handler h"}
+{"sql":"create procedural language language handler h inline i validator v"}
+{"sql":"create procedural language language handler s.h no validator"}
+{"sql":"create procedural language language handler","code":"42601","message":"syntax error at end of input","position":43}
+{"sql":"create procedural language language x","code":"42601","message":"syntax error at or near \"x\"","position":36}
+{"sql":"create procedural language language;"}
+{"sql":"create procedural language s.l","code":"42601","message":"syntax error at or near \".\"","position":28}
+{"sql":"create procedural language s.l handler h","code":"42601","message":"syntax error at or near \".\"","position":28}
+{"sql":"create procedural language s.l handler h inline i validator v","code":"42601","message":"syntax error at or near \".\"","position":28}
+{"sql":"create procedural language s.l handler s.h no validator","code":"42601","message":"syntax error at or near \".\"","position":28}
+{"sql":"create procedural language s.l handler","code":"42601","message":"syntax error at or near \".\"","position":28}
+{"sql":"create procedural language s.l x","code":"42601","message":"syntax error at or near \".\"","position":28}
+{"sql":"create procedural language s.l;","code":"42601","message":"syntax error at or near \".\"","position":28}
+{"sql":"create procedural language 'l'","code":"42601","message":"syntax error at or near \"'l'\"","position":27}
+{"sql":"create procedural language 'l' handler h","code":"42601","message":"syntax error at or near \"'l'\"","position":27}
+{"sql":"create procedural language 'l' handler h inline i validator v","code":"42601","message":"syntax error at or near \"'l'\"","position":27}
+{"sql":"create procedural language 'l' handler s.h no validator","code":"42601","message":"syntax error at or near \"'l'\"","position":27}
+{"sql":"create procedural language 'l' handler","code":"42601","message":"syntax error at or near \"'l'\"","position":27}
+{"sql":"create procedural language 'l' x","code":"42601","message":"syntax error at or near \"'l'\"","position":27}
+{"sql":"create procedural language 'l';","code":"42601","message":"syntax error at or near \"'l'\"","position":27}
+{"sql":"create procedural language ","code":"42601","message":"syntax error at end of input","position":27}
+{"sql":"create procedural language  handler h","code":"42601","message":"syntax error at or near \"h\"","position":36}
+{"sql":"create procedural language  handler h inline i validator v","code":"42601","message":"syntax error at or near \"h\"","position":36}
+{"sql":"create procedural language  handler s.h no validator","code":"42601","message":"syntax error at or near \"s\"","position":36}
+{"sql":"create procedural language  handler"}
+{"sql":"create procedural language  x"}
+{"sql":"create procedural language ;","code":"42601","message":"syntax error at or near \";\"","position":27}
+{"sql":"create trusted language l"}
+{"sql":"create trusted language l handler h"}
+{"sql":"create trusted language l handler h inline i validator v"}
+{"sql":"create trusted language l handler s.h no validator"}
+{"sql":"create trusted language l handler","code":"42601","message":"syntax error at end of input","position":33}
+{"sql":"create trusted language l x","code":"42601","message":"syntax error at or near \"x\"","position":26}
+{"sql":"create trusted language l;"}
+{"sql":"create trusted language \"L\""}
+{"sql":"create trusted language \"L\" handler h"}
+{"sql":"create trusted language \"L\" handler h inline i validator v"}
+{"sql":"create trusted language \"L\" handler s.h no validator"}
+{"sql":"create trusted language \"L\" handler","code":"42601","message":"syntax error at end of input","position":35}
+{"sql":"create trusted language \"L\" x","code":"42601","message":"syntax error at or near \"x\"","position":28}
+{"sql":"create trusted language \"L\";"}
+{"sql":"create trusted language plpgsql"}
+{"sql":"create trusted language plpgsql handler h"}
+{"sql":"create trusted language plpgsql handler h inline i validator v"}
+{"sql":"create trusted language plpgsql handler s.h no validator"}
+{"sql":"create trusted language plpgsql handler","code":"42601","message":"syntax error at end of input","position":39}
+{"sql":"create trusted language plpgsql x","code":"42601","message":"syntax error at or near \"x\"","position":32}
+{"sql":"create trusted language plpgsql;"}
+{"sql":"create trusted language language"}
+{"sql":"create trusted language language handler h"}
+{"sql":"create trusted language language handler h inline i validator v"}
+{"sql":"create trusted language language handler s.h no validator"}
+{"sql":"create trusted language language handler","code":"42601","message":"syntax error at end of input","position":40}
+{"sql":"create trusted language language x","code":"42601","message":"syntax error at or near \"x\"","position":33}
+{"sql":"create trusted language language;"}
+{"sql":"create trusted language s.l","code":"42601","message":"syntax error at or near \".\"","position":25}
+{"sql":"create trusted language s.l handler h","code":"42601","message":"syntax error at or near \".\"","position":25}
+{"sql":"create trusted language s.l handler h inline i validator v","code":"42601","message":"syntax error at or near \".\"","position":25}
+{"sql":"create trusted language s.l handler s.h no validator","code":"42601","message":"syntax error at or near \".\"","position":25}
+{"sql":"create trusted language s.l handler","code":"42601","message":"syntax error at or near \".\"","position":25}
+{"sql":"create trusted language s.l x","code":"42601","message":"syntax error at or near \".\"","position":25}
+{"sql":"create trusted language s.l;","code":"42601","message":"syntax error at or near \".\"","position":25}
+{"sql":"create trusted language 'l'","code":"42601","message":"syntax error at or near \"'l'\"","position":24}
+{"sql":"create trusted language 'l' handler h","code":"42601","message":"syntax error at or near \"'l'\"","position":24}
+{"sql":"create trusted language 'l' handler h inline i validator v","code":"42601","message":"syntax error at or near \"'l'\"","position":24}
+{"sql":"create trusted language 'l' handler s.h no validator","code":"42601","message":"syntax error at or near \"'l'\"","position":24}
+{"sql":"create trusted language 'l' handler","code":"42601","message":"syntax error at or near \"'l'\"","position":24}
+{"sql":"create trusted language 'l' x","code":"42601","message":"syntax error at or near \"'l'\"","position":24}
+{"sql":"create trusted language 'l';","code":"42601","message":"syntax error at or near \"'l'\"","position":24}
+{"sql":"create trusted language ","code":"42601","message":"syntax error at end of input","position":24}
+{"sql":"create trusted language  handler h","code":"42601","message":"syntax error at or near \"h\"","position":33}
+{"sql":"create trusted language  handler h inline i validator v","code":"42601","message":"syntax error at or near \"h\"","position":33}
+{"sql":"create trusted language  handler s.h no validator","code":"42601","message":"syntax error at or near \"s\"","position":33}
+{"sql":"create trusted language  handler"}
+{"sql":"create trusted language  x"}
+{"sql":"create trusted language ;","code":"42601","message":"syntax error at or near \";\"","position":24}
+{"sql":"create trusted procedural language l"}
+{"sql":"create trusted procedural language l handler h"}
+{"sql":"create trusted procedural language l handler h inline i validator v"}
+{"sql":"create trusted procedural language l handler s.h no validator"}
+{"sql":"create trusted procedural language l handler","code":"42601","message":"syntax error at end of input","position":44}
+{"sql":"create trusted procedural language l x","code":"42601","message":"syntax error at or near \"x\"","position":37}
+{"sql":"create trusted procedural language l;"}
+{"sql":"create trusted procedural language \"L\""}
+{"sql":"create trusted procedural language \"L\" handler h"}
+{"sql":"create trusted procedural language \"L\" handler h inline i validator v"}
+{"sql":"create trusted procedural language \"L\" handler s.h no validator"}
+{"sql":"create trusted procedural language \"L\" handler","code":"42601","message":"syntax error at end of input","position":46}
+{"sql":"create trusted procedural language \"L\" x","code":"42601","message":"syntax error at or near \"x\"","position":39}
+{"sql":"create trusted procedural language \"L\";"}
+{"sql":"create trusted procedural language plpgsql"}
+{"sql":"create trusted procedural language plpgsql handler h"}
+{"sql":"create trusted procedural language plpgsql handler h inline i validator v"}
+{"sql":"create trusted procedural language plpgsql handler s.h no validator"}
+{"sql":"create trusted procedural language plpgsql handler","code":"42601","message":"syntax error at end of input","position":50}
+{"sql":"create trusted procedural language plpgsql x","code":"42601","message":"syntax error at or near \"x\"","position":43}
+{"sql":"create trusted procedural language plpgsql;"}
+{"sql":"create trusted procedural language language"}
+{"sql":"create trusted procedural language language handler h"}
+{"sql":"create trusted procedural language language handler h inline i validator v"}
+{"sql":"create trusted procedural language language handler s.h no validator"}
+{"sql":"create trusted procedural language language handler","code":"42601","message":"syntax error at end of input","position":51}
+{"sql":"create trusted procedural language language x","code":"42601","message":"syntax error at or near \"x\"","position":44}
+{"sql":"create trusted procedural language language;"}
+{"sql":"create trusted procedural language s.l","code":"42601","message":"syntax error at or near \".\"","position":36}
+{"sql":"create trusted procedural language s.l handler h","code":"42601","message":"syntax error at or near \".\"","position":36}
+{"sql":"create trusted procedural language s.l handler h inline i validator v","code":"42601","message":"syntax error at or near \".\"","position":36}
+{"sql":"create trusted procedural language s.l handler s.h no validator","code":"42601","message":"syntax error at or near \".\"","position":36}
+{"sql":"create trusted procedural language s.l handler","code":"42601","message":"syntax error at or near \".\"","position":36}
+{"sql":"create trusted procedural language s.l x","code":"42601","message":"syntax error at or near \".\"","position":36}
+{"sql":"create trusted procedural language s.l;","code":"42601","message":"syntax error at or near \".\"","position":36}
+{"sql":"create trusted procedural language 'l'","code":"42601","message":"syntax error at or near \"'l'\"","position":35}
+{"sql":"create trusted procedural language 'l' handler h","code":"42601","message":"syntax error at or near \"'l'\"","position":35}
+{"sql":"create trusted procedural language 'l' handler h inline i validator v","code":"42601","message":"syntax error at or near \"'l'\"","position":35}
+{"sql":"create trusted procedural language 'l' handler s.h no validator","code":"42601","message":"syntax error at or near \"'l'\"","position":35}
+{"sql":"create trusted procedural language 'l' handler","code":"42601","message":"syntax error at or near \"'l'\"","position":35}
+{"sql":"create trusted procedural language 'l' x","code":"42601","message":"syntax error at or near \"'l'\"","position":35}
+{"sql":"create trusted procedural language 'l';","code":"42601","message":"syntax error at or near \"'l'\"","position":35}
+{"sql":"create trusted procedural language ","code":"42601","message":"syntax error at end of input","position":35}
+{"sql":"create trusted procedural language  handler h","code":"42601","message":"syntax error at or near \"h\"","position":44}
+{"sql":"create trusted procedural language  handler h inline i validator v","code":"42601","message":"syntax error at or near \"h\"","position":44}
+{"sql":"create trusted procedural language  handler s.h no validator","code":"42601","message":"syntax error at or near \"s\"","position":44}
+{"sql":"create trusted procedural language  handler"}
+{"sql":"create trusted procedural language  x"}
+{"sql":"create trusted procedural language ;","code":"42601","message":"syntax error at or near \";\"","position":35}
+{"sql":"create or replace language l"}
+{"sql":"create or replace language l handler h"}
+{"sql":"create or replace language l handler h inline i validator v"}
+{"sql":"create or replace language l handler s.h no validator"}
+{"sql":"create or replace language l handler","code":"42601","message":"syntax error at end of input","position":36}
+{"sql":"create or replace language l x","code":"42601","message":"syntax error at or near \"x\"","position":29}
+{"sql":"create or replace language l;"}
+{"sql":"create or replace language \"L\""}
+{"sql":"create or replace language \"L\" handler h"}
+{"sql":"create or replace language \"L\" handler h inline i validator v"}
+{"sql":"create or replace language \"L\" handler s.h no validator"}
+{"sql":"create or replace language \"L\" handler","code":"42601","message":"syntax error at end of input","position":38}
+{"sql":"create or replace language \"L\" x","code":"42601","message":"syntax error at or near \"x\"","position":31}
+{"sql":"create or replace language \"L\";"}
+{"sql":"create or replace language plpgsql"}
+{"sql":"create or replace language plpgsql handler h"}
+{"sql":"create or replace language plpgsql handler h inline i validator v"}
+{"sql":"create or replace language plpgsql handler s.h no validator"}
+{"sql":"create or replace language plpgsql handler","code":"42601","message":"syntax error at end of input","position":42}
+{"sql":"create or replace language plpgsql x","code":"42601","message":"syntax error at or near \"x\"","position":35}
+{"sql":"create or replace language plpgsql;"}
+{"sql":"create or replace language language"}
+{"sql":"create or replace language language handler h"}
+{"sql":"create or replace language language handler h inline i validator v"}
+{"sql":"create or replace language language handler s.h no validator"}
+{"sql":"create or replace language language handler","code":"42601","message":"syntax error at end of input","position":43}
+{"sql":"create or replace language language x","code":"42601","message":"syntax error at or near \"x\"","position":36}
+{"sql":"create or replace language language;"}
+{"sql":"create or replace language s.l","code":"42601","message":"syntax error at or near \".\"","position":28}
+{"sql":"create or replace language s.l handler h","code":"42601","message":"syntax error at or near \".\"","position":28}
+{"sql":"create or replace language s.l handler h inline i validator v","code":"42601","message":"syntax error at or near \".\"","position":28}
+{"sql":"create or replace language s.l handler s.h no validator","code":"42601","message":"syntax error at or near \".\"","position":28}
+{"sql":"create or replace language s.l handler","code":"42601","message":"syntax error at or near \".\"","position":28}
+{"sql":"create or replace language s.l x","code":"42601","message":"syntax error at or near \".\"","position":28}
+{"sql":"create or replace language s.l;","code":"42601","message":"syntax error at or near \".\"","position":28}
+{"sql":"create or replace language 'l'","code":"42601","message":"syntax error at or near \"'l'\"","position":27}
+{"sql":"create or replace language 'l' handler h","code":"42601","message":"syntax error at or near \"'l'\"","position":27}
+{"sql":"create or replace language 'l' handler h inline i validator v","code":"42601","message":"syntax error at or near \"'l'\"","position":27}
+{"sql":"create or replace language 'l' handler s.h no validator","code":"42601","message":"syntax error at or near \"'l'\"","position":27}
+{"sql":"create or replace language 'l' handler","code":"42601","message":"syntax error at or near \"'l'\"","position":27}
+{"sql":"create or replace language 'l' x","code":"42601","message":"syntax error at or near \"'l'\"","position":27}
+{"sql":"create or replace language 'l';","code":"42601","message":"syntax error at or near \"'l'\"","position":27}
+{"sql":"create or replace language ","code":"42601","message":"syntax error at end of input","position":27}
+{"sql":"create or replace language  handler h","code":"42601","message":"syntax error at or near \"h\"","position":36}
+{"sql":"create or replace language  handler h inline i validator v","code":"42601","message":"syntax error at or near \"h\"","position":36}
+{"sql":"create or replace language  handler s.h no validator","code":"42601","message":"syntax error at or near \"s\"","position":36}
+{"sql":"create or replace language  handler"}
+{"sql":"create or replace language  x"}
+{"sql":"create or replace language ;","code":"42601","message":"syntax error at or near \";\"","position":27}
+{"sql":"create or replace procedural language l"}
+{"sql":"create or replace procedural language l handler h"}
+{"sql":"create or replace procedural language l handler h inline i validator v"}
+{"sql":"create or replace procedural language l handler s.h no validator"}
+{"sql":"create or replace procedural language l handler","code":"42601","message":"syntax error at end of input","position":47}
+{"sql":"create or replace procedural language l x","code":"42601","message":"syntax error at or near \"x\"","position":40}
+{"sql":"create or replace procedural language l;"}
+{"sql":"create or replace procedural language \"L\""}
+{"sql":"create or replace procedural language \"L\" handler h"}
+{"sql":"create or replace procedural language \"L\" handler h inline i validator v"}
+{"sql":"create or replace procedural language \"L\" handler s.h no validator"}
+{"sql":"create or replace procedural language \"L\" handler","code":"42601","message":"syntax error at end of input","position":49}
+{"sql":"create or replace procedural language \"L\" x","code":"42601","message":"syntax error at or near \"x\"","position":42}
+{"sql":"create or replace procedural language \"L\";"}
+{"sql":"create or replace procedural language plpgsql"}
+{"sql":"create or replace procedural language plpgsql handler h"}
+{"sql":"create or replace procedural language plpgsql handler h inline i validator v"}
+{"sql":"create or replace procedural language plpgsql handler s.h no validator"}
+{"sql":"create or replace procedural language plpgsql handler","code":"42601","message":"syntax error at end of input","position":53}
+{"sql":"create or replace procedural language plpgsql x","code":"42601","message":"syntax error at or near \"x\"","position":46}
+{"sql":"create or replace procedural language plpgsql;"}
+{"sql":"create or replace procedural language language"}
+{"sql":"create or replace procedural language language handler h"}
+{"sql":"create or replace procedural language language handler h inline i validator v"}
+{"sql":"create or replace procedural language language handler s.h no validator"}
+{"sql":"create or replace procedural language language handler","code":"42601","message":"syntax error at end of input","position":54}
+{"sql":"create or replace procedural language language x","code":"42601","message":"syntax error at or near \"x\"","position":47}
+{"sql":"create or replace procedural language language;"}
+{"sql":"create or replace procedural language s.l","code":"42601","message":"syntax error at or near \".\"","position":39}
+{"sql":"create or replace procedural language s.l handler h","code":"42601","message":"syntax error at or near \".\"","position":39}
+{"sql":"create or replace procedural language s.l handler h inline i validator v","code":"42601","message":"syntax error at or near \".\"","position":39}
+{"sql":"create or replace procedural language s.l handler s.h no validator","code":"42601","message":"syntax error at or near \".\"","position":39}
+{"sql":"create or replace procedural language s.l handler","code":"42601","message":"syntax error at or near \".\"","position":39}
+{"sql":"create or replace procedural language s.l x","code":"42601","message":"syntax error at or near \".\"","position":39}
+{"sql":"create or replace procedural language s.l;","code":"42601","message":"syntax error at or near \".\"","position":39}
+{"sql":"create or replace procedural language 'l'","code":"42601","message":"syntax error at or near \"'l'\"","position":38}
+{"sql":"create or replace procedural language 'l' handler h","code":"42601","message":"syntax error at or near \"'l'\"","position":38}
+{"sql":"create or replace procedural language 'l' handler h inline i validator v","code":"42601","message":"syntax error at or near \"'l'\"","position":38}
+{"sql":"create or replace procedural language 'l' handler s.h no validator","code":"42601","message":"syntax error at or near \"'l'\"","position":38}
+{"sql":"create or replace procedural language 'l' handler","code":"42601","message":"syntax error at or near \"'l'\"","position":38}
+{"sql":"create or replace procedural language 'l' x","code":"42601","message":"syntax error at or near \"'l'\"","position":38}
+{"sql":"create or replace procedural language 'l';","code":"42601","message":"syntax error at or near \"'l'\"","position":38}
+{"sql":"create or replace procedural language ","code":"42601","message":"syntax error at end of input","position":38}
+{"sql":"create or replace procedural language  handler h","code":"42601","message":"syntax error at or near \"h\"","position":47}
+{"sql":"create or replace procedural language  handler h inline i validator v","code":"42601","message":"syntax error at or near \"h\"","position":47}
+{"sql":"create or replace procedural language  handler s.h no validator","code":"42601","message":"syntax error at or near \"s\"","position":47}
+{"sql":"create or replace procedural language  handler"}
+{"sql":"create or replace procedural language  x"}
+{"sql":"create or replace procedural language ;","code":"42601","message":"syntax error at or near \";\"","position":38}
+{"sql":"create or replace trusted language l"}
+{"sql":"create or replace trusted language l handler h"}
+{"sql":"create or replace trusted language l handler h inline i validator v"}
+{"sql":"create or replace trusted language l handler s.h no validator"}
+{"sql":"create or replace trusted language l handler","code":"42601","message":"syntax error at end of input","position":44}
+{"sql":"create or replace trusted language l x","code":"42601","message":"syntax error at or near \"x\"","position":37}
+{"sql":"create or replace trusted language l;"}
+{"sql":"create or replace trusted language \"L\""}
+{"sql":"create or replace trusted language \"L\" handler h"}
+{"sql":"create or replace trusted language \"L\" handler h inline i validator v"}
+{"sql":"create or replace trusted language \"L\" handler s.h no validator"}
+{"sql":"create or replace trusted language \"L\" handler","code":"42601","message":"syntax error at end of input","position":46}
+{"sql":"create or replace trusted language \"L\" x","code":"42601","message":"syntax error at or near \"x\"","position":39}
+{"sql":"create or replace trusted language \"L\";"}
+{"sql":"create or replace trusted language plpgsql"}
+{"sql":"create or replace trusted language plpgsql handler h"}
+{"sql":"create or replace trusted language plpgsql handler h inline i validator v"}
+{"sql":"create or replace trusted language plpgsql handler s.h no validator"}
+{"sql":"create or replace trusted language plpgsql handler","code":"42601","message":"syntax error at end of input","position":50}
+{"sql":"create or replace trusted language plpgsql x","code":"42601","message":"syntax error at or near \"x\"","position":43}
+{"sql":"create or replace trusted language plpgsql;"}
+{"sql":"create or replace trusted language language"}
+{"sql":"create or replace trusted language language handler h"}
+{"sql":"create or replace trusted language language handler h inline i validator v"}
+{"sql":"create or replace trusted language language handler s.h no validator"}
+{"sql":"create or replace trusted language language handler","code":"42601","message":"syntax error at end of input","position":51}
+{"sql":"create or replace trusted language language x","code":"42601","message":"syntax error at or near \"x\"","position":44}
+{"sql":"create or replace trusted language language;"}
+{"sql":"create or replace trusted language s.l","code":"42601","message":"syntax error at or near \".\"","position":36}
+{"sql":"create or replace trusted language s.l handler h","code":"42601","message":"syntax error at or near \".\"","position":36}
+{"sql":"create or replace trusted language s.l handler h inline i validator v","code":"42601","message":"syntax error at or near \".\"","position":36}
+{"sql":"create or replace trusted language s.l handler s.h no validator","code":"42601","message":"syntax error at or near \".\"","position":36}
+{"sql":"create or replace trusted language s.l handler","code":"42601","message":"syntax error at or near \".\"","position":36}
+{"sql":"create or replace trusted language s.l x","code":"42601","message":"syntax error at or near \".\"","position":36}
+{"sql":"create or replace trusted language s.l;","code":"42601","message":"syntax error at or near \".\"","position":36}
+{"sql":"create or replace trusted language 'l'","code":"42601","message":"syntax error at or near \"'l'\"","position":35}
+{"sql":"create or replace trusted language 'l' handler h","code":"42601","message":"syntax error at or near \"'l'\"","position":35}
+{"sql":"create or replace trusted language 'l' handler h inline i validator v","code":"42601","message":"syntax error at or near \"'l'\"","position":35}
+{"sql":"create or replace trusted language 'l' handler s.h no validator","code":"42601","message":"syntax error at or near \"'l'\"","position":35}
+{"sql":"create or replace trusted language 'l' handler","code":"42601","message":"syntax error at or near \"'l'\"","position":35}
+{"sql":"create or replace trusted language 'l' x","code":"42601","message":"syntax error at or near \"'l'\"","position":35}
+{"sql":"create or replace trusted language 'l';","code":"42601","message":"syntax error at or near \"'l'\"","position":35}
+{"sql":"create or replace trusted language ","code":"42601","message":"syntax error at end of input","position":35}
+{"sql":"create or replace trusted language  handler h","code":"42601","message":"syntax error at or near \"h\"","position":44}
+{"sql":"create or replace trusted language  handler h inline i validator v","code":"42601","message":"syntax error at or near \"h\"","position":44}
+{"sql":"create or replace trusted language  handler s.h no validator","code":"42601","message":"syntax error at or near \"s\"","position":44}
+{"sql":"create or replace trusted language  handler"}
+{"sql":"create or replace trusted language  x"}
+{"sql":"create or replace trusted language ;","code":"42601","message":"syntax error at or near \";\"","position":35}
+{"sql":"create or replace trusted procedural language l"}
+{"sql":"create or replace trusted procedural language l handler h"}
+{"sql":"create or replace trusted procedural language l handler h inline i validator v"}
+{"sql":"create or replace trusted procedural language l handler s.h no validator"}
+{"sql":"create or replace trusted procedural language l handler","code":"42601","message":"syntax error at end of input","position":55}
+{"sql":"create or replace trusted procedural language l x","code":"42601","message":"syntax error at or near \"x\"","position":48}
+{"sql":"create or replace trusted procedural language l;"}
+{"sql":"create or replace trusted procedural language \"L\""}
+{"sql":"create or replace trusted procedural language \"L\" handler h"}
+{"sql":"create or replace trusted procedural language \"L\" handler h inline i validator v"}
+{"sql":"create or replace trusted procedural language \"L\" handler s.h no validator"}
+{"sql":"create or replace trusted procedural language \"L\" handler","code":"42601","message":"syntax error at end of input","position":57}
+{"sql":"create or replace trusted procedural language \"L\" x","code":"42601","message":"syntax error at or near \"x\"","position":50}
+{"sql":"create or replace trusted procedural language \"L\";"}
+{"sql":"create or replace trusted procedural language plpgsql"}
+{"sql":"create or replace trusted procedural language plpgsql handler h"}
+{"sql":"create or replace trusted procedural language plpgsql handler h inline i validator v"}
+{"sql":"create or replace trusted procedural language plpgsql handler s.h no validator"}
+{"sql":"create or replace trusted procedural language plpgsql handler","code":"42601","message":"syntax error at end of input","position":61}
+{"sql":"create or replace trusted procedural language plpgsql x","code":"42601","message":"syntax error at or near \"x\"","position":54}
+{"sql":"create or replace trusted procedural language plpgsql;"}
+{"sql":"create or replace trusted procedural language language"}
+{"sql":"create or replace trusted procedural language language handler h"}
+{"sql":"create or replace trusted procedural language language handler h inline i validator v"}
+{"sql":"create or replace trusted procedural language language handler s.h no validator"}
+{"sql":"create or replace trusted procedural language language handler","code":"42601","message":"syntax error at end of input","position":62}
+{"sql":"create or replace trusted procedural language language x","code":"42601","message":"syntax error at or near \"x\"","position":55}
+{"sql":"create or replace trusted procedural language language;"}
+{"sql":"create or replace trusted procedural language s.l","code":"42601","message":"syntax error at or near \".\"","position":47}
+{"sql":"create or replace trusted procedural language s.l handler h","code":"42601","message":"syntax error at or near \".\"","position":47}
+{"sql":"create or replace trusted procedural language s.l handler h inline i validator v","code":"42601","message":"syntax error at or near \".\"","position":47}
+{"sql":"create or replace trusted procedural language s.l handler s.h no validator","code":"42601","message":"syntax error at or near \".\"","position":47}
+{"sql":"create or replace trusted procedural language s.l handler","code":"42601","message":"syntax error at or near \".\"","position":47}
+{"sql":"create or replace trusted procedural language s.l x","code":"42601","message":"syntax error at or near \".\"","position":47}
+{"sql":"create or replace trusted procedural language s.l;","code":"42601","message":"syntax error at or near \".\"","position":47}
+{"sql":"create or replace trusted procedural language 'l'","code":"42601","message":"syntax error at or near \"'l'\"","position":46}
+{"sql":"create or replace trusted procedural language 'l' handler h","code":"42601","message":"syntax error at or near \"'l'\"","position":46}
+{"sql":"create or replace trusted procedural language 'l' handler h inline i validator v","code":"42601","message":"syntax error at or near \"'l'\"","position":46}
+{"sql":"create or replace trusted procedural language 'l' handler s.h no validator","code":"42601","message":"syntax error at or near \"'l'\"","position":46}
+{"sql":"create or replace trusted procedural language 'l' handler","code":"42601","message":"syntax error at or near \"'l'\"","position":46}
+{"sql":"create or replace trusted procedural language 'l' x","code":"42601","message":"syntax error at or near \"'l'\"","position":46}
+{"sql":"create or replace trusted procedural language 'l';","code":"42601","message":"syntax error at or near \"'l'\"","position":46}
+{"sql":"create or replace trusted procedural language ","code":"42601","message":"syntax error at end of input","position":46}
+{"sql":"create or replace trusted procedural language  handler h","code":"42601","message":"syntax error at or near \"h\"","position":55}
+{"sql":"create or replace trusted procedural language  handler h inline i validator v","code":"42601","message":"syntax error at or near \"h\"","position":55}
+{"sql":"create or replace trusted procedural language  handler s.h no validator","code":"42601","message":"syntax error at or near \"s\"","position":55}
+{"sql":"create or replace trusted procedural language  handler"}
+{"sql":"create or replace trusted procedural language  x"}
+{"sql":"create or replace trusted procedural language ;","code":"42601","message":"syntax error at or near \";\"","position":46}
+{"sql":"create language l; create language m"}
+{"sql":"create or replace or replace language l","code":"42601","message":"syntax error at or near \"or\"","position":18}
+{"sql":"create trusted trusted language l","code":"42601","message":"syntax error at or near \"trusted\"","position":15}
