@@ -1,0 +1,571 @@
+{"sql":"create table t (a int references x)"}
+{"sql":"create table t (a int references x not null)"}
+{"sql":"create table t (a int references x null)"}
+{"sql":"create table t (a int references x default 1)"}
+{"sql":"create table t (a int references x check (a > 0))"}
+{"sql":"create table t (a int references x unique)"}
+{"sql":"create table t (a int references x primary key)"}
+{"sql":"create table t (a int references x references y)"}
+{"sql":"create table t (a int references x references y deferrable)"}
+{"sql":"create table t (a int references x collate \"C\")"}
+{"sql":"create table t (a int references x constraint c not null)"}
+{"sql":"create table t (a int references x generated always as identity)"}
+{"sql":"create table t (a int references x deferrable)"}
+{"sql":"create table t (a int references x deferrable not null)"}
+{"sql":"create table t (a int references x deferrable null)"}
+{"sql":"create table t (a int references x deferrable default 1)"}
+{"sql":"create table t (a int references x deferrable check (a > 0))"}
+{"sql":"create table t (a int references x deferrable unique)"}
+{"sql":"create table t (a int references x deferrable primary key)"}
+{"sql":"create table t (a int references x deferrable references y)"}
+{"sql":"create table t (a int references x deferrable references y deferrable)"}
+{"sql":"create table t (a int references x deferrable collate \"C\")"}
+{"sql":"create table t (a int references x deferrable constraint c not null)"}
+{"sql":"create table t (a int references x deferrable generated always as identity)"}
+{"sql":"create table t (a int references x not deferrable)"}
+{"sql":"create table t (a int references x not deferrable not null)"}
+{"sql":"create table t (a int references x not deferrable null)"}
+{"sql":"create table t (a int references x not deferrable default 1)"}
+{"sql":"create table t (a int references x not deferrable check (a > 0))"}
+{"sql":"create table t (a int references x not deferrable unique)"}
+{"sql":"create table t (a int references x not deferrable primary key)"}
+{"sql":"create table t (a int references x not deferrable references y)"}
+{"sql":"create table t (a int references x not deferrable references y deferrable)"}
+{"sql":"create table t (a int references x not deferrable collate \"C\")"}
+{"sql":"create table t (a int references x not deferrable constraint c not null)"}
+{"sql":"create table t (a int references x not deferrable generated always as identity)"}
+{"sql":"create table t (a int references x initially deferred)"}
+{"sql":"create table t (a int references x initially deferred not null)"}
+{"sql":"create table t (a int references x initially deferred null)"}
+{"sql":"create table t (a int references x initially deferred default 1)"}
+{"sql":"create table t (a int references x initially deferred check (a > 0))"}
+{"sql":"create table t (a int references x initially deferred unique)"}
+{"sql":"create table t (a int references x initially deferred primary key)"}
+{"sql":"create table t (a int references x initially deferred references y)"}
+{"sql":"create table t (a int references x initially deferred references y deferrable)"}
+{"sql":"create table t (a int references x initially deferred collate \"C\")"}
+{"sql":"create table t (a int references x initially deferred constraint c not null)"}
+{"sql":"create table t (a int references x initially deferred generated always as identity)"}
+{"sql":"create table t (a int references x initially immediate)"}
+{"sql":"create table t (a int references x initially immediate not null)"}
+{"sql":"create table t (a int references x initially immediate null)"}
+{"sql":"create table t (a int references x initially immediate default 1)"}
+{"sql":"create table t (a int references x initially immediate check (a > 0))"}
+{"sql":"create table t (a int references x initially immediate unique)"}
+{"sql":"create table t (a int references x initially immediate primary key)"}
+{"sql":"create table t (a int references x initially immediate references y)"}
+{"sql":"create table t (a int references x initially immediate references y deferrable)"}
+{"sql":"create table t (a int references x initially immediate collate \"C\")"}
+{"sql":"create table t (a int references x initially immediate constraint c not null)"}
+{"sql":"create table t (a int references x initially immediate generated always as identity)"}
+{"sql":"create table t (a int references x deferrable initially deferred)"}
+{"sql":"create table t (a int references x deferrable initially deferred not null)"}
+{"sql":"create table t (a int references x deferrable initially deferred null)"}
+{"sql":"create table t (a int references x deferrable initially deferred default 1)"}
+{"sql":"create table t (a int references x deferrable initially deferred check (a > 0))"}
+{"sql":"create table t (a int references x deferrable initially deferred unique)"}
+{"sql":"create table t (a int references x deferrable initially deferred primary key)"}
+{"sql":"create table t (a int references x deferrable initially deferred references y)"}
+{"sql":"create table t (a int references x deferrable initially deferred references y deferrable)"}
+{"sql":"create table t (a int references x deferrable initially deferred collate \"C\")"}
+{"sql":"create table t (a int references x deferrable initially deferred constraint c not null)"}
+{"sql":"create table t (a int references x deferrable initially deferred generated always as identity)"}
+{"sql":"create table t (a int references x not deferrable initially deferred)"}
+{"sql":"create table t (a int references x not deferrable initially deferred not null)"}
+{"sql":"create table t (a int references x not deferrable initially deferred null)"}
+{"sql":"create table t (a int references x not deferrable initially deferred default 1)"}
+{"sql":"create table t (a int references x not deferrable initially deferred check (a > 0))"}
+{"sql":"create table t (a int references x not deferrable initially deferred unique)"}
+{"sql":"create table t (a int references x not deferrable initially deferred primary key)"}
+{"sql":"create table t (a int references x not deferrable initially deferred references y)"}
+{"sql":"create table t (a int references x not deferrable initially deferred references y deferrable)"}
+{"sql":"create table t (a int references x not deferrable initially deferred collate \"C\")"}
+{"sql":"create table t (a int references x not deferrable initially deferred constraint c not null)"}
+{"sql":"create table t (a int references x not deferrable initially deferred generated always as identity)"}
+{"sql":"create table t (a int references x initially deferred deferrable)"}
+{"sql":"create table t (a int references x initially deferred deferrable not null)"}
+{"sql":"create table t (a int references x initially deferred deferrable null)"}
+{"sql":"create table t (a int references x initially deferred deferrable default 1)"}
+{"sql":"create table t (a int references x initially deferred deferrable check (a > 0))"}
+{"sql":"create table t (a int references x initially deferred deferrable unique)"}
+{"sql":"create table t (a int references x initially deferred deferrable primary key)"}
+{"sql":"create table t (a int references x initially deferred deferrable references y)"}
+{"sql":"create table t (a int references x initially deferred deferrable references y deferrable)"}
+{"sql":"create table t (a int references x initially deferred deferrable collate \"C\")"}
+{"sql":"create table t (a int references x initially deferred deferrable constraint c not null)"}
+{"sql":"create table t (a int references x initially deferred deferrable generated always as identity)"}
+{"sql":"create table t (a int references x deferrable not deferrable)"}
+{"sql":"create table t (a int references x deferrable not deferrable not null)"}
+{"sql":"create table t (a int references x deferrable not deferrable null)"}
+{"sql":"create table t (a int references x deferrable not deferrable default 1)"}
+{"sql":"create table t (a int references x deferrable not deferrable check (a > 0))"}
+{"sql":"create table t (a int references x deferrable not deferrable unique)"}
+{"sql":"create table t (a int references x deferrable not deferrable primary key)"}
+{"sql":"create table t (a int references x deferrable not deferrable references y)"}
+{"sql":"create table t (a int references x deferrable not deferrable references y deferrable)"}
+{"sql":"create table t (a int references x deferrable not deferrable collate \"C\")"}
+{"sql":"create table t (a int references x deferrable not deferrable constraint c not null)"}
+{"sql":"create table t (a int references x deferrable not deferrable generated always as identity)"}
+{"sql":"create table t (a int references x initially immediate initially deferred)"}
+{"sql":"create table t (a int references x initially immediate initially deferred not null)"}
+{"sql":"create table t (a int references x initially immediate initially deferred null)"}
+{"sql":"create table t (a int references x initially immediate initially deferred default 1)"}
+{"sql":"create table t (a int references x initially immediate initially deferred check (a > 0))"}
+{"sql":"create table t (a int references x initially immediate initially deferred unique)"}
+{"sql":"create table t (a int references x initially immediate initially deferred primary key)"}
+{"sql":"create table t (a int references x initially immediate initially deferred references y)"}
+{"sql":"create table t (a int references x initially immediate initially deferred references y deferrable)"}
+{"sql":"create table t (a int references x initially immediate initially deferred collate \"C\")"}
+{"sql":"create table t (a int references x initially immediate initially deferred constraint c not null)"}
+{"sql":"create table t (a int references x initially immediate initially deferred generated always as identity)"}
+{"sql":"create table t (a int references x deferrable deferrable)"}
+{"sql":"create table t (a int references x deferrable deferrable not null)"}
+{"sql":"create table t (a int references x deferrable deferrable null)"}
+{"sql":"create table t (a int references x deferrable deferrable default 1)"}
+{"sql":"create table t (a int references x deferrable deferrable check (a > 0))"}
+{"sql":"create table t (a int references x deferrable deferrable unique)"}
+{"sql":"create table t (a int references x deferrable deferrable primary key)"}
+{"sql":"create table t (a int references x deferrable deferrable references y)"}
+{"sql":"create table t (a int references x deferrable deferrable references y deferrable)"}
+{"sql":"create table t (a int references x deferrable deferrable collate \"C\")"}
+{"sql":"create table t (a int references x deferrable deferrable constraint c not null)"}
+{"sql":"create table t (a int references x deferrable deferrable generated always as identity)"}
+{"sql":"create table t (a int references x not valid)","code":"42601","message":"syntax error at or near \"valid\"","position":39}
+{"sql":"create table t (a int references x not valid not null)","code":"42601","message":"syntax error at or near \"valid\"","position":39}
+{"sql":"create table t (a int references x not valid null)","code":"42601","message":"syntax error at or near \"valid\"","position":39}
+{"sql":"create table t (a int references x not valid default 1)","code":"42601","message":"syntax error at or near \"valid\"","position":39}
+{"sql":"create table t (a int references x not valid check (a > 0))","code":"42601","message":"syntax error at or near \"valid\"","position":39}
+{"sql":"create table t (a int references x not valid unique)","code":"42601","message":"syntax error at or near \"valid\"","position":39}
+{"sql":"create table t (a int references x not valid primary key)","code":"42601","message":"syntax error at or near \"valid\"","position":39}
+{"sql":"create table t (a int references x not valid references y)","code":"42601","message":"syntax error at or near \"valid\"","position":39}
+{"sql":"create table t (a int references x not valid references y deferrable)","code":"42601","message":"syntax error at or near \"valid\"","position":39}
+{"sql":"create table t (a int references x not valid collate \"C\")","code":"42601","message":"syntax error at or near \"valid\"","position":39}
+{"sql":"create table t (a int references x not valid constraint c not null)","code":"42601","message":"syntax error at or near \"valid\"","position":39}
+{"sql":"create table t (a int references x not valid generated always as identity)","code":"42601","message":"syntax error at or near \"valid\"","position":39}
+{"sql":"create table t (a int references x no inherit)","code":"42601","message":"syntax error at or near \"no\"","position":35}
+{"sql":"create table t (a int references x no inherit not null)","code":"42601","message":"syntax error at or near \"no\"","position":35}
+{"sql":"create table t (a int references x no inherit null)","code":"42601","message":"syntax error at or near \"no\"","position":35}
+{"sql":"create table t (a int references x no inherit default 1)","code":"42601","message":"syntax error at or near \"no\"","position":35}
+{"sql":"create table t (a int references x no inherit check (a > 0))","code":"42601","message":"syntax error at or near \"no\"","position":35}
+{"sql":"create table t (a int references x no inherit unique)","code":"42601","message":"syntax error at or near \"no\"","position":35}
+{"sql":"create table t (a int references x no inherit primary key)","code":"42601","message":"syntax error at or near \"no\"","position":35}
+{"sql":"create table t (a int references x no inherit references y)","code":"42601","message":"syntax error at or near \"no\"","position":35}
+{"sql":"create table t (a int references x no inherit references y deferrable)","code":"42601","message":"syntax error at or near \"no\"","position":35}
+{"sql":"create table t (a int references x no inherit collate \"C\")","code":"42601","message":"syntax error at or near \"no\"","position":35}
+{"sql":"create table t (a int references x no inherit constraint c not null)","code":"42601","message":"syntax error at or near \"no\"","position":35}
+{"sql":"create table t (a int references x no inherit generated always as identity)","code":"42601","message":"syntax error at or near \"no\"","position":35}
+{"sql":"create table t (a int references x deferrable not valid)","code":"42601","message":"syntax error at or near \"valid\"","position":50}
+{"sql":"create table t (a int references x deferrable not valid not null)","code":"42601","message":"syntax error at or near \"valid\"","position":50}
+{"sql":"create table t (a int references x deferrable not valid null)","code":"42601","message":"syntax error at or near \"valid\"","position":50}
+{"sql":"create table t (a int references x deferrable not valid default 1)","code":"42601","message":"syntax error at or near \"valid\"","position":50}
+{"sql":"create table t (a int references x deferrable not valid check (a > 0))","code":"42601","message":"syntax error at or near \"valid\"","position":50}
+{"sql":"create table t (a int references x deferrable not valid unique)","code":"42601","message":"syntax error at or near \"valid\"","position":50}
+{"sql":"create table t (a int references x deferrable not valid primary key)","code":"42601","message":"syntax error at or near \"valid\"","position":50}
+{"sql":"create table t (a int references x deferrable not valid references y)","code":"42601","message":"syntax error at or near \"valid\"","position":50}
+{"sql":"create table t (a int references x deferrable not valid references y deferrable)","code":"42601","message":"syntax error at or near \"valid\"","position":50}
+{"sql":"create table t (a int references x deferrable not valid collate \"C\")","code":"42601","message":"syntax error at or near \"valid\"","position":50}
+{"sql":"create table t (a int references x deferrable not valid constraint c not null)","code":"42601","message":"syntax error at or near \"valid\"","position":50}
+{"sql":"create table t (a int references x deferrable not valid generated always as identity)","code":"42601","message":"syntax error at or near \"valid\"","position":50}
+{"sql":"create table t (a int references x (b))"}
+{"sql":"create table t (a int references x (b) not null)"}
+{"sql":"create table t (a int references x (b) null)"}
+{"sql":"create table t (a int references x (b) default 1)"}
+{"sql":"create table t (a int references x (b) check (a > 0))"}
+{"sql":"create table t (a int references x (b) unique)"}
+{"sql":"create table t (a int references x (b) primary key)"}
+{"sql":"create table t (a int references x (b) references y)"}
+{"sql":"create table t (a int references x (b) references y deferrable)"}
+{"sql":"create table t (a int references x (b) collate \"C\")"}
+{"sql":"create table t (a int references x (b) constraint c not null)"}
+{"sql":"create table t (a int references x (b) generated always as identity)"}
+{"sql":"create table t (a int references x (b) deferrable)"}
+{"sql":"create table t (a int references x (b) deferrable not null)"}
+{"sql":"create table t (a int references x (b) deferrable null)"}
+{"sql":"create table t (a int references x (b) deferrable default 1)"}
+{"sql":"create table t (a int references x (b) deferrable check (a > 0))"}
+{"sql":"create table t (a int references x (b) deferrable unique)"}
+{"sql":"create table t (a int references x (b) deferrable primary key)"}
+{"sql":"create table t (a int references x (b) deferrable references y)"}
+{"sql":"create table t (a int references x (b) deferrable references y deferrable)"}
+{"sql":"create table t (a int references x (b) deferrable collate \"C\")"}
+{"sql":"create table t (a int references x (b) deferrable constraint c not null)"}
+{"sql":"create table t (a int references x (b) deferrable generated always as identity)"}
+{"sql":"create table t (a int references x (b) not deferrable)"}
+{"sql":"create table t (a int references x (b) not deferrable not null)"}
+{"sql":"create table t (a int references x (b) not deferrable null)"}
+{"sql":"create table t (a int references x (b) not deferrable default 1)"}
+{"sql":"create table t (a int references x (b) not deferrable check (a > 0))"}
+{"sql":"create table t (a int references x (b) not deferrable unique)"}
+{"sql":"create table t (a int references x (b) not deferrable primary key)"}
+{"sql":"create table t (a int references x (b) not deferrable references y)"}
+{"sql":"create table t (a int references x (b) not deferrable references y deferrable)"}
+{"sql":"create table t (a int references x (b) not deferrable collate \"C\")"}
+{"sql":"create table t (a int references x (b) not deferrable constraint c not null)"}
+{"sql":"create table t (a int references x (b) not deferrable generated always as identity)"}
+{"sql":"create table t (a int references x (b) initially deferred)"}
+{"sql":"create table t (a int references x (b) initially deferred not null)"}
+{"sql":"create table t (a int references x (b) initially deferred null)"}
+{"sql":"create table t (a int references x (b) initially deferred default 1)"}
+{"sql":"create table t (a int references x (b) initially deferred check (a > 0))"}
+{"sql":"create table t (a int references x (b) initially deferred unique)"}
+{"sql":"create table t (a int references x (b) initially deferred primary key)"}
+{"sql":"create table t (a int references x (b) initially deferred references y)"}
+{"sql":"create table t (a int references x (b) initially deferred references y deferrable)"}
+{"sql":"create table t (a int references x (b) initially deferred collate \"C\")"}
+{"sql":"create table t (a int references x (b) initially deferred constraint c not null)"}
+{"sql":"create table t (a int references x (b) initially deferred generated always as identity)"}
+{"sql":"create table t (a int references x (b) initially immediate)"}
+{"sql":"create table t (a int references x (b) initially immediate not null)"}
+{"sql":"create table t (a int references x (b) initially immediate null)"}
+{"sql":"create table t (a int references x (b) initially immediate default 1)"}
+{"sql":"create table t (a int references x (b) initially immediate check (a > 0))"}
+{"sql":"create table t (a int references x (b) initially immediate unique)"}
+{"sql":"create table t (a int references x (b) initially immediate primary key)"}
+{"sql":"create table t (a int references x (b) initially immediate references y)"}
+{"sql":"create table t (a int references x (b) initially immediate references y deferrable)"}
+{"sql":"create table t (a int references x (b) initially immediate collate \"C\")"}
+{"sql":"create table t (a int references x (b) initially immediate constraint c not null)"}
+{"sql":"create table t (a int references x (b) initially immediate generated always as identity)"}
+{"sql":"create table t (a int references x (b) deferrable initially deferred)"}
+{"sql":"create table t (a int references x (b) deferrable initially deferred not null)"}
+{"sql":"create table t (a int references x (b) deferrable initially deferred null)"}
+{"sql":"create table t (a int references x (b) deferrable initially deferred default 1)"}
+{"sql":"create table t (a int references x (b) deferrable initially deferred check (a > 0))"}
+{"sql":"create table t (a int references x (b) deferrable initially deferred unique)"}
+{"sql":"create table t (a int references x (b) deferrable initially deferred primary key)"}
+{"sql":"create table t (a int references x (b) deferrable initially deferred references y)"}
+{"sql":"create table t (a int references x (b) deferrable initially deferred references y deferrable)"}
+{"sql":"create table t (a int references x (b) deferrable initially deferred collate \"C\")"}
+{"sql":"create table t (a int references x (b) deferrable initially deferred constraint c not null)"}
+{"sql":"create table t (a int references x (b) deferrable initially deferred generated always as identity)"}
+{"sql":"create table t (a int references x (b) not deferrable initially deferred)"}
+{"sql":"create table t (a int references x (b) not deferrable initially deferred not null)"}
+{"sql":"create table t (a int references x (b) not deferrable initially deferred null)"}
+{"sql":"create table t (a int references x (b) not deferrable initially deferred default 1)"}
+{"sql":"create table t (a int references x (b) not deferrable initially deferred check (a > 0))"}
+{"sql":"create table t (a int references x (b) not deferrable initially deferred unique)"}
+{"sql":"create table t (a int references x (b) not deferrable initially deferred primary key)"}
+{"sql":"create table t (a int references x (b) not deferrable initially deferred references y)"}
+{"sql":"create table t (a int references x (b) not deferrable initially deferred references y deferrable)"}
+{"sql":"create table t (a int references x (b) not deferrable initially deferred collate \"C\")"}
+{"sql":"create table t (a int references x (b) not deferrable initially deferred constraint c not null)"}
+{"sql":"create table t (a int references x (b) not deferrable initially deferred generated always as identity)"}
+{"sql":"create table t (a int references x (b) initially deferred deferrable)"}
+{"sql":"create table t (a int references x (b) initially deferred deferrable not null)"}
+{"sql":"create table t (a int references x (b) initially deferred deferrable null)"}
+{"sql":"create table t (a int references x (b) initially deferred deferrable default 1)"}
+{"sql":"create table t (a int references x (b) initially deferred deferrable check (a > 0))"}
+{"sql":"create table t (a int references x (b) initially deferred deferrable unique)"}
+{"sql":"create table t (a int references x (b) initially deferred deferrable primary key)"}
+{"sql":"create table t (a int references x (b) initially deferred deferrable references y)"}
+{"sql":"create table t (a int references x (b) initially deferred deferrable references y deferrable)"}
+{"sql":"create table t (a int references x (b) initially deferred deferrable collate \"C\")"}
+{"sql":"create table t (a int references x (b) initially deferred deferrable constraint c not null)"}
+{"sql":"create table t (a int references x (b) initially deferred deferrable generated always as identity)"}
+{"sql":"create table t (a int references x (b) deferrable not deferrable)"}
+{"sql":"create table t (a int references x (b) deferrable not deferrable not null)"}
+{"sql":"create table t (a int references x (b) deferrable not deferrable null)"}
+{"sql":"create table t (a int references x (b) deferrable not deferrable default 1)"}
+{"sql":"create table t (a int references x (b) deferrable not deferrable check (a > 0))"}
+{"sql":"create table t (a int references x (b) deferrable not deferrable unique)"}
+{"sql":"create table t (a int references x (b) deferrable not deferrable primary key)"}
+{"sql":"create table t (a int references x (b) deferrable not deferrable references y)"}
+{"sql":"create table t (a int references x (b) deferrable not deferrable references y deferrable)"}
+{"sql":"create table t (a int references x (b) deferrable not deferrable collate \"C\")"}
+{"sql":"create table t (a int references x (b) deferrable not deferrable constraint c not null)"}
+{"sql":"create table t (a int references x (b) deferrable not deferrable generated always as identity)"}
+{"sql":"create table t (a int references x (b) initially immediate initially deferred)"}
+{"sql":"create table t (a int references x (b) initially immediate initially deferred not null)"}
+{"sql":"create table t (a int references x (b) initially immediate initially deferred null)"}
+{"sql":"create table t (a int references x (b) initially immediate initially deferred default 1)"}
+{"sql":"create table t (a int references x (b) initially immediate initially deferred check (a > 0))"}
+{"sql":"create table t (a int references x (b) initially immediate initially deferred unique)"}
+{"sql":"create table t (a int references x (b) initially immediate initially deferred primary key)"}
+{"sql":"create table t (a int references x (b) initially immediate initially deferred references y)"}
+{"sql":"create table t (a int references x (b) initially immediate initially deferred references y deferrable)"}
+{"sql":"create table t (a int references x (b) initially immediate initially deferred collate \"C\")"}
+{"sql":"create table t (a int references x (b) initially immediate initially deferred constraint c not null)"}
+{"sql":"create table t (a int references x (b) initially immediate initially deferred generated always as identity)"}
+{"sql":"create table t (a int references x (b) deferrable deferrable)"}
+{"sql":"create table t (a int references x (b) deferrable deferrable not null)"}
+{"sql":"create table t (a int references x (b) deferrable deferrable null)"}
+{"sql":"create table t (a int references x (b) deferrable deferrable default 1)"}
+{"sql":"create table t (a int references x (b) deferrable deferrable check (a > 0))"}
+{"sql":"create table t (a int references x (b) deferrable deferrable unique)"}
+{"sql":"create table t (a int references x (b) deferrable deferrable primary key)"}
+{"sql":"create table t (a int references x (b) deferrable deferrable references y)"}
+{"sql":"create table t (a int references x (b) deferrable deferrable references y deferrable)"}
+{"sql":"create table t (a int references x (b) deferrable deferrable collate \"C\")"}
+{"sql":"create table t (a int references x (b) deferrable deferrable constraint c not null)"}
+{"sql":"create table t (a int references x (b) deferrable deferrable generated always as identity)"}
+{"sql":"create table t (a int references x (b) not valid)","code":"42601","message":"syntax error at or near \"valid\"","position":43}
+{"sql":"create table t (a int references x (b) not valid not null)","code":"42601","message":"syntax error at or near \"valid\"","position":43}
+{"sql":"create table t (a int references x (b) not valid null)","code":"42601","message":"syntax error at or near \"valid\"","position":43}
+{"sql":"create table t (a int references x (b) not valid default 1)","code":"42601","message":"syntax error at or near \"valid\"","position":43}
+{"sql":"create table t (a int references x (b) not valid check (a > 0))","code":"42601","message":"syntax error at or near \"valid\"","position":43}
+{"sql":"create table t (a int references x (b) not valid unique)","code":"42601","message":"syntax error at or near \"valid\"","position":43}
+{"sql":"create table t (a int references x (b) not valid primary key)","code":"42601","message":"syntax error at or near \"valid\"","position":43}
+{"sql":"create table t (a int references x (b) not valid references y)","code":"42601","message":"syntax error at or near \"valid\"","position":43}
+{"sql":"create table t (a int references x (b) not valid references y deferrable)","code":"42601","message":"syntax error at or near \"valid\"","position":43}
+{"sql":"create table t (a int references x (b) not valid collate \"C\")","code":"42601","message":"syntax error at or near \"valid\"","position":43}
+{"sql":"create table t (a int references x (b) not valid constraint c not null)","code":"42601","message":"syntax error at or near \"valid\"","position":43}
+{"sql":"create table t (a int references x (b) not valid generated always as identity)","code":"42601","message":"syntax error at or near \"valid\"","position":43}
+{"sql":"create table t (a int references x (b) no inherit)","code":"42601","message":"syntax error at or near \"no\"","position":39}
+{"sql":"create table t (a int references x (b) no inherit not null)","code":"42601","message":"syntax error at or near \"no\"","position":39}
+{"sql":"create table t (a int references x (b) no inherit null)","code":"42601","message":"syntax error at or near \"no\"","position":39}
+{"sql":"create table t (a int references x (b) no inherit default 1)","code":"42601","message":"syntax error at or near \"no\"","position":39}
+{"sql":"create table t (a int references x (b) no inherit check (a > 0))","code":"42601","message":"syntax error at or near \"no\"","position":39}
+{"sql":"create table t (a int references x (b) no inherit unique)","code":"42601","message":"syntax error at or near \"no\"","position":39}
+{"sql":"create table t (a int references x (b) no inherit primary key)","code":"42601","message":"syntax error at or near \"no\"","position":39}
+{"sql":"create table t (a int references x (b) no inherit references y)","code":"42601","message":"syntax error at or near \"no\"","position":39}
+{"sql":"create table t (a int references x (b) no inherit references y deferrable)","code":"42601","message":"syntax error at or near \"no\"","position":39}
+{"sql":"create table t (a int references x (b) no inherit collate \"C\")","code":"42601","message":"syntax error at or near \"no\"","position":39}
+{"sql":"create table t (a int references x (b) no inherit constraint c not null)","code":"42601","message":"syntax error at or near \"no\"","position":39}
+{"sql":"create table t (a int references x (b) no inherit generated always as identity)","code":"42601","message":"syntax error at or near \"no\"","position":39}
+{"sql":"create table t (a int references x (b) deferrable not valid)","code":"42601","message":"syntax error at or near \"valid\"","position":54}
+{"sql":"create table t (a int references x (b) deferrable not valid not null)","code":"42601","message":"syntax error at or near \"valid\"","position":54}
+{"sql":"create table t (a int references x (b) deferrable not valid null)","code":"42601","message":"syntax error at or near \"valid\"","position":54}
+{"sql":"create table t (a int references x (b) deferrable not valid default 1)","code":"42601","message":"syntax error at or near \"valid\"","position":54}
+{"sql":"create table t (a int references x (b) deferrable not valid check (a > 0))","code":"42601","message":"syntax error at or near \"valid\"","position":54}
+{"sql":"create table t (a int references x (b) deferrable not valid unique)","code":"42601","message":"syntax error at or near \"valid\"","position":54}
+{"sql":"create table t (a int references x (b) deferrable not valid primary key)","code":"42601","message":"syntax error at or near \"valid\"","position":54}
+{"sql":"create table t (a int references x (b) deferrable not valid references y)","code":"42601","message":"syntax error at or near \"valid\"","position":54}
+{"sql":"create table t (a int references x (b) deferrable not valid references y deferrable)","code":"42601","message":"syntax error at or near \"valid\"","position":54}
+{"sql":"create table t (a int references x (b) deferrable not valid collate \"C\")","code":"42601","message":"syntax error at or near \"valid\"","position":54}
+{"sql":"create table t (a int references x (b) deferrable not valid constraint c not null)","code":"42601","message":"syntax error at or near \"valid\"","position":54}
+{"sql":"create table t (a int references x (b) deferrable not valid generated always as identity)","code":"42601","message":"syntax error at or near \"valid\"","position":54}
+{"sql":"create table t (a int references x match full)"}
+{"sql":"create table t (a int references x match full not null)"}
+{"sql":"create table t (a int references x match full null)"}
+{"sql":"create table t (a int references x match full default 1)"}
+{"sql":"create table t (a int references x match full check (a > 0))"}
+{"sql":"create table t (a int references x match full unique)"}
+{"sql":"create table t (a int references x match full primary key)"}
+{"sql":"create table t (a int references x match full references y)"}
+{"sql":"create table t (a int references x match full references y deferrable)"}
+{"sql":"create table t (a int references x match full collate \"C\")"}
+{"sql":"create table t (a int references x match full constraint c not null)"}
+{"sql":"create table t (a int references x match full generated always as identity)"}
+{"sql":"create table t (a int references x match full deferrable)"}
+{"sql":"create table t (a int references x match full deferrable not null)"}
+{"sql":"create table t (a int references x match full deferrable null)"}
+{"sql":"create table t (a int references x match full deferrable default 1)"}
+{"sql":"create table t (a int references x match full deferrable check (a > 0))"}
+{"sql":"create table t (a int references x match full deferrable unique)"}
+{"sql":"create table t (a int references x match full deferrable primary key)"}
+{"sql":"create table t (a int references x match full deferrable references y)"}
+{"sql":"create table t (a int references x match full deferrable references y deferrable)"}
+{"sql":"create table t (a int references x match full deferrable collate \"C\")"}
+{"sql":"create table t (a int references x match full deferrable constraint c not null)"}
+{"sql":"create table t (a int references x match full deferrable generated always as identity)"}
+{"sql":"create table t (a int references x match full not deferrable)"}
+{"sql":"create table t (a int references x match full not deferrable not null)"}
+{"sql":"create table t (a int references x match full not deferrable null)"}
+{"sql":"create table t (a int references x match full not deferrable default 1)"}
+{"sql":"create table t (a int references x match full not deferrable check (a > 0))"}
+{"sql":"create table t (a int references x match full not deferrable unique)"}
+{"sql":"create table t (a int references x match full not deferrable primary key)"}
+{"sql":"create table t (a int references x match full not deferrable references y)"}
+{"sql":"create table t (a int references x match full not deferrable references y deferrable)"}
+{"sql":"create table t (a int references x match full not deferrable collate \"C\")"}
+{"sql":"create table t (a int references x match full not deferrable constraint c not null)"}
+{"sql":"create table t (a int references x match full not deferrable generated always as identity)"}
+{"sql":"create table t (a int references x match full initially deferred)"}
+{"sql":"create table t (a int references x match full initially deferred not null)"}
+{"sql":"create table t (a int references x match full initially deferred null)"}
+{"sql":"create table t (a int references x match full initially deferred default 1)"}
+{"sql":"create table t (a int references x match full initially deferred check (a > 0))"}
+{"sql":"create table t (a int references x match full initially deferred unique)"}
+{"sql":"create table t (a int references x match full initially deferred primary key)"}
+{"sql":"create table t (a int references x match full initially deferred references y)"}
+{"sql":"create table t (a int references x match full initially deferred references y deferrable)"}
+{"sql":"create table t (a int references x match full initially deferred collate \"C\")"}
+{"sql":"create table t (a int references x match full initially deferred constraint c not null)"}
+{"sql":"create table t (a int references x match full initially deferred generated always as identity)"}
+{"sql":"create table t (a int references x match full initially immediate)"}
+{"sql":"create table t (a int references x match full initially immediate not null)"}
+{"sql":"create table t (a int references x match full initially immediate null)"}
+{"sql":"create table t (a int references x match full initially immediate default 1)"}
+{"sql":"create table t (a int references x match full initially immediate check (a > 0))"}
+{"sql":"create table t (a int references x match full initially immediate unique)"}
+{"sql":"create table t (a int references x match full initially immediate primary key)"}
+{"sql":"create table t (a int references x match full initially immediate references y)"}
+{"sql":"create table t (a int references x match full initially immediate references y deferrable)"}
+{"sql":"create table t (a int references x match full initially immediate collate \"C\")"}
+{"sql":"create table t (a int references x match full initially immediate constraint c not null)"}
+{"sql":"create table t (a int references x match full initially immediate generated always as identity)"}
+{"sql":"create table t (a int references x match full deferrable initially deferred)"}
+{"sql":"create table t (a int references x match full deferrable initially deferred not null)"}
+{"sql":"create table t (a int references x match full deferrable initially deferred null)"}
+{"sql":"create table t (a int references x match full deferrable initially deferred default 1)"}
+{"sql":"create table t (a int references x match full deferrable initially deferred check (a > 0))"}
+{"sql":"create table t (a int references x match full deferrable initially deferred unique)"}
+{"sql":"create table t (a int references x match full deferrable initially deferred primary key)"}
+{"sql":"create table t (a int references x match full deferrable initially deferred references y)"}
+{"sql":"create table t (a int references x match full deferrable initially deferred references y deferrable)"}
+{"sql":"create table t (a int references x match full deferrable initially deferred collate \"C\")"}
+{"sql":"create table t (a int references x match full deferrable initially deferred constraint c not null)"}
+{"sql":"create table t (a int references x match full deferrable initially deferred generated always as identity)"}
+{"sql":"create table t (a int references x match full not deferrable initially deferred)"}
+{"sql":"create table t (a int references x match full not deferrable initially deferred not null)"}
+{"sql":"create table t (a int references x match full not deferrable initially deferred null)"}
+{"sql":"create table t (a int references x match full not deferrable initially deferred default 1)"}
+{"sql":"create table t (a int references x match full not deferrable initially deferred check (a > 0))"}
+{"sql":"create table t (a int references x match full not deferrable initially deferred unique)"}
+{"sql":"create table t (a int references x match full not deferrable initially deferred primary key)"}
+{"sql":"create table t (a int references x match full not deferrable initially deferred references y)"}
+{"sql":"create table t (a int references x match full not deferrable initially deferred references y deferrable)"}
+{"sql":"create table t (a int references x match full not deferrable initially deferred collate \"C\")"}
+{"sql":"create table t (a int references x match full not deferrable initially deferred constraint c not null)"}
+{"sql":"create table t (a int references x match full not deferrable initially deferred generated always as identity)"}
+{"sql":"create table t (a int references x match full initially deferred deferrable)"}
+{"sql":"create table t (a int references x match full initially deferred deferrable not null)"}
+{"sql":"create table t (a int references x match full initially deferred deferrable null)"}
+{"sql":"create table t (a int references x match full initially deferred deferrable default 1)"}
+{"sql":"create table t (a int references x match full initially deferred deferrable check (a > 0))"}
+{"sql":"create table t (a int references x match full initially deferred deferrable unique)"}
+{"sql":"create table t (a int references x match full initially deferred deferrable primary key)"}
+{"sql":"create table t (a int references x match full initially deferred deferrable references y)"}
+{"sql":"create table t (a int references x match full initially deferred deferrable references y deferrable)"}
+{"sql":"create table t (a int references x match full initially deferred deferrable collate \"C\")"}
+{"sql":"create table t (a int references x match full initially deferred deferrable constraint c not null)"}
+{"sql":"create table t (a int references x match full initially deferred deferrable generated always as identity)"}
+{"sql":"create table t (a int references x match full deferrable not deferrable)"}
+{"sql":"create table t (a int references x match full deferrable not deferrable not null)"}
+{"sql":"create table t (a int references x match full deferrable not deferrable null)"}
+{"sql":"create table t (a int references x match full deferrable not deferrable default 1)"}
+{"sql":"create table t (a int references x match full deferrable not deferrable check (a > 0))"}
+{"sql":"create table t (a int references x match full deferrable not deferrable unique)"}
+{"sql":"create table t (a int references x match full deferrable not deferrable primary key)"}
+{"sql":"create table t (a int references x match full deferrable not deferrable references y)"}
+{"sql":"create table t (a int references x match full deferrable not deferrable references y deferrable)"}
+{"sql":"create table t (a int references x match full deferrable not deferrable collate \"C\")"}
+{"sql":"create table t (a int references x match full deferrable not deferrable constraint c not null)"}
+{"sql":"create table t (a int references x match full deferrable not deferrable generated always as identity)"}
+{"sql":"create table t (a int references x match full initially immediate initially deferred)"}
+{"sql":"create table t (a int references x match full initially immediate initially deferred not null)"}
+{"sql":"create table t (a int references x match full initially immediate initially deferred null)"}
+{"sql":"create table t (a int references x match full initially immediate initially deferred default 1)"}
+{"sql":"create table t (a int references x match full initially immediate initially deferred check (a > 0))"}
+{"sql":"create table t (a int references x match full initially immediate initially deferred unique)"}
+{"sql":"create table t (a int references x match full initially immediate initially deferred primary key)"}
+{"sql":"create table t (a int references x match full initially immediate initially deferred references y)"}
+{"sql":"create table t (a int references x match full initially immediate initially deferred references y deferrable)"}
+{"sql":"create table t (a int references x match full initially immediate initially deferred collate \"C\")"}
+{"sql":"create table t (a int references x match full initially immediate initially deferred constraint c not null)"}
+{"sql":"create table t (a int references x match full initially immediate initially deferred generated always as identity)"}
+{"sql":"create table t (a int references x match full deferrable deferrable)"}
+{"sql":"create table t (a int references x match full deferrable deferrable not null)"}
+{"sql":"create table t (a int references x match full deferrable deferrable null)"}
+{"sql":"create table t (a int references x match full deferrable deferrable default 1)"}
+{"sql":"create table t (a int references x match full deferrable deferrable check (a > 0))"}
+{"sql":"create table t (a int references x match full deferrable deferrable unique)"}
+{"sql":"create table t (a int references x match full deferrable deferrable primary key)"}
+{"sql":"create table t (a int references x match full deferrable deferrable references y)"}
+{"sql":"create table t (a int references x match full deferrable deferrable references y deferrable)"}
+{"sql":"create table t (a int references x match full deferrable deferrable collate \"C\")"}
+{"sql":"create table t (a int references x match full deferrable deferrable constraint c not null)"}
+{"sql":"create table t (a int references x match full deferrable deferrable generated always as identity)"}
+{"sql":"create table t (a int references x match full not valid)","code":"42601","message":"syntax error at or near \"valid\"","position":50}
+{"sql":"create table t (a int references x match full not valid not null)","code":"42601","message":"syntax error at or near \"valid\"","position":50}
+{"sql":"create table t (a int references x match full not valid null)","code":"42601","message":"syntax error at or near \"valid\"","position":50}
+{"sql":"create table t (a int references x match full not valid default 1)","code":"42601","message":"syntax error at or near \"valid\"","position":50}
+{"sql":"create table t (a int references x match full not valid check (a > 0))","code":"42601","message":"syntax error at or near \"valid\"","position":50}
+{"sql":"create table t (a int references x match full not valid unique)","code":"42601","message":"syntax error at or near \"valid\"","position":50}
+{"sql":"create table t (a int references x match full not valid primary key)","code":"42601","message":"syntax error at or near \"valid\"","position":50}
+{"sql":"create table t (a int references x match full not valid references y)","code":"42601","message":"syntax error at or near \"valid\"","position":50}
+{"sql":"create table t (a int references x match full not valid references y deferrable)","code":"42601","message":"syntax error at or near \"valid\"","position":50}
+{"sql":"create table t (a int references x match full not valid collate \"C\")","code":"42601","message":"syntax error at or near \"valid\"","position":50}
+{"sql":"create table t (a int references x match full not valid constraint c not null)","code":"42601","message":"syntax error at or near \"valid\"","position":50}
+{"sql":"create table t (a int references x match full not valid generated always as identity)","code":"42601","message":"syntax error at or near \"valid\"","position":50}
+{"sql":"create table t (a int references x match full no inherit)","code":"42601","message":"syntax error at or near \"no\"","position":46}
+{"sql":"create table t (a int references x match full no inherit not null)","code":"42601","message":"syntax error at or near \"no\"","position":46}
+{"sql":"create table t (a int references x match full no inherit null)","code":"42601","message":"syntax error at or near \"no\"","position":46}
+{"sql":"create table t (a int references x match full no inherit default 1)","code":"42601","message":"syntax error at or near \"no\"","position":46}
+{"sql":"create table t (a int references x match full no inherit check (a > 0))","code":"42601","message":"syntax error at or near \"no\"","position":46}
+{"sql":"create table t (a int references x match full no inherit unique)","code":"42601","message":"syntax error at or near \"no\"","position":46}
+{"sql":"create table t (a int references x match full no inherit primary key)","code":"42601","message":"syntax error at or near \"no\"","position":46}
+{"sql":"create table t (a int references x match full no inherit references y)","code":"42601","message":"syntax error at or near \"no\"","position":46}
+{"sql":"create table t (a int references x match full no inherit references y deferrable)","code":"42601","message":"syntax error at or near \"no\"","position":46}
+{"sql":"create table t (a int references x match full no inherit collate \"C\")","code":"42601","message":"syntax error at or near \"no\"","position":46}
+{"sql":"create table t (a int references x match full no inherit constraint c not null)","code":"42601","message":"syntax error at or near \"no\"","position":46}
+{"sql":"create table t (a int references x match full no inherit generated always as identity)","code":"42601","message":"syntax error at or near \"no\"","position":46}
+{"sql":"create table t (a int references x match full deferrable not valid)","code":"42601","message":"syntax error at or near \"valid\"","position":61}
+{"sql":"create table t (a int references x match full deferrable not valid not null)","code":"42601","message":"syntax error at or near \"valid\"","position":61}
+{"sql":"create table t (a int references x match full deferrable not valid null)","code":"42601","message":"syntax error at or near \"valid\"","position":61}
+{"sql":"create table t (a int references x match full deferrable not valid default 1)","code":"42601","message":"syntax error at or near \"valid\"","position":61}
+{"sql":"create table t (a int references x match full deferrable not valid check (a > 0))","code":"42601","message":"syntax error at or near \"valid\"","position":61}
+{"sql":"create table t (a int references x match full deferrable not valid unique)","code":"42601","message":"syntax error at or near \"valid\"","position":61}
+{"sql":"create table t (a int references x match full deferrable not valid primary key)","code":"42601","message":"syntax error at or near \"valid\"","position":61}
+{"sql":"create table t (a int references x match full deferrable not valid references y)","code":"42601","message":"syntax error at or near \"valid\"","position":61}
+{"sql":"create table t (a int references x match full deferrable not valid references y deferrable)","code":"42601","message":"syntax error at or near \"valid\"","position":61}
+{"sql":"create table t (a int references x match full deferrable not valid collate \"C\")","code":"42601","message":"syntax error at or near \"valid\"","position":61}
+{"sql":"create table t (a int references x match full deferrable not valid constraint c not null)","code":"42601","message":"syntax error at or near \"valid\"","position":61}
+{"sql":"create table t (a int references x match full deferrable not valid generated always as identity)","code":"42601","message":"syntax error at or near \"valid\"","position":61}
+{"sql":"create table t (a int references x on delete cascade)"}
+{"sql":"create table t (a int references x on delete cascade deferrable)"}
+{"sql":"create table t (a int references x on delete cascade not deferrable)"}
+{"sql":"create table t (a int references x on delete cascade initially deferred)"}
+{"sql":"create table t (a int references x on delete cascade initially immediate)"}
+{"sql":"create table t (a int references x on delete cascade deferrable initially deferred)"}
+{"sql":"create table t (a int references x match simple on update set null on delete restrict)"}
+{"sql":"create table t (a int references x match simple on update set null on delete restrict deferrable)"}
+{"sql":"create table t (a int references x match simple on update set null on delete restrict not deferrable)"}
+{"sql":"create table t (a int references x match simple on update set null on delete restrict initially deferred)"}
+{"sql":"create table t (a int references x match simple on update set null on delete restrict initially immediate)"}
+{"sql":"create table t (a int references x match simple on update set null on delete restrict deferrable initially deferred)"}
+{"sql":"create table t (a int constraint c references x, b int)"}
+{"sql":"alter table t add column a int references x"}
+{"sql":"alter table t add a int references x not null"}
+{"sql":"create table t (a int not null references x)"}
+{"sql":"create table t (a int)"}
+{"sql":"create table t (a int references x, foreign key (a) references y)"}
+{"sql":"create table t (a int constraint c references x deferrable, b int)"}
+{"sql":"alter table t add column a int references x deferrable"}
+{"sql":"alter table t add a int references x deferrable not null"}
+{"sql":"create table t (a int not null references x deferrable)"}
+{"sql":"create table t (a int deferrable references x)"}
+{"sql":"create table t (a int deferrable)"}
+{"sql":"create table t (a int references x deferrable, foreign key (a) references y deferrable)"}
+{"sql":"create table t (a int constraint c references x not deferrable, b int)"}
+{"sql":"alter table t add column a int references x not deferrable"}
+{"sql":"alter table t add a int references x not deferrable not null"}
+{"sql":"create table t (a int not null references x not deferrable)"}
+{"sql":"create table t (a int not deferrable references x)"}
+{"sql":"create table t (a int not deferrable)"}
+{"sql":"create table t (a int references x not deferrable, foreign key (a) references y not deferrable)"}
+{"sql":"create table t (a int constraint c references x initially deferred, b int)"}
+{"sql":"alter table t add column a int references x initially deferred"}
+{"sql":"alter table t add a int references x initially deferred not null"}
+{"sql":"create table t (a int not null references x initially deferred)"}
+{"sql":"create table t (a int initially deferred references x)"}
+{"sql":"create table t (a int initially deferred)"}
+{"sql":"create table t (a int references x initially deferred, foreign key (a) references y initially deferred)"}
+{"sql":"create table t (a int constraint c references x initially immediate, b int)"}
+{"sql":"alter table t add column a int references x initially immediate"}
+{"sql":"alter table t add a int references x initially immediate not null"}
+{"sql":"create table t (a int not null references x initially immediate)"}
+{"sql":"create table t (a int initially immediate references x)"}
+{"sql":"create table t (a int initially immediate)"}
+{"sql":"create table t (a int references x initially immediate, foreign key (a) references y initially immediate)"}
+{"sql":"create table t (a int constraint c references x deferrable initially deferred, b int)"}
+{"sql":"alter table t add column a int references x deferrable initially deferred"}
+{"sql":"alter table t add a int references x deferrable initially deferred not null"}
+{"sql":"create table t (a int not null references x deferrable initially deferred)"}
+{"sql":"create table t (a int deferrable initially deferred references x)"}
+{"sql":"create table t (a int deferrable initially deferred)"}
+{"sql":"create table t (a int references x deferrable initially deferred, foreign key (a) references y deferrable initially deferred)"}
+{"sql":"create table t (a int constraint c references x not deferrable initially deferred, b int)"}
+{"sql":"alter table t add column a int references x not deferrable initially deferred"}
+{"sql":"alter table t add a int references x not deferrable initially deferred not null"}
+{"sql":"create table t (a int not null references x not deferrable initially deferred)"}
+{"sql":"create table t (a int not deferrable initially deferred references x)"}
+{"sql":"create table t (a int not deferrable initially deferred)"}
+{"sql":"create table t (a int references x not deferrable initially deferred, foreign key (a) references y not deferrable initially deferred)","code":"42601","message":"constraint declared INITIALLY DEFERRED must be DEFERRABLE","position":114}
+{"sql":"create table t (a int constraint c references x initially deferred deferrable, b int)"}
+{"sql":"alter table t add column a int references x initially deferred deferrable"}
+{"sql":"alter table t add a int references x initially deferred deferrable not null"}
+{"sql":"create table t (a int not null references x initially deferred deferrable)"}
+{"sql":"create table t (a int initially deferred deferrable references x)"}
+{"sql":"create table t (a int initially deferred deferrable)"}
+{"sql":"create table t (a int references x initially deferred deferrable, foreign key (a) references y initially deferred deferrable)"}
