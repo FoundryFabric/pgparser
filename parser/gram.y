@@ -385,7 +385,7 @@ import (
 %type <ival>  event
 %type <boolean>  opt_instead opt_trusted
 %type <list>  handler_name opt_inline_handler opt_validator
-%type <ival>  ConstraintAttributeSpec ConstraintAttributeElem ColConstraintAttributeSpec ColConstraintAttributeElem
+%type <ival>  ConstraintAttributeSpec ConstraintAttributeElem
 %type <ival>  key_match
 %type <keyaction>  key_action
 %type <keyaction>  key_update key_delete
@@ -1956,7 +1956,7 @@ ColConstraintElem:
 				Location: -1,
 			}
 		}
-	| REFERENCES qualified_name opt_column_list key_match key_actions ColConstraintAttributeSpec
+	| REFERENCES qualified_name opt_column_list key_match key_actions
 		{
 			rv := makeRangeVar($2, $<loc>2)
 			n := &nodes.Constraint{
@@ -1970,7 +1970,6 @@ ColConstraintElem:
 				Location:       -1,
 				InitiallyValid: true,
 			}
-			applyConstraintAttrs(n, $6)
 			$$ = n
 		}
 	| GENERATED ALWAYS AS IDENTITY_P OptParenthesizedSeqOptList
@@ -14173,20 +14172,6 @@ ConstraintAttributeElem:
 	| INITIALLY DEFERRED  { $$ = int64(nodes.CAS_INITIALLY_DEFERRED) }
 	| NOT VALID           { $$ = int64(nodes.CAS_NOT_VALID) }
 	| NO INHERIT          { $$ = int64(nodes.CAS_NO_INHERIT) }
-	;
-
-ColConstraintAttributeSpec:
-	/* EMPTY */
-		{ $$ = 0 }
-	| ColConstraintAttributeSpec ColConstraintAttributeElem
-		{ $$ = $1 | $2 }
-	;
-
-ColConstraintAttributeElem:
-	NOT DEFERRABLE        { $$ = int64(nodes.CAS_NOT_DEFERRABLE) }
-	| DEFERRABLE          { $$ = int64(nodes.CAS_DEFERRABLE) }
-	| INITIALLY IMMEDIATE { $$ = int64(nodes.CAS_INITIALLY_IMMEDIATE) }
-	| INITIALLY DEFERRED  { $$ = int64(nodes.CAS_INITIALLY_DEFERRED) }
 	;
 
 no_inherit:
