@@ -90,7 +90,7 @@ L a feature's grammar.
 | role-name-checks | 1 | 4 (0/1/3) | accepts `ALTER ROLE CURRENT_USER RENAME`; 42601 for 42939 | `RoleId` action, `RenameStmt` | no | S |
 | bare-column-label | 2 | 511 (2/502/7) | refuses a keyword as a column label without AS | `target_el: a_expr BareColLabel`, `bare_label_keyword` | no | M |
 | pg17-json-names | 2 | 75 (4/66/5) | refuses PostgreSQL 16's json, json_table and the like as names | `kwlist.h`: 20 PostgreSQL 17 keywords, JSON col_name; `JsonType` | no | M (with pg17-sqljson) |
-| drop-type-typename | 2 | 50 (0/47/3) | refuses `DROP TYPE t[]`, `DROP DOMAIN d(3)` | `DropStmt` TYPE/DOMAIN `type_name_list` | yes, all 50 | S |
+| drop-type-typename (fixed) | 2 | 50 (0/47/3) | refuses `DROP TYPE t[]`, `DROP DOMAIN d(3)` | `DropStmt` TYPE/DOMAIN `type_name_list` | yes, all 50 | S |
 | alter-column-optional-keyword | 2 | 7 (0/5/2) | refuses `ALTER a SET (...)`, `ALTER a SET GENERATED` without COLUMN | `alter_table_cmd` `ALTER opt_column ColId` | no | S |
 | alter-role-no-options | 2 | 4 (0/2/2) | refuses `ALTER ROLE r` | `AlterRoleStmt` `opt_with AlterOptRoleList` | no | S |
 | reindex-optional-name | 2 | 4 (1/0/3) | refuses `REINDEX SYSTEM`, `REINDEX DATABASE` | `ReindexStmt` `opt_single_name` | no | S |
@@ -98,7 +98,7 @@ L a feature's grammar.
 | copy-generic-options | 2 | 4 (0/2/2) | refuses a reserved keyword as a COPY option name; accepts DEFAULT as its argument | `copy_generic_opt_elem: ColLabel copy_generic_opt_arg` | no | S |
 | alter-database-refresh-collation | 2 | 3 (0/0/3) | refuses `ALTER DATABASE x REFRESH COLLATION VERSION` | `AlterDatabaseRefreshCollStmt` | no | S |
 | column-options-qualified-name | 2 | 3 (0/1/2) | refuses `ALTER COLUMN a SET (x.y = 1)` | `alter_table_cmd` SET/RESET `reloptions` (`reloption_elem`) | no | S |
-| alter-extension-member | 2 | 2 (0/0/2) | refuses ALTER EXTENSION ADD CAST, ADD TRANSFORM | `AlterExtensionContentsStmt` | yes, both | S |
+| alter-extension-member (fixed) | 2 | 2 (0/0/2) | refuses ALTER EXTENSION ADD CAST, ADD TRANSFORM | `AlterExtensionContentsStmt` | yes, both | S |
 | role-option-error-order | 3 | 7 (0/6/1) | syntax error at the next token for PostgreSQL's `unrecognized role option` | `CreateOptRoleElem`/`AlterOptRoleElem: IDENT` | no | S |
 | operator-missing-argument-message | 3 | 5 (2/1/2) | hint folded into the message | `oper_argtypes` | no | S |
 | policy-option-message | 3 | 3 (1/1/1) | hint used as the message | `RowSecurityDefaultPermissive` | no | S |
@@ -309,7 +309,7 @@ type names spelled with them are refused. Fixed with pg17-sqljson.
 | `select json_table(j)` | accepts | 42601 syntax error at or near "(" at 17 |
 | `SELECT JSON_VALUE(3)(jsonb '[]', '$')` | 42601 syntax error at or near "(" at 20 | 42601 syntax error at or near ")" at 19 |
 
-### drop-type-typename (risk 2, 50; #15 fixes all)
+### drop-type-typename (risk 2, 50; fixed by #15)
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
@@ -384,7 +384,7 @@ changes those fixtures.
 
 `alter table t set (toast.autovacuum_enabled = false)` is accepted by both.
 
-### alter-extension-member (risk 2, 2; #15 fixes both)
+### alter-extension-member (risk 2, 2; fixed by #15)
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|

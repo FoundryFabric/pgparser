@@ -2562,7 +2562,7 @@
 {"file":"alter_table.sql","stmt":1108,"sum":"ed6d7d5d"}
 {"file":"alter_table.sql","stmt":1109,"sum":"3f0bdc1d"}
 {"file":"alter_table.sql","stmt":1110,"sum":"9a53c6b5"}
-{"file":"alter_table.sql","stmt":1110,"edit":[20,0,"[]"],"class":"drop-type-typename"}
+{"file":"alter_table.sql","stmt":1110,"edit":[20,0,"[]"]}
 {"file":"alter_table.sql","stmt":1111,"sum":"3f88a478"}
 {"file":"alter_table.sql","stmt":1111,"edit":[34,6,"text b"]}
 {"file":"alter_table.sql","stmt":1112,"sum":"bbd235d8"}
@@ -2576,7 +2576,7 @@
 {"file":"alter_table.sql","stmt":1119,"sum":"0ad98bab"}
 {"file":"alter_table.sql","stmt":1120,"sum":"6d736bbb"}
 {"file":"alter_table.sql","stmt":1121,"sum":"a19a4e23"}
-{"file":"alter_table.sql","stmt":1121,"edit":[25,0,"[1:2]"],"code":"42601","msg":"syntax error at or near \":\"","pos":27,"class":"drop-type-typename"}
+{"file":"alter_table.sql","stmt":1121,"edit":[25,0,"[1:2]"],"code":"42601","msg":"syntax error at or near \":\"","pos":27}
 {"file":"alter_table.sql","stmt":1122,"sum":"1c6f50e8"}
 {"file":"alter_table.sql","stmt":1122,"edit":[72,9,"numeric y"]}
 {"file":"alter_table.sql","stmt":1123,"sum":"a1316c6f"}
@@ -5512,7 +5512,7 @@
 {"file":"collate.icu.utf8.sql","stmt":196,"sum":"6cff11fd"}
 {"file":"collate.icu.utf8.sql","stmt":197,"sum":"ee1ebcad"}
 {"file":"collate.icu.utf8.sql","stmt":198,"sum":"324151f1"}
-{"file":"collate.icu.utf8.sql","stmt":198,"edit":[27,0,"[1]"],"class":"drop-type-typename"}
+{"file":"collate.icu.utf8.sql","stmt":198,"edit":[27,0,"[1]"]}
 {"file":"collate.icu.utf8.sql","stmt":199,"sum":"897c1a5d"}
 {"file":"collate.icu.utf8.sql","stmt":199,"edit":[68,7,"union"]}
 {"file":"collate.icu.utf8.sql","stmt":200,"sum":"6d64091a"}
@@ -5520,7 +5520,7 @@
 {"file":"collate.icu.utf8.sql","stmt":201,"edit":[40,0,".x"]}
 {"file":"collate.icu.utf8.sql","stmt":202,"sum":"f2f7afcb"}
 {"file":"collate.icu.utf8.sql","stmt":203,"sum":"b6413702"}
-{"file":"collate.icu.utf8.sql","stmt":203,"edit":[21,0,"(3)"],"class":"drop-type-typename"}
+{"file":"collate.icu.utf8.sql","stmt":203,"edit":[21,0,"(3)"]}
 {"file":"collate.icu.utf8.sql","stmt":204,"sum":"94312c97"}
 {"file":"collate.icu.utf8.sql","stmt":204,"edit":[25,0," textrange_en_us"],"code":"42601","msg":"syntax error at or near \"textrange_en_us\"","pos":26}
 {"file":"collate.icu.utf8.sql","stmt":205,"sum":"b0f13e84"}
@@ -5906,7 +5906,7 @@
 {"file":"collate.icu.utf8.sql","stmt":494,"edit":[59,0,"(3)"],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":47,"class":"pg17-sqljson"}
 {"file":"collate.icu.utf8.sql","stmt":494,"edit":[92,0,".x"],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":47,"class":"pg17-sqljson"}
 {"file":"collate.icu.utf8.sql","stmt":495,"sum":"709e9041"}
-{"file":"collate.icu.utf8.sql","stmt":495,"edit":[23,0," ( "],"code":"42601","msg":"syntax error at or near \",\"","pos":26,"class":"drop-type-typename"}
+{"file":"collate.icu.utf8.sql","stmt":495,"edit":[23,0," ( "],"code":"42601","msg":"syntax error at or near \",\"","pos":26}
 {"file":"collate.icu.utf8.sql","stmt":496,"sum":"ea0db68c"}
 {"file":"collate.icu.utf8.sql","stmt":497,"sum":"833e0ecf"}
 {"file":"collate.icu.utf8.sql","stmt":498,"sum":"c0e823d5"}
@@ -6177,7 +6177,7 @@
 {"file":"collate.linux.utf8.sql","stmt":196,"sum":"b6413702"}
 {"file":"collate.linux.utf8.sql","stmt":196,"edit":[21,0,".x"]}
 {"file":"collate.linux.utf8.sql","stmt":197,"sum":"94312c97"}
-{"file":"collate.linux.utf8.sql","stmt":197,"edit":[25,0,"[]"],"class":"drop-type-typename"}
+{"file":"collate.linux.utf8.sql","stmt":197,"edit":[25,0,"[]"]}
 {"file":"collate.linux.utf8.sql","stmt":198,"sum":"b0f13e84"}
 {"file":"collate.linux.utf8.sql","stmt":199,"sum":"d6f252bd"}
 {"file":"collate.linux.utf8.sql","stmt":199,"edit":[95,0,".x"]}
@@ -6623,7 +6623,7 @@
 {"file":"collate.windows.win1252.sql","stmt":160,"sum":"6cff11fd"}
 {"file":"collate.windows.win1252.sql","stmt":161,"sum":"ee1ebcad"}
 {"file":"collate.windows.win1252.sql","stmt":162,"sum":"324151f1"}
-{"file":"collate.windows.win1252.sql","stmt":162,"edit":[27,0," ( "],"code":"42601","msg":"syntax error at end of input","pos":30,"class":"drop-type-typename"}
+{"file":"collate.windows.win1252.sql","stmt":162,"edit":[27,0," ( "],"code":"42601","msg":"syntax error at end of input","pos":30}
 {"file":"collate.windows.win1252.sql","stmt":163,"sum":"897c1a5d"}
 {"file":"collate.windows.win1252.sql","stmt":164,"sum":"2d57ba08"}
 {"file":"collate.windows.win1252.sql","stmt":165,"sum":"449c3006"}
@@ -10026,14 +10026,14 @@
 {"file":"create_table.sql","stmt":109,"sum":"6c9792ff"}
 {"file":"create_table.sql","stmt":110,"sum":"c3583196"}
 {"file":"create_table.sql","stmt":111,"sum":"17e0493a"}
-{"file":"create_table.sql","stmt":111,"edit":[27,0,"(3)"],"class":"drop-type-typename"}
+{"file":"create_table.sql","stmt":111,"edit":[27,0,"(3)"]}
 {"file":"create_table.sql","stmt":112,"sum":"e0faa9b6"}
 {"file":"create_table.sql","stmt":113,"sum":"ea88bc18"}
 {"file":"create_table.sql","stmt":114,"sum":"cc7c6d39"}
 {"file":"create_table.sql","stmt":115,"sum":"3289a0b2"}
 {"file":"create_table.sql","stmt":116,"sum":"c3583196"}
 {"file":"create_table.sql","stmt":117,"sum":"17e0493a"}
-{"file":"create_table.sql","stmt":117,"edit":[27,0,"(3)"],"class":"drop-type-typename"}
+{"file":"create_table.sql","stmt":117,"edit":[27,0,"(3)"]}
 {"file":"create_table.sql","stmt":118,"sum":"e0faa9b6"}
 {"file":"create_table.sql","stmt":118,"edit":[38,7,""]}
 {"file":"create_table.sql","stmt":119,"sum":"ea88bc18"}
@@ -10489,7 +10489,7 @@
 {"file":"create_type.sql","stmt":24,"sum":"f33405e0"}
 {"file":"create_type.sql","stmt":24,"edit":[90,0,".x"]}
 {"file":"create_type.sql","stmt":25,"sum":"82bbd419"}
-{"file":"create_type.sql","stmt":25,"edit":[20,0,"[]"],"class":"drop-type-typename"}
+{"file":"create_type.sql","stmt":25,"edit":[20,0,"[]"]}
 {"file":"create_type.sql","stmt":26,"sum":"3ce3efdc"}
 {"file":"create_type.sql","stmt":27,"sum":"3737e53b"}
 {"file":"create_type.sql","stmt":28,"sum":"9ff4f87d"}
@@ -10514,10 +10514,10 @@
 {"file":"create_type.sql","stmt":44,"sum":"010be11e"}
 {"file":"create_type.sql","stmt":44,"edit":[44,0," base_type"]}
 {"file":"create_type.sql","stmt":45,"sum":"40c32a26"}
-{"file":"create_type.sql","stmt":45,"edit":[28,0,"[]"],"class":"drop-type-typename"}
+{"file":"create_type.sql","stmt":45,"edit":[28,0,"[]"]}
 {"file":"create_type.sql","stmt":46,"sum":"e6f2fc2c"}
 {"file":"create_type.sql","stmt":46,"edit":[19,9,""]}
-{"file":"create_type.sql","stmt":46,"edit":[28,0,"[]"],"class":"drop-type-typename"}
+{"file":"create_type.sql","stmt":46,"edit":[28,0,"[]"]}
 {"file":"create_type.sql","stmt":47,"sum":"8766b25c"}
 {"file":"create_type.sql","stmt":48,"sum":"2d4bf9df"}
 {"file":"create_type.sql","stmt":49,"sum":"61401159"}
@@ -11478,7 +11478,7 @@
 {"file":"domain.sql","stmt":2,"sum":"eb218479"}
 {"file":"domain.sql","stmt":2,"edit":[46,0,"(3)"]}
 {"file":"domain.sql","stmt":3,"sum":"9b636167"}
-{"file":"domain.sql","stmt":3,"edit":[60,0,"(3)"],"class":"drop-type-typename"}
+{"file":"domain.sql","stmt":3,"edit":[60,0,"(3)"]}
 {"file":"domain.sql","stmt":4,"sum":"cb8d1cf3"}
 {"file":"domain.sql","stmt":5,"sum":"84560751"}
 {"file":"domain.sql","stmt":6,"sum":"774936c7"}
@@ -11512,7 +11512,7 @@
 {"file":"domain.sql","stmt":23,"sum":"cd88ed97"}
 {"file":"domain.sql","stmt":24,"sum":"eb06375d"}
 {"file":"domain.sql","stmt":25,"sum":"04565c81"}
-{"file":"domain.sql","stmt":25,"edit":[22,0," ( "],"code":"42601","msg":"syntax error at end of input","pos":34,"class":"drop-type-typename"}
+{"file":"domain.sql","stmt":25,"edit":[22,0," ( "],"code":"42601","msg":"syntax error at end of input","pos":34}
 {"file":"domain.sql","stmt":26,"sum":"607e767b"}
 {"file":"domain.sql","stmt":27,"sum":"fc259d45"}
 {"file":"domain.sql","stmt":28,"sum":"ccfb0958"}
@@ -11526,7 +11526,7 @@
 {"file":"domain.sql","stmt":36,"sum":"3c6cb5f3"}
 {"file":"domain.sql","stmt":37,"sum":"734df4dc"}
 {"file":"domain.sql","stmt":38,"sum":"42b25c3d"}
-{"file":"domain.sql","stmt":38,"edit":[22,0,"[]"],"class":"drop-type-typename"}
+{"file":"domain.sql","stmt":38,"edit":[22,0,"[]"]}
 {"file":"domain.sql","stmt":38,"edit":[22,0,".x"]}
 {"file":"domain.sql","stmt":39,"sum":"4b722e60"}
 {"file":"domain.sql","stmt":40,"sum":"27399d6f"}
@@ -11564,7 +11564,7 @@
 {"file":"domain.sql","stmt":63,"edit":[31,0,"(3)"]}
 {"file":"domain.sql","stmt":64,"sum":"e008c9cb"}
 {"file":"domain.sql","stmt":65,"sum":"710976e6"}
-{"file":"domain.sql","stmt":65,"edit":[42,0,"[]"],"class":"drop-type-typename"}
+{"file":"domain.sql","stmt":65,"edit":[42,0,"[]"]}
 {"file":"domain.sql","stmt":66,"sum":"4d5a8a7d"}
 {"file":"domain.sql","stmt":67,"sum":"8c1f52e3"}
 {"file":"domain.sql","stmt":67,"edit":[35,0,".x"]}
@@ -11679,7 +11679,7 @@
 {"file":"domain.sql","stmt":152,"sum":"06db4a0c"}
 {"file":"domain.sql","stmt":153,"sum":"b79232b7"}
 {"file":"domain.sql","stmt":154,"sum":"7e6c9d61"}
-{"file":"domain.sql","stmt":154,"edit":[13,0,"[]"],"class":"drop-type-typename"}
+{"file":"domain.sql","stmt":154,"edit":[13,0,"[]"]}
 {"file":"domain.sql","stmt":155,"sum":"66768c22"}
 {"file":"domain.sql","stmt":155,"edit":[85,0,".x"],"code":"42601","msg":"syntax error at or near \".\"","pos":85}
 {"file":"domain.sql","stmt":156,"sum":"7a996e5b"}
@@ -11746,11 +11746,11 @@
 {"file":"domain.sql","stmt":205,"sum":"6b8948fb"}
 {"file":"domain.sql","stmt":205,"edit":[19,4,""]}
 {"file":"domain.sql","stmt":206,"sum":"fe8c8434"}
-{"file":"domain.sql","stmt":206,"edit":[20,0,"(3)"],"class":"drop-type-typename"}
+{"file":"domain.sql","stmt":206,"edit":[20,0,"(3)"]}
 {"file":"domain.sql","stmt":207,"sum":"e63bca9b"}
 {"file":"domain.sql","stmt":207,"edit":[12,5,""]}
 {"file":"domain.sql","stmt":208,"sum":"8936e19c"}
-{"file":"domain.sql","stmt":208,"edit":[18,0,"[]"],"class":"drop-type-typename"}
+{"file":"domain.sql","stmt":208,"edit":[18,0,"[]"]}
 {"file":"domain.sql","stmt":209,"sum":"7e895880"}
 {"file":"domain.sql","stmt":209,"edit":[19,0,".x"]}
 {"file":"domain.sql","stmt":210,"sum":"3f4c9b90"}
@@ -11845,7 +11845,7 @@
 {"file":"domain.sql","stmt":282,"sum":"d4a8e34a"}
 {"file":"domain.sql","stmt":283,"sum":"a6a4c707"}
 {"file":"domain.sql","stmt":284,"sum":"0dfe54d6"}
-{"file":"domain.sql","stmt":284,"edit":[22,0,"(3)"],"class":"drop-type-typename"}
+{"file":"domain.sql","stmt":284,"edit":[22,0,"(3)"]}
 {"file":"domain.sql","stmt":284,"edit":[22,0,".x"]}
 {"file":"domain.sql","stmt":285,"sum":"a8ff95a4"}
 {"file":"domain.sql","stmt":286,"sum":"61bb2747"}
@@ -11879,7 +11879,7 @@
 {"file":"domain.sql","stmt":307,"sum":"cf97ad28"}
 {"file":"domain.sql","stmt":307,"edit":[21,0,"(3)"]}
 {"file":"domain.sql","stmt":308,"sum":"414a222c"}
-{"file":"domain.sql","stmt":308,"edit":[28,0,"(3)"],"class":"drop-type-typename"}
+{"file":"domain.sql","stmt":308,"edit":[28,0,"(3)"]}
 {"file":"domain.sql","stmt":309,"sum":"cc1b5f41"}
 {"file":"domain.sql","stmt":310,"sum":"e0f20a18"}
 {"file":"domain.sql","stmt":310,"edit":[17,0,".x"]}
@@ -11982,7 +11982,7 @@
 {"file":"domain.sql","stmt":389,"sum":"05b620b7"}
 {"file":"domain.sql","stmt":390,"sum":"965e1658"}
 {"file":"domain.sql","stmt":391,"sum":"c889f05b"}
-{"file":"domain.sql","stmt":391,"edit":[17,0,"[]"],"class":"drop-type-typename"}
+{"file":"domain.sql","stmt":391,"edit":[17,0,"[]"]}
 {"file":"domain.sql","stmt":392,"sum":"404c9f81"}
 {"file":"domain.sql","stmt":392,"edit":[12,6,""]}
 {"file":"domain.sql","stmt":393,"sum":"09d469a3"}
@@ -12099,12 +12099,12 @@
 {"file":"drop_if_exists.sql","stmt":24,"sum":"36d44ac5"}
 {"file":"drop_if_exists.sql","stmt":25,"sum":"463f304b"}
 {"file":"drop_if_exists.sql","stmt":26,"sum":"36d44ac5"}
-{"file":"drop_if_exists.sql","stmt":26,"edit":[12,0,"[]"],"code":"42601","msg":"syntax error at or near \"EXISTS\"","pos":15,"class":"drop-type-typename"}
+{"file":"drop_if_exists.sql","stmt":26,"edit":[12,0,"[]"],"code":"42601","msg":"syntax error at or near \"EXISTS\"","pos":15}
 {"file":"drop_if_exists.sql","stmt":27,"sum":"d19dad96"}
-{"file":"drop_if_exists.sql","stmt":27,"edit":[26,0,"(3)"],"class":"drop-type-typename"}
+{"file":"drop_if_exists.sql","stmt":27,"edit":[26,0,"(3)"]}
 {"file":"drop_if_exists.sql","stmt":28,"sum":"119a594a"}
 {"file":"drop_if_exists.sql","stmt":29,"sum":"73794c95"}
-{"file":"drop_if_exists.sql","stmt":29,"edit":[14,0," , "],"code":"42601","msg":"syntax error at or near \"EXISTS\"","pos":18,"class":"drop-type-typename"}
+{"file":"drop_if_exists.sql","stmt":29,"edit":[14,0," , "],"code":"42601","msg":"syntax error at or near \"EXISTS\"","pos":18}
 {"file":"drop_if_exists.sql","stmt":30,"sum":"8cb1b210"}
 {"file":"drop_if_exists.sql","stmt":31,"sum":"73794c95"}
 {"file":"drop_if_exists.sql","stmt":31,"edit":[40,0,".x"]}
@@ -12242,8 +12242,8 @@
 {"file":"drop_if_exists.sql","stmt":140,"sum":"d50001ad"}
 {"file":"drop_if_exists.sql","stmt":141,"sum":"5fb5d1d6"}
 {"file":"drop_if_exists.sql","stmt":142,"sum":"1504565e"}
-{"file":"drop_if_exists.sql","stmt":142,"edit":[34,0,"(3)"],"code":"42601","msg":"syntax error at or near \".\"","pos":37,"class":"drop-type-typename"}
-{"file":"drop_if_exists.sql","stmt":142,"edit":[10,9,"EXISTS IF"],"code":"42601","msg":"syntax error at or near \"EXISTS\"","pos":10,"class":"drop-type-typename"}
+{"file":"drop_if_exists.sql","stmt":142,"edit":[34,0,"(3)"],"code":"42601","msg":"syntax error at or near \".\"","pos":37}
+{"file":"drop_if_exists.sql","stmt":142,"edit":[10,9,"EXISTS IF"],"code":"42601","msg":"syntax error at or near \"EXISTS\"","pos":10}
 {"file":"drop_if_exists.sql","stmt":143,"sum":"348ad75d"}
 {"file":"drop_if_exists.sql","stmt":144,"sum":"95f8494a"}
 {"file":"drop_if_exists.sql","stmt":144,"edit":[147,0," ( "],"code":"42601","msg":"syntax error at or near \"(\"","pos":148}
@@ -12472,7 +12472,7 @@
 {"file":"enum.sql","stmt":149,"sum":"3520eab8"}
 {"file":"enum.sql","stmt":150,"sum":"eb2ebdbd"}
 {"file":"enum.sql","stmt":151,"sum":"8a47bcf4"}
-{"file":"enum.sql","stmt":151,"edit":[15,0,"(3)"],"class":"drop-type-typename"}
+{"file":"enum.sql","stmt":151,"edit":[15,0,"(3)"]}
 {"file":"enum.sql","stmt":151,"edit":[15,0,".x"]}
 {"file":"enum.sql","stmt":152,"sum":"e0fffd17"}
 {"file":"enum.sql","stmt":153,"sum":"abed64d4"}
@@ -12495,7 +12495,7 @@
 {"file":"enum.sql","stmt":165,"sum":"43feef1e"}
 {"file":"enum.sql","stmt":166,"sum":"ad80e605"}
 {"file":"enum.sql","stmt":167,"sum":"ff06b1b6"}
-{"file":"enum.sql","stmt":167,"edit":[17,0,"(3)"],"class":"drop-type-typename"}
+{"file":"enum.sql","stmt":167,"edit":[17,0,"(3)"]}
 {"file":"enum.sql","stmt":167,"edit":[17,0,".x"]}
 {"file":"enum.sql","stmt":168,"sum":"24cc45bc"}
 {"file":"enum.sql","stmt":169,"sum":"5617c90d"}
@@ -12663,7 +12663,7 @@
 {"file":"errors.sql","stmt":39,"sum":"b8c15b78","code":"42601","msg":"syntax error at end of input","pos":46}
 {"file":"errors.sql","stmt":40,"sum":"5375f093","code":"42601","msg":"syntax error at or near \"314159\"","pos":27}
 {"file":"errors.sql","stmt":41,"sum":"482272eb"}
-{"file":"errors.sql","stmt":41,"edit":[34,0,"(3)"],"class":"drop-type-typename"}
+{"file":"errors.sql","stmt":41,"edit":[34,0,"(3)"]}
 {"file":"errors.sql","stmt":42,"sum":"a6e76f42","code":"42601","msg":"syntax error at end of input","pos":55}
 {"file":"errors.sql","stmt":43,"sum":"fa81c15f","code":"42601","msg":"syntax error at end of input","pos":41}
 {"file":"errors.sql","stmt":44,"sum":"ae70e463","code":"42601","msg":"syntax error at end of input","pos":38}
@@ -17967,7 +17967,7 @@
 {"file":"identity.sql","stmt":161,"sum":"aad57f61"}
 {"file":"identity.sql","stmt":162,"sum":"a72f5868"}
 {"file":"identity.sql","stmt":163,"sum":"1b30c8c2"}
-{"file":"identity.sql","stmt":163,"edit":[29,0,"[]"],"class":"drop-type-typename"}
+{"file":"identity.sql","stmt":163,"edit":[29,0,"[]"]}
 {"file":"identity.sql","stmt":164,"sum":"974997fe"}
 {"file":"identity.sql","stmt":165,"sum":"fe2329c1"}
 {"file":"identity.sql","stmt":166,"sum":"a475d303"}
@@ -20358,7 +20358,7 @@
 {"file":"insert.sql","stmt":91,"edit":[22,0,".x"]}
 {"file":"insert.sql","stmt":92,"sum":"206ea6fd"}
 {"file":"insert.sql","stmt":93,"sum":"9fcc7afb"}
-{"file":"insert.sql","stmt":93,"edit":[26,0,"[]"],"class":"drop-type-typename"}
+{"file":"insert.sql","stmt":93,"edit":[26,0,"[]"]}
 {"file":"insert.sql","stmt":94,"sum":"a5d13055"}
 {"file":"insert.sql","stmt":95,"sum":"9e012cd4"}
 {"file":"insert.sql","stmt":96,"sum":"11e10e94"}
@@ -24079,12 +24079,12 @@
 {"file":"json.sql","stmt":334,"sum":"d45226eb"}
 {"file":"json.sql","stmt":335,"sum":"168b7b8b"}
 {"file":"json.sql","stmt":336,"sum":"8cd5976d"}
-{"file":"json.sql","stmt":336,"edit":[27,0,"[1]"],"class":"drop-type-typename"}
+{"file":"json.sql","stmt":336,"edit":[27,0,"[1]"]}
 {"file":"json.sql","stmt":337,"sum":"74fc41c1"}
 {"file":"json.sql","stmt":338,"sum":"62fe6402"}
-{"file":"json.sql","stmt":338,"edit":[27,0,"[]"],"class":"drop-type-typename"}
+{"file":"json.sql","stmt":338,"edit":[27,0,"[]"]}
 {"file":"json.sql","stmt":339,"sum":"f03c11b5"}
-{"file":"json.sql","stmt":339,"edit":[26,0,"(3)"],"class":"drop-type-typename"}
+{"file":"json.sql","stmt":339,"edit":[26,0,"(3)"]}
 {"file":"json.sql","stmt":340,"sum":"cca1c8c2"}
 {"file":"json.sql","stmt":341,"sum":"24324525"}
 {"file":"json.sql","stmt":341,"edit":[50,6,"value("]}
@@ -25039,7 +25039,7 @@
 {"file":"jsonb.sql","stmt":466,"sum":"c5dc6c4e"}
 {"file":"jsonb.sql","stmt":467,"sum":"71d77f38"}
 {"file":"jsonb.sql","stmt":468,"sum":"3676a85c"}
-{"file":"jsonb.sql","stmt":468,"edit":[38,0,"[]"],"class":"drop-type-typename"}
+{"file":"jsonb.sql","stmt":468,"edit":[38,0,"[]"]}
 {"file":"jsonb.sql","stmt":469,"sum":"867a47c5"}
 {"file":"jsonb.sql","stmt":469,"edit":[66,0,"(3)"]}
 {"file":"jsonb.sql","stmt":470,"sum":"6132beed"}
@@ -25122,9 +25122,9 @@
 {"file":"jsonb.sql","stmt":521,"sum":"3e4af7cb"}
 {"file":"jsonb.sql","stmt":522,"sum":"d493812b"}
 {"file":"jsonb.sql","stmt":523,"sum":"26a11fd5"}
-{"file":"jsonb.sql","stmt":523,"edit":[28,0,"[]"],"class":"drop-type-typename"}
+{"file":"jsonb.sql","stmt":523,"edit":[28,0,"[]"]}
 {"file":"jsonb.sql","stmt":524,"sum":"16a6a769"}
-{"file":"jsonb.sql","stmt":524,"edit":[28,0,"[]"],"class":"drop-type-typename"}
+{"file":"jsonb.sql","stmt":524,"edit":[28,0,"[]"]}
 {"file":"jsonb.sql","stmt":525,"sum":"04aa5caa"}
 {"file":"jsonb.sql","stmt":526,"sum":"df33e0b7"}
 {"file":"jsonb.sql","stmt":527,"sum":"a28fce78"}
@@ -30186,7 +30186,7 @@
 {"file":"multirangetypes.sql","stmt":521,"sum":"a30b8bb0"}
 {"file":"multirangetypes.sql","stmt":522,"sum":"7666fa9d"}
 {"file":"multirangetypes.sql","stmt":523,"sum":"0a83f848"}
-{"file":"multirangetypes.sql","stmt":523,"edit":[38,0,"[]"],"class":"drop-type-typename"}
+{"file":"multirangetypes.sql","stmt":523,"edit":[38,0,"[]"]}
 {"file":"multirangetypes.sql","stmt":524,"sum":"7eb9ed83"}
 {"file":"multirangetypes.sql","stmt":525,"sum":"2f5ea432"}
 {"file":"multirangetypes.sql","stmt":526,"sum":"cd1fd267"}
@@ -30268,7 +30268,7 @@
 {"file":"multirangetypes.sql","stmt":583,"sum":"46b6715b"}
 {"file":"multirangetypes.sql","stmt":583,"edit":[256,0," v"],"code":"42601","msg":"syntax error at or near \"v\"","pos":257}
 {"file":"multirangetypes.sql","stmt":584,"sum":"02b1214f"}
-{"file":"multirangetypes.sql","stmt":584,"edit":[18,0,"[]"],"class":"drop-type-typename"}
+{"file":"multirangetypes.sql","stmt":584,"edit":[18,0,"[]"]}
 {"file":"multirangetypes.sql","stmt":585,"sum":"12b16078"}
 {"file":"multirangetypes.sql","stmt":586,"sum":"5a4ba995"}
 {"file":"multirangetypes.sql","stmt":586,"edit":[87,0,"(3)"]}
@@ -38274,7 +38274,7 @@
 {"file":"privileges.sql","stmt":599,"sum":"53388fb5"}
 {"file":"privileges.sql","stmt":599,"edit":[27,0," , "]}
 {"file":"privileges.sql","stmt":600,"sum":"1f8ddb8f"}
-{"file":"privileges.sql","stmt":600,"edit":[29,0,"(3)"],"class":"drop-type-typename"}
+{"file":"privileges.sql","stmt":600,"edit":[29,0,"(3)"]}
 {"file":"privileges.sql","stmt":601,"sum":"df0da300"}
 {"file":"privileges.sql","stmt":602,"sum":"aa58e1cd"}
 {"file":"privileges.sql","stmt":602,"edit":[4,0,"(3)"],"code":"42601","msg":"syntax error at or near \"(\"","pos":4}
@@ -38686,7 +38686,7 @@
 {"file":"privileges.sql","stmt":938,"sum":"1c43c5a5"}
 {"file":"privileges.sql","stmt":938,"edit":[7,18,""]}
 {"file":"privileges.sql","stmt":939,"sum":"bc960ecb"}
-{"file":"privileges.sql","stmt":939,"edit":[25,0,"(3)"],"code":"42601","msg":"syntax error at or near \".\"","pos":28,"class":"drop-type-typename"}
+{"file":"privileges.sql","stmt":939,"edit":[25,0,"(3)"],"code":"42601","msg":"syntax error at or near \".\"","pos":28}
 {"file":"privileges.sql","stmt":940,"sum":"f1b8a310"}
 {"file":"privileges.sql","stmt":941,"sum":"e6b275fc"}
 {"file":"privileges.sql","stmt":942,"sum":"92c49604"}
@@ -41425,9 +41425,9 @@
 {"file":"rangetypes.sql","stmt":324,"sum":"18dd352c"}
 {"file":"rangetypes.sql","stmt":324,"edit":[45,0,"[]"]}
 {"file":"rangetypes.sql","stmt":325,"sum":"df246ebe"}
-{"file":"rangetypes.sql","stmt":325,"edit":[20,0,"[]"],"class":"drop-type-typename"}
+{"file":"rangetypes.sql","stmt":325,"edit":[20,0,"[]"]}
 {"file":"rangetypes.sql","stmt":326,"sum":"f32402cc"}
-{"file":"rangetypes.sql","stmt":326,"edit":[28,0,"(3)"],"class":"drop-type-typename"}
+{"file":"rangetypes.sql","stmt":326,"edit":[28,0,"(3)"]}
 {"file":"rangetypes.sql","stmt":326,"edit":[20,8,""]}
 {"file":"rangetypes.sql","stmt":327,"sum":"92926b88"}
 {"file":"rangetypes.sql","stmt":328,"sum":"15f7e0b9"}
@@ -42071,7 +42071,7 @@
 {"file":"returning.sql","stmt":59,"sum":"181a2039"}
 {"file":"returning.sql","stmt":60,"sum":"5a2b5b12"}
 {"file":"returning.sql","stmt":61,"sum":"c43bf847"}
-{"file":"returning.sql","stmt":61,"edit":[15,0,"[1:2]"],"code":"42601","msg":"syntax error at or near \":\"","pos":17,"class":"drop-type-typename"}
+{"file":"returning.sql","stmt":61,"edit":[15,0,"[1:2]"],"code":"42601","msg":"syntax error at or near \":\"","pos":17}
 {"file":"returning.sql","stmt":62,"sum":"781285de"}
 {"file":"returning.sql","stmt":62,"edit":[25,0,"(3)"],"code":"42601","msg":"syntax error at or near \"(\"","pos":25}
 {"file":"returning.sql","stmt":63,"sum":"5d231909"}
@@ -45840,7 +45840,7 @@
 {"file":"sqljson_jsontable.sql","stmt":42,"sum":"d549392c"}
 {"file":"sqljson_jsontable.sql","stmt":42,"edit":[27,0,".x"]}
 {"file":"sqljson_jsontable.sql","stmt":43,"sum":"57a0743a"}
-{"file":"sqljson_jsontable.sql","stmt":43,"edit":[29,0,"(3)"],"class":"drop-type-typename"}
+{"file":"sqljson_jsontable.sql","stmt":43,"edit":[29,0,"(3)"]}
 {"file":"sqljson_jsontable.sql","stmt":44,"sum":"b6b909d6","code":"42601","msg":"syntax error at or near \"COLUMNS\"","pos":95,"class":"pg17-sqljson"}
 {"file":"sqljson_jsontable.sql","stmt":44,"edit":[111,10,"as"],"code":"42601","msg":"syntax error at or near \"COLUMNS\"","pos":95,"class":"pg17-sqljson"}
 {"file":"sqljson_jsontable.sql","stmt":44,"edit":[166,2,"true"],"code":"42601","msg":"syntax error at or near \"COLUMNS\"","pos":95,"class":"pg17-sqljson"}
@@ -54725,7 +54725,7 @@
 {"file":"typed_table.sql","stmt":16,"sum":"dbffe8c5"}
 {"file":"typed_table.sql","stmt":17,"sum":"a33f000e"}
 {"file":"typed_table.sql","stmt":17,"edit":[10,11,""]}
-{"file":"typed_table.sql","stmt":17,"edit":[21,0,"(3)"],"class":"drop-type-typename"}
+{"file":"typed_table.sql","stmt":17,"edit":[21,0,"(3)"]}
 {"file":"typed_table.sql","stmt":18,"sum":"da180140"}
 {"file":"typed_table.sql","stmt":19,"sum":"942be971"}
 {"file":"typed_table.sql","stmt":19,"edit":[6,0," ) "],"code":"42601","msg":"syntax error at or near \")\"","pos":7}
@@ -58772,9 +58772,9 @@
 {"sql":"drop aggregate a","code":"42601","msg":"syntax error at end of input","pos":16,"class":"drop-aggregate-arguments"}
 {"sql":"drop aggregate a(*)"}
 {"sql":"drop aggregate if exists a, b","code":"42601","msg":"syntax error at or near \",\"","pos":26,"class":"drop-aggregate-arguments"}
-{"sql":"drop type t[]","class":"drop-type-typename"}
-{"sql":"drop domain d(3)","class":"drop-type-typename"}
-{"sql":"drop type t(1)[]","class":"drop-type-typename"}
+{"sql":"drop type t[]"}
+{"sql":"drop domain d(3)"}
+{"sql":"drop type t(1)[]"}
 {"sql":"create publication p for current_schema","code":"42601","msg":"invalid publication object list","pos":25,"class":"publication-object-list"}
 {"sql":"create publication p for t","code":"42601","msg":"invalid publication object list","pos":25,"class":"publication-object-list"}
 {"sql":"alter publication p add tables in schema s, s2 where (a = 1)","code":"42601","msg":"WHERE clause not allowed for schema","pos":44,"class":"publication-object-list"}
@@ -58859,6 +58859,6 @@
 {"sql":"-- CREATE RULE DO (...) should keep semicolons inside parens\nCREATE RULE r1 AS ON INSERT TO foo DO (\n  INSERT INTO foo VALUES (1);\n  UPDATE foo SET a = 2;\n)"}
 {"sql":"-- Grammar compatibility fixtures for postgres features missing in pgparser.\n-- expect-error: syntax error\nALTER DATABASE mydb REFRESH COLLATION VERSION","class":"alter-database-refresh-collation"}
 {"sql":"-- expect-error: syntax error\nALTER TYPE mood DROP VALUE 'sad'","code":"42601","msg":"syntax error at or near \"VALUE\"","pos":51}
-{"sql":"-- expect-error: syntax error\nALTER EXTENSION hstore ADD CAST (text AS hstore)","class":"alter-extension-member"}
-{"sql":"-- expect-error: syntax error\nALTER EXTENSION hstore ADD TRANSFORM FOR jsonb LANGUAGE plpgsql","class":"alter-extension-member"}
+{"sql":"-- expect-error: syntax error\nALTER EXTENSION hstore ADD CAST (text AS hstore)"}
+{"sql":"-- expect-error: syntax error\nALTER EXTENSION hstore ADD TRANSFORM FOR jsonb LANGUAGE plpgsql"}
 {"sql":"-- expect-error: syntax error\nCREATE ASSERTION positive CHECK (1 = 1)","code":"0A000","msg":"CREATE ASSERTION is not yet implemented","pos":-1,"class":"not-yet-implemented-errors"}
