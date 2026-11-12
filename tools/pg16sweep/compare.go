@@ -57,12 +57,12 @@ var quotedTok = regexp.MustCompile(`"(?:[^"]|"")*"`)
 
 // signature groups disagreements for reading: kind, both messages with the
 // token kept, and the statement's first two words.
-func signature(kind string, it item, pg, fk result) string {
+func signature(kind string, it item, pg, fk result, pgName, fkName string) string {
 	lead := strings.Fields(strings.ToLower(stripComments(it.SQL)))
 	if len(lead) > 2 {
 		lead = lead[:2]
 	}
-	return kind + " | pg: " + msgShape(pg) + " | fork: " + msgShape(fk) + " | " + strings.Join(lead, " ")
+	return kind + " | " + pgName + ": " + msgShape(pg) + " | " + fkName + ": " + msgShape(fk) + " | " + strings.Join(lead, " ")
 }
 
 func msgShape(r result) string {
@@ -253,6 +253,17 @@ func keepSample(id, sample int) bool {
 // writeReport lists the disagreements by class, then by signature, with the
 // shortest examples first.
 func writeReport(path string, findings []finding) error {
+	w, err := os.Create(path)
+	if err != nil {
+		return err
+	}
+	defer w.Close()
+	return writeClasses(w, findings, "pg", "pg16", "fork")
+}
+
+// writeClasses is writeReport's listing, with the names its two parsers'
+// verdicts are shown under (the first in signatures, then in examples).
+func writeClasses(w *os.File, findings []finding, pgSig, pgName, fkName string) error {
 	byClass := map[string][]finding{}
 	for _, f := range findings {
 		byClass[f.class] = append(byClass[f.class], f)
@@ -262,11 +273,6 @@ func writeReport(path string, findings []finding) error {
 		classes = append(classes, c)
 	}
 	sort.Slice(classes, func(i, j int) bool { return len(byClass[classes[i]]) > len(byClass[classes[j]]) })
-	w, err := os.Create(path)
-	if err != nil {
-		return err
-	}
-	defer w.Close()
 	for _, c := range classes {
 		fs := byClass[c]
 		n15 := 0
@@ -287,7 +293,7 @@ func writeReport(path string, findings []finding) error {
 		fmt.Fprintf(w, "=== class %q: %d (regression %d, mutations %d, probes %d), kinds %v, other branch agrees on %d\n", c, len(fs), reg, len(fs)-reg-probes, probes, kinds, n15)
 		bySig := map[string][]finding{}
 		for _, f := range fs {
-			s := signature(f.kind, f.it, f.pg, f.fk)
+			s := signature(f.kind, f.it, f.pg, f.fk, pgSig, fkName)
 			bySig[s] = append(bySig[s], f)
 		}
 		var sigs []string
@@ -309,7 +315,7 @@ func writeReport(path string, findings []finding) error {
 				if len(sql) > 220 {
 					sql = sql[:220] + "..."
 				}
-				fmt.Fprintf(w, "       [%d %s:%d %s] %s\n         pg16: %s\n         fork: %s\n", ex[i].it.ID, ex[i].it.File, ex[i].it.Stmt, ex[i].it.Op, sql, describe(ex[i].pg), describe(ex[i].fk))
+				fmt.Fprintf(w, "       [%d %s:%d %s] %s\n         %s: %s\n         %s: %s\n", ex[i].it.ID, ex[i].it.File, ex[i].it.Stmt, ex[i].it.Op, sql, pgName, describe(ex[i].pg), fkName, describe(ex[i].fk))
 			}
 		}
 	}

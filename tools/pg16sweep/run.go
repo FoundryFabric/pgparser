@@ -16,6 +16,7 @@ import (
 	"unicode/utf8"
 
 	"github.com/jackc/pgx/v5/pgconn"
+	"github.com/pgplex/pgparser/nodes"
 	"github.com/pgplex/pgparser/parser"
 )
 
@@ -173,6 +174,16 @@ const parseTimeout = 5 * time.Second
 // parseOne parses sql, turning a panic into a result and giving up after
 // parseTimeout (the goroutine is left running).
 func parseOne(id int, sql string) result {
+	return parseWith(id, sql, func(s string) error {
+		_, err := parser.Parse(s)
+		return err
+	})
+}
+
+func parseFork(sql string) (*nodes.List, error) { return parser.Parse(sql) }
+
+// parseWith is parseOne with the parse call given.
+func parseWith(id int, sql string, parse func(string) error) result {
 	done := make(chan result, 1)
 	go func() {
 		r := result{ID: id, Pos: -1}
@@ -183,7 +194,7 @@ func parseOne(id int, sql string) result {
 			}
 		}()
 		t0 := time.Now()
-		_, err := parser.Parse(sql)
+		err := parse(sql)
 		r.Micros = time.Since(t0).Microseconds()
 		var pe *parser.ParseError
 		switch {
