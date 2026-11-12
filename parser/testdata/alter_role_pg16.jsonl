@@ -1,0 +1,1053 @@
+{"sql":"alter role r"}
+{"sql":"alter role r with"}
+{"sql":"alter role r WITH"}
+{"sql":"alter role r login"}
+{"sql":"alter role r with login"}
+{"sql":"alter role r with login nosuperuser"}
+{"sql":"alter role r with connection limit 3"}
+{"sql":"alter role r password 'x'"}
+{"sql":"alter role r password null"}
+{"sql":"alter role r valid until 'x'"}
+{"sql":"alter role r with with","code":"42601","message":"syntax error at or near \"with\"","position":18}
+{"sql":"alter role r login with","code":"42601","message":"syntax error at or near \"with\"","position":19}
+{"sql":"alter role r inherit"}
+{"sql":"alter role r noinherit"}
+{"sql":"alter role r createdb createrole"}
+{"sql":"alter role r in database d set x = 1"}
+{"sql":"alter role r set x = 1"}
+{"sql":"alter role r reset all"}
+{"sql":"alter role r rename to s"}
+{"sql":"alter role r ;"}
+{"sql":"alter role r ; select 1"}
+{"sql":"alter role r (","code":"42601","message":"syntax error at or near \"(\"","position":13}
+{"sql":"alter role r 1","code":"42601","message":"syntax error at or near \"1\"","position":13}
+{"sql":"alter role r ,","code":"42601","message":"syntax error at or near \",\"","position":13}
+{"sql":"alter role r r","code":"42601","message":"unrecognized role option \"r\"","position":13}
+{"sql":"alter role \"R\""}
+{"sql":"alter role \"R\" with"}
+{"sql":"alter role \"R\" WITH"}
+{"sql":"alter role \"R\" login"}
+{"sql":"alter role \"R\" with login"}
+{"sql":"alter role \"R\" with login nosuperuser"}
+{"sql":"alter role \"R\" with connection limit 3"}
+{"sql":"alter role \"R\" password 'x'"}
+{"sql":"alter role \"R\" password null"}
+{"sql":"alter role \"R\" valid until 'x'"}
+{"sql":"alter role \"R\" with with","code":"42601","message":"syntax error at or near \"with\"","position":20}
+{"sql":"alter role \"R\" login with","code":"42601","message":"syntax error at or near \"with\"","position":21}
+{"sql":"alter role \"R\" inherit"}
+{"sql":"alter role \"R\" noinherit"}
+{"sql":"alter role \"R\" createdb createrole"}
+{"sql":"alter role \"R\" in database d set x = 1"}
+{"sql":"alter role \"R\" set x = 1"}
+{"sql":"alter role \"R\" reset all"}
+{"sql":"alter role \"R\" rename to s"}
+{"sql":"alter role \"R\" ;"}
+{"sql":"alter role \"R\" ; select 1"}
+{"sql":"alter role \"R\" (","code":"42601","message":"syntax error at or near \"(\"","position":15}
+{"sql":"alter role \"R\" 1","code":"42601","message":"syntax error at or near \"1\"","position":15}
+{"sql":"alter role \"R\" ,","code":"42601","message":"syntax error at or near \",\"","position":15}
+{"sql":"alter role \"R\" r","code":"42601","message":"unrecognized role option \"r\"","position":15}
+{"sql":"alter role current_user"}
+{"sql":"alter role current_user with"}
+{"sql":"alter role current_user WITH"}
+{"sql":"alter role current_user login"}
+{"sql":"alter role current_user with login"}
+{"sql":"alter role current_user with login nosuperuser"}
+{"sql":"alter role current_user with connection limit 3"}
+{"sql":"alter role current_user password 'x'"}
+{"sql":"alter role current_user password null"}
+{"sql":"alter role current_user valid until 'x'"}
+{"sql":"alter role current_user with with","code":"42601","message":"syntax error at or near \"with\"","position":29}
+{"sql":"alter role current_user login with","code":"42601","message":"syntax error at or near \"with\"","position":30}
+{"sql":"alter role current_user inherit"}
+{"sql":"alter role current_user noinherit"}
+{"sql":"alter role current_user createdb createrole"}
+{"sql":"alter role current_user in database d set x = 1"}
+{"sql":"alter role current_user set x = 1"}
+{"sql":"alter role current_user reset all"}
+{"sql":"alter role current_user rename to s","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":11}
+{"sql":"alter role current_user ;"}
+{"sql":"alter role current_user ; select 1"}
+{"sql":"alter role current_user (","code":"42601","message":"syntax error at or near \"(\"","position":24}
+{"sql":"alter role current_user 1","code":"42601","message":"syntax error at or near \"1\"","position":24}
+{"sql":"alter role current_user ,","code":"42601","message":"syntax error at or near \",\"","position":24}
+{"sql":"alter role current_user r","code":"42601","message":"unrecognized role option \"r\"","position":24}
+{"sql":"alter role current_role"}
+{"sql":"alter role current_role with"}
+{"sql":"alter role current_role WITH"}
+{"sql":"alter role current_role login"}
+{"sql":"alter role current_role with login"}
+{"sql":"alter role current_role with login nosuperuser"}
+{"sql":"alter role current_role with connection limit 3"}
+{"sql":"alter role current_role password 'x'"}
+{"sql":"alter role current_role password null"}
+{"sql":"alter role current_role valid until 'x'"}
+{"sql":"alter role current_role with with","code":"42601","message":"syntax error at or near \"with\"","position":29}
+{"sql":"alter role current_role login with","code":"42601","message":"syntax error at or near \"with\"","position":30}
+{"sql":"alter role current_role inherit"}
+{"sql":"alter role current_role noinherit"}
+{"sql":"alter role current_role createdb createrole"}
+{"sql":"alter role current_role in database d set x = 1"}
+{"sql":"alter role current_role set x = 1"}
+{"sql":"alter role current_role reset all"}
+{"sql":"alter role current_role rename to s","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":11}
+{"sql":"alter role current_role ;"}
+{"sql":"alter role current_role ; select 1"}
+{"sql":"alter role current_role (","code":"42601","message":"syntax error at or near \"(\"","position":24}
+{"sql":"alter role current_role 1","code":"42601","message":"syntax error at or near \"1\"","position":24}
+{"sql":"alter role current_role ,","code":"42601","message":"syntax error at or near \",\"","position":24}
+{"sql":"alter role current_role r","code":"42601","message":"unrecognized role option \"r\"","position":24}
+{"sql":"alter role session_user"}
+{"sql":"alter role session_user with"}
+{"sql":"alter role session_user WITH"}
+{"sql":"alter role session_user login"}
+{"sql":"alter role session_user with login"}
+{"sql":"alter role session_user with login nosuperuser"}
+{"sql":"alter role session_user with connection limit 3"}
+{"sql":"alter role session_user password 'x'"}
+{"sql":"alter role session_user password null"}
+{"sql":"alter role session_user valid until 'x'"}
+{"sql":"alter role session_user with with","code":"42601","message":"syntax error at or near \"with\"","position":29}
+{"sql":"alter role session_user login with","code":"42601","message":"syntax error at or near \"with\"","position":30}
+{"sql":"alter role session_user inherit"}
+{"sql":"alter role session_user noinherit"}
+{"sql":"alter role session_user createdb createrole"}
+{"sql":"alter role session_user in database d set x = 1"}
+{"sql":"alter role session_user set x = 1"}
+{"sql":"alter role session_user reset all"}
+{"sql":"alter role session_user rename to s","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":11}
+{"sql":"alter role session_user ;"}
+{"sql":"alter role session_user ; select 1"}
+{"sql":"alter role session_user (","code":"42601","message":"syntax error at or near \"(\"","position":24}
+{"sql":"alter role session_user 1","code":"42601","message":"syntax error at or near \"1\"","position":24}
+{"sql":"alter role session_user ,","code":"42601","message":"syntax error at or near \",\"","position":24}
+{"sql":"alter role session_user r","code":"42601","message":"unrecognized role option \"r\"","position":24}
+{"sql":"alter role user","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role user with","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role user WITH","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role user login","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role user with login","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role user with login nosuperuser","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role user with connection limit 3","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role user password 'x'","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role user password null","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role user valid until 'x'","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role user with with","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role user login with","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role user inherit","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role user noinherit","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role user createdb createrole","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role user in database d set x = 1","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role user set x = 1","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role user reset all","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role user rename to s","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role user ;","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role user ; select 1","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role user (","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role user 1","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role user ,","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role user r","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter role public"}
+{"sql":"alter role public with"}
+{"sql":"alter role public WITH"}
+{"sql":"alter role public login"}
+{"sql":"alter role public with login"}
+{"sql":"alter role public with login nosuperuser"}
+{"sql":"alter role public with connection limit 3"}
+{"sql":"alter role public password 'x'"}
+{"sql":"alter role public password null"}
+{"sql":"alter role public valid until 'x'"}
+{"sql":"alter role public with with","code":"42601","message":"syntax error at or near \"with\"","position":23}
+{"sql":"alter role public login with","code":"42601","message":"syntax error at or near \"with\"","position":24}
+{"sql":"alter role public inherit"}
+{"sql":"alter role public noinherit"}
+{"sql":"alter role public createdb createrole"}
+{"sql":"alter role public in database d set x = 1"}
+{"sql":"alter role public set x = 1"}
+{"sql":"alter role public reset all"}
+{"sql":"alter role public rename to s","code":"42939","message":"role name \"public\" is reserved","position":11}
+{"sql":"alter role public ;"}
+{"sql":"alter role public ; select 1"}
+{"sql":"alter role public (","code":"42601","message":"syntax error at or near \"(\"","position":18}
+{"sql":"alter role public 1","code":"42601","message":"syntax error at or near \"1\"","position":18}
+{"sql":"alter role public ,","code":"42601","message":"syntax error at or near \",\"","position":18}
+{"sql":"alter role public r","code":"42601","message":"unrecognized role option \"r\"","position":18}
+{"sql":"alter role none","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role none with","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role none WITH","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role none login","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role none with login","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role none with login nosuperuser","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role none with connection limit 3","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role none password 'x'","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role none password null","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role none valid until 'x'","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role none with with","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role none login with","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role none inherit","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role none noinherit","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role none createdb createrole","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role none in database d set x = 1","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role none set x = 1","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role none reset all","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role none rename to s","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role none ;","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role none ; select 1","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role none (","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role none 1","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role none ,","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role none r","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter role all","code":"42601","message":"syntax error at end of input","position":14}
+{"sql":"alter role all with","code":"42601","message":"syntax error at or near \"with\"","position":15}
+{"sql":"alter role all WITH","code":"42601","message":"syntax error at or near \"WITH\"","position":15}
+{"sql":"alter role all login","code":"42601","message":"syntax error at or near \"login\"","position":15}
+{"sql":"alter role all with login","code":"42601","message":"syntax error at or near \"with\"","position":15}
+{"sql":"alter role all with login nosuperuser","code":"42601","message":"syntax error at or near \"with\"","position":15}
+{"sql":"alter role all with connection limit 3","code":"42601","message":"syntax error at or near \"with\"","position":15}
+{"sql":"alter role all password 'x'","code":"42601","message":"syntax error at or near \"password\"","position":15}
+{"sql":"alter role all password null","code":"42601","message":"syntax error at or near \"password\"","position":15}
+{"sql":"alter role all valid until 'x'","code":"42601","message":"syntax error at or near \"valid\"","position":15}
+{"sql":"alter role all with with","code":"42601","message":"syntax error at or near \"with\"","position":15}
+{"sql":"alter role all login with","code":"42601","message":"syntax error at or near \"login\"","position":15}
+{"sql":"alter role all inherit","code":"42601","message":"syntax error at or near \"inherit\"","position":15}
+{"sql":"alter role all noinherit","code":"42601","message":"syntax error at or near \"noinherit\"","position":15}
+{"sql":"alter role all createdb createrole","code":"42601","message":"syntax error at or near \"createdb\"","position":15}
+{"sql":"alter role all in database d set x = 1"}
+{"sql":"alter role all set x = 1"}
+{"sql":"alter role all reset all"}
+{"sql":"alter role all rename to s","code":"42601","message":"syntax error at or near \"rename\"","position":15}
+{"sql":"alter role all ;","code":"42601","message":"syntax error at or near \";\"","position":15}
+{"sql":"alter role all ; select 1","code":"42601","message":"syntax error at or near \";\"","position":15}
+{"sql":"alter role all (","code":"42601","message":"syntax error at or near \"(\"","position":15}
+{"sql":"alter role all 1","code":"42601","message":"syntax error at or near \"1\"","position":15}
+{"sql":"alter role all ,","code":"42601","message":"syntax error at or near \",\"","position":15}
+{"sql":"alter role all r","code":"42601","message":"syntax error at or near \"r\"","position":15}
+{"sql":"alter role replication"}
+{"sql":"alter role replication with"}
+{"sql":"alter role replication WITH"}
+{"sql":"alter role replication login"}
+{"sql":"alter role replication with login"}
+{"sql":"alter role replication with login nosuperuser"}
+{"sql":"alter role replication with connection limit 3"}
+{"sql":"alter role replication password 'x'"}
+{"sql":"alter role replication password null"}
+{"sql":"alter role replication valid until 'x'"}
+{"sql":"alter role replication with with","code":"42601","message":"syntax error at or near \"with\"","position":28}
+{"sql":"alter role replication login with","code":"42601","message":"syntax error at or near \"with\"","position":29}
+{"sql":"alter role replication inherit"}
+{"sql":"alter role replication noinherit"}
+{"sql":"alter role replication createdb createrole"}
+{"sql":"alter role replication in database d set x = 1"}
+{"sql":"alter role replication set x = 1"}
+{"sql":"alter role replication reset all"}
+{"sql":"alter role replication rename to s"}
+{"sql":"alter role replication ;"}
+{"sql":"alter role replication ; select 1"}
+{"sql":"alter role replication (","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter role replication 1","code":"42601","message":"syntax error at or near \"1\"","position":23}
+{"sql":"alter role replication ,","code":"42601","message":"syntax error at or near \",\"","position":23}
+{"sql":"alter role replication r","code":"42601","message":"unrecognized role option \"r\"","position":23}
+{"sql":"alter role login"}
+{"sql":"alter role login with"}
+{"sql":"alter role login WITH"}
+{"sql":"alter role login login"}
+{"sql":"alter role login with login"}
+{"sql":"alter role login with login nosuperuser"}
+{"sql":"alter role login with connection limit 3"}
+{"sql":"alter role login password 'x'"}
+{"sql":"alter role login password null"}
+{"sql":"alter role login valid until 'x'"}
+{"sql":"alter role login with with","code":"42601","message":"syntax error at or near \"with\"","position":22}
+{"sql":"alter role login login with","code":"42601","message":"syntax error at or near \"with\"","position":23}
+{"sql":"alter role login inherit"}
+{"sql":"alter role login noinherit"}
+{"sql":"alter role login createdb createrole"}
+{"sql":"alter role login in database d set x = 1"}
+{"sql":"alter role login set x = 1"}
+{"sql":"alter role login reset all"}
+{"sql":"alter role login rename to s"}
+{"sql":"alter role login ;"}
+{"sql":"alter role login ; select 1"}
+{"sql":"alter role login (","code":"42601","message":"syntax error at or near \"(\"","position":17}
+{"sql":"alter role login 1","code":"42601","message":"syntax error at or near \"1\"","position":17}
+{"sql":"alter role login ,","code":"42601","message":"syntax error at or near \",\"","position":17}
+{"sql":"alter role login r","code":"42601","message":"unrecognized role option \"r\"","position":17}
+{"sql":"alter role superuser"}
+{"sql":"alter role superuser with"}
+{"sql":"alter role superuser WITH"}
+{"sql":"alter role superuser login"}
+{"sql":"alter role superuser with login"}
+{"sql":"alter role superuser with login nosuperuser"}
+{"sql":"alter role superuser with connection limit 3"}
+{"sql":"alter role superuser password 'x'"}
+{"sql":"alter role superuser password null"}
+{"sql":"alter role superuser valid until 'x'"}
+{"sql":"alter role superuser with with","code":"42601","message":"syntax error at or near \"with\"","position":26}
+{"sql":"alter role superuser login with","code":"42601","message":"syntax error at or near \"with\"","position":27}
+{"sql":"alter role superuser inherit"}
+{"sql":"alter role superuser noinherit"}
+{"sql":"alter role superuser createdb createrole"}
+{"sql":"alter role superuser in database d set x = 1"}
+{"sql":"alter role superuser set x = 1"}
+{"sql":"alter role superuser reset all"}
+{"sql":"alter role superuser rename to s"}
+{"sql":"alter role superuser ;"}
+{"sql":"alter role superuser ; select 1"}
+{"sql":"alter role superuser (","code":"42601","message":"syntax error at or near \"(\"","position":21}
+{"sql":"alter role superuser 1","code":"42601","message":"syntax error at or near \"1\"","position":21}
+{"sql":"alter role superuser ,","code":"42601","message":"syntax error at or near \",\"","position":21}
+{"sql":"alter role superuser r","code":"42601","message":"unrecognized role option \"r\"","position":21}
+{"sql":"alter role role"}
+{"sql":"alter role role with"}
+{"sql":"alter role role WITH"}
+{"sql":"alter role role login"}
+{"sql":"alter role role with login"}
+{"sql":"alter role role with login nosuperuser"}
+{"sql":"alter role role with connection limit 3"}
+{"sql":"alter role role password 'x'"}
+{"sql":"alter role role password null"}
+{"sql":"alter role role valid until 'x'"}
+{"sql":"alter role role with with","code":"42601","message":"syntax error at or near \"with\"","position":21}
+{"sql":"alter role role login with","code":"42601","message":"syntax error at or near \"with\"","position":22}
+{"sql":"alter role role inherit"}
+{"sql":"alter role role noinherit"}
+{"sql":"alter role role createdb createrole"}
+{"sql":"alter role role in database d set x = 1"}
+{"sql":"alter role role set x = 1"}
+{"sql":"alter role role reset all"}
+{"sql":"alter role role rename to s"}
+{"sql":"alter role role ;"}
+{"sql":"alter role role ; select 1"}
+{"sql":"alter role role (","code":"42601","message":"syntax error at or near \"(\"","position":16}
+{"sql":"alter role role 1","code":"42601","message":"syntax error at or near \"1\"","position":16}
+{"sql":"alter role role ,","code":"42601","message":"syntax error at or near \",\"","position":16}
+{"sql":"alter role role r","code":"42601","message":"unrecognized role option \"r\"","position":16}
+{"sql":"alter role with","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter role with with","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter role with WITH","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter role with login","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter role with with login","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter role with with login nosuperuser","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter role with with connection limit 3","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter role with password 'x'","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter role with password null","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter role with valid until 'x'","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter role with with with","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter role with login with","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter role with inherit","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter role with noinherit","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter role with createdb createrole","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter role with in database d set x = 1","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter role with set x = 1","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter role with reset all","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter role with rename to s","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter role with ;","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter role with ; select 1","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter role with (","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter role with 1","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter role with ,","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter role with r","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter user r"}
+{"sql":"alter user r with"}
+{"sql":"alter user r WITH"}
+{"sql":"alter user r login"}
+{"sql":"alter user r with login"}
+{"sql":"alter user r with login nosuperuser"}
+{"sql":"alter user r with connection limit 3"}
+{"sql":"alter user r password 'x'"}
+{"sql":"alter user r password null"}
+{"sql":"alter user r valid until 'x'"}
+{"sql":"alter user r with with","code":"42601","message":"syntax error at or near \"with\"","position":18}
+{"sql":"alter user r login with","code":"42601","message":"syntax error at or near \"with\"","position":19}
+{"sql":"alter user r inherit"}
+{"sql":"alter user r noinherit"}
+{"sql":"alter user r createdb createrole"}
+{"sql":"alter user r in database d set x = 1"}
+{"sql":"alter user r set x = 1"}
+{"sql":"alter user r reset all"}
+{"sql":"alter user r rename to s"}
+{"sql":"alter user r ;"}
+{"sql":"alter user r ; select 1"}
+{"sql":"alter user r (","code":"42601","message":"syntax error at or near \"(\"","position":13}
+{"sql":"alter user r 1","code":"42601","message":"syntax error at or near \"1\"","position":13}
+{"sql":"alter user r ,","code":"42601","message":"syntax error at or near \",\"","position":13}
+{"sql":"alter user r r","code":"42601","message":"unrecognized role option \"r\"","position":13}
+{"sql":"alter user \"R\""}
+{"sql":"alter user \"R\" with"}
+{"sql":"alter user \"R\" WITH"}
+{"sql":"alter user \"R\" login"}
+{"sql":"alter user \"R\" with login"}
+{"sql":"alter user \"R\" with login nosuperuser"}
+{"sql":"alter user \"R\" with connection limit 3"}
+{"sql":"alter user \"R\" password 'x'"}
+{"sql":"alter user \"R\" password null"}
+{"sql":"alter user \"R\" valid until 'x'"}
+{"sql":"alter user \"R\" with with","code":"42601","message":"syntax error at or near \"with\"","position":20}
+{"sql":"alter user \"R\" login with","code":"42601","message":"syntax error at or near \"with\"","position":21}
+{"sql":"alter user \"R\" inherit"}
+{"sql":"alter user \"R\" noinherit"}
+{"sql":"alter user \"R\" createdb createrole"}
+{"sql":"alter user \"R\" in database d set x = 1"}
+{"sql":"alter user \"R\" set x = 1"}
+{"sql":"alter user \"R\" reset all"}
+{"sql":"alter user \"R\" rename to s"}
+{"sql":"alter user \"R\" ;"}
+{"sql":"alter user \"R\" ; select 1"}
+{"sql":"alter user \"R\" (","code":"42601","message":"syntax error at or near \"(\"","position":15}
+{"sql":"alter user \"R\" 1","code":"42601","message":"syntax error at or near \"1\"","position":15}
+{"sql":"alter user \"R\" ,","code":"42601","message":"syntax error at or near \",\"","position":15}
+{"sql":"alter user \"R\" r","code":"42601","message":"unrecognized role option \"r\"","position":15}
+{"sql":"alter user current_user"}
+{"sql":"alter user current_user with"}
+{"sql":"alter user current_user WITH"}
+{"sql":"alter user current_user login"}
+{"sql":"alter user current_user with login"}
+{"sql":"alter user current_user with login nosuperuser"}
+{"sql":"alter user current_user with connection limit 3"}
+{"sql":"alter user current_user password 'x'"}
+{"sql":"alter user current_user password null"}
+{"sql":"alter user current_user valid until 'x'"}
+{"sql":"alter user current_user with with","code":"42601","message":"syntax error at or near \"with\"","position":29}
+{"sql":"alter user current_user login with","code":"42601","message":"syntax error at or near \"with\"","position":30}
+{"sql":"alter user current_user inherit"}
+{"sql":"alter user current_user noinherit"}
+{"sql":"alter user current_user createdb createrole"}
+{"sql":"alter user current_user in database d set x = 1"}
+{"sql":"alter user current_user set x = 1"}
+{"sql":"alter user current_user reset all"}
+{"sql":"alter user current_user rename to s","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":11}
+{"sql":"alter user current_user ;"}
+{"sql":"alter user current_user ; select 1"}
+{"sql":"alter user current_user (","code":"42601","message":"syntax error at or near \"(\"","position":24}
+{"sql":"alter user current_user 1","code":"42601","message":"syntax error at or near \"1\"","position":24}
+{"sql":"alter user current_user ,","code":"42601","message":"syntax error at or near \",\"","position":24}
+{"sql":"alter user current_user r","code":"42601","message":"unrecognized role option \"r\"","position":24}
+{"sql":"alter user current_role"}
+{"sql":"alter user current_role with"}
+{"sql":"alter user current_role WITH"}
+{"sql":"alter user current_role login"}
+{"sql":"alter user current_role with login"}
+{"sql":"alter user current_role with login nosuperuser"}
+{"sql":"alter user current_role with connection limit 3"}
+{"sql":"alter user current_role password 'x'"}
+{"sql":"alter user current_role password null"}
+{"sql":"alter user current_role valid until 'x'"}
+{"sql":"alter user current_role with with","code":"42601","message":"syntax error at or near \"with\"","position":29}
+{"sql":"alter user current_role login with","code":"42601","message":"syntax error at or near \"with\"","position":30}
+{"sql":"alter user current_role inherit"}
+{"sql":"alter user current_role noinherit"}
+{"sql":"alter user current_role createdb createrole"}
+{"sql":"alter user current_role in database d set x = 1"}
+{"sql":"alter user current_role set x = 1"}
+{"sql":"alter user current_role reset all"}
+{"sql":"alter user current_role rename to s","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":11}
+{"sql":"alter user current_role ;"}
+{"sql":"alter user current_role ; select 1"}
+{"sql":"alter user current_role (","code":"42601","message":"syntax error at or near \"(\"","position":24}
+{"sql":"alter user current_role 1","code":"42601","message":"syntax error at or near \"1\"","position":24}
+{"sql":"alter user current_role ,","code":"42601","message":"syntax error at or near \",\"","position":24}
+{"sql":"alter user current_role r","code":"42601","message":"unrecognized role option \"r\"","position":24}
+{"sql":"alter user session_user"}
+{"sql":"alter user session_user with"}
+{"sql":"alter user session_user WITH"}
+{"sql":"alter user session_user login"}
+{"sql":"alter user session_user with login"}
+{"sql":"alter user session_user with login nosuperuser"}
+{"sql":"alter user session_user with connection limit 3"}
+{"sql":"alter user session_user password 'x'"}
+{"sql":"alter user session_user password null"}
+{"sql":"alter user session_user valid until 'x'"}
+{"sql":"alter user session_user with with","code":"42601","message":"syntax error at or near \"with\"","position":29}
+{"sql":"alter user session_user login with","code":"42601","message":"syntax error at or near \"with\"","position":30}
+{"sql":"alter user session_user inherit"}
+{"sql":"alter user session_user noinherit"}
+{"sql":"alter user session_user createdb createrole"}
+{"sql":"alter user session_user in database d set x = 1"}
+{"sql":"alter user session_user set x = 1"}
+{"sql":"alter user session_user reset all"}
+{"sql":"alter user session_user rename to s","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":11}
+{"sql":"alter user session_user ;"}
+{"sql":"alter user session_user ; select 1"}
+{"sql":"alter user session_user (","code":"42601","message":"syntax error at or near \"(\"","position":24}
+{"sql":"alter user session_user 1","code":"42601","message":"syntax error at or near \"1\"","position":24}
+{"sql":"alter user session_user ,","code":"42601","message":"syntax error at or near \",\"","position":24}
+{"sql":"alter user session_user r","code":"42601","message":"unrecognized role option \"r\"","position":24}
+{"sql":"alter user user","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user user with","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user user WITH","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user user login","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user user with login","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user user with login nosuperuser","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user user with connection limit 3","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user user password 'x'","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user user password null","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user user valid until 'x'","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user user with with","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user user login with","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user user inherit","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user user noinherit","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user user createdb createrole","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user user in database d set x = 1","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user user set x = 1","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user user reset all","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user user rename to s","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user user ;","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user user ; select 1","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user user (","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user user 1","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user user ,","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user user r","code":"42601","message":"syntax error at or near \"user\"","position":11}
+{"sql":"alter user public"}
+{"sql":"alter user public with"}
+{"sql":"alter user public WITH"}
+{"sql":"alter user public login"}
+{"sql":"alter user public with login"}
+{"sql":"alter user public with login nosuperuser"}
+{"sql":"alter user public with connection limit 3"}
+{"sql":"alter user public password 'x'"}
+{"sql":"alter user public password null"}
+{"sql":"alter user public valid until 'x'"}
+{"sql":"alter user public with with","code":"42601","message":"syntax error at or near \"with\"","position":23}
+{"sql":"alter user public login with","code":"42601","message":"syntax error at or near \"with\"","position":24}
+{"sql":"alter user public inherit"}
+{"sql":"alter user public noinherit"}
+{"sql":"alter user public createdb createrole"}
+{"sql":"alter user public in database d set x = 1"}
+{"sql":"alter user public set x = 1"}
+{"sql":"alter user public reset all"}
+{"sql":"alter user public rename to s","code":"42939","message":"role name \"public\" is reserved","position":11}
+{"sql":"alter user public ;"}
+{"sql":"alter user public ; select 1"}
+{"sql":"alter user public (","code":"42601","message":"syntax error at or near \"(\"","position":18}
+{"sql":"alter user public 1","code":"42601","message":"syntax error at or near \"1\"","position":18}
+{"sql":"alter user public ,","code":"42601","message":"syntax error at or near \",\"","position":18}
+{"sql":"alter user public r","code":"42601","message":"unrecognized role option \"r\"","position":18}
+{"sql":"alter user none","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user none with","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user none WITH","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user none login","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user none with login","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user none with login nosuperuser","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user none with connection limit 3","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user none password 'x'","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user none password null","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user none valid until 'x'","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user none with with","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user none login with","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user none inherit","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user none noinherit","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user none createdb createrole","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user none in database d set x = 1","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user none set x = 1","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user none reset all","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user none rename to s","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user none ;","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user none ; select 1","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user none (","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user none 1","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user none ,","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user none r","code":"42939","message":"role name \"none\" is reserved","position":11}
+{"sql":"alter user all","code":"42601","message":"syntax error at end of input","position":14}
+{"sql":"alter user all with","code":"42601","message":"syntax error at or near \"with\"","position":15}
+{"sql":"alter user all WITH","code":"42601","message":"syntax error at or near \"WITH\"","position":15}
+{"sql":"alter user all login","code":"42601","message":"syntax error at or near \"login\"","position":15}
+{"sql":"alter user all with login","code":"42601","message":"syntax error at or near \"with\"","position":15}
+{"sql":"alter user all with login nosuperuser","code":"42601","message":"syntax error at or near \"with\"","position":15}
+{"sql":"alter user all with connection limit 3","code":"42601","message":"syntax error at or near \"with\"","position":15}
+{"sql":"alter user all password 'x'","code":"42601","message":"syntax error at or near \"password\"","position":15}
+{"sql":"alter user all password null","code":"42601","message":"syntax error at or near \"password\"","position":15}
+{"sql":"alter user all valid until 'x'","code":"42601","message":"syntax error at or near \"valid\"","position":15}
+{"sql":"alter user all with with","code":"42601","message":"syntax error at or near \"with\"","position":15}
+{"sql":"alter user all login with","code":"42601","message":"syntax error at or near \"login\"","position":15}
+{"sql":"alter user all inherit","code":"42601","message":"syntax error at or near \"inherit\"","position":15}
+{"sql":"alter user all noinherit","code":"42601","message":"syntax error at or near \"noinherit\"","position":15}
+{"sql":"alter user all createdb createrole","code":"42601","message":"syntax error at or near \"createdb\"","position":15}
+{"sql":"alter user all in database d set x = 1"}
+{"sql":"alter user all set x = 1"}
+{"sql":"alter user all reset all"}
+{"sql":"alter user all rename to s","code":"42601","message":"syntax error at or near \"rename\"","position":15}
+{"sql":"alter user all ;","code":"42601","message":"syntax error at or near \";\"","position":15}
+{"sql":"alter user all ; select 1","code":"42601","message":"syntax error at or near \";\"","position":15}
+{"sql":"alter user all (","code":"42601","message":"syntax error at or near \"(\"","position":15}
+{"sql":"alter user all 1","code":"42601","message":"syntax error at or near \"1\"","position":15}
+{"sql":"alter user all ,","code":"42601","message":"syntax error at or near \",\"","position":15}
+{"sql":"alter user all r","code":"42601","message":"syntax error at or near \"r\"","position":15}
+{"sql":"alter user replication"}
+{"sql":"alter user replication with"}
+{"sql":"alter user replication WITH"}
+{"sql":"alter user replication login"}
+{"sql":"alter user replication with login"}
+{"sql":"alter user replication with login nosuperuser"}
+{"sql":"alter user replication with connection limit 3"}
+{"sql":"alter user replication password 'x'"}
+{"sql":"alter user replication password null"}
+{"sql":"alter user replication valid until 'x'"}
+{"sql":"alter user replication with with","code":"42601","message":"syntax error at or near \"with\"","position":28}
+{"sql":"alter user replication login with","code":"42601","message":"syntax error at or near \"with\"","position":29}
+{"sql":"alter user replication inherit"}
+{"sql":"alter user replication noinherit"}
+{"sql":"alter user replication createdb createrole"}
+{"sql":"alter user replication in database d set x = 1"}
+{"sql":"alter user replication set x = 1"}
+{"sql":"alter user replication reset all"}
+{"sql":"alter user replication rename to s"}
+{"sql":"alter user replication ;"}
+{"sql":"alter user replication ; select 1"}
+{"sql":"alter user replication (","code":"42601","message":"syntax error at or near \"(\"","position":23}
+{"sql":"alter user replication 1","code":"42601","message":"syntax error at or near \"1\"","position":23}
+{"sql":"alter user replication ,","code":"42601","message":"syntax error at or near \",\"","position":23}
+{"sql":"alter user replication r","code":"42601","message":"unrecognized role option \"r\"","position":23}
+{"sql":"alter user login"}
+{"sql":"alter user login with"}
+{"sql":"alter user login WITH"}
+{"sql":"alter user login login"}
+{"sql":"alter user login with login"}
+{"sql":"alter user login with login nosuperuser"}
+{"sql":"alter user login with connection limit 3"}
+{"sql":"alter user login password 'x'"}
+{"sql":"alter user login password null"}
+{"sql":"alter user login valid until 'x'"}
+{"sql":"alter user login with with","code":"42601","message":"syntax error at or near \"with\"","position":22}
+{"sql":"alter user login login with","code":"42601","message":"syntax error at or near \"with\"","position":23}
+{"sql":"alter user login inherit"}
+{"sql":"alter user login noinherit"}
+{"sql":"alter user login createdb createrole"}
+{"sql":"alter user login in database d set x = 1"}
+{"sql":"alter user login set x = 1"}
+{"sql":"alter user login reset all"}
+{"sql":"alter user login rename to s"}
+{"sql":"alter user login ;"}
+{"sql":"alter user login ; select 1"}
+{"sql":"alter user login (","code":"42601","message":"syntax error at or near \"(\"","position":17}
+{"sql":"alter user login 1","code":"42601","message":"syntax error at or near \"1\"","position":17}
+{"sql":"alter user login ,","code":"42601","message":"syntax error at or near \",\"","position":17}
+{"sql":"alter user login r","code":"42601","message":"unrecognized role option \"r\"","position":17}
+{"sql":"alter user superuser"}
+{"sql":"alter user superuser with"}
+{"sql":"alter user superuser WITH"}
+{"sql":"alter user superuser login"}
+{"sql":"alter user superuser with login"}
+{"sql":"alter user superuser with login nosuperuser"}
+{"sql":"alter user superuser with connection limit 3"}
+{"sql":"alter user superuser password 'x'"}
+{"sql":"alter user superuser password null"}
+{"sql":"alter user superuser valid until 'x'"}
+{"sql":"alter user superuser with with","code":"42601","message":"syntax error at or near \"with\"","position":26}
+{"sql":"alter user superuser login with","code":"42601","message":"syntax error at or near \"with\"","position":27}
+{"sql":"alter user superuser inherit"}
+{"sql":"alter user superuser noinherit"}
+{"sql":"alter user superuser createdb createrole"}
+{"sql":"alter user superuser in database d set x = 1"}
+{"sql":"alter user superuser set x = 1"}
+{"sql":"alter user superuser reset all"}
+{"sql":"alter user superuser rename to s"}
+{"sql":"alter user superuser ;"}
+{"sql":"alter user superuser ; select 1"}
+{"sql":"alter user superuser (","code":"42601","message":"syntax error at or near \"(\"","position":21}
+{"sql":"alter user superuser 1","code":"42601","message":"syntax error at or near \"1\"","position":21}
+{"sql":"alter user superuser ,","code":"42601","message":"syntax error at or near \",\"","position":21}
+{"sql":"alter user superuser r","code":"42601","message":"unrecognized role option \"r\"","position":21}
+{"sql":"alter user role"}
+{"sql":"alter user role with"}
+{"sql":"alter user role WITH"}
+{"sql":"alter user role login"}
+{"sql":"alter user role with login"}
+{"sql":"alter user role with login nosuperuser"}
+{"sql":"alter user role with connection limit 3"}
+{"sql":"alter user role password 'x'"}
+{"sql":"alter user role password null"}
+{"sql":"alter user role valid until 'x'"}
+{"sql":"alter user role with with","code":"42601","message":"syntax error at or near \"with\"","position":21}
+{"sql":"alter user role login with","code":"42601","message":"syntax error at or near \"with\"","position":22}
+{"sql":"alter user role inherit"}
+{"sql":"alter user role noinherit"}
+{"sql":"alter user role createdb createrole"}
+{"sql":"alter user role in database d set x = 1"}
+{"sql":"alter user role set x = 1"}
+{"sql":"alter user role reset all"}
+{"sql":"alter user role rename to s"}
+{"sql":"alter user role ;"}
+{"sql":"alter user role ; select 1"}
+{"sql":"alter user role (","code":"42601","message":"syntax error at or near \"(\"","position":16}
+{"sql":"alter user role 1","code":"42601","message":"syntax error at or near \"1\"","position":16}
+{"sql":"alter user role ,","code":"42601","message":"syntax error at or near \",\"","position":16}
+{"sql":"alter user role r","code":"42601","message":"unrecognized role option \"r\"","position":16}
+{"sql":"alter user with","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter user with with","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter user with WITH","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter user with login","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter user with with login","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter user with with login nosuperuser","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter user with with connection limit 3","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter user with password 'x'","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter user with password null","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter user with valid until 'x'","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter user with with with","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter user with login with","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter user with inherit","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter user with noinherit","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter user with createdb createrole","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter user with in database d set x = 1","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter user with set x = 1","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter user with reset all","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter user with rename to s","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter user with ;","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter user with ; select 1","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter user with (","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter user with 1","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter user with ,","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter user with r","code":"42601","message":"syntax error at or near \"with\"","position":11}
+{"sql":"alter group r","code":"42601","message":"syntax error at end of input","position":13}
+{"sql":"alter group r with","code":"42601","message":"syntax error at or near \"with\"","position":14}
+{"sql":"alter group r WITH","code":"42601","message":"syntax error at or near \"WITH\"","position":14}
+{"sql":"alter group r login","code":"42601","message":"syntax error at or near \"login\"","position":14}
+{"sql":"alter group r with login","code":"42601","message":"syntax error at or near \"with\"","position":14}
+{"sql":"alter group r with login nosuperuser","code":"42601","message":"syntax error at or near \"with\"","position":14}
+{"sql":"alter group r with connection limit 3","code":"42601","message":"syntax error at or near \"with\"","position":14}
+{"sql":"alter group r password 'x'","code":"42601","message":"syntax error at or near \"password\"","position":14}
+{"sql":"alter group r password null","code":"42601","message":"syntax error at or near \"password\"","position":14}
+{"sql":"alter group r valid until 'x'","code":"42601","message":"syntax error at or near \"valid\"","position":14}
+{"sql":"alter group r with with","code":"42601","message":"syntax error at or near \"with\"","position":14}
+{"sql":"alter group r login with","code":"42601","message":"syntax error at or near \"login\"","position":14}
+{"sql":"alter group r inherit","code":"42601","message":"syntax error at or near \"inherit\"","position":14}
+{"sql":"alter group r noinherit","code":"42601","message":"syntax error at or near \"noinherit\"","position":14}
+{"sql":"alter group r createdb createrole","code":"42601","message":"syntax error at or near \"createdb\"","position":14}
+{"sql":"alter group r in database d set x = 1","code":"42601","message":"syntax error at or near \"in\"","position":14}
+{"sql":"alter group r set x = 1","code":"42601","message":"syntax error at or near \"set\"","position":14}
+{"sql":"alter group r reset all","code":"42601","message":"syntax error at or near \"reset\"","position":14}
+{"sql":"alter group r rename to s"}
+{"sql":"alter group r ;","code":"42601","message":"syntax error at or near \";\"","position":14}
+{"sql":"alter group r ; select 1","code":"42601","message":"syntax error at or near \";\"","position":14}
+{"sql":"alter group r (","code":"42601","message":"syntax error at or near \"(\"","position":14}
+{"sql":"alter group r 1","code":"42601","message":"syntax error at or near \"1\"","position":14}
+{"sql":"alter group r ,","code":"42601","message":"syntax error at or near \",\"","position":14}
+{"sql":"alter group r r","code":"42601","message":"syntax error at or near \"r\"","position":14}
+{"sql":"alter group \"R\"","code":"42601","message":"syntax error at end of input","position":15}
+{"sql":"alter group \"R\" with","code":"42601","message":"syntax error at or near \"with\"","position":16}
+{"sql":"alter group \"R\" WITH","code":"42601","message":"syntax error at or near \"WITH\"","position":16}
+{"sql":"alter group \"R\" login","code":"42601","message":"syntax error at or near \"login\"","position":16}
+{"sql":"alter group \"R\" with login","code":"42601","message":"syntax error at or near \"with\"","position":16}
+{"sql":"alter group \"R\" with login nosuperuser","code":"42601","message":"syntax error at or near \"with\"","position":16}
+{"sql":"alter group \"R\" with connection limit 3","code":"42601","message":"syntax error at or near \"with\"","position":16}
+{"sql":"alter group \"R\" password 'x'","code":"42601","message":"syntax error at or near \"password\"","position":16}
+{"sql":"alter group \"R\" password null","code":"42601","message":"syntax error at or near \"password\"","position":16}
+{"sql":"alter group \"R\" valid until 'x'","code":"42601","message":"syntax error at or near \"valid\"","position":16}
+{"sql":"alter group \"R\" with with","code":"42601","message":"syntax error at or near \"with\"","position":16}
+{"sql":"alter group \"R\" login with","code":"42601","message":"syntax error at or near \"login\"","position":16}
+{"sql":"alter group \"R\" inherit","code":"42601","message":"syntax error at or near \"inherit\"","position":16}
+{"sql":"alter group \"R\" noinherit","code":"42601","message":"syntax error at or near \"noinherit\"","position":16}
+{"sql":"alter group \"R\" createdb createrole","code":"42601","message":"syntax error at or near \"createdb\"","position":16}
+{"sql":"alter group \"R\" in database d set x = 1","code":"42601","message":"syntax error at or near \"in\"","position":16}
+{"sql":"alter group \"R\" set x = 1","code":"42601","message":"syntax error at or near \"set\"","position":16}
+{"sql":"alter group \"R\" reset all","code":"42601","message":"syntax error at or near \"reset\"","position":16}
+{"sql":"alter group \"R\" rename to s"}
+{"sql":"alter group \"R\" ;","code":"42601","message":"syntax error at or near \";\"","position":16}
+{"sql":"alter group \"R\" ; select 1","code":"42601","message":"syntax error at or near \";\"","position":16}
+{"sql":"alter group \"R\" (","code":"42601","message":"syntax error at or near \"(\"","position":16}
+{"sql":"alter group \"R\" 1","code":"42601","message":"syntax error at or near \"1\"","position":16}
+{"sql":"alter group \"R\" ,","code":"42601","message":"syntax error at or near \",\"","position":16}
+{"sql":"alter group \"R\" r","code":"42601","message":"syntax error at or near \"r\"","position":16}
+{"sql":"alter group current_user","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"alter group current_user with","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"alter group current_user WITH","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"alter group current_user login","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"alter group current_user with login","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"alter group current_user with login nosuperuser","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"alter group current_user with connection limit 3","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"alter group current_user password 'x'","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"alter group current_user password null","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"alter group current_user valid until 'x'","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"alter group current_user with with","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"alter group current_user login with","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"alter group current_user inherit","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"alter group current_user noinherit","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"alter group current_user createdb createrole","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"alter group current_user in database d set x = 1","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"alter group current_user set x = 1","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"alter group current_user reset all","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"alter group current_user rename to s","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"alter group current_user ;","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"alter group current_user ; select 1","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"alter group current_user (","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"alter group current_user 1","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"alter group current_user ,","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"alter group current_user r","code":"42939","message":"CURRENT_USER cannot be used as a role name here","position":12}
+{"sql":"alter group current_role","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"alter group current_role with","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"alter group current_role WITH","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"alter group current_role login","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"alter group current_role with login","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"alter group current_role with login nosuperuser","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"alter group current_role with connection limit 3","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"alter group current_role password 'x'","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"alter group current_role password null","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"alter group current_role valid until 'x'","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"alter group current_role with with","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"alter group current_role login with","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"alter group current_role inherit","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"alter group current_role noinherit","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"alter group current_role createdb createrole","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"alter group current_role in database d set x = 1","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"alter group current_role set x = 1","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"alter group current_role reset all","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"alter group current_role rename to s","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"alter group current_role ;","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"alter group current_role ; select 1","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"alter group current_role (","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"alter group current_role 1","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"alter group current_role ,","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"alter group current_role r","code":"42939","message":"CURRENT_ROLE cannot be used as a role name here","position":12}
+{"sql":"alter group session_user","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"alter group session_user with","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"alter group session_user WITH","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"alter group session_user login","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"alter group session_user with login","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"alter group session_user with login nosuperuser","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"alter group session_user with connection limit 3","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"alter group session_user password 'x'","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"alter group session_user password null","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"alter group session_user valid until 'x'","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"alter group session_user with with","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"alter group session_user login with","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"alter group session_user inherit","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"alter group session_user noinherit","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"alter group session_user createdb createrole","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"alter group session_user in database d set x = 1","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"alter group session_user set x = 1","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"alter group session_user reset all","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"alter group session_user rename to s","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"alter group session_user ;","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"alter group session_user ; select 1","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"alter group session_user (","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"alter group session_user 1","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"alter group session_user ,","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"alter group session_user r","code":"42939","message":"SESSION_USER cannot be used as a role name here","position":12}
+{"sql":"alter group user","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"alter group user with","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"alter group user WITH","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"alter group user login","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"alter group user with login","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"alter group user with login nosuperuser","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"alter group user with connection limit 3","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"alter group user password 'x'","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"alter group user password null","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"alter group user valid until 'x'","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"alter group user with with","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"alter group user login with","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"alter group user inherit","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"alter group user noinherit","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"alter group user createdb createrole","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"alter group user in database d set x = 1","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"alter group user set x = 1","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"alter group user reset all","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"alter group user rename to s","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"alter group user ;","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"alter group user ; select 1","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"alter group user (","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"alter group user 1","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"alter group user ,","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"alter group user r","code":"42601","message":"syntax error at or near \"user\"","position":12}
+{"sql":"alter group public","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"alter group public with","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"alter group public WITH","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"alter group public login","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"alter group public with login","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"alter group public with login nosuperuser","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"alter group public with connection limit 3","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"alter group public password 'x'","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"alter group public password null","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"alter group public valid until 'x'","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"alter group public with with","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"alter group public login with","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"alter group public inherit","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"alter group public noinherit","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"alter group public createdb createrole","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"alter group public in database d set x = 1","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"alter group public set x = 1","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"alter group public reset all","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"alter group public rename to s","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"alter group public ;","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"alter group public ; select 1","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"alter group public (","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"alter group public 1","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"alter group public ,","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"alter group public r","code":"42939","message":"role name \"public\" is reserved","position":12}
+{"sql":"alter group none","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group none with","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group none WITH","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group none login","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group none with login","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group none with login nosuperuser","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group none with connection limit 3","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group none password 'x'","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group none password null","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group none valid until 'x'","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group none with with","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group none login with","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group none inherit","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group none noinherit","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group none createdb createrole","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group none in database d set x = 1","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group none set x = 1","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group none reset all","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group none rename to s","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group none ;","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group none ; select 1","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group none (","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group none 1","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group none ,","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group none r","code":"42939","message":"role name \"none\" is reserved","position":12}
+{"sql":"alter group all","code":"42601","message":"syntax error at or near \"all\"","position":12}
+{"sql":"alter group all with","code":"42601","message":"syntax error at or near \"all\"","position":12}
+{"sql":"alter group all WITH","code":"42601","message":"syntax error at or near \"all\"","position":12}
+{"sql":"alter group all login","code":"42601","message":"syntax error at or near \"all\"","position":12}
+{"sql":"alter group all with login","code":"42601","message":"syntax error at or near \"all\"","position":12}
+{"sql":"alter group all with login nosuperuser","code":"42601","message":"syntax error at or near \"all\"","position":12}
+{"sql":"alter group all with connection limit 3","code":"42601","message":"syntax error at or near \"all\"","position":12}
+{"sql":"alter group all password 'x'","code":"42601","message":"syntax error at or near \"all\"","position":12}
+{"sql":"alter group all password null","code":"42601","message":"syntax error at or near \"all\"","position":12}
+{"sql":"alter group all valid until 'x'","code":"42601","message":"syntax error at or near \"all\"","position":12}
+{"sql":"alter group all with with","code":"42601","message":"syntax error at or near \"all\"","position":12}
+{"sql":"alter group all login with","code":"42601","message":"syntax error at or near \"all\"","position":12}
+{"sql":"alter group all inherit","code":"42601","message":"syntax error at or near \"all\"","position":12}
+{"sql":"alter group all noinherit","code":"42601","message":"syntax error at or near \"all\"","position":12}
+{"sql":"alter group all createdb createrole","code":"42601","message":"syntax error at or near \"all\"","position":12}
+{"sql":"alter group all in database d set x = 1","code":"42601","message":"syntax error at or near \"all\"","position":12}
+{"sql":"alter group all set x = 1","code":"42601","message":"syntax error at or near \"all\"","position":12}
+{"sql":"alter group all reset all","code":"42601","message":"syntax error at or near \"all\"","position":12}
+{"sql":"alter group all rename to s","code":"42601","message":"syntax error at or near \"all\"","position":12}
+{"sql":"alter group all ;","code":"42601","message":"syntax error at or near \"all\"","position":12}
+{"sql":"alter group all ; select 1","code":"42601","message":"syntax error at or near \"all\"","position":12}
+{"sql":"alter group all (","code":"42601","message":"syntax error at or near \"all\"","position":12}
+{"sql":"alter group all 1","code":"42601","message":"syntax error at or near \"all\"","position":12}
+{"sql":"alter group all ,","code":"42601","message":"syntax error at or near \"all\"","position":12}
+{"sql":"alter group all r","code":"42601","message":"syntax error at or near \"all\"","position":12}
+{"sql":"alter group replication","code":"42601","message":"syntax error at end of input","position":23}
+{"sql":"alter group replication with","code":"42601","message":"syntax error at or near \"with\"","position":24}
+{"sql":"alter group replication WITH","code":"42601","message":"syntax error at or near \"WITH\"","position":24}
+{"sql":"alter group replication login","code":"42601","message":"syntax error at or near \"login\"","position":24}
+{"sql":"alter group replication with login","code":"42601","message":"syntax error at or near \"with\"","position":24}
+{"sql":"alter group replication with login nosuperuser","code":"42601","message":"syntax error at or near \"with\"","position":24}
+{"sql":"alter group replication with connection limit 3","code":"42601","message":"syntax error at or near \"with\"","position":24}
+{"sql":"alter group replication password 'x'","code":"42601","message":"syntax error at or near \"password\"","position":24}
+{"sql":"alter group replication password null","code":"42601","message":"syntax error at or near \"password\"","position":24}
+{"sql":"alter group replication valid until 'x'","code":"42601","message":"syntax error at or near \"valid\"","position":24}
+{"sql":"alter group replication with with","code":"42601","message":"syntax error at or near \"with\"","position":24}
+{"sql":"alter group replication login with","code":"42601","message":"syntax error at or near \"login\"","position":24}
+{"sql":"alter group replication inherit","code":"42601","message":"syntax error at or near \"inherit\"","position":24}
+{"sql":"alter group replication noinherit","code":"42601","message":"syntax error at or near \"noinherit\"","position":24}
+{"sql":"alter group replication createdb createrole","code":"42601","message":"syntax error at or near \"createdb\"","position":24}
+{"sql":"alter group replication in database d set x = 1","code":"42601","message":"syntax error at or near \"in\"","position":24}
+{"sql":"alter group replication set x = 1","code":"42601","message":"syntax error at or near \"set\"","position":24}
+{"sql":"alter group replication reset all","code":"42601","message":"syntax error at or near \"reset\"","position":24}
+{"sql":"alter group replication rename to s"}
+{"sql":"alter group replication ;","code":"42601","message":"syntax error at or near \";\"","position":24}
+{"sql":"alter group replication ; select 1","code":"42601","message":"syntax error at or near \";\"","position":24}
+{"sql":"alter group replication (","code":"42601","message":"syntax error at or near \"(\"","position":24}
+{"sql":"alter group replication 1","code":"42601","message":"syntax error at or near \"1\"","position":24}
+{"sql":"alter group replication ,","code":"42601","message":"syntax error at or near \",\"","position":24}
+{"sql":"alter group replication r","code":"42601","message":"syntax error at or near \"r\"","position":24}
+{"sql":"alter group login","code":"42601","message":"syntax error at end of input","position":17}
+{"sql":"alter group login with","code":"42601","message":"syntax error at or near \"with\"","position":18}
+{"sql":"alter group login WITH","code":"42601","message":"syntax error at or near \"WITH\"","position":18}
+{"sql":"alter group login login","code":"42601","message":"syntax error at or near \"login\"","position":18}
+{"sql":"alter group login with login","code":"42601","message":"syntax error at or near \"with\"","position":18}
+{"sql":"alter group login with login nosuperuser","code":"42601","message":"syntax error at or near \"with\"","position":18}
+{"sql":"alter group login with connection limit 3","code":"42601","message":"syntax error at or near \"with\"","position":18}
+{"sql":"alter group login password 'x'","code":"42601","message":"syntax error at or near \"password\"","position":18}
+{"sql":"alter group login password null","code":"42601","message":"syntax error at or near \"password\"","position":18}
+{"sql":"alter group login valid until 'x'","code":"42601","message":"syntax error at or near \"valid\"","position":18}
+{"sql":"alter group login with with","code":"42601","message":"syntax error at or near \"with\"","position":18}
+{"sql":"alter group login login with","code":"42601","message":"syntax error at or near \"login\"","position":18}
+{"sql":"alter group login inherit","code":"42601","message":"syntax error at or near \"inherit\"","position":18}
+{"sql":"alter group login noinherit","code":"42601","message":"syntax error at or near \"noinherit\"","position":18}
+{"sql":"alter group login createdb createrole","code":"42601","message":"syntax error at or near \"createdb\"","position":18}
+{"sql":"alter group login in database d set x = 1","code":"42601","message":"syntax error at or near \"in\"","position":18}
+{"sql":"alter group login set x = 1","code":"42601","message":"syntax error at or near \"set\"","position":18}
+{"sql":"alter group login reset all","code":"42601","message":"syntax error at or near \"reset\"","position":18}
+{"sql":"alter group login rename to s"}
+{"sql":"alter group login ;","code":"42601","message":"syntax error at or near \";\"","position":18}
+{"sql":"alter group login ; select 1","code":"42601","message":"syntax error at or near \";\"","position":18}
+{"sql":"alter group login (","code":"42601","message":"syntax error at or near \"(\"","position":18}
+{"sql":"alter group login 1","code":"42601","message":"syntax error at or near \"1\"","position":18}
+{"sql":"alter group login ,","code":"42601","message":"syntax error at or near \",\"","position":18}
+{"sql":"alter group login r","code":"42601","message":"syntax error at or near \"r\"","position":18}
+{"sql":"alter group superuser","code":"42601","message":"syntax error at end of input","position":21}
+{"sql":"alter group superuser with","code":"42601","message":"syntax error at or near \"with\"","position":22}
+{"sql":"alter group superuser WITH","code":"42601","message":"syntax error at or near \"WITH\"","position":22}
+{"sql":"alter group superuser login","code":"42601","message":"syntax error at or near \"login\"","position":22}
+{"sql":"alter group superuser with login","code":"42601","message":"syntax error at or near \"with\"","position":22}
+{"sql":"alter group superuser with login nosuperuser","code":"42601","message":"syntax error at or near \"with\"","position":22}
+{"sql":"alter group superuser with connection limit 3","code":"42601","message":"syntax error at or near \"with\"","position":22}
+{"sql":"alter group superuser password 'x'","code":"42601","message":"syntax error at or near \"password\"","position":22}
+{"sql":"alter group superuser password null","code":"42601","message":"syntax error at or near \"password\"","position":22}
+{"sql":"alter group superuser valid until 'x'","code":"42601","message":"syntax error at or near \"valid\"","position":22}
+{"sql":"alter group superuser with with","code":"42601","message":"syntax error at or near \"with\"","position":22}
+{"sql":"alter group superuser login with","code":"42601","message":"syntax error at or near \"login\"","position":22}
+{"sql":"alter group superuser inherit","code":"42601","message":"syntax error at or near \"inherit\"","position":22}
+{"sql":"alter group superuser noinherit","code":"42601","message":"syntax error at or near \"noinherit\"","position":22}
+{"sql":"alter group superuser createdb createrole","code":"42601","message":"syntax error at or near \"createdb\"","position":22}
+{"sql":"alter group superuser in database d set x = 1","code":"42601","message":"syntax error at or near \"in\"","position":22}
+{"sql":"alter group superuser set x = 1","code":"42601","message":"syntax error at or near \"set\"","position":22}
+{"sql":"alter group superuser reset all","code":"42601","message":"syntax error at or near \"reset\"","position":22}
+{"sql":"alter group superuser rename to s"}
+{"sql":"alter group superuser ;","code":"42601","message":"syntax error at or near \";\"","position":22}
+{"sql":"alter group superuser ; select 1","code":"42601","message":"syntax error at or near \";\"","position":22}
+{"sql":"alter group superuser (","code":"42601","message":"syntax error at or near \"(\"","position":22}
+{"sql":"alter group superuser 1","code":"42601","message":"syntax error at or near \"1\"","position":22}
+{"sql":"alter group superuser ,","code":"42601","message":"syntax error at or near \",\"","position":22}
+{"sql":"alter group superuser r","code":"42601","message":"syntax error at or near \"r\"","position":22}
+{"sql":"alter group role","code":"42601","message":"syntax error at end of input","position":16}
+{"sql":"alter group role with","code":"42601","message":"syntax error at or near \"with\"","position":17}
+{"sql":"alter group role WITH","code":"42601","message":"syntax error at or near \"WITH\"","position":17}
+{"sql":"alter group role login","code":"42601","message":"syntax error at or near \"login\"","position":17}
+{"sql":"alter group role with login","code":"42601","message":"syntax error at or near \"with\"","position":17}
+{"sql":"alter group role with login nosuperuser","code":"42601","message":"syntax error at or near \"with\"","position":17}
+{"sql":"alter group role with connection limit 3","code":"42601","message":"syntax error at or near \"with\"","position":17}
+{"sql":"alter group role password 'x'","code":"42601","message":"syntax error at or near \"password\"","position":17}
+{"sql":"alter group role password null","code":"42601","message":"syntax error at or near \"password\"","position":17}
+{"sql":"alter group role valid until 'x'","code":"42601","message":"syntax error at or near \"valid\"","position":17}
+{"sql":"alter group role with with","code":"42601","message":"syntax error at or near \"with\"","position":17}
+{"sql":"alter group role login with","code":"42601","message":"syntax error at or near \"login\"","position":17}
+{"sql":"alter group role inherit","code":"42601","message":"syntax error at or near \"inherit\"","position":17}
+{"sql":"alter group role noinherit","code":"42601","message":"syntax error at or near \"noinherit\"","position":17}
+{"sql":"alter group role createdb createrole","code":"42601","message":"syntax error at or near \"createdb\"","position":17}
+{"sql":"alter group role in database d set x = 1","code":"42601","message":"syntax error at or near \"in\"","position":17}
+{"sql":"alter group role set x = 1","code":"42601","message":"syntax error at or near \"set\"","position":17}
+{"sql":"alter group role reset all","code":"42601","message":"syntax error at or near \"reset\"","position":17}
+{"sql":"alter group role rename to s"}
+{"sql":"alter group role ;","code":"42601","message":"syntax error at or near \";\"","position":17}
+{"sql":"alter group role ; select 1","code":"42601","message":"syntax error at or near \";\"","position":17}
+{"sql":"alter group role (","code":"42601","message":"syntax error at or near \"(\"","position":17}
+{"sql":"alter group role 1","code":"42601","message":"syntax error at or near \"1\"","position":17}
+{"sql":"alter group role ,","code":"42601","message":"syntax error at or near \",\"","position":17}
+{"sql":"alter group role r","code":"42601","message":"syntax error at or near \"r\"","position":17}
+{"sql":"alter group with","code":"42601","message":"syntax error at or near \"with\"","position":12}
+{"sql":"alter group with with","code":"42601","message":"syntax error at or near \"with\"","position":12}
+{"sql":"alter group with WITH","code":"42601","message":"syntax error at or near \"with\"","position":12}
+{"sql":"alter group with login","code":"42601","message":"syntax error at or near \"with\"","position":12}
+{"sql":"alter group with with login","code":"42601","message":"syntax error at or near \"with\"","position":12}
+{"sql":"alter group with with login nosuperuser","code":"42601","message":"syntax error at or near \"with\"","position":12}
+{"sql":"alter group with with connection limit 3","code":"42601","message":"syntax error at or near \"with\"","position":12}
+{"sql":"alter group with password 'x'","code":"42601","message":"syntax error at or near \"with\"","position":12}
+{"sql":"alter group with password null","code":"42601","message":"syntax error at or near \"with\"","position":12}
+{"sql":"alter group with valid until 'x'","code":"42601","message":"syntax error at or near \"with\"","position":12}
+{"sql":"alter group with with with","code":"42601","message":"syntax error at or near \"with\"","position":12}
+{"sql":"alter group with login with","code":"42601","message":"syntax error at or near \"with\"","position":12}
+{"sql":"alter group with inherit","code":"42601","message":"syntax error at or near \"with\"","position":12}
+{"sql":"alter group with noinherit","code":"42601","message":"syntax error at or near \"with\"","position":12}
+{"sql":"alter group with createdb createrole","code":"42601","message":"syntax error at or near \"with\"","position":12}
+{"sql":"alter group with in database d set x = 1","code":"42601","message":"syntax error at or near \"with\"","position":12}
+{"sql":"alter group with set x = 1","code":"42601","message":"syntax error at or near \"with\"","position":12}
+{"sql":"alter group with reset all","code":"42601","message":"syntax error at or near \"with\"","position":12}
+{"sql":"alter group with rename to s","code":"42601","message":"syntax error at or near \"with\"","position":12}
+{"sql":"alter group with ;","code":"42601","message":"syntax error at or near \"with\"","position":12}
+{"sql":"alter group with ; select 1","code":"42601","message":"syntax error at or near \"with\"","position":12}
+{"sql":"alter group with (","code":"42601","message":"syntax error at or near \"with\"","position":12}
+{"sql":"alter group with 1","code":"42601","message":"syntax error at or near \"with\"","position":12}
+{"sql":"alter group with ,","code":"42601","message":"syntax error at or near \"with\"","position":12}
+{"sql":"alter group with r","code":"42601","message":"syntax error at or near \"with\"","position":12}
+{"sql":"alter role","code":"42601","message":"syntax error at end of input","position":10}
+{"sql":"alter user","code":"42601","message":"syntax error at end of input","position":10}
+{"sql":"alter role r, s","code":"42601","message":"syntax error at or near \",\"","position":12}

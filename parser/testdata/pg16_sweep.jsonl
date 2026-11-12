@@ -9721,7 +9721,7 @@
 {"file":"create_role.sql","stmt":22,"sum":"81f772c1"}
 {"file":"create_role.sql","stmt":22,"edit":[112,0," NOREPLICATION"]}
 {"file":"create_role.sql","stmt":23,"sum":"f82c437b"}
-{"file":"create_role.sql","stmt":23,"edit":[11,19,""],"class":"alter-role-no-options"}
+{"file":"create_role.sql","stmt":23,"edit":[11,19,""]}
 {"file":"create_role.sql","stmt":24,"sum":"2948d492"}
 {"file":"create_role.sql","stmt":25,"sum":"64303a87"}
 {"file":"create_role.sql","stmt":26,"sum":"ca14c2e0"}
@@ -12780,7 +12780,7 @@
 {"file":"event_trigger.sql","stmt":48,"sum":"92f75dc8"}
 {"file":"event_trigger.sql","stmt":49,"sum":"49b8b7ea"}
 {"file":"event_trigger.sql","stmt":50,"sum":"bc1e9ab4"}
-{"file":"event_trigger.sql","stmt":50,"edit":[51,16,""],"class":"alter-role-no-options"}
+{"file":"event_trigger.sql","stmt":50,"edit":[51,16,""]}
 {"file":"event_trigger.sql","stmt":51,"sum":"f6dfd691"}
 {"file":"event_trigger.sql","stmt":52,"sum":"18ef076e"}
 {"file":"event_trigger.sql","stmt":53,"sum":"eca36957"}
@@ -58760,8 +58760,8 @@
 {"sql":"alter role current_user rename to x","code":"42939","msg":"CURRENT_USER cannot be used as a role name here","pos":11}
 {"sql":"create role current_user","code":"42939","msg":"CURRENT_USER cannot be used as a role name here","pos":12}
 {"sql":"create user current_role","code":"42939","msg":"CURRENT_ROLE cannot be used as a role name here","pos":12}
-{"sql":"alter role r","class":"alter-role-no-options"}
-{"sql":"alter user r","class":"alter-role-no-options"}
+{"sql":"alter role r"}
+{"sql":"alter user r"}
 {"sql":"alter role r with"}
 {"sql":"reindex system","class":"reindex-optional-name"}
 {"sql":"reindex database","class":"reindex-optional-name"}

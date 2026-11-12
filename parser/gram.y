@@ -6237,6 +6237,13 @@ AlterRoleStmt:
 				Options: prependList($4, $5),
 			}
 		}
+	| ALTER ROLE RoleSpec
+		{
+			$$ = &nodes.AlterRoleStmt{
+				Role:   $3.(*nodes.RoleSpec),
+				Action: 1,
+			}
+		}
 	| ALTER USER RoleSpec WITH AlterOptRoleList
 		{
 			$$ = &nodes.AlterRoleStmt{
@@ -6251,6 +6258,13 @@ AlterRoleStmt:
 				Role:    $3.(*nodes.RoleSpec),
 				Action:  1,
 				Options: prependList($4, $5),
+			}
+		}
+	| ALTER USER RoleSpec
+		{
+			$$ = &nodes.AlterRoleStmt{
+				Role:   $3.(*nodes.RoleSpec),
+				Action: 1,
 			}
 		}
 	;

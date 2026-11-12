@@ -92,7 +92,7 @@ L a feature's grammar.
 | pg17-json-names | 2 | 75 (4/66/5) | refuses PostgreSQL 16's json, json_table and the like as names | `kwlist.h`: 20 PostgreSQL 17 keywords, JSON col_name; `JsonType` | no | M (with pg17-sqljson) |
 | drop-type-typename (fixed) | 2 | 50 (0/47/3) | refuses `DROP TYPE t[]`, `DROP DOMAIN d(3)` | `DropStmt` TYPE/DOMAIN `type_name_list` | yes, all 50 | S |
 | alter-column-optional-keyword (fixed) | 2 | 7 (0/5/2) | refuses `ALTER a SET (...)`, `ALTER a SET GENERATED` without COLUMN | `alter_table_cmd` `ALTER opt_column ColId` | no | S |
-| alter-role-no-options | 2 | 4 (0/2/2) | refuses `ALTER ROLE r` | `AlterRoleStmt` `opt_with AlterOptRoleList` | no | S |
+| alter-role-no-options (fixed) | 2 | 4 (0/2/2) | refuses `ALTER ROLE r` | `AlterRoleStmt` `opt_with AlterOptRoleList` | no | S |
 | reindex-optional-name | 2 | 4 (1/0/3) | refuses `REINDEX SYSTEM`, `REINDEX DATABASE` | `ReindexStmt` `opt_single_name` | no | S |
 | role-spec-keywords | 2 | 4 (0/1/3) | refuses a type_func_name keyword as a role | `RoleSpec: NonReservedWord` | no | S |
 | copy-generic-options (fixed) | 2 | 4 (0/2/2) | refuses a reserved keyword as a COPY option name; accepts DEFAULT as its argument | `copy_generic_opt_elem: ColLabel copy_generic_opt_arg` | no | S |
@@ -421,13 +421,17 @@ COLUMN is optional in DROP EXPRESSION, DROP IDENTITY, the identity options
 (SET GENERATED, RESTART, SET ...) and SET/RESET `(...)` too. The 16 rules
 without COLUMN that duplicated others are deleted. All 7 agree.
 
-### alter-role-no-options (risk 2, 4)
+### alter-role-no-options (risk 2, 4; fixed)
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
 | `alter role r` | accepts | 42601 syntax error at end of input at 12 |
 | `alter user r` | accepts | 42601 syntax error at end of input at 12 |
 | `ALTER ROLE REPLICATION` | accepts | 42601 syntax error at end of input at 23 |
+
+`AlterRoleStmt` now has `ALTER ROLE|USER RoleSpec` with no options, which is
+PostgreSQL 16's `opt_with AlterOptRoleList` with both empty; the tree is an
+AlterRoleStmt with no options. All 4 agree.
 
 ### reindex-optional-name (risk 2, 4)
 
