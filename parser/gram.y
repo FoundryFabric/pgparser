@@ -3820,7 +3820,7 @@ DropStmt:
 			}
 		}
 	/* DROP TYPE / DROP DOMAIN */
-	| DROP TYPE_P any_name_list opt_drop_behavior
+	| DROP TYPE_P type_list opt_drop_behavior
 		{
 			$$ = &nodes.DropStmt{
 				Objects:    $3,
@@ -3828,7 +3828,7 @@ DropStmt:
 				Behavior:   int($4),
 			}
 		}
-	| DROP TYPE_P IF_P EXISTS any_name_list opt_drop_behavior
+	| DROP TYPE_P IF_P EXISTS type_list opt_drop_behavior
 		{
 			$$ = &nodes.DropStmt{
 				Objects:    $5,
@@ -3837,7 +3837,7 @@ DropStmt:
 				Missing_ok: true,
 			}
 		}
-	| DROP DOMAIN_P any_name_list opt_drop_behavior
+	| DROP DOMAIN_P type_list opt_drop_behavior
 		{
 			$$ = &nodes.DropStmt{
 				Objects:    $3,
@@ -3845,7 +3845,7 @@ DropStmt:
 				Behavior:   int($4),
 			}
 		}
-	| DROP DOMAIN_P IF_P EXISTS any_name_list opt_drop_behavior
+	| DROP DOMAIN_P IF_P EXISTS type_list opt_drop_behavior
 		{
 			$$ = &nodes.DropStmt{
 				Objects:    $5,
@@ -12836,7 +12836,7 @@ CommentStmt:
 				Comment: $6,
 			}
 		}
-	| COMMENT ON TYPE_P any_name IS comment_text
+	| COMMENT ON TYPE_P Typename IS comment_text
 		{
 			$$ = &nodes.CommentStmt{
 				Objtype: nodes.OBJECT_TYPE,
@@ -12844,7 +12844,7 @@ CommentStmt:
 				Comment: $6,
 			}
 		}
-	| COMMENT ON DOMAIN_P any_name IS comment_text
+	| COMMENT ON DOMAIN_P Typename IS comment_text
 		{
 			$$ = &nodes.CommentStmt{
 				Objtype: nodes.OBJECT_DOMAIN,
@@ -13029,7 +13029,7 @@ SecLabelStmt:
 				Label:    $8,
 			}
 		}
-	| SECURITY LABEL opt_provider ON TYPE_P any_name IS security_label
+	| SECURITY LABEL opt_provider ON TYPE_P Typename IS security_label
 		{
 			$$ = &nodes.SecLabelStmt{
 				Objtype:  nodes.OBJECT_TYPE,
@@ -13038,7 +13038,7 @@ SecLabelStmt:
 				Label:    $8,
 			}
 		}
-	| SECURITY LABEL opt_provider ON DOMAIN_P any_name IS security_label
+	| SECURITY LABEL opt_provider ON DOMAIN_P Typename IS security_label
 		{
 			$$ = &nodes.SecLabelStmt{
 				Objtype:  nodes.OBJECT_DOMAIN,
@@ -15026,6 +15026,24 @@ AlterExtensionContentsStmt:
 				Action:  int($4),
 				Objtype: nodes.OBJECT_OPFAMILY,
 				Object:  prependList(&nodes.String{Str: $9}, $7),
+			}
+		}
+	| ALTER EXTENSION name add_drop CAST '(' Typename AS Typename ')'
+		{
+			$$ = &nodes.AlterExtensionContentsStmt{
+				Extname: $3,
+				Action:  int($4),
+				Objtype: nodes.OBJECT_CAST,
+				Object:  makeList2($7, $9),
+			}
+		}
+	| ALTER EXTENSION name add_drop TRANSFORM FOR Typename LANGUAGE name
+		{
+			$$ = &nodes.AlterExtensionContentsStmt{
+				Extname: $3,
+				Action:  int($4),
+				Objtype: nodes.OBJECT_TRANSFORM,
+				Object:  makeList2($7, &nodes.String{Str: $9}),
 			}
 		}
 	| ALTER EXTENSION name add_drop DOMAIN_P Typename

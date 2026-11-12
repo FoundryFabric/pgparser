@@ -258,7 +258,7 @@
 {"sql": "drop index a.b.c.d", "pg16After": "42601 improper relation name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
 {"sql": "drop sequence a.b.c.d", "pg16After": "42601 improper relation name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
 {"sql": "drop type a.b.c.d", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
-{"sql": "drop type a.b[1]", "pg16After": "3F000 schema \"a\" does not exist", "divergence": "DROP TYPE and COMMENT ON TYPE take an any_name; PostgreSQL 16's take a Typename, which may carry array bounds"}
+{"sql": "drop type a.b[1]", "pg16After": "3F000 schema \"a\" does not exist"}
 {"sql": "drop domain a.b.c.d", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
 {"sql": "drop schema a.b", "syntaxError": "syntax error at or near \".\"", "position": 13}
 {"sql": "drop schema a", "pg16After": "3F000 schema \"a\" does not exist"}
@@ -343,7 +343,7 @@
 {"sql": "comment on column a.b[1] is 'x'", "syntaxError": "syntax error at or near \"[\"", "position": 21}
 {"sql": "comment on function a.b.c.d() is 'x'", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
 {"sql": "comment on function a.b[1]() is 'x'", "syntaxError": "syntax error at or near \"(\"", "position": 26}
-{"sql": "comment on type a.b[1] is 'x'", "pg16After": "3F000 schema \"a\" does not exist", "divergence": "DROP TYPE and COMMENT ON TYPE take an any_name; PostgreSQL 16's take a Typename, which may carry array bounds"}
+{"sql": "comment on type a.b[1] is 'x'", "pg16After": "3F000 schema \"a\" does not exist"}
 {"sql": "comment on type a.b.c.d is 'x'", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "pg16Name": "a.b.c.d"}
 {"sql": "comment on schema a.b is 'x'", "syntaxError": "syntax error at or near \".\"", "position": 19}
 {"sql": "create language l handler a", "pg16After": "42883 function a() does not exist"}
