@@ -4,7 +4,9 @@ go 1.25.0
 
 require (
 	github.com/jackc/pgx/v5 v5.9.2
+	github.com/pganalyze/pg_query_go/v5 v5.1.0
 	github.com/pgplex/pgparser v0.0.0
+	google.golang.org/protobuf v1.31.0
 )
 
 require (
