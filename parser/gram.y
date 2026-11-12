@@ -507,7 +507,9 @@ import (
 %nonassoc  '<' '>' '=' LESS_EQUALS GREATER_EQUALS NOT_EQUALS
 %nonassoc  BETWEEN IN_P LIKE ILIKE SIMILAR NOT_LA
 %nonassoc  ESCAPE
-%nonassoc  UNBOUNDED
+// NESTED below PATH: in a JSON_TABLE column list, NESTED followed by PATH
+// is a nested column path, not a column named nested of type path.
+%nonassoc  UNBOUNDED NESTED
 %nonassoc  IDENT PARTITION RANGE ROWS GROUPS PRECEDING FOLLOWING CUBE ROLLUP
 %nonassoc  SET KEYS OBJECT_P SCALAR VALUE_P WITH WITHOUT PATH
 %left      Op OPERATOR

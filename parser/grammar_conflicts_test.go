@@ -13,7 +13,7 @@ import (
 // either count must change these on purpose. make check-parser checks that
 // y.output is goyacc's output for gram.y.
 const (
-	pinnedShiftReduce  = 1
+	pinnedShiftReduce  = 0
 	pinnedReduceReduce = 0
 )
 
@@ -23,8 +23,8 @@ var (
 )
 
 // yaccConflicts counts the conflicts in a goyacc y.output: the summary line
-// goyacc writes when there are any, and the conflict lines of the states,
-// which must agree with it.
+// goyacc always writes, and the conflict lines of the states, which must
+// agree with it.
 func yaccConflicts(path string) (shiftReduce, reduceReduce int, err error) {
 	f, err := os.Open(path)
 	if err != nil {
@@ -53,7 +53,7 @@ func yaccConflicts(path string) (shiftReduce, reduceReduce int, err error) {
 	if err := sc.Err(); err != nil {
 		return 0, 0, err
 	}
-	if summary != (shiftReduce+reduceReduce > 0) || sumSR != shiftReduce || sumRR != reduceReduce {
+	if !summary || sumSR != shiftReduce || sumRR != reduceReduce {
 		return 0, 0, fmt.Errorf("%s: summary %d shift/reduce, %d reduce/reduce; states list %d and %d", path, sumSR, sumRR, shiftReduce, reduceReduce)
 	}
 	return shiftReduce, reduceReduce, nil
@@ -80,7 +80,8 @@ func TestYaccConflictsCountsAndChecks(t *testing.T) {
 		sr, rr     int
 		bad        bool
 	}{
-		{"none", "state 0\n\t$accept: .stmtblock $end \n", 0, 0, false},
+		{"none", "state 0\n\t$accept: .stmtblock $end \n0 shift/reduce, 0 reduce/reduce conflicts reported\n", 0, 0, false},
+		{"no summary, no conflicts", "state 0\n\t$accept: .stmtblock $end \n", 0, 0, true},
 		{"some", "1098: shift/reduce conflict (shift 1754(0), red'n 1725(0)) on CASCADE\n 1098: reduce/reduce conflict  (red'ns 1725 and 433) on $end\n 1098: reduce/reduce conflict  (red'ns 1725 and 433) on ';'\n1 shift/reduce, 2 reduce/reduce conflicts reported\n", 1, 2, false},
 		{"summary differs", "1098: shift/reduce conflict (shift 1754(0), red'n 1725(0)) on CASCADE\n2 shift/reduce, 0 reduce/reduce conflicts reported\n", 0, 0, true},
 		{"no summary", " 1: reduce/reduce conflict  (red'ns 1 and 2) on ';'\n", 0, 0, true},
