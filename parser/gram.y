@@ -10,6 +10,7 @@ package parser
 import (
 	"fmt"
 	"math"
+	"reflect"
 	"strconv"
 	"strings"
 
@@ -7492,7 +7493,11 @@ aggr_args:
 	| '(' aggr_args_list ORDER BY aggr_args_list ')'
 		{
 			/* ordered-set agg with direct args and ordered args */
-			$$ = makeOrderedSetArgs($2, $5)
+			args, ok := makeOrderedSetArgs(pglex, $2, $5)
+			if !ok {
+				return 1
+			}
+			$$ = args
 		}
 	;
 
@@ -18595,21 +18600,57 @@ func extractAggrArgTypes(args *nodes.List) *nodes.List {
 	return extractArgTypes(aggrArgs(args))
 }
 
-// makeOrderedSetArgs builds the aggr_args result for ordered-set aggregates
-// with both direct args and ORDER BY args.
-// Returns a 2-element list: [combined_args_list, Integer{ndirectargs}].
-// The combined list has the direct args followed by the ORDER BY args.
-func makeOrderedSetArgs(directArgs *nodes.List, orderedArgs *nodes.List) *nodes.List {
-	combined := &nodes.List{}
-	ndirect := 0
-	if directArgs != nil {
-		combined.Items = append(combined.Items, directArgs.Items...)
-		ndirect = len(directArgs.Items)
+// makeOrderedSetArgs is PostgreSQL 16's makeOrderedSetArgs: aggr_args'
+// 2-element list [direct args then ordered args, Integer{ndirectargs}] for
+// an ordered-set aggregate. A VARIADIC last direct argument takes one
+// VARIADIC ordered argument of the same type, which is dropped; anything
+// else is refused at the first ordered argument's type, and it reports
+// false.
+func makeOrderedSetArgs(lex pgLexer, directArgs *nodes.List, orderedArgs *nodes.List) (*nodes.List, bool) {
+	lastd := directArgs.Items[len(directArgs.Items)-1].(*nodes.FunctionParameter)
+	if lastd.Mode == nodes.FUNC_PARAM_VARIADIC {
+		firsto := orderedArgs.Items[0].(*nodes.FunctionParameter)
+		if len(orderedArgs.Items) != 1 || firsto.Mode != nodes.FUNC_PARAM_VARIADIC || !equalNodes(reflect.ValueOf(lastd.ArgType), reflect.ValueOf(firsto.ArgType)) {
+			grammarError(lex, "0A000", "an ordered-set aggregate with a VARIADIC direct argument must have one VARIADIC aggregated argument of the same data type", "", firsto.ArgType.Location)
+			return nil, false
+		}
+		orderedArgs = nil
 	}
-	if orderedArgs != nil {
-		combined.Items = append(combined.Items, orderedArgs.Items...)
+	combined := &nodes.List{Items: append(append([]nodes.Node{}, directArgs.Items...), orderedArgs.Elems()...)}
+	return makeList2(combined, &nodes.Integer{Ival: int64(len(directArgs.Items))}), true
+}
+
+// equalNodes is PostgreSQL 16's equal() for parse trees: the same node
+// kinds with equal fields, locations aside.
+func equalNodes(a, b reflect.Value) bool {
+	if a.Type() != b.Type() {
+		return false
 	}
-	return makeList2(combined, &nodes.Integer{Ival: int64(ndirect)})
+	switch a.Kind() {
+	case reflect.Pointer, reflect.Interface:
+		if a.IsNil() || b.IsNil() {
+			return a.IsNil() == b.IsNil()
+		}
+		return equalNodes(a.Elem(), b.Elem())
+	case reflect.Struct:
+		for i := 0; i < a.NumField(); i++ {
+			if a.Type().Field(i).Name != "Location" && !equalNodes(a.Field(i), b.Field(i)) {
+				return false
+			}
+		}
+		return true
+	case reflect.Slice:
+		if a.Len() != b.Len() {
+			return false
+		}
+		for i := 0; i < a.Len(); i++ {
+			if !equalNodes(a.Index(i), b.Index(i)) {
+				return false
+			}
+		}
+		return true
+	}
+	return a.Equal(b)
 }
 
 // checkNames is PostgreSQL 16's check_func_name and check_qualified_name:

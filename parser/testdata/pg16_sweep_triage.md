@@ -1023,6 +1023,21 @@ a statement once (`typeNames`), as an argument's is now reached through
 both lists. `testdata/objfuncargs_pg16.jsonl` pins 22 statements; all
 agree.
 
+### ordered-set-variadic (tree 1, 1 and 1; verdict, probes only; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `create aggregate my_rank(VARIADIC "any" ORDER BY VARIADIC "any") (...)` | one argument, 1 direct | two arguments |
+| `create aggregate a(variadic "any" order by "any") (...)` | `0A000 an ordered-set aggregate with a VARIADIC direct argument must have one VARIADIC aggregated argument of the same data type` at the ordered argument's type | accepted |
+
+PostgreSQL 16's `makeOrderedSetArgs` drops a VARIADIC ordered argument
+that repeats a VARIADIC last direct argument, and refuses any other
+ordered arguments after one, comparing the types as `equal()` does
+(locations aside; `equalNodes`). The 3 trees that changed over the corpus
+are such aggregates; the 11 verdicts that changed are new probes, now
+PostgreSQL 16's. `testdata/ordered_set_pg16.jsonl` pins 21 statements;
+all agree.
+
 ## Rerunning
 
 ```
