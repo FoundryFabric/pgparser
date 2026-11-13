@@ -9455,7 +9455,7 @@ over_clause:
 			$$ = &nodes.WindowDef{
 				Name:         $2,
 				FrameOptions: nodes.FRAMEOPTION_DEFAULTS,
-				Location:     -1,
+				Location:     $<loc>2,
 			}
 		}
 	| /* EMPTY */				{ $$ = nil }
@@ -9491,7 +9491,7 @@ window_specification:
 			if $4 != nil {
 				n.OrderClause = $4
 			}
-			n.Location = -1
+			n.Location = $<loc>1
 			$$ = n
 		}
 	;

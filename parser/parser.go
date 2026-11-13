@@ -29991,7 +29991,7 @@ pgdefault:
 			pgVAL.node = &nodes.WindowDef{
 				Name:         pgDollar[2].str,
 				FrameOptions: nodes.FRAMEOPTION_DEFAULTS,
-				Location:     -1,
+				Location:     pgDollar[2].loc,
 			}
 		}
 	case 1395:
@@ -30044,7 +30044,7 @@ pgdefault:
 			if pgDollar[4].list != nil {
 				n.OrderClause = pgDollar[4].list
 			}
-			n.Location = -1
+			n.Location = pgDollar[1].loc
 			pgVAL.node = n
 		}
 	case 1402:

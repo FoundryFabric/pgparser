@@ -245,3 +245,16 @@
 {"sql":"create table p partition of t for values from (minvalue) to (1)","locations":{"PartitionBoundSpec":[41]}}
 {"sql":"alter table t attach partition p for values with (modulus 2, remainder 0)","locations":{"PartitionBoundSpec":[44]}}
 {"sql":"alter table t attach partition p default","locations":{"PartitionBoundSpec":[33]}}
+{"sql":"SELECT count() OVER () FROM tenk1","locations":{"WindowDef":[20]}}
+{"sql":"SELECT generate_series(1, 100) OVER () FROM empsalary","locations":{"WindowDef":[36]}}
+{"sql":"SELECT ntile(0) OVER (ORDER BY ten), ten, four FROM tenk1","locations":{"WindowDef":[21]}}
+{"sql":"SELECT COUNT(*) OVER w FROM tenk1 WHERE unique2 < 10 WINDOW w AS ()","locations":{"WindowDef":[21,65]}}
+{"sql":"-- no window operation\nSELECT four FROM tenk1 WHERE FALSE WINDOW w AS (PARTITION BY ten)","locations":{"WindowDef":[70]}}
+{"sql":"SELECT count(*) OVER w FROM tenk1 WINDOW w AS (ORDER BY unique1), w AS (ORDER BY unique1)","locations":{"WindowDef":[21,46,71]}}
+{"sql":"SELECT to_json(a) AS a, JSON_OBJECTAGG(k : v WITH UNIQUE KEYS) OVER (ORDER BY k)\nFROM (VALUES (1,1), (2,2)) a(k,v)","locations":{"WindowDef":[68]}}
+{"sql":"SELECT to_json(a) AS a, JSON_OBJECTAGG(k : v WITH UNIQUE KEYS) OVER (ORDER BY k)\nFROM (VALUES (1,1), (1,2), (2,2)) a(k,v)","locations":{"WindowDef":[68]}}
+{"sql":"SELECT to_json(a) AS a, JSON_OBJECTAGG(k : v ABSENT ON NULL)\nOVER (ORDER BY k)\nFROM (VALUES (1,1), (1,null), (2,2)) a(k,v)","locations":{"WindowDef":[66]}}
+{"sql":"select count(*) over w from t window w as (), v as (w order by a rows between unbounded preceding and current row)","locations":{"WindowDef":[21,42,51]}}
+{"sql":"select sum(a) over (partition by b) , rank() over w2 from t","locations":{"WindowDef":[19,50]}}
+{"sql":"select json_objectagg(k : v) over (order by k) from t","locations":{"WindowDef":[34]}}
+{"sql":"select json_arrayagg(v) over w from t window w as (partition by a)","locations":{"WindowDef":[29,50]}}

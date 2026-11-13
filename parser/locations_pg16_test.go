@@ -40,8 +40,8 @@ func TestLocationsAreLibpgQuerys(t *testing.T) {
 	if err := sc.Err(); err != nil {
 		t.Fatal(err)
 	}
-	if len(cases) != 247 {
-		t.Fatalf("%d cases, want 247", len(cases))
+	if len(cases) != 260 {
+		t.Fatalf("%d cases, want 260", len(cases))
 	}
 	for _, c := range cases {
 		tree, err := Parse(c.SQL)
