@@ -301,3 +301,36 @@
 {"sql":"insert into t values (1) on conflict (a) do nothing","locations":{"InferClause":[37],"OnConflictClause":[25]}}
 {"sql":"select a from t group by grouping sets ((a), (), rollup (a, b), cube (b))","locations":{"GroupingSet":[25,45,49,64]}}
 {"sql":"select a from t group by ()","locations":{"GroupingSet":[25]}}
+{"sql":"SELECT xmlconcat(NULL)","locations":{"XmlExpr":[7]}}
+{"sql":"SELECT xmlpi(name foo)","locations":{"XmlExpr":[7]}}
+{"sql":"SELECT xmlconcat(1, 2)","locations":{"XmlExpr":[7]}}
+{"sql":"CREATE STATISTICS tst ON a FROM XMLTABLE('foo' PASSING 'bar' COLUMNS a text)","locations":{"RangeTableFunc":[32],"RangeTableFuncCol":[69]}}
+{"sql":"-- errors\nSELECT * FROM XMLTABLE (ROW () PASSING null COLUMNS v1 timestamp) AS f (v1, v2)","locations":{"RangeTableFunc":[24],"RangeTableFuncCol":[62]}}
+{"sql":"SELECT xmltable.* FROM xmltest2, LATERAL xmltable('/d/r' PASSING x COLUMNS a int PATH '' || lower(_path) || 'c')","locations":{"RangeTableFunc":[41],"RangeTableFuncCol":[75]}}
+{"sql":"SELECT * FROM XMLTABLE('.' PASSING XMLELEMENT(NAME a) columns a varchar(20) PATH '\"<foo/>\"', b xml PATH '\"<foo/>\"')","locations":{"RangeTableFunc":[14],"RangeTableFuncCol":[62,93],"XmlExpr":[35]}}
+{"sql":"select count(*) from person tablesample bernoulli (100)","locations":{"RangeTableSample":[40]}}
+{"sql":"SELECT id FROM test_tablesample TABLESAMPLE SYSTEM (-1)","locations":{"RangeTableSample":[44]}}
+{"sql":"SELECT id FROM test_tablesample TABLESAMPLE SYSTEM (200)","locations":{"RangeTableSample":[44]}}
+{"sql":"SELECT xmlserialize(document 'bad' as text)","locations":{"XmlSerialize":[7]}}
+{"sql":"SELECT xmlserialize(CONTENT  '' AS text INDENT)","locations":{"XmlSerialize":[7]}}
+{"sql":"SELECT xmlserialize(content 'good' as char(10))","locations":{"XmlSerialize":[7]}}
+{"sql":"SELECT xmlelement(name element, xmlelement(name nested, 'stuff'))","locations":{"XmlExpr":[7,32]}}
+{"sql":"SELECT xmlelement(name employee, xmlforest(name, age, salary as pay)) FROM emp","locations":{"XmlExpr":[7,33]}}
+{"sql":"SELECT xmlroot(xmlroot(xml '<foo/>', version '1.0'), version '1.1', standalone no)","locations":{"XmlExpr":[7,15]}}
+{"sql":"SELECT xmlelement(name employees, xmlagg(xmlelement(name name, name))) FROM emp","locations":{"XmlExpr":[7,41]}}
+{"sql":"-- multi line xml test, result should be empty too\nWITH\n   x AS (SELECT proname, proowner, procost::numeric, pronargs,\n                array_to_string(proargnames,',') as proargnames,\n                case when proargtypes <> '' then array_to_string(proargtypes::oid[],',') end as proargtypes\n           FROM pg_proc),\n   y AS (SELECT xmlelement(name data,\n                           xmlagg(xmlelement(name proc,\n                                             xmlforest(proname, proowner, procost,\n                                                       pronargs, proargnames, proargtypes)))) as doc\n           FROM x),\n   z AS (SELECT xmltable.*\n           FROM y,\n                LATERAL xmltable('/data/proc' PASSING doc\n                                 COLUMNS proname name,\n                                         proowner oid,\n                                         procost float,\n                                         pronargs int,\n                                         proargnames text,\n                                         proargtypes text))\n   SELECT * FROM z\n   EXCEPT SELECT * FROM x","locations":{"RangeTableFunc":[686],"RangeTableFuncCol":[761,816,871,927,982,1041],"XmlExpr":[334,390,457]}}
+{"sql":"-- multi line xml test, result should be empty too\nWITH\n   x AS (SELECT proname, proowner, procost::numeric, pronargs,\n                array_to_string(proargnames,',') as proargnames,\n                case when proargtypes <> '' then array_to_string(proargtypes::oid[],',') end as proargtypes\n           FROM pg_proc),\n   y AS (SELECT xmlelement(name data,\n                           xmlagg(xmlelement(name proc,\n                                             xmlforest.x(proname, proowner, procost,\n                                                       pronargs, proargnames, proargtypes)))) as doc\n           FROM x),\n   z AS (SELECT xmltable.*\n           FROM y,\n                LATERAL xmltable('/data/proc' PASSING doc\n                                 COLUMNS proname name,\n                                         proowner oid,\n                                         procost float,\n                                         pronargs int,\n                                         proargnames text,\n                                         proargtypes text))\n   SELECT * FROM z\n   EXCEPT SELECT * FROM x","locations":{"RangeTableFunc":[688],"RangeTableFuncCol":[763,818,873,929,984,1043],"XmlExpr":[334,390]}}
+{"sql":"SELECT xmlserialize(CONTENT  '<foo><bar><val x=\"y\">42</val></bar></foo>' AS text) = xmlserialize(CONTENT '<foo><bar><val x=\"y\">42</val></bar></foo>' AS text  INDENT)","locations":{"XmlSerialize":[7,84]}}
+{"sql":"SELECT xmlserialize(CONTENT  '<foo><bar><val x=\"y\">42</val></bar></foo>' AS text) = xmlserialize(CONTENT '<foo><bar><val x=\"y\">42</val></bar></foo>' AS text NO INDENT)","locations":{"XmlSerialize":[7,84]}}
+{"sql":"-- 'no indent' = not using 'no indent'\nSELECT xmlserialize(DOCUMENT '<foo><bar><val x=\"y\">42</val></bar></foo>' AS text) = xmlserialize(DOCUMENT '<foo><bar><val x=\"y\">42</val></bar></foo>' AS text NO INDENT)","locations":{"XmlSerialize":[46,123]}}
+{"sql":"SELECT '<>' IS NOT DOCUMENT","locations":{"XmlExpr":[12]}}
+{"sql":"SELECT xml 'abc' IS NOT DOCUMENT","locations":{"XmlExpr":[17]}}
+{"sql":"SELECT xml '<abc/>' IS NOT DOCUMENT","locations":{"XmlExpr":[20]}}
+{"sql":"CREATE STATISTICS tst ON a FROM ext_stats_test s TABLESAMPLE system (x)","locations":{"RangeTableSample":[61]}}
+{"sql":"-- ok - conditional expressions are allowed\nALTER PUBLICATION testpub5 SET TABLE testpub_rf_tbl5 WHERE (a IS DOCUMENT)","locations":{"XmlExpr":[106]}}
+{"sql":"select xmlconcat('a', 'b'), xmlelement(name a, xmlattributes(1 as b), 'c'), xmlelement(name a, 'c'), xmlelement(name a, xmlattributes(1 as b)), xmlforest(1 as a), xmlparse(document 'x' preserve whitespace), xmlpi(name a), xmlpi(name a, 'b'), xmlroot('x', version '1.0', standalone yes)","locations":{"XmlExpr":[7,28,76,101,144,163,207,222,242]}}
+{"sql":"select xmlserialize(content 'x' as text no indent)","locations":{"XmlSerialize":[7]}}
+{"sql":"select 1 where 'x' is document and 'y' is not document","locations":{"XmlExpr":[19,39]}}
+{"sql":"select * from xmltable(xmlnamespaces('u' as a), '/x' passing 'y' columns a int path 'b' default 1 not null, b for ordinality, c text)","locations":{"RangeTableFunc":[14],"RangeTableFuncCol":[73,108,126]}}
+{"sql":"select * from t tablesample system (1) repeatable (2)","locations":{"RangeTableSample":[28]}}
+{"sql":"select ('x' is document) is not document","locations":{"XmlExpr":[12,25]}}

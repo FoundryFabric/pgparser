@@ -8243,10 +8243,10 @@ tablesample_clause:
 	TABLESAMPLE func_name '(' expr_list ')' opt_repeatable_clause
 		{
 			$$ = &nodes.RangeTableSample{
-				Method: $2,
-				Args:   $4,
+				Method:     $2,
+				Args:       $4,
 				Repeatable: $6,
-				Location: -1,
+				Location:   $<loc>2,
 			}
 		}
 	;
@@ -8748,7 +8748,7 @@ a_expr:
 			$$ = &nodes.XmlExpr{
 				Op:       nodes.IS_DOCUMENT,
 				Args:     makeList($1),
-				Location: -1,
+				Location: $<loc>2,
 			}
 		}
 	| a_expr IS NOT DOCUMENT_P                         %prec IS
@@ -8756,7 +8756,7 @@ a_expr:
 			$$ = makeNotExpr(&nodes.XmlExpr{
 				Op:       nodes.IS_DOCUMENT,
 				Args:     makeList($1),
-				Location: -1,
+				Location: $<loc>2,
 			}, $<loc>2)
 		}
 	| a_expr IS json_predicate_type_constraint json_key_uniqueness_constraint_opt   %prec IS
@@ -9269,7 +9269,7 @@ b_expr:
 			$$ = &nodes.XmlExpr{
 				Op:       nodes.IS_DOCUMENT,
 				Args:     makeList($1),
-				Location: -1,
+				Location: $<loc>2,
 			}
 		}
 	| b_expr IS NOT DOCUMENT_P				%prec IS
@@ -9277,7 +9277,7 @@ b_expr:
 			$$ = makeNotExpr(&nodes.XmlExpr{
 				Op:       nodes.IS_DOCUMENT,
 				Args:     makeList($1),
-				Location: -1,
+				Location: $<loc>2,
 			}, $<loc>2)
 		}
 	| b_expr TYPECAST Typename
@@ -9921,7 +9921,7 @@ func_expr_common_subexpr:
 			$$ = &nodes.XmlExpr{
 				Op:       nodes.IS_XMLCONCAT,
 				Args:     $3,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| XMLELEMENT '(' NAME_P ColLabel ')'
@@ -9929,7 +9929,7 @@ func_expr_common_subexpr:
 			$$ = &nodes.XmlExpr{
 				Op:       nodes.IS_XMLELEMENT,
 				Name:     $4,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| XMLELEMENT '(' NAME_P ColLabel ',' xml_attributes ')'
@@ -9938,7 +9938,7 @@ func_expr_common_subexpr:
 				Op:        nodes.IS_XMLELEMENT,
 				Name:      $4,
 				NamedArgs: $6,
-				Location:  -1,
+				Location:  $<loc>1,
 			}
 		}
 	| XMLELEMENT '(' NAME_P ColLabel ',' expr_list ')'
@@ -9947,7 +9947,7 @@ func_expr_common_subexpr:
 				Op:       nodes.IS_XMLELEMENT,
 				Name:     $4,
 				Args:     $6,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| XMLELEMENT '(' NAME_P ColLabel ',' xml_attributes ',' expr_list ')'
@@ -9957,7 +9957,7 @@ func_expr_common_subexpr:
 				Name:      $4,
 				NamedArgs: $6,
 				Args:      $8,
-				Location:  -1,
+				Location:  $<loc>1,
 			}
 		}
 	| XMLEXISTS '(' c_expr xmlexists_argument ')'
@@ -9975,16 +9975,16 @@ func_expr_common_subexpr:
 			$$ = &nodes.XmlExpr{
 				Op:        nodes.IS_XMLFOREST,
 				NamedArgs: $3,
-				Location:  -1,
+				Location:  $<loc>1,
 			}
 		}
 	| XMLPARSE '(' document_or_content a_expr xml_whitespace_option ')'
 		{
 			x := &nodes.XmlExpr{
-				Op:       nodes.IS_XMLPARSE,
-				Args:     makeList2($4, makeBoolAConst($5, -1)),
+				Op:        nodes.IS_XMLPARSE,
+				Args:      makeList2($4, makeBoolAConst($5, -1)),
 				Xmloption: nodes.XmlOptionType($3),
-				Location: -1,
+				Location:  $<loc>1,
 			}
 			$$ = x
 		}
@@ -9993,7 +9993,7 @@ func_expr_common_subexpr:
 			$$ = &nodes.XmlExpr{
 				Op:       nodes.IS_XMLPI,
 				Name:     $4,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| XMLPI '(' NAME_P ColLabel ',' a_expr ')'
@@ -10002,7 +10002,7 @@ func_expr_common_subexpr:
 				Op:       nodes.IS_XMLPI,
 				Name:     $4,
 				Args:     makeList($6),
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| XMLROOT '(' a_expr ',' xml_root_version opt_xml_root_standalone ')'
@@ -10010,7 +10010,7 @@ func_expr_common_subexpr:
 			$$ = &nodes.XmlExpr{
 				Op:       nodes.IS_XMLROOT,
 				Args:     &nodes.List{Items: []nodes.Node{$3, $5, $6}},
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| XMLSERIALIZE '(' document_or_content a_expr AS SimpleTypename xml_indent_option ')'
@@ -10020,7 +10020,7 @@ func_expr_common_subexpr:
 				Expr:      $4,
 				TypeName:  $6,
 				Indent:    $7 != 0,
-				Location:  -1,
+				Location:  $<loc>1,
 			}
 		}
 	/* SQL/JSON function expressions */
@@ -10347,7 +10347,7 @@ xmltable:
 				Rowexpr:  $3,
 				Docexpr:  $4,
 				Columns:  $6,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| XMLTABLE '(' XMLNAMESPACES '(' xml_namespace_list ')' ','
@@ -10358,7 +10358,7 @@ xmltable:
 				Docexpr:    $9,
 				Columns:    $11,
 				Namespaces: $5,
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 		}
 	;
@@ -10376,7 +10376,7 @@ xmltable_column_el:
 			$$ = &nodes.RangeTableFuncCol{
 				Colname:  $1,
 				TypeName: $2,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| ColId Typename xmltable_column_option_list
@@ -10384,7 +10384,7 @@ xmltable_column_el:
 			fc := &nodes.RangeTableFuncCol{
 				Colname:  $1,
 				TypeName: $2,
-				Location: -1,
+				Location: $<loc>1,
 			}
 			nullability := false
 			for _, item := range $3.Items {
@@ -10421,7 +10421,7 @@ xmltable_column_el:
 			$$ = &nodes.RangeTableFuncCol{
 				Colname:       $1,
 				ForOrdinality: true,
-				Location:      -1,
+				Location:      $<loc>1,
 			}
 		}
 	;

@@ -28344,7 +28344,7 @@ pgdefault:
 				Method:     pgDollar[2].list,
 				Args:       pgDollar[4].list,
 				Repeatable: pgDollar[6].node,
-				Location:   -1,
+				Location:   pgDollar[2].loc,
 			}
 		}
 	case 1175:
@@ -29064,7 +29064,7 @@ pgdefault:
 			pgVAL.node = &nodes.XmlExpr{
 				Op:       nodes.IS_DOCUMENT,
 				Args:     makeList(pgDollar[1].node),
-				Location: -1,
+				Location: pgDollar[2].loc,
 			}
 		}
 	case 1282:
@@ -29074,7 +29074,7 @@ pgdefault:
 			pgVAL.node = makeNotExpr(&nodes.XmlExpr{
 				Op:       nodes.IS_DOCUMENT,
 				Args:     makeList(pgDollar[1].node),
-				Location: -1,
+				Location: pgDollar[2].loc,
 			}, pgDollar[2].loc)
 		}
 	case 1283:
@@ -29727,7 +29727,7 @@ pgdefault:
 			pgVAL.node = &nodes.XmlExpr{
 				Op:       nodes.IS_DOCUMENT,
 				Args:     makeList(pgDollar[1].node),
-				Location: -1,
+				Location: pgDollar[2].loc,
 			}
 		}
 	case 1366:
@@ -29737,7 +29737,7 @@ pgdefault:
 			pgVAL.node = makeNotExpr(&nodes.XmlExpr{
 				Op:       nodes.IS_DOCUMENT,
 				Args:     makeList(pgDollar[1].node),
-				Location: -1,
+				Location: pgDollar[2].loc,
 			}, pgDollar[2].loc)
 		}
 	case 1367:
@@ -30610,7 +30610,7 @@ pgdefault:
 			pgVAL.node = &nodes.XmlExpr{
 				Op:       nodes.IS_XMLCONCAT,
 				Args:     pgDollar[3].list,
-				Location: -1,
+				Location: pgDollar[1].loc,
 			}
 		}
 	case 1466:
@@ -30620,7 +30620,7 @@ pgdefault:
 			pgVAL.node = &nodes.XmlExpr{
 				Op:       nodes.IS_XMLELEMENT,
 				Name:     pgDollar[4].str,
-				Location: -1,
+				Location: pgDollar[1].loc,
 			}
 		}
 	case 1467:
@@ -30631,7 +30631,7 @@ pgdefault:
 				Op:        nodes.IS_XMLELEMENT,
 				Name:      pgDollar[4].str,
 				NamedArgs: pgDollar[6].list,
-				Location:  -1,
+				Location:  pgDollar[1].loc,
 			}
 		}
 	case 1468:
@@ -30642,7 +30642,7 @@ pgdefault:
 				Op:       nodes.IS_XMLELEMENT,
 				Name:     pgDollar[4].str,
 				Args:     pgDollar[6].list,
-				Location: -1,
+				Location: pgDollar[1].loc,
 			}
 		}
 	case 1469:
@@ -30654,7 +30654,7 @@ pgdefault:
 				Name:      pgDollar[4].str,
 				NamedArgs: pgDollar[6].list,
 				Args:      pgDollar[8].list,
-				Location:  -1,
+				Location:  pgDollar[1].loc,
 			}
 		}
 	case 1470:
@@ -30676,7 +30676,7 @@ pgdefault:
 			pgVAL.node = &nodes.XmlExpr{
 				Op:        nodes.IS_XMLFOREST,
 				NamedArgs: pgDollar[3].list,
-				Location:  -1,
+				Location:  pgDollar[1].loc,
 			}
 		}
 	case 1472:
@@ -30687,7 +30687,7 @@ pgdefault:
 				Op:        nodes.IS_XMLPARSE,
 				Args:      makeList2(pgDollar[4].node, makeBoolAConst(pgDollar[5].ival, -1)),
 				Xmloption: nodes.XmlOptionType(pgDollar[3].ival),
-				Location:  -1,
+				Location:  pgDollar[1].loc,
 			}
 			pgVAL.node = x
 		}
@@ -30698,7 +30698,7 @@ pgdefault:
 			pgVAL.node = &nodes.XmlExpr{
 				Op:       nodes.IS_XMLPI,
 				Name:     pgDollar[4].str,
-				Location: -1,
+				Location: pgDollar[1].loc,
 			}
 		}
 	case 1474:
@@ -30709,7 +30709,7 @@ pgdefault:
 				Op:       nodes.IS_XMLPI,
 				Name:     pgDollar[4].str,
 				Args:     makeList(pgDollar[6].node),
-				Location: -1,
+				Location: pgDollar[1].loc,
 			}
 		}
 	case 1475:
@@ -30719,7 +30719,7 @@ pgdefault:
 			pgVAL.node = &nodes.XmlExpr{
 				Op:       nodes.IS_XMLROOT,
 				Args:     &nodes.List{Items: []nodes.Node{pgDollar[3].node, pgDollar[5].node, pgDollar[6].node}},
-				Location: -1,
+				Location: pgDollar[1].loc,
 			}
 		}
 	case 1476:
@@ -30731,7 +30731,7 @@ pgdefault:
 				Expr:      pgDollar[4].node,
 				TypeName:  pgDollar[6].typename,
 				Indent:    pgDollar[7].ival != 0,
-				Location:  -1,
+				Location:  pgDollar[1].loc,
 			}
 		}
 	case 1477:
@@ -31189,7 +31189,7 @@ pgdefault:
 				Rowexpr:  pgDollar[3].node,
 				Docexpr:  pgDollar[4].node,
 				Columns:  pgDollar[6].list,
-				Location: -1,
+				Location: pgDollar[1].loc,
 			}
 		}
 	case 1540:
@@ -31201,7 +31201,7 @@ pgdefault:
 				Docexpr:    pgDollar[9].node,
 				Columns:    pgDollar[11].list,
 				Namespaces: pgDollar[5].list,
-				Location:   -1,
+				Location:   pgDollar[1].loc,
 			}
 		}
 	case 1541:
@@ -31223,7 +31223,7 @@ pgdefault:
 			pgVAL.node = &nodes.RangeTableFuncCol{
 				Colname:  pgDollar[1].str,
 				TypeName: pgDollar[2].typename,
-				Location: -1,
+				Location: pgDollar[1].loc,
 			}
 		}
 	case 1544:
@@ -31233,7 +31233,7 @@ pgdefault:
 			fc := &nodes.RangeTableFuncCol{
 				Colname:  pgDollar[1].str,
 				TypeName: pgDollar[2].typename,
-				Location: -1,
+				Location: pgDollar[1].loc,
 			}
 			nullability := false
 			for _, item := range pgDollar[3].list.Items {
@@ -31272,7 +31272,7 @@ pgdefault:
 			pgVAL.node = &nodes.RangeTableFuncCol{
 				Colname:       pgDollar[1].str,
 				ForOrdinality: true,
-				Location:      -1,
+				Location:      pgDollar[1].loc,
 			}
 		}
 	case 1546:
