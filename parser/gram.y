@@ -1597,7 +1597,7 @@ PartitionSpec_rule:
 			$$ = &nodes.PartitionSpec{
 				Strategy:   strategy,
 				PartParams: $5,
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 		}
 	;
@@ -1616,7 +1616,7 @@ part_elem:
 				Name:      $1,
 				Collation: $2,
 				Opclass:   $3,
-				Location:  -1,
+				Location:  $<loc>1,
 			}
 		}
 	| func_expr_windowless opt_collate opt_qualified_name
@@ -1625,7 +1625,7 @@ part_elem:
 				Expr:      $1,
 				Collation: $2,
 				Opclass:   $3,
-				Location:  -1,
+				Location:  $<loc>1,
 			}
 		}
 	| '(' a_expr ')' opt_collate opt_qualified_name
@@ -1634,7 +1634,7 @@ part_elem:
 				Expr:      $2,
 				Collation: $4,
 				Opclass:   $5,
-				Location:  -1,
+				Location:  $<loc>1,
 			}
 		}
 	;
@@ -1650,7 +1650,7 @@ ForValues:
 		{
 			$$ = &nodes.PartitionBoundSpec{
 				IsDefault: true,
-				Location:  -1,
+				Location:  $<loc>1,
 			}
 		}
 	;
@@ -1662,7 +1662,7 @@ PartitionBoundSpec:
 			$$ = &nodes.PartitionBoundSpec{
 				Strategy:   'l',
 				Listdatums: $5,
-				Location:   -1,
+				Location:   $<loc>3,
 			}
 		}
 	/* a RANGE partition */
@@ -1672,7 +1672,7 @@ PartitionBoundSpec:
 				Strategy:    'r',
 				Lowerdatums: $5,
 				Upperdatums: $9,
-				Location:    -1,
+				Location:    $<loc>3,
 			}
 		}
 	/* a HASH partition */
@@ -1682,7 +1682,7 @@ PartitionBoundSpec:
 				Strategy:  'h',
 				Modulus:   -1,
 				Remainder: -1,
-				Location:  -1,
+				Location:  $<loc>3,
 			}
 			for _, item := range $5.Items {
 				opt := item.(*nodes.DefElem)

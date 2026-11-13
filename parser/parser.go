@@ -19881,7 +19881,7 @@ pgdefault:
 			pgVAL.partspec = &nodes.PartitionSpec{
 				Strategy:   strategy,
 				PartParams: pgDollar[5].list,
-				Location:   -1,
+				Location:   pgDollar[1].loc,
 			}
 		}
 	case 201:
@@ -19904,7 +19904,7 @@ pgdefault:
 				Name:      pgDollar[1].str,
 				Collation: pgDollar[2].list,
 				Opclass:   pgDollar[3].list,
-				Location:  -1,
+				Location:  pgDollar[1].loc,
 			}
 		}
 	case 204:
@@ -19915,7 +19915,7 @@ pgdefault:
 				Expr:      pgDollar[1].node,
 				Collation: pgDollar[2].list,
 				Opclass:   pgDollar[3].list,
-				Location:  -1,
+				Location:  pgDollar[1].loc,
 			}
 		}
 	case 205:
@@ -19926,7 +19926,7 @@ pgdefault:
 				Expr:      pgDollar[2].node,
 				Collation: pgDollar[4].list,
 				Opclass:   pgDollar[5].list,
-				Location:  -1,
+				Location:  pgDollar[1].loc,
 			}
 		}
 	case 206:
@@ -19953,7 +19953,7 @@ pgdefault:
 		{
 			pgVAL.partbound = &nodes.PartitionBoundSpec{
 				IsDefault: true,
-				Location:  -1,
+				Location:  pgDollar[1].loc,
 			}
 		}
 	case 210:
@@ -19963,7 +19963,7 @@ pgdefault:
 			pgVAL.partbound = &nodes.PartitionBoundSpec{
 				Strategy:   'l',
 				Listdatums: pgDollar[5].list,
-				Location:   -1,
+				Location:   pgDollar[3].loc,
 			}
 		}
 	case 211:
@@ -19974,7 +19974,7 @@ pgdefault:
 				Strategy:    'r',
 				Lowerdatums: pgDollar[5].list,
 				Upperdatums: pgDollar[9].list,
-				Location:    -1,
+				Location:    pgDollar[3].loc,
 			}
 		}
 	case 212:
@@ -19985,7 +19985,7 @@ pgdefault:
 				Strategy:  'h',
 				Modulus:   -1,
 				Remainder: -1,
-				Location:  -1,
+				Location:  pgDollar[3].loc,
 			}
 			for _, item := range pgDollar[5].list.Items {
 				opt := item.(*nodes.DefElem)

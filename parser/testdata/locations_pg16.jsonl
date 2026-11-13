@@ -233,3 +233,15 @@
 {"sql":"alter domain d add constraint c check (value > 0) not valid","locations":{"Constraint":[19]}}
 {"sql":"alter table t alter constraint c deferrable","locations":{"Constraint":[0]}}
 {"sql":"alter table t alter a add generated always as identity","locations":{"Constraint":[26]}}
+{"sql":"CREATE TABLE fk_d PARTITION OF fk DEFAULT","locations":{"PartitionBoundSpec":[34]}}
+{"sql":"CREATE TABLE fk (a int) PARTITION BY LIST (a)","locations":{"PartitionElem":[43],"PartitionSpec":[24]}}
+{"sql":"CREATE TABLE prt (a int) PARTITION BY RANGE(a)","locations":{"PartitionElem":[44],"PartitionSpec":[25]}}
+{"sql":"create table lp (a char) partition by list (a)","locations":{"PartitionElem":[44],"PartitionSpec":[25]}}
+{"sql":"ALTER TABLE prt1 ATTACH PARTITION prt1_p3 DEFAULT","locations":{"PartitionBoundSpec":[42]}}
+{"sql":"ALTER TABLE plt2 ATTACH PARTITION plt2_p3 DEFAULT","locations":{"PartitionBoundSpec":[42]}}
+{"sql":"ALTER TABLE plt1 ATTACH PARTITION plt1_p3 DEFAULT","locations":{"PartitionBoundSpec":[42]}}
+{"sql":"create table t (a int) partition by range ((a+1) collate \"C\" text_ops, lower(b), c)","locations":{"PartitionElem":[43,71,81],"PartitionSpec":[23]}}
+{"sql":"create table p partition of t for values in (1, 2)","locations":{"PartitionBoundSpec":[41]}}
+{"sql":"create table p partition of t for values from (minvalue) to (1)","locations":{"PartitionBoundSpec":[41]}}
+{"sql":"alter table t attach partition p for values with (modulus 2, remainder 0)","locations":{"PartitionBoundSpec":[44]}}
+{"sql":"alter table t attach partition p default","locations":{"PartitionBoundSpec":[33]}}
