@@ -31175,7 +31175,7 @@ pgdefault:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
 //line gram.y:10242
 		{
-			pgVAL.list = prependList(pgDollar[1].node, pgDollar[3].list)
+			pgVAL.list = appendList(pgDollar[3].list, pgDollar[1].node)
 		}
 	case 1510:
 		pgDollar = pgS[pgpt-2 : pgpt+1]

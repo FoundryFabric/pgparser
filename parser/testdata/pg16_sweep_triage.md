@@ -1169,6 +1169,20 @@ functions' arguments, so the known `presence A_Const.ival` (+2) and
 `FuncCall.args/A_Const.fval` (+2) integer-literal classes grow.
 `testdata/range_function_pg16.jsonl` pins 10 statements; all agree.
 
+### trim-argument-order (tree 7, 6, 6, 6, 2, 1 and 1; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `select trim(both 'x' from 'xxxxxsome Xsxxxxx')` | `btrim('xxxxxsome Xsxxxxx', 'x')` | `btrim('x', 'xxxxxsome Xsxxxxx')` |
+
+PostgreSQL 16's `trim_list` appends the characters to trim after the
+string (`btrim(string, characters)`); the parser put them first, so the
+call trimmed the wrong string. This was the four TRIM `location` classes,
+`name A_Const.sval/String.sval` and the `TypeName.arraybounds` pair: the
+two arguments compared crosswise. The 7 trees that changed over the
+corpus and test data are TRIM with characters and FROM.
+`testdata/trim_args_pg16.jsonl` pins 10 statements; all agree.
+
 ## Rerunning
 
 ```

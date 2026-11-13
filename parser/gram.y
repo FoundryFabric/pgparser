@@ -10240,7 +10240,7 @@ substr_list:
 trim_list:
 	a_expr FROM expr_list
 		{
-			$$ = prependList($1, $3)
+			$$ = appendList($3, $1)
 		}
 	| FROM expr_list
 		{
