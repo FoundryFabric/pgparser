@@ -1373,6 +1373,18 @@ fork's style, a rule with COLUMN and one without. The trees match
 libpg_query's. `testdata/view_rename_if_exists_pg16.jsonl` pins 29
 statements; all agree.
 
+### create-extension-from (risk 3; fixed)
+
+| statement | PostgreSQL 16 | parser |
+|---|---|---|
+| `create extension e from '1'` | 0A000 CREATE EXTENSION ... FROM is no longer supported at 19 | 42601 syntax error at or near "from" at 19 |
+
+PostgreSQL 16's `create_extension_opt_item` keeps `FROM
+NonReservedWord_or_Sconst` to refuse it with its own error; the fork had
+no rule, so the error was a syntax error. The rule and its error are
+added. `testdata/create_extension_from_pg16.jsonl` pins 23 statements; all
+agree.
+
 ## Rerunning
 
 ```

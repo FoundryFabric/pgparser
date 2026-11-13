@@ -14746,6 +14746,11 @@ create_extension_opt_item:
 		{
 			$$ = makeDefElem("cascade", &nodes.Boolean{Boolval: true}, $<loc>1)
 		}
+	| FROM NonReservedWord_or_Sconst
+		{
+			grammarError(pglex, "0A000", "CREATE EXTENSION ... FROM is no longer supported", "", $<loc>1)
+			return 1
+		}
 	;
 
 /*****************************************************************************
