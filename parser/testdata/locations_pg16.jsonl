@@ -381,3 +381,16 @@
 {"sql":"select xmlserialize(document x as varchar(3) indent), xmlserialize(content x as interval(2))","locations":{"TypeName":[34,80]}}
 {"sql":"create table if not exists t of s.ty","locations":{"TypeName":[32]}}
 {"sql":"alter table t of ty","locations":{"TypeName":[17]}}
+{"sql":"CREATE PUBLICATION testpub4 FOR TABLES IN SCHEMA pub_test","locations":{"PublicationObjSpec":[49]}}
+{"sql":"-- ok\nCREATE PUBLICATION testpub3 FOR TABLES IN SCHEMA pub_test","locations":{"PublicationObjSpec":[55]}}
+{"sql":"CREATE PUBLICATION addr_pub_schema FOR TABLES IN SCHEMA addr_nsp","locations":{"PublicationObjSpec":[56]}}
+{"sql":"-- fail\nALTER PUBLICATION testpub3 ADD TABLES IN SCHEMA pub_test","locations":{"PublicationObjSpec":[56]}}
+{"sql":"ALTER PUBLICATION testpub3_forschema SET TABLES IN SCHEMA pub_test1","locations":{"PublicationObjSpec":[58]}}
+{"sql":"ALTER PUBLICATION testpub1_forschema SET TABLES IN SCHEMA pub_test1","locations":{"PublicationObjSpec":[58]}}
+{"sql":"create publication p for table t (a) where (a > 1), u, tables in schema s, current_schema, tables in schema current_schema","locations":{"PublicationObjSpec":[0,52,72,75,108]}}
+{"sql":"alter publication p add table only t, tables in schema s, s2","locations":{"PublicationObjSpec":[0,55,58]}}
+{"sql":"alter publication p drop tables in schema s","locations":{"PublicationObjSpec":[42]}}
+{"sql":"create publication p for tables in schema current_schema, s","locations":{"PublicationObjSpec":[42,58]}}
+{"sql":"create publication p for table a, only t where (e < 1)","locations":{"PublicationObjSpec":[0,0]}}
+{"sql":"create publication p for table a, b * (c)","locations":{"PublicationObjSpec":[0,0]}}
+{"sql":"create publication p for table a, b (c), tables in schema s, current_schema","locations":{"PublicationObjSpec":[0,34,58,61]}}

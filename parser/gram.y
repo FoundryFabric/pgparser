@@ -15058,12 +15058,14 @@ PublicationObjSpec:
 			$$ = []pubObj{{spec: &nodes.PublicationObjSpec{
 				Pubobjtype: nodes.PUBLICATIONOBJ_TABLES_IN_SCHEMA,
 				Name:       $4,
+				Location:   $<loc>4,
 			}, loc: $<loc>1}}
 		}
 	| TABLES IN_P SCHEMA CURRENT_SCHEMA
 		{
 			$$ = []pubObj{{spec: &nodes.PublicationObjSpec{
 				Pubobjtype: nodes.PUBLICATIONOBJ_TABLES_IN_CUR_SCHEMA,
+				Location:   $<loc>4,
 			}, loc: $<loc>1}}
 		}
 	| qualified_name opt_column_list OptWhereClause
@@ -15078,6 +15080,7 @@ PublicationObjSpec:
 			$$ = []pubObj{{spec: &nodes.PublicationObjSpec{
 				Pubobjtype: nodes.PUBLICATIONOBJ_CONTINUATION,
 				Pubtable:   pt,
+				Location:   $<loc>1,
 			}, loc: $<loc>1, name: len($1.Items) == 1}}
 		}
 	| extended_relation_expr opt_column_list OptWhereClause
@@ -15098,6 +15101,7 @@ PublicationObjSpec:
 		{
 			$$ = []pubObj{{spec: &nodes.PublicationObjSpec{
 				Pubobjtype: nodes.PUBLICATIONOBJ_CONTINUATION,
+				Location:   $<loc>1,
 			}, loc: $<loc>1}}
 		}
 	;
