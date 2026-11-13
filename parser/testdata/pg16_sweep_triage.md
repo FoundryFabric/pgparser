@@ -963,6 +963,20 @@ did here. The 18 trees that changed over the corpus and test data are
 ALTER ATTRIBUTE statements. `testdata/alter_attribute_pg16.jsonl` pins 8
 statements; all agree.
 
+### initially-valid (tree 131 and 117; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `create table t (a int, unique (a))` | `initially_valid` false | true |
+| `alter table t add primary key (a)` | `initially_valid` false | true |
+
+PostgreSQL 16's grammar sets `initially_valid` for CHECK and FOREIGN KEY
+constraints (from NOT VALID) and leaves it false for UNIQUE, PRIMARY KEY
+and EXCLUDE, which are valid through their index and never read the flag.
+The 325 trees that changed over the corpus and test data are table
+UNIQUE, PRIMARY KEY and EXCLUDE constraints.
+`testdata/initially_valid_pg16.jsonl` pins 15 statements; all agree.
+
 ## Rerunning
 
 ```

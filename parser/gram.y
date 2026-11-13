@@ -2079,7 +2079,6 @@ ConstraintElem:
 				Options:          $7,
 				Indexspace:       $8,
 				Location:         -1,
-				InitiallyValid:   true,
 			}
 			if !checkConstraintAttrs(pglex, $9, "UNIQUE", true, false, false) {
 				return 1
@@ -2093,7 +2092,6 @@ ConstraintElem:
 				Contype:    nodes.CONSTR_UNIQUE,
 				Indexname:  $2,
 				Location:   -1,
-				InitiallyValid: true,
 			}
 			if !checkConstraintAttrs(pglex, $3, "UNIQUE", true, false, false) {
 				return 1
@@ -2110,7 +2108,6 @@ ConstraintElem:
 				Options:    $7,
 				Indexspace:  $8,
 				Location:   -1,
-				InitiallyValid: true,
 			}
 			if !checkConstraintAttrs(pglex, $9, "PRIMARY KEY", true, false, false) {
 				return 1
@@ -2124,7 +2121,6 @@ ConstraintElem:
 				Contype:    nodes.CONSTR_PRIMARY,
 				Indexname:  $3,
 				Location:   -1,
-				InitiallyValid: true,
 			}
 			if !checkConstraintAttrs(pglex, $4, "PRIMARY KEY", true, false, false) {
 				return 1
@@ -2178,7 +2174,6 @@ ConstraintElem:
 				Indexspace:      $8,
 				WhereClause:    $9,
 				Location:       -1,
-				InitiallyValid: true,
 			}
 			if !checkConstraintAttrs(pglex, $10, "EXCLUDE", true, false, false) {
 				return 1
