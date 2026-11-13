@@ -258,3 +258,31 @@
 {"sql":"select sum(a) over (partition by b) , rank() over w2 from t","locations":{"WindowDef":[19,50]}}
 {"sql":"select json_objectagg(k : v) over (order by k) from t","locations":{"WindowDef":[34]}}
 {"sql":"select json_arrayagg(v) over w from t window w as (partition by a)","locations":{"WindowDef":[29,50]}}
+{"sql":"with x (a, b) as (select 1, 2) select 1","locations":{"CommonTableExpr":[5],"WithClause":[0]}}
+{"sql":"WITH t AS (\n\tINSERT INTO y VALUES(0)\n)\nVALUES(FALSE)","locations":{"CommonTableExpr":[5],"WithClause":[0]}}
+{"sql":"SELECT JSON_ARRAY(WITH x AS (SELECT 1) VALUES (TRUE))","locations":{"CommonTableExpr":[23],"WithClause":[18]}}
+{"sql":"-- CTEs\nWITH foo AS (SELECT * FROM gtest1) SELECT * FROM foo","locations":{"CommonTableExpr":[13],"WithClause":[8]}}
+{"sql":"--\n-- error cases\n--\nWITH x(n, b) AS (SELECT 1)\nSELECT * FROM x","locations":{"CommonTableExpr":[26],"WithClause":[21]}}
+{"sql":"with recursive test as (\n  select 1 as x\n  union all\n  select x + 1\n  from test\n) search depth first by x set y\nselect * from test limit 5","locations":{"CTESearchClause":[82],"CommonTableExpr":[15],"WithClause":[0]}}
+{"sql":"with recursive test as (\n  select 1 as x\n  union all\n  select x + 1\n  from test\n) search breadth first by x set y\nselect * from test limit 5","locations":{"CTESearchClause":[82],"CommonTableExpr":[15],"WithClause":[0]}}
+{"sql":"explain (verbose, costs off)\nwith recursive test as (\n  select 1 as x\n  union all\n  select x + 1\n  from test\n) search breadth first by x set y\nselect * from test limit 5","locations":{"CTESearchClause":[111],"CommonTableExpr":[44],"WithClause":[29]}}
+{"sql":"-- star expansion\nwith recursive a as (\n\tselect 1 as b\n\tunion all\n\tselect * from a\n) cycle b set c using p\nselect * from a","locations":{"CTECycleClause":[85],"CommonTableExpr":[33],"WithClause":[18]}}
+{"sql":"with recursive test as (\n  select 0 as x\n  union all\n  select (x + 1) % 10\n  from test\n) cycle x set is_cycle using path\nselect * from test","locations":{"CTECycleClause":[89],"CommonTableExpr":[15],"WithClause":[0]}}
+{"sql":"explain (verbose, costs off)\nwith recursive test as (\n  select 0 as x\n  union all\n  select (x + 1) % 10\n  from test\n) cycle x set is_cycle using path\nselect * from test","locations":{"CTECycleClause":[118],"CommonTableExpr":[44],"WithClause":[29]}}
+{"sql":"-- check sane response to attempt to modify CTE relation\nWITH with_test AS (SELECT 42) INSERT INTO with_test VALUES (1)","locations":{"CommonTableExpr":[62],"WithClause":[57]}}
+{"sql":"-- data-modifying WITH in a modifying statement\nWITH t AS (\n    DELETE FROM y\n    WHERE a <= 10\n    RETURNING *\n)\nINSERT INTO y SELECT -a FROM t RETURNING *","locations":{"CommonTableExpr":[53],"WithClause":[48]}}
+{"sql":"CREATE RULE id_alw3_ins AS ON INSERT TO id_alw3 DO INSTEAD\n  WITH t1 AS (INSERT INTO id_alw1 DEFAULT VALUES RETURNING i)\n    INSERT INTO id_alw2_view DEFAULT VALUES RETURNING i","locations":{"CommonTableExpr":[66],"WithClause":[61]}}
+{"sql":"-- InitPlan\nWITH cte_init AS MATERIALIZED (SELECT 1 a, 'cte_init val' b)\nMERGE INTO m USING (select 1 k, 'merge source InitPlan' v offset 0) o ON m.k=o.k\nWHEN MATCHED THEN UPDATE SET v = (SELECT b || ' merge update' FROM cte_init WHERE a = 1 LIMIT 1)\nWHEN NOT MATCHED THEN INSERT VALUES(o.k, o.v)","locations":{"CommonTableExpr":[17],"WithClause":[12]}}
+{"sql":"-- Basic:\nWITH cte_basic AS MATERIALIZED (SELECT 1 a, 'cte_basic val' b)\nMERGE INTO m USING (select 0 k, 'merge source SubPlan' v offset 0) o ON m.k=o.k\nWHEN MATCHED THEN UPDATE SET v = (SELECT b || ' merge update' FROM cte_basic WHERE cte_basic.a = m.k LIMIT 1)\nWHEN NOT MATCHED THEN INSERT VALUES(o.k, o.v)","locations":{"CommonTableExpr":[15],"WithClause":[10]}}
+{"sql":"-- Basic:\nWITH cte_basic AS MATERIALIZED (SELECT 1 a, 'cte_basic val' b)\nMERGE INTO m USING (select 0 k, 'merge source SubPlan' v offset 0) o ON m.k=o.k\nWHEN MATCHED THEN UPDATE SET v = (SELECT b || ' merge update' FROM cte_basic WHERE cte_basic.a = m.k.x LIMIT 1)\nWHEN NOT MATCHED THEN INSERT VALUES(o.k, o.v)","locations":{"CommonTableExpr":[15],"WithClause":[10]}}
+{"sql":"-- and this\nWITH RECURSIVE x(n) AS (\n  WITH sub_cte AS (SELECT * FROM x)\n  DELETE FROM graph RETURNING f)\n\tSELECT  FROM x","locations":{"CommonTableExpr":[27,44],"WithClause":[12,39]}}
+{"sql":"-- and this\nWITH RECURSIVE x(n) AS (\n  WITH sub_cte AS (SELECT * FROM x)\n  DELETE FROM graph RETURNING f)\n\tSELECT * FROM x","locations":{"CommonTableExpr":[27,44],"WithClause":[12,39]}}
+{"sql":"-- check EXPLAIN VERBOSE for a wCTE with RETURNING\nEXPLAIN (VERBOSE, COSTS OFF)\nWITH wcte AS ( INSERT INTO int8_tbl VALUES ( 42, 47 ) RETURNING q2 )\nDELETE FROM a_star USING wcte WHERE aa = q2","locations":{"CommonTableExpr":[85],"WithClause":[80]}}
+{"sql":"CREATE RULE r2 AS ON UPDATE TO x DO INSTEAD\n    WITH t AS (SELECT OLD.*) UPDATE y SET a = t.n FROM t","locations":{"CommonTableExpr":[53],"WithClause":[48]}}
+{"sql":"-- Exercise code in ExecGetTriggerResultRel() as there's been previous issues\n-- with ResultRelInfos being returned with the incorrect ri_RootResultRelInfo\nWITH cte AS (\n  UPDATE fkpart13_t2_p1 SET part_id = part_id\n) UPDATE fkpart13_t1 SET a = 2 WHERE a = 1","locations":{"CommonTableExpr":[161],"WithClause":[156]}}
+{"sql":"with recursive a(x) as materialized (select 1) search depth first by x set s cycle x set c to true default false using p, b as not materialized (select 2) select 1","locations":{"CTECycleClause":[77],"CTESearchClause":[47],"CommonTableExpr":[15,122],"WithClause":[0]}}
+{"sql":"with a as (select 1) cycle x set c using p insert into t select 1","locations":{"CTECycleClause":[21],"CommonTableExpr":[5],"WithClause":[0]}}
+{"sql":"with a as (select 1) delete from t","locations":{"CommonTableExpr":[5],"WithClause":[0]}}
+{"sql":"with a as (select 1) update t set x = 1","locations":{"CommonTableExpr":[5],"WithClause":[0]}}
+{"sql":"with a as (select 1) merge into t using a on true when matched then do nothing","locations":{"CommonTableExpr":[5],"WithClause":[0]}}
+{"sql":"with a as (select 1) search breadth first by x set s select 1","locations":{"CTESearchClause":[21],"CommonTableExpr":[5],"WithClause":[0]}}

@@ -7724,6 +7724,7 @@ with_clause:
 			$$ = &nodes.WithClause{
 				Ctes:      $2,
 				Recursive: false,
+				Location:  $<loc>1,
 			}
 		}
 	| WITH_LA cte_list
@@ -7731,6 +7732,7 @@ with_clause:
 			$$ = &nodes.WithClause{
 				Ctes:      $2,
 				Recursive: false,
+				Location:  $<loc>1,
 			}
 		}
 	| WITH RECURSIVE cte_list
@@ -7738,6 +7740,7 @@ with_clause:
 			$$ = &nodes.WithClause{
 				Ctes:      $3,
 				Recursive: true,
+				Location:  $<loc>1,
 			}
 		}
 	;
@@ -7761,6 +7764,7 @@ common_table_expr:
 				Aliascolnames:   $2,
 				Ctematerialized: int($4),
 				Ctequery:        $6,
+				Location:        $<loc>1,
 			}
 			if $8 != nil {
 				cte.SearchClause = $8
@@ -7785,7 +7789,7 @@ opt_search_clause:
 				SearchColList:      $5,
 				SearchBreadthFirst: false,
 				SearchSeqColumn:    $7,
-				Location:           -1,
+				Location:           $<loc>1,
 			}
 		}
 	| SEARCH BREADTH FIRST_P BY columnList SET ColId
@@ -7794,7 +7798,7 @@ opt_search_clause:
 				SearchColList:      $5,
 				SearchBreadthFirst: true,
 				SearchSeqColumn:    $7,
-				Location:           -1,
+				Location:           $<loc>1,
 			}
 		}
 	| /* EMPTY */ { $$ = nil }
@@ -7809,7 +7813,7 @@ opt_cycle_clause:
 				CycleMarkValue:   $6,
 				CycleMarkDefault: $8,
 				CyclePathColumn:  $10,
-				Location:         -1,
+				Location:         $<loc>1,
 			}
 		}
 	| CYCLE columnList SET ColId USING ColId
@@ -7820,7 +7824,7 @@ opt_cycle_clause:
 				CycleMarkValue:   makeBoolAConst(1, -1),
 				CycleMarkDefault: makeBoolAConst(0, -1),
 				CyclePathColumn:  $6,
-				Location:         -1,
+				Location:         $<loc>1,
 			}
 		}
 	| /* EMPTY */ { $$ = nil }
