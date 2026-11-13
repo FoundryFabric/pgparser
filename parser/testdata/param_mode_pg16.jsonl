@@ -1,0 +1,15 @@
+{"sql":"create function f(int) returns int language sql as 'select 1'"}
+{"sql":"create function f(a int, b text) returns int language sql as 'select 1'"}
+{"sql":"create function f(in a int, out b int) language sql as 'select 1'"}
+{"sql":"create function f(a in int, b out int, c inout int, d variadic int[]) language sql as 'select 1'"}
+{"sql":"create function f(a int default 1, b int = 2) returns int language sql as 'select 1'"}
+{"sql":"create procedure p(int, in text, inout int) language sql as ''"}
+{"sql":"create aggregate a(int) (sfunc = f, stype = int)"}
+{"sql":"create aggregate a(in int) (sfunc = f, stype = int)"}
+{"sql":"create aggregate a(variadic int[]) (sfunc = f, stype = int)"}
+{"sql":"create aggregate a(int order by text) (sfunc = f, stype = int)"}
+{"sql":"drop function f(int, out int)"}
+{"sql":"create function f(out int) returns table (a int) language sql as ''","code":"42601","message":"OUT and INOUT arguments aren't allowed in TABLE functions","position":-1}
+{"sql":"create function f(int) returns table (a int) language sql as ''"}
+{"sql":"create function f(a int default) returns int language sql as ''","code":"42601","message":"syntax error at or near \")\"","position":31}
+{"sql":"create function f(in out int) language sql as ''"}

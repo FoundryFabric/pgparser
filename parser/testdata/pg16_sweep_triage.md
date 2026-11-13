@@ -977,6 +977,21 @@ The 325 trees that changed over the corpus and test data are table
 UNIQUE, PRIMARY KEY and EXCLUDE constraints.
 `testdata/initially_valid_pg16.jsonl` pins 15 statements; all agree.
 
+### param-mode-default (tree 664 and 75; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `create function f(int) ...` | `mode` `FUNC_PARAM_DEFAULT` (`d`) | `FUNC_PARAM_IN` (`i`) |
+| `create aggregate a(int) (...)` | `d` | `i` |
+
+PostgreSQL 16 marks an argument written without a mode
+`FUNC_PARAM_DEFAULT`, so a consumer can tell `f(int)` from `f(in int)`;
+both act as IN. The 772 trees that changed over the corpus and test data
+are function, procedure and aggregate argument lists with an argument
+written without a mode; `TestCreateFunctionWithParams` and
+`TestCreateFunctionUnnamedParam` expected IN for those and now expect
+DEFAULT. `testdata/param_mode_pg16.jsonl` pins 15 statements; all agree.
+
 ## Rerunning
 
 ```

@@ -4383,7 +4383,7 @@ func_arg:
 			$$ = &nodes.FunctionParameter{
 				Name:    $1,
 				ArgType: $2,
-				Mode:    nodes.FUNC_PARAM_IN,
+				Mode:    nodes.FUNC_PARAM_DEFAULT,
 			}
 		}
 	| arg_class func_type
@@ -4397,7 +4397,7 @@ func_arg:
 		{
 			$$ = &nodes.FunctionParameter{
 				ArgType: $1,
-				Mode:    nodes.FUNC_PARAM_IN,
+				Mode:    nodes.FUNC_PARAM_DEFAULT,
 			}
 		}
 	;

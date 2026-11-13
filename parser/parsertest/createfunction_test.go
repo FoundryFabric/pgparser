@@ -112,8 +112,8 @@ func TestCreateFunctionWithParams(t *testing.T) {
 	if p1.ArgType == nil {
 		t.Fatal("expected param 1 type to be set")
 	}
-	if p1.Mode != nodes.FUNC_PARAM_IN {
-		t.Errorf("expected param 1 mode IN (%d), got %d", nodes.FUNC_PARAM_IN, p1.Mode)
+	if p1.Mode != nodes.FUNC_PARAM_DEFAULT {
+		t.Errorf("expected param 1 mode DEFAULT (no mode written) (%d), got %d", nodes.FUNC_PARAM_DEFAULT, p1.Mode)
 	}
 
 	// Check second parameter
@@ -124,8 +124,8 @@ func TestCreateFunctionWithParams(t *testing.T) {
 	if p2.ArgType == nil {
 		t.Fatal("expected param 2 type to be set")
 	}
-	if p2.Mode != nodes.FUNC_PARAM_IN {
-		t.Errorf("expected param 2 mode IN (%d), got %d", nodes.FUNC_PARAM_IN, p2.Mode)
+	if p2.Mode != nodes.FUNC_PARAM_DEFAULT {
+		t.Errorf("expected param 2 mode DEFAULT (no mode written) (%d), got %d", nodes.FUNC_PARAM_DEFAULT, p2.Mode)
 	}
 
 	if stmt.ReturnType == nil {
@@ -147,8 +147,8 @@ func TestCreateFunctionUnnamedParam(t *testing.T) {
 	if p1.ArgType == nil {
 		t.Fatal("expected param type to be set")
 	}
-	if p1.Mode != nodes.FUNC_PARAM_IN {
-		t.Errorf("expected param mode IN (%d), got %d", nodes.FUNC_PARAM_IN, p1.Mode)
+	if p1.Mode != nodes.FUNC_PARAM_DEFAULT {
+		t.Errorf("expected param mode DEFAULT (no mode written) (%d), got %d", nodes.FUNC_PARAM_DEFAULT, p1.Mode)
 	}
 }
 

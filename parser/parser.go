@@ -23871,7 +23871,7 @@ pgdefault:
 			pgVAL.node = &nodes.FunctionParameter{
 				Name:    pgDollar[1].str,
 				ArgType: pgDollar[2].typename,
-				Mode:    nodes.FUNC_PARAM_IN,
+				Mode:    nodes.FUNC_PARAM_DEFAULT,
 			}
 		}
 	case 573:
@@ -23889,7 +23889,7 @@ pgdefault:
 		{
 			pgVAL.node = &nodes.FunctionParameter{
 				ArgType: pgDollar[1].typename,
-				Mode:    nodes.FUNC_PARAM_IN,
+				Mode:    nodes.FUNC_PARAM_DEFAULT,
 			}
 		}
 	case 575:
