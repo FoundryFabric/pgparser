@@ -4,7 +4,7 @@
 //
 //	pg16sweep corpus -sql ../../parser/pgregress/testdata/sql -out corpus.jsonl
 //	pg16sweep oracle -db postgres://... -corpus corpus.jsonl -out pg16.jsonl
-//	pg16sweep fork -corpus corpus.jsonl -out ff.jsonl
+//	pg16sweep fork -corpus corpus.jsonl -out ff.jsonl [-version 17]
 //	pg16sweep compare -corpus corpus.jsonl -pg pg16.jsonl -fork ff.jsonl [-other pr.jsonl] -testdata ../../parser/testdata/pg16_sweep.jsonl
 //	pg16sweep libpg -corpus corpus.jsonl -out libpg.jsonl [-pg pg16.jsonl] -report libpg.txt
 //
@@ -18,13 +18,21 @@
 // accept, its parse trees. Given the oracle's results, it also lists the
 // statements the two oracles disagree on. On macOS SDKs that declare
 // strchrnul, build with CGO_CFLAGS=-DHAVE_STRCHRNUL.
+//
+// fork, probe and libpg run the parser as PostgreSQL 16 unless -version
+// names 17.
 package main
 
 import (
 	"flag"
 	"fmt"
 	"os"
+
+	"github.com/pgplex/pgparser/parser"
 )
+
+// version is the -version flag, passed on to the fork child.
+var version int
 
 func main() {
 	if len(os.Args) < 2 {
@@ -48,7 +56,9 @@ func main() {
 	report := fs.String("report", "", "class report to write")
 	sample := fs.Int("sample", 40, "keep one agreeing mutation in this many")
 	nodesDir := fs.String("nodes", "../../nodes", "the parser's nodes package source, for its enums")
+	fs.IntVar(&version, "version", 16, "the PostgreSQL version the parser answers as (fork, probe, libpg)")
 	_ = fs.Parse(os.Args[2:])
+	forkParser = newFork(parser.Version(version))
 	var err error
 	switch os.Args[1] {
 	case "corpus":
