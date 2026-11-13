@@ -21782,7 +21782,7 @@ pgdefault:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
 //line gram.y:2683
 		{
-			coldef := &nodes.ColumnDef{TypeName: pgDollar[5].typename}
+			coldef := &nodes.ColumnDef{TypeName: pgDollar[5].typename, RawDefault: pgDollar[8].node}
 			if pgDollar[6].node != nil {
 				coldef.CollClause = pgDollar[6].node.(*nodes.CollateClause)
 			}
@@ -21796,7 +21796,7 @@ pgdefault:
 		pgDollar = pgS[pgpt-10 : pgpt+1]
 //line gram.y:2695
 		{
-			coldef := &nodes.ColumnDef{TypeName: pgDollar[7].typename}
+			coldef := &nodes.ColumnDef{TypeName: pgDollar[7].typename, RawDefault: pgDollar[10].node}
 			if pgDollar[8].node != nil {
 				coldef.CollClause = pgDollar[8].node.(*nodes.CollateClause)
 			}

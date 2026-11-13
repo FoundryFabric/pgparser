@@ -936,6 +936,21 @@ corpus and test data are CREATE TYPE ... AS, ALTER TYPE and RENAME
 ATTRIBUTE statements. `testdata/type_relation_pg16.jsonl` pins 15
 statements; all agree.
 
+### alter-column-using (tree 25; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `alter table t alter column a type int using a::int` | `def` `raw_default` the USING expression | no `raw_default`: USING was dropped |
+
+ALTER COLUMN ... TYPE ... USING read the expression and threw it away, so
+the conversion was lost; PostgreSQL 16 keeps it as the ColumnDef's
+`raw_default`. The 38 trees that changed over the corpus and test data are
+ALTER COLUMN ... TYPE ... USING statements. In
+`testdata/generictype_pg16.json` the statement `alter table opass.tab alter
+column a set data type a.b.c.d using a::a.b.c.d` now has the cast's
+`TypeName` too (at 68, as libpg_query has it).
+`testdata/alter_column_using_pg16.jsonl` pins 10 statements; all agree.
+
 ## Rerunning
 
 ```

@@ -1,0 +1,10 @@
+{"sql":"alter table t alter column a type int using a::int"}
+{"sql":"alter table t alter a type int using a + 1"}
+{"sql":"alter table t alter column a set data type text using upper(a)"}
+{"sql":"alter table t alter column a set data type text collate \"C\" using a"}
+{"sql":"alter table t alter column a type int"}
+{"sql":"alter table opass.tab alter column a set data type a.b.c.d using a::a.b.c.d"}
+{"sql":"alter foreign table t alter column a type int using 1"}
+{"sql":"alter table t alter column a type int using","code":"42601","message":"syntax error at end of input","position":43}
+{"sql":"alter table t alter column a using a","code":"42601","message":"syntax error at or near \"using\"","position":29}
+{"sql":"alter table t alter column a type int using a, b","code":"42601","message":"syntax error at or near \"b\"","position":47}

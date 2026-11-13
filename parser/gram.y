@@ -2681,7 +2681,7 @@ alter_table_cmd:
 		}
 	| ALTER opt_column ColId TYPE_P Typename opt_collate_clause USING a_expr
 		{
-			coldef := &nodes.ColumnDef{TypeName: $5}
+			coldef := &nodes.ColumnDef{TypeName: $5, RawDefault: $8}
 			if $6 != nil {
 				coldef.CollClause = $6.(*nodes.CollateClause)
 			}
@@ -2693,7 +2693,7 @@ alter_table_cmd:
 		}
 	| ALTER opt_column ColId SET DATA_P TYPE_P Typename opt_collate_clause USING a_expr
 		{
-			coldef := &nodes.ColumnDef{TypeName: $7}
+			coldef := &nodes.ColumnDef{TypeName: $7, RawDefault: $10}
 			if $8 != nil {
 				coldef.CollClause = $8.(*nodes.CollateClause)
 			}
