@@ -845,6 +845,27 @@ already-known `DefElem.arg` (+2, a boolean option the parser keeps as an
 grew by procedures they had not reached. `testdata/create_procedure_pg16.jsonl`
 pins 12 statements; all agree.
 
+### json-returning-format (tree 91; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `select json_array(returning text)` | `returning` with format `JS_FORMAT_DEFAULT`, `JS_ENC_DEFAULT`, unlocated | no `returning` |
+| `select json_array(returning bytea format json encoding utf8)` | format `JS_FORMAT_JSON`, `JS_ENC_UTF8`, at FORMAT | no `returning` |
+| `select json_array(select 1 format json)` | the query's format at FORMAT | unlocated |
+
+RETURNING's own FORMAT clause was dropped by every constructor that takes
+one (JSON_OBJECT, JSON_ARRAY in all its forms, JSON_OBJECTAGG,
+JSON_ARRAYAGG, and PostgreSQL 17's JSON_SERIALIZE, JSON_QUERY and
+JSON_VALUE): `JsonOutput.Returning` was nil. It is now a `JsonReturning`
+holding the clause's `JsonFormat`, or the default format, unlocated, when
+there is none, and a FORMAT clause is located at FORMAT wherever it is
+written. PostgreSQL 16 refuses no FORMAT or ENCODING spelling the parser
+accepts. The 335 trees that changed over the corpus and test data have a
+RETURNING clause (312) or a FORMAT JSON clause (23: the query form of
+JSON_ARRAY and JSON_TABLE columns, now located); no verdict changed.
+`testdata/json_returning_format_pg16.jsonl` pins 40 statements; all agree,
+3 of them PostgreSQL 17 functions marked `pg17-sqljson`.
+
 ### integer-literal-width (tree 145, 66, 33, 24, 15, 4, 2, 1, 1, 1 and 4; left)
 
 | statement | libpg_query 16 | parser |

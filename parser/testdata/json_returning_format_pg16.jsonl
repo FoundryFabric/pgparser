@@ -1,0 +1,40 @@
+{"sql":"SELECT JSON_ARRAY(RETURNING text)"}
+{"sql":"SELECT JSON_ARRAY(RETURNING bytea FORMAT JSON)"}
+{"sql":"SELECT JSON_ARRAY(RETURNING bytea FORMAT JSON ENCODING UTF8)"}
+{"sql":"SELECT JSON_ARRAY(RETURNING bytea FORMAT JSON ENCODING UTF16)"}
+{"sql":"SELECT JSON_ARRAY(RETURNING bytea FORMAT JSON ENCODING UTF32)"}
+{"sql":"SELECT JSON_ARRAY(RETURNING bytea FORMAT JSON ENCODING latin1)","code":"22023","message":"unrecognized JSON encoding: latin1","position":-1}
+{"sql":"SELECT JSON_ARRAY(RETURNING bytea FORMAT JSON ENCODING \"UTF8\")"}
+{"sql":"SELECT JSON_ARRAY(RETURNING bytea FORMAT JSON ENCODING 'utf8')","code":"42601","message":"syntax error at or near \"'utf8'\"","position":55}
+{"sql":"SELECT JSON_ARRAY(RETURNING bytea FORMAT JSONB)","code":"42601","message":"syntax error at or near \"FORMAT\"","position":34}
+{"sql":"SELECT JSON_ARRAY(RETURNING bytea FORMAT)","code":"42601","message":"syntax error at or near \"FORMAT\"","position":34}
+{"sql":"SELECT JSON_ARRAY(RETURNING bytea ENCODING UTF8)","code":"42601","message":"syntax error at or near \"ENCODING\"","position":34}
+{"sql":"SELECT JSON_ARRAY(RETURNING int FORMAT JSON)"}
+{"sql":"SELECT JSON_ARRAY(1, 2 RETURNING text FORMAT JSON)"}
+{"sql":"SELECT JSON_ARRAY(1, 2 NULL ON NULL RETURNING jsonb)"}
+{"sql":"SELECT JSON_ARRAY(SELECT 1 RETURNING text)"}
+{"sql":"SELECT JSON_ARRAY(SELECT 1 FORMAT JSON RETURNING bytea FORMAT JSON ENCODING UTF8)"}
+{"sql":"SELECT JSON_OBJECT(RETURNING text)"}
+{"sql":"SELECT JSON_OBJECT(RETURNING text FORMAT JSON)"}
+{"sql":"SELECT JSON_OBJECT('a': 1 RETURNING bytea FORMAT JSON ENCODING UTF16)"}
+{"sql":"SELECT JSON_OBJECT('a' VALUE 1 ABSENT ON NULL WITH UNIQUE KEYS RETURNING jsonb)"}
+{"sql":"SELECT JSON_OBJECTAGG(k: v RETURNING text) FROM t"}
+{"sql":"SELECT JSON_OBJECTAGG(k: v RETURNING bytea FORMAT JSON ENCODING UTF8) FROM t"}
+{"sql":"SELECT JSON_OBJECTAGG(k: v NULL ON NULL WITH UNIQUE RETURNING jsonb) OVER () FROM t"}
+{"sql":"SELECT JSON_ARRAYAGG(v RETURNING text) FROM t"}
+{"sql":"SELECT JSON_ARRAYAGG(v ORDER BY v RETURNING bytea FORMAT JSON ENCODING UTF32) FROM t"}
+{"sql":"SELECT JSON_ARRAYAGG(v RETURNING text) FILTER (WHERE v > 1) FROM t"}
+{"sql":"SELECT JSON_ARRAY(RETURNING varchar(10) FORMAT JSON)"}
+{"sql":"SELECT JSON_ARRAY(RETURNING text[] FORMAT JSON)"}
+{"sql":"SELECT JSON_ARRAY(RETURNING setof text)"}
+{"sql":"SELECT JSON_ARRAY(RETURNING bytea FORMAT JSON ENCODING)","code":"42601","message":"syntax error at or near \")\"","position":54}
+{"sql":"SELECT JSON_SERIALIZE('1' RETURNING bytea FORMAT JSON)","code":"42601","message":"syntax error at or near \"RETURNING\"","position":26,"class":"pg17-sqljson"}
+{"sql":"SELECT JSON_SCALAR(1 RETURNING text)","code":"42601","message":"syntax error at or near \"RETURNING\"","position":21}
+{"sql":"SELECT JSON('1' RETURNING text)","code":"42601","message":"syntax error at or near \"RETURNING\"","position":16}
+{"sql":"SELECT JSON_QUERY(jsonb '1', '$' RETURNING text FORMAT JSON)","code":"42601","message":"syntax error at or near \"RETURNING\"","position":33,"class":"pg17-sqljson"}
+{"sql":"SELECT JSON_VALUE(jsonb '1', '$' RETURNING text)","code":"42601","message":"syntax error at or near \"RETURNING\"","position":33,"class":"pg17-sqljson"}
+{"sql":"SELECT JSON_ARRAY(RETURNING json FORMAT JSON ENCODING UTF8)"}
+{"sql":"SELECT JSON_ARRAY(RETURNING bytea FORMAT JSON ENCODING utf_8)","code":"22023","message":"unrecognized JSON encoding: utf_8","position":-1}
+{"sql":"SELECT JSON_ARRAY(RETURNING bytea FORMAT JSON ENCODING Utf16)"}
+{"sql":"select json_objectagg(k value v returning text format json) from t"}
+{"sql":"select json_arrayagg(v returning json format json encoding utf8) from t"}

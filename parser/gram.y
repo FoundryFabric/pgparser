@@ -10638,7 +10638,7 @@ json_format_clause:
 		{
 			$$ = &nodes.JsonFormat{
 				FormatType: nodes.JS_FORMAT_JSON,
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 		}
 	| FORMAT_LA JSON ENCODING name
@@ -10658,7 +10658,7 @@ json_format_clause:
 			$$ = &nodes.JsonFormat{
 				FormatType: nodes.JS_FORMAT_JSON,
 				Encoding:   enc,
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 		}
 	;
@@ -10671,8 +10671,14 @@ json_format_clause_opt:
 json_returning_clause_opt:
 	RETURNING Typename json_format_clause_opt
 		{
+			/* RETURNING without FORMAT has the default format. */
+			format := &nodes.JsonFormat{Location: -1}
+			if $3 != nil {
+				format = $3.(*nodes.JsonFormat)
+			}
 			$$ = &nodes.JsonOutput{
-				TypeName: $2,
+				TypeName:  $2,
+				Returning: &nodes.JsonReturning{Format: format},
 			}
 		}
 	| /* EMPTY */
