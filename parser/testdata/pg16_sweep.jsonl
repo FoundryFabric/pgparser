@@ -1161,9 +1161,9 @@
 {"file":"alter_operator.sql","stmt":29,"edit":[77,0,"[]"]}
 {"file":"alter_operator.sql","stmt":30,"sum":"1f47623d"}
 {"file":"alter_operator.sql","stmt":31,"sum":"8aba976a"}
-{"file":"alter_operator.sql","stmt":32,"sum":"a117911d","code":"42601","msg":"syntax error at or near \")\"","pos":80,"class":"pg17-ddl"}
-{"file":"alter_operator.sql","stmt":33,"sum":"8065670e","code":"42601","msg":"syntax error at or near \")\"","pos":46,"class":"pg17-ddl"}
-{"file":"alter_operator.sql","stmt":33,"edit":[33,0,"[]"],"code":"42601","msg":"syntax error at or near \")\"","pos":48,"class":"pg17-ddl"}
+{"file":"alter_operator.sql","stmt":32,"sum":"a117911d","code":"42601","msg":"syntax error at or near \")\"","pos":80,"pg17":"pg17-ddl"}
+{"file":"alter_operator.sql","stmt":33,"sum":"8065670e","code":"42601","msg":"syntax error at or near \")\"","pos":46,"pg17":"pg17-ddl"}
+{"file":"alter_operator.sql","stmt":33,"edit":[33,0,"[]"],"code":"42601","msg":"syntax error at or near \")\"","pos":48,"pg17":"pg17-ddl"}
 {"file":"alter_operator.sql","stmt":34,"sum":"f9766d0d"}
 {"file":"alter_operator.sql","stmt":34,"edit":[30,0,".x"]}
 {"file":"alter_operator.sql","stmt":34,"edit":[18,0,"(3)"]}
@@ -1174,9 +1174,9 @@
 {"file":"alter_operator.sql","stmt":39,"sum":"f7ec34c6"}
 {"file":"alter_operator.sql","stmt":40,"sum":"e62b5b0d"}
 {"file":"alter_operator.sql","stmt":41,"sum":"bb12fc22"}
-{"file":"alter_operator.sql","stmt":42,"sum":"275725dd","code":"42601","msg":"syntax error at or near \")\"","pos":46,"class":"pg17-ddl"}
-{"file":"alter_operator.sql","stmt":43,"sum":"8065670e","code":"42601","msg":"syntax error at or near \")\"","pos":46,"class":"pg17-ddl"}
-{"file":"alter_operator.sql","stmt":43,"edit":[46,0," ) "],"code":"42601","msg":"syntax error at or near \")\"","pos":47,"class":"pg17-ddl"}
+{"file":"alter_operator.sql","stmt":42,"sum":"275725dd","code":"42601","msg":"syntax error at or near \")\"","pos":46,"pg17":"pg17-ddl"}
+{"file":"alter_operator.sql","stmt":43,"sum":"8065670e","code":"42601","msg":"syntax error at or near \")\"","pos":46,"pg17":"pg17-ddl"}
+{"file":"alter_operator.sql","stmt":43,"edit":[46,0," ) "],"code":"42601","msg":"syntax error at or near \")\"","pos":47,"pg17":"pg17-ddl"}
 {"file":"alter_operator.sql","stmt":44,"sum":"899b6a95"}
 {"file":"alter_operator.sql","stmt":45,"sum":"aae1d222"}
 {"file":"alter_operator.sql","stmt":46,"sum":"98e44067"}
@@ -7911,14 +7911,14 @@
 {"file":"create_am.sql","stmt":62,"sum":"bbcf21a6"}
 {"file":"create_am.sql","stmt":62,"edit":[25,5,""]}
 {"file":"create_am.sql","stmt":63,"sum":"973dba78"}
-{"file":"create_am.sql","stmt":64,"sum":"b1c588a7","code":"42601","msg":"syntax error at or near \"DEFAULT\"","pos":40,"class":"pg17-ddl"}
+{"file":"create_am.sql","stmt":64,"sum":"b1c588a7","code":"42601","msg":"syntax error at or near \"DEFAULT\"","pos":40,"pg17":"pg17-ddl"}
 {"file":"create_am.sql","stmt":65,"sum":"e8c0a72c"}
 {"file":"create_am.sql","stmt":65,"edit":[13,0,".x"]}
 {"file":"create_am.sql","stmt":65,"edit":[98,0,"(3)"]}
 {"file":"create_am.sql","stmt":66,"sum":"7107c69a"}
 {"file":"create_am.sql","stmt":66,"edit":[10,27,""]}
-{"file":"create_am.sql","stmt":67,"sum":"b1c588a7","code":"42601","msg":"syntax error at or near \"DEFAULT\"","pos":40,"class":"pg17-ddl"}
-{"file":"create_am.sql","stmt":67,"edit":[47,0,"(3)"],"code":"42601","msg":"syntax error at or near \"DEFAULT\"","pos":40,"class":"pg17-ddl"}
+{"file":"create_am.sql","stmt":67,"sum":"b1c588a7","code":"42601","msg":"syntax error at or near \"DEFAULT\"","pos":40,"pg17":"pg17-ddl"}
+{"file":"create_am.sql","stmt":67,"edit":[47,0,"(3)"],"code":"42601","msg":"syntax error at or near \"DEFAULT\"","pos":40,"pg17":"pg17-ddl"}
 {"file":"create_am.sql","stmt":68,"sum":"e8c0a72c"}
 {"file":"create_am.sql","stmt":68,"edit":[37,2,""]}
 {"file":"create_am.sql","stmt":69,"sum":"eb2ebdbd"}
@@ -7929,8 +7929,8 @@
 {"file":"create_am.sql","stmt":73,"edit":[55,0,"(3)"]}
 {"file":"create_am.sql","stmt":74,"sum":"8f25a071"}
 {"file":"create_am.sql","stmt":75,"sum":"de50ffd0"}
-{"file":"create_am.sql","stmt":76,"sum":"e7700892","code":"42601","msg":"syntax error at or near \"DEFAULT\"","pos":40,"class":"pg17-ddl"}
-{"file":"create_am.sql","stmt":76,"edit":[52,0,"(3)"],"code":"42601","msg":"syntax error at or near \"DEFAULT\"","pos":40,"class":"pg17-ddl"}
+{"file":"create_am.sql","stmt":76,"sum":"e7700892","code":"42601","msg":"syntax error at or near \"DEFAULT\"","pos":40,"pg17":"pg17-ddl"}
+{"file":"create_am.sql","stmt":76,"edit":[52,0,"(3)"],"code":"42601","msg":"syntax error at or near \"DEFAULT\"","pos":40,"pg17":"pg17-ddl"}
 {"file":"create_am.sql","stmt":77,"sum":"5c2a647a"}
 {"file":"create_am.sql","stmt":77,"edit":[30,0,".x"]}
 {"file":"create_am.sql","stmt":78,"sum":"b09cb4f9"}
@@ -7960,8 +7960,8 @@
 {"file":"create_am.sql","stmt":96,"sum":"382d1824"}
 {"file":"create_am.sql","stmt":97,"sum":"d19d6bd9"}
 {"file":"create_am.sql","stmt":97,"edit":[38,0,".x"]}
-{"file":"create_am.sql","stmt":98,"sum":"8853123a","code":"42601","msg":"syntax error at or near \"DEFAULT\"","pos":65,"class":"pg17-ddl"}
-{"file":"create_am.sql","stmt":98,"edit":[72,0,".x"],"code":"42601","msg":"syntax error at or near \"DEFAULT\"","pos":65,"class":"pg17-ddl"}
+{"file":"create_am.sql","stmt":98,"sum":"8853123a","code":"42601","msg":"syntax error at or near \"DEFAULT\"","pos":65,"pg17":"pg17-ddl"}
+{"file":"create_am.sql","stmt":98,"edit":[72,0,".x"],"code":"42601","msg":"syntax error at or near \"DEFAULT\"","pos":65,"pg17":"pg17-ddl"}
 {"file":"create_am.sql","stmt":99,"sum":"c5df103a"}
 {"file":"create_am.sql","stmt":99,"edit":[12,0,".x"]}
 {"file":"create_am.sql","stmt":100,"sum":"2cec5b78"}
@@ -7972,12 +7972,12 @@
 {"file":"create_am.sql","stmt":105,"sum":"e76f0d60"}
 {"file":"create_am.sql","stmt":106,"sum":"382d1824"}
 {"file":"create_am.sql","stmt":107,"sum":"3383e86e"}
-{"file":"create_am.sql","stmt":108,"sum":"ad34fd85","code":"42601","msg":"syntax error at or near \"DEFAULT\"","pos":45,"class":"pg17-ddl"}
+{"file":"create_am.sql","stmt":108,"sum":"ad34fd85","code":"42601","msg":"syntax error at or near \"DEFAULT\"","pos":45,"pg17":"pg17-ddl"}
 {"file":"create_am.sql","stmt":109,"sum":"c5df103a"}
 {"file":"create_am.sql","stmt":109,"edit":[13,13,"pg_class FROM"],"code":"42601","msg":"syntax error at or near \"WHERE\"","pos":27}
 {"file":"create_am.sql","stmt":110,"sum":"47e28118"}
-{"file":"create_am.sql","stmt":111,"sum":"d5d063e8","code":"42601","msg":"syntax error at or near \"DEFAULT\"","pos":82,"class":"pg17-ddl"}
-{"file":"create_am.sql","stmt":111,"edit":[89,0," DEFAULT"],"code":"42601","msg":"syntax error at or near \"DEFAULT\"","pos":82,"class":"pg17-ddl"}
+{"file":"create_am.sql","stmt":111,"sum":"d5d063e8","code":"42601","msg":"syntax error at or near \"DEFAULT\"","pos":82,"pg17":"pg17-ddl"}
+{"file":"create_am.sql","stmt":111,"edit":[89,0," DEFAULT"],"code":"42601","msg":"syntax error at or near \"DEFAULT\"","pos":82,"pg17":"pg17-ddl"}
 {"file":"create_am.sql","stmt":112,"sum":"27a530e7"}
 {"file":"create_am.sql","stmt":113,"sum":"0f116155"}
 {"file":"create_am.sql","stmt":114,"sum":"61f450ac"}
@@ -11789,7 +11789,7 @@
 {"file":"domain.sql","stmt":236,"sum":"d19af2e1"}
 {"file":"domain.sql","stmt":237,"sum":"97945f27"}
 {"file":"domain.sql","stmt":238,"sum":"e37be079"}
-{"file":"domain.sql","stmt":239,"sum":"ace83ff0","code":"42601","msg":"syntax error at or near \"not\"","pos":121,"class":"pg17-ddl"}
+{"file":"domain.sql","stmt":239,"sum":"ace83ff0","code":"42601","msg":"syntax error at or near \"not\"","pos":121,"pg17":"pg17-ddl"}
 {"file":"domain.sql","stmt":240,"sum":"97945f27"}
 {"file":"domain.sql","stmt":241,"sum":"c6f8a49c"}
 {"file":"domain.sql","stmt":242,"sum":"99af114a"}
@@ -11827,18 +11827,18 @@
 {"file":"domain.sql","stmt":270,"sum":"bd7e23e8"}
 {"file":"domain.sql","stmt":271,"sum":"d751fdcb"}
 {"file":"domain.sql","stmt":272,"sum":"d6aa7f53"}
-{"file":"domain.sql","stmt":273,"sum":"91c9ccae","code":"42601","msg":"syntax error at or near \"not\"","pos":28,"class":"pg17-ddl"}
-{"file":"domain.sql","stmt":273,"edit":[31,0,".*"],"code":"42601","msg":"syntax error at or near \"not\"","pos":28,"class":"pg17-ddl"}
+{"file":"domain.sql","stmt":273,"sum":"91c9ccae","code":"42601","msg":"syntax error at or near \"not\"","pos":28,"pg17":"pg17-ddl"}
+{"file":"domain.sql","stmt":273,"edit":[31,0,".*"],"code":"42601","msg":"syntax error at or near \"not\"","pos":28,"pg17":"pg17-ddl"}
 {"file":"domain.sql","stmt":274,"sum":"4684ed4a"}
-{"file":"domain.sql","stmt":275,"sum":"91c9ccae","code":"42601","msg":"syntax error at or near \"not\"","pos":28,"class":"pg17-ddl"}
-{"file":"domain.sql","stmt":275,"edit":[36,0,".x"],"code":"42601","msg":"syntax error at or near \"not\"","pos":28,"class":"pg17-ddl"}
+{"file":"domain.sql","stmt":275,"sum":"91c9ccae","code":"42601","msg":"syntax error at or near \"not\"","pos":28,"pg17":"pg17-ddl"}
+{"file":"domain.sql","stmt":275,"edit":[36,0,".x"],"code":"42601","msg":"syntax error at or near \"not\"","pos":28,"pg17":"pg17-ddl"}
 {"file":"domain.sql","stmt":276,"sum":"cebf13ba"}
-{"file":"domain.sql","stmt":277,"sum":"fac0ea19","code":"42601","msg":"syntax error at or near \"not\"","pos":47,"class":"pg17-ddl"}
+{"file":"domain.sql","stmt":277,"sum":"fac0ea19","code":"42601","msg":"syntax error at or near \"not\"","pos":47,"pg17":"pg17-ddl"}
 {"file":"domain.sql","stmt":278,"sum":"3b807c02"}
 {"file":"domain.sql","stmt":278,"edit":[34,0,".x"]}
 {"file":"domain.sql","stmt":278,"edit":[73,0,"[]"]}
-{"file":"domain.sql","stmt":279,"sum":"2cdd57d1","code":"42601","msg":"syntax error at or near \"not\"","pos":50,"class":"pg17-ddl"}
-{"file":"domain.sql","stmt":279,"edit":[53,0,"[]"],"code":"42601","msg":"syntax error at or near \"not\"","pos":50,"class":"pg17-ddl"}
+{"file":"domain.sql","stmt":279,"sum":"2cdd57d1","code":"42601","msg":"syntax error at or near \"not\"","pos":50,"pg17":"pg17-ddl"}
+{"file":"domain.sql","stmt":279,"edit":[53,0,"[]"],"code":"42601","msg":"syntax error at or near \"not\"","pos":50,"pg17":"pg17-ddl"}
 {"file":"domain.sql","stmt":280,"sum":"b001ab25"}
 {"file":"domain.sql","stmt":281,"sum":"a6a4c707"}
 {"file":"domain.sql","stmt":281,"edit":[24,0," domconnotnulltest"]}
@@ -28329,14 +28329,14 @@
 {"file":"merge.sql","stmt":19,"sum":"4c55542a"}
 {"file":"merge.sql","stmt":20,"sum":"238d6336","code":"42601","msg":"syntax error at or near \"RANDOMWORD\"","pos":36}
 {"file":"merge.sql","stmt":21,"sum":"840dc71c","code":"42601","msg":"syntax error at or near \"INSERT\"","pos":98}
-{"file":"merge.sql","stmt":22,"sum":"f6251f0e","code":"42601","msg":"syntax error at or near \"BY\"","pos":110,"class":"pg17-merge"}
-{"file":"merge.sql","stmt":22,"edit":[112,0,"(3)"],"code":"42601","msg":"syntax error at or near \"BY\"","pos":110,"class":"pg17-merge"}
+{"file":"merge.sql","stmt":22,"sum":"f6251f0e","code":"42601","msg":"syntax error at or near \"BY\"","pos":110,"pg17":"pg17-merge"}
+{"file":"merge.sql","stmt":22,"edit":[112,0,"(3)"],"code":"42601","msg":"syntax error at or near \"BY\"","pos":110,"pg17":"pg17-merge"}
 {"file":"merge.sql","stmt":22,"edit":[102,7,"analyse"],"code":"42601","msg":"syntax error at or near \"analyse\"","pos":102}
 {"file":"merge.sql","stmt":23,"sum":"66aa34d0","code":"42601","msg":"syntax error at or near \"INTO\"","pos":123}
 {"file":"merge.sql","stmt":24,"sum":"99aba1af","code":"42601","msg":"syntax error at or near \",\"","pos":123}
 {"file":"merge.sql","stmt":25,"sum":"c287b4cd","code":"42601","msg":"syntax error at or near \"SELECT\"","pos":112}
 {"file":"merge.sql","stmt":26,"sum":"61e33cc4","code":"42601","msg":"syntax error at or near \"UPDATE\"","pos":100}
-{"file":"merge.sql","stmt":27,"sum":"60b78808","code":"42601","msg":"syntax error at or near \"BY\"","pos":104,"class":"pg17-merge"}
+{"file":"merge.sql","stmt":27,"sum":"60b78808","code":"42601","msg":"syntax error at or near \"BY\"","pos":104,"pg17":"pg17-merge"}
 {"file":"merge.sql","stmt":28,"sum":"024e7223","code":"42601","msg":"syntax error at or near \"target\"","pos":101}
 {"file":"merge.sql","stmt":29,"sum":"a769714c"}
 {"file":"merge.sql","stmt":30,"sum":"b7ac3dd7"}
@@ -28378,8 +28378,8 @@
 {"file":"merge.sql","stmt":62,"sum":"eb2ebdbd"}
 {"file":"merge.sql","stmt":63,"sum":"0fd385dc"}
 {"file":"merge.sql","stmt":63,"edit":[46,5,""]}
-{"file":"merge.sql","stmt":64,"sum":"c8bea77b","code":"42601","msg":"syntax error at or near \"BY\"","pos":72,"class":"pg17-merge"}
-{"file":"merge.sql","stmt":64,"edit":[54,0,"(3)"],"code":"42601","msg":"syntax error at or near \"BY\"","pos":75,"class":"pg17-merge"}
+{"file":"merge.sql","stmt":64,"sum":"c8bea77b","code":"42601","msg":"syntax error at or near \"BY\"","pos":72,"pg17":"pg17-merge"}
+{"file":"merge.sql","stmt":64,"edit":[54,0,"(3)"],"code":"42601","msg":"syntax error at or near \"BY\"","pos":75,"pg17":"pg17-merge"}
 {"file":"merge.sql","stmt":65,"sum":"2c5a534a"}
 {"file":"merge.sql","stmt":66,"sum":"eb2ebdbd"}
 {"file":"merge.sql","stmt":67,"sum":"416f0915"}
@@ -28520,10 +28520,10 @@
 {"file":"merge.sql","stmt":177,"sum":"277b6a8a"}
 {"file":"merge.sql","stmt":177,"edit":[57,0,".x"]}
 {"file":"merge.sql","stmt":178,"sum":"e5ffa355"}
-{"file":"merge.sql","stmt":179,"sum":"7ae7710e","code":"42601","msg":"syntax error at or near \"BY\"","pos":154,"class":"pg17-merge"}
-{"file":"merge.sql","stmt":180,"sum":"05291894","code":"42601","msg":"syntax error at or near \"BY\"","pos":75,"class":"pg17-merge"}
-{"file":"merge.sql","stmt":180,"edit":[100,0,".*"],"code":"42601","msg":"syntax error at or near \"BY\"","pos":75,"class":"pg17-merge"}
-{"file":"merge.sql","stmt":180,"edit":[99,1,""],"code":"42601","msg":"syntax error at or near \"BY\"","pos":75,"class":"pg17-merge"}
+{"file":"merge.sql","stmt":179,"sum":"7ae7710e","code":"42601","msg":"syntax error at or near \"BY\"","pos":154,"pg17":"pg17-merge"}
+{"file":"merge.sql","stmt":180,"sum":"05291894","code":"42601","msg":"syntax error at or near \"BY\"","pos":75,"pg17":"pg17-merge"}
+{"file":"merge.sql","stmt":180,"edit":[100,0,".*"],"code":"42601","msg":"syntax error at or near \"BY\"","pos":75,"pg17":"pg17-merge"}
+{"file":"merge.sql","stmt":180,"edit":[99,1,""],"code":"42601","msg":"syntax error at or near \"BY\"","pos":75,"pg17":"pg17-merge"}
 {"file":"merge.sql","stmt":181,"sum":"f4ab060e"}
 {"file":"merge.sql","stmt":181,"edit":[91,0,"(3)"]}
 {"file":"merge.sql","stmt":182,"sum":"88715f42"}
@@ -28580,8 +28580,8 @@
 {"file":"merge.sql","stmt":220,"sum":"eb2ebdbd"}
 {"file":"merge.sql","stmt":221,"sum":"db387755"}
 {"file":"merge.sql","stmt":222,"sum":"d1074615"}
-{"file":"merge.sql","stmt":223,"sum":"041d8de2","code":"42601","msg":"syntax error at or near \"BY\"","pos":258,"class":"pg17-merge"}
-{"file":"merge.sql","stmt":223,"edit":[375,1,"returning"],"code":"42601","msg":"syntax error at or near \"BY\"","pos":258,"class":"pg17-merge"}
+{"file":"merge.sql","stmt":223,"sum":"041d8de2","code":"42601","msg":"syntax error at or near \"BY\"","pos":258,"pg17":"pg17-merge"}
+{"file":"merge.sql","stmt":223,"edit":[375,1,"returning"],"code":"42601","msg":"syntax error at or near \"BY\"","pos":258,"pg17":"pg17-merge"}
 {"file":"merge.sql","stmt":224,"sum":"2c5a534a"}
 {"file":"merge.sql","stmt":225,"sum":"eb2ebdbd"}
 {"file":"merge.sql","stmt":226,"sum":"accc543e"}
@@ -28675,9 +28675,9 @@
 {"file":"merge.sql","stmt":302,"sum":"3f126d5e"}
 {"file":"merge.sql","stmt":303,"sum":"8ebeb7a6"}
 {"file":"merge.sql","stmt":304,"sum":"11a5f014"}
-{"file":"merge.sql","stmt":305,"sum":"c276ea52","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":247,"class":"pg17-merge"}
-{"file":"merge.sql","stmt":305,"edit":[563,2,""],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":247,"class":"pg17-merge"}
-{"file":"merge.sql","stmt":305,"edit":[265,6,"from"],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":247,"class":"pg17-merge"}
+{"file":"merge.sql","stmt":305,"sum":"c276ea52","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":247,"pg17":"pg17-merge"}
+{"file":"merge.sql","stmt":305,"edit":[563,2,""],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":247,"pg17":"pg17-merge"}
+{"file":"merge.sql","stmt":305,"edit":[265,6,"from"],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":247,"pg17":"pg17-merge"}
 {"file":"merge.sql","stmt":306,"sum":"eb2ebdbd"}
 {"file":"merge.sql","stmt":307,"sum":"e8873a5c"}
 {"file":"merge.sql","stmt":307,"edit":[56,13,"(merge_action"]}
@@ -28685,13 +28685,13 @@
 {"file":"merge.sql","stmt":309,"sum":"d603715d"}
 {"file":"merge.sql","stmt":310,"sum":"40af96a0"}
 {"file":"merge.sql","stmt":311,"sum":"3f126d5e"}
-{"file":"merge.sql","stmt":312,"sum":"7e305d53","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":299,"class":"pg17-merge"}
-{"file":"merge.sql","stmt":312,"edit":[658,0,".x"],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":299,"class":"pg17-merge"}
+{"file":"merge.sql","stmt":312,"sum":"7e305d53","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":299,"pg17":"pg17-merge"}
+{"file":"merge.sql","stmt":312,"edit":[658,0,".x"],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":299,"pg17":"pg17-merge"}
 {"file":"merge.sql","stmt":313,"sum":"9e7b6f8d"}
 {"file":"merge.sql","stmt":314,"sum":"eb2ebdbd"}
 {"file":"merge.sql","stmt":315,"sum":"767b48ed"}
-{"file":"merge.sql","stmt":316,"sum":"b4a2c189","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":294,"class":"pg17-merge"}
-{"file":"merge.sql","stmt":316,"edit":[303,0," RETURNING"],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":294,"class":"pg17-merge"}
+{"file":"merge.sql","stmt":316,"sum":"b4a2c189","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":294,"pg17":"pg17-merge"}
+{"file":"merge.sql","stmt":316,"edit":[303,0," RETURNING"],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":294,"pg17":"pg17-merge"}
 {"file":"merge.sql","stmt":317,"sum":"eb2ebdbd"}
 {"file":"merge.sql","stmt":318,"sum":"1078b5c4"}
 {"file":"merge.sql","stmt":319,"sum":"e74d039f"}
@@ -28764,12 +28764,12 @@
 {"file":"merge.sql","stmt":370,"edit":[81,0,".x"]}
 {"file":"merge.sql","stmt":371,"sum":"66b5e8c7"}
 {"file":"merge.sql","stmt":371,"edit":[20,5,""]}
-{"file":"merge.sql","stmt":372,"sum":"f8fa238f","code":"42601","msg":"syntax error at or near \"BY\"","pos":252,"class":"pg17-merge"}
+{"file":"merge.sql","stmt":372,"sum":"f8fa238f","code":"42601","msg":"syntax error at or near \"BY\"","pos":252,"pg17":"pg17-merge"}
 {"file":"merge.sql","stmt":373,"sum":"cc5d66bb"}
 {"file":"merge.sql","stmt":373,"edit":[41,0,".x"]}
 {"file":"merge.sql","stmt":374,"sum":"eb2ebdbd"}
 {"file":"merge.sql","stmt":375,"sum":"f730e13a"}
-{"file":"merge.sql","stmt":376,"sum":"0ca6d8ab","code":"42601","msg":"syntax error at or near \"BY\"","pos":264,"class":"pg17-merge"}
+{"file":"merge.sql","stmt":376,"sum":"0ca6d8ab","code":"42601","msg":"syntax error at or near \"BY\"","pos":264,"pg17":"pg17-merge"}
 {"file":"merge.sql","stmt":377,"sum":"cc5d66bb"}
 {"file":"merge.sql","stmt":378,"sum":"eb2ebdbd"}
 {"file":"merge.sql","stmt":379,"sum":"948374c7"}
@@ -28781,7 +28781,7 @@
 {"file":"merge.sql","stmt":382,"edit":[41,0,"(3)"]}
 {"file":"merge.sql","stmt":383,"sum":"eb2ebdbd"}
 {"file":"merge.sql","stmt":384,"sum":"ba1a220d"}
-{"file":"merge.sql","stmt":385,"sum":"a49ba7e0","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":188,"class":"pg17-merge"}
+{"file":"merge.sql","stmt":385,"sum":"a49ba7e0","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":188,"pg17":"pg17-merge"}
 {"file":"merge.sql","stmt":386,"sum":"48ca26c8"}
 {"file":"merge.sql","stmt":386,"edit":[7,1,""]}
 {"file":"merge.sql","stmt":387,"sum":"eb2ebdbd"}
@@ -28812,7 +28812,7 @@
 {"file":"merge.sql","stmt":407,"sum":"cc5d66bb"}
 {"file":"merge.sql","stmt":408,"sum":"eb2ebdbd"}
 {"file":"merge.sql","stmt":409,"sum":"f730e13a"}
-{"file":"merge.sql","stmt":410,"sum":"e45a8354","code":"42601","msg":"syntax error at or near \"BY\"","pos":313,"class":"pg17-merge"}
+{"file":"merge.sql","stmt":410,"sum":"e45a8354","code":"42601","msg":"syntax error at or near \"BY\"","pos":313,"pg17":"pg17-merge"}
 {"file":"merge.sql","stmt":411,"sum":"cc5d66bb"}
 {"file":"merge.sql","stmt":412,"sum":"eb2ebdbd"}
 {"file":"merge.sql","stmt":413,"sum":"948374c7"}
@@ -28861,7 +28861,7 @@
 {"file":"merge.sql","stmt":446,"sum":"da61f95c"}
 {"file":"merge.sql","stmt":447,"sum":"a99c0d75"}
 {"file":"merge.sql","stmt":448,"sum":"66b5e8c7"}
-{"file":"merge.sql","stmt":449,"sum":"db218ffa","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":309,"class":"pg17-merge"}
+{"file":"merge.sql","stmt":449,"sum":"db218ffa","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":309,"pg17":"pg17-merge"}
 {"file":"merge.sql","stmt":450,"sum":"48ca26c8"}
 {"file":"merge.sql","stmt":451,"sum":"eb2ebdbd"}
 {"file":"merge.sql","stmt":452,"sum":"52511ec9"}
@@ -28971,15 +28971,15 @@
 {"file":"merge.sql","stmt":541,"sum":"dac8e9d0"}
 {"file":"merge.sql","stmt":542,"sum":"0b7f64c5"}
 {"file":"merge.sql","stmt":542,"edit":[62,0,".x"]}
-{"file":"merge.sql","stmt":543,"sum":"e23706a0","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":261,"class":"pg17-merge"}
-{"file":"merge.sql","stmt":543,"edit":[237,0,"(3)"],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":264,"class":"pg17-merge"}
+{"file":"merge.sql","stmt":543,"sum":"e23706a0","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":261,"pg17":"pg17-merge"}
+{"file":"merge.sql","stmt":543,"edit":[237,0,"(3)"],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":264,"pg17":"pg17-merge"}
 {"file":"merge.sql","stmt":544,"sum":"75620cf3"}
 {"file":"merge.sql","stmt":545,"sum":"a1686b10"}
 {"file":"merge.sql","stmt":546,"sum":"a46c5225"}
 {"file":"merge.sql","stmt":547,"sum":"e0d962ac"}
 {"file":"merge.sql","stmt":548,"sum":"f08a92ec"}
 {"file":"merge.sql","stmt":549,"sum":"84f71fa0"}
-{"file":"merge.sql","stmt":550,"sum":"f0e7ed29","code":"42601","msg":"syntax error at or near \"BY\"","pos":132,"class":"pg17-merge"}
+{"file":"merge.sql","stmt":550,"sum":"f0e7ed29","code":"42601","msg":"syntax error at or near \"BY\"","pos":132,"pg17":"pg17-merge"}
 {"file":"merge.sql","stmt":551,"sum":"c794a4f2"}
 {"file":"merge.sql","stmt":552,"sum":"9175ebd1"}
 {"file":"merge.sql","stmt":553,"sum":"2d1f5841"}
@@ -28987,19 +28987,19 @@
 {"file":"merge.sql","stmt":555,"sum":"d22f8dfd"}
 {"file":"merge.sql","stmt":556,"sum":"7d6645b4"}
 {"file":"merge.sql","stmt":557,"sum":"882308a0"}
-{"file":"merge.sql","stmt":558,"sum":"a52476c1","code":"42601","msg":"syntax error at or near \"BY\"","pos":112,"class":"pg17-merge"}
-{"file":"merge.sql","stmt":558,"edit":[145,0,".x"],"code":"42601","msg":"syntax error at or near \"BY\"","pos":112,"class":"pg17-merge"}
-{"file":"merge.sql","stmt":558,"edit":[158,0,".x"],"code":"42601","msg":"syntax error at or near \"BY\"","pos":112,"class":"pg17-merge"}
+{"file":"merge.sql","stmt":558,"sum":"a52476c1","code":"42601","msg":"syntax error at or near \"BY\"","pos":112,"pg17":"pg17-merge"}
+{"file":"merge.sql","stmt":558,"edit":[145,0,".x"],"code":"42601","msg":"syntax error at or near \"BY\"","pos":112,"pg17":"pg17-merge"}
+{"file":"merge.sql","stmt":558,"edit":[158,0,".x"],"code":"42601","msg":"syntax error at or near \"BY\"","pos":112,"pg17":"pg17-merge"}
 {"file":"merge.sql","stmt":559,"sum":"400e7ee5"}
 {"file":"merge.sql","stmt":560,"sum":"a413248e"}
 {"file":"merge.sql","stmt":561,"sum":"b4db01a9"}
 {"file":"merge.sql","stmt":561,"edit":[20,0,".x"]}
 {"file":"merge.sql","stmt":562,"sum":"7b95f834"}
-{"file":"merge.sql","stmt":563,"sum":"fc5fb064","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":168,"class":"pg17-merge"}
-{"file":"merge.sql","stmt":563,"edit":[151,0,".x"],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":170,"class":"pg17-merge"}
+{"file":"merge.sql","stmt":563,"sum":"fc5fb064","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":168,"pg17":"pg17-merge"}
+{"file":"merge.sql","stmt":563,"edit":[151,0,".x"],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":170,"pg17":"pg17-merge"}
 {"file":"merge.sql","stmt":564,"sum":"66e5f15c"}
-{"file":"merge.sql","stmt":565,"sum":"fe7a8170","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":157,"class":"pg17-merge"}
-{"file":"merge.sql","stmt":565,"edit":[113,0,"[]"],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":159,"class":"pg17-merge"}
+{"file":"merge.sql","stmt":565,"sum":"fe7a8170","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":157,"pg17":"pg17-merge"}
+{"file":"merge.sql","stmt":565,"edit":[113,0,"[]"],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":159,"pg17":"pg17-merge"}
 {"file":"merge.sql","stmt":566,"sum":"6c03b2ce"}
 {"file":"merge.sql","stmt":567,"sum":"fa2849c2"}
 {"file":"merge.sql","stmt":568,"sum":"fbf0c526"}
@@ -42731,10 +42731,10 @@
 {"file":"rowsecurity.sql","stmt":414,"sum":"ab3f5ba2"}
 {"file":"rowsecurity.sql","stmt":414,"edit":[106,1,""]}
 {"file":"rowsecurity.sql","stmt":415,"sum":"09385801"}
-{"file":"rowsecurity.sql","stmt":416,"sum":"f4040644","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":257,"class":"pg17-merge"}
-{"file":"rowsecurity.sql","stmt":416,"edit":[268,0," *"],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":257,"class":"pg17-merge"}
-{"file":"rowsecurity.sql","stmt":417,"sum":"ffd6b512","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":255,"class":"pg17-merge"}
-{"file":"rowsecurity.sql","stmt":417,"edit":[143,0,".x"],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":257,"class":"pg17-merge"}
+{"file":"rowsecurity.sql","stmt":416,"sum":"f4040644","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":257,"pg17":"pg17-merge"}
+{"file":"rowsecurity.sql","stmt":416,"edit":[268,0," *"],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":257,"pg17":"pg17-merge"}
+{"file":"rowsecurity.sql","stmt":417,"sum":"ffd6b512","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":255,"pg17":"pg17-merge"}
+{"file":"rowsecurity.sql","stmt":417,"edit":[143,0,".x"],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":257,"pg17":"pg17-merge"}
 {"file":"rowsecurity.sql","stmt":418,"sum":"dd23fc95"}
 {"file":"rowsecurity.sql","stmt":419,"sum":"c95acb34"}
 {"file":"rowsecurity.sql","stmt":420,"sum":"c5f215f1"}
@@ -44209,9 +44209,9 @@
 {"file":"rules.sql","stmt":568,"sum":"c47545a0"}
 {"file":"rules.sql","stmt":569,"sum":"13d6bd6f"}
 {"file":"rules.sql","stmt":570,"sum":"b2ce076b"}
-{"file":"rules.sql","stmt":571,"sum":"595cd6a0","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":941,"class":"pg17-merge"}
-{"file":"rules.sql","stmt":572,"sum":"edfa4165","code":"42601","msg":"syntax error at or near \"BY\"","pos":264,"class":"pg17-merge"}
-{"file":"rules.sql","stmt":572,"edit":[197,0,"(3)"],"code":"42601","msg":"syntax error at or near \"BY\"","pos":267,"class":"pg17-merge"}
+{"file":"rules.sql","stmt":571,"sum":"595cd6a0","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":941,"pg17":"pg17-merge"}
+{"file":"rules.sql","stmt":572,"sum":"edfa4165","code":"42601","msg":"syntax error at or near \"BY\"","pos":264,"pg17":"pg17-merge"}
+{"file":"rules.sql","stmt":572,"edit":[197,0,"(3)"],"code":"42601","msg":"syntax error at or near \"BY\"","pos":267,"pg17":"pg17-merge"}
 {"file":"rules.sql","stmt":573,"sum":"a3b755f1"}
 {"file":"rules.sql","stmt":574,"sum":"7c9c01f9"}
 {"file":"rules.sql","stmt":575,"sum":"4b2679bf"}
@@ -48060,7 +48060,7 @@
 {"file":"stats_ext.sql","stmt":803,"sum":"d04459e2"}
 {"file":"stats_ext.sql","stmt":804,"sum":"077730f6"}
 {"file":"stats_ext.sql","stmt":805,"sum":"1a3b7f4a"}
-{"file":"stats_ext.sql","stmt":806,"sum":"4f5dfee1","code":"42601","msg":"syntax error at or near \"EXPRESSION\"","pos":44,"class":"pg17-ddl"}
+{"file":"stats_ext.sql","stmt":806,"sum":"4f5dfee1","code":"42601","msg":"syntax error at or near \"EXPRESSION\"","pos":44,"pg17":"pg17-ddl"}
 {"file":"stats_ext.sql","stmt":807,"sum":"645cc598"}
 {"file":"stats_ext.sql","stmt":808,"sum":"9fea006a"}
 {"file":"stats_ext.sql","stmt":809,"sum":"138d32bb"}
@@ -50968,18 +50968,18 @@
 {"file":"timestamptz.sql","stmt":353,"sum":"6638d3dc"}
 {"file":"timestamptz.sql","stmt":353,"edit":[30,5,""]}
 {"file":"timestamptz.sql","stmt":354,"sum":"ede173fb"}
-{"file":"timestamptz.sql","stmt":355,"sum":"e5883c4e","code":"42601","msg":"syntax error at or near \"LOCAL\"","pos":81,"class":"pg17-ddl"}
-{"file":"timestamptz.sql","stmt":356,"sum":"3c583126","code":"42601","msg":"syntax error at or near \"LOCAL\"","pos":40,"class":"pg17-ddl"}
-{"file":"timestamptz.sql","stmt":356,"edit":[45,0," * "],"code":"42601","msg":"syntax error at or near \"LOCAL\"","pos":40,"class":"pg17-ddl"}
-{"file":"timestamptz.sql","stmt":356,"edit":[17,0,".x"],"code":"42601","msg":"syntax error at or near \"LOCAL\"","pos":42,"class":"pg17-ddl"}
+{"file":"timestamptz.sql","stmt":355,"sum":"e5883c4e","code":"42601","msg":"syntax error at or near \"LOCAL\"","pos":81,"pg17":"pg17-ddl"}
+{"file":"timestamptz.sql","stmt":356,"sum":"3c583126","code":"42601","msg":"syntax error at or near \"LOCAL\"","pos":40,"pg17":"pg17-ddl"}
+{"file":"timestamptz.sql","stmt":356,"edit":[45,0," * "],"code":"42601","msg":"syntax error at or near \"LOCAL\"","pos":40,"pg17":"pg17-ddl"}
+{"file":"timestamptz.sql","stmt":356,"edit":[17,0,".x"],"code":"42601","msg":"syntax error at or near \"LOCAL\"","pos":42,"pg17":"pg17-ddl"}
 {"file":"timestamptz.sql","stmt":357,"sum":"53aa4160"}
-{"file":"timestamptz.sql","stmt":358,"sum":"e5883c4e","code":"42601","msg":"syntax error at or near \"LOCAL\"","pos":81,"class":"pg17-ddl"}
-{"file":"timestamptz.sql","stmt":359,"sum":"3c583126","code":"42601","msg":"syntax error at or near \"LOCAL\"","pos":40,"class":"pg17-ddl"}
-{"file":"timestamptz.sql","stmt":359,"edit":[8,0," ("],"code":"42601","msg":"syntax error at or near \"LOCAL\"","pos":42,"class":"pg17-ddl"}
+{"file":"timestamptz.sql","stmt":358,"sum":"e5883c4e","code":"42601","msg":"syntax error at or near \"LOCAL\"","pos":81,"pg17":"pg17-ddl"}
+{"file":"timestamptz.sql","stmt":359,"sum":"3c583126","code":"42601","msg":"syntax error at or near \"LOCAL\"","pos":40,"pg17":"pg17-ddl"}
+{"file":"timestamptz.sql","stmt":359,"edit":[8,0," ("],"code":"42601","msg":"syntax error at or near \"LOCAL\"","pos":42,"pg17":"pg17-ddl"}
 {"file":"timestamptz.sql","stmt":360,"sum":"d1da2302"}
-{"file":"timestamptz.sql","stmt":361,"sum":"8fa5555e","code":"42601","msg":"syntax error at or near \"LOCAL\"","pos":118,"class":"pg17-ddl"}
-{"file":"timestamptz.sql","stmt":361,"edit":[242,0," ,"],"code":"42601","msg":"syntax error at or near \"LOCAL\"","pos":118,"class":"pg17-ddl"}
-{"file":"timestamptz.sql","stmt":361,"edit":[241,0," ttz_func"],"code":"42601","msg":"syntax error at or near \"LOCAL\"","pos":118,"class":"pg17-ddl"}
+{"file":"timestamptz.sql","stmt":361,"sum":"8fa5555e","code":"42601","msg":"syntax error at or near \"LOCAL\"","pos":118,"pg17":"pg17-ddl"}
+{"file":"timestamptz.sql","stmt":361,"edit":[242,0," ,"],"code":"42601","msg":"syntax error at or near \"LOCAL\"","pos":118,"pg17":"pg17-ddl"}
+{"file":"timestamptz.sql","stmt":361,"edit":[241,0," ttz_func"],"code":"42601","msg":"syntax error at or near \"LOCAL\"","pos":118,"pg17":"pg17-ddl"}
 {"file":"timestamptz.sql","stmt":362,"sum":"49880b4f"}
 {"file":"timestamptz.sql","stmt":363,"sum":"0b05c509"}
 {"file":"timestamptz.sql","stmt":364,"sum":"f1ac4def"}
@@ -51070,8 +51070,8 @@
 {"file":"timetz.sql","stmt":49,"sum":"7b03167d"}
 {"file":"timetz.sql","stmt":50,"sum":"690876f9"}
 {"file":"timetz.sql","stmt":51,"sum":"d1da2302"}
-{"file":"timetz.sql","stmt":52,"sum":"d5005b5e","code":"42601","msg":"syntax error at or near \"LOCAL\"","pos":99,"class":"pg17-ddl"}
-{"file":"timetz.sql","stmt":52,"edit":[44,0,"(3)"],"code":"42601","msg":"syntax error at or near \"LOCAL\"","pos":102,"class":"pg17-ddl"}
+{"file":"timetz.sql","stmt":52,"sum":"d5005b5e","code":"42601","msg":"syntax error at or near \"LOCAL\"","pos":99,"pg17":"pg17-ddl"}
+{"file":"timetz.sql","stmt":52,"edit":[44,0,"(3)"],"code":"42601","msg":"syntax error at or near \"LOCAL\"","pos":102,"pg17":"pg17-ddl"}
 {"file":"timetz.sql","stmt":53,"sum":"62c5d64c"}
 {"file":"timetz.sql","stmt":54,"sum":"682d69ea"}
 {"file":"timetz.sql","stmt":54,"edit":[23,0,".x"]}
@@ -55141,19 +55141,19 @@
 {"file":"updatable_views.sql","stmt":104,"sum":"b7358980"}
 {"file":"updatable_views.sql","stmt":105,"sum":"4eca6637"}
 {"file":"updatable_views.sql","stmt":105,"edit":[22,0,".x"]}
-{"file":"updatable_views.sql","stmt":106,"sum":"0236e71c","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":272,"class":"pg17-merge"}
+{"file":"updatable_views.sql","stmt":106,"sum":"0236e71c","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":272,"pg17":"pg17-merge"}
 {"file":"updatable_views.sql","stmt":107,"sum":"f69d9ca7"}
 {"file":"updatable_views.sql","stmt":107,"edit":[33,0,".x"]}
-{"file":"updatable_views.sql","stmt":108,"sum":"b6f7f02f","code":"42601","msg":"syntax error at or near \"BY\"","pos":219,"class":"pg17-merge"}
-{"file":"updatable_views.sql","stmt":108,"edit":[297,1,""],"code":"42601","msg":"syntax error at or near \"BY\"","pos":219,"class":"pg17-merge"}
+{"file":"updatable_views.sql","stmt":108,"sum":"b6f7f02f","code":"42601","msg":"syntax error at or near \"BY\"","pos":219,"pg17":"pg17-merge"}
+{"file":"updatable_views.sql","stmt":108,"edit":[297,1,""],"code":"42601","msg":"syntax error at or near \"BY\"","pos":219,"pg17":"pg17-merge"}
 {"file":"updatable_views.sql","stmt":109,"sum":"f69d9ca7"}
 {"file":"updatable_views.sql","stmt":110,"sum":"83f1248f"}
 {"file":"updatable_views.sql","stmt":110,"edit":[41,0,".x"]}
 {"file":"updatable_views.sql","stmt":111,"sum":"03d7bf13"}
 {"file":"updatable_views.sql","stmt":112,"sum":"799ca591"}
 {"file":"updatable_views.sql","stmt":113,"sum":"eeb86f13"}
-{"file":"updatable_views.sql","stmt":114,"sum":"96a47e1e","code":"42601","msg":"syntax error at or near \"BY\"","pos":127,"class":"pg17-merge"}
-{"file":"updatable_views.sql","stmt":114,"edit":[141,0,".x"],"code":"42601","msg":"syntax error at or near \"BY\"","pos":127,"class":"pg17-merge"}
+{"file":"updatable_views.sql","stmt":114,"sum":"96a47e1e","code":"42601","msg":"syntax error at or near \"BY\"","pos":127,"pg17":"pg17-merge"}
+{"file":"updatable_views.sql","stmt":114,"edit":[141,0,".x"],"code":"42601","msg":"syntax error at or near \"BY\"","pos":127,"pg17":"pg17-merge"}
 {"file":"updatable_views.sql","stmt":115,"sum":"5ef01481"}
 {"file":"updatable_views.sql","stmt":116,"sum":"0aaf01d1"}
 {"file":"updatable_views.sql","stmt":117,"sum":"61c146a9"}
@@ -55182,11 +55182,11 @@
 {"file":"updatable_views.sql","stmt":133,"sum":"e37a7d51"}
 {"file":"updatable_views.sql","stmt":134,"sum":"87271e4a"}
 {"file":"updatable_views.sql","stmt":135,"sum":"011dfc96"}
-{"file":"updatable_views.sql","stmt":136,"sum":"93df62de","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":226,"class":"pg17-merge"}
-{"file":"updatable_views.sql","stmt":136,"edit":[171,1,""],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":225,"class":"pg17-merge"}
+{"file":"updatable_views.sql","stmt":136,"sum":"93df62de","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":226,"pg17":"pg17-merge"}
+{"file":"updatable_views.sql","stmt":136,"edit":[171,1,""],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":225,"pg17":"pg17-merge"}
 {"file":"updatable_views.sql","stmt":137,"sum":"e9178842"}
 {"file":"updatable_views.sql","stmt":137,"edit":[35,0,".x"]}
-{"file":"updatable_views.sql","stmt":138,"sum":"ba2ab93c","code":"42601","msg":"syntax error at or near \"BY\"","pos":243,"class":"pg17-merge"}
+{"file":"updatable_views.sql","stmt":138,"sum":"ba2ab93c","code":"42601","msg":"syntax error at or near \"BY\"","pos":243,"pg17":"pg17-merge"}
 {"file":"updatable_views.sql","stmt":139,"sum":"e9178842"}
 {"file":"updatable_views.sql","stmt":139,"edit":[35,0,".x"]}
 {"file":"updatable_views.sql","stmt":140,"sum":"d4a57698"}
@@ -55266,13 +55266,13 @@
 {"file":"updatable_views.sql","stmt":193,"sum":"011dfc96"}
 {"file":"updatable_views.sql","stmt":194,"sum":"24247503"}
 {"file":"updatable_views.sql","stmt":195,"sum":"011dfc96"}
-{"file":"updatable_views.sql","stmt":196,"sum":"cd44b873","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":242,"class":"pg17-merge"}
-{"file":"updatable_views.sql","stmt":196,"edit":[121,1,"except"],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":247,"class":"pg17-merge"}
-{"file":"updatable_views.sql","stmt":196,"edit":[272,0," ,"],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":242,"class":"pg17-merge"}
+{"file":"updatable_views.sql","stmt":196,"sum":"cd44b873","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":242,"pg17":"pg17-merge"}
+{"file":"updatable_views.sql","stmt":196,"edit":[121,1,"except"],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":247,"pg17":"pg17-merge"}
+{"file":"updatable_views.sql","stmt":196,"edit":[272,0," ,"],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":242,"pg17":"pg17-merge"}
 {"file":"updatable_views.sql","stmt":197,"sum":"f69d9ca7"}
-{"file":"updatable_views.sql","stmt":198,"sum":"c3c52ab1","code":"42601","msg":"syntax error at or near \"BY\"","pos":219,"class":"pg17-merge"}
-{"file":"updatable_views.sql","stmt":198,"edit":[308,0," ."],"code":"42601","msg":"syntax error at or near \"BY\"","pos":219,"class":"pg17-merge"}
-{"file":"updatable_views.sql","stmt":198,"edit":[244,0,"[]"],"code":"42601","msg":"syntax error at or near \"BY\"","pos":219,"class":"pg17-merge"}
+{"file":"updatable_views.sql","stmt":198,"sum":"c3c52ab1","code":"42601","msg":"syntax error at or near \"BY\"","pos":219,"pg17":"pg17-merge"}
+{"file":"updatable_views.sql","stmt":198,"edit":[308,0," ."],"code":"42601","msg":"syntax error at or near \"BY\"","pos":219,"pg17":"pg17-merge"}
+{"file":"updatable_views.sql","stmt":198,"edit":[244,0,"[]"],"code":"42601","msg":"syntax error at or near \"BY\"","pos":219,"pg17":"pg17-merge"}
 {"file":"updatable_views.sql","stmt":199,"sum":"f69d9ca7"}
 {"file":"updatable_views.sql","stmt":200,"sum":"1e8ee710"}
 {"file":"updatable_views.sql","stmt":201,"sum":"4300a063"}
@@ -58122,8 +58122,8 @@
 {"file":"with.sql","stmt":283,"sum":"8cb2fe85"}
 {"file":"with.sql","stmt":284,"sum":"440aa7e1"}
 {"file":"with.sql","stmt":284,"edit":[78,0,".x"]}
-{"file":"with.sql","stmt":285,"sum":"5d8880bf","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":175,"class":"pg17-merge"}
-{"file":"with.sql","stmt":285,"edit":[198,1,""],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":175,"class":"pg17-merge"}
+{"file":"with.sql","stmt":285,"sum":"5d8880bf","code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":175,"pg17":"pg17-merge"}
+{"file":"with.sql","stmt":285,"edit":[198,1,""],"code":"42601","msg":"syntax error at or near \"RETURNING\"","pos":175,"pg17":"pg17-merge"}
 {"file":"with.sql","stmt":286,"sum":"24c44136"}
 {"file":"with.sql","stmt":286,"edit":[95,2,"a="]}
 {"file":"with.sql","stmt":287,"sum":"93f17f6d"}
@@ -58717,14 +58717,14 @@
 {"sql":"select json()","pg17":"pg17-json-names"}
 {"sql":"select json_scalar()","pg17":"pg17-json-names"}
 {"sql":"select json_table(j)","pg17":"pg17-json-names"}
-{"sql":"merge into t using s on t.a = s.a when matched then delete returning *","code":"42601","msg":"syntax error at or near \"returning\"","pos":59,"class":"pg17-merge"}
-{"sql":"merge into t using s on t.a = s.a when not matched by source then delete","code":"42601","msg":"syntax error at or near \"by\"","pos":51,"class":"pg17-merge"}
+{"sql":"merge into t using s on t.a = s.a when matched then delete returning *","code":"42601","msg":"syntax error at or near \"returning\"","pos":59,"pg17":"pg17-merge"}
+{"sql":"merge into t using s on t.a = s.a when not matched by source then delete","code":"42601","msg":"syntax error at or near \"by\"","pos":51,"pg17":"pg17-merge"}
 {"sql":"select merge_action()"}
-{"sql":"alter table t set access method default","code":"42601","msg":"syntax error at or near \"default\"","pos":32,"class":"pg17-ddl"}
-{"sql":"alter table t alter c set expression as (1)","code":"42601","msg":"syntax error at or near \"expression\"","pos":26,"class":"pg17-ddl"}
-{"sql":"select now() at local","code":"42601","msg":"syntax error at or near \"local\"","pos":16,"class":"pg17-ddl"}
-{"sql":"alter domain d add not null","code":"42601","msg":"syntax error at or near \"not\"","pos":19,"class":"pg17-ddl"}
-{"sql":"alter operator === (int, int) set (merges)","code":"42601","msg":"syntax error at or near \")\"","pos":41,"class":"pg17-ddl"}
+{"sql":"alter table t set access method default","code":"42601","msg":"syntax error at or near \"default\"","pos":32,"pg17":"pg17-ddl"}
+{"sql":"alter table t alter c set expression as (1)","code":"42601","msg":"syntax error at or near \"expression\"","pos":26,"pg17":"pg17-ddl"}
+{"sql":"select now() at local","code":"42601","msg":"syntax error at or near \"local\"","pos":16,"pg17":"pg17-ddl"}
+{"sql":"alter domain d add not null","code":"42601","msg":"syntax error at or near \"not\"","pos":19,"pg17":"pg17-ddl"}
+{"sql":"alter operator === (int, int) set (merges)","code":"42601","msg":"syntax error at or near \")\"","pos":41,"pg17":"pg17-ddl"}
 {"sql":"create table t () with oids","code":"42601","msg":"syntax error at or near \"oids\"","pos":23}
 {"sql":"alter table t set with oids","code":"42601","msg":"syntax error at or near \"with\"","pos":18}
 {"sql":"create table t () without oids"}

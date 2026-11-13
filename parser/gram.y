@@ -497,6 +497,7 @@ import (
 %type <boolean> opt_unique_null_treatment
 %type <list>  opt_qualified_name
 %type <node>  set_statistics_value
+%type <list>  merge_returning_clause
 %type <list>  opt_stat_name_list
 
 // Operator precedence - must match PostgreSQL's gram.y
@@ -2042,7 +2043,7 @@ DomainConstraintElem:
 			applyConstraintAttrs(n, $5)
 			$$ = n
 		}
-	| NOT NULL_P ConstraintAttributeSpec
+	| pg17_not NULL_P ConstraintAttributeSpec
 		{
 			n := &nodes.Constraint{
 				Contype:        nodes.CONSTR_NOTNULL,
@@ -2895,7 +2896,7 @@ alter_table_cmd:
 				Name:    $4,
 			}
 		}
-	| SET ACCESS METHOD DEFAULT
+	| SET ACCESS METHOD pg17_default
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetAccessMethod),
@@ -3020,7 +3021,7 @@ alter_table_cmd:
 			}
 		}
 	/* SET/DROP EXPRESSION */
-	| ALTER opt_column ColId SET EXPRESSION AS '(' a_expr ')'
+	| ALTER opt_column ColId SET pg17_expression AS '(' a_expr ')'
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetExpression),
@@ -5010,7 +5011,7 @@ copy_opt_item:
 		{
 			$$ = &nodes.DefElem{Defname: "force_not_null", Arg: $4}
 		}
-	| FORCE NOT NULL_P '*'
+	| FORCE NOT NULL_P pg17_star
 		{
 			$$ = &nodes.DefElem{Defname: "force_not_null", Arg: &nodes.A_Star{}}
 		}
@@ -5018,7 +5019,7 @@ copy_opt_item:
 		{
 			$$ = &nodes.DefElem{Defname: "force_null", Arg: $3}
 		}
-	| FORCE NULL_P '*'
+	| FORCE NULL_P pg17_star
 		{
 			$$ = &nodes.DefElem{Defname: "force_null", Arg: &nodes.A_Star{}}
 		}
@@ -9133,7 +9134,7 @@ a_expr:
 				Location:   $<loc>2,
 			}
 		}
-	| a_expr AT LOCAL                                  %prec AT
+	| a_expr AT pg17_local                             %prec AT
 		{
 			$$ = &nodes.FuncCall{
 				Funcname:   makeFuncName("pg_catalog", "timezone"),
@@ -12720,6 +12721,9 @@ ClusterStmt:
 		}
 	| CLUSTER '(' utility_option_list ')'
 		{
+			if !sinceVersion(pglex, PostgreSQL17) {
+				return 1
+			}
 			$$ = &nodes.ClusterStmt{
 				Params: $3,
 			}
@@ -13339,7 +13343,7 @@ opt_from_in:
  *****************************************************************************/
 
 MergeStmt:
-	opt_with_clause MERGE INTO relation_expr_opt_alias USING table_ref ON a_expr merge_when_list returning_clause
+	opt_with_clause MERGE INTO relation_expr_opt_alias USING table_ref ON a_expr merge_when_list merge_returning_clause
 		{
 			m := &nodes.MergeStmt{}
 			if $1 != nil {
@@ -13352,6 +13356,12 @@ MergeStmt:
 			m.ReturningList = $10
 			$$ = m
 		}
+	;
+
+/* MERGE's RETURNING is PostgreSQL 17's */
+merge_returning_clause:
+	pg17_returning target_list { $$ = $2 }
+	| /* EMPTY */ { $$ = nil }
 	;
 
 merge_when_list:
@@ -13410,7 +13420,7 @@ merge_when_tgt_matched:
 		{
 			$$ = int64(nodes.MERGE_WHEN_MATCHED)
 		}
-	| WHEN NOT MATCHED BY SOURCE
+	| WHEN NOT MATCHED pg17_by SOURCE
 		{
 			$$ = int64(nodes.MERGE_WHEN_NOT_MATCHED_BY_SOURCE)
 		}
@@ -13421,7 +13431,7 @@ merge_when_tgt_not_matched:
 		{
 			$$ = int64(nodes.MERGE_WHEN_NOT_MATCHED_BY_TARGET)
 		}
-	| WHEN NOT MATCHED BY TARGET
+	| WHEN NOT MATCHED pg17_by TARGET
 		{
 			$$ = int64(nodes.MERGE_WHEN_NOT_MATCHED_BY_TARGET)
 		}
@@ -15844,6 +15854,10 @@ operator_def_elem:
 		}
 	| ColLabel
 		{
+			/* PostgreSQL 16 refuses at the ')' or ',' after the name */
+			if !sinceVersion(pglex, PostgreSQL17) {
+				return 1
+			}
 			$$ = &nodes.DefElem{
 				Defname:  $1,
 				Location: -1,
@@ -16371,9 +16385,21 @@ AlterStatsStmt:
 set_statistics_value:
 	SignedIconst
 		{ $$ = &nodes.Integer{Ival: $1} }
-	| DEFAULT
+	| pg17_default
 		{ $$ = nil }
 	;
+
+/*
+ * A PostgreSQL 17 rule's first token beyond PostgreSQL 16's grammar, which a
+ * parse answering as PostgreSQL 16 refuses where PostgreSQL 16 does.
+ */
+pg17_by:         BY         { if !sinceVersion(pglex, PostgreSQL17) { return 1 } } ;
+pg17_default:    DEFAULT    { if !sinceVersion(pglex, PostgreSQL17) { return 1 } } ;
+pg17_expression: EXPRESSION { if !sinceVersion(pglex, PostgreSQL17) { return 1 } } ;
+pg17_local:      LOCAL      { if !sinceVersion(pglex, PostgreSQL17) { return 1 } } ;
+pg17_not:        NOT        { if !sinceVersion(pglex, PostgreSQL17) { return 1 } } ;
+pg17_returning:  RETURNING  { if !sinceVersion(pglex, PostgreSQL17) { return 1 } } ;
+pg17_star:       '*'        { if !sinceVersion(pglex, PostgreSQL17) { return 1 } } ;
 
 /*****************************************************************************
  *

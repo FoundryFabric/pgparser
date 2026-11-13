@@ -75,8 +75,8 @@ L a feature's grammar.
 | class | risk | statements (regr/mut/probe) | direction | gram.y | #15 | size |
 |---|---|---|---|---|---|---|
 | pg17-sqljson (fixed at 16) | 1 | 714 (334/369/11) | accepts PostgreSQL 17's SQL/JSON | `func_expr_common_subexpr` JSON_QUERY, JSON_VALUE, JSON_EXISTS, JSON(), JSON_SCALAR, JSON_SERIALIZE; `json_table` in `table_ref`; `json_returning_clause_opt`, `json_behavior_clause_opt`, `json_wrapper_behavior`, `json_quotes_clause_opt`, `json_passing_clause_opt`, `json_table_column_definition` | no | L |
-| pg17-merge | 1 | 58 (31/25/2) | accepts PostgreSQL 17's MERGE | `merge_when_clause` (`BY SOURCE`, `BY TARGET`), `MergeStmt` `returning_clause`, `MERGE_ACTION()` | no | M |
-| pg17-ddl | 1 | 42 (22/15/5) | accepts PostgreSQL 17's DDL | `set_access_method_name` (DEFAULT), `alter_table_cmd` SET EXPRESSION, `a_expr AT LOCAL`, `DomainConstraintElem` NOT NULL in ALTER DOMAIN ADD, `operator_def_elem` without `=` | no | M |
+| pg17-merge (fixed at 16) | 1 | 58 (31/25/2) | accepts PostgreSQL 17's MERGE | `merge_when_clause` (`BY SOURCE`, `BY TARGET`), `MergeStmt` `returning_clause`, `MERGE_ACTION()` | no | M |
+| pg17-ddl (fixed at 16) | 1 | 42 (22/15/5) | accepts PostgreSQL 17's DDL | `set_access_method_name` (DEFAULT), `alter_table_cmd` SET EXPRESSION, `a_expr AT LOCAL`, `DomainConstraintElem` NOT NULL in ALTER DOMAIN ADD, `operator_def_elem` without `=` | no | M |
 | utility-option-argument (fixed) | 1 | 55 (0/52/3) | accepts `*`, DEFAULT and `(list)` as an EXPLAIN/VACUUM/ANALYZE option argument | `utility_option_arg` | no | S |
 | publication-object-list (fixed) | 1 | 24 (6/15/3) | accepts what `preprocess_pubobj_list` refuses | `CreatePublicationStmt`, `AlterPublicationStmt`, `PublicationObjSpec` actions | no | S |
 | grammar-action-checks (fixed) | 1 | 21 (8/6/7) | accepts what a grammar action refuses | `CopyStmt`, `parsePartitionStrategy`, `alter_table_cmd` column number, `CreateSchemaStmt`, `TriggerEvents`, `xmltable_column_option_el`, `frame_extent`, `json_encoding_clause_opt` | no | M |
@@ -135,7 +135,10 @@ parsing, and its expectations name `JsonTableColumn`; the fix changes them.
 | `select * from json_table(j, '$' columns (a int))` | 42601 syntax error at or near "columns" at 32 | accepts |
 | `select json('1' with unique keys)` | 42601 syntax error at or near "with" at 16 | accepts |
 
-### pg17-merge (risk 1, 58)
+### pg17-merge (risk 1, 58; fixed at PostgreSQL 16)
+
+Fixed by version gates: as PostgreSQL 16, `BY` in WHEN NOT MATCHED BY and MERGE's `RETURNING`
+are one-token rules that raise PostgreSQL 16's syntax error at that token.
 
 MERGE's RETURNING, `merge_action()` and `WHEN NOT MATCHED BY SOURCE | BY
 TARGET` are PostgreSQL 17's.
@@ -146,7 +149,10 @@ TARGET` are PostgreSQL 17's.
 | `merge into t using s on t.a = s.a when not matched by source then delete` | 42601 syntax error at or near "by" at 51 | accepts |
 | `MERGE INTO target t USING source AS s ON t.tid = s.sid WHEN NOT MATCHED BY SOURCE THEN INSERT DEFAULT VALUES` | 42601 syntax error at or near "BY" at 110 | 42601 syntax error at or near "INSERT" at 126 |
 
-### pg17-ddl (risk 1, 42)
+### pg17-ddl (risk 1, 42; fixed at PostgreSQL 16)
+
+Fixed by version gates on `DEFAULT` (SET ACCESS METHOD, SET STATISTICS), `EXPRESSION`,
+`LOCAL`, ALTER DOMAIN's `NOT` and, at the token after it, an operator option without a value.
 
 | statement | PostgreSQL 16 | parser |
 |---|---|---|
