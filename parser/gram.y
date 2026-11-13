@@ -2993,7 +2993,7 @@ alter_table_cmd:
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetStatistics),
 				Name:    $3,
-				Def:     makeIntConst($6, -1),
+				Def:     &nodes.Integer{Ival: $6},
 			}
 		}
 	| ALTER opt_column Iconst SET STATISTICS SignedIconst
@@ -3004,7 +3004,7 @@ alter_table_cmd:
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetStatistics),
 				Num:     int16($3),
-				Def:     makeIntConst($6, -1),
+				Def:     &nodes.Integer{Ival: $6},
 			}
 		}
 	/* SET COMPRESSION */
@@ -6933,7 +6933,7 @@ alter_identity_column_option:
 		}
 	| SET GENERATED generated_when
 		{
-			$$ = makeDefElem("generated", makeIntConst($3, -1))
+			$$ = makeDefElem("generated", &nodes.Integer{Ival: $3})
 		}
 	;
 

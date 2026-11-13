@@ -22327,7 +22327,7 @@ pgdefault:
 			pgVAL.node = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetStatistics),
 				Name:    pgDollar[3].str,
-				Def:     makeIntConst(pgDollar[6].ival, -1),
+				Def:     &nodes.Integer{Ival: pgDollar[6].ival},
 			}
 		}
 	case 401:
@@ -22340,7 +22340,7 @@ pgdefault:
 			pgVAL.node = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetStatistics),
 				Num:     int16(pgDollar[3].ival),
-				Def:     makeIntConst(pgDollar[6].ival, -1),
+				Def:     &nodes.Integer{Ival: pgDollar[6].ival},
 			}
 		}
 	case 402:
@@ -27302,7 +27302,7 @@ pgdefault:
 		pgDollar = pgS[pgpt-3 : pgpt+1]
 //line gram.y:6935
 		{
-			pgVAL.node = makeDefElem("generated", makeIntConst(pgDollar[3].ival, -1))
+			pgVAL.node = makeDefElem("generated", &nodes.Integer{Ival: pgDollar[3].ival})
 		}
 	case 960:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
