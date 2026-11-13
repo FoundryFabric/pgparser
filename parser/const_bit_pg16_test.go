@@ -18,7 +18,7 @@ func TestConstBitIsPostgreSQL16s(t *testing.T) {
 // have no type modifiers, as libpg_query's tree has it, and a column's BIT
 // to be BIT(1).
 func TestConstBitHasNoLength(t *testing.T) {
-	list, err := Parse("select bit '1'")
+	list, err := parse16("select bit '1'")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -26,7 +26,7 @@ func TestConstBitHasNoLength(t *testing.T) {
 	if tc.TypeName.Typmods != nil {
 		t.Errorf("select bit '1': typmods %v, want none", tc.TypeName.Typmods)
 	}
-	list, err = Parse("create table t (a bit)")
+	list, err = parse16("create table t (a bit)")
 	if err != nil {
 		t.Fatal(err)
 	}

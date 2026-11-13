@@ -35,7 +35,7 @@ func TestGrammarConflictsArePostgreSQL16s(t *testing.T) {
 	for _, path := range paths {
 		t.Run(filepath.Base(path), func(t *testing.T) {
 			for _, c := range readGrammarConflictCases(t, path) {
-				_, err := Parse(c.SQL)
+				_, err := parse16(c.SQL)
 				if c.Code == "" {
 					if err != nil {
 						t.Errorf("Parse(%q) = %v, want it parsed", c.SQL, err)

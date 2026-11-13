@@ -51,7 +51,7 @@ func TestBareLabelsArePostgreSQL16s(t *testing.T) {
 		t.Fatalf("%d cases, want 5437", len(cases))
 	}
 	for _, c := range cases {
-		stmts, err := Parse(c.SQL)
+		stmts, err := parse16(c.SQL)
 		if c.SyntaxError != "" {
 			var pe *ParseError
 			if !errors.As(err, &pe) || pe.Code != codeSyntaxError || pe.Message != c.SyntaxError || pe.Position != c.Position {
@@ -70,14 +70,19 @@ func TestBareLabelsArePostgreSQL16s(t *testing.T) {
 }
 
 // TestBareLabelIsTheKeywordTable checks that a keyword is a column label
-// without AS exactly when Keywords marks it BareLabel.
+// without AS exactly when its version's keyword table marks it BareLabel,
+// and that a word that is no keyword in a version is a label there.
 func TestBareLabelIsTheKeywordTable(t *testing.T) {
-	for _, k := range Keywords {
-		sql := "select 1 " + k.Name + ", 2"
-		stmts, err := Parse(sql)
-		labelled := err == nil && slices.Equal(targetLabels(stmts), []string{k.Name})
-		if labelled != k.BareLabel {
-			t.Errorf("Parse(%q): labelled %v, err %v; Keywords says BareLabel %v", sql, labelled, err, k.BareLabel)
+	for _, v := range []Version{PostgreSQL16, PostgreSQL17} {
+		p := &Parser{version: v}
+		for _, kw := range Keywords {
+			sql := "select 1 " + kw.Name + ", 2"
+			stmts, err := p.Parse(sql)
+			labelled := err == nil && slices.Equal(targetLabels(stmts), []string{kw.Name})
+			k := LookupKeywordVersion(v, kw.Name)
+			if want := k == nil || k.BareLabel; labelled != want {
+				t.Errorf("%d: Parse(%q): labelled %v, err %v; want %v", v, sql, labelled, err, want)
+			}
 		}
 	}
 }

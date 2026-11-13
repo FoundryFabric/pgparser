@@ -89,7 +89,7 @@ func TestRoleSpecsArePostgreSQL16s(t *testing.T) {
 		t.Fatalf("%d cases, want 1555", len(cases))
 	}
 	for _, c := range cases {
-		tree, err := Parse(c.SQL)
+		tree, err := parse16(c.SQL)
 		if c.Code == "" {
 			if err != nil {
 				t.Errorf("Parse(%q) = %v, want it parsed", c.SQL, err)

@@ -23,7 +23,7 @@ func TestCreateProcedureIsMarked(t *testing.T) {
 		"create or replace function f() language sql as 'select 1'":            false,
 		"create function f() returns table (a int) language sql as 'select 1'": false,
 	} {
-		list, err := Parse(sql)
+		list, err := parse16(sql)
 		if err != nil {
 			t.Fatal(err)
 		}

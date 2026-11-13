@@ -28,7 +28,7 @@ func TestJSONArrayLeavesOutNulls(t *testing.T) {
 		{"select json_array(1, null null on null)", false},
 		{"select json_array(select 1)", true},
 	} {
-		list, err := Parse(c.sql)
+		list, err := parse16(c.sql)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -49,7 +49,7 @@ func TestJSONArrayLeavesOutNulls(t *testing.T) {
 		"select json_array(select 1 format json encoding utf16)": nodes.JS_ENC_UTF16,
 		"select json_array(select 1 format json encoding utf32)": nodes.JS_ENC_UTF32,
 	} {
-		list, err := Parse(sql)
+		list, err := parse16(sql)
 		if err != nil {
 			t.Fatal(err)
 		}

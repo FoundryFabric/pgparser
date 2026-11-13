@@ -27,7 +27,7 @@ func TestInitiallyDeferredTriggerIsDeferrable(t *testing.T) {
 		{"not deferrable initially immediate", false, false},
 	} {
 		sql := "create constraint trigger t after insert on r " + c.attrs + " for each row execute function f()"
-		list, err := Parse(sql)
+		list, err := parse16(sql)
 		if err != nil {
 			t.Fatal(err)
 		}

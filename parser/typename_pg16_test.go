@@ -73,7 +73,7 @@ func TestTypeNamesArePostgreSQL16s(t *testing.T) {
 // typeNameDisagreement is how Parse(c.SQL) differs from PostgreSQL 16's
 // answer in c, or "" when it agrees.
 func typeNameDisagreement(c typeNameCase) string {
-	stmts, err := Parse(c.SQL)
+	stmts, err := parse16(c.SQL)
 	if c.SyntaxError != "" {
 		var pe *ParseError
 		if !errors.As(err, &pe) || pe.Code != codeSyntaxError || pe.Message != c.SyntaxError || pe.Position != c.Position {

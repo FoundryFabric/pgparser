@@ -9,6 +9,7 @@ import (
 	"os"
 	"path/filepath"
 	"sort"
+	"strings"
 	"testing"
 
 	"github.com/pgplex/pgparser/parser"
@@ -24,7 +25,9 @@ import (
 // fixture). Code, Msg and Pos are PostgreSQL's error, Pos a 0-based byte
 // offset or -1 where PostgreSQL gave none; no Code means PostgreSQL's parser
 // accepted it. Class names the cause of a known disagreement, as
-// testdata/pg16_sweep_triage.md lists them.
+// testdata/pg16_sweep_triage.md lists them. PG17 names the PostgreSQL 17
+// grammar, such as pg17-sqljson, by which a PostgreSQL 17 parser answers
+// the statement unlike PostgreSQL 16.
 type sweepCase struct {
 	SQL   string `json:"sql"`
 	File  string `json:"file"`
@@ -35,6 +38,7 @@ type sweepCase struct {
 	Msg   string `json:"msg"`
 	Pos   *int   `json:"pos"`
 	Class string `json:"class"`
+	PG17  string `json:"pg17"`
 }
 
 // TestSweepIsPostgreSQL16s pins PostgreSQL 16's parser's verdicts on the
@@ -43,7 +47,7 @@ type sweepCase struct {
 // inserted; a dotted part, a type modifier or '[]' added; a word replaced by
 // a reserved keyword) and on hand-written probes, as tools/pg16sweep
 // recorded them by sending each statement after "select 1/0;" to
-// PostgreSQL 16.15. The parser must accept what PostgreSQL accepts and
+// PostgreSQL 16.15. A PostgreSQL 16 parser must accept what PostgreSQL accepts and
 // refuse the rest with PostgreSQL's SQLSTATE, message and position. A case
 // with a class is a known disagreement: the class is skipped while the
 // parser still disagrees on every case in it, and a case that now agrees
@@ -52,6 +56,10 @@ func TestSweepIsPostgreSQL16s(t *testing.T) {
 	cases := readSweep(t)
 	if len(cases) != 58864 {
 		t.Fatalf("%d cases, want 58864", len(cases))
+	}
+	p, err := parser.New(parser.PostgreSQL16)
+	if err != nil {
+		t.Fatal(err)
 	}
 	stmts := map[string][]pgregress.ExtractedStmt{}
 	type outcome struct{ agree, disagree []string }
@@ -67,7 +75,7 @@ func TestSweepIsPostgreSQL16s(t *testing.T) {
 			byClass[c.Class] = o
 		}
 		label := fmt.Sprintf("case %d (%s:%d) %q", i+1, c.File, c.Stmt, sql)
-		if problem := sweepDisagreement(c, sql); problem != "" {
+		if problem := sweepDisagreement(p, c, sql); problem != "" {
 			o.disagree = append(o.disagree, label+": "+problem)
 		} else {
 			o.agree = append(o.agree, label)
@@ -104,6 +112,49 @@ func TestSweepIsPostgreSQL16s(t *testing.T) {
 				t.Skipf("known divergence from PostgreSQL 16: %d statements", len(o.disagree))
 			}
 		})
+	}
+}
+
+// TestSweepAsPostgreSQL17 parses the sweep as PostgreSQL 17, the version
+// Parse answers as: a case with PG17, or with a pg17 class, is answered
+// unlike PostgreSQL 16, by PostgreSQL 17's grammar, and every other case
+// without a class as PostgreSQL 16 answers it.
+func TestSweepAsPostgreSQL17(t *testing.T) {
+	cases := readSweep(t)
+	p, err := parser.New(parser.PostgreSQL17)
+	if err != nil {
+		t.Fatal(err)
+	}
+	stmts := map[string][]pgregress.ExtractedStmt{}
+	byPG17 := map[string]int{}
+	failures := 0
+	for i, c := range cases {
+		pg17 := c.PG17
+		if strings.HasPrefix(c.Class, "pg17-") {
+			pg17 = c.Class
+		} else if c.Class != "" {
+			continue
+		}
+		sql, err := sweepSQL(c, stmts)
+		if err != nil {
+			t.Fatalf("case %d: %v", i+1, err)
+		}
+		problem := sweepDisagreement(p, c, sql)
+		switch {
+		case pg17 != "" && problem == "":
+			t.Errorf("case %d (%s:%d) %q: as PostgreSQL 17 answers as PostgreSQL 16, want PostgreSQL 17's %s", i+1, c.File, c.Stmt, sql, pg17)
+			failures++
+		case pg17 == "" && problem != "":
+			t.Errorf("case %d (%s:%d) %q: as PostgreSQL 17: %s", i+1, c.File, c.Stmt, sql, problem)
+			failures++
+		}
+		if failures == 20 {
+			t.Fatal("and more")
+		}
+		byPG17[pg17]++
+	}
+	if byPG17["pg17-sqljson"] != 714 || byPG17["pg17-json-names"] != 75 || byPG17["pg17-merge"] != 58 || byPG17["pg17-ddl"] != 42 {
+		t.Errorf("PostgreSQL 17 cases %v, want 714 pg17-sqljson, 75 pg17-json-names, 58 pg17-merge and 42 pg17-ddl", byPG17)
 	}
 }
 
@@ -169,15 +220,15 @@ func sweepSQL(c sweepCase, stmts map[string][]pgregress.ExtractedStmt) (string, 
 	return sql[:int(at)] + ins + sql[int(at)+int(del):], nil
 }
 
-// sweepDisagreement is how Parse(sql) differs from PostgreSQL 16's verdict
-// in c, or "" when it agrees.
-func sweepDisagreement(c sweepCase, sql string) (problem string) {
+// sweepDisagreement is how p.Parse(sql) differs from PostgreSQL 16's
+// verdict in c, or "" when it agrees.
+func sweepDisagreement(p *parser.Parser, c sweepCase, sql string) (problem string) {
 	defer func() {
-		if p := recover(); p != nil {
-			problem = fmt.Sprint("Parse panicked: ", p)
+		if r := recover(); r != nil {
+			problem = fmt.Sprint("Parse panicked: ", r)
 		}
 	}()
-	_, err := parser.Parse(sql)
+	_, err := p.Parse(sql)
 	if c.Code == "" {
 		if err != nil {
 			return "got " + err.Error() + ", want it parsed"

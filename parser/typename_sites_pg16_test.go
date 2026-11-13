@@ -57,7 +57,7 @@ func TestTypeNameSitesArePostgreSQL16s(t *testing.T) {
 			if c.Object == "" {
 				return
 			}
-			stmts, err := Parse(c.SQL)
+			stmts, err := parse16(c.SQL)
 			if err != nil {
 				t.Fatal(err)
 			}

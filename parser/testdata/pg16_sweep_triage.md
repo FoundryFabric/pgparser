@@ -74,7 +74,7 @@ L a feature's grammar.
 
 | class | risk | statements (regr/mut/probe) | direction | gram.y | #15 | size |
 |---|---|---|---|---|---|---|
-| pg17-sqljson | 1 | 714 (334/369/11) | accepts PostgreSQL 17's SQL/JSON | `func_expr_common_subexpr` JSON_QUERY, JSON_VALUE, JSON_EXISTS, JSON(), JSON_SCALAR, JSON_SERIALIZE; `json_table` in `table_ref`; `json_returning_clause_opt`, `json_behavior_clause_opt`, `json_wrapper_behavior`, `json_quotes_clause_opt`, `json_passing_clause_opt`, `json_table_column_definition` | no | L |
+| pg17-sqljson (fixed at 16) | 1 | 714 (334/369/11) | accepts PostgreSQL 17's SQL/JSON | `func_expr_common_subexpr` JSON_QUERY, JSON_VALUE, JSON_EXISTS, JSON(), JSON_SCALAR, JSON_SERIALIZE; `json_table` in `table_ref`; `json_returning_clause_opt`, `json_behavior_clause_opt`, `json_wrapper_behavior`, `json_quotes_clause_opt`, `json_passing_clause_opt`, `json_table_column_definition` | no | L |
 | pg17-merge | 1 | 58 (31/25/2) | accepts PostgreSQL 17's MERGE | `merge_when_clause` (`BY SOURCE`, `BY TARGET`), `MergeStmt` `returning_clause`, `MERGE_ACTION()` | no | M |
 | pg17-ddl | 1 | 42 (22/15/5) | accepts PostgreSQL 17's DDL | `set_access_method_name` (DEFAULT), `alter_table_cmd` SET EXPRESSION, `a_expr AT LOCAL`, `DomainConstraintElem` NOT NULL in ALTER DOMAIN ADD, `operator_def_elem` without `=` | no | M |
 | utility-option-argument (fixed) | 1 | 55 (0/52/3) | accepts `*`, DEFAULT and `(list)` as an EXPLAIN/VACUUM/ANALYZE option argument | `utility_option_arg` | no | S |
@@ -89,7 +89,7 @@ L a feature's grammar.
 | partition-command-in-list (fixed) | 1 | 4 (0/2/2) | accepts ATTACH/DETACH PARTITION in a command list | `AlterTableStmt` `partition_cmd` | no | S |
 | role-name-checks (fixed) | 1 | 4 (0/1/3) | accepts `ALTER ROLE CURRENT_USER RENAME`; 42601 for 42939 | `RoleId` action, `RenameStmt` | no | S |
 | bare-column-label (fixed) | 2 | 511 (2/502/7) | refuses a keyword as a column label without AS | `target_el: a_expr BareColLabel`, `bare_label_keyword` | no | M |
-| pg17-json-names | 2 | 75 (4/66/5) | refuses PostgreSQL 16's json, json_table and the like as names | `kwlist.h`: 20 PostgreSQL 17 keywords, JSON col_name; `JsonType` | no | M (with pg17-sqljson) |
+| pg17-json-names (fixed at 16) | 2 | 75 (4/66/5) | refuses PostgreSQL 16's json, json_table and the like as names | `kwlist.h`: 20 PostgreSQL 17 keywords, JSON col_name; `JsonType` | no | M (with pg17-sqljson) |
 | drop-type-typename (fixed) | 2 | 50 (0/47/3) | refuses `DROP TYPE t[]`, `DROP DOMAIN d(3)` | `DropStmt` TYPE/DOMAIN `type_name_list` | yes, all 50 | S |
 | alter-column-optional-keyword (fixed) | 2 | 7 (0/5/2) | refuses `ALTER a SET (...)`, `ALTER a SET GENERATED` without COLUMN | `alter_table_cmd` `ALTER opt_column ColId` | no | S |
 | alter-role-no-options (fixed) | 2 | 4 (0/2/2) | refuses `ALTER ROLE r` | `AlterRoleStmt` `opt_with AlterOptRoleList` | no | S |
@@ -109,7 +109,12 @@ Totals: 1,653 statements; 30 classes. Every disagreement is in a class.
 
 ## The classes
 
-### pg17-sqljson (risk 1, 714)
+### pg17-sqljson (risk 1, 714; fixed at PostgreSQL 16)
+
+Fixed by the version switch: a PostgreSQL 16 parser (`parser.New(parser.PostgreSQL16)`)
+lexes PostgreSQL 17's twenty SQL/JSON and MERGE keywords as identifiers and `json` as
+`JSON_PG16`, an unreserved keyword, so PostgreSQL 16's own rules answer; all 714 agree
+without a grammar gate. The PostgreSQL 17 parser still accepts them, as PostgreSQL 17 does.
 
 The parser takes PostgreSQL 17's SQL/JSON query functions, constructors and
 JSON_TABLE. PostgreSQL 16 has `json_query(...)`, `json_value(...)`,
@@ -377,7 +382,9 @@ next token, PostgreSQL 16's position, but with `syntax error` where
 PostgreSQL says `UESCAPE must be followed by a simple string literal`, the
 message `uescape` is about. The `uescape` fix makes them agree.
 
-### pg17-json-names (risk 2, 75)
+### pg17-json-names (risk 2, 75; fixed at PostgreSQL 16)
+
+Fixed by the version switch, as pg17-sqljson: all 75 agree as PostgreSQL 16.
 
 The parser has PostgreSQL 17's 491 keywords, PostgreSQL 16 has 471. The
 twenty more are `json_exists`, `json_query`, `json_scalar`, `json_serialize`,

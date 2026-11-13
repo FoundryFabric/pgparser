@@ -28,11 +28,11 @@
 {"sql":"SELECT JSON_ARRAY(RETURNING text[] FORMAT JSON)"}
 {"sql":"SELECT JSON_ARRAY(RETURNING setof text)"}
 {"sql":"SELECT JSON_ARRAY(RETURNING bytea FORMAT JSON ENCODING)","code":"42601","message":"syntax error at or near \")\"","position":54}
-{"sql":"SELECT JSON_SERIALIZE('1' RETURNING bytea FORMAT JSON)","code":"42601","message":"syntax error at or near \"RETURNING\"","position":26,"class":"pg17-sqljson"}
+{"sql":"SELECT JSON_SERIALIZE('1' RETURNING bytea FORMAT JSON)","code":"42601","message":"syntax error at or near \"RETURNING\"","position":26,"pg17":"pg17-sqljson"}
 {"sql":"SELECT JSON_SCALAR(1 RETURNING text)","code":"42601","message":"syntax error at or near \"RETURNING\"","position":21}
 {"sql":"SELECT JSON('1' RETURNING text)","code":"42601","message":"syntax error at or near \"RETURNING\"","position":16}
-{"sql":"SELECT JSON_QUERY(jsonb '1', '$' RETURNING text FORMAT JSON)","code":"42601","message":"syntax error at or near \"RETURNING\"","position":33,"class":"pg17-sqljson"}
-{"sql":"SELECT JSON_VALUE(jsonb '1', '$' RETURNING text)","code":"42601","message":"syntax error at or near \"RETURNING\"","position":33,"class":"pg17-sqljson"}
+{"sql":"SELECT JSON_QUERY(jsonb '1', '$' RETURNING text FORMAT JSON)","code":"42601","message":"syntax error at or near \"RETURNING\"","position":33,"pg17":"pg17-sqljson"}
+{"sql":"SELECT JSON_VALUE(jsonb '1', '$' RETURNING text)","code":"42601","message":"syntax error at or near \"RETURNING\"","position":33,"pg17":"pg17-sqljson"}
 {"sql":"SELECT JSON_ARRAY(RETURNING json FORMAT JSON ENCODING UTF8)"}
 {"sql":"SELECT JSON_ARRAY(RETURNING bytea FORMAT JSON ENCODING utf_8)","code":"22023","message":"unrecognized JSON encoding: utf_8","position":-1}
 {"sql":"SELECT JSON_ARRAY(RETURNING bytea FORMAT JSON ENCODING Utf16)"}
