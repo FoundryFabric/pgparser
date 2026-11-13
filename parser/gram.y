@@ -4624,6 +4624,20 @@ common_func_opt_item:
 				Arg:     &nodes.Boolean{Boolval: false},
 			}
 		}
+	| EXTERNAL SECURITY DEFINER
+		{
+			$$ = &nodes.DefElem{
+				Defname: "security",
+				Arg:     &nodes.Boolean{Boolval: true},
+			}
+		}
+	| EXTERNAL SECURITY INVOKER
+		{
+			$$ = &nodes.DefElem{
+				Defname: "security",
+				Arg:     &nodes.Boolean{Boolval: false},
+			}
+		}
 	| LEAKPROOF
 		{
 			$$ = &nodes.DefElem{

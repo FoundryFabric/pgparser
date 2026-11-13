@@ -1,0 +1,8 @@
+{"sql":"create function f() returns int language sql external security invoker as 'select 1'"}
+{"sql":"create function f() returns int language sql external security definer as 'select 1'"}
+{"sql":"alter function f() external security definer"}
+{"sql":"alter procedure p() external security invoker"}
+{"sql":"create procedure p() external security definer language sql as ''"}
+{"sql":"create function f() returns int language sql external as 'select 1'","code":"42601","message":"syntax error at or near \"as\"","position":54}
+{"sql":"create function f() returns int language sql external security as 'select 1'","code":"42601","message":"syntax error at or near \"as\"","position":63}
+{"sql":"alter function f() external invoker","code":"42601","message":"syntax error at or near \"invoker\"","position":28}

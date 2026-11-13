@@ -1054,6 +1054,18 @@ changed over the corpus and test data have one of them; the five
 and a `BUFFER_USAGE_LIMIT` past int32, the integer-literal divergence.
 `testdata/func_flags_pg16.jsonl` pins 14 statements; all agree.
 
+### external-security (verdict, probes only; fixed)
+
+| statement | PostgreSQL 16 | parser |
+|---|---|---|
+| `create function f() ... external security invoker ...` | the `security` option, false | `42601 syntax error at or near "external"` |
+
+Found while pinning the function flags: PostgreSQL 16's
+`common_func_opt_item` takes the SQL standard's EXTERNAL SECURITY DEFINER
+and INVOKER as SECURITY DEFINER and INVOKER. No statement of the corpus
+has one; the 8 verdicts that changed are new probes, now PostgreSQL 16's.
+`testdata/external_security_pg16.jsonl` pins 8 statements; all agree.
+
 ## Rerunning
 
 ```
