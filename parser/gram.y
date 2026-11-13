@@ -1516,6 +1516,7 @@ CreateStmt:
 			rv := makeRangeVar($4, $<loc>4)
 			rv.(*nodes.RangeVar).Relpersistence = relpersistenceForTemp($2)
 			tn := makeTypeNameFromNameList($6).(*nodes.TypeName)
+			tn.Location = $<loc>6
 			$$ = &nodes.CreateStmt{
 				Relation:       rv.(*nodes.RangeVar),
 				TableElts:      $7,
@@ -1531,6 +1532,7 @@ CreateStmt:
 			rv := makeRangeVar($7, $<loc>7)
 			rv.(*nodes.RangeVar).Relpersistence = relpersistenceForTemp($2)
 			tn := makeTypeNameFromNameList($9).(*nodes.TypeName)
+			tn.Location = $<loc>9
 			$$ = &nodes.CreateStmt{
 				Relation:       rv.(*nodes.RangeVar),
 				TableElts:      $10,
@@ -3114,6 +3116,7 @@ alter_table_cmd:
 	| OF any_name
 		{
 			tn := makeTypeNameFromNameList($2)
+			tn.(*nodes.TypeName).Location = $<loc>2
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_AddOf),
 				Def:     tn,
@@ -6697,6 +6700,7 @@ SeqOptList:
 SeqOptElem:
 	AS SimpleTypename
 		{
+			$2.Location = $<loc>2
 			$$ = makeDefElem("as", $2, $<loc>1)
 		}
 	| CACHE NumericOnly
@@ -10016,6 +10020,7 @@ func_expr_common_subexpr:
 		}
 	| XMLSERIALIZE '(' document_or_content a_expr AS SimpleTypename xml_indent_option ')'
 		{
+			$6.Location = $<loc>6
 			$$ = &nodes.XmlSerialize{
 				Xmloption: nodes.XmlOptionType($3),
 				Expr:      $4,

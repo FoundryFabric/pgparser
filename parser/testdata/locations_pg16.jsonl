@@ -40,7 +40,7 @@
 {"sql":"GRANT regress_du_role0 TO regress_du_admin WITH ADMIN TRUE","locations":{"DefElem":[48]}}
 {"sql":"CREATE SEQUENCE sequence_testx CACHE 0","locations":{"DefElem":[31]}}
 {"sql":"CREATE SEQUENCE sequence_testx AS text","locations":{"DefElem":[31]}}
-{"sql":"CREATE SEQUENCE sequence_test7 AS bigint","locations":{"DefElem":[31]}}
+{"sql":"CREATE SEQUENCE sequence_test7 AS bigint","locations":{"DefElem":[31],"TypeName":[34]}}
 {"sql":"CREATE SUBSCRIPTION regress_testsub CONNECTION 'testconn' PUBLICATION testpub WITH (create_slot)","locations":{"DefElem":[84]}}
 {"sql":"CREATE SUBSCRIPTION regress_addr_sub CONNECTION '' PUBLICATION bar WITH (connect = false, slot_name = NONE)","locations":{"DefElem":[73,90]}}
 {"sql":"CREATE SUBSCRIPTION regress_testsub2 CONNECTION 'dbname=regress_doesnotexist' PUBLICATION foo WITH (connect = false)","locations":{"DefElem":[100]}}
@@ -313,7 +313,7 @@
 {"sql":"SELECT id FROM test_tablesample TABLESAMPLE SYSTEM (200)","locations":{"RangeTableSample":[44]}}
 {"sql":"SELECT xmlserialize(document 'bad' as text)","locations":{"XmlSerialize":[7]}}
 {"sql":"SELECT xmlserialize(CONTENT  '' AS text INDENT)","locations":{"XmlSerialize":[7]}}
-{"sql":"SELECT xmlserialize(content 'good' as char(10))","locations":{"XmlSerialize":[7]}}
+{"sql":"SELECT xmlserialize(content 'good' as char(10))","locations":{"XmlSerialize":[7],"TypeName":[38]}}
 {"sql":"SELECT xmlelement(name element, xmlelement(name nested, 'stuff'))","locations":{"XmlExpr":[7,32]}}
 {"sql":"SELECT xmlelement(name employee, xmlforest(name, age, salary as pay)) FROM emp","locations":{"XmlExpr":[7,33]}}
 {"sql":"SELECT xmlroot(xmlroot(xml '<foo/>', version '1.0'), version '1.1', standalone no)","locations":{"XmlExpr":[7,15]}}
@@ -366,3 +366,18 @@
 {"sql":"select * from t order by a using operator(pg_catalog.<) nulls last, b using >=, c using ~<~","locations":{"SortBy":[33,76,88]}}
 {"sql":"select array_agg(a order by b using <) from t","locations":{"SortBy":[36]}}
 {"sql":"select rank() over (order by a using <) from t","locations":{"SortBy":[37]}}
+{"sql":"ALTER SEQUENCE sequence_test5 AS smallint","locations":{"TypeName":[33]}}
+{"sql":"CREATE SEQUENCE sequence_test6 AS smallint","locations":{"TypeName":[34]}}
+{"sql":"CREATE TABLE persons5 OF stuff","locations":{"TypeName":[25]}}
+{"sql":"CREATE TABLE ttable1 OF nothing","locations":{"TypeName":[24]}}
+{"sql":"CREATE TABLE fail_part OF mytype","locations":{"TypeName":[26]}}
+{"sql":"ALTER TABLE tt1 OF tt_t0","locations":{"TypeName":[19]}}
+{"sql":"ALTER TABLE tt2 OF tt_t0","locations":{"TypeName":[19]}}
+{"sql":"ALTER TABLE tt3 OF tt_t0","locations":{"TypeName":[19]}}
+{"sql":"SELECT xmlserialize(content data as character varying(20)) FROM xmltest","locations":{"TypeName":[36]}}
+{"sql":"CREATE VIEW xmlview8 AS SELECT xmlserialize(content 'good' as char(10))","locations":{"TypeName":[62]}}
+{"sql":"create sequence s as double precision","locations":{"TypeName":[21]}}
+{"sql":"alter sequence s as int","locations":{"TypeName":[20]}}
+{"sql":"select xmlserialize(document x as varchar(3) indent), xmlserialize(content x as interval(2))","locations":{"TypeName":[34,80]}}
+{"sql":"create table if not exists t of s.ty","locations":{"TypeName":[32]}}
+{"sql":"alter table t of ty","locations":{"TypeName":[17]}}

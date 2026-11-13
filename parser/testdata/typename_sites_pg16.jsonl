@@ -783,7 +783,7 @@
 {"sql": "alter function f(setof int4) owner to postgres", "pg16After": "42883 function f(integer) does not exist", "types": [{"names": ["int4"], "setof": true, "location": 23}]}
 {"sql": "alter function f(a.b() owner to postgres", "syntaxError": "syntax error at or near \")\"", "position": 21}
 {"sql": "create sequence s as a.b", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 21}], "pg16Position": 21}
-{"sql": "create sequence s as double precision", "pg16After": "22023 sequence type must be smallint, integer, or bigint", "types": [{"names": ["pg_catalog", "float8"], "location": -1}]}
+{"sql": "create sequence s as double precision", "pg16After": "22023 sequence type must be smallint, integer, or bigint", "types": [{"names": ["pg_catalog", "float8"], "location": 21}]}
 {"sql": "create sequence s as int4[]", "syntaxError": "syntax error at or near \"[\"", "position": 25}
 {"sql": "create sequence s as a.b[1]", "syntaxError": "syntax error at or near \"[\"", "position": 24}
 {"sql": "create sequence s as a.b%type", "syntaxError": "syntax error at or near \"%\"", "position": 24}
@@ -810,7 +810,7 @@
 {"sql": "alter domain a.b%type owner to postgres", "syntaxError": "syntax error at or near \"%\"", "position": 16}
 {"sql": "alter domain setof int4 owner to postgres", "syntaxError": "syntax error at or near \"int4\"", "position": 19}
 {"sql": "alter domain a.b( owner to postgres", "syntaxError": "syntax error at or near \"(\"", "position": 16}
-{"sql": "create table t of a.b", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": -1}]}
+{"sql": "create table t of a.b", "pg16After": "3F000 schema \"a\" does not exist", "types": [{"names": ["a", "b"], "location": 18}]}
 {"sql": "create table t of double precision", "syntaxError": "syntax error at or near \"precision\"", "position": 25}
 {"sql": "create table t of int4[]", "syntaxError": "syntax error at or near \"[\"", "position": 22}
 {"sql": "create table t of a.b[1]", "syntaxError": "syntax error at or near \"[\"", "position": 21}
