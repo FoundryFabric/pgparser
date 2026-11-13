@@ -8371,6 +8371,7 @@ sortby:
 				Node:        $1,
 				SortbyDir:   nodes.SortByDir($2),
 				SortbyNulls: nodes.SortByNulls($3),
+				Location:    -1,
 			}
 		}
 	;

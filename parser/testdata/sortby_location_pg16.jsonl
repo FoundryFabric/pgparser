@@ -1,0 +1,12 @@
+{"sql":"select * from t order by a"}
+{"sql":"select * from t order by a desc nulls first, b asc"}
+{"sql":"select * from t order by a using <"}
+{"sql":"select * from t order by a using operator(pg_catalog.<) nulls last"}
+{"sql":"select rank() over (order by a) from t"}
+{"sql":"select array_agg(a order by b desc) from t"}
+{"sql":"select percentile_cont(0.5) within group (order by a) from t"}
+{"sql":"select json_agg(a order by b) from t"}
+{"sql":"select json_arrayagg(a order by b) from t"}
+{"sql":"select * from t order by","code":"42601","message":"syntax error at end of input","position":24}
+{"sql":"select * from t order by a using","code":"42601","message":"syntax error at end of input","position":32}
+{"sql":"select * from t order by a asc desc","code":"42601","message":"syntax error at or near \"desc\"","position":31}

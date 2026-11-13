@@ -1140,6 +1140,19 @@ trees that changed over the corpus and test data are those GRANT and
 REVOKE statements. `testdata/grant_name_pg16.jsonl` pins 18 statements;
 all agree.
 
+### sortby-location (overplaced 2824, 438, 138 and 2; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `select * from t order by pk` | `SortBy` `location` -1 | 0 |
+
+A SortBy's location is its USING operator's; PostgreSQL 16's `sortby`
+sets -1 without one, and the parser left Go's 0, which is a position. The
+3,458 trees that changed over the corpus and test data have an ORDER BY
+without USING. (USING's location is still unset, one of the `unlocated`
+classes.) `testdata/sortby_location_pg16.jsonl` pins 12 statements; all
+agree.
+
 ## Rerunning
 
 ```
