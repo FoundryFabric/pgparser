@@ -507,8 +507,9 @@ func TestAlterTableRenameConstraint(t *testing.T) {
 	if stmt.RenameType != nodes.OBJECT_TABCONSTRAINT {
 		t.Errorf("expected OBJECT_TABCONSTRAINT, got %d", stmt.RenameType)
 	}
-	if stmt.RelationType != nodes.OBJECT_TABLE {
-		t.Errorf("expected RelationType OBJECT_TABLE, got %d", stmt.RelationType)
+	// PostgreSQL 16 leaves relationType unset for a constraint.
+	if stmt.RelationType != 0 {
+		t.Errorf("expected RelationType unset (0), got %d", stmt.RelationType)
 	}
 	if stmt.Subname != "old_con" {
 		t.Errorf("expected old name 'old_con', got %q", stmt.Subname)

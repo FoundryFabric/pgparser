@@ -906,6 +906,19 @@ consumer reading the flag saw a difference. The 10 trees that changed over
 the corpus and test data are those statements.
 `testdata/alter_enum_pg16.jsonl` pins 12 statements; all agree.
 
+### rename-constraint-relation-type (tree 13; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `alter table t rename constraint c to d` | `relationType` 0 (unset) | `OBJECT_TABLE` |
+
+PostgreSQL 16's grammar sets `relationType` for RENAME COLUMN and RENAME
+ATTRIBUTE only; a table constraint's rename leaves it unset. The 13 trees
+that changed over the corpus and test data are those statements; the test
+`TestAlterTableRenameConstraint` expected `OBJECT_TABLE` and now expects
+it unset. `testdata/rename_constraint_pg16.jsonl` pins 10 statements; all
+agree.
+
 ## Rerunning
 
 ```

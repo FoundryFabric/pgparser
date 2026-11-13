@@ -3200,11 +3200,10 @@ RenameStmt:
 	| ALTER TABLE relation_expr RENAME CONSTRAINT name TO name
 		{
 			$$ = &nodes.RenameStmt{
-				RenameType:   nodes.OBJECT_TABCONSTRAINT,
-				RelationType: nodes.OBJECT_TABLE,
-				Relation:     $3.(*nodes.RangeVar),
-				Subname:      $6,
-				Newname:      $8,
+				RenameType: nodes.OBJECT_TABCONSTRAINT,
+				Relation:   $3.(*nodes.RangeVar),
+				Subname:    $6,
+				Newname:    $8,
 			}
 		}
 	| ALTER TABLE IF_P EXISTS relation_expr RENAME COLUMN ColId TO name
@@ -3232,12 +3231,11 @@ RenameStmt:
 	| ALTER TABLE IF_P EXISTS relation_expr RENAME CONSTRAINT name TO name
 		{
 			$$ = &nodes.RenameStmt{
-				RenameType:   nodes.OBJECT_TABCONSTRAINT,
-				RelationType: nodes.OBJECT_TABLE,
-				Relation:     $5.(*nodes.RangeVar),
-				Subname:      $8,
-				Newname:      $10,
-				MissingOk:    true,
+				RenameType: nodes.OBJECT_TABCONSTRAINT,
+				Relation:   $5.(*nodes.RangeVar),
+				Subname:    $8,
+				Newname:    $10,
+				MissingOk:  true,
 			}
 		}
 	/* RENAME INDEX */
