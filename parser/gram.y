@@ -1796,7 +1796,7 @@ TableLikeOptionList:
 	;
 
 TableLikeOption:
-	ALL				{ $$ = 0xFFFFFFFF }
+	ALL				{ $$ = 0x7FFFFFFF } /* CREATE_TABLE_LIKE_ALL, PG_INT32_MAX */
 	| COMMENTS		{ $$ = 1 }
 	| COMPRESSION	{ $$ = 2 }
 	| CONSTRAINTS	{ $$ = 4 }
@@ -2722,9 +2722,15 @@ alter_table_cmd:
 			if !checkConstraintAttrs(pglex, $4, "FOREIGN KEY", true, false, false) {
 				return 1
 			}
+			/* PostgreSQL 16 leaves its location unset. */
+			c := &nodes.Constraint{
+				Contype: nodes.CONSTR_FOREIGN,
+				Conname: $3,
+			}
+			applyConstraintAttrs(c, $4)
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_AlterConstraint),
-				Name:    $3,
+				Def:     c,
 			}
 		}
 	/* INHERIT / NO INHERIT */
@@ -2940,25 +2946,28 @@ alter_table_cmd:
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_ReplicaIdentity),
+				Def:     &nodes.ReplicaIdentityStmt{IdentityType: nodes.REPLICA_IDENTITY_DEFAULT},
 			}
 		}
 	| REPLICA IDENTITY_P FULL
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_ReplicaIdentity),
+				Def:     &nodes.ReplicaIdentityStmt{IdentityType: nodes.REPLICA_IDENTITY_FULL},
 			}
 		}
 	| REPLICA IDENTITY_P NOTHING
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_ReplicaIdentity),
+				Def:     &nodes.ReplicaIdentityStmt{IdentityType: nodes.REPLICA_IDENTITY_NOTHING},
 			}
 		}
 	| REPLICA IDENTITY_P USING INDEX name
 		{
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_ReplicaIdentity),
-				Name:    $5,
+				Def:     &nodes.ReplicaIdentityStmt{IdentityType: nodes.REPLICA_IDENTITY_INDEX, Name: $5},
 			}
 		}
 	/* SET STORAGE */
@@ -4178,6 +4187,10 @@ ViewStmt:
 	| CREATE OptTemp RECURSIVE VIEW qualified_name '(' columnList ')' opt_reloptions
 	AS SelectStmt opt_check_option
 		{
+			if $12 != VIEW_CHECK_OPTION_NONE {
+				grammarError(pglex, "0A000", "WITH CHECK OPTION not supported on recursive views", "", $<loc>12)
+				return 1
+			}
 			rv := makeRangeVar($5, $<loc>5).(*nodes.RangeVar)
 			rv.Relpersistence = relpersistenceForTemp($2)
 			/* Create a WITH RECURSIVE CTE wrapper */
@@ -4206,12 +4219,15 @@ ViewStmt:
 				Aliases:         $7,
 				Options:         $9,
 				Query:           sel,
-				WithCheckOption: int($12),
 			}
 		}
 	| CREATE OR REPLACE OptTemp RECURSIVE VIEW qualified_name '(' columnList ')' opt_reloptions
 	AS SelectStmt opt_check_option
 		{
+			if $14 != VIEW_CHECK_OPTION_NONE {
+				grammarError(pglex, "0A000", "WITH CHECK OPTION not supported on recursive views", "", $<loc>14)
+				return 1
+			}
 			rv := makeRangeVar($7, $<loc>7).(*nodes.RangeVar)
 			rv.Relpersistence = relpersistenceForTemp($4)
 			cte := &nodes.CommonTableExpr{
@@ -4240,13 +4256,12 @@ ViewStmt:
 				Options:         $11,
 				Query:           sel,
 				Replace:         true,
-				WithCheckOption: int($14),
 			}
 		}
 	;
 
 opt_check_option:
-	WITH CHECK OPTION              { $$ = int64(VIEW_CHECK_OPTION_LOCAL) }
+	WITH CHECK OPTION              { $$ = int64(VIEW_CHECK_OPTION_CASCADED) }
 	| WITH CASCADED CHECK OPTION   { $$ = int64(VIEW_CHECK_OPTION_CASCADED) }
 	| WITH LOCAL CHECK OPTION      { $$ = int64(VIEW_CHECK_OPTION_LOCAL) }
 	| /* EMPTY */                  { $$ = int64(VIEW_CHECK_OPTION_NONE) }
@@ -4275,13 +4290,15 @@ CreateFunctionStmt:
 	| CREATE opt_or_replace FUNCTION func_name func_args_with_defaults
 	RETURNS TABLE '(' table_func_column_list ')' opt_createfunc_opt_list opt_routine_body
 		{
-			/* RETURNS TABLE(...) adds table columns to parameter list */
-			params := concatLists($5, $9)
+			params, ok := mergeTableFuncParameters(pglex, $5, $9)
+			if !ok {
+				return 1
+			}
 			n := &nodes.CreateFunctionStmt{
 				IsOrReplace: $2,
 				Funcname:    $4,
 				Parameters:  params,
-				ReturnType:  &nodes.TypeName{Names: makeFuncName("pg_catalog", "record"), Location: -1},
+				ReturnType:  tableFuncTypeName($9, $<loc>7),
 				Options:     $11,
 				SqlBody:     $12,
 			}
@@ -4302,15 +4319,14 @@ CreateFunctionStmt:
 	| CREATE opt_or_replace PROCEDURE func_name func_args_with_defaults
 	opt_createfunc_opt_list opt_routine_body
 		{
-			n := &nodes.CreateFunctionStmt{
+			$$ = &nodes.CreateFunctionStmt{
+				IsProcedure: true,
 				IsOrReplace: $2,
 				Funcname:    $4,
 				Parameters:  $5,
 				Options:     $6,
 				SqlBody:     $7,
 			}
-			n.Options = appendList(n.Options, &nodes.DefElem{Defname: "isProcedure", Arg: &nodes.Integer{Ival: 1}})
-			$$ = n
 		}
 	;
 
@@ -10179,17 +10195,24 @@ func_expr_common_subexpr:
 		}
 	| JSON_ARRAY '(' select_no_parens json_format_clause_opt json_returning_clause_opt ')'
 		{
-			$$ = &nodes.JsonArrayQueryConstructor{
-				Query:  $3,
-				Output: asJsonOutput($5),
-				Location: -1,
+			/* JSON_ARRAY leaves out a query's NULLs. */
+			n := &nodes.JsonArrayQueryConstructor{
+				Query:        $3,
+				Output:       asJsonOutput($5),
+				AbsentOnNull: true,
+				Location:     -1,
 			}
+			if $4 != nil {
+				n.Format = $4.(*nodes.JsonFormat)
+			}
+			$$ = n
 		}
 	| JSON_ARRAY '(' json_returning_clause_opt ')'
 		{
 			$$ = &nodes.JsonArrayConstructor{
-				Output:   asJsonOutput($3),
-				Location: -1,
+				Output:       asJsonOutput($3),
+				AbsentOnNull: true,
+				Location:     -1,
 			}
 		}
 	| JSON '(' json_value_expr json_key_uniqueness_constraint_opt ')'
@@ -10620,14 +10643,21 @@ json_format_clause:
 		}
 	| FORMAT_LA JSON ENCODING name
 		{
+			var enc nodes.JsonEncoding
 			switch downcase($4) {
-			case "utf8", "utf16", "utf32":
+			case "utf8":
+				enc = nodes.JS_ENC_UTF8
+			case "utf16":
+				enc = nodes.JS_ENC_UTF16
+			case "utf32":
+				enc = nodes.JS_ENC_UTF32
 			default:
 				grammarError(pglex, "22023", "unrecognized JSON encoding: "+$4, "", -1)
 				return 1
 			}
 			$$ = &nodes.JsonFormat{
 				FormatType: nodes.JS_FORMAT_JSON,
+				Encoding:   enc,
 				Location:   -1,
 			}
 		}
@@ -13879,11 +13909,16 @@ CreateTrigStmt:
 			if len($7.Items) > 1 && $7.Items[1] != nil {
 				columns = $7.Items[1].(*nodes.List)
 			}
+			if $2 {
+				grammarError(pglex, "0A000", "CREATE OR REPLACE CONSTRAINT TRIGGER is not supported", "", -1)
+				return 1
+			}
 			casBits := $11
 			if !checkConstraintAttrs(pglex, casBits, "TRIGGER", true, false, false) {
 				return 1
 			}
-			deferrable := (casBits & int64(nodes.CAS_DEFERRABLE)) != 0
+			/* INITIALLY DEFERRED implies DEFERRABLE. */
+			deferrable := (casBits & int64(nodes.CAS_DEFERRABLE|nodes.CAS_INITIALLY_DEFERRED)) != 0
 			initdeferred := (casBits & int64(nodes.CAS_INITIALLY_DEFERRED)) != 0
 			var constrrel *nodes.RangeVar
 			if $10 != nil {
@@ -15216,7 +15251,7 @@ AlterPublicationStmt:
 			$$ = &nodes.AlterPublicationStmt{
 				Pubname:    $3,
 				Pubobjects: objs,
-				Action:     nodes.DEFELEM_ADD,
+				Action:     nodes.AP_AddObjects,
 			}
 		}
 	| ALTER PUBLICATION name SET pub_obj_list
@@ -15228,7 +15263,7 @@ AlterPublicationStmt:
 			$$ = &nodes.AlterPublicationStmt{
 				Pubname:    $3,
 				Pubobjects: objs,
-				Action:     nodes.DEFELEM_SET,
+				Action:     nodes.AP_SetObjects,
 			}
 		}
 	| ALTER PUBLICATION name DROP pub_obj_list
@@ -15240,7 +15275,7 @@ AlterPublicationStmt:
 			$$ = &nodes.AlterPublicationStmt{
 				Pubname:    $3,
 				Pubobjects: objs,
-				Action:     nodes.DEFELEM_DROP,
+				Action:     nodes.AP_DropObjects,
 			}
 		}
 	;
@@ -18133,10 +18168,7 @@ func makeStringConst(str string, location nodes.ParseLoc) nodes.Node {
 }
 
 func makeBoolAConst(val int64, location nodes.ParseLoc) nodes.Node {
-	if val != 0 {
-		return &nodes.A_Const{Val: &nodes.String{Str: "t"}, Location: location}
-	}
-	return &nodes.A_Const{Val: &nodes.String{Str: "f"}, Location: location}
+	return &nodes.A_Const{Val: &nodes.Boolean{Boolval: val != 0}, Location: location}
 }
 
 func makeNullAConst(location nodes.ParseLoc) nodes.Node {
@@ -18258,6 +18290,35 @@ func makeDefElem(name string, arg nodes.Node) nodes.Node {
 // makeFuncName converts a function name string to a *nodes.List of String nodes.
 // With one argument, creates an unqualified name.
 // With two arguments, creates a schema-qualified name (e.g. "pg_catalog", "func").
+// mergeTableFuncParameters is PostgreSQL 16's: RETURNS TABLE's columns
+// follow the function's arguments, which may not be OUT or INOUT. Otherwise
+// it raises the error and reports false.
+func mergeTableFuncParameters(lex pgLexer, args, columns *nodes.List) (*nodes.List, bool) {
+	if args != nil {
+		for _, a := range args.Items {
+			if m := a.(*nodes.FunctionParameter).Mode; m == nodes.FUNC_PARAM_OUT || m == nodes.FUNC_PARAM_INOUT {
+				grammarError(lex, codeSyntaxError, "OUT and INOUT arguments aren't allowed in TABLE functions", "", -1)
+				return nil, false
+			}
+		}
+	}
+	return concatLists(args, columns), true
+}
+
+// tableFuncTypeName is PostgreSQL 16's TableFuncTypeName, located at TABLE:
+// RETURNS TABLE returns a set of its one column's type, else a set of
+// record. The one column's TypeName is copied; its lists are shared with
+// the column's.
+func tableFuncTypeName(columns *nodes.List, loc nodes.ParseLoc) *nodes.TypeName {
+	tn := nodes.TypeName{Names: makeFuncName("pg_catalog", "record")}
+	if len(columns.Items) == 1 {
+		tn = *columns.Items[0].(*nodes.FunctionParameter).ArgType
+	}
+	tn.Setof = true
+	tn.Location = loc
+	return &tn
+}
+
 func makeFuncName(parts ...string) *nodes.List {
 	items := make([]nodes.Node, len(parts))
 	for i, p := range parts {
@@ -18639,9 +18700,10 @@ type pubObj struct {
 
 // preprocessPubobjList is PostgreSQL 16's preprocess_pubobj_list: the first
 // object is a TABLE or TABLES IN SCHEMA, and an object without one takes the
-// kind before it. A table is not CURRENT_SCHEMA; a schema is a bare name or
-// CURRENT_SCHEMA, with no column list or WHERE clause. Otherwise it raises the
-// error at the object and reports false.
+// kind before it. A table is not CURRENT_SCHEMA; a schema is a bare name,
+// which becomes the object's name, or CURRENT_SCHEMA, with no column list or
+// WHERE clause. Otherwise it raises the error at the object and reports
+// false.
 func preprocessPubobjList(lex pgLexer, objs []pubObj) (*nodes.List, bool) {
 	if objs[0].spec.Pubobjtype == nodes.PUBLICATIONOBJ_CONTINUATION {
 		grammarError(lex, codeSyntaxError, "invalid publication object list", "", objs[0].loc)
@@ -18662,13 +18724,19 @@ func preprocessPubobjList(lex pgLexer, objs []pubObj) (*nodes.List, bool) {
 			if pt == nil {
 				message = "invalid table name"
 			}
+			o.spec.Pubobjtype = kind
 		case pt == nil:
+			o.spec.Pubobjtype = nodes.PUBLICATIONOBJ_TABLES_IN_CUR_SCHEMA
 		case pt.WhereClause != nil:
 			message = "WHERE clause not allowed for schema"
 		case pt.Columns != nil:
 			message = "column specification not allowed for schema"
 		case !o.name:
 			message = "invalid schema name"
+		default:
+			o.spec.Pubobjtype = nodes.PUBLICATIONOBJ_TABLES_IN_SCHEMA
+			o.spec.Name = pt.Relation.Relname
+			o.spec.Pubtable = nil
 		}
 		if message != "" {
 			grammarError(lex, codeSyntaxError, message, "", o.loc)

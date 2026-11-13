@@ -1,0 +1,42 @@
+{"sql":"select json_array()"}
+{"sql":"select json_array(returning text)"}
+{"sql":"select json_array(returning json)"}
+{"sql":"select json_array(returning jsonb)"}
+{"sql":"select json_array(returning bytea format json)"}
+{"sql":"select json_array(1, 2)"}
+{"sql":"select json_array(1, null)"}
+{"sql":"select json_array(1, null null on null)"}
+{"sql":"select json_array(1, null absent on null)"}
+{"sql":"select json_array(1, 2 returning text)"}
+{"sql":"select json_array(1, 2 absent on null returning jsonb)"}
+{"sql":"select json_array(1 format json, '2' format json encoding utf8)"}
+{"sql":"select json_array(select 1)"}
+{"sql":"select json_array(select 1 returning text)"}
+{"sql":"select json_array(select 1 format json)"}
+{"sql":"select json_array(select 1 format json returning jsonb)"}
+{"sql":"select json_array(select '1' format json encoding utf8)"}
+{"sql":"select json_array(select * from t)"}
+{"sql":"select json_array(values (1), (2))"}
+{"sql":"select json_array(with x as (select 1) select * from x)"}
+{"sql":"select json_array(select 1 null on null)","code":"42601","message":"syntax error at or near \"on\"","position":32}
+{"sql":"select json_array(select 1 absent on null)","code":"42601","message":"syntax error at or near \"on\"","position":34}
+{"sql":"select json_array(table t)"}
+{"sql":"select json_array((select 1))"}
+{"sql":"select json_array(select 1 union select 2)"}
+{"sql":"select json_arrayagg(a)"}
+{"sql":"select json_arrayagg(a null on null)"}
+{"sql":"select json_arrayagg(a absent on null)"}
+{"sql":"select json_arrayagg(a order by a returning jsonb)"}
+{"sql":"select json_object()"}
+{"sql":"select json_object('a': 1)"}
+{"sql":"select json_object('a': null absent on null)"}
+{"sql":"select json_object('a' value 1 null on null with unique keys)"}
+{"sql":"select json_objectagg(k: v)"}
+{"sql":"select json_array(1,)","code":"42601","message":"syntax error at or near \")\"","position":20}
+{"sql":"select json_array(null on null)","code":"42601","message":"syntax error at or near \"on\"","position":23}
+{"sql":"select json_array(absent on null)","code":"42601","message":"syntax error at or near \"on\"","position":25}
+{"sql":"select json_array(select 1 format json encoding utf32)"}
+{"sql":"select json_array(select 1 format json encoding utf16)"}
+{"sql":"select json_array(select 1 format json encoding UTF8)"}
+{"sql":"select json_array('1' format json encoding utf16)"}
+{"sql":"select json_array(select 1 format json encoding latin1)","code":"22023","message":"unrecognized JSON encoding: latin1","position":-1}

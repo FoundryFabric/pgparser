@@ -173,8 +173,8 @@ func TestAlterPublicationAddTable(t *testing.T) {
 	if stmt.Pubobjects == nil || stmt.Pubobjects.Len() != 1 {
 		t.Fatalf("expected 1 pub object, got %d", stmt.Pubobjects.Len())
 	}
-	if stmt.Action != nodes.DEFELEM_ADD {
-		t.Errorf("expected action DEFELEM_ADD, got %d", stmt.Action)
+	if stmt.Action != nodes.AP_AddObjects {
+		t.Errorf("expected action AP_AddObjects, got %d", stmt.Action)
 	}
 }
 
@@ -186,7 +186,7 @@ func TestAlterPublicationDropTable(t *testing.T) {
 		t.Fatalf("Parse error: %v", err)
 	}
 	stmt := result.Items[0].(*nodes.AlterPublicationStmt)
-	if stmt.Action != nodes.DEFELEM_DROP {
-		t.Errorf("expected action DEFELEM_DROP, got %d", stmt.Action)
+	if stmt.Action != nodes.AP_DropObjects {
+		t.Errorf("expected action AP_DropObjects, got %d", stmt.Action)
 	}
 }

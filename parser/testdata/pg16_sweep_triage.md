@@ -683,6 +683,183 @@ recursive form, and `json_table_column_option_el: DEFAULT b_expr`, `PATH
 b_expr`, `NOT NULL_P` and `NULL_P`. They are deleted, with their `%type`
 entries; no tree or verdict changed.
 
+## Tree meaning
+
+Where both accept, `pg16sweep libpg` compares the parser's tree with
+libpg_query 16's over the whole corpus. These classes are trees whose
+meaning differed, not only their shape or locations; each is fixed with its
+own test data, and the corpus comparison after each fix shows its class gone
+and no other class changed.
+
+### view-check-option (tree 18, verdict 3; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `create view v as select 1 with check option` | `withCheckOption` 2 (CASCADED) | 1 (LOCAL) |
+| `create recursive view v (a) as select 1 with check option` | `0A000 WITH CHECK OPTION not supported on recursive views` at WITH | accepted, the option dropped |
+
+Plain `WITH CHECK OPTION` is CASCADED, as the SQL standard and PostgreSQL 16
+have it; a recursive view refuses any check option. The 33 trees that
+changed over the corpus and test data are statements with a plain `WITH
+CHECK OPTION`. `testdata/view_check_option_pg16.jsonl` pins 35 statements;
+all agree.
+
+### returns-table-setof (tree 31, 6 and 1; verdict 2; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `create function f() returns table (a int) ...` | return type `pg_catalog.int4`, setof, at TABLE | `pg_catalog.record`, not setof, no location |
+| `create function f() returns table (a int, b text) ...` | `pg_catalog.record`, setof, at TABLE | `pg_catalog.record`, not setof, no location |
+| `create function f(out x int) returns table (a int) ...` | `42601 OUT and INOUT arguments aren't allowed in TABLE functions` | accepted |
+
+RETURNS TABLE's return type is PostgreSQL 16's `TableFuncTypeName`: a set
+of the one column's type (its typmods and array bounds too), else a set of
+record, located at TABLE; and its arguments are merged as
+`mergeTableFuncParameters` merges them, refusing OUT and INOUT. This clears
+the `CreateFunctionStmt.returntype/TypeName.setof`, `TypeName.names/String.sval`,
+`returntype/TypeName.typmods` and `returntype/TypeName.location` classes. The
+41 trees that changed over the corpus and test data are RETURNS TABLE
+statements. `testdata/typename_sites_pg16.jsonl` (6 rows) and
+`testdata/generictype_pg16.json` (3 rows) had recorded the record return
+type and now record the column's, as PostgreSQL 16's analysis errors in
+those rows (`return type mismatch in function declared to return
+integer[]`) show. `testdata/returns_table_pg16.jsonl` pins 39 statements;
+all agree.
+
+### json-array-absent-on-null (tree 15 and 10; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `select json_array(returning text)` | `absent_on_null` true | false |
+| `select json_array(select 1)` | `absent_on_null` true | false |
+| `select json_array(select 1 format json encoding utf8)` | format JSON, encoding UTF8 | no format |
+| `select json_array('1' format json encoding utf16)` | encoding UTF16 | encoding default |
+
+JSON_ARRAY leaves out NULLs unless told otherwise; the two forms without a
+NULL clause now say so. The query form kept no FORMAT clause, and FORMAT
+JSON ENCODING kept no encoding; both are kept now. A missing FORMAT is
+still nil where libpg_query has a default `JsonFormat` (the
+`JsonArrayQueryConstructor.format` and `JsonValueExpr.format` presence
+classes), which is the same meaning. The 53 trees that changed over the
+corpus and test data are JSON_ARRAY statements or have an encoding.
+`testdata/json_array_pg16.jsonl` pins 42 statements; all agree.
+
+### publication-action-and-objects (tree 152, 15, 4 and 4; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `alter publication p add table t` | `action` `AP_AddObjects` | `DEFELEM_ADD` |
+| `alter publication p drop table t, u` | `u` is `PUBLICATIONOBJ_TABLE` | `PUBLICATIONOBJ_CONTINUATION` |
+| `create publication p for tables in schema s, u` | `u` is `PUBLICATIONOBJ_TABLES_IN_SCHEMA` named `u` | `PUBLICATIONOBJ_CONTINUATION`, a `PublicationTable` `u` |
+
+The action was not mixed up: ADD, SET and DROP were `DEFELEM_ADD`,
+`DEFELEM_SET` and `DEFELEM_DROP`, so the comparison, which matches enums by
+member name, saw 2 for libpg_query's `AP_AddObjects` 0. But PostgreSQL 16's
+field is an `AlterPublicationAction`, which the nodes package already
+declares; `AlterPublicationStmt.Action` is now one (ALTER PUBLICATION SET
+with options keeps the zero value, `AP_AddObjects`, as PostgreSQL leaves
+it). The object list was checked as `preprocess_pubobj_list` checks it, but
+an object after the first kept `PUBLICATIONOBJ_CONTINUATION`, and a schema
+after TABLES IN SCHEMA stayed a table: the kind before it is now written
+into it, a bare name becomes the schema's `Name`, and CURRENT_SCHEMA becomes
+`PUBLICATIONOBJ_TABLES_IN_CUR_SCHEMA`. The 421 trees that changed over the
+corpus and test data are ALTER PUBLICATION statements and publication
+object lists with more than one object. `testdata/publication_action_pg16.jsonl`
+pins 42 statements; all agree. `alter publication p add tables in schema s,
+only u` is left out of it: PostgreSQL 16 raises `invalid schema name` at the
+object's unset location 0, which the oracle's `select 1/0;` prefix turns
+into no position; libpg_query, and `publication_object_pg16.jsonl`, have 0.
+
+### table-like-all (tree 9; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `create table t (like s including all)` | `options` 2147483647 | 4294967295 |
+| `create table t (like s including all excluding comments)` | 2147483646 | 4294967294 |
+
+INCLUDING ALL is PostgreSQL 16's `CREATE_TABLE_LIKE_ALL`, `PG_INT32_MAX`; it
+was every bit of the `uint32`. Each option's bit was set either way, so only
+a consumer comparing with `CREATE_TABLE_LIKE_ALL` saw a difference. The 19
+trees that changed over the corpus and test data have INCLUDING ALL or
+EXCLUDING ALL. `testdata/table_like_pg16.jsonl` pins 21 statements; all
+agree.
+
+### constraint-trigger-deferrable (tree 4, verdict 3; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `create constraint trigger t after insert on r initially deferred for each row ...` | `deferrable` true, `initdeferred` true | `deferrable` false |
+| `create or replace constraint trigger t ...` | `0A000 CREATE OR REPLACE CONSTRAINT TRIGGER is not supported` | accepted |
+
+INITIALLY DEFERRED implies DEFERRABLE, as PostgreSQL 16's `processCASbits`
+has it and the parser's constraints already had it. OR REPLACE is refused
+before the attributes are checked. The 11 trees that changed over the
+corpus and test data are INITIALLY DEFERRED constraint triggers, and the 3
+verdicts OR REPLACE ones. `testdata/constraint_trigger_pg16.jsonl` pins 25
+statements; all agree.
+
+### bool-const (tree 10, 10, 24 and 34; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `with recursive t ... cycle a set c using p select ...` | marks `A_Const` boolean true and false | `A_Const` strings `'t'` and `'f'` |
+| `select xmlparse(content '<a/>')` | second argument `A_Const` boolean false | `A_Const` string `'f'` |
+
+`makeBoolAConst` made a string constant, which PostgreSQL before 15 cast to
+boolean; PostgreSQL 16's makes a `Boolean`. Its only callers are a CYCLE
+clause without TO and DEFAULT and XMLPARSE's whitespace option, so this one
+change clears the four classes of both. The 49 trees that changed over the
+corpus and test data are those statements. `testdata/bool_const_pg16.jsonl`
+pins 21 statements; all agree.
+
+### alter-table-cmd-definition (tree 62 and 46; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `alter table t replica identity full` | `def` `ReplicaIdentityStmt` `f` | no `def`: DEFAULT, FULL and NOTHING were alike |
+| `alter table t replica identity using index i` | `def` `ReplicaIdentityStmt` `i`, `i` | `name` `i` |
+| `alter table t alter constraint c deferrable` | `def` `Constraint` foreign key `c`, deferrable | `name` `c`, the attributes dropped |
+
+REPLICA IDENTITY's identity is a new `nodes.ReplicaIdentityStmt` (the tag
+was there) with PostgreSQL 16's `REPLICA_IDENTITY_*` chars; ALTER
+CONSTRAINT's is a foreign key `Constraint` with its attributes applied,
+location unset as PostgreSQL 16 leaves it. The 98 trees that changed over
+the corpus and test data are those statements.
+`testdata/replica_identity_pg16.jsonl` pins 24 statements; all agree.
+
+### create-procedure-marked (tree 41 and 41; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `create procedure p() language sql as 'select 1'` | `is_procedure` true, 2 options | no such field; an option `isProcedure` 1 as a third |
+
+CREATE PROCEDURE was marked by an `isProcedure` DefElem appended to its
+options, which PostgreSQL 16 has not got and which a consumer reading the
+options as PostgreSQL's would take for an unknown one. `CreateFunctionStmt`
+now has PostgreSQL 16's `IsProcedure`, and the options are the statement's
+own. Every CREATE FUNCTION and CREATE PROCEDURE tree changed (1,325 over the
+corpus and test data: the new field). With the option gone, the corpus
+comparison now compares each procedure's options pairwise, so the
+already-known `DefElem.arg` (+2, a boolean option the parser keeps as an
+`Integer`) and `CreateFunctionStmt.options/DefElem.location` (+40) classes
+grew by procedures they had not reached. `testdata/create_procedure_pg16.jsonl`
+pins 12 statements; all agree.
+
+### integer-literal-width (tree 145, 66, 33, 24, 15, 4, 2, 1, 1, 1 and 4; left)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `select 0x80000000` | `Float` `0x80000000` | `Integer` 2147483648 |
+| `select 12345678901234567::money` | `Float` `12345678901234567` | `Integer` 12345678901234567 |
+| `select 1_000.` | `Float` `1_000.` | `Float` `1000.` |
+
+These are the deliberate divergence FORK.md records: `Integer` holds an
+`int64`, and a literal that fits one is an `Integer`, where PostgreSQL 16's
+is a `Float` past `int32` and `make_const` reads an int8 from it. A Float's
+text has its underscores taken out, where PostgreSQL keeps the literal's
+text for numeric's input to read. The value is the same either way; the
+classes stay until that divergence is reconsidered.
+
 ## Rerunning
 
 ```

@@ -1,0 +1,21 @@
+{"sql":"with recursive t (a) as (select 1 union all select a + 1 from t) cycle a set c using p select * from t"}
+{"sql":"with recursive t (a) as (select 1 union all select a + 1 from t) cycle a set c to 'y' default 'n' using p select * from t"}
+{"sql":"with recursive t (a) as (select 1 union all select a + 1 from t) cycle a set c to true default false using p select * from t"}
+{"sql":"with recursive t (a) as (select 1 union all select a + 1 from t) cycle a set c to 1 default 0 using p select * from t"}
+{"sql":"with recursive t (a, b) as (select 1, 2 union all select a + 1, b from t) cycle a, b set c using p select * from t"}
+{"sql":"with recursive t (a) as (select 1 union all select a + 1 from t) search depth first by a set s cycle a set c using p select * from t"}
+{"sql":"with recursive t (a) as (select 1 union all select a + 1 from t) cycle a set c to 'y' using p select * from t","code":"42601","message":"syntax error at or near \"using\"","position":86}
+{"sql":"with recursive t (a) as (select 1 union all select a + 1 from t) cycle a set c default 'n' using p select * from t","code":"42601","message":"syntax error at or near \"default\"","position":79}
+{"sql":"with recursive t (a) as (select 1 union all select a + 1 from t) cycle a set c select * from t","code":"42601","message":"syntax error at or near \"select\"","position":79}
+{"sql":"with recursive t (a) as (select 1 union all select a + 1 from t) cycle set c using p select * from t","code":"42601","message":"syntax error at or near \"c\"","position":75}
+{"sql":"select xmlparse(content '<a/>')"}
+{"sql":"select xmlparse(document '<a/>')"}
+{"sql":"select xmlparse(content '<a/>' preserve whitespace)"}
+{"sql":"select xmlparse(content '<a/>' strip whitespace)"}
+{"sql":"select xmlparse(document '<a/>' preserve whitespace)"}
+{"sql":"select xmlparse(document '<a/>' strip whitespace)"}
+{"sql":"select xmlparse(content x) from t"}
+{"sql":"select xmlparse('<a/>')","code":"42601","message":"syntax error at or near \"'<a/>'\"","position":16}
+{"sql":"select xmlparse(content '<a/>' whitespace)","code":"42601","message":"syntax error at or near \"whitespace\"","position":31}
+{"sql":"select xmlparse(content '<a/>' preserve)","code":"42601","message":"syntax error at or near \")\"","position":39}
+{"sql":"select xmlparse(content)","code":"42601","message":"syntax error at or near \")\"","position":23}

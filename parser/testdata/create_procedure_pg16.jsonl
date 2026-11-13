@@ -1,0 +1,12 @@
+{"sql":"create procedure p() language sql as 'select 1'"}
+{"sql":"create or replace procedure p() language sql as 'select 1'"}
+{"sql":"create procedure p(a int, inout b int) language sql as 'select 1'"}
+{"sql":"create procedure p(out a int) language sql as 'select 1'"}
+{"sql":"create procedure s.p() begin atomic select 1; end"}
+{"sql":"create procedure p() language plpgsql security definer as $$ begin end $$"}
+{"sql":"create procedure p() set search_path = s language sql as 'select 1'"}
+{"sql":"create procedure p() returns int language sql as 'select 1'","code":"42601","message":"syntax error at or near \"int\"","position":29}
+{"sql":"create procedure p language sql as 'select 1'","code":"42601","message":"syntax error at or near \"language\"","position":19}
+{"sql":"create function f() returns int language sql as 'select 1'"}
+{"sql":"create function f() language sql as 'select 1'"}
+{"sql":"create or replace function f(a int) returns setof int language sql as 'select 1'"}
