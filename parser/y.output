@@ -2797,14 +2797,15 @@ state 147
 
 state 148
 	ExplainStmt:  EXPLAIN.ExplainableStmt 
-	ExplainStmt:  EXPLAIN.ANALYZE ExplainableStmt 
+	ExplainStmt:  EXPLAIN.analyze_keyword ExplainableStmt 
 	ExplainStmt:  EXPLAIN.VERBOSE ExplainableStmt 
-	ExplainStmt:  EXPLAIN.ANALYZE VERBOSE ExplainableStmt 
+	ExplainStmt:  EXPLAIN.analyze_keyword VERBOSE ExplainableStmt 
 	ExplainStmt:  EXPLAIN.'(' utility_option_list ')' ExplainableStmt 
 	opt_with_clause: .    (1083)
 
 	WITH_LA  shift 190
-	ANALYZE  shift 717
+	ANALYSE  shift 185
+	ANALYZE  shift 184
 	CREATE  shift 730
 	DECLARE  shift 172
 	EXECUTE  shift 162
@@ -2835,6 +2836,7 @@ state 148
 	CreateAsStmt  goto 726
 	CreateMatViewStmt  goto 727
 	RefreshMatViewStmt  goto 728
+	analyze_keyword  goto 717
 
 state 149
 	CopyStmt:  COPY.opt_binary relation_expr opt_column_list copy_from opt_program copy_file_name copy_delimiter copy_opt_with copy_options where_clause 
@@ -39303,8 +39305,8 @@ state 716
 
 
 state 717
-	ExplainStmt:  EXPLAIN ANALYZE.ExplainableStmt 
-	ExplainStmt:  EXPLAIN ANALYZE.VERBOSE ExplainableStmt 
+	ExplainStmt:  EXPLAIN analyze_keyword.ExplainableStmt 
+	ExplainStmt:  EXPLAIN analyze_keyword.VERBOSE ExplainableStmt 
 	opt_with_clause: .    (1083)
 
 	WITH_LA  shift 190
@@ -66072,13 +66074,13 @@ state 1146
 
 
 state 1147
-	ExplainStmt:  EXPLAIN ANALYZE ExplainableStmt.    (641)
+	ExplainStmt:  EXPLAIN analyze_keyword ExplainableStmt.    (641)
 
 	.  reduce 641 (src line 4692)
 
 
 state 1148
-	ExplainStmt:  EXPLAIN ANALYZE VERBOSE.ExplainableStmt 
+	ExplainStmt:  EXPLAIN analyze_keyword VERBOSE.ExplainableStmt 
 	opt_with_clause: .    (1083)
 
 	WITH_LA  shift 190
@@ -130394,7 +130396,7 @@ state 1851
 
 
 state 1852
-	ExplainStmt:  EXPLAIN ANALYZE VERBOSE ExplainableStmt.    (643)
+	ExplainStmt:  EXPLAIN analyze_keyword VERBOSE ExplainableStmt.    (643)
 
 	.  reduce 643 (src line 4706)
 
@@ -579947,11 +579949,11 @@ state 6804
 3456 grammar rules, 6805/16000 states
 0 shift/reduce, 0 reduce/reduce conflicts reported
 769 working sets used
-memory: parser 24123/240000
+memory: parser 23680/240000
 4791 extra closures
-509506 shift entries, 463 exceptions
-6025 goto entries
+509507 shift entries, 463 exceptions
+6026 goto entries
 10935 entries saved by goto default
 Optimizer space used: output 124160/240000
-124160 table entries, 34121 zero
+124160 table entries, 34119 zero
 maximum spread: 533, maximum offset: 6800

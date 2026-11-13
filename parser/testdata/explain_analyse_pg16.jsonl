@@ -1,0 +1,40 @@
+{"sql":"explain analyse select 1"}
+{"sql":"explain analyse verbose select 1"}
+{"sql":"explain analyse insert into t values (1)"}
+{"sql":"explain analyse verbose update t set a = 1"}
+{"sql":"explain analyse delete from t"}
+{"sql":"explain analyse create table x as select 1"}
+{"sql":"explain analyse execute p"}
+{"sql":"explain analyse declare c cursor for select 1"}
+{"sql":"explain analyse merge into t using u on true when matched then delete"}
+{"sql":"explain analyse values (1)"}
+{"sql":"explain analyse analyse select 1","code":"42601","message":"syntax error at or near \"analyse\"","position":16}
+{"sql":"explain analyse verbose verbose select 1","code":"42601","message":"syntax error at or near \"verbose\"","position":24}
+{"sql":"explain verbose analyse select 1","code":"42601","message":"syntax error at or near \"analyse\"","position":16}
+{"sql":"explain analyse (verbose) select 1","code":"42601","message":"syntax error at or near \"verbose\"","position":17}
+{"sql":"explain analyse","code":"42601","message":"syntax error at end of input","position":15}
+{"sql":"explain analyze select 1"}
+{"sql":"explain analyze verbose select 1"}
+{"sql":"explain verbose select 1"}
+{"sql":"explain verbose analyze select 1","code":"42601","message":"syntax error at or near \"analyze\"","position":16}
+{"sql":"explain select 1"}
+{"sql":"explain (analyse) select 1"}
+{"sql":"explain (analyse true, verbose) select 1"}
+{"sql":"explain (analyze, format json) select 1"}
+{"sql":"analyse"}
+{"sql":"analyse t"}
+{"sql":"analyse verbose t"}
+{"sql":"analyse t (a)"}
+{"sql":"analyse (verbose) t"}
+{"sql":"analyse (verbose, skip_locked) t, u (a)"}
+{"sql":"analyse verbose"}
+{"sql":"vacuum analyse"}
+{"sql":"vacuum analyse t"}
+{"sql":"vacuum full analyse t"}
+{"sql":"vacuum full freeze verbose analyse t (a)"}
+{"sql":"vacuum verbose analyse"}
+{"sql":"vacuum (analyse) t"}
+{"sql":"vacuum (analyse, verbose) t"}
+{"sql":"vacuum (analyse true) t"}
+{"sql":"vacuum analyse verbose t","code":"42601","message":"syntax error at or near \"verbose\"","position":15}
+{"sql":"copy t from stdin with (analyse true)"}

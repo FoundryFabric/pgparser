@@ -4689,7 +4689,7 @@ ExplainStmt:
 				Query: $2,
 			}
 		}
-	| EXPLAIN ANALYZE ExplainableStmt
+	| EXPLAIN analyze_keyword ExplainableStmt
 		{
 			$$ = &nodes.ExplainStmt{
 				Query:   $3,
@@ -4703,7 +4703,7 @@ ExplainStmt:
 				Options: makeList(&nodes.DefElem{Defname: "verbose", Location: $<loc>2}),
 			}
 		}
-	| EXPLAIN ANALYZE VERBOSE ExplainableStmt
+	| EXPLAIN analyze_keyword VERBOSE ExplainableStmt
 		{
 			$$ = &nodes.ExplainStmt{
 				Query: $4,

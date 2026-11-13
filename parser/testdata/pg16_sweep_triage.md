@@ -1289,6 +1289,31 @@ corpus verdict; the 10 that changed are new probes, now PostgreSQL 16's,
 and `domain_collate_pg16.jsonl`'s two `column-qualifier-order` rows lose
 their class. `testdata/column_options_order_pg16.jsonl` pins 20
 statements; all agree.
+## Spellings the corpus lacks
+
+The corpus has only the spellings PostgreSQL's regression tests use, so a
+synonym or a noise word they never write (ANALYSE for ANALYZE, an optional
+TRANSACTION, PROCEDURAL or COLUMN, FROM or IN in FETCH, GLOBAL TEMP, ...)
+can be refused without the sweep seeing it. These were probed by hand,
+statement sets generated for each spelling PostgreSQL 16's grammar takes
+and each keyword of `pg_get_keywords()` with a usual statement, sent to
+PostgreSQL 16.15 with `pg16sweep probe` and, where both accept, compared
+with libpg_query 16's trees (`pg16sweep libpg`). Each class below that
+found a difference pins its probes, the differing ones and a set that
+agreed, in its own test data.
+
+### explain-analyse (risk 2; fixed)
+
+| statement | PostgreSQL 16 | parser |
+|---|---|---|
+| `explain analyse select 1` | accepts | 42601 syntax error at or near "analyse" at 8 |
+| `explain analyse verbose select 1` | accepts | 42601 syntax error at or near "analyse" at 8 |
+
+`ExplainStmt` spelt ANALYZE as the token; it now takes `analyze_keyword`,
+as VACUUM, ANALYZE and the option lists already did. The trees are those
+of `explain analyze ...`; they differ from libpg_query's only in
+`DefElem.location`, which the parser does not set for any EXPLAIN option.
+`testdata/explain_analyse_pg16.jsonl` pins 40 statements; all agree.
 
 ## Rerunning
 
