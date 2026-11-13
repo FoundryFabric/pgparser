@@ -57,6 +57,7 @@ func main() {
 	sample := fs.Int("sample", 40, "keep one agreeing mutation in this many")
 	nodesDir := fs.String("nodes", "../../nodes", "the parser's nodes package source, for its enums")
 	fs.IntVar(&version, "version", 16, "the PostgreSQL version the parser answers as (fork, probe, libpg)")
+	examples := fs.Int("examples", 3, "libpg: statements shown for each tree class, shortest first")
 	_ = fs.Parse(os.Args[2:])
 	forkParser = newFork(parser.Version(version))
 	var err error
@@ -80,7 +81,7 @@ func main() {
 				live = *pg
 			}
 		})
-		err = runLibpg(*corpus, live, *nodesDir, *out, *report)
+		err = runLibpg(*corpus, live, *nodesDir, *out, *report, *examples)
 	default:
 		err = fmt.Errorf("unknown command %q", os.Args[1])
 	}

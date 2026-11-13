@@ -69,7 +69,7 @@ type treeFinding struct {
 // compare does with PostgreSQL 16's, and, where both accept, the trees. With
 // pgPath it also compares libpg_query's verdicts with PostgreSQL 16's, and
 // leaves out of the fork's counts the statements those two disagree on.
-func runLibpg(corpusPath, pgPath, nodesDir, out, reportPath string) error {
+func runLibpg(corpusPath, pgPath, nodesDir, out, reportPath string, examples int) error {
 	items, err := readCorpus(corpusPath)
 	if err != nil {
 		return err
@@ -185,7 +185,7 @@ func runLibpg(corpusPath, pgPath, nodesDir, out, reportPath string) error {
 		return err
 	}
 	fmt.Fprintf(w, "##### trees, where both accept: %d compared, %d alike\n", compared, alike)
-	writeTreeClasses(w, byClass)
+	writeTreeClasses(w, byClass, examples)
 	return nil
 }
 
@@ -205,8 +205,8 @@ func printCounts(name string, m map[string]int) {
 }
 
 // writeTreeClasses lists the tree mismatch classes worst kind first, then
-// by size, each with its shortest statements.
-func writeTreeClasses(w *os.File, byClass map[string][]treeFinding) {
+// by size, each with its examples shortest statements.
+func writeTreeClasses(w *os.File, byClass map[string][]treeFinding, examples int) {
 	var classes []string
 	for c := range byClass {
 		classes = append(classes, c)
@@ -235,7 +235,7 @@ func writeTreeClasses(w *os.File, byClass map[string][]treeFinding) {
 		}
 		fmt.Fprintf(w, "=== tree %q: %d (regression %d, mutations %d, probes %d)\n", c, len(fs), reg, len(fs)-reg-probes, probes)
 		sort.Slice(fs, func(i, j int) bool { return len(fs[i].it.SQL) < len(fs[j].it.SQL) })
-		for i := 0; i < len(fs) && i < 3; i++ {
+		for i := 0; i < len(fs) && i < examples; i++ {
 			fmt.Fprintf(w, "       [%d %s:%d %s] %s\n         fork: %s  libpg: %s  (%d in the statement)\n", fs[i].it.ID, fs[i].it.File, fs[i].it.Stmt, fs[i].it.Op, oneLine(fs[i].it.SQL), shortValue(fs[i].first.fork), shortValue(fs[i].first.libpg), fs[i].n)
 		}
 	}
