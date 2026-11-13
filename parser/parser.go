@@ -24124,7 +24124,7 @@ pgdefault:
 		{
 			pgVAL.node = &nodes.DefElem{
 				Defname: "window",
-				Arg:     &nodes.Integer{Ival: 1},
+				Arg:     &nodes.Boolean{Boolval: true},
 			}
 		}
 	case 604:
@@ -24190,7 +24190,7 @@ pgdefault:
 		{
 			pgVAL.node = &nodes.DefElem{
 				Defname: "strict",
-				Arg:     &nodes.Integer{Ival: 1},
+				Arg:     &nodes.Boolean{Boolval: true},
 			}
 		}
 	case 613:
@@ -24199,7 +24199,7 @@ pgdefault:
 		{
 			pgVAL.node = &nodes.DefElem{
 				Defname: "strict",
-				Arg:     &nodes.Integer{Ival: 0},
+				Arg:     &nodes.Boolean{Boolval: false},
 			}
 		}
 	case 614:
@@ -24208,7 +24208,7 @@ pgdefault:
 		{
 			pgVAL.node = &nodes.DefElem{
 				Defname: "strict",
-				Arg:     &nodes.Integer{Ival: 1},
+				Arg:     &nodes.Boolean{Boolval: true},
 			}
 		}
 	case 615:
@@ -24217,7 +24217,7 @@ pgdefault:
 		{
 			pgVAL.node = &nodes.DefElem{
 				Defname: "security",
-				Arg:     &nodes.Integer{Ival: 1},
+				Arg:     &nodes.Boolean{Boolval: true},
 			}
 		}
 	case 616:
@@ -24226,7 +24226,7 @@ pgdefault:
 		{
 			pgVAL.node = &nodes.DefElem{
 				Defname: "security",
-				Arg:     &nodes.Integer{Ival: 0},
+				Arg:     &nodes.Boolean{Boolval: false},
 			}
 		}
 	case 617:
@@ -24235,7 +24235,7 @@ pgdefault:
 		{
 			pgVAL.node = &nodes.DefElem{
 				Defname: "leakproof",
-				Arg:     &nodes.Integer{Ival: 1},
+				Arg:     &nodes.Boolean{Boolval: true},
 			}
 		}
 	case 618:
@@ -24244,7 +24244,7 @@ pgdefault:
 		{
 			pgVAL.node = &nodes.DefElem{
 				Defname: "leakproof",
-				Arg:     &nodes.Integer{Ival: 0},
+				Arg:     &nodes.Boolean{Boolval: false},
 			}
 		}
 	case 619:

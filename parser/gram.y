@@ -4547,7 +4547,7 @@ createfunc_opt_item:
 		{
 			$$ = &nodes.DefElem{
 				Defname: "window",
-				Arg:     &nodes.Integer{Ival: 1},
+				Arg:     &nodes.Boolean{Boolval: true},
 			}
 		}
 	| common_func_opt_item { $$ = $1 }
@@ -4593,49 +4593,49 @@ common_func_opt_item:
 		{
 			$$ = &nodes.DefElem{
 				Defname: "strict",
-				Arg:     &nodes.Integer{Ival: 1},
+				Arg:     &nodes.Boolean{Boolval: true},
 			}
 		}
 	| CALLED ON NULL_P INPUT_P
 		{
 			$$ = &nodes.DefElem{
 				Defname: "strict",
-				Arg:     &nodes.Integer{Ival: 0},
+				Arg:     &nodes.Boolean{Boolval: false},
 			}
 		}
 	| RETURNS NULL_P ON NULL_P INPUT_P
 		{
 			$$ = &nodes.DefElem{
 				Defname: "strict",
-				Arg:     &nodes.Integer{Ival: 1},
+				Arg:     &nodes.Boolean{Boolval: true},
 			}
 		}
 	| SECURITY DEFINER
 		{
 			$$ = &nodes.DefElem{
 				Defname: "security",
-				Arg:     &nodes.Integer{Ival: 1},
+				Arg:     &nodes.Boolean{Boolval: true},
 			}
 		}
 	| SECURITY INVOKER
 		{
 			$$ = &nodes.DefElem{
 				Defname: "security",
-				Arg:     &nodes.Integer{Ival: 0},
+				Arg:     &nodes.Boolean{Boolval: false},
 			}
 		}
 	| LEAKPROOF
 		{
 			$$ = &nodes.DefElem{
 				Defname: "leakproof",
-				Arg:     &nodes.Integer{Ival: 1},
+				Arg:     &nodes.Boolean{Boolval: true},
 			}
 		}
 	| NOT LEAKPROOF
 		{
 			$$ = &nodes.DefElem{
 				Defname: "leakproof",
-				Arg:     &nodes.Integer{Ival: 0},
+				Arg:     &nodes.Boolean{Boolval: false},
 			}
 		}
 	| COST NumericOnly

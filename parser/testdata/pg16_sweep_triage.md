@@ -1038,6 +1038,22 @@ are such aggregates; the 11 verdicts that changed are new probes, now
 PostgreSQL 16's. `testdata/ordered_set_pg16.jsonl` pins 21 statements;
 all agree.
 
+### function-flags-boolean (tree 114 of 124; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `create function f() ... strict ...` | `strict` `Boolean` true | `Integer` 1 |
+| `alter function f(int) not leakproof` | `leakproof` `Boolean` false | `Integer` 0 |
+
+STRICT, CALLED ON NULL INPUT, RETURNS NULL ON NULL INPUT, SECURITY
+DEFINER and INVOKER, LEAKPROOF, NOT LEAKPROOF and WINDOW are
+`makeBoolean` options in PostgreSQL 16's grammar. The 119 trees that
+changed over the corpus and test data have one of them; the five
+`parsertest` tests of those options expected `Integer` and now expect
+`Boolean`. `DefElem.arg` keeps 10: SET GENERATED's `A_Const` (next fix)
+and a `BUFFER_USAGE_LIMIT` past int32, the integer-literal divergence.
+`testdata/func_flags_pg16.jsonl` pins 14 statements; all agree.
+
 ## Rerunning
 
 ```
