@@ -241,8 +241,8 @@
 {"sql":"insert into t (a) overriding system value select 1"}
 {"sql":"insert into t (a, b) overriding user value values (1, 2)"}
 {"sql":"set transaction isolation level read uncommitted"}
-{"sql":"select json_query('1', '$' with conditional array wrapper)","code":"42601","message":"syntax error at or near \"with\"","position":27,"class":"pg17-sqljson"}
-{"sql":"select json_query('1', '$' without array wrapper)","code":"42601","message":"syntax error at or near \"without\"","position":27,"class":"pg17-sqljson"}
+{"sql":"select json_query('1', '$' with conditional array wrapper)","code":"42601","message":"syntax error at or near \"with\"","position":27,"pg17":"pg17-sqljson"}
+{"sql":"select json_query('1', '$' without array wrapper)","code":"42601","message":"syntax error at or near \"without\"","position":27,"pg17":"pg17-sqljson"}
 {"sql":"merge into t using s on true when not matched then insert overriding system value values (1)"}
 {"sql":"merge into t using s on true when not matched then insert overriding user value values (default)"}
 {"sql":"comment on database d is 'x'"}
@@ -289,8 +289,8 @@
 {"sql":"alter table t alter column c set statistics -1"}
 {"sql":"select 'a' not ilike any (array['b'])"}
 {"sql":"select 'a' not like all (array['b'])"}
-{"sql":"select * from t, lateral json_table('1', '$' columns (a int)) j","code":"42601","message":"syntax error at or near \"columns\"","position":45,"class":"pg17-sqljson"}
-{"sql":"select * from lateral json_table('1', '$' columns (a int))","code":"42601","message":"syntax error at or near \"columns\"","position":42,"class":"pg17-sqljson"}
+{"sql":"select * from t, lateral json_table('1', '$' columns (a int)) j","code":"42601","message":"syntax error at or near \"columns\"","position":45,"pg17":"pg17-sqljson"}
+{"sql":"select * from lateral json_table('1', '$' columns (a int))","code":"42601","message":"syntax error at or near \"columns\"","position":42,"pg17":"pg17-sqljson"}
 {"sql":"create transform for int language l (to sql with function f(internal))"}
 {"sql":"create transform for int language l (to sql with function f(internal), from sql with function g(internal))"}
 {"sql":"create transform for int language l (from sql with function g(internal), to sql with function f(internal))"}

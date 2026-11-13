@@ -28,7 +28,7 @@ func TestReturnsTableIsASet(t *testing.T) {
 		{"create function f(x int) returns table (a s.t) language sql as ''", []string{"s", "t"}, 0},
 		{"create function f() returns table (a int, b text) language sql as ''", []string{"pg_catalog", "record"}, 0},
 	} {
-		list, err := Parse(c.sql)
+		list, err := parse16(c.sql)
 		if err != nil {
 			t.Fatal(err)
 		}

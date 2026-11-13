@@ -79,7 +79,7 @@ func TestNameShapesArePostgreSQL16s(t *testing.T) {
 // nameShapeDisagreement is how Parse(c.SQL) differs from PostgreSQL 16's
 // answer in c, or "" when it agrees.
 func nameShapeDisagreement(c nameShapeCase) string {
-	stmts, err := Parse(c.SQL)
+	stmts, err := parse16(c.SQL)
 	got := "no error"
 	if err != nil {
 		got = err.Error()

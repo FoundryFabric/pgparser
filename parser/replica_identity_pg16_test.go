@@ -18,7 +18,7 @@ func TestReplicaIdentityIsPostgreSQL16s(t *testing.T) {
 // libpg_query's tree has them.
 func TestAlterTableCmdKeepsItsDefinition(t *testing.T) {
 	cmd := func(sql string) *nodes.AlterTableCmd {
-		list, err := Parse(sql)
+		list, err := parse16(sql)
 		if err != nil {
 			t.Fatal(err)
 		}

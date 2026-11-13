@@ -46,7 +46,7 @@ func TestUtilityOptionsArePostgreSQL16s(t *testing.T) {
 		t.Fatalf("%d cases, want 1984", len(cases))
 	}
 	for _, c := range cases {
-		_, err := Parse(c.SQL)
+		_, err := parse16(c.SQL)
 		if c.SyntaxError == "" {
 			if err != nil {
 				t.Errorf("Parse(%q) = %v, want it parsed", c.SQL, err)

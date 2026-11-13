@@ -18,7 +18,7 @@ func TestCreateLanguageIsPostgreSQL16s(t *testing.T) {
 // without a handler to be CREATE EXTENSION, OR REPLACE its IF NOT EXISTS
 // and TRUSTED dropped, as libpg_query's tree has it.
 func TestCreateLanguageWithoutHandlerIsAnExtension(t *testing.T) {
-	list, err := Parse("create or replace trusted procedural language l")
+	list, err := parse16("create or replace trusted procedural language l")
 	if err != nil {
 		t.Fatal(err)
 	}

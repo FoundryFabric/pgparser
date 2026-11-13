@@ -21,7 +21,7 @@ func TestTableLikeAllIsPostgreSQL16s(t *testing.T) {
 		"create table t (like s including all excluding comments)": 0x7FFFFFFE,
 		"create table t (like s excluding all including defaults)": 8,
 	} {
-		list, err := Parse(sql)
+		list, err := parse16(sql)
 		if err != nil {
 			t.Fatal(err)
 		}

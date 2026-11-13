@@ -175,12 +175,26 @@ const parseTimeout = 5 * time.Second
 // parseTimeout (the goroutine is left running).
 func parseOne(id int, sql string) result {
 	return parseWith(id, sql, func(s string) error {
-		_, err := parser.Parse(s)
+		_, err := forkParser.Parse(s)
 		return err
 	})
 }
 
-func parseFork(sql string) (*nodes.List, error) { return parser.Parse(sql) }
+// forkParser is the parser under test: a PostgreSQL 16 parser unless -version
+// names another version.
+var forkParser = newFork(parser.PostgreSQL16)
+
+// newFork is a Parser for version v, exiting when v is unsupported.
+func newFork(v parser.Version) *parser.Parser {
+	p, err := parser.New(v)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(2)
+	}
+	return p
+}
+
+func parseFork(sql string) (*nodes.List, error) { return forkParser.Parse(sql) }
 
 // parseWith is parseOne with the parse call given.
 func parseWith(id int, sql string, parse func(string) error) result {
@@ -256,7 +270,7 @@ func runForkDriver(corpusPath, out string, start int) error {
 	}
 	began := time.Now()
 	for {
-		cmd := exec.Command(exe, "fork-child", "-corpus", corpusPath, "-out", out, "-start", strconv.Itoa(start))
+		cmd := exec.Command(exe, "fork-child", "-corpus", corpusPath, "-out", out, "-start", strconv.Itoa(start), "-version", strconv.Itoa(version))
 		cmd.Stdout, cmd.Stderr = os.Stdout, os.Stderr
 		runErr := cmd.Run()
 		done, err := readResults(out)

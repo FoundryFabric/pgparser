@@ -26,7 +26,7 @@ func TestViewCheckOptionIsCascadedByDefault(t *testing.T) {
 		{"create or replace view v as select 1 with local check option", VIEW_CHECK_OPTION_LOCAL},
 		{"create recursive view v (a) as select 1", VIEW_CHECK_OPTION_NONE},
 	} {
-		list, err := Parse(c.sql)
+		list, err := parse16(c.sql)
 		if err != nil {
 			t.Fatal(err)
 		}

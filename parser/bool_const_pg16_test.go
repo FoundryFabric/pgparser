@@ -23,7 +23,7 @@ func TestBoolConstIsBoolean(t *testing.T) {
 		}
 		return n.(*nodes.A_Const).Val
 	}
-	list, err := Parse("with recursive t (a) as (select 1 union all select a + 1 from t) cycle a set c using p select * from t")
+	list, err := parse16("with recursive t (a) as (select 1 union all select a + 1 from t) cycle a set c using p select * from t")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -36,7 +36,7 @@ func TestBoolConstIsBoolean(t *testing.T) {
 		"select xmlparse(content '<a/>' preserve whitespace)": true,
 		"select xmlparse(document '<a/>' strip whitespace)":   false,
 	} {
-		list, err := Parse(sql)
+		list, err := parse16(sql)
 		if err != nil {
 			t.Fatal(err)
 		}

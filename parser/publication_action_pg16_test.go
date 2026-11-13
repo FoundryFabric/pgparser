@@ -32,7 +32,7 @@ func TestPublicationObjectsAreResolved(t *testing.T) {
 		{"alter publication p add table t, tables in schema s, u", nodes.AP_AddObjects, "0:t 1:s 1:u"},
 		{"alter publication p set (publish = 'insert')", nodes.AP_AddObjects, ""},
 	} {
-		list, err := Parse(c.sql)
+		list, err := parse16(c.sql)
 		if err != nil {
 			t.Fatal(err)
 		}

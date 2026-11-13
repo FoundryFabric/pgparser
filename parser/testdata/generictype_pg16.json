@@ -129,7 +129,7 @@
 {"sql": "select null::pg_catalog.numeric", "pg16After": "ok", "types": [{"names": ["pg_catalog", "numeric"], "location": 13}]},
 {"sql": "select null::pg_catalog.bool", "pg16After": "ok", "types": [{"names": ["pg_catalog", "bool"], "location": 13}]},
 {"sql": "select null::boolean", "pg16After": "ok", "types": [{"names": ["pg_catalog", "bool"], "location": 13}]},
-{"sql": "select null::json", "pg16After": "ok", "types": [{"names": ["pg_catalog", "json"], "location": 13}]},
+{"sql": "select null::json", "pg16After": "ok", "types": [{"names": ["json"], "location": 13}]},
 {"sql": "select null::pg_catalog.json", "pg16After": "ok", "types": [{"names": ["pg_catalog", "json"], "location": 13}]},
 {"sql": "select int4 '1'", "pg16After": "ok", "types": [{"names": ["int4"], "location": 7}]},
 {"sql": "select pg_catalog.int4 '1'", "pg16After": "ok", "types": [{"names": ["pg_catalog", "int4"], "location": 7}]},

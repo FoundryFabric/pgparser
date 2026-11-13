@@ -17,26 +17,28 @@ func TestJSONReturningFormatIsPostgreSQL16s(t *testing.T) {
 // TestJSONReturningKeepsItsFormat requires every RETURNING clause to carry
 // its JsonReturning, with the FORMAT clause's type, encoding and location,
 // or PostgreSQL 16's default format, unlocated, when it has none, as
-// libpg_query's tree has it.
+// libpg_query's tree has it. JSON_SERIALIZE and JSON_VALUE are PostgreSQL
+// 17's, parsed as 17.
 func TestJSONReturningKeepsItsFormat(t *testing.T) {
 	for _, c := range []struct {
 		sql      string
 		format   nodes.JsonFormatType
 		encoding nodes.JsonEncoding
 		location nodes.ParseLoc
+		v        Version
 	}{
-		{"select json_array(returning text)", nodes.JS_FORMAT_DEFAULT, nodes.JS_ENC_DEFAULT, -1},
-		{"select json_array(returning bytea format json)", nodes.JS_FORMAT_JSON, nodes.JS_ENC_DEFAULT, 34},
-		{"select json_array(1 returning bytea format json encoding utf8)", nodes.JS_FORMAT_JSON, nodes.JS_ENC_UTF8, 36},
-		{"select json_array(select 1 format json returning bytea format json encoding utf16)", nodes.JS_FORMAT_JSON, nodes.JS_ENC_UTF16, 55},
-		{"select json_object(returning text)", nodes.JS_FORMAT_DEFAULT, nodes.JS_ENC_DEFAULT, -1},
-		{"select json_object('a': 1 returning bytea format json encoding utf32)", nodes.JS_FORMAT_JSON, nodes.JS_ENC_UTF32, 42},
-		{"select json_objectagg(k: v returning bytea format json) from t", nodes.JS_FORMAT_JSON, nodes.JS_ENC_DEFAULT, 43},
-		{"select json_arrayagg(v returning text) from t", nodes.JS_FORMAT_DEFAULT, nodes.JS_ENC_DEFAULT, -1},
-		{"select json_serialize('1' returning bytea format json)", nodes.JS_FORMAT_JSON, nodes.JS_ENC_DEFAULT, 42},
-		{"select json_value(jsonb '1', '$' returning text)", nodes.JS_FORMAT_DEFAULT, nodes.JS_ENC_DEFAULT, -1},
+		{"select json_array(returning text)", nodes.JS_FORMAT_DEFAULT, nodes.JS_ENC_DEFAULT, -1, PostgreSQL16},
+		{"select json_array(returning bytea format json)", nodes.JS_FORMAT_JSON, nodes.JS_ENC_DEFAULT, 34, PostgreSQL16},
+		{"select json_array(1 returning bytea format json encoding utf8)", nodes.JS_FORMAT_JSON, nodes.JS_ENC_UTF8, 36, PostgreSQL16},
+		{"select json_array(select 1 format json returning bytea format json encoding utf16)", nodes.JS_FORMAT_JSON, nodes.JS_ENC_UTF16, 55, PostgreSQL16},
+		{"select json_object(returning text)", nodes.JS_FORMAT_DEFAULT, nodes.JS_ENC_DEFAULT, -1, PostgreSQL16},
+		{"select json_object('a': 1 returning bytea format json encoding utf32)", nodes.JS_FORMAT_JSON, nodes.JS_ENC_UTF32, 42, PostgreSQL16},
+		{"select json_objectagg(k: v returning bytea format json) from t", nodes.JS_FORMAT_JSON, nodes.JS_ENC_DEFAULT, 43, PostgreSQL16},
+		{"select json_arrayagg(v returning text) from t", nodes.JS_FORMAT_DEFAULT, nodes.JS_ENC_DEFAULT, -1, PostgreSQL16},
+		{"select json_serialize('1' returning bytea format json)", nodes.JS_FORMAT_JSON, nodes.JS_ENC_DEFAULT, 42, PostgreSQL17},
+		{"select json_value(jsonb '1', '$' returning text)", nodes.JS_FORMAT_DEFAULT, nodes.JS_ENC_DEFAULT, -1, PostgreSQL17},
 	} {
-		list, err := Parse(c.sql)
+		list, err := (&Parser{version: c.v}).Parse(c.sql)
 		if err != nil {
 			t.Fatal(err)
 		}
