@@ -1,0 +1,10 @@
+{"sql":"select * from f()"}
+{"sql":"select * from f(1) with ordinality as x(a, b)"}
+{"sql":"select * from lateral f(t.a) as x"}
+{"sql":"select * from f() as (a int, b text)"}
+{"sql":"select * from rows from (f(), g() as (a int))"}
+{"sql":"select * from rows from (f(), g()) with ordinality"}
+{"sql":"select * from generate_series(1, 3) g"}
+{"sql":"select * from current_date"}
+{"sql":"select * from rows from ()","code":"42601","message":"syntax error at or near \")\"","position":25}
+{"sql":"select * from f() with ordinality ordinality"}

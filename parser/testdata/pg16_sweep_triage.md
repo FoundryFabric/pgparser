@@ -1153,6 +1153,22 @@ without USING. (USING's location is still unset, one of the `unlocated`
 classes.) `testdata/sortby_location_pg16.jsonl` pins 12 statements; all
 agree.
 
+### range-function-pairs (tree 2728; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `select * from t(3)` | `functions` one list of 2: the call and NIL | one list of 1: the call |
+
+PostgreSQL 16 makes each of a RangeFunction's functions a pair, the call
+and its column definition list, for a lone function as for ROWS FROM;
+the parser's lone function was a list of one. ROWS FROM's missing list
+was a nil `*List` in a `Node`, which is not `== nil`; both are now a nil
+`Node`. The 2,385 trees that changed over the corpus and test data have a
+function in FROM. With the pairs alike, the comparison now reaches these
+functions' arguments, so the known `presence A_Const.ival` (+2) and
+`FuncCall.args/A_Const.fval` (+2) integer-literal classes grow.
+`testdata/range_function_pg16.jsonl` pins 10 statements; all agree.
+
 ## Rerunning
 
 ```

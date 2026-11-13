@@ -8199,7 +8199,7 @@ func_table:
 		{
 			$$ = &nodes.RangeFunction{
 				Ordinality: $2,
-				Functions:  makeList(makeList($1)),
+				Functions:  makeList(makeList2($1, nil)),
 			}
 		}
 	| ROWS FROM '(' rowsfrom_list ')' opt_ordinality
@@ -8222,7 +8222,12 @@ rowsfrom_list:
 rowsfrom_item:
 	func_expr_windowless opt_col_def_list
 		{
-			$$ = makeList2($1, $2)
+			/* a missing column definition list is a nil Node, not a nil *List */
+			if $2 == nil {
+				$$ = makeList2($1, nil)
+			} else {
+				$$ = makeList2($1, $2)
+			}
 		}
 	;
 
