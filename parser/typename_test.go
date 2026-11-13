@@ -76,9 +76,12 @@ func TestParseTypeNameTakesAnyNumberOfParts(t *testing.T) {
 	}
 }
 
-// typeNames is every TypeName reachable from root.
+// typeNames is every TypeName reachable from root, each once: an
+// ObjectWithArgs reaches an argument's TypeName through both Objargs and
+// Objfuncargs, and it is one type name of the statement.
 func typeNames(root nodes.Node) []*nodes.TypeName {
 	var out []*nodes.TypeName
+	seen := map[*nodes.TypeName]bool{}
 	var walk func(v reflect.Value)
 	walk = func(v reflect.Value) {
 		switch v.Kind() { //nolint:exhaustive // only the kinds that can carry a Node
@@ -86,7 +89,8 @@ func typeNames(root nodes.Node) []*nodes.TypeName {
 			if v.IsNil() {
 				return
 			}
-			if tn, ok := v.Interface().(*nodes.TypeName); ok && v.Kind() == reflect.Ptr {
+			if tn, ok := v.Interface().(*nodes.TypeName); ok && v.Kind() == reflect.Ptr && !seen[tn] {
+				seen[tn] = true
 				out = append(out, tn)
 			}
 			walk(v.Elem())

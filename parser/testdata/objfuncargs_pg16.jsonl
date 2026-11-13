@@ -1,0 +1,22 @@
+{"sql":"drop function f(int)"}
+{"sql":"drop function f(a int, out b int, inout c text)"}
+{"sql":"drop function f()"}
+{"sql":"drop function f"}
+{"sql":"drop procedure p(out int, int, int)"}
+{"sql":"drop aggregate a(int)"}
+{"sql":"drop aggregate a(*)"}
+{"sql":"drop aggregate a(int order by text)"}
+{"sql":"alter function f(int) strict"}
+{"sql":"alter function f(in a int, out b int) rename to g"}
+{"sql":"alter aggregate a(int) owner to r"}
+{"sql":"alter function f(variadic int[]) set schema s"}
+{"sql":"grant execute on function f(int, text) to r"}
+{"sql":"revoke all on procedure p(inout int) from r"}
+{"sql":"comment on function f(out int, int) is 'x'"}
+{"sql":"security label on routine f(int) is 'x'"}
+{"sql":"create cast (int as text) with function f(int)"}
+{"sql":"create transform for int language sql (from sql with function f(internal), to sql with function g(internal))"}
+{"sql":"alter operator family o using btree add function 1 f(int, int)"}
+{"sql":"alter operator family o using btree drop function 1 (int, int)"}
+{"sql":"drop function f(int, table)","code":"42601","message":"syntax error at or near \"table\"","position":21}
+{"sql":"drop function f(out)","code":"42601","message":"syntax error at or near \")\"","position":19}

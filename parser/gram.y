@@ -13750,8 +13750,9 @@ function_with_argtypes:
 	func_name func_args
 		{
 			$$ = &nodes.ObjectWithArgs{
-				Objname: $1,
-				Objargs: extractArgTypes($2),
+				Objname:     $1,
+				Objargs:     extractArgTypes($2),
+				Objfuncargs: $2,
 			}
 		}
 	| type_func_name_keyword
@@ -13804,8 +13805,9 @@ aggregate_with_argtypes:
 	func_name aggr_args
 		{
 			$$ = &nodes.ObjectWithArgs{
-				Objname: $1,
-				Objargs: extractAggrArgTypes($2),
+				Objname:     $1,
+				Objargs:     extractAggrArgTypes($2),
+				Objfuncargs: aggrArgs($2),
 			}
 		}
 	;
@@ -18564,41 +18566,33 @@ func relpersistenceForTemp(tempFlag int64) byte {
 	}
 }
 
-// extractArgTypes extracts the type names from a list of FunctionParameter nodes.
+// extractArgTypes is PostgreSQL 16's extractArgTypes: the types of the
+// arguments that identify a function, every one but OUT ones (it leaves
+// out TABLE ones too, which an argument list it is given cannot hold).
 func extractArgTypes(args *nodes.List) *nodes.List {
 	if args == nil {
 		return nil
 	}
 	result := &nodes.List{}
 	for _, item := range args.Items {
-		fp, ok := item.(*nodes.FunctionParameter)
-		if ok {
+		if fp := item.(*nodes.FunctionParameter); fp.Mode != nodes.FUNC_PARAM_OUT {
 			result.Items = append(result.Items, fp.ArgType)
 		}
 	}
 	return result
 }
 
-// extractAggrArgTypes extracts the type names from an aggregate argument list.
-// aggr_args returns a 2-element list: [args_list, Integer_marker].
-// The first element is either nil (for agg(*)) or a *List of FunctionParameter nodes.
-// This function extracts the ArgType from each FunctionParameter in the first element.
+// aggrArgs is the argument list of aggr_args' 2-element list [args,
+// Integer marker]: a list of FunctionParameter, or nil for agg(*).
+func aggrArgs(args *nodes.List) *nodes.List {
+	l, _ := args.Items[0].(*nodes.List)
+	return l
+}
+
+// extractAggrArgTypes is PostgreSQL 16's extractAggrArgTypes: the types of
+// aggr_args' arguments.
 func extractAggrArgTypes(args *nodes.List) *nodes.List {
-	if args == nil || len(args.Items) < 1 {
-		return nil
-	}
-	// First element is the args list (may be nil for agg(*))
-	argsList, ok := args.Items[0].(*nodes.List)
-	if !ok || argsList == nil {
-		return nil
-	}
-	result := &nodes.List{}
-	for _, item := range argsList.Items {
-		if fp, ok := item.(*nodes.FunctionParameter); ok {
-			result.Items = append(result.Items, fp.ArgType)
-		}
-	}
-	return result
+	return extractArgTypes(aggrArgs(args))
 }
 
 // makeOrderedSetArgs builds the aggr_args result for ordered-set aggregates

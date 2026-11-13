@@ -1004,6 +1004,25 @@ an OUT or INOUT argument. No statement of the corpus has one, so no tree
 or verdict there changed; the 8 probes that changed verdict are pinned.
 `testdata/aggregate_output_pg16.jsonl` pins 13 statements; all agree.
 
+### objfuncargs (tree 275, 35, 26, 24, 17, 12, 10, 10, 9, 4, 1, 1 and 4; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `drop function f1(int)` | `objfuncargs` the `FunctionParameter` list | no such field |
+| `drop procedure ptest10(out int, int, int)` | `objargs` 2 types, OUT left out | 3 types |
+
+PostgreSQL 16's ObjectWithArgs keeps the arguments as written
+(`objfuncargs`, which carry their modes and names) beside the types that
+identify the function (`objargs`, from `extractArgTypes`, which leaves out
+OUT and TABLE arguments). `ObjectWithArgs.Objfuncargs` is new, set by
+`function_with_argtypes` and `aggregate_with_argtypes`, and `Objargs` now
+leaves out OUT arguments. Every statement naming a function, procedure,
+routine, aggregate or operator changed tree (1,376 over the corpus and
+test data: the new field). The TypeName-site tests count each TypeName of
+a statement once (`typeNames`), as an argument's is now reached through
+both lists. `testdata/objfuncargs_pg16.jsonl` pins 22 statements; all
+agree.
+
 ## Rerunning
 
 ```
