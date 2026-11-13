@@ -1197,6 +1197,18 @@ are OVERLAPS expressions; no corpus verdict changed, and the 5 that did
 are new probes, now PostgreSQL 16's. `testdata/overlaps_pg16.jsonl` pins
 10 statements; all agree.
 
+### is-normalized (tree 2; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `select u&'\00E4\24D1c' is normalized` | `is_normalized(x)` | `is_normalized(x, 'NFC')` |
+
+Without a form PostgreSQL 16 passes the string alone and leaves the form
+to `is_normalized`'s default; the parser wrote the default in. The 6
+trees that changed over the corpus and test data are IS [NOT] NORMALIZED
+without a form. `testdata/normalized_pg16.jsonl` pins 8 statements; all
+agree.
+
 ## Rerunning
 
 ```

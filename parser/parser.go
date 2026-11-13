@@ -29278,7 +29278,7 @@ pgdefault:
 		{
 			pgVAL.node = &nodes.FuncCall{
 				Funcname:   makeFuncName("pg_catalog", "is_normalized"),
-				Args:       makeList2(pgDollar[1].node, makeStringConst("NFC", -1)),
+				Args:       makeList(pgDollar[1].node),
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
 				Location:   pgDollar[2].loc,
 			}
@@ -29289,7 +29289,7 @@ pgdefault:
 		{
 			pgVAL.node = makeNotExpr(&nodes.FuncCall{
 				Funcname:   makeFuncName("pg_catalog", "is_normalized"),
-				Args:       makeList2(pgDollar[1].node, makeStringConst("NFC", -1)),
+				Args:       makeList(pgDollar[1].node),
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
 				Location:   pgDollar[2].loc,
 			}, pgDollar[2].loc)

@@ -8801,7 +8801,7 @@ a_expr:
 		{
 			$$ = &nodes.FuncCall{
 				Funcname:   makeFuncName("pg_catalog", "is_normalized"),
-				Args:       makeList2($1, makeStringConst("NFC", -1)),
+				Args:       makeList($1),
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
 				Location:   $<loc>2,
 			}
@@ -8810,7 +8810,7 @@ a_expr:
 		{
 			$$ = makeNotExpr(&nodes.FuncCall{
 				Funcname:   makeFuncName("pg_catalog", "is_normalized"),
-				Args:       makeList2($1, makeStringConst("NFC", -1)),
+				Args:       makeList($1),
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
 				Location:   $<loc>2,
 			}, $<loc>2)
