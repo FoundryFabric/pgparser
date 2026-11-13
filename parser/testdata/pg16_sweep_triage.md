@@ -1315,6 +1315,22 @@ of `explain analyze ...`; they differ from libpg_query's only in
 `DefElem.location`, which the parser does not set for any EXPLAIN option.
 `testdata/explain_analyse_pg16.jsonl` pins 40 statements; all agree.
 
+### global-temp (risk 2; fixed)
+
+| statement | PostgreSQL 16 | parser |
+|---|---|---|
+| `create global temp table t (a int)` | accepts (WARNING: GLOBAL is deprecated) | 42601 syntax error at or near "global" at 7 |
+| `create global temporary view v as select 1` | accepts | 42601 syntax error at or near "global" at 7 |
+| `create global unlogged table t (a int)` | 42601 syntax error at or near "unlogged" at 14 | the same |
+
+`OptTemp` had TEMP, TEMPORARY, LOCAL TEMP, LOCAL TEMPORARY and UNLOGGED but
+not PostgreSQL 16's GLOBAL TEMP and GLOBAL TEMPORARY, which make a
+temporary relation as TEMP does; SELECT INTO's `OptTempTableName` already
+had them. The trees are those of TEMP; where they differ from
+libpg_query's it is in locations, and in a recursive view's column
+reference, as they do for TEMP. `testdata/global_temp_pg16.jsonl` pins 34
+statements; all agree.
+
 ## Rerunning
 
 ```

@@ -1551,6 +1551,8 @@ OptTemp:
 	| TEMP          { $$ = 1 }
 	| LOCAL TEMPORARY { $$ = 1 }
 	| LOCAL TEMP    { $$ = 1 }
+	| GLOBAL TEMPORARY { $$ = 1 }
+	| GLOBAL TEMP   { $$ = 1 }
 	| UNLOGGED      { $$ = 2 }
 	| /* EMPTY */   { $$ = 0 }
 	;
