@@ -260,7 +260,7 @@
 {"sql":"select json_arrayagg(v) over w from t window w as (partition by a)","locations":{"WindowDef":[29,50]}}
 {"sql":"with x (a, b) as (select 1, 2) select 1","locations":{"CommonTableExpr":[5],"WithClause":[0]}}
 {"sql":"WITH t AS (\n\tINSERT INTO y VALUES(0)\n)\nVALUES(FALSE)","locations":{"CommonTableExpr":[5],"WithClause":[0]}}
-{"sql":"SELECT JSON_ARRAY(WITH x AS (SELECT 1) VALUES (TRUE))","locations":{"CommonTableExpr":[23],"WithClause":[18]}}
+{"sql":"SELECT JSON_ARRAY(WITH x AS (SELECT 1) VALUES (TRUE))","locations":{"CommonTableExpr":[23],"WithClause":[18],"JsonArrayQueryConstructor":[7]}}
 {"sql":"-- CTEs\nWITH foo AS (SELECT * FROM gtest1) SELECT * FROM foo","locations":{"CommonTableExpr":[13],"WithClause":[8]}}
 {"sql":"--\n-- error cases\n--\nWITH x(n, b) AS (SELECT 1)\nSELECT * FROM x","locations":{"CommonTableExpr":[26],"WithClause":[21]}}
 {"sql":"with recursive test as (\n  select 1 as x\n  union all\n  select x + 1\n  from test\n) search depth first by x set y\nselect * from test limit 5","locations":{"CTESearchClause":[82],"CommonTableExpr":[15],"WithClause":[0]}}
@@ -334,3 +334,26 @@
 {"sql":"select * from xmltable(xmlnamespaces('u' as a), '/x' passing 'y' columns a int path 'b' default 1 not null, b for ordinality, c text)","locations":{"RangeTableFunc":[14],"RangeTableFuncCol":[73,108,126]}}
 {"sql":"select * from t tablesample system (1) repeatable (2)","locations":{"RangeTableSample":[28]}}
 {"sql":"select ('x' is document) is not document","locations":{"XmlExpr":[12,25]}}
+{"sql":"SELECT JSON_OBJECT(NULL: 1)","locations":{"JsonObjectConstructor":[7]}}
+{"sql":"SELECT JSON_OBJECT('a': 2 + 3)","locations":{"JsonObjectConstructor":[7]}}
+{"sql":"SELECT JSON_OBJECT(RETURNING text)","locations":{"JsonObjectConstructor":[7]}}
+{"sql":"SELECT JSON_ARRAY(RETURNING text)","locations":{"JsonArrayConstructor":[7]}}
+{"sql":"SELECT JSON_ARRAY(RETURNING json)","locations":{"JsonArrayConstructor":[7]}}
+{"sql":"SELECT JSON_ARRAY(RETURNING bytea)","locations":{"JsonArrayConstructor":[7]}}
+{"sql":"SELECT JSON_OBJECTAGG(NULL: 1)","locations":{"JsonAggConstructor":[7]}}
+{"sql":"SELECT JSON_OBJECTAGG(NULL: 1 RETURNING jsonb)","locations":{"JsonAggConstructor":[7]}}
+{"sql":"SELECT JSON_OBJECT('a': JSON_OBJECTAGG('b': 1 RETURNING text) FORMAT JSON)","locations":{"JsonAggConstructor":[24],"JsonObjectConstructor":[7]}}
+{"sql":"SELECT JSON_ARRAYAGG(i::text::json)\nFROM generate_series(1, 5) i","locations":{"JsonAggConstructor":[7]}}
+{"sql":"SELECT JSON_ARRAYAGG(i::text(3)::json)\nFROM generate_series(1, 5) i","locations":{"JsonAggConstructor":[7]}}
+{"sql":"SELECT JSON_ARRAYAGG(i ORDER BY i DESC)\nFROM generate_series(1, 5) i","locations":{"JsonAggConstructor":[7]}}
+{"sql":"SELECT JSON_ARRAY(SELECT i, i FROM (VALUES (1)) foo(i))","locations":{"JsonArrayQueryConstructor":[7]}}
+{"sql":"SELECT JSON_ARRAY(SELECT * FROM (VALUES (1, 2)) foo(i, j))","locations":{"JsonArrayQueryConstructor":[7]}}
+{"sql":"SELECT JSON_OBJECT('a': JSON_OBJECT('b': 1 RETURNING text))","locations":{"JsonObjectConstructor":[7,24]}}
+{"sql":"SELECT JSON_OBJECT('a': JSON_OBJECT('b': 1 RETURNING bytea))","locations":{"JsonObjectConstructor":[7,24]}}
+{"sql":"SELECT JSON_OBJECT('a': JSON_OBJECT('b': 1 RETURNING varchar(2)))","locations":{"JsonObjectConstructor":[7,24]}}
+{"sql":"SELECT JSON_ARRAY(JSON_ARRAY('{ \"a\" : 123 }' RETURNING text))","locations":{"JsonArrayConstructor":[7,18]}}
+{"sql":"SELECT JSON_ARRAY(JSON_ARRAY('{ \"a\" : 123 }' RETURNING text(3)))","locations":{"JsonArrayConstructor":[7,18]}}
+{"sql":"SELECT JSON_ARRAY(JSON_ARRAY('{ \"a\" : 123 }' RETURNING varchar(2)))","locations":{"JsonArrayConstructor":[7,18]}}
+{"sql":"SELECT (JSON_OBJECT(RETURNING jsonb), '$')","locations":{"JsonObjectConstructor":[8]}}
+{"sql":"select json_object('a': 1 null on null with unique keys returning jsonb), json_object(returning text), json_array(1, 2 absent on null returning jsonb), json_array(select 1 format json returning jsonb), json_array(returning json)","locations":{"JsonArrayConstructor":[103,202],"JsonArrayQueryConstructor":[152],"JsonObjectConstructor":[7,74]}}
+{"sql":"select json_objectagg(k: v absent on null with unique keys returning jsonb) filter (where true) over (), json_arrayagg(v order by v null on null returning text) from t","locations":{"JsonAggConstructor":[7,105]}}

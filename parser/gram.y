@@ -10042,14 +10042,14 @@ func_expr_common_subexpr:
 				Output:       asJsonOutput($6),
 				AbsentOnNull: $4 != 0,
 				UniqueKeys:   $5 != 0,
-				Location:     -1,
+				Location:     $<loc>1,
 			}
 		}
 	| JSON_OBJECT '(' json_returning_clause_opt ')'
 		{
 			$$ = &nodes.JsonObjectConstructor{
 				Output:   asJsonOutput($3),
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| JSON_ARRAY '(' json_value_expr_list json_array_constructor_null_clause_opt
@@ -10059,7 +10059,7 @@ func_expr_common_subexpr:
 				Exprs:        $3,
 				AbsentOnNull: $4 != 0,
 				Output:       asJsonOutput($5),
-				Location:     -1,
+				Location:     $<loc>1,
 			}
 		}
 	| JSON_ARRAY '(' select_no_parens json_format_clause_opt json_returning_clause_opt ')'
@@ -10070,7 +10070,7 @@ func_expr_common_subexpr:
 				Output:       asJsonOutput($5),
 				Format:       $4.(*nodes.JsonFormat),
 				AbsentOnNull: true,
-				Location:     -1,
+				Location:     $<loc>1,
 			}
 			$$ = n
 		}
@@ -10079,7 +10079,7 @@ func_expr_common_subexpr:
 			$$ = &nodes.JsonArrayConstructor{
 				Output:       asJsonOutput($3),
 				AbsentOnNull: true,
-				Location:     -1,
+				Location:     $<loc>1,
 			}
 		}
 	| JSON '(' json_value_expr json_key_uniqueness_constraint_opt ')'
@@ -10721,7 +10721,7 @@ json_aggregate_func:
 			$$ = &nodes.JsonObjectAgg{
 				Constructor: &nodes.JsonAggConstructor{
 					Output:   asJsonOutput($6),
-					Location: -1,
+					Location: $<loc>1,
 				},
 				Arg:          $3.(*nodes.JsonKeyValue),
 				AbsentOnNull: $4 != 0,
@@ -10735,7 +10735,7 @@ json_aggregate_func:
 				Constructor: &nodes.JsonAggConstructor{
 					Output:    asJsonOutput($6),
 					Agg_order: $4,
-					Location:  -1,
+					Location:  $<loc>1,
 				},
 				Arg:          $3.(*nodes.JsonValueExpr),
 				AbsentOnNull: $5 != 0,

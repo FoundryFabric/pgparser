@@ -30755,7 +30755,7 @@ pgdefault:
 				Output:       asJsonOutput(pgDollar[6].node),
 				AbsentOnNull: pgDollar[4].ival != 0,
 				UniqueKeys:   pgDollar[5].ival != 0,
-				Location:     -1,
+				Location:     pgDollar[1].loc,
 			}
 		}
 	case 1479:
@@ -30764,7 +30764,7 @@ pgdefault:
 		{
 			pgVAL.node = &nodes.JsonObjectConstructor{
 				Output:   asJsonOutput(pgDollar[3].node),
-				Location: -1,
+				Location: pgDollar[1].loc,
 			}
 		}
 	case 1480:
@@ -30775,7 +30775,7 @@ pgdefault:
 				Exprs:        pgDollar[3].list,
 				AbsentOnNull: pgDollar[4].ival != 0,
 				Output:       asJsonOutput(pgDollar[5].node),
-				Location:     -1,
+				Location:     pgDollar[1].loc,
 			}
 		}
 	case 1481:
@@ -30788,7 +30788,7 @@ pgdefault:
 				Output:       asJsonOutput(pgDollar[5].node),
 				Format:       pgDollar[4].node.(*nodes.JsonFormat),
 				AbsentOnNull: true,
-				Location:     -1,
+				Location:     pgDollar[1].loc,
 			}
 			pgVAL.node = n
 		}
@@ -30799,7 +30799,7 @@ pgdefault:
 			pgVAL.node = &nodes.JsonArrayConstructor{
 				Output:       asJsonOutput(pgDollar[3].node),
 				AbsentOnNull: true,
-				Location:     -1,
+				Location:     pgDollar[1].loc,
 			}
 		}
 	case 1483:
@@ -31786,7 +31786,7 @@ pgdefault:
 			pgVAL.node = &nodes.JsonObjectAgg{
 				Constructor: &nodes.JsonAggConstructor{
 					Output:   asJsonOutput(pgDollar[6].node),
-					Location: -1,
+					Location: pgDollar[1].loc,
 				},
 				Arg:          pgDollar[3].node.(*nodes.JsonKeyValue),
 				AbsentOnNull: pgDollar[4].ival != 0,
@@ -31801,7 +31801,7 @@ pgdefault:
 				Constructor: &nodes.JsonAggConstructor{
 					Output:    asJsonOutput(pgDollar[6].node),
 					Agg_order: pgDollar[4].list,
-					Location:  -1,
+					Location:  pgDollar[1].loc,
 				},
 				Arg:          pgDollar[3].node.(*nodes.JsonValueExpr),
 				AbsentOnNull: pgDollar[5].ival != 0,
