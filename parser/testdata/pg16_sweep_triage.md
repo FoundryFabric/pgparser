@@ -1101,6 +1101,30 @@ has it; `TestVarcharCast`, `TestCharCast`, `TestCharacterVaryingCast` and
 `A_Const`. `testdata/character_type_pg16.jsonl` pins 14
 statements; all agree.
 
+### drop-object-names (tree 197 and 161; verdict, probes only; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `drop server s2` | `objects` `String` `s2` | a list holding `s2` |
+| `drop policy p3 on s1` | one list `s1`, `p3` | one list `s1`: the policy's name was dropped |
+| `drop language l, m`, `drop procedural language l`, `drop event trigger e, f` | accepted | `42601 syntax error at or near ","` / `"procedural"` |
+| `drop access method a.b`, `comment on access method a.b is 'x'` | `42601 syntax error at or near "."` | accepted |
+
+PostgreSQL 16's `DropStmt` takes `drop_type_name name_list` (ACCESS
+METHOD, EVENT TRIGGER, EXTENSION, FOREIGN DATA WRAPPER, [PROCEDURAL]
+LANGUAGE, PUBLICATION, SCHEMA, SERVER), whose objects are bare `String`s,
+and `object_type_name_on_any_name name ON any_name`, whose one object is
+the relation's name with the object's appended. The parser wrapped each
+name in a list, kept only the relation's name for DROP TRIGGER, POLICY
+and RULE (the name of what was dropped was lost), took one name for
+EVENT TRIGGER and LANGUAGE, no PROCEDURAL, and an access method's name
+qualified. The rules are now PostgreSQL 16's, and ACCESS METHOD is an
+`object_type_name` for COMMENT, SECURITY LABEL and ALTER EXTENSION, as
+in PostgreSQL 16. The 338 trees that changed over the corpus and test data
+are those DROP statements; no verdict of the corpus changed, and the 9
+that changed are new probes, now PostgreSQL 16's.
+`testdata/drop_name_pg16.jsonl` pins 42 statements; all agree.
+
 ## Rerunning
 
 ```

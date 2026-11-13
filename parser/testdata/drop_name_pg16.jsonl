@@ -1,0 +1,42 @@
+{"sql":"drop schema s"}
+{"sql":"drop schema if exists s, t cascade"}
+{"sql":"drop extension e, f restrict"}
+{"sql":"drop extension if exists e"}
+{"sql":"drop language l"}
+{"sql":"drop language if exists l"}
+{"sql":"drop procedural language l"}
+{"sql":"drop procedural language if exists l cascade"}
+{"sql":"drop language l, m"}
+{"sql":"drop publication p, q"}
+{"sql":"drop publication if exists p"}
+{"sql":"drop event trigger e"}
+{"sql":"drop event trigger if exists e"}
+{"sql":"drop event trigger e, f"}
+{"sql":"drop foreign data wrapper w, x"}
+{"sql":"drop foreign data wrapper if exists w"}
+{"sql":"drop server s, t"}
+{"sql":"drop server if exists s"}
+{"sql":"drop access method a"}
+{"sql":"drop access method if exists a, b cascade"}
+{"sql":"drop access method a.b","code":"42601","message":"syntax error at or near \".\"","position":20}
+{"sql":"drop schema s.t","code":"42601","message":"syntax error at or near \".\"","position":13}
+{"sql":"drop server s.t","code":"42601","message":"syntax error at or near \".\"","position":13}
+{"sql":"drop trigger t on r"}
+{"sql":"drop trigger if exists t on s.r cascade"}
+{"sql":"drop policy p on r"}
+{"sql":"drop policy if exists p on s.r"}
+{"sql":"drop rule r on t"}
+{"sql":"drop rule if exists r on a.b.c"}
+{"sql":"drop trigger t on r, s","code":"42601","message":"syntax error at or near \",\"","position":19}
+{"sql":"drop table t, s.u"}
+{"sql":"drop index concurrently i"}
+{"sql":"drop collation c"}
+{"sql":"comment on access method a is 'x'"}
+{"sql":"comment on access method a.b is 'x'","code":"42601","message":"syntax error at or near \".\"","position":26}
+{"sql":"security label on access method a is 'x'"}
+{"sql":"alter extension e add access method a"}
+{"sql":"alter extension e drop access method a.b","code":"42601","message":"syntax error at or near \".\"","position":38}
+{"sql":"drop procedural language l, m"}
+{"sql":"drop event trigger if exists e, f"}
+{"sql":"drop rule r on t cascade"}
+{"sql":"drop policy p on a.b.c"}

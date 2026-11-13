@@ -240,7 +240,7 @@ import (
 %type <list>  alter_table_cmds
 %type <node>  alter_table_cmd partition_cmd
 %type <ival>  opt_drop_behavior
-%type <ival>  object_type_any_name
+%type <ival>  object_type_any_name drop_type_name
 %type <list>  any_name_list
 %type <node>  IndexStmt
 %type <boolean>  opt_unique opt_concurrently
@@ -3729,6 +3729,41 @@ DropStmt:
 				Behavior:   int($4),
 			}
 		}
+	| DROP drop_type_name IF_P EXISTS name_list opt_drop_behavior
+		{
+			$$ = &nodes.DropStmt{
+				Objects:    $5,
+				RemoveType: int($2),
+				Behavior:   int($6),
+				Missing_ok: true,
+			}
+		}
+	| DROP drop_type_name name_list opt_drop_behavior
+		{
+			$$ = &nodes.DropStmt{
+				Objects:    $3,
+				RemoveType: int($2),
+				Behavior:   int($4),
+			}
+		}
+	/* DROP TRIGGER / POLICY / RULE name ON relation: the relation's name, then the object's */
+	| DROP object_type_name_on_any_name name ON any_name opt_drop_behavior
+		{
+			$$ = &nodes.DropStmt{
+				Objects:    makeList(appendList($5, &nodes.String{Str: $3})),
+				RemoveType: int($2),
+				Behavior:   int($6),
+			}
+		}
+	| DROP object_type_name_on_any_name IF_P EXISTS name ON any_name opt_drop_behavior
+		{
+			$$ = &nodes.DropStmt{
+				Objects:    makeList(appendList($7, &nodes.String{Str: $5})),
+				RemoveType: int($2),
+				Behavior:   int($8),
+				Missing_ok: true,
+			}
+		}
 	/* DROP TYPE / DROP DOMAIN */
 	| DROP TYPE_P type_list opt_drop_behavior
 		{
@@ -3764,146 +3799,6 @@ DropStmt:
 				Missing_ok: true,
 			}
 		}
-	/* DROP SCHEMA / EXTENSION / LANGUAGE / PUBLICATION / SUBSCRIPTION */
-	| DROP SCHEMA name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList($3),
-				RemoveType: int(nodes.OBJECT_SCHEMA),
-				Behavior:   int($4),
-			}
-		}
-	| DROP SCHEMA IF_P EXISTS name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList($5),
-				RemoveType: int(nodes.OBJECT_SCHEMA),
-				Behavior:   int($6),
-				Missing_ok: true,
-			}
-		}
-	| DROP EXTENSION name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList($3),
-				RemoveType: int(nodes.OBJECT_EXTENSION),
-				Behavior:   int($4),
-			}
-		}
-	| DROP EXTENSION IF_P EXISTS name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList($5),
-				RemoveType: int(nodes.OBJECT_EXTENSION),
-				Behavior:   int($6),
-				Missing_ok: true,
-			}
-		}
-	/* DROP TRIGGER / POLICY / RULE ON relation */
-	| DROP TRIGGER name ON any_name opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    &nodes.List{Items: []nodes.Node{$5}},
-				RemoveType: int(nodes.OBJECT_TRIGGER),
-				Behavior:   int($6),
-			}
-		}
-	| DROP TRIGGER IF_P EXISTS name ON any_name opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    &nodes.List{Items: []nodes.Node{$7}},
-				RemoveType: int(nodes.OBJECT_TRIGGER),
-				Behavior:   int($8),
-				Missing_ok: true,
-			}
-		}
-	| DROP POLICY name ON any_name opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    &nodes.List{Items: []nodes.Node{$5}},
-				RemoveType: int(nodes.OBJECT_POLICY),
-				Behavior:   int($6),
-			}
-		}
-	| DROP POLICY IF_P EXISTS name ON any_name opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    &nodes.List{Items: []nodes.Node{$7}},
-				RemoveType: int(nodes.OBJECT_POLICY),
-				Behavior:   int($8),
-				Missing_ok: true,
-			}
-		}
-	| DROP RULE name ON any_name opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    &nodes.List{Items: []nodes.Node{$5}},
-				RemoveType: int(nodes.OBJECT_RULE),
-				Behavior:   int($6),
-			}
-		}
-	| DROP RULE IF_P EXISTS name ON any_name opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    &nodes.List{Items: []nodes.Node{$7}},
-				RemoveType: int(nodes.OBJECT_RULE),
-				Behavior:   int($8),
-				Missing_ok: true,
-			}
-		}
-	/* DROP EVENT TRIGGER */
-	| DROP EVENT TRIGGER name opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList(&nodes.List{Items: []nodes.Node{&nodes.String{Str: $4}}}),
-				RemoveType: int(nodes.OBJECT_EVENT_TRIGGER),
-				Behavior:   int($5),
-			}
-		}
-	| DROP EVENT TRIGGER IF_P EXISTS name opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList(&nodes.List{Items: []nodes.Node{&nodes.String{Str: $6}}}),
-				RemoveType: int(nodes.OBJECT_EVENT_TRIGGER),
-				Behavior:   int($7),
-				Missing_ok: true,
-			}
-		}
-	/* DROP LANGUAGE / PUBLICATION */
-	| DROP LANGUAGE name opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList(&nodes.List{Items: []nodes.Node{&nodes.String{Str: $3}}}),
-				RemoveType: int(nodes.OBJECT_LANGUAGE),
-				Behavior:   int($4),
-			}
-		}
-	| DROP LANGUAGE IF_P EXISTS name opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList(&nodes.List{Items: []nodes.Node{&nodes.String{Str: $5}}}),
-				RemoveType: int(nodes.OBJECT_LANGUAGE),
-				Behavior:   int($6),
-				Missing_ok: true,
-			}
-		}
-	| DROP PUBLICATION name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList($3),
-				RemoveType: int(nodes.OBJECT_PUBLICATION),
-				Behavior:   int($4),
-			}
-		}
-	| DROP PUBLICATION IF_P EXISTS name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList($5),
-				RemoveType: int(nodes.OBJECT_PUBLICATION),
-				Behavior:   int($6),
-				Missing_ok: true,
-			}
-		}
 	/* DROP INDEX CONCURRENTLY */
 	| DROP INDEX CONCURRENTLY any_name_list opt_drop_behavior
 		{
@@ -3924,41 +3819,6 @@ DropStmt:
 				Concurrent: true,
 			}
 		}
-	/* DROP FOREIGN DATA WRAPPER / DROP SERVER */
-	| DROP FOREIGN DATA_P WRAPPER name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList($5),
-				RemoveType: int(nodes.OBJECT_FDW),
-				Behavior:   int($6),
-			}
-		}
-	| DROP FOREIGN DATA_P WRAPPER IF_P EXISTS name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList($7),
-				RemoveType: int(nodes.OBJECT_FDW),
-				Behavior:   int($8),
-				Missing_ok: true,
-			}
-		}
-	| DROP SERVER name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList($3),
-				RemoveType: int(nodes.OBJECT_FOREIGN_SERVER),
-				Behavior:   int($4),
-			}
-		}
-	| DROP SERVER IF_P EXISTS name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList($5),
-				RemoveType: int(nodes.OBJECT_FOREIGN_SERVER),
-				Behavior:   int($6),
-				Missing_ok: true,
-			}
-		}
 	;
 
 object_type_any_name:
@@ -3975,7 +3835,17 @@ object_type_any_name:
 	| TEXT_P SEARCH DICTIONARY { $$ = int64(nodes.OBJECT_TSDICTIONARY) }
 	| TEXT_P SEARCH TEMPLATE { $$ = int64(nodes.OBJECT_TSTEMPLATE) }
 	| TEXT_P SEARCH CONFIGURATION { $$ = int64(nodes.OBJECT_TSCONFIGURATION) }
-	| ACCESS METHOD     { $$ = int64(nodes.OBJECT_ACCESS_METHOD) }
+	;
+
+drop_type_name:
+	ACCESS METHOD				{ $$ = int64(nodes.OBJECT_ACCESS_METHOD) }
+	| EVENT TRIGGER				{ $$ = int64(nodes.OBJECT_EVENT_TRIGGER) }
+	| EXTENSION					{ $$ = int64(nodes.OBJECT_EXTENSION) }
+	| FOREIGN DATA_P WRAPPER	{ $$ = int64(nodes.OBJECT_FDW) }
+	| opt_procedural LANGUAGE	{ $$ = int64(nodes.OBJECT_LANGUAGE) }
+	| PUBLICATION				{ $$ = int64(nodes.OBJECT_PUBLICATION) }
+	| SCHEMA					{ $$ = int64(nodes.OBJECT_SCHEMA) }
+	| SERVER					{ $$ = int64(nodes.OBJECT_FOREIGN_SERVER) }
 	;
 
 any_name_list:
@@ -12847,6 +12717,7 @@ object_type_name:
 	| SUBSCRIPTION { $$ = int64(nodes.OBJECT_SUBSCRIPTION) }
 	| PUBLICATION  { $$ = int64(nodes.OBJECT_PUBLICATION) }
 	| SERVER       { $$ = int64(nodes.OBJECT_FOREIGN_SERVER) }
+	| ACCESS METHOD { $$ = int64(nodes.OBJECT_ACCESS_METHOD) }
 	;
 
 object_type_name_on_any_name:
