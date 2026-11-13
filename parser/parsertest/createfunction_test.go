@@ -112,8 +112,8 @@ func TestCreateFunctionWithParams(t *testing.T) {
 	if p1.ArgType == nil {
 		t.Fatal("expected param 1 type to be set")
 	}
-	if p1.Mode != nodes.FUNC_PARAM_IN {
-		t.Errorf("expected param 1 mode IN (%d), got %d", nodes.FUNC_PARAM_IN, p1.Mode)
+	if p1.Mode != nodes.FUNC_PARAM_DEFAULT {
+		t.Errorf("expected param 1 mode DEFAULT (no mode written) (%d), got %d", nodes.FUNC_PARAM_DEFAULT, p1.Mode)
 	}
 
 	// Check second parameter
@@ -124,8 +124,8 @@ func TestCreateFunctionWithParams(t *testing.T) {
 	if p2.ArgType == nil {
 		t.Fatal("expected param 2 type to be set")
 	}
-	if p2.Mode != nodes.FUNC_PARAM_IN {
-		t.Errorf("expected param 2 mode IN (%d), got %d", nodes.FUNC_PARAM_IN, p2.Mode)
+	if p2.Mode != nodes.FUNC_PARAM_DEFAULT {
+		t.Errorf("expected param 2 mode DEFAULT (no mode written) (%d), got %d", nodes.FUNC_PARAM_DEFAULT, p2.Mode)
 	}
 
 	if stmt.ReturnType == nil {
@@ -147,8 +147,8 @@ func TestCreateFunctionUnnamedParam(t *testing.T) {
 	if p1.ArgType == nil {
 		t.Fatal("expected param type to be set")
 	}
-	if p1.Mode != nodes.FUNC_PARAM_IN {
-		t.Errorf("expected param mode IN (%d), got %d", nodes.FUNC_PARAM_IN, p1.Mode)
+	if p1.Mode != nodes.FUNC_PARAM_DEFAULT {
+		t.Errorf("expected param mode DEFAULT (no mode written) (%d), got %d", nodes.FUNC_PARAM_DEFAULT, p1.Mode)
 	}
 }
 
@@ -235,12 +235,12 @@ func TestCreateFunctionStrict(t *testing.T) {
 	if strictDef == nil {
 		t.Fatal("expected strict option")
 	}
-	strictVal, ok := strictDef.Arg.(*nodes.Integer)
+	strictVal, ok := strictDef.Arg.(*nodes.Boolean)
 	if !ok {
-		t.Fatalf("expected strict arg to be *nodes.Integer, got %T", strictDef.Arg)
+		t.Fatalf("expected strict arg to be *nodes.Boolean, got %T", strictDef.Arg)
 	}
-	if strictVal.Ival != 1 {
-		t.Errorf("expected strict value 1, got %d", strictVal.Ival)
+	if !strictVal.Boolval {
+		t.Errorf("expected strict value true, got %v", strictVal.Boolval)
 	}
 }
 
@@ -252,12 +252,12 @@ func TestCreateFunctionSecurityDefiner(t *testing.T) {
 	if secDef == nil {
 		t.Fatal("expected security option")
 	}
-	secVal, ok := secDef.Arg.(*nodes.Integer)
+	secVal, ok := secDef.Arg.(*nodes.Boolean)
 	if !ok {
-		t.Fatalf("expected security arg to be *nodes.Integer, got %T", secDef.Arg)
+		t.Fatalf("expected security arg to be *nodes.Boolean, got %T", secDef.Arg)
 	}
-	if secVal.Ival != 1 {
-		t.Errorf("expected security value 1 (DEFINER), got %d", secVal.Ival)
+	if !secVal.Boolval {
+		t.Errorf("expected security value true (DEFINER), got %v", secVal.Boolval)
 	}
 }
 
@@ -339,12 +339,12 @@ func TestCreateFunctionCalledOnNullInput(t *testing.T) {
 	if strictDef == nil {
 		t.Fatal("expected strict option")
 	}
-	strictVal, ok := strictDef.Arg.(*nodes.Integer)
+	strictVal, ok := strictDef.Arg.(*nodes.Boolean)
 	if !ok {
-		t.Fatalf("expected strict arg to be *nodes.Integer, got %T", strictDef.Arg)
+		t.Fatalf("expected strict arg to be *nodes.Boolean, got %T", strictDef.Arg)
 	}
-	if strictVal.Ival != 0 {
-		t.Errorf("expected strict value 0 (CALLED ON NULL INPUT), got %d", strictVal.Ival)
+	if strictVal.Boolval {
+		t.Errorf("expected strict value false (CALLED ON NULL INPUT), got %v", strictVal.Boolval)
 	}
 }
 
@@ -356,12 +356,12 @@ func TestCreateFunctionReturnsNullOnNullInput(t *testing.T) {
 	if strictDef == nil {
 		t.Fatal("expected strict option")
 	}
-	strictVal, ok := strictDef.Arg.(*nodes.Integer)
+	strictVal, ok := strictDef.Arg.(*nodes.Boolean)
 	if !ok {
-		t.Fatalf("expected strict arg to be *nodes.Integer, got %T", strictDef.Arg)
+		t.Fatalf("expected strict arg to be *nodes.Boolean, got %T", strictDef.Arg)
 	}
-	if strictVal.Ival != 1 {
-		t.Errorf("expected strict value 1 (RETURNS NULL ON NULL INPUT), got %d", strictVal.Ival)
+	if !strictVal.Boolval {
+		t.Errorf("expected strict value true (RETURNS NULL ON NULL INPUT), got %v", strictVal.Boolval)
 	}
 }
 
@@ -373,12 +373,12 @@ func TestCreateFunctionSecurityInvoker(t *testing.T) {
 	if secDef == nil {
 		t.Fatal("expected security option")
 	}
-	secVal, ok := secDef.Arg.(*nodes.Integer)
+	secVal, ok := secDef.Arg.(*nodes.Boolean)
 	if !ok {
-		t.Fatalf("expected security arg to be *nodes.Integer, got %T", secDef.Arg)
+		t.Fatalf("expected security arg to be *nodes.Boolean, got %T", secDef.Arg)
 	}
-	if secVal.Ival != 0 {
-		t.Errorf("expected security value 0 (INVOKER), got %d", secVal.Ival)
+	if secVal.Boolval {
+		t.Errorf("expected security value false (INVOKER), got %v", secVal.Boolval)
 	}
 }
 

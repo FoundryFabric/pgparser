@@ -894,6 +894,354 @@ text has its underscores taken out, where PostgreSQL keeps the literal's
 text for numeric's input to read. The value is the same either way; the
 classes stay until that divergence is reconsidered.
 
+### alter-enum-add-value-after (tree 9; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `alter type e add value 'x'` | `newValIsAfter` true | false |
+
+ADD VALUE without BEFORE or AFTER sets `newValIsAfter`, as PostgreSQL 16's
+grammar does; with no neighbour the value goes last either way, so only a
+consumer reading the flag saw a difference. The 10 trees that changed over
+the corpus and test data are those statements.
+`testdata/alter_enum_pg16.jsonl` pins 12 statements; all agree.
+
+### rename-constraint-relation-type (tree 13; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `alter table t rename constraint c to d` | `relationType` 0 (unset) | `OBJECT_TABLE` |
+
+PostgreSQL 16's grammar sets `relationType` for RENAME COLUMN and RENAME
+ATTRIBUTE only; a table constraint's rename leaves it unset. The 13 trees
+that changed over the corpus and test data are those statements; the test
+`TestAlterTableRenameConstraint` expected `OBJECT_TABLE` and now expects
+it unset. `testdata/rename_constraint_pg16.jsonl` pins 10 statements; all
+agree.
+
+### type-relation-not-inherited (tree 112, 33, 33 and 4; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `create type t as (a int)` | `typevar` `inh` false | true |
+| `alter type t drop attribute c` | `relation` `inh` false, `relpersistence` `p` | `inh` true, `relpersistence` unset |
+| `alter type t rename attribute a to b` | `relation` `inh` false | true |
+
+PostgreSQL 16 names a composite type with `makeRangeVarFromAnyName`, which
+leaves `inh` false (a type has no children to scan) and sets a permanent
+`relpersistence`; the parser used its table-name helper, with `inh` true,
+and ALTER TYPE built its own RangeVar without a persistence. The three
+sites now share `makeTypeRangeVar`. The 167 trees that changed over the
+corpus and test data are CREATE TYPE ... AS, ALTER TYPE and RENAME
+ATTRIBUTE statements. `testdata/type_relation_pg16.jsonl` pins 15
+statements; all agree.
+
+### alter-column-using (tree 25; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `alter table t alter column a type int using a::int` | `def` `raw_default` the USING expression | no `raw_default`: USING was dropped |
+
+ALTER COLUMN ... TYPE ... USING read the expression and threw it away, so
+the conversion was lost; PostgreSQL 16 keeps it as the ColumnDef's
+`raw_default`. The 38 trees that changed over the corpus and test data are
+ALTER COLUMN ... TYPE ... USING statements. In
+`testdata/generictype_pg16.json` the statement `alter table opass.tab alter
+column a set data type a.b.c.d using a::a.b.c.d` now has the cast's
+`TypeName` too (at 68, as libpg_query has it).
+`testdata/alter_column_using_pg16.jsonl` pins 10 statements; all agree.
+
+### alter-attribute-column-name (tree 12; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `alter type t alter attribute b type varchar` | `def` `ColumnDef` unnamed, `name` `b` | `ColumnDef` named `b` too |
+
+PostgreSQL 16 names the attribute in the command and leaves the
+ColumnDef's `colname` empty, as ALTER TABLE's ALTER COLUMN TYPE already
+did here. The 18 trees that changed over the corpus and test data are
+ALTER ATTRIBUTE statements. `testdata/alter_attribute_pg16.jsonl` pins 8
+statements; all agree.
+
+### initially-valid (tree 131 and 117; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `create table t (a int, unique (a))` | `initially_valid` false | true |
+| `alter table t add primary key (a)` | `initially_valid` false | true |
+
+PostgreSQL 16's grammar sets `initially_valid` for CHECK and FOREIGN KEY
+constraints (from NOT VALID) and leaves it false for UNIQUE, PRIMARY KEY
+and EXCLUDE, which are valid through their index and never read the flag.
+The 325 trees that changed over the corpus and test data are table
+UNIQUE, PRIMARY KEY and EXCLUDE constraints.
+`testdata/initially_valid_pg16.jsonl` pins 15 statements; all agree.
+
+### param-mode-default (tree 664 and 75; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `create function f(int) ...` | `mode` `FUNC_PARAM_DEFAULT` (`d`) | `FUNC_PARAM_IN` (`i`) |
+| `create aggregate a(int) (...)` | `d` | `i` |
+
+PostgreSQL 16 marks an argument written without a mode
+`FUNC_PARAM_DEFAULT`, so a consumer can tell `f(int)` from `f(in int)`;
+both act as IN. The 772 trees that changed over the corpus and test data
+are function, procedure and aggregate argument lists with an argument
+written without a mode; `TestCreateFunctionWithParams` and
+`TestCreateFunctionUnnamedParam` expected IN for those and now expect
+DEFAULT. `testdata/param_mode_pg16.jsonl` pins 15 statements; all agree.
+
+### aggregate-output-arguments (verdict, probes only; fixed)
+
+| statement | PostgreSQL 16 | parser |
+|---|---|---|
+| `create aggregate a(out int) (sfunc = f, stype = int)` | `0A000 aggregates cannot have output arguments` at `out` | accepted |
+| `drop aggregate a(int, x out int)` | the same, at `x` | accepted |
+
+Found while pinning argument modes: PostgreSQL 16's `aggr_arg` refuses
+an OUT or INOUT argument. No statement of the corpus has one, so no tree
+or verdict there changed; the 8 probes that changed verdict are pinned.
+`testdata/aggregate_output_pg16.jsonl` pins 13 statements; all agree.
+
+### objfuncargs (tree 275, 35, 26, 24, 17, 12, 10, 10, 9, 4, 1, 1 and 4; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `drop function f1(int)` | `objfuncargs` the `FunctionParameter` list | no such field |
+| `drop procedure ptest10(out int, int, int)` | `objargs` 2 types, OUT left out | 3 types |
+
+PostgreSQL 16's ObjectWithArgs keeps the arguments as written
+(`objfuncargs`, which carry their modes and names) beside the types that
+identify the function (`objargs`, from `extractArgTypes`, which leaves out
+OUT and TABLE arguments). `ObjectWithArgs.Objfuncargs` is new, set by
+`function_with_argtypes` and `aggregate_with_argtypes`, and `Objargs` now
+leaves out OUT arguments. Every statement naming a function, procedure,
+routine, aggregate or operator changed tree (1,376 over the corpus and
+test data: the new field). The TypeName-site tests count each TypeName of
+a statement once (`typeNames`), as an argument's is now reached through
+both lists. `testdata/objfuncargs_pg16.jsonl` pins 22 statements; all
+agree.
+
+### ordered-set-variadic (tree 1, 1 and 1; verdict, probes only; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `create aggregate my_rank(VARIADIC "any" ORDER BY VARIADIC "any") (...)` | one argument, 1 direct | two arguments |
+| `create aggregate a(variadic "any" order by "any") (...)` | `0A000 an ordered-set aggregate with a VARIADIC direct argument must have one VARIADIC aggregated argument of the same data type` at the ordered argument's type | accepted |
+
+PostgreSQL 16's `makeOrderedSetArgs` drops a VARIADIC ordered argument
+that repeats a VARIADIC last direct argument, and refuses any other
+ordered arguments after one, comparing the types as `equal()` does
+(locations aside; `equalNodes`). The 3 trees that changed over the corpus
+are such aggregates; the 11 verdicts that changed are new probes, now
+PostgreSQL 16's. `testdata/ordered_set_pg16.jsonl` pins 21 statements;
+all agree.
+
+### function-flags-boolean (tree 114 of 124; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `create function f() ... strict ...` | `strict` `Boolean` true | `Integer` 1 |
+| `alter function f(int) not leakproof` | `leakproof` `Boolean` false | `Integer` 0 |
+
+STRICT, CALLED ON NULL INPUT, RETURNS NULL ON NULL INPUT, SECURITY
+DEFINER and INVOKER, LEAKPROOF, NOT LEAKPROOF and WINDOW are
+`makeBoolean` options in PostgreSQL 16's grammar. The 119 trees that
+changed over the corpus and test data have one of them; the five
+`parsertest` tests of those options expected `Integer` and now expect
+`Boolean`. `DefElem.arg` keeps 10: SET GENERATED's `A_Const` (next fix)
+and a `BUFFER_USAGE_LIMIT` past int32, the integer-literal divergence.
+`testdata/func_flags_pg16.jsonl` pins 14 statements; all agree.
+
+### external-security (verdict, probes only; fixed)
+
+| statement | PostgreSQL 16 | parser |
+|---|---|---|
+| `create function f() ... external security invoker ...` | the `security` option, false | `42601 syntax error at or near "external"` |
+
+Found while pinning the function flags: PostgreSQL 16's
+`common_func_opt_item` takes the SQL standard's EXTERNAL SECURITY DEFINER
+and INVOKER as SECURITY DEFINER and INVOKER. No statement of the corpus
+has one; the 8 verdicts that changed are new probes, now PostgreSQL 16's.
+`testdata/external_security_pg16.jsonl` pins 8 statements; all agree.
+
+### integer-option (tree 19 and 9; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `alter table t alter a set statistics 0` | `def` `Integer` 0 | `A_Const` 0 |
+| `alter table t alter a set generated by default` | `generated` `Integer` 100 (`d`) | `A_Const` 100 |
+
+PostgreSQL 16's grammar makes SET STATISTICS's target and SET GENERATED's
+kind with `makeInteger`, a bare value, where the parser made a constant
+expression. The 184 trees that changed over the corpus and test data have
+one of them. `node-type DefElem.arg` keeps 1, a `BUFFER_USAGE_LIMIT` past
+int32 (the integer-literal divergence). `testdata/int_option_pg16.jsonl`
+pins 10 statements; all agree.
+
+### character-typmods (tree 150, 29 and 3; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `select a::varchar(3) from tt1` | typmod `A_Const` 3 | `Integer` 3 |
+| `alter table attmp add column i char` | typmod `A_Const` 1 (CHAR is CHAR(1)) | no typmod |
+| `select 'j'::char` | typmod `A_Const` 1 | no typmod |
+
+PostgreSQL 16's `CharacterWithLength` makes the length with
+`makeIntConst`, and `CharacterWithoutLength` makes CHAR, CHARACTER and
+NCHAR without a length CHAR(1); only a constant's type (`char 'x'`,
+`ConstCharacter`) drops that typmod. The rules are now PostgreSQL 16's
+(`character`, `CharacterWithLength`, `CharacterWithoutLength`) instead of
+twelve alternatives written out twice. The 250 trees that changed over the
+corpus and test data have a character type. `typename_sites_pg16.jsonl`'s
+`drop type nchar` recorded no typmod and now records 1, as libpg_query
+has it; `TestVarcharCast`, `TestCharCast`, `TestCharacterVaryingCast` and
+`TestCastStringToVarchar` expected an `Integer` typmod and now expect an
+`A_Const`. `testdata/character_type_pg16.jsonl` pins 14
+statements; all agree.
+
+### drop-object-names (tree 197 and 161; verdict, probes only; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `drop server s2` | `objects` `String` `s2` | a list holding `s2` |
+| `drop policy p3 on s1` | one list `s1`, `p3` | one list `s1`: the policy's name was dropped |
+| `drop language l, m`, `drop procedural language l`, `drop event trigger e, f` | accepted | `42601 syntax error at or near ","` / `"procedural"` |
+| `drop access method a.b`, `comment on access method a.b is 'x'` | `42601 syntax error at or near "."` | accepted |
+
+PostgreSQL 16's `DropStmt` takes `drop_type_name name_list` (ACCESS
+METHOD, EVENT TRIGGER, EXTENSION, FOREIGN DATA WRAPPER, [PROCEDURAL]
+LANGUAGE, PUBLICATION, SCHEMA, SERVER), whose objects are bare `String`s,
+and `object_type_name_on_any_name name ON any_name`, whose one object is
+the relation's name with the object's appended. The parser wrapped each
+name in a list, kept only the relation's name for DROP TRIGGER, POLICY
+and RULE (the name of what was dropped was lost), took one name for
+EVENT TRIGGER and LANGUAGE, no PROCEDURAL, and an access method's name
+qualified. The rules are now PostgreSQL 16's, and ACCESS METHOD is an
+`object_type_name` for COMMENT, SECURITY LABEL and ALTER EXTENSION, as
+in PostgreSQL 16. The 338 trees that changed over the corpus and test data
+are those DROP statements; no verdict of the corpus changed, and the 9
+that changed are new probes, now PostgreSQL 16's.
+`testdata/drop_name_pg16.jsonl` pins 42 statements; all agree.
+
+### grant-object-names (tree 73; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `grant usage on schema schema_op1 to public` | `objects` `String` `schema_op1` | a list holding it |
+
+PostgreSQL 16's `privilege_target` keeps the names of databases,
+languages, schemas, tablespaces, foreign data wrappers and servers, and of
+the schemas of ALL ... IN SCHEMA, as bare `String`s; the parser wrapped
+each in a list, as it had for DROP. With DROP fixed, the helper that did
+it (`makeNameListAsAnyNameList`) has no caller left and is gone. The 113
+trees that changed over the corpus and test data are those GRANT and
+REVOKE statements. `testdata/grant_name_pg16.jsonl` pins 18 statements;
+all agree.
+
+### sortby-location (overplaced 2824, 438, 138 and 2; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `select * from t order by pk` | `SortBy` `location` -1 | 0 |
+
+A SortBy's location is its USING operator's; PostgreSQL 16's `sortby`
+sets -1 without one, and the parser left Go's 0, which is a position. The
+3,458 trees that changed over the corpus and test data have an ORDER BY
+without USING. (USING's location is still unset, one of the `unlocated`
+classes.) `testdata/sortby_location_pg16.jsonl` pins 12 statements; all
+agree.
+
+### range-function-pairs (tree 2728; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `select * from t(3)` | `functions` one list of 2: the call and NIL | one list of 1: the call |
+
+PostgreSQL 16 makes each of a RangeFunction's functions a pair, the call
+and its column definition list, for a lone function as for ROWS FROM;
+the parser's lone function was a list of one. ROWS FROM's missing list
+was a nil `*List` in a `Node`, which is not `== nil`; both are now a nil
+`Node`. The 2,385 trees that changed over the corpus and test data have a
+function in FROM. With the pairs alike, the comparison now reaches these
+functions' arguments, so the known `presence A_Const.ival` (+2) and
+`FuncCall.args/A_Const.fval` (+2) integer-literal classes grow.
+`testdata/range_function_pg16.jsonl` pins 10 statements; all agree.
+
+### trim-argument-order (tree 7, 6, 6, 6, 2, 1 and 1; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `select trim(both 'x' from 'xxxxxsome Xsxxxxx')` | `btrim('xxxxxsome Xsxxxxx', 'x')` | `btrim('x', 'xxxxxsome Xsxxxxx')` |
+
+PostgreSQL 16's `trim_list` appends the characters to trim after the
+string (`btrim(string, characters)`); the parser put them first, so the
+call trimmed the wrong string. This was the four TRIM `location` classes,
+`name A_Const.sval/String.sval` and the `TypeName.arraybounds` pair: the
+two arguments compared crosswise. The 7 trees that changed over the
+corpus and test data are TRIM with characters and FROM.
+`testdata/trim_args_pg16.jsonl` pins 10 statements; all agree.
+
+### overlaps (tree 23; verdict, probes only; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `select (time '00:00', interval '1 hour') overlaps (time '00:30', interval '1 hour')` | `pg_catalog.overlaps` | `overlaps` |
+| `select (1, 2, 3) overlaps (3, 4)` | `42601 wrong number of parameters on left side of OVERLAPS expression` at the row | accepted |
+
+PostgreSQL 16 calls `SystemFuncName("overlaps")`, which a schema named
+on the search path cannot capture, and refuses a row that is not a pair,
+left side first. The 26 trees that changed over the corpus and test data
+are OVERLAPS expressions; no corpus verdict changed, and the 5 that did
+are new probes, now PostgreSQL 16's. `testdata/overlaps_pg16.jsonl` pins
+10 statements; all agree.
+
+### is-normalized (tree 2; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `select u&'\00E4\24D1c' is normalized` | `is_normalized(x)` | `is_normalized(x, 'NFC')` |
+
+Without a form PostgreSQL 16 passes the string alone and leaves the form
+to `is_normalized`'s default; the parser wrote the default in. The 6
+trees that changed over the corpus and test data are IS [NOT] NORMALIZED
+without a form. `testdata/normalized_pg16.jsonl` pins 8 statements; all
+agree.
+
+### domain-collate (tree 15 and 15; verdict, probes only; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `create domain d2 as text collate "C"` | `collClause` the `CollateClause`, no constraints | the `CollateClause` among the constraints |
+| `create table t (a text collate "C" collate "POSIX")` | `42601 multiple COLLATE clauses not allowed` at the second COLLATE | accepted, the last one kept |
+
+CREATE DOMAIN's qualifiers go through PostgreSQL 16's `SplitColQualList`,
+which keeps COLLATE apart from the constraints and refuses a second one
+at its COLLATE; a column's did not refuse it. A COLLATE clause now has its
+location, at COLLATE, which also clears 95 of the 100 statements of the
+`unlocated ColumnDef.collclause/CollateClause.location` class (the 5 left
+are COLLATE in other rules). The 135 trees that changed over the corpus
+and test data have a COLLATE qualifier; no corpus verdict changed, and the
+4 that did are new probes, now PostgreSQL 16's. A domain's COMPRESSION and
+STORAGE, which PostgreSQL 16 refuses (they are column options before the
+constraints, not qualifiers), are still taken: they are pinned with the
+class `column-qualifier-order`, left for its own fix.
+`testdata/domain_collate_pg16.jsonl` pins 16 statements; the 14 without a
+class agree.
+
+### recursive-view-select (tree 3; overplaced 3 and 3; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `create recursive view nums (n) as values (1) union all ...` | `SELECT n FROM nums`, WITH and CTE at -1 | `SELECT * FROM nums`, WITH and CTE at 0 |
+
+PostgreSQL 16's `makeRecursiveViewSelect` selects the view's columns by
+name, not `*`, and leaves the WITH clause and the CTE unlocated. Both
+rules now share the parser's `makeRecursiveViewSelect`. The 3 trees that
+changed over the corpus and test data are recursive views.
+`testdata/recursive_view_pg16.jsonl` pins 8 statements; all agree.
+
 ## Rerunning
 
 ```

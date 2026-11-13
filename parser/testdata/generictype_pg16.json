@@ -219,7 +219,7 @@
 {"sql": "alter table opass.tab add column c nosuch", "pg16After": "42704 type \"nosuch\" does not exist", "types": [{"names": ["nosuch"], "location": 35}], "pg16Name": "nosuch", "pg16Position": 35},
 {"sql": "alter table opass.tab alter column a type oracle.pg_catalog.int8", "pg16After": "ok", "types": [{"names": ["oracle", "pg_catalog", "int8"], "location": 42}]},
 {"sql": "alter table opass.tab alter column a type a.b.c", "pg16After": "0A000 cross-database references are not implemented: a.b.c", "types": [{"names": ["a", "b", "c"], "location": 42}], "pg16Name": "a.b.c"},
-{"sql": "alter table opass.tab alter column a set data type a.b.c.d using a::a.b.c.d", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "types": [{"names": ["a", "b", "c", "d"], "location": 51}], "pg16Name": "a.b.c.d"},
+{"sql": "alter table opass.tab alter column a set data type a.b.c.d using a::a.b.c.d", "pg16After": "42601 improper qualified name (too many dotted names): a.b.c.d", "types": [{"names": ["a", "b", "c", "d"], "location": 51}, {"names": ["a", "b", "c", "d"], "location": 68}], "pg16Name": "a.b.c.d"},
 {"sql": "alter table opass.tab alter a type oracle.pg_catalog.numeric(5,2)[] using null", "pg16After": "ok", "types": [{"names": ["oracle", "pg_catalog", "numeric"], "typmods": 2, "bounds": [-1], "location": 35}]},
 {"sql": "alter table opass.tab alter column b type a.b.c collate \"C\"", "pg16After": "0A000 cross-database references are not implemented: a.b.c", "types": [{"names": ["a", "b", "c"], "location": 42}], "pg16Name": "a.b.c"},
 {"sql": "alter table opass.tab alter column a type nosuch", "pg16After": "42704 type \"nosuch\" does not exist", "types": [{"names": ["nosuch"], "location": 42}], "pg16Name": "nosuch"},

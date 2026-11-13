@@ -1,0 +1,12 @@
+{"sql":"alter type e add value 'x'"}
+{"sql":"alter type e add value if not exists 'x'"}
+{"sql":"alter type s.e add value 'x'"}
+{"sql":"alter type e add value 'x' before 'y'"}
+{"sql":"alter type e add value 'x' after 'y'"}
+{"sql":"alter type e add value if not exists 'x' after 'y'"}
+{"sql":"alter type e rename value 'x' to 'y'"}
+{"sql":"alter type e add value x","code":"42601","message":"syntax error at or near \"x\"","position":23}
+{"sql":"alter type e add value 'x' before","code":"42601","message":"syntax error at end of input","position":33}
+{"sql":"alter type e add value 'x' after y","code":"42601","message":"syntax error at or near \"y\"","position":33}
+{"sql":"alter type e add 'x'","code":"42601","message":"syntax error at or near \"'x'\"","position":17}
+{"sql":"alter type a.b.c.d add value 'x'"}

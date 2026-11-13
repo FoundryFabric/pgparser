@@ -1,0 +1,10 @@
+{"sql":"select trim(both 'x' from 'xay')"}
+{"sql":"select trim(leading 'x' from 'xay')"}
+{"sql":"select trim(trailing from 'xay')"}
+{"sql":"select trim('x' from 'xay')"}
+{"sql":"select trim(from 'xay')"}
+{"sql":"select trim('xay')"}
+{"sql":"select trim('xay', 'x')"}
+{"sql":"select trim(both 'x' from 'a', 'b')"}
+{"sql":"select trim(both from)","code":"42601","message":"syntax error at or near \")\"","position":21}
+{"sql":"select trim(both 'x' from)","code":"42601","message":"syntax error at or near \")\"","position":25}

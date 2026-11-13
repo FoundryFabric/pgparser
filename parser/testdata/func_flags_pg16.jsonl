@@ -1,0 +1,14 @@
+{"sql":"create function f() returns int language sql strict as 'select 1'"}
+{"sql":"create function f() returns int language sql called on null input as 'select 1'"}
+{"sql":"create function f() returns int language sql returns null on null input as 'select 1'"}
+{"sql":"create function f() returns int language sql security definer as 'select 1'"}
+{"sql":"create function f() returns int language sql leakproof as 'select 1'"}
+{"sql":"create function f() returns int language sql not leakproof as 'select 1'"}
+{"sql":"create function f() returns int language sql window as 'select 1'"}
+{"sql":"alter function f() strict"}
+{"sql":"alter function f() not leakproof restrict"}
+{"sql":"alter procedure p() security definer"}
+{"sql":"create procedure p() language sql strict as ''"}
+{"sql":"create function f() returns int language sql security as 'select 1'","code":"42601","message":"syntax error at or near \"as\"","position":54}
+{"sql":"create function f() returns int language sql not strict as 'select 1'","code":"42601","message":"syntax error at or near \"strict\"","position":49}
+{"sql":"alter function f() window","code":"42601","message":"syntax error at or near \"window\"","position":19}

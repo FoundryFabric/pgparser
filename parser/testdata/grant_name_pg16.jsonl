@@ -1,0 +1,18 @@
+{"sql":"grant usage on schema s, t to r"}
+{"sql":"grant create on database d to r"}
+{"sql":"grant usage on language plpgsql to public"}
+{"sql":"grant create on tablespace ts to r with grant option"}
+{"sql":"grant usage on foreign data wrapper w to r"}
+{"sql":"grant usage on foreign server s to r"}
+{"sql":"grant select on all tables in schema s, t to r"}
+{"sql":"grant execute on all functions in schema s to r"}
+{"sql":"grant usage on all sequences in schema s to r"}
+{"sql":"grant execute on all routines in schema s to r"}
+{"sql":"grant execute on all procedures in schema s to r"}
+{"sql":"revoke all on schema s from r cascade"}
+{"sql":"revoke grant option for usage on schema s from r"}
+{"sql":"revoke create on database d, e from r"}
+{"sql":"revoke usage on all sequences in schema s from r"}
+{"sql":"grant select on table t, s.u to r"}
+{"sql":"grant usage on schema s.t to r","code":"42601","message":"syntax error at or near \".\"","position":23}
+{"sql":"grant usage on type t to r"}

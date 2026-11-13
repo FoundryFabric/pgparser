@@ -1,0 +1,8 @@
+{"sql":"select 'a' is normalized"}
+{"sql":"select 'a' is not normalized"}
+{"sql":"select 'a' is nfd normalized"}
+{"sql":"select 'a' is not nfkc normalized"}
+{"sql":"select 'a' is nfx normalized","code":"42601","message":"syntax error at or near \"nfx\"","position":14}
+{"sql":"select 'a' is nfkd normalized and true"}
+{"sql":"select 'a' is not normalized is true"}
+{"sql":"select 'a' is normalized nfc"}

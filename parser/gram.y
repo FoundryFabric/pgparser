@@ -10,6 +10,7 @@ package parser
 import (
 	"fmt"
 	"math"
+	"reflect"
 	"strconv"
 	"strings"
 
@@ -189,7 +190,8 @@ import (
 %type <list>   when_clause_list
 %type <typename>  Typename SimpleTypename GenericType Numeric opt_float Character
 %type <typename>  ConstDatetime ConstInterval Bit BitWithLength BitWithoutLength
-%type <typename>  ConstTypename ConstBit ConstCharacter
+%type <typename>  ConstTypename ConstBit ConstCharacter CharacterWithLength CharacterWithoutLength
+%type <str>   character
 %type <boolean>  opt_timezone
 %type <list>  opt_interval
 %type <list>  interval_second
@@ -238,7 +240,7 @@ import (
 %type <list>  alter_table_cmds
 %type <node>  alter_table_cmd partition_cmd
 %type <ival>  opt_drop_behavior
-%type <ival>  object_type_any_name
+%type <ival>  object_type_any_name drop_type_name
 %type <list>  any_name_list
 %type <node>  IndexStmt
 %type <boolean>  opt_unique opt_concurrently
@@ -1743,7 +1745,9 @@ columnOptions:
 				IsLocal:     true,
 				Location:    -1,
 			}
-			splitColQualList($2, n)
+			if !splitColQualList(pglex, $2, n) {
+				return 1
+			}
 			$$ = n
 		}
 	| ColId WITH OPTIONS opt_column_constraints
@@ -1754,7 +1758,9 @@ columnOptions:
 				IsLocal:     true,
 				Location:    -1,
 			}
-			splitColQualList($4, n)
+			if !splitColQualList(pglex, $4, n) {
+				return 1
+			}
 			$$ = n
 		}
 	;
@@ -1821,7 +1827,9 @@ columnDef:
 				IsLocal:     true,
 				Location:    -1,
 			}
-			splitColQualList($3, n)
+			if !splitColQualList(pglex, $3, n) {
+				return 1
+			}
 			$$ = n
 		}
 	;
@@ -1850,7 +1858,7 @@ ColConstraint:
 		{
 			$$ = &nodes.CollateClause{
 				Collname: $2,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| COMPRESSION ColId
@@ -2079,7 +2087,6 @@ ConstraintElem:
 				Options:          $7,
 				Indexspace:       $8,
 				Location:         -1,
-				InitiallyValid:   true,
 			}
 			if !checkConstraintAttrs(pglex, $9, "UNIQUE", true, false, false) {
 				return 1
@@ -2093,7 +2100,6 @@ ConstraintElem:
 				Contype:    nodes.CONSTR_UNIQUE,
 				Indexname:  $2,
 				Location:   -1,
-				InitiallyValid: true,
 			}
 			if !checkConstraintAttrs(pglex, $3, "UNIQUE", true, false, false) {
 				return 1
@@ -2110,7 +2116,6 @@ ConstraintElem:
 				Options:    $7,
 				Indexspace:  $8,
 				Location:   -1,
-				InitiallyValid: true,
 			}
 			if !checkConstraintAttrs(pglex, $9, "PRIMARY KEY", true, false, false) {
 				return 1
@@ -2124,7 +2129,6 @@ ConstraintElem:
 				Contype:    nodes.CONSTR_PRIMARY,
 				Indexname:  $3,
 				Location:   -1,
-				InitiallyValid: true,
 			}
 			if !checkConstraintAttrs(pglex, $4, "PRIMARY KEY", true, false, false) {
 				return 1
@@ -2178,7 +2182,6 @@ ConstraintElem:
 				Indexspace:      $8,
 				WhereClause:    $9,
 				Location:       -1,
-				InitiallyValid: true,
 			}
 			if !checkConstraintAttrs(pglex, $10, "EXCLUDE", true, false, false) {
 				return 1
@@ -2681,7 +2684,7 @@ alter_table_cmd:
 		}
 	| ALTER opt_column ColId TYPE_P Typename opt_collate_clause USING a_expr
 		{
-			coldef := &nodes.ColumnDef{TypeName: $5}
+			coldef := &nodes.ColumnDef{TypeName: $5, RawDefault: $8}
 			if $6 != nil {
 				coldef.CollClause = $6.(*nodes.CollateClause)
 			}
@@ -2693,7 +2696,7 @@ alter_table_cmd:
 		}
 	| ALTER opt_column ColId SET DATA_P TYPE_P Typename opt_collate_clause USING a_expr
 		{
-			coldef := &nodes.ColumnDef{TypeName: $7}
+			coldef := &nodes.ColumnDef{TypeName: $7, RawDefault: $10}
 			if $8 != nil {
 				coldef.CollClause = $8.(*nodes.CollateClause)
 			}
@@ -2997,7 +3000,7 @@ alter_table_cmd:
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetStatistics),
 				Name:    $3,
-				Def:     makeIntConst($6, -1),
+				Def:     &nodes.Integer{Ival: $6},
 			}
 		}
 	| ALTER opt_column Iconst SET STATISTICS SignedIconst
@@ -3008,7 +3011,7 @@ alter_table_cmd:
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_SetStatistics),
 				Num:     int16($3),
-				Def:     makeIntConst($6, -1),
+				Def:     &nodes.Integer{Ival: $6},
 			}
 		}
 	/* SET COMPRESSION */
@@ -3200,11 +3203,10 @@ RenameStmt:
 	| ALTER TABLE relation_expr RENAME CONSTRAINT name TO name
 		{
 			$$ = &nodes.RenameStmt{
-				RenameType:   nodes.OBJECT_TABCONSTRAINT,
-				RelationType: nodes.OBJECT_TABLE,
-				Relation:     $3.(*nodes.RangeVar),
-				Subname:      $6,
-				Newname:      $8,
+				RenameType: nodes.OBJECT_TABCONSTRAINT,
+				Relation:   $3.(*nodes.RangeVar),
+				Subname:    $6,
+				Newname:    $8,
 			}
 		}
 	| ALTER TABLE IF_P EXISTS relation_expr RENAME COLUMN ColId TO name
@@ -3232,12 +3234,11 @@ RenameStmt:
 	| ALTER TABLE IF_P EXISTS relation_expr RENAME CONSTRAINT name TO name
 		{
 			$$ = &nodes.RenameStmt{
-				RenameType:   nodes.OBJECT_TABCONSTRAINT,
-				RelationType: nodes.OBJECT_TABLE,
-				Relation:     $5.(*nodes.RangeVar),
-				Subname:      $8,
-				Newname:      $10,
-				MissingOk:    true,
+				RenameType: nodes.OBJECT_TABCONSTRAINT,
+				Relation:   $5.(*nodes.RangeVar),
+				Subname:    $8,
+				Newname:    $10,
+				MissingOk:  true,
 			}
 		}
 	/* RENAME INDEX */
@@ -3478,7 +3479,7 @@ RenameStmt:
 			$$ = &nodes.RenameStmt{
 				RenameType:   nodes.OBJECT_ATTRIBUTE,
 				RelationType: nodes.OBJECT_TYPE,
-				Relation:     makeRangeVarFromAnyName($3, $<loc>3),
+				Relation:     makeTypeRangeVar($3, $<loc>3),
 				Subname:      $6,
 				Newname:      $8,
 				Behavior:     nodes.DropBehavior($9),
@@ -3734,6 +3735,41 @@ DropStmt:
 				Behavior:   int($4),
 			}
 		}
+	| DROP drop_type_name IF_P EXISTS name_list opt_drop_behavior
+		{
+			$$ = &nodes.DropStmt{
+				Objects:    $5,
+				RemoveType: int($2),
+				Behavior:   int($6),
+				Missing_ok: true,
+			}
+		}
+	| DROP drop_type_name name_list opt_drop_behavior
+		{
+			$$ = &nodes.DropStmt{
+				Objects:    $3,
+				RemoveType: int($2),
+				Behavior:   int($4),
+			}
+		}
+	/* DROP TRIGGER / POLICY / RULE name ON relation: the relation's name, then the object's */
+	| DROP object_type_name_on_any_name name ON any_name opt_drop_behavior
+		{
+			$$ = &nodes.DropStmt{
+				Objects:    makeList(appendList($5, &nodes.String{Str: $3})),
+				RemoveType: int($2),
+				Behavior:   int($6),
+			}
+		}
+	| DROP object_type_name_on_any_name IF_P EXISTS name ON any_name opt_drop_behavior
+		{
+			$$ = &nodes.DropStmt{
+				Objects:    makeList(appendList($7, &nodes.String{Str: $5})),
+				RemoveType: int($2),
+				Behavior:   int($8),
+				Missing_ok: true,
+			}
+		}
 	/* DROP TYPE / DROP DOMAIN */
 	| DROP TYPE_P type_list opt_drop_behavior
 		{
@@ -3769,146 +3805,6 @@ DropStmt:
 				Missing_ok: true,
 			}
 		}
-	/* DROP SCHEMA / EXTENSION / LANGUAGE / PUBLICATION / SUBSCRIPTION */
-	| DROP SCHEMA name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList($3),
-				RemoveType: int(nodes.OBJECT_SCHEMA),
-				Behavior:   int($4),
-			}
-		}
-	| DROP SCHEMA IF_P EXISTS name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList($5),
-				RemoveType: int(nodes.OBJECT_SCHEMA),
-				Behavior:   int($6),
-				Missing_ok: true,
-			}
-		}
-	| DROP EXTENSION name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList($3),
-				RemoveType: int(nodes.OBJECT_EXTENSION),
-				Behavior:   int($4),
-			}
-		}
-	| DROP EXTENSION IF_P EXISTS name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList($5),
-				RemoveType: int(nodes.OBJECT_EXTENSION),
-				Behavior:   int($6),
-				Missing_ok: true,
-			}
-		}
-	/* DROP TRIGGER / POLICY / RULE ON relation */
-	| DROP TRIGGER name ON any_name opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    &nodes.List{Items: []nodes.Node{$5}},
-				RemoveType: int(nodes.OBJECT_TRIGGER),
-				Behavior:   int($6),
-			}
-		}
-	| DROP TRIGGER IF_P EXISTS name ON any_name opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    &nodes.List{Items: []nodes.Node{$7}},
-				RemoveType: int(nodes.OBJECT_TRIGGER),
-				Behavior:   int($8),
-				Missing_ok: true,
-			}
-		}
-	| DROP POLICY name ON any_name opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    &nodes.List{Items: []nodes.Node{$5}},
-				RemoveType: int(nodes.OBJECT_POLICY),
-				Behavior:   int($6),
-			}
-		}
-	| DROP POLICY IF_P EXISTS name ON any_name opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    &nodes.List{Items: []nodes.Node{$7}},
-				RemoveType: int(nodes.OBJECT_POLICY),
-				Behavior:   int($8),
-				Missing_ok: true,
-			}
-		}
-	| DROP RULE name ON any_name opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    &nodes.List{Items: []nodes.Node{$5}},
-				RemoveType: int(nodes.OBJECT_RULE),
-				Behavior:   int($6),
-			}
-		}
-	| DROP RULE IF_P EXISTS name ON any_name opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    &nodes.List{Items: []nodes.Node{$7}},
-				RemoveType: int(nodes.OBJECT_RULE),
-				Behavior:   int($8),
-				Missing_ok: true,
-			}
-		}
-	/* DROP EVENT TRIGGER */
-	| DROP EVENT TRIGGER name opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList(&nodes.List{Items: []nodes.Node{&nodes.String{Str: $4}}}),
-				RemoveType: int(nodes.OBJECT_EVENT_TRIGGER),
-				Behavior:   int($5),
-			}
-		}
-	| DROP EVENT TRIGGER IF_P EXISTS name opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList(&nodes.List{Items: []nodes.Node{&nodes.String{Str: $6}}}),
-				RemoveType: int(nodes.OBJECT_EVENT_TRIGGER),
-				Behavior:   int($7),
-				Missing_ok: true,
-			}
-		}
-	/* DROP LANGUAGE / PUBLICATION */
-	| DROP LANGUAGE name opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList(&nodes.List{Items: []nodes.Node{&nodes.String{Str: $3}}}),
-				RemoveType: int(nodes.OBJECT_LANGUAGE),
-				Behavior:   int($4),
-			}
-		}
-	| DROP LANGUAGE IF_P EXISTS name opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList(&nodes.List{Items: []nodes.Node{&nodes.String{Str: $5}}}),
-				RemoveType: int(nodes.OBJECT_LANGUAGE),
-				Behavior:   int($6),
-				Missing_ok: true,
-			}
-		}
-	| DROP PUBLICATION name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList($3),
-				RemoveType: int(nodes.OBJECT_PUBLICATION),
-				Behavior:   int($4),
-			}
-		}
-	| DROP PUBLICATION IF_P EXISTS name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList($5),
-				RemoveType: int(nodes.OBJECT_PUBLICATION),
-				Behavior:   int($6),
-				Missing_ok: true,
-			}
-		}
 	/* DROP INDEX CONCURRENTLY */
 	| DROP INDEX CONCURRENTLY any_name_list opt_drop_behavior
 		{
@@ -3929,41 +3825,6 @@ DropStmt:
 				Concurrent: true,
 			}
 		}
-	/* DROP FOREIGN DATA WRAPPER / DROP SERVER */
-	| DROP FOREIGN DATA_P WRAPPER name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList($5),
-				RemoveType: int(nodes.OBJECT_FDW),
-				Behavior:   int($6),
-			}
-		}
-	| DROP FOREIGN DATA_P WRAPPER IF_P EXISTS name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList($7),
-				RemoveType: int(nodes.OBJECT_FDW),
-				Behavior:   int($8),
-				Missing_ok: true,
-			}
-		}
-	| DROP SERVER name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList($3),
-				RemoveType: int(nodes.OBJECT_FOREIGN_SERVER),
-				Behavior:   int($4),
-			}
-		}
-	| DROP SERVER IF_P EXISTS name_list opt_drop_behavior
-		{
-			$$ = &nodes.DropStmt{
-				Objects:    makeNameListAsAnyNameList($5),
-				RemoveType: int(nodes.OBJECT_FOREIGN_SERVER),
-				Behavior:   int($6),
-				Missing_ok: true,
-			}
-		}
 	;
 
 object_type_any_name:
@@ -3980,7 +3841,17 @@ object_type_any_name:
 	| TEXT_P SEARCH DICTIONARY { $$ = int64(nodes.OBJECT_TSDICTIONARY) }
 	| TEXT_P SEARCH TEMPLATE { $$ = int64(nodes.OBJECT_TSTEMPLATE) }
 	| TEXT_P SEARCH CONFIGURATION { $$ = int64(nodes.OBJECT_TSCONFIGURATION) }
-	| ACCESS METHOD     { $$ = int64(nodes.OBJECT_ACCESS_METHOD) }
+	;
+
+drop_type_name:
+	ACCESS METHOD				{ $$ = int64(nodes.OBJECT_ACCESS_METHOD) }
+	| EVENT TRIGGER				{ $$ = int64(nodes.OBJECT_EVENT_TRIGGER) }
+	| EXTENSION					{ $$ = int64(nodes.OBJECT_EXTENSION) }
+	| FOREIGN DATA_P WRAPPER	{ $$ = int64(nodes.OBJECT_FDW) }
+	| opt_procedural LANGUAGE	{ $$ = int64(nodes.OBJECT_LANGUAGE) }
+	| PUBLICATION				{ $$ = int64(nodes.OBJECT_PUBLICATION) }
+	| SCHEMA					{ $$ = int64(nodes.OBJECT_SCHEMA) }
+	| SERVER					{ $$ = int64(nodes.OBJECT_FOREIGN_SERVER) }
 	;
 
 any_name_list:
@@ -4197,27 +4068,7 @@ ViewStmt:
 			}
 			rv := makeRangeVar($5, $<loc>5).(*nodes.RangeVar)
 			rv.Relpersistence = relpersistenceForTemp($2)
-			/* Create a WITH RECURSIVE CTE wrapper */
-			cte := &nodes.CommonTableExpr{
-				Ctename:      rv.Relname,
-				Ctequery:     $11,
-				Aliascolnames:  $7,
-			}
-			wc := &nodes.WithClause{
-				Ctes:      makeList(cte),
-				Recursive: true,
-			}
-			cr := &nodes.ColumnRef{
-				Fields: &nodes.List{Items: []nodes.Node{&nodes.A_Star{}}},
-				Location: -1,
-			}
-			rt := &nodes.ResTarget{Val: cr, Location: -1}
-			fromRv := &nodes.RangeVar{Relname: rv.Relname, Inh: true, Relpersistence: 'p', Location: -1}
-			sel := &nodes.SelectStmt{
-				TargetList: makeList(rt),
-				FromClause: makeList(fromRv),
-				WithClause: wc,
-			}
+			sel := makeRecursiveViewSelect(rv.Relname, $7, $11)
 			$$ = &nodes.ViewStmt{
 				View:            rv,
 				Aliases:         $7,
@@ -4234,26 +4085,7 @@ ViewStmt:
 			}
 			rv := makeRangeVar($7, $<loc>7).(*nodes.RangeVar)
 			rv.Relpersistence = relpersistenceForTemp($4)
-			cte := &nodes.CommonTableExpr{
-				Ctename:      rv.Relname,
-				Ctequery:     $13,
-				Aliascolnames:  $9,
-			}
-			wc := &nodes.WithClause{
-				Ctes:      makeList(cte),
-				Recursive: true,
-			}
-			cr := &nodes.ColumnRef{
-				Fields: &nodes.List{Items: []nodes.Node{&nodes.A_Star{}}},
-				Location: -1,
-			}
-			rt := &nodes.ResTarget{Val: cr, Location: -1}
-			fromRv := &nodes.RangeVar{Relname: rv.Relname, Inh: true, Relpersistence: 'p', Location: -1}
-			sel := &nodes.SelectStmt{
-				TargetList: makeList(rt),
-				FromClause: makeList(fromRv),
-				WithClause: wc,
-			}
+			sel := makeRecursiveViewSelect(rv.Relname, $9, $13)
 			$$ = &nodes.ViewStmt{
 				View:            rv,
 				Aliases:         $9,
@@ -4390,7 +4222,7 @@ func_arg:
 			$$ = &nodes.FunctionParameter{
 				Name:    $1,
 				ArgType: $2,
-				Mode:    nodes.FUNC_PARAM_IN,
+				Mode:    nodes.FUNC_PARAM_DEFAULT,
 			}
 		}
 	| arg_class func_type
@@ -4404,7 +4236,7 @@ func_arg:
 		{
 			$$ = &nodes.FunctionParameter{
 				ArgType: $1,
-				Mode:    nodes.FUNC_PARAM_IN,
+				Mode:    nodes.FUNC_PARAM_DEFAULT,
 			}
 		}
 	;
@@ -4553,7 +4385,7 @@ createfunc_opt_item:
 		{
 			$$ = &nodes.DefElem{
 				Defname: "window",
-				Arg:     &nodes.Integer{Ival: 1},
+				Arg:     &nodes.Boolean{Boolval: true},
 			}
 		}
 	| common_func_opt_item { $$ = $1 }
@@ -4599,49 +4431,63 @@ common_func_opt_item:
 		{
 			$$ = &nodes.DefElem{
 				Defname: "strict",
-				Arg:     &nodes.Integer{Ival: 1},
+				Arg:     &nodes.Boolean{Boolval: true},
 			}
 		}
 	| CALLED ON NULL_P INPUT_P
 		{
 			$$ = &nodes.DefElem{
 				Defname: "strict",
-				Arg:     &nodes.Integer{Ival: 0},
+				Arg:     &nodes.Boolean{Boolval: false},
 			}
 		}
 	| RETURNS NULL_P ON NULL_P INPUT_P
 		{
 			$$ = &nodes.DefElem{
 				Defname: "strict",
-				Arg:     &nodes.Integer{Ival: 1},
+				Arg:     &nodes.Boolean{Boolval: true},
 			}
 		}
 	| SECURITY DEFINER
 		{
 			$$ = &nodes.DefElem{
 				Defname: "security",
-				Arg:     &nodes.Integer{Ival: 1},
+				Arg:     &nodes.Boolean{Boolval: true},
 			}
 		}
 	| SECURITY INVOKER
 		{
 			$$ = &nodes.DefElem{
 				Defname: "security",
-				Arg:     &nodes.Integer{Ival: 0},
+				Arg:     &nodes.Boolean{Boolval: false},
+			}
+		}
+	| EXTERNAL SECURITY DEFINER
+		{
+			$$ = &nodes.DefElem{
+				Defname: "security",
+				Arg:     &nodes.Boolean{Boolval: true},
+			}
+		}
+	| EXTERNAL SECURITY INVOKER
+		{
+			$$ = &nodes.DefElem{
+				Defname: "security",
+				Arg:     &nodes.Boolean{Boolval: false},
 			}
 		}
 	| LEAKPROOF
 		{
 			$$ = &nodes.DefElem{
 				Defname: "leakproof",
-				Arg:     &nodes.Integer{Ival: 1},
+				Arg:     &nodes.Boolean{Boolval: true},
 			}
 		}
 	| NOT LEAKPROOF
 		{
 			$$ = &nodes.DefElem{
 				Defname: "leakproof",
-				Arg:     &nodes.Integer{Ival: 0},
+				Arg:     &nodes.Boolean{Boolval: false},
 			}
 		}
 	| COST NumericOnly
@@ -5269,7 +5115,7 @@ GrantStmt:
 				IsGrant:     true,
 				Targtype:    nodes.ACL_TARGET_OBJECT,
 				Objtype:     nodes.OBJECT_DATABASE,
-				Objects:     makeNameListAsAnyNameList($5),
+				Objects:     $5,
 				Privileges:  $2,
 				Grantees:    $7,
 				GrantOption: $8,
@@ -5295,7 +5141,7 @@ GrantStmt:
 				IsGrant:     true,
 				Targtype:    nodes.ACL_TARGET_OBJECT,
 				Objtype:     nodes.OBJECT_LANGUAGE,
-				Objects:     makeNameListAsAnyNameList($5),
+				Objects:     $5,
 				Privileges:  $2,
 				Grantees:    $7,
 				GrantOption: $8,
@@ -5308,7 +5154,7 @@ GrantStmt:
 				IsGrant:     true,
 				Targtype:    nodes.ACL_TARGET_OBJECT,
 				Objtype:     nodes.OBJECT_SCHEMA,
-				Objects:     makeNameListAsAnyNameList($5),
+				Objects:     $5,
 				Privileges:  $2,
 				Grantees:    $7,
 				GrantOption: $8,
@@ -5321,7 +5167,7 @@ GrantStmt:
 				IsGrant:     true,
 				Targtype:    nodes.ACL_TARGET_OBJECT,
 				Objtype:     nodes.OBJECT_TABLESPACE,
-				Objects:     makeNameListAsAnyNameList($5),
+				Objects:     $5,
 				Privileges:  $2,
 				Grantees:    $7,
 				GrantOption: $8,
@@ -5360,7 +5206,7 @@ GrantStmt:
 				IsGrant:     true,
 				Targtype:    nodes.ACL_TARGET_OBJECT,
 				Objtype:     nodes.OBJECT_FDW,
-				Objects:     makeNameListAsAnyNameList($7),
+				Objects:     $7,
 				Privileges:  $2,
 				Grantees:    $9,
 				GrantOption: $10,
@@ -5373,7 +5219,7 @@ GrantStmt:
 				IsGrant:     true,
 				Targtype:    nodes.ACL_TARGET_OBJECT,
 				Objtype:     nodes.OBJECT_FOREIGN_SERVER,
-				Objects:     makeNameListAsAnyNameList($6),
+				Objects:     $6,
 				Privileges:  $2,
 				Grantees:    $8,
 				GrantOption: $9,
@@ -5386,7 +5232,7 @@ GrantStmt:
 				IsGrant:     true,
 				Targtype:    nodes.ACL_TARGET_ALL_IN_SCHEMA,
 				Objtype:     nodes.OBJECT_TABLE,
-				Objects:     makeNameListAsAnyNameList($8),
+				Objects:     $8,
 				Privileges:  $2,
 				Grantees:    $10,
 				GrantOption: $11,
@@ -5399,7 +5245,7 @@ GrantStmt:
 				IsGrant:     true,
 				Targtype:    nodes.ACL_TARGET_ALL_IN_SCHEMA,
 				Objtype:     nodes.OBJECT_SEQUENCE,
-				Objects:     makeNameListAsAnyNameList($8),
+				Objects:     $8,
 				Privileges:  $2,
 				Grantees:    $10,
 				GrantOption: $11,
@@ -5412,7 +5258,7 @@ GrantStmt:
 				IsGrant:     true,
 				Targtype:    nodes.ACL_TARGET_ALL_IN_SCHEMA,
 				Objtype:     nodes.OBJECT_FUNCTION,
-				Objects:     makeNameListAsAnyNameList($8),
+				Objects:     $8,
 				Privileges:  $2,
 				Grantees:    $10,
 				GrantOption: $11,
@@ -5425,7 +5271,7 @@ GrantStmt:
 				IsGrant:     true,
 				Targtype:    nodes.ACL_TARGET_ALL_IN_SCHEMA,
 				Objtype:     nodes.OBJECT_ROUTINE,
-				Objects:     makeNameListAsAnyNameList($8),
+				Objects:     $8,
 				Privileges:  $2,
 				Grantees:    $10,
 				GrantOption: $11,
@@ -5438,7 +5284,7 @@ GrantStmt:
 				IsGrant:     true,
 				Targtype:    nodes.ACL_TARGET_ALL_IN_SCHEMA,
 				Objtype:     nodes.OBJECT_PROCEDURE,
-				Objects:     makeNameListAsAnyNameList($8),
+				Objects:     $8,
 				Privileges:  $2,
 				Grantees:    $10,
 				GrantOption: $11,
@@ -5545,7 +5391,7 @@ RevokeStmt:
 				IsGrant:    false,
 				Targtype:   nodes.ACL_TARGET_OBJECT,
 				Objtype:    nodes.OBJECT_DATABASE,
-				Objects:    makeNameListAsAnyNameList($5),
+				Objects:    $5,
 				Privileges: $2,
 				Grantees:   $7,
 				Grantor:    roleSpecOrNil($8),
@@ -5571,7 +5417,7 @@ RevokeStmt:
 				IsGrant:    false,
 				Targtype:   nodes.ACL_TARGET_OBJECT,
 				Objtype:    nodes.OBJECT_LANGUAGE,
-				Objects:    makeNameListAsAnyNameList($5),
+				Objects:    $5,
 				Privileges: $2,
 				Grantees:   $7,
 				Grantor:    roleSpecOrNil($8),
@@ -5584,7 +5430,7 @@ RevokeStmt:
 				IsGrant:    false,
 				Targtype:   nodes.ACL_TARGET_OBJECT,
 				Objtype:    nodes.OBJECT_SCHEMA,
-				Objects:    makeNameListAsAnyNameList($5),
+				Objects:    $5,
 				Privileges: $2,
 				Grantees:   $7,
 				Grantor:    roleSpecOrNil($8),
@@ -5597,7 +5443,7 @@ RevokeStmt:
 				IsGrant:    false,
 				Targtype:   nodes.ACL_TARGET_OBJECT,
 				Objtype:    nodes.OBJECT_TABLESPACE,
-				Objects:    makeNameListAsAnyNameList($5),
+				Objects:    $5,
 				Privileges: $2,
 				Grantees:   $7,
 				Grantor:    roleSpecOrNil($8),
@@ -5636,7 +5482,7 @@ RevokeStmt:
 				IsGrant:    false,
 				Targtype:   nodes.ACL_TARGET_OBJECT,
 				Objtype:    nodes.OBJECT_FDW,
-				Objects:    makeNameListAsAnyNameList($7),
+				Objects:    $7,
 				Privileges: $2,
 				Grantees:   $9,
 				Grantor:    roleSpecOrNil($10),
@@ -5649,7 +5495,7 @@ RevokeStmt:
 				IsGrant:    false,
 				Targtype:   nodes.ACL_TARGET_OBJECT,
 				Objtype:    nodes.OBJECT_FOREIGN_SERVER,
-				Objects:    makeNameListAsAnyNameList($6),
+				Objects:    $6,
 				Privileges: $2,
 				Grantees:   $8,
 				Grantor:    roleSpecOrNil($9),
@@ -5662,7 +5508,7 @@ RevokeStmt:
 				IsGrant:    false,
 				Targtype:   nodes.ACL_TARGET_ALL_IN_SCHEMA,
 				Objtype:    nodes.OBJECT_TABLE,
-				Objects:    makeNameListAsAnyNameList($8),
+				Objects:    $8,
 				Privileges: $2,
 				Grantees:   $10,
 				Grantor:    roleSpecOrNil($11),
@@ -5675,7 +5521,7 @@ RevokeStmt:
 				IsGrant:    false,
 				Targtype:   nodes.ACL_TARGET_ALL_IN_SCHEMA,
 				Objtype:    nodes.OBJECT_SEQUENCE,
-				Objects:    makeNameListAsAnyNameList($8),
+				Objects:    $8,
 				Privileges: $2,
 				Grantees:   $10,
 				Grantor:    roleSpecOrNil($11),
@@ -5688,7 +5534,7 @@ RevokeStmt:
 				IsGrant:    false,
 				Targtype:   nodes.ACL_TARGET_ALL_IN_SCHEMA,
 				Objtype:    nodes.OBJECT_FUNCTION,
-				Objects:    makeNameListAsAnyNameList($8),
+				Objects:    $8,
 				Privileges: $2,
 				Grantees:   $10,
 				Grantor:    roleSpecOrNil($11),
@@ -5701,7 +5547,7 @@ RevokeStmt:
 				IsGrant:    false,
 				Targtype:   nodes.ACL_TARGET_ALL_IN_SCHEMA,
 				Objtype:    nodes.OBJECT_ROUTINE,
-				Objects:    makeNameListAsAnyNameList($8),
+				Objects:    $8,
 				Privileges: $2,
 				Grantees:   $10,
 				Grantor:    roleSpecOrNil($11),
@@ -5714,7 +5560,7 @@ RevokeStmt:
 				IsGrant:    false,
 				Targtype:   nodes.ACL_TARGET_ALL_IN_SCHEMA,
 				Objtype:    nodes.OBJECT_PROCEDURE,
-				Objects:    makeNameListAsAnyNameList($8),
+				Objects:    $8,
 				Privileges: $2,
 				Grantees:   $10,
 				Grantor:    roleSpecOrNil($11),
@@ -5824,7 +5670,7 @@ RevokeStmt:
 				IsGrant:     false,
 				Targtype:    nodes.ACL_TARGET_OBJECT,
 				Objtype:     nodes.OBJECT_DATABASE,
-				Objects:     makeNameListAsAnyNameList($8),
+				Objects:     $8,
 				Privileges:  $5,
 				Grantees:    $10,
 				GrantOption: true,
@@ -5852,7 +5698,7 @@ RevokeStmt:
 				IsGrant:     false,
 				Targtype:    nodes.ACL_TARGET_OBJECT,
 				Objtype:     nodes.OBJECT_LANGUAGE,
-				Objects:     makeNameListAsAnyNameList($8),
+				Objects:     $8,
 				Privileges:  $5,
 				Grantees:    $10,
 				GrantOption: true,
@@ -5866,7 +5712,7 @@ RevokeStmt:
 				IsGrant:     false,
 				Targtype:    nodes.ACL_TARGET_OBJECT,
 				Objtype:     nodes.OBJECT_SCHEMA,
-				Objects:     makeNameListAsAnyNameList($8),
+				Objects:     $8,
 				Privileges:  $5,
 				Grantees:    $10,
 				GrantOption: true,
@@ -5880,7 +5726,7 @@ RevokeStmt:
 				IsGrant:     false,
 				Targtype:    nodes.ACL_TARGET_OBJECT,
 				Objtype:     nodes.OBJECT_TABLESPACE,
-				Objects:     makeNameListAsAnyNameList($8),
+				Objects:     $8,
 				Privileges:  $5,
 				Grantees:    $10,
 				GrantOption: true,
@@ -5922,7 +5768,7 @@ RevokeStmt:
 				IsGrant:     false,
 				Targtype:    nodes.ACL_TARGET_OBJECT,
 				Objtype:     nodes.OBJECT_FDW,
-				Objects:     makeNameListAsAnyNameList($10),
+				Objects:     $10,
 				Privileges:  $5,
 				Grantees:    $12,
 				GrantOption: true,
@@ -5936,7 +5782,7 @@ RevokeStmt:
 				IsGrant:     false,
 				Targtype:    nodes.ACL_TARGET_OBJECT,
 				Objtype:     nodes.OBJECT_FOREIGN_SERVER,
-				Objects:     makeNameListAsAnyNameList($9),
+				Objects:     $9,
 				Privileges:  $5,
 				Grantees:    $11,
 				GrantOption: true,
@@ -6925,7 +6771,7 @@ alter_identity_column_option:
 		}
 	| SET GENERATED generated_when
 		{
-			$$ = makeDefElem("generated", makeIntConst($3, -1))
+			$$ = makeDefElem("generated", &nodes.Integer{Ival: $3})
 		}
 	;
 
@@ -6938,10 +6784,15 @@ alter_identity_column_option:
 CreateDomainStmt:
 	CREATE DOMAIN_P any_name opt_as Typename opt_column_constraints
 		{
+			constraints, coll, ok := splitDomainQualList(pglex, $6)
+			if !ok {
+				return 1
+			}
 			$$ = &nodes.CreateDomainStmt{
 				Domainname:  $3,
 				Typname:     $5,
-				Constraints: $6,
+				CollClause:  coll,
+				Constraints: constraints,
 			}
 		}
 	;
@@ -7043,6 +6894,7 @@ AlterEnumStmt:
 			$$ = &nodes.AlterEnumStmt{
 				Typname:            $3,
 				Newval:             $7,
+				NewvalIsAfter:      true,
 				SkipIfNewvalExists: $6,
 			}
 		}
@@ -7096,27 +6948,8 @@ AlterCompositeTypeStmt:
 			if !checkRangeVarNames(pglex, $3, $<loc>3) {
 				return 1
 			}
-			rv := &nodes.RangeVar{
-				Inh:     true,
-				Location: $<loc>3,
-			}
-			/* Convert any_name to schema.rel */
-			names := $3
-			if names != nil && len(names.Items) > 0 {
-				switch len(names.Items) {
-				case 1:
-					rv.Relname = names.Items[0].(*nodes.String).Str
-				case 2:
-					rv.Schemaname = names.Items[0].(*nodes.String).Str
-					rv.Relname = names.Items[1].(*nodes.String).Str
-				case 3:
-					rv.Catalogname = names.Items[0].(*nodes.String).Str
-					rv.Schemaname = names.Items[1].(*nodes.String).Str
-					rv.Relname = names.Items[2].(*nodes.String).Str
-				}
-			}
 			$$ = &nodes.AlterTableStmt{
-				Relation: rv,
+				Relation: makeTypeRangeVar($3, $<loc>3),
 				Cmds:     $4,
 				ObjType:  int(nodes.OBJECT_TYPE),
 			}
@@ -7158,11 +6991,7 @@ alter_type_cmd:
 		}
 	| ALTER ATTRIBUTE ColId SET DATA_P TYPE_P Typename opt_collate_clause opt_drop_behavior
 		{
-			coldef := &nodes.ColumnDef{
-				Colname:    $3,
-				TypeName:   $7,
-				CollClause: nil,
-			}
+			coldef := &nodes.ColumnDef{TypeName: $7}
 			if $8 != nil {
 				coldef.CollClause = $8.(*nodes.CollateClause)
 			}
@@ -7175,11 +7004,7 @@ alter_type_cmd:
 		}
 	| ALTER ATTRIBUTE ColId TYPE_P Typename opt_collate_clause opt_drop_behavior
 		{
-			coldef := &nodes.ColumnDef{
-				Colname:    $3,
-				TypeName:   $5,
-				CollClause: nil,
-			}
+			coldef := &nodes.ColumnDef{TypeName: $5}
 			if $6 != nil {
 				coldef.CollClause = $6.(*nodes.CollateClause)
 			}
@@ -7349,7 +7174,7 @@ CompositeTypeStmt:
 				return 1
 			}
 			$$ = &nodes.CompositeTypeStmt{
-				Typevar:    makeRangeVarFromAnyName($3, $<loc>3),
+				Typevar:    makeTypeRangeVar($3, $<loc>3),
 				Coldeflist: $6,
 			}
 		}
@@ -7525,7 +7350,11 @@ aggr_args:
 	| '(' aggr_args_list ORDER BY aggr_args_list ')'
 		{
 			/* ordered-set agg with direct args and ordered args */
-			$$ = makeOrderedSetArgs($2, $5)
+			args, ok := makeOrderedSetArgs(pglex, $2, $5)
+			if !ok {
+				return 1
+			}
+			$$ = args
 		}
 	;
 
@@ -7543,6 +7372,10 @@ aggr_args_list:
 aggr_arg:
 	func_arg
 		{
+			if m := $1.(*nodes.FunctionParameter).Mode; m != nodes.FUNC_PARAM_DEFAULT && m != nodes.FUNC_PARAM_IN && m != nodes.FUNC_PARAM_VARIADIC {
+				grammarError(pglex, "0A000", "aggregates cannot have output arguments", "", $<loc>1)
+				return 1
+			}
 			$$ = $1
 		}
 	;
@@ -8338,7 +8171,7 @@ func_table:
 		{
 			$$ = &nodes.RangeFunction{
 				Ordinality: $2,
-				Functions:  makeList(makeList($1)),
+				Functions:  makeList(makeList2($1, nil)),
 			}
 		}
 	| ROWS FROM '(' rowsfrom_list ')' opt_ordinality
@@ -8361,7 +8194,12 @@ rowsfrom_list:
 rowsfrom_item:
 	func_expr_windowless opt_col_def_list
 		{
-			$$ = makeList2($1, $2)
+			/* a missing column definition list is a nil Node, not a nil *List */
+			if $2 == nil {
+				$$ = makeList2($1, nil)
+			} else {
+				$$ = makeList2($1, $2)
+			}
 		}
 	;
 
@@ -8510,6 +8348,7 @@ sortby:
 				Node:        $1,
 				SortbyDir:   nodes.SortByDir($2),
 				SortbyNulls: nodes.SortByNulls($3),
+				Location:    -1,
 			}
 		}
 	;
@@ -8861,21 +8700,19 @@ a_expr:
 		}
 	| row OVERLAPS row
 		{
-			/* convert to a function call */
-			var args *nodes.List
-			if r1, ok := $1.(*nodes.RowExpr); ok {
-				args = r1.Args
-			} else {
-				args = makeList($1)
+			/* convert to pg_catalog.overlaps of the two pairs */
+			left, right := $1.(*nodes.RowExpr).Args, $3.(*nodes.RowExpr).Args
+			if len(left.Elems()) != 2 {
+				grammarError(pglex, codeSyntaxError, "wrong number of parameters on left side of OVERLAPS expression", "", $<loc>1)
+				return 1
 			}
-			if r2, ok := $3.(*nodes.RowExpr); ok {
-				args = concatLists(args, r2.Args)
-			} else {
-				args = appendList(args, $3)
+			if len(right.Elems()) != 2 {
+				grammarError(pglex, codeSyntaxError, "wrong number of parameters on right side of OVERLAPS expression", "", $<loc>3)
+				return 1
 			}
 			$$ = &nodes.FuncCall{
-				Funcname:       makeFuncName("overlaps"),
-				Args:           args,
+				Funcname:       makeFuncName("pg_catalog", "overlaps"),
+				Args:           concatLists(left, right),
 				FuncFormat:     int(nodes.COERCE_SQL_SYNTAX),
 				Location:       $<loc>2,
 			}
@@ -8936,7 +8773,7 @@ a_expr:
 		{
 			$$ = &nodes.FuncCall{
 				Funcname:   makeFuncName("pg_catalog", "is_normalized"),
-				Args:       makeList2($1, makeStringConst("NFC", -1)),
+				Args:       makeList($1),
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
 				Location:   $<loc>2,
 			}
@@ -8945,7 +8782,7 @@ a_expr:
 		{
 			$$ = makeNotExpr(&nodes.FuncCall{
 				Funcname:   makeFuncName("pg_catalog", "is_normalized"),
-				Args:       makeList2($1, makeStringConst("NFC", -1)),
+				Args:       makeList($1),
 				FuncFormat: int(nodes.COERCE_SQL_SYNTAX),
 				Location:   $<loc>2,
 			}, $<loc>2)
@@ -10373,7 +10210,7 @@ substr_list:
 trim_list:
 	a_expr FROM expr_list
 		{
-			$$ = prependList($1, $3)
+			$$ = appendList($3, $1)
 		}
 	| FROM expr_list
 		{
@@ -11516,100 +11353,36 @@ opt_float:
 	;
 
 Character:
-	CHARACTER opt_varying '(' Iconst ')'
+	CharacterWithLength		{ $$ = $1 }
+	| CharacterWithoutLength	{ $$ = $1 }
+	;
+
+CharacterWithLength:
+	character '(' Iconst ')'
 		{
-			if $2 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-			$$.Typmods = makeList(&nodes.Integer{Ival: $4})
+			$$ = makeTypeName($1)
+			$$.Typmods = makeList(makeIntConst($3, $<loc>3))
 		}
-	| CHARACTER opt_varying
+	;
+
+CharacterWithoutLength:
+	character
 		{
-			if $2 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-		}
-	| CHAR_P opt_varying '(' Iconst ')'
-		{
-			if $2 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-			$$.Typmods = makeList(&nodes.Integer{Ival: $4})
-		}
-	| CHAR_P opt_varying
-		{
-			if $2 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
+			$$ = makeTypeName($1)
+			/* char defaults to char(1), varchar to no limit */
+			if $1 == "bpchar" {
+				$$.Typmods = makeList(makeIntConst(1, -1))
 			}
 		}
-	| NATIONAL CHARACTER opt_varying '(' Iconst ')'
-		{
-			if $3 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-			$$.Typmods = makeList(&nodes.Integer{Ival: $5})
-		}
-	| NATIONAL CHARACTER opt_varying
-		{
-			if $3 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-		}
-	| NATIONAL CHAR_P opt_varying '(' Iconst ')'
-		{
-			if $3 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-			$$.Typmods = makeList(&nodes.Integer{Ival: $5})
-		}
-	| NATIONAL CHAR_P opt_varying
-		{
-			if $3 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-		}
-	| NCHAR opt_varying '(' Iconst ')'
-		{
-			if $2 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-			$$.Typmods = makeList(&nodes.Integer{Ival: $4})
-		}
-	| NCHAR opt_varying
-		{
-			if $2 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-		}
-	| VARCHAR '(' Iconst ')'
-		{
-			$$ = makeTypeName("varchar")
-			$$.Typmods = makeList(&nodes.Integer{Ival: $3})
-		}
-	| VARCHAR
-		{
-			$$ = makeTypeName("varchar")
-		}
+	;
+
+character:
+	CHARACTER opt_varying				{ $$ = characterType($2) }
+	| CHAR_P opt_varying				{ $$ = characterType($2) }
+	| VARCHAR							{ $$ = "varchar" }
+	| NATIONAL CHARACTER opt_varying	{ $$ = characterType($3) }
+	| NATIONAL CHAR_P opt_varying		{ $$ = characterType($3) }
+	| NCHAR opt_varying					{ $$ = characterType($2) }
 	;
 
 opt_varying:
@@ -11665,100 +11438,12 @@ ConstBit:
 	;
 
 ConstCharacter:
-	CHARACTER opt_varying '(' Iconst ')'
+	CharacterWithLength		{ $$ = $1 }
+	| CharacterWithoutLength
 		{
-			if $2 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-			$$.Typmods = makeList(&nodes.Integer{Ival: $4})
-		}
-	| CHARACTER opt_varying
-		{
-			if $2 {
-				$$ = makeTypeName("varchar")
-			} else {
-				/* ConstCharacter: CHAR without length defaults to unspecified */
-				$$ = makeTypeName("bpchar")
-			}
-		}
-	| CHAR_P opt_varying '(' Iconst ')'
-		{
-			if $2 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-			$$.Typmods = makeList(&nodes.Integer{Ival: $4})
-		}
-	| CHAR_P opt_varying
-		{
-			if $2 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-		}
-	| NATIONAL CHARACTER opt_varying '(' Iconst ')'
-		{
-			if $3 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-			$$.Typmods = makeList(&nodes.Integer{Ival: $5})
-		}
-	| NATIONAL CHARACTER opt_varying
-		{
-			if $3 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-		}
-	| NATIONAL CHAR_P opt_varying '(' Iconst ')'
-		{
-			if $3 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-			$$.Typmods = makeList(&nodes.Integer{Ival: $5})
-		}
-	| NATIONAL CHAR_P opt_varying
-		{
-			if $3 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-		}
-	| NCHAR opt_varying '(' Iconst ')'
-		{
-			if $2 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-			$$.Typmods = makeList(&nodes.Integer{Ival: $4})
-		}
-	| NCHAR opt_varying
-		{
-			if $2 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-		}
-	| VARCHAR '(' Iconst ')'
-		{
-			$$ = makeTypeName("varchar")
-			$$.Typmods = makeList(&nodes.Integer{Ival: $3})
-		}
-	| VARCHAR
-		{
-			$$ = makeTypeName("varchar")
+			/* A constant's length is unrestricted when not written; a column's CHAR is CHAR(1). */
+			$$ = $1
+			$$.Typmods = nil
 		}
 	;
 
@@ -13008,6 +12693,7 @@ object_type_name:
 	| SUBSCRIPTION { $$ = int64(nodes.OBJECT_SUBSCRIPTION) }
 	| PUBLICATION  { $$ = int64(nodes.OBJECT_PUBLICATION) }
 	| SERVER       { $$ = int64(nodes.OBJECT_FOREIGN_SERVER) }
+	| ACCESS METHOD { $$ = int64(nodes.OBJECT_ACCESS_METHOD) }
 	;
 
 object_type_name_on_any_name:
@@ -13779,8 +13465,9 @@ function_with_argtypes:
 	func_name func_args
 		{
 			$$ = &nodes.ObjectWithArgs{
-				Objname: $1,
-				Objargs: extractArgTypes($2),
+				Objname:     $1,
+				Objargs:     extractArgTypes($2),
+				Objfuncargs: $2,
 			}
 		}
 	| type_func_name_keyword
@@ -13833,8 +13520,9 @@ aggregate_with_argtypes:
 	func_name aggr_args
 		{
 			$$ = &nodes.ObjectWithArgs{
-				Objname: $1,
-				Objargs: extractAggrArgTypes($2),
+				Objname:     $1,
+				Objargs:     extractAggrArgTypes($2),
+				Objfuncargs: aggrArgs($2),
 			}
 		}
 	;
@@ -18063,20 +17751,6 @@ func makeAExpr(kind nodes.A_Expr_Kind, op string, lexpr, rexpr nodes.Node, locat
 	}
 }
 
-// makeAExprFromList creates an A_Expr with an operator name list (from qual_Op).
-// makeNameListAsAnyNameList wraps each name string into a single-element
-// List (matching PG's any_name format for DropStmt.Objects).
-func makeNameListAsAnyNameList(names *nodes.List) *nodes.List {
-	if names == nil {
-		return nil
-	}
-	result := &nodes.List{}
-	for _, item := range names.Items {
-		result.Items = append(result.Items, &nodes.List{Items: []nodes.Node{item}})
-	}
-	return result
-}
-
 // makeStringConstCast is PostgreSQL's: the constant at location, cast with
 // no location of its own.
 func makeStringConstCast(s string, location nodes.ParseLoc, typeName *nodes.TypeName) nodes.Node {
@@ -18190,6 +17864,15 @@ func makeSetOp(op nodes.SetOperation, quantifier int64, larg, rarg nodes.Node) n
 		Rarg: rarg.(*nodes.SelectStmt),
 	}
 	return n
+}
+
+// characterType is the type PostgreSQL 16's character rule names: varchar
+// when VARYING is written, else bpchar.
+func characterType(varying bool) string {
+	if varying {
+		return "varchar"
+	}
+	return "bpchar"
 }
 
 func makeTypeName(typeName string) *nodes.TypeName {
@@ -18454,14 +18137,16 @@ func applyConstraintAttrs(n *nodes.Constraint, attrs int64) {
 	}
 }
 
-func splitColQualList(qualList *nodes.List, coldef *nodes.ColumnDef) {
+func splitColQualList(lex pgLexer, qualList *nodes.List, coldef *nodes.ColumnDef) bool {
 	if qualList == nil {
-		return
+		return true
 	}
 	var constraints []nodes.Node
 	for _, item := range qualList.Items {
 		if cc, ok := item.(*nodes.CollateClause); ok {
-			coldef.CollClause = cc
+			if !takeCollate(lex, &coldef.CollClause, cc) {
+				return false
+			}
 		} else if de, ok := item.(*nodes.DefElem); ok && de.Defname == "compression" {
 			if s, ok := de.Arg.(*nodes.String); ok {
 				coldef.Compression = s.Str
@@ -18481,6 +18166,40 @@ func splitColQualList(qualList *nodes.List, coldef *nodes.ColumnDef) {
 	if len(constraints) > 0 {
 		coldef.Constraints = &nodes.List{Items: constraints}
 	}
+	return true
+}
+
+// splitDomainQualList is PostgreSQL 16's SplitColQualList for CREATE
+// DOMAIN: the domain's constraints, nil for none, and its COLLATE clause;
+// it reports false for a second COLLATE.
+func splitDomainQualList(lex pgLexer, qualList *nodes.List) (*nodes.List, *nodes.CollateClause, bool) {
+	var constraints []nodes.Node
+	var coll *nodes.CollateClause
+	for _, item := range qualList.Elems() {
+		if cc, ok := item.(*nodes.CollateClause); ok {
+			if !takeCollate(lex, &coll, cc) {
+				return nil, nil, false
+			}
+			continue
+		}
+		constraints = append(constraints, item)
+	}
+	if len(constraints) == 0 {
+		return nil, coll, true
+	}
+	return &nodes.List{Items: constraints}, coll, true
+}
+
+// takeCollate keeps a qualifier list's COLLATE clause in *have, refusing a
+// second as PostgreSQL 16's SplitColQualList does, at its COLLATE, and
+// reports whether it was the first.
+func takeCollate(lex pgLexer, have **nodes.CollateClause, cc *nodes.CollateClause) bool {
+	if *have != nil {
+		grammarError(lex, codeSyntaxError, "multiple COLLATE clauses not allowed", "", cc.Location)
+		return false
+	}
+	*have = cc
+	return true
 }
 
 // insertSelectOptions adds the clauses after a select_clause to its
@@ -18593,58 +18312,86 @@ func relpersistenceForTemp(tempFlag int64) byte {
 	}
 }
 
-// extractArgTypes extracts the type names from a list of FunctionParameter nodes.
+// extractArgTypes is PostgreSQL 16's extractArgTypes: the types of the
+// arguments that identify a function, every one but OUT ones (it leaves
+// out TABLE ones too, which an argument list it is given cannot hold).
 func extractArgTypes(args *nodes.List) *nodes.List {
 	if args == nil {
 		return nil
 	}
 	result := &nodes.List{}
 	for _, item := range args.Items {
-		fp, ok := item.(*nodes.FunctionParameter)
-		if ok {
+		if fp := item.(*nodes.FunctionParameter); fp.Mode != nodes.FUNC_PARAM_OUT {
 			result.Items = append(result.Items, fp.ArgType)
 		}
 	}
 	return result
 }
 
-// extractAggrArgTypes extracts the type names from an aggregate argument list.
-// aggr_args returns a 2-element list: [args_list, Integer_marker].
-// The first element is either nil (for agg(*)) or a *List of FunctionParameter nodes.
-// This function extracts the ArgType from each FunctionParameter in the first element.
+// aggrArgs is the argument list of aggr_args' 2-element list [args,
+// Integer marker]: a list of FunctionParameter, or nil for agg(*).
+func aggrArgs(args *nodes.List) *nodes.List {
+	l, _ := args.Items[0].(*nodes.List)
+	return l
+}
+
+// extractAggrArgTypes is PostgreSQL 16's extractAggrArgTypes: the types of
+// aggr_args' arguments.
 func extractAggrArgTypes(args *nodes.List) *nodes.List {
-	if args == nil || len(args.Items) < 1 {
-		return nil
-	}
-	// First element is the args list (may be nil for agg(*))
-	argsList, ok := args.Items[0].(*nodes.List)
-	if !ok || argsList == nil {
-		return nil
-	}
-	result := &nodes.List{}
-	for _, item := range argsList.Items {
-		if fp, ok := item.(*nodes.FunctionParameter); ok {
-			result.Items = append(result.Items, fp.ArgType)
-		}
-	}
-	return result
+	return extractArgTypes(aggrArgs(args))
 }
 
-// makeOrderedSetArgs builds the aggr_args result for ordered-set aggregates
-// with both direct args and ORDER BY args.
-// Returns a 2-element list: [combined_args_list, Integer{ndirectargs}].
-// The combined list has the direct args followed by the ORDER BY args.
-func makeOrderedSetArgs(directArgs *nodes.List, orderedArgs *nodes.List) *nodes.List {
-	combined := &nodes.List{}
-	ndirect := 0
-	if directArgs != nil {
-		combined.Items = append(combined.Items, directArgs.Items...)
-		ndirect = len(directArgs.Items)
+// makeOrderedSetArgs is PostgreSQL 16's makeOrderedSetArgs: aggr_args'
+// 2-element list [direct args then ordered args, Integer{ndirectargs}] for
+// an ordered-set aggregate. A VARIADIC last direct argument takes one
+// VARIADIC ordered argument of the same type, which is dropped; anything
+// else is refused at the first ordered argument's type, and it reports
+// false.
+func makeOrderedSetArgs(lex pgLexer, directArgs *nodes.List, orderedArgs *nodes.List) (*nodes.List, bool) {
+	lastd := directArgs.Items[len(directArgs.Items)-1].(*nodes.FunctionParameter)
+	if lastd.Mode == nodes.FUNC_PARAM_VARIADIC {
+		firsto := orderedArgs.Items[0].(*nodes.FunctionParameter)
+		if len(orderedArgs.Items) != 1 || firsto.Mode != nodes.FUNC_PARAM_VARIADIC || !equalNodes(reflect.ValueOf(lastd.ArgType), reflect.ValueOf(firsto.ArgType)) {
+			grammarError(lex, "0A000", "an ordered-set aggregate with a VARIADIC direct argument must have one VARIADIC aggregated argument of the same data type", "", firsto.ArgType.Location)
+			return nil, false
+		}
+		orderedArgs = nil
 	}
-	if orderedArgs != nil {
-		combined.Items = append(combined.Items, orderedArgs.Items...)
+	combined := &nodes.List{Items: append(append([]nodes.Node{}, directArgs.Items...), orderedArgs.Elems()...)}
+	return makeList2(combined, &nodes.Integer{Ival: int64(len(directArgs.Items))}), true
+}
+
+// equalNodes is PostgreSQL 16's equal() for parse trees: the same node
+// kinds with equal fields, locations aside.
+func equalNodes(a, b reflect.Value) bool {
+	if a.Type() != b.Type() {
+		return false
 	}
-	return makeList2(combined, &nodes.Integer{Ival: int64(ndirect)})
+	switch a.Kind() {
+	case reflect.Pointer, reflect.Interface:
+		if a.IsNil() || b.IsNil() {
+			return a.IsNil() == b.IsNil()
+		}
+		return equalNodes(a.Elem(), b.Elem())
+	case reflect.Struct:
+		for i := 0; i < a.NumField(); i++ {
+			if a.Type().Field(i).Name != "Location" && !equalNodes(a.Field(i), b.Field(i)) {
+				return false
+			}
+		}
+		return true
+	case reflect.Slice:
+		if a.Len() != b.Len() {
+			return false
+		}
+		for i := 0; i < a.Len(); i++ {
+			if !equalNodes(a.Index(i), b.Index(i)) {
+				return false
+			}
+		}
+		return true
+	}
+	return a.Equal(b)
 }
 
 // checkNames is PostgreSQL 16's check_func_name and check_qualified_name:
@@ -18730,6 +18477,39 @@ func makeRangeVarFromAnyName(names *nodes.List, location nodes.ParseLoc) *nodes.
 		rv.Relname = names.Items[2].(*nodes.String).Str
 	}
 	return rv
+}
+
+// makeTypeRangeVar is PostgreSQL 16's makeRangeVarFromAnyName, which names
+// a composite type in CREATE TYPE ... AS, ALTER TYPE and RENAME ATTRIBUTE:
+// a permanent relation with inh false, where a table's name has inh true.
+func makeTypeRangeVar(names *nodes.List, location nodes.ParseLoc) *nodes.RangeVar {
+	rv := makeRangeVarFromAnyName(names, location)
+	rv.Inh = false
+	return rv
+}
+
+// makeRecursiveViewSelect is PostgreSQL 16's: CREATE RECURSIVE VIEW's query,
+// WITH RECURSIVE relname (aliases) AS (query) SELECT aliases FROM relname,
+// with no locations of its own.
+func makeRecursiveViewSelect(relname string, aliases *nodes.List, query nodes.Node) *nodes.SelectStmt {
+	cte := &nodes.CommonTableExpr{
+		Ctename:       relname,
+		Aliascolnames: aliases,
+		Ctequery:      query,
+		Location:      -1,
+	}
+	tl := &nodes.List{}
+	for _, a := range aliases.Items {
+		tl.Items = append(tl.Items, &nodes.ResTarget{
+			Val:      &nodes.ColumnRef{Fields: makeList(&nodes.String{Str: a.(*nodes.String).Str}), Location: -1},
+			Location: -1,
+		})
+	}
+	return &nodes.SelectStmt{
+		WithClause: &nodes.WithClause{Ctes: makeList(cte), Recursive: true, Location: -1},
+		TargetList: tl,
+		FromClause: makeList(&nodes.RangeVar{Relname: relname, Inh: true, Relpersistence: 'p', Location: -1}),
+	}
 }
 
 // pubObj is one object of a publication's list as the grammar read it, with

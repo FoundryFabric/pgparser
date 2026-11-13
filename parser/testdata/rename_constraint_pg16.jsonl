@@ -1,0 +1,10 @@
+{"sql":"alter table t rename constraint c to d"}
+{"sql":"alter table if exists t rename constraint c to d"}
+{"sql":"alter table only t rename constraint c to d"}
+{"sql":"alter table s.t* rename constraint c to d"}
+{"sql":"alter table t rename column a to b"}
+{"sql":"alter table t rename a to b"}
+{"sql":"alter domain d rename constraint c to e"}
+{"sql":"alter table t rename constraint c","code":"42601","message":"syntax error at end of input","position":33}
+{"sql":"alter table t rename constraint to d","code":"42601","message":"syntax error at or near \"to\"","position":32}
+{"sql":"alter table if exists t rename constraint c to","code":"42601","message":"syntax error at end of input","position":46}

@@ -1,0 +1,21 @@
+{"sql":"create aggregate a(variadic \"any\" order by variadic \"any\") (sfunc = f, stype = internal)"}
+{"sql":"create aggregate a(int, variadic int[] order by variadic int[]) (sfunc = f, stype = internal)"}
+{"sql":"create aggregate a(variadic \"any\" order by \"any\") (sfunc = f, stype = internal)","code":"0A000","message":"an ordered-set aggregate with a VARIADIC direct argument must have one VARIADIC aggregated argument of the same data type","position":43}
+{"sql":"create aggregate a(variadic \"any\" order by variadic int[]) (sfunc = f, stype = internal)","code":"0A000","message":"an ordered-set aggregate with a VARIADIC direct argument must have one VARIADIC aggregated argument of the same data type","position":52}
+{"sql":"create aggregate a(variadic \"any\" order by variadic \"any\", int) (sfunc = f, stype = internal)","code":"0A000","message":"an ordered-set aggregate with a VARIADIC direct argument must have one VARIADIC aggregated argument of the same data type","position":52}
+{"sql":"create aggregate a(variadic x \"any\" order by variadic y \"any\") (sfunc = f, stype = internal)"}
+{"sql":"create aggregate a(int order by text) (sfunc = f, stype = internal)"}
+{"sql":"create aggregate a(int order by variadic \"any\") (sfunc = f, stype = internal)"}
+{"sql":"create aggregate a(order by variadic \"any\") (sfunc = f, stype = internal)"}
+{"sql":"alter aggregate a(variadic \"any\" order by variadic \"any\") rename to b"}
+{"sql":"drop aggregate a(variadic \"any\" order by text)","code":"0A000","message":"an ordered-set aggregate with a VARIADIC direct argument must have one VARIADIC aggregated argument of the same data type","position":41}
+{"sql":"drop aggregate a(variadic \"any\" order by variadic \"any\")"}
+{"sql":"create aggregate a(variadic \"any\" order by variadic \"any\"[]) (sfunc = f, stype = internal)","code":"0A000","message":"an ordered-set aggregate with a VARIADIC direct argument must have one VARIADIC aggregated argument of the same data type","position":52}
+{"sql":"create aggregate a(variadic int[] order by variadic int[3]) (sfunc = f, stype = internal)","code":"0A000","message":"an ordered-set aggregate with a VARIADIC direct argument must have one VARIADIC aggregated argument of the same data type","position":52}
+{"sql":"create aggregate a(variadic numeric(3) order by variadic numeric(4)) (sfunc = f, stype = internal)","code":"0A000","message":"an ordered-set aggregate with a VARIADIC direct argument must have one VARIADIC aggregated argument of the same data type","position":57}
+{"sql":"create aggregate a(variadic numeric(3) order by variadic numeric(x)) (sfunc = f, stype = internal)","code":"0A000","message":"an ordered-set aggregate with a VARIADIC direct argument must have one VARIADIC aggregated argument of the same data type","position":57}
+{"sql":"create aggregate a(variadic numeric(3) order by variadic numeric) (sfunc = f, stype = internal)","code":"0A000","message":"an ordered-set aggregate with a VARIADIC direct argument must have one VARIADIC aggregated argument of the same data type","position":57}
+{"sql":"create aggregate a(variadic numeric(3) order by variadic numeric(3)) (sfunc = f, stype = internal)"}
+{"sql":"create aggregate a(variadic s.t order by variadic s.t) (sfunc = f, stype = internal)"}
+{"sql":"create aggregate a(variadic s.t order by variadic s.u) (sfunc = f, stype = internal)","code":"0A000","message":"an ordered-set aggregate with a VARIADIC direct argument must have one VARIADIC aggregated argument of the same data type","position":50}
+{"sql":"create aggregate a(variadic setof int order by variadic int) (sfunc = f, stype = internal)","code":"0A000","message":"an ordered-set aggregate with a VARIADIC direct argument must have one VARIADIC aggregated argument of the same data type","position":56}

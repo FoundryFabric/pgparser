@@ -1,0 +1,13 @@
+{"sql":"create aggregate a(out int) (sfunc = f, stype = int)","code":"0A000","message":"aggregates cannot have output arguments","position":19}
+{"sql":"create aggregate a(inout int) (sfunc = f, stype = int)","code":"0A000","message":"aggregates cannot have output arguments","position":19}
+{"sql":"create aggregate a(int, x out int) (sfunc = f, stype = int)","code":"0A000","message":"aggregates cannot have output arguments","position":24}
+{"sql":"create aggregate a(int order by out text) (sfunc = f, stype = int)","code":"0A000","message":"aggregates cannot have output arguments","position":32}
+{"sql":"drop aggregate a(out int)","code":"0A000","message":"aggregates cannot have output arguments","position":17}
+{"sql":"create aggregate a(in int) (sfunc = f, stype = int)"}
+{"sql":"create aggregate a(variadic int[]) (sfunc = f, stype = int)"}
+{"sql":"create aggregate a(x int order by variadic \"any\") (sfunc = f, stype = int)"}
+{"sql":"drop aggregate a(in int, variadic int[])"}
+{"sql":"alter aggregate a(out int) rename to b","code":"0A000","message":"aggregates cannot have output arguments","position":18}
+{"sql":"comment on aggregate a(inout int) is 'x'","code":"0A000","message":"aggregates cannot have output arguments","position":23}
+{"sql":"create aggregate a(int order by inout text) (sfunc = f, stype = int)","code":"0A000","message":"aggregates cannot have output arguments","position":32}
+{"sql":"create aggregate a (sfunc = f, stype = int, basetype = int)"}

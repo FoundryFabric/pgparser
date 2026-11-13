@@ -153,9 +153,9 @@ func TestVarcharCast(t *testing.T) {
 	if tc.TypeName.Typmods == nil || len(tc.TypeName.Typmods.Items) != 1 {
 		t.Fatalf("expected 1 typmod for varchar(100), got %d", listLen(tc.TypeName.Typmods))
 	}
-	typmod, ok := tc.TypeName.Typmods.Items[0].(*nodes.Integer)
+	typmod, ok := tc.TypeName.Typmods.Items[0].(*nodes.A_Const).Val.(*nodes.Integer)
 	if !ok {
-		t.Fatalf("expected *nodes.Integer for typmod, got %T", tc.TypeName.Typmods.Items[0])
+		t.Fatalf("expected an A_Const Integer for typmod, got %T", tc.TypeName.Typmods.Items[0])
 	}
 	if typmod.Ival != 100 {
 		t.Errorf("expected typmod 100, got %d", typmod.Ival)
@@ -374,7 +374,7 @@ func TestCharCast(t *testing.T) {
 	if tc.TypeName.Typmods == nil || len(tc.TypeName.Typmods.Items) != 1 {
 		t.Fatalf("expected 1 typmod for char(10), got %d", listLen(tc.TypeName.Typmods))
 	}
-	typmod := tc.TypeName.Typmods.Items[0].(*nodes.Integer)
+	typmod := tc.TypeName.Typmods.Items[0].(*nodes.A_Const).Val.(*nodes.Integer)
 	if typmod.Ival != 10 {
 		t.Errorf("expected typmod 10, got %d", typmod.Ival)
 	}
@@ -389,7 +389,7 @@ func TestCharacterVaryingCast(t *testing.T) {
 	if tc.TypeName.Typmods == nil || len(tc.TypeName.Typmods.Items) != 1 {
 		t.Fatalf("expected 1 typmod for character varying(50), got %d", listLen(tc.TypeName.Typmods))
 	}
-	typmod := tc.TypeName.Typmods.Items[0].(*nodes.Integer)
+	typmod := tc.TypeName.Typmods.Items[0].(*nodes.A_Const).Val.(*nodes.Integer)
 	if typmod.Ival != 50 {
 		t.Errorf("expected typmod 50, got %d", typmod.Ival)
 	}
@@ -490,7 +490,7 @@ func TestCastStringToVarchar(t *testing.T) {
 	if tc.TypeName.Typmods == nil || len(tc.TypeName.Typmods.Items) != 1 {
 		t.Fatalf("expected 1 typmod, got %d", listLen(tc.TypeName.Typmods))
 	}
-	typmod := tc.TypeName.Typmods.Items[0].(*nodes.Integer)
+	typmod := tc.TypeName.Typmods.Items[0].(*nodes.A_Const).Val.(*nodes.Integer)
 	if typmod.Ival != 10 {
 		t.Errorf("expected typmod 10, got %d", typmod.Ival)
 	}

@@ -87,14 +87,10 @@ func TestTreesAlike(t *testing.T) {
 	}
 }
 
-// TestTreesDiffer checks that each mismatch kind is seen, on statements
-// the fork's tree differs on and on a tree changed by hand.
+// TestTreesDiffer checks that each mismatch kind is seen, on a statement
+// the fork's tree differs on and on trees changed by hand.
 func TestTreesDiffer(t *testing.T) {
 	for _, c := range []struct{ sql, class string }{
-		{"drop server s", "node-type DropStmt.objects"},
-		{"grant all on t to public", "value GrantStmt.grantees/RoleSpec.roletype"},
-		{"select * from f()", "list-length RangeFunction.functions"},
-		{"select 1 from t order by a", "overplaced SelectStmt.sortclause/SortBy.location"},
 		{"create table t (a int)", "unlocated CreateStmt.tableelts/ColumnDef.location"},
 	} {
 		fv, lv := bothTrees(t, c.sql)
@@ -113,7 +109,7 @@ func TestTreesDiffer(t *testing.T) {
 			t.Errorf("partition by list: %s", m.class())
 		}
 	}
-	sql := "select a.b from s.t"
+	const sql = "select a.b from s.t order by a"
 	for _, c := range []struct {
 		change func(stmt *tnode)
 		class  string
@@ -124,6 +120,7 @@ func TestTreesDiffer(t *testing.T) {
 		{func(s *tnode) { colRef(s).fields["fields"].([]any)[0].(*tnode).typ = "A_Star" }, "node-type ColumnRef.fields"},
 		{func(s *tnode) { s.fields["whereclause"] = &tnode{typ: "A_Const"} }, "presence SelectStmt.whereclause"},
 		{func(s *tnode) { s.fields["all"] = true }, "value SelectStmt.all"},
+		{func(s *tnode) { s.fields["sortclause"].([]any)[0].(*tnode).fields["location"] = int64(0) }, "overplaced SelectStmt.sortclause/SortBy.location"},
 	} {
 		fv, lv := bothTrees(t, sql)
 		if ms := compareTrees(fv, lv); len(ms) != 0 {

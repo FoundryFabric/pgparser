@@ -1,0 +1,15 @@
+{"sql":"create table t (a int, unique (a))"}
+{"sql":"create table t (a int, primary key (a))"}
+{"sql":"create table t (a int, exclude using gist (a with =))"}
+{"sql":"create table t (a int, check (a > 0))"}
+{"sql":"create table t (a int, foreign key (a) references s (b))"}
+{"sql":"create table t (a int unique, b int primary key, c int check (c > 0), d int references s)"}
+{"sql":"alter table t add unique (a)"}
+{"sql":"alter table t add constraint c unique using index i"}
+{"sql":"alter table t add primary key using index i"}
+{"sql":"alter table t add primary key (a) deferrable initially deferred"}
+{"sql":"alter table t add check (a > 0) not valid"}
+{"sql":"alter table t add foreign key (a) references s not valid"}
+{"sql":"alter table t add unique (a) not valid","code":"0A000","message":"UNIQUE constraints cannot be marked NOT VALID","position":-1}
+{"sql":"alter table t add primary key (a) no inherit","code":"0A000","message":"PRIMARY KEY constraints cannot be marked NO INHERIT","position":-1}
+{"sql":"alter table t add exclude (a with =) not valid","code":"0A000","message":"EXCLUDE constraints cannot be marked NOT VALID","position":-1}
