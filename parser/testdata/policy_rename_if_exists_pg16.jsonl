@@ -1,0 +1,20 @@
+{"sql":"alter policy if exists p on t rename to q"}
+{"sql":"alter policy if exists p on s.t rename to q"}
+{"sql":"alter policy if exists if on t rename to q"}
+{"sql":"alter policy if on t rename to q"}
+{"sql":"alter policy if exists on t rename to q","code":"42601","message":"syntax error at or near \"on\"","position":23}
+{"sql":"alter policy if exists p on t to public","code":"42601","message":"syntax error at or near \"to\"","position":30}
+{"sql":"alter policy if exists p on t using (true)","code":"42601","message":"syntax error at or near \"using\"","position":30}
+{"sql":"alter policy if exists p rename to q","code":"42601","message":"syntax error at or near \"rename\"","position":25}
+{"sql":"alter policy p on t rename to q"}
+{"sql":"alter policy p on s.t rename to q"}
+{"sql":"alter policy p on t to public using (true) with check (true)"}
+{"sql":"alter policy p on t using (true)"}
+{"sql":"alter policy p on t with check (true)"}
+{"sql":"alter policy p on t to current_user, r"}
+{"sql":"alter policy exists on t rename to q"}
+{"sql":"drop policy if exists p on t"}
+{"sql":"alter trigger if exists tg on t rename to u","code":"42601","message":"syntax error at or near \"exists\"","position":17}
+{"sql":"alter rule if exists r on t rename to s","code":"42601","message":"syntax error at or near \"exists\"","position":14}
+{"sql":"alter trigger tg on t rename to u"}
+{"sql":"alter rule r on t rename to s"}

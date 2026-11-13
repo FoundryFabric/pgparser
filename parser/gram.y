@@ -3707,6 +3707,16 @@ RenameStmt:
 				Newname:    $8,
 			}
 		}
+	| ALTER POLICY IF_P EXISTS name ON qualified_name RENAME TO name
+		{
+			$$ = &nodes.RenameStmt{
+				RenameType: nodes.OBJECT_POLICY,
+				Relation:   makeRangeVarFromAnyName($7, $<loc>7),
+				Subname:    $5,
+				Newname:    $10,
+				MissingOk:  true,
+			}
+		}
 	/* RENAME LANGUAGE / DATABASE / TABLESPACE / ROLE */
 	| ALTER opt_procedural LANGUAGE name RENAME TO name
 		{

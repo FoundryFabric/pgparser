@@ -1407,6 +1407,19 @@ open tree-shape change (#38), which also makes DROP's names PostgreSQL
 16's. `testdata/object_type_name_pg16.jsonl` pins 68 statements; all
 agree.
 
+### policy-rename-if-exists (risk 2; fixed)
+
+| statement | PostgreSQL 16 | parser |
+|---|---|---|
+| `alter policy if exists p on t rename to q` | accepts | 42601 syntax error at or near "exists" at 16 |
+| `alter policy if exists p on t to public` | 42601 syntax error at or near "to" at 30 | the same |
+
+PostgreSQL 16's `RenameStmt` has `ALTER POLICY [IF EXISTS] name ON
+qualified_name RENAME TO name`; ALTER POLICY's other forms take no IF
+EXISTS. The fork's lacked the IF EXISTS rename, which is added. The trees
+match libpg_query's. `testdata/policy_rename_if_exists_pg16.jsonl` pins 20
+statements; all agree.
+
 ## Rerunning
 
 ```
