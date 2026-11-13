@@ -1,0 +1,29 @@
+{"sql":"alter view if exists v rename column a to b"}
+{"sql":"alter view if exists v rename a to b"}
+{"sql":"alter view if exists s.v rename column a to b"}
+{"sql":"alter materialized view if exists v rename column a to b"}
+{"sql":"alter materialized view if exists v rename a to b"}
+{"sql":"alter materialized view if exists s.v rename a to b"}
+{"sql":"alter view if exists v rename column a","code":"42601","message":"syntax error at end of input","position":38}
+{"sql":"alter view if exists v rename column to b","code":"42601","message":"syntax error at or near \"to\"","position":37}
+{"sql":"alter view if exists v rename constraint a to b","code":"42601","message":"syntax error at or near \"constraint\"","position":30}
+{"sql":"alter materialized view if exists v rename constraint a to b","code":"42601","message":"syntax error at or near \"constraint\"","position":43}
+{"sql":"alter view if exists only v rename a to b","code":"42601","message":"syntax error at or near \"only\"","position":21}
+{"sql":"alter view if exists v rename to w"}
+{"sql":"alter materialized view if exists v rename to w"}
+{"sql":"alter view v rename column a to b"}
+{"sql":"alter view v rename a to b"}
+{"sql":"alter view v rename to w"}
+{"sql":"alter materialized view v rename column a to b"}
+{"sql":"alter materialized view v rename a to b"}
+{"sql":"alter materialized view v rename to w"}
+{"sql":"alter table if exists t rename column a to b"}
+{"sql":"alter table if exists t rename a to b"}
+{"sql":"alter foreign table if exists f rename column a to b"}
+{"sql":"alter foreign table if exists f rename a to b"}
+{"sql":"alter index if exists i rename to j"}
+{"sql":"alter sequence if exists s rename to t"}
+{"sql":"alter table if exists t rename constraint a to b"}
+{"sql":"alter view if exists v alter column a set default 1"}
+{"sql":"alter view if exists v owner to u"}
+{"sql":"alter materialized view if exists v set schema s"}

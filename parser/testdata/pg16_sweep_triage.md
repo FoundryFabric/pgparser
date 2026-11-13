@@ -1359,6 +1359,20 @@ constant take it; the fork had it in `SimpleTypename` only. It is moved to
 The constants' trees match libpg_query's.
 `testdata/boolean_const_pg16.jsonl` pins 37 statements; all agree.
 
+### view-rename-if-exists (risk 2; fixed)
+
+| statement | PostgreSQL 16 | parser |
+|---|---|---|
+| `alter view if exists v rename column a to b` | accepts | 42601 syntax error at or near "column" at 30 |
+| `alter materialized view if exists v rename a to b` | accepts | 42601 syntax error at or near "a" at 43 |
+
+PostgreSQL 16's `RenameStmt` has `ALTER VIEW [IF EXISTS] qualified_name
+RENAME opt_column name TO name`, and the same for MATERIALIZED VIEW; the
+fork had the column renames without IF EXISTS only. They are added in the
+fork's style, a rule with COLUMN and one without. The trees match
+libpg_query's. `testdata/view_rename_if_exists_pg16.jsonl` pins 29
+statements; all agree.
+
 ## Rerunning
 
 ```

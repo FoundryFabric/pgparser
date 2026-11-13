@@ -3322,6 +3322,30 @@ RenameStmt:
 				Newname:      $7,
 			}
 		}
+	| ALTER VIEW IF_P EXISTS qualified_name RENAME COLUMN ColId TO name
+		{
+			rv := makeRangeVarFromAnyName($5, $<loc>5)
+			$$ = &nodes.RenameStmt{
+				RenameType:   nodes.OBJECT_COLUMN,
+				RelationType: nodes.OBJECT_VIEW,
+				Relation:     rv,
+				Subname:      $8,
+				Newname:      $10,
+				MissingOk:    true,
+			}
+		}
+	| ALTER VIEW IF_P EXISTS qualified_name RENAME ColId TO name
+		{
+			rv := makeRangeVarFromAnyName($5, $<loc>5)
+			$$ = &nodes.RenameStmt{
+				RenameType:   nodes.OBJECT_COLUMN,
+				RelationType: nodes.OBJECT_VIEW,
+				Relation:     rv,
+				Subname:      $7,
+				Newname:      $9,
+				MissingOk:    true,
+			}
+		}
 	/* RENAME MATERIALIZED VIEW */
 	| ALTER MATERIALIZED VIEW qualified_name RENAME TO name
 		{
@@ -3362,6 +3386,30 @@ RenameStmt:
 				Relation:     rv,
 				Subname:      $6,
 				Newname:      $8,
+			}
+		}
+	| ALTER MATERIALIZED VIEW IF_P EXISTS qualified_name RENAME COLUMN ColId TO name
+		{
+			rv := makeRangeVarFromAnyName($6, $<loc>6)
+			$$ = &nodes.RenameStmt{
+				RenameType:   nodes.OBJECT_COLUMN,
+				RelationType: nodes.OBJECT_MATVIEW,
+				Relation:     rv,
+				Subname:      $9,
+				Newname:      $11,
+				MissingOk:    true,
+			}
+		}
+	| ALTER MATERIALIZED VIEW IF_P EXISTS qualified_name RENAME ColId TO name
+		{
+			rv := makeRangeVarFromAnyName($6, $<loc>6)
+			$$ = &nodes.RenameStmt{
+				RenameType:   nodes.OBJECT_COLUMN,
+				RelationType: nodes.OBJECT_MATVIEW,
+				Relation:     rv,
+				Subname:      $8,
+				Newname:      $10,
+				MissingOk:    true,
 			}
 		}
 	/* RENAME FUNCTION / PROCEDURE / ROUTINE */
