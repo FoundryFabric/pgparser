@@ -1,0 +1,402 @@
+{"sql":"EXPLAIN (COSTS OFF) EXECUTE p1(2)","locations":{"DefElem":[9]}}
+{"sql":"EXPLAIN (COSTS OFF) EXECUTE p2(2)","locations":{"DefElem":[9]}}
+{"sql":"CREATE PROCEDURE addr_nsp.proc() LANGUAGE SQL AS $$ $$","locations":{"DefElem":[33,46]}}
+{"sql":"CREATE PROCEDURE testns.bar() AS 'select 1' LANGUAGE sql","locations":{"DefElem":[30,44]}}
+{"sql":"CREATE COLLATION test0 FROM \"C\"","locations":{"DefElem":[28]}}
+{"sql":"VACUUM (FULL) ","locations":{"DefElem":[8]}}
+{"sql":"VACUUM ANALYZE ","locations":{"DefElem":[7]}}
+{"sql":"alter table simple set (localtime = 2)","locations":{"DefElem":[24]}}
+{"sql":"alter table alterlock reset (fillfactor)","locations":{"DefElem":[29]}}
+{"sql":"alter table t alter column a reset (x.y)","locations":{"DefElem":[36]}}
+{"sql":"CREATE TABLE withoid() WITH (oids)","locations":{"DefElem":[29]}}
+{"sql":"CREATE TABLE withoid() WITH (oids = true)","locations":{"DefElem":[29]}}
+{"sql":"CREATE TEMP TABLE withoutoid() WITH (oids = false)","locations":{"DefElem":[37]}}
+{"sql":"COPY testeoc TO stdout CSV","locations":{"DefElem":[23]}}
+{"sql":"COPY testeoc FROM stdin CSV","locations":{"DefElem":[24]}}
+{"sql":"COPY vistest FROM stdin CSV","locations":{"DefElem":[24]}}
+{"sql":"CREATE ROLE regress_login LOGIN","locations":{"DefElem":[26]}}
+{"sql":"CREATE USER regress_rls_bob NOLOGIN","locations":{"DefElem":[28]}}
+{"sql":"CREATE ROLE regress_inherit INHERIT","locations":{"DefElem":[28]}}
+{"sql":"reindex (verbose) system","locations":{"DefElem":[9]}}
+{"sql":"REINDEX TABLE CONCURRENTLY sro_tab","locations":{"DefElem":[14]}}
+{"sql":"REINDEX INDEX CONCURRENTLY sro_pidx","locations":{"DefElem":[14]}}
+{"sql":"do $$\nbegin\n  assert 1=0;  -- should fail\nend;\n$$","locations":{"DefElem":[3]}}
+{"sql":"do $$\nbegin\n  assert NULL;  -- should fail\nend;\n$$","locations":{"DefElem":[3]}}
+{"sql":"do $$\nbegin\n  assert 1=0;  -- won't be tested\nend;\n$$","locations":{"DefElem":[3]}}
+{"sql":"CREATE INDEX ON brin_hot_3 USING brin (a) WITH (pages_per_range = 1)","locations":{"DefElem":[48]}}
+{"sql":"create index on btree_bpchar(f1 bpchar_ops) WITH (deduplicate_items=on)","locations":{"DefElem":[50]}}
+{"sql":"create index btree_tall_idx on btree_tall_tbl (t, id) with (fillfactor = 10)","locations":{"DefElem":[60]}}
+{"sql":"alter group g add user verbose","locations":{"DefElem":[23],"RoleSpec":[12,23]}}
+{"sql":"ALTER ROLE regress_createdb CREATEDB","locations":{"DefElem":[28]}}
+{"sql":"ALTER ROLE regress_createdb NOCREATEDB","locations":{"DefElem":[28]}}
+{"sql":"ALTER SUBSCRIPTION regress_testsub ENABLE","locations":{"DefElem":[0]}}
+{"sql":"ALTER SUBSCRIPTION regress_testsub DISABLE","locations":{"DefElem":[0]}}
+{"sql":"CREATE VIEW rec1v WITH (security_barrier) AS SELECT * FROM rec1","locations":{"DefElem":[24]}}
+{"sql":"CREATE VIEW rec2v WITH (security_barrier) AS SELECT * FROM rec2","locations":{"DefElem":[24]}}
+{"sql":"CREATE VIEW v1 WITH (security_barrier = true) AS\n  SELECT * FROM t1","locations":{"DefElem":[21]}}
+{"sql":"START TRANSACTION READ ONLY","locations":{"DefElem":[18]}}
+{"sql":"GRANT regress_du_role2 TO regress_du_admin WITH ADMIN TRUE","locations":{"DefElem":[48]}}
+{"sql":"GRANT regress_du_role1 TO regress_du_admin WITH ADMIN TRUE","locations":{"DefElem":[48]}}
+{"sql":"GRANT regress_du_role0 TO regress_du_admin WITH ADMIN TRUE","locations":{"DefElem":[48]}}
+{"sql":"CREATE SEQUENCE sequence_testx CACHE 0","locations":{"DefElem":[31]}}
+{"sql":"CREATE SEQUENCE sequence_testx AS text","locations":{"DefElem":[31]}}
+{"sql":"CREATE SEQUENCE sequence_test7 AS bigint","locations":{"DefElem":[31],"TypeName":[34]}}
+{"sql":"CREATE SUBSCRIPTION regress_testsub CONNECTION 'testconn' PUBLICATION testpub WITH (create_slot)","locations":{"DefElem":[84]}}
+{"sql":"CREATE SUBSCRIPTION regress_addr_sub CONNECTION '' PUBLICATION bar WITH (connect = false, slot_name = NONE)","locations":{"DefElem":[73,90]}}
+{"sql":"CREATE SUBSCRIPTION regress_testsub2 CONNECTION 'dbname=regress_doesnotexist' PUBLICATION foo WITH (connect = false)","locations":{"DefElem":[100]}}
+{"sql":"create type intr as range(subtype=int)","locations":{"DefElem":[26]}}
+{"sql":"create type intrange as range(subtype=int)","locations":{"DefElem":[30]}}
+{"sql":"CREATE TYPE deptest_range AS RANGE (SUBTYPE = int4)","locations":{"DefElem":[36]}}
+{"sql":"ALTER SEQUENCE serialTest1 CYCLE","locations":{"DefElem":[27]}}
+{"sql":"ALTER SEQUENCE sequence_test2 RESTART","locations":{"DefElem":[30]}}
+{"sql":"ALTER SEQUENCE ss1 OWNED BY deptest2.f1","locations":{"DefElem":[19]}}
+{"sql":"ALTER PROCEDURE ptest1(text) STRICT","locations":{"DefElem":[29]}}
+{"sql":"alter function myfunc(int) reset all","locations":{"DefElem":[27]}}
+{"sql":"ALTER FUNCTION ptest1(text) VOLATILE","locations":{"DefElem":[28]}}
+{"sql":"-- error cases\nCREATE PUBLICATION testpub_xxx WITH (foo)","locations":{"DefElem":[52]}}
+{"sql":"CREATE PUBLICATION testpib_ins_trunct WITH (publish = insert)","locations":{"DefElem":[44]}}
+{"sql":"CREATE PUBLICATION testpub_xxx WITH (order = 'cluster, vacuum')","locations":{"DefElem":[37]}}
+{"sql":"ALTER OPERATOR === (boolean, real) SET (NEGATOR = @!=)","locations":{"DefElem":[40]}}
+{"sql":"ALTER OPERATOR === (boolean, real) SET (HASHES = false)","locations":{"DefElem":[40]}}
+{"sql":"ALTER OPERATOR === (boolean, boolean) SET (JOIN = NONE)","locations":{"DefElem":[43]}}
+{"sql":"SET TRANSACTION READ ONLY","locations":{"DefElem":[16]}}
+{"sql":"create index on mcrparted4 (a abs(b), c)","locations":{"DefElem":[34]}}
+{"sql":"CREATE INDEX ON vaccluster(wrap_do_analyze wrap_do_analyze(i))","locations":{"DefElem":[59]}}
+{"sql":"CREATE INDEX wowidx2 ON test_tsvector USING gist (a tsvector_ops(siglen=1))","locations":{"DefElem":[65]}}
+{"sql":"-- no\nALTER DEFAULT PRIVILEGES IN SCHEMA testns GRANT USAGE ON TYPES to public","locations":{"DefElem":[31]}}
+{"sql":"-- no\nALTER DEFAULT PRIVILEGES IN SCHEMA testns GRANT EXECUTE ON ROUTINES to public","locations":{"DefElem":[31]}}
+{"sql":"ALTER DEFAULT PRIVILEGES FOR ROLE regress_priv_user1 REVOKE USAGE ON TYPES FROM public","locations":{"DefElem":[25]}}
+{"sql":"ALTER PUBLICATION testpub_default SET (publish = update)","locations":{"DefElem":[39]}}
+{"sql":"ALTER PUBLICATION testpub_forparted1 SET (publish='insert')","locations":{"DefElem":[42]}}
+{"sql":"ALTER PUBLICATION testpub_foralltables SET (publish = 'insert, update')","locations":{"DefElem":[44]}}
+{"sql":"CREATE EVENT TRIGGER sql_drop_command ON sql_drop\n    WHEN TAG IN ('DROP POLICY') EXECUTE PROCEDURE drop_sql_command()","locations":{"DefElem":[59]}}
+{"sql":"CREATE EVENT TRIGGER test_event_trigger_guc\n\tON sql_drop\n\tWHEN TAG IN ('DROP POLICY') EXECUTE FUNCTION test_event_trigger_guc()","locations":{"DefElem":[63]}}
+{"sql":"CREATE EVENT TRIGGER regress_reindex_end ON ddl_command_end\n    WHEN TAG IN ('REINDEX')\n    EXECUTE PROCEDURE reindex_end_command()","locations":{"DefElem":[69]}}
+{"sql":"ALTER FOREIGN DATA WRAPPER foo OPTIONS (a '2')","locations":{"DefElem":[40]}}
+{"sql":"ALTER FOREIGN DATA WRAPPER foo OPTIONS (b '4')","locations":{"DefElem":[40]}}
+{"sql":"ALTER FOREIGN DATA WRAPPER foo OPTIONS (ADD d '5')","locations":{"DefElem":[44]}}
+{"sql":"ALTER USER MAPPING FOR public SERVER s4 OPTIONS (ADD modified '1')","locations":{"DefElem":[53],"RoleSpec":[23]}}
+{"sql":"-- ERROR\nALTER USER MAPPING FOR public SERVER t1 OPTIONS (ADD  '1')","locations":{"DefElem":[58],"RoleSpec":[32]}}
+{"sql":"-- ERROR\nALTER USER MAPPING FOR user SERVER ss4 OPTIONS (gotcha 'true')","locations":{"DefElem":[57],"RoleSpec":[32]}}
+{"sql":"CREATE FOREIGN TABLE ft2 () INHERITS (fd_pt1)\n  SERVER s0 OPTIONS (delimiter ',', quote '\"', \"be quoted\" 'value')","locations":{"DefElem":[67,82,93]}}
+{"sql":"CREATE FOREIGN TABLE ft2 (\n\tc1 integer NOT NULL,\n\tc2 text,\n\tc3 date\n) SERVER s0 OPTIONS (delimiter ',', quote '\"', \"be quoted\" 'value')","locations":{"DefElem":[89,104,115]}}
+{"sql":"ALTER SERVER s8 OPTIONS (foo '1')","locations":{"DefElem":[25]}}
+{"sql":"-- ERROR\nALTER SERVER s0 OPTIONS (a '1')","locations":{"DefElem":[34]}}
+{"sql":"ALTER SERVER s8 OPTIONS (localtimestamp '1')","locations":{"DefElem":[25]}}
+{"sql":"ALTER FOREIGN TABLE ft1 ADD COLUMN c10 integer OPTIONS (p1 'v1')","locations":{"DefElem":[56]}}
+{"sql":"ALTER FOREIGN TABLE IF EXISTS doesnt_exist_ft1 ADD COLUMN c10 integer OPTIONS (p1 'v1')","locations":{"DefElem":[79]}}
+{"sql":"ALTER FOREIGN TABLE IF EXISTS doesnt_exist_ft1 ADD COLUMN c10 integer[] OPTIONS (p1 'v1')","locations":{"DefElem":[81]}}
+{"sql":"CREATE FOREIGN DATA WRAPPER test_fdw HANDLER invalid_fdw_handler","locations":{"DefElem":[37]}}
+{"sql":"CREATE FOREIGN DATA WRAPPER foo VALIDATOR postgresql_fdw_validator","locations":{"DefElem":[32]}}
+{"sql":"-- ERROR\nCREATE FOREIGN DATA WRAPPER test_fdw HANDLER test_fdw_handler","locations":{"DefElem":[46]}}
+{"sql":"CREATE USER MAPPING FOR public SERVER s10 OPTIONS (user 'secret')","locations":{"DefElem":[51]}}
+{"sql":"CREATE USER MAPPING FOR current_user SERVER s6 OPTIONS (username 'test')","locations":{"DefElem":[56]}}
+{"sql":"CREATE USER MAPPING FOR user SERVER s8 OPTIONS (username 'test', password 'secret')","locations":{"DefElem":[48,65]}}
+{"sql":"-- ERROR\nALTER FOREIGN DATA WRAPPER foo NO VALIDATOR","locations":{"DefElem":[40]}}
+{"sql":"-- ERROR\nALTER FOREIGN DATA WRAPPER foo VALIDATOR bar","locations":{"DefElem":[40]}}
+{"sql":"-- ERROR\nALTER FOREIGN DATA WRAPPER foo HANDLER test_fdw_handler","locations":{"DefElem":[40]}}
+{"sql":"CREATE TABLE truncate_b (id int GENERATED ALWAYS AS IDENTITY (START WITH 44))","locations":{"DefElem":[62]}}
+{"sql":"ALTER TABLE ONLY pitest3\n            ALTER COLUMN f3 ADD GENERATED ALWAYS AS IDENTITY (START  3)","locations":{"DefElem":[87]}}
+{"sql":"ALTER TABLE ONLY pitest3\n            ALTER COLUMN f3 ADD GENERATED ALWAYS AS IDENTITY (START WITH 3)","locations":{"DefElem":[87]}}
+{"sql":"CREATE SERVER s8 FOREIGN DATA WRAPPER postgresql OPTIONS (foo '1')","locations":{"DefElem":[58]}}
+{"sql":"CREATE SERVER s4 TYPE 'oracle' FOREIGN DATA WRAPPER foo OPTIONS (host 'a', dbname 'b')","locations":{"DefElem":[65,75]}}
+{"sql":"CREATE SERVER s6 VERSION '16.0' FOREIGN DATA WRAPPER foo OPTIONS (host 'a', dbname 'b')","locations":{"DefElem":[66,76]}}
+{"sql":"ALTER TYPE myvarchar SET (storage = plain)","locations":{"DefElem":[26]}}
+{"sql":"-- not allowed\nALTER TYPE myvarchar SET (storage = extended)","locations":{"DefElem":[41]}}
+{"sql":"-- not allowed\nALTER TYPE myvarchar SET (storage = extended[])","locations":{"DefElem":[41]}}
+{"sql":"-- fail\nALTER TABLESPACE regress_tblspace RESET (random_page_cost = 2.0)","locations":{"DefElem":[49]}}
+{"sql":"ALTER TABLESPACE regress_tblspace SET (some_nonexistent_parameter = true)","locations":{"DefElem":[39]}}
+{"sql":"-- fail\nALTER TABLESPACE regress_tblspace RESET (random_page_cost, effective_io_concurrency)","locations":{"DefElem":[49,67]}}
+{"sql":"CREATE FOREIGN DATA WRAPPER foo OPTIONS (testing '1')","locations":{"DefElem":[41]}}
+{"sql":"CREATE FOREIGN DATA WRAPPER foo OPTIONS (testing '1', testing '2')","locations":{"DefElem":[41,54]}}
+{"sql":"-- ERROR\nCREATE FOREIGN DATA WRAPPER foo OPTIONS (\"test wrapper\" 'true')","locations":{"DefElem":[50]}}
+{"sql":"drop database test_database_exists with (force)","locations":{"DefElem":[41]}}
+{"sql":"drop database if exists test_database_exists (force)","locations":{"DefElem":[46]}}
+{"sql":"drop database if exists test_database_exists with (force)","locations":{"DefElem":[51]}}
+{"sql":"ALTER TEXT SEARCH DICTIONARY synonym (CaseSensitive = 1)","locations":{"DefElem":[38]}}
+{"sql":"ALTER TEXT SEARCH DICTIONARY synonym (CaseSensitive = 2)","locations":{"DefElem":[38]}}
+{"sql":"-- fail\nALTER TEXT SEARCH DICTIONARY synonym (CaseSensitive = off)","locations":{"DefElem":[46]}}
+{"sql":"ALTER DATABASE regression_utf8 CONNECTION_LIMIT 123","locations":{"DefElem":[31]}}
+{"sql":"ALTER DATABASE regression_utf8 SET TABLESPACE regress_tblspace","locations":{"DefElem":[46]}}
+{"sql":"-- fail\nCREATE TABLESPACE regress_tblspacewith LOCATION '' WITH (random_page_cost = 3.0)","locations":{"DefElem":[65]}}
+{"sql":"-- create a tablespace using WITH clause\nCREATE TABLESPACE regress_tblspacewith LOCATION '' WITH (some_nonexistent_parameter = true)","locations":{"DefElem":[98]}}
+{"sql":"CREATE DATABASE regression_tbd\n\tENCODING utf8 LC_COLLATE \"C\" LC_CTYPE \"C\" TEMPLATE template0","locations":{"DefElem":[32,46,61,74]}}
+{"sql":"CREATE DATABASE regression_tbd\n\tENCODING LC_COLLATE utf8 \"C\" LC_CTYPE \"C\" TEMPLATE template0","locations":{"DefElem":[32,52,61,74]}}
+{"sql":"-- ERROR\nIMPORT FOREIGN SCHEMA s1 EXCEPT (t1, t2) FROM SERVER s9 INTO public\nOPTIONS (option1 'value1', option2 'value2')","locations":{"DefElem":[86,104]}}
+{"sql":"-- invalid: non-lowercase quoted reloptions identifiers\nCREATE TABLE tas_case WITH (\"Fillfactor\" = 10) AS SELECT 1 a","locations":{"DefElem":[84]}}
+{"sql":"explain analyze select 1","locations":{"DefElem":[8]}}
+{"sql":"explain verbose select 1","locations":{"DefElem":[8]}}
+{"sql":"explain analyze verbose select 1","locations":{"DefElem":[8,16]}}
+{"sql":"alter server s options (drop a, set b $$x$$, add c $$y$$)","locations":{"DefElem":[29,36,49]}}
+{"sql":"cluster verbose t","locations":{"DefElem":[8]}}
+{"sql":"cluster verbose","locations":{"DefElem":[8]}}
+{"sql":"cluster verbose i on t","locations":{"DefElem":[8]}}
+{"sql":"analyze verbose t","locations":{"DefElem":[8]}}
+{"sql":"analyse verbose","locations":{"DefElem":[8]}}
+{"sql":"vacuum full freeze verbose analyze t","locations":{"DefElem":[7,12,19,27]}}
+{"sql":"vacuum freeze","locations":{"DefElem":[7]}}
+{"sql":"reindex schema concurrently s","locations":{"DefElem":[15]}}
+{"sql":"reindex database concurrently","locations":{"DefElem":[17]}}
+{"sql":"reindex system concurrently d","locations":{"DefElem":[15]}}
+{"sql":"create collation if not exists c from \"C\"","locations":{"DefElem":[38]}}
+{"sql":"alter database d set tablespace x","locations":{"DefElem":[32]}}
+{"sql":"alter group g drop user a, b","locations":{"DefElem":[24],"RoleSpec":[12,24,27]}}
+{"sql":"revoke inherit option for a from b","locations":{"DefElem":[7]}}
+{"sql":"alter role r with nosuperuser createdb password $$x$$ valid until $$y$$","locations":{"DefElem":[18,30,39,54]}}
+{"sql":"create role r sysid 4 admin a role b in role c in group d","locations":{"DefElem":[14,22,30,37,47]}}
+{"sql":"begin isolation level serializable, read only, not deferrable","locations":{"DefElem":[6,36,47]}}
+{"sql":"alter extension e update to $$2$$","locations":{"DefElem":[25]}}
+{"sql":"create extension e schema s version $$1$$ cascade","locations":{"DefElem":[19,28,42]}}
+{"sql":"GRANT ALL ON t2 TO public","locations":{"RoleSpec":[19]}}
+{"sql":"GRANT ALL ON x1 TO PUBLIC","locations":{"RoleSpec":[19]}}
+{"sql":"GRANT ALL ON t3 TO public","locations":{"RoleSpec":[19]}}
+{"sql":"DROP user clstr_4","locations":{"RoleSpec":[10]}}
+{"sql":"DROP group temptest","locations":{"RoleSpec":[11]}}
+{"sql":"DROP ROLE session_user","locations":{"RoleSpec":[10]}}
+{"sql":"ALTER COLLATION test11 OWNER TO nonsense","locations":{"RoleSpec":[32]}}
+{"sql":"grant r to authorization","locations":{"RoleSpec":[11]}}
+{"sql":"grant regress_alice to regress_bob","locations":{"RoleSpec":[23]}}
+{"sql":"REVOKE regress_priv_user1 FROM  CASCADE","locations":{"RoleSpec":[32]}}
+{"sql":"alter role r","locations":{"RoleSpec":[11]}}
+{"sql":"alter user r","locations":{"RoleSpec":[11]}}
+{"sql":"alter role r with","locations":{"RoleSpec":[11]}}
+{"sql":"ALTER TABLE t1 OWNER TO regress_rls_alice","locations":{"RoleSpec":[24]}}
+{"sql":"ALTER TABLE t1.x OWNER TO regress_rls_alice","locations":{"RoleSpec":[26]}}
+{"sql":"ALTER TABLE sro_tab OWNER TO regress_sro_user","locations":{"RoleSpec":[29]}}
+{"sql":"CREATE ROLE regress_monitor IN ROLE pg_monitor","locations":{"RoleSpec":[36]}}
+{"sql":"CREATE ROLE regress_maintain_all IN ROLE pg_maintain","locations":{"RoleSpec":[41]}}
+{"sql":"CREATE USER MAPPING FOR user SERVER s4","locations":{"RoleSpec":[24]}}
+{"sql":"CREATE USER MAPPING FOR public SERVER s6","locations":{"RoleSpec":[24]}}
+{"sql":"CREATE USER MAPPING FOR public SERVER s8","locations":{"RoleSpec":[24]}}
+{"sql":"create schema s authorization authorization","locations":{"RoleSpec":[30]}}
+{"sql":"CREATE SCHEMA schema_two authorization regress_evt_user","locations":{"RoleSpec":[39]}}
+{"sql":"CREATE SCHEMA audit_tbls authorization regress_evt_user","locations":{"RoleSpec":[39]}}
+{"sql":"REVOKE regress_priv_role FROM regress_priv_user1 GRANTED BY CURRENT_ROLE","locations":{"RoleSpec":[30,60]}}
+{"sql":"GRANT regress_priv_user1 TO regress_priv_user3 GRANTED BY regress_priv_user2","locations":{"RoleSpec":[28,58]}}
+{"sql":"GRANT regress_priv_user1 TO regress_priv_user4 GRANTED BY regress_priv_user3","locations":{"RoleSpec":[28,58]}}
+{"sql":"DROP OWNED BY regress_evt_user","locations":{"RoleSpec":[14]}}
+{"sql":"DROP OWNED BY regress_sro_user","locations":{"RoleSpec":[14]}}
+{"sql":"DROP OWNED BY regress_dep_user1","locations":{"RoleSpec":[14]}}
+{"sql":"CREATE POLICY p1 ON t1 FOR ALL TO PUBLIC USING (a % 2 = 0)","locations":{"RoleSpec":[34]}}
+{"sql":"CREATE POLICY p1 ON t1 TO regress_rls_bob USING ((a % 2) = 0)","locations":{"RoleSpec":[26]}}
+{"sql":"CREATE POLICY p1 ON z1 TO regress_rls_group1 USING (a % 2 = 0)","locations":{"RoleSpec":[26]}}
+{"sql":"DROP USER MAPPING FOR public SERVER s7","locations":{"RoleSpec":[22]}}
+{"sql":"DROP USER MAPPING FOR public SERVER s8","locations":{"RoleSpec":[22]}}
+{"sql":"DROP USER MAPPING FOR public SERVER s4","locations":{"RoleSpec":[22]}}
+{"sql":"REASSIGN OWNED BY regress_dep_user0 TO regress_dep_user1","locations":{"RoleSpec":[18,39]}}
+{"sql":"REASSIGN OWNED BY regress_dep_user1 TO regress_dep_user0","locations":{"RoleSpec":[18,39]}}
+{"sql":"REASSIGN OWNED BY regress_dep_user1 TO regress_dep_user2","locations":{"RoleSpec":[18,39]}}
+{"sql":"GRANT INSERT ON atest2 TO regress_priv_user4 GRANTED BY CURRENT_USER","locations":{"RoleSpec":[26,56]}}
+{"sql":"GRANT TRUNCATE ON atest2 TO regress_priv_user5 GRANTED BY CURRENT_ROLE","locations":{"RoleSpec":[28,58]}}
+{"sql":"REVOKE ALL ON LARGE OBJECT 2001, 2002 FROM PUBLIC GRANTED BY CURRENT_ROLE","locations":{"RoleSpec":[43,61]}}
+{"sql":"ALTER POLICY p1 ON event_trigger_test  TO p2","locations":{"RoleSpec":[42]}}
+{"sql":"ALTER ROLE regress_rol_lock1 SET search_path = lock_schema1","locations":{"RoleSpec":[11]}}
+{"sql":"revoke inherit option for a from b granted by current_role","locations":{"RoleSpec":[33,46]}}
+{"sql":"create user mapping for user server s","locations":{"RoleSpec":[24]}}
+{"sql":"alter policy p on t to public, session_user","locations":{"RoleSpec":[23,31]}}
+{"sql":"grant select on t to public, current_user with grant option granted by session_user","locations":{"RoleSpec":[21,29,71]}}
+{"sql":"CREATE TABLE m(id OID)","locations":{"ColumnDef":[15]}}
+{"sql":"create table p2(f2 int)","locations":{"ColumnDef":[16]}}
+{"sql":"CREATE TABLE tt8(a int)","locations":{"ColumnDef":[17]}}
+{"sql":"alter table p11 add a int","locations":{"ColumnDef":[20]}}
+{"sql":"ALTER TABLE leader ADD c int","locations":{"ColumnDef":[23]}}
+{"sql":"ALTER TABLE leader ADD int c","locations":{"ColumnDef":[23]}}
+{"sql":"create type testtype5 as (a int)","locations":{"ColumnDef":[26]}}
+{"sql":"create type jsb_ia2 as (a int[][])","locations":{"ColumnDef":[24]}}
+{"sql":"select * from testrngfunc() as (f1 int8,f2 int8)","locations":{"ColumnDef":[32,40]}}
+{"sql":"select * from testrngfunc() as t(f1 int8,f2 int8)","locations":{"ColumnDef":[33,41]}}
+{"sql":"SELECT * FROM ROWS FROM( getrngfunc6(1) AS (rngfuncid int, rngfuncsubid int, rngfuncname text) ) WITH ORDINALITY","locations":{"ColumnDef":[44,59,77]}}
+{"sql":"SELECT * FROM ROWS FROM( getrngfunc7(1) AS (rngfuncid int, rngfuncsubid int, rngfuncname text) ) WITH ORDINALITY","locations":{"ColumnDef":[44,59,77]}}
+{"sql":"CREATE VIEW vw_getrngfunc AS\n  SELECT * FROM ROWS FROM( getrngfunc6(1) AS (rngfuncid int, rngfuncsubid int, rngfuncname text) )\n                WITH ORDINALITY","locations":{"ColumnDef":[75,90,108]}}
+{"sql":"alter table t alter column a type int","locations":{"ColumnDef":[27]}}
+{"sql":"alter table t alter a set data type int collate \"C\" using a","locations":{"ColumnDef":[20]}}
+{"sql":"alter type ty alter attribute a type int","locations":{"ColumnDef":[30]}}
+{"sql":"alter type ty alter attribute a set data type int","locations":{"ColumnDef":[30]}}
+{"sql":"create table t of ty (a with options default 1)","locations":{"ColumnDef":[22]}}
+{"sql":"CREATE TABLE koju (a INT UNIQUE)","locations":{"Constraint":[25]}}
+{"sql":"create temp table t (a int unique)","locations":{"Constraint":[27]}}
+{"sql":"ALTER TABLE m ADD UNIQUE (k)","locations":{"Constraint":[18]}}
+{"sql":"ALTER TABLE tt9 ADD UNIQUE(c)","locations":{"Constraint":[20]}}
+{"sql":"CREATE TABLE attmp4 (a int, b int, unique(a,b))","locations":{"Constraint":[35]}}
+{"sql":"create table fkest1 (a int, b int, primary key(a,b))","locations":{"Constraint":[35]}}
+{"sql":"CREATE TABLE UNIQUE_TBL (i int, t text,\n\tUNIQUE(i,t))","locations":{"Constraint":[41]}}
+{"sql":"create domain ddef1 int4 DEFAULT 3","locations":{"Constraint":[25]}}
+{"sql":"create domain ddef2 oid DEFAULT '12'","locations":{"Constraint":[24]}}
+{"sql":"create domain ddef1.x int4 DEFAULT 3","locations":{"Constraint":[27]}}
+{"sql":"alter domain con add check (VALUE > 0)","locations":{"Constraint":[21]}}
+{"sql":"alter domain con add constraint t check (VALUE < 1)","locations":{"Constraint":[21]}}
+{"sql":"alter domain di add constraint pos check (value > 0)","locations":{"Constraint":[20]}}
+{"sql":"create table t (a int constraint c not null deferrable initially deferred, b int constraint d check (b > 0) no inherit, c int null default 1 references r (x) match full on delete cascade, d int generated always as identity (start 2), e int generated by default as identity, f int generated always as (a + 1) stored, g int primary key, h int unique nulls not distinct)","locations":{"Constraint":[22,44,55,81,126,131,141,194,240,280,322,341]}}
+{"sql":"create table t (constraint c unique (a) include (b) with (fillfactor=1), primary key (a), check (a > 0) not valid, foreign key (a) references r, exclude using gist (a with =) where (a > 0), constraint p primary key using index i)","locations":{"Constraint":[16,73,90,115,145,190]}}
+{"sql":"alter table t add constraint c unique using index i","locations":{"Constraint":[18]}}
+{"sql":"create domain d int constraint c not null check (value > 0)","locations":{"Constraint":[20,42]}}
+{"sql":"alter domain d add constraint c check (value > 0) not valid","locations":{"Constraint":[19]}}
+{"sql":"alter table t alter constraint c deferrable","locations":{"Constraint":[0]}}
+{"sql":"alter table t alter a add generated always as identity","locations":{"Constraint":[26]}}
+{"sql":"CREATE TABLE fk_d PARTITION OF fk DEFAULT","locations":{"PartitionBoundSpec":[34]}}
+{"sql":"CREATE TABLE fk (a int) PARTITION BY LIST (a)","locations":{"PartitionElem":[43],"PartitionSpec":[24]}}
+{"sql":"CREATE TABLE prt (a int) PARTITION BY RANGE(a)","locations":{"PartitionElem":[44],"PartitionSpec":[25]}}
+{"sql":"create table lp (a char) partition by list (a)","locations":{"PartitionElem":[44],"PartitionSpec":[25]}}
+{"sql":"ALTER TABLE prt1 ATTACH PARTITION prt1_p3 DEFAULT","locations":{"PartitionBoundSpec":[42]}}
+{"sql":"ALTER TABLE plt2 ATTACH PARTITION plt2_p3 DEFAULT","locations":{"PartitionBoundSpec":[42]}}
+{"sql":"ALTER TABLE plt1 ATTACH PARTITION plt1_p3 DEFAULT","locations":{"PartitionBoundSpec":[42]}}
+{"sql":"create table t (a int) partition by range ((a+1) collate \"C\" text_ops, lower(b), c)","locations":{"PartitionElem":[43,71,81],"PartitionSpec":[23]}}
+{"sql":"create table p partition of t for values in (1, 2)","locations":{"PartitionBoundSpec":[41]}}
+{"sql":"create table p partition of t for values from (minvalue) to (1)","locations":{"PartitionBoundSpec":[41]}}
+{"sql":"alter table t attach partition p for values with (modulus 2, remainder 0)","locations":{"PartitionBoundSpec":[44]}}
+{"sql":"alter table t attach partition p default","locations":{"PartitionBoundSpec":[33]}}
+{"sql":"SELECT count() OVER () FROM tenk1","locations":{"WindowDef":[20]}}
+{"sql":"SELECT generate_series(1, 100) OVER () FROM empsalary","locations":{"WindowDef":[36]}}
+{"sql":"SELECT ntile(0) OVER (ORDER BY ten), ten, four FROM tenk1","locations":{"WindowDef":[21]}}
+{"sql":"SELECT COUNT(*) OVER w FROM tenk1 WHERE unique2 < 10 WINDOW w AS ()","locations":{"WindowDef":[21,65]}}
+{"sql":"-- no window operation\nSELECT four FROM tenk1 WHERE FALSE WINDOW w AS (PARTITION BY ten)","locations":{"WindowDef":[70]}}
+{"sql":"SELECT count(*) OVER w FROM tenk1 WINDOW w AS (ORDER BY unique1), w AS (ORDER BY unique1)","locations":{"WindowDef":[21,46,71]}}
+{"sql":"SELECT to_json(a) AS a, JSON_OBJECTAGG(k : v WITH UNIQUE KEYS) OVER (ORDER BY k)\nFROM (VALUES (1,1), (2,2)) a(k,v)","locations":{"WindowDef":[68]}}
+{"sql":"SELECT to_json(a) AS a, JSON_OBJECTAGG(k : v WITH UNIQUE KEYS) OVER (ORDER BY k)\nFROM (VALUES (1,1), (1,2), (2,2)) a(k,v)","locations":{"WindowDef":[68]}}
+{"sql":"SELECT to_json(a) AS a, JSON_OBJECTAGG(k : v ABSENT ON NULL)\nOVER (ORDER BY k)\nFROM (VALUES (1,1), (1,null), (2,2)) a(k,v)","locations":{"WindowDef":[66]}}
+{"sql":"select count(*) over w from t window w as (), v as (w order by a rows between unbounded preceding and current row)","locations":{"WindowDef":[21,42,51]}}
+{"sql":"select sum(a) over (partition by b) , rank() over w2 from t","locations":{"WindowDef":[19,50]}}
+{"sql":"select json_objectagg(k : v) over (order by k) from t","locations":{"WindowDef":[34]}}
+{"sql":"select json_arrayagg(v) over w from t window w as (partition by a)","locations":{"WindowDef":[29,50]}}
+{"sql":"with x (a, b) as (select 1, 2) select 1","locations":{"CommonTableExpr":[5],"WithClause":[0]}}
+{"sql":"WITH t AS (\n\tINSERT INTO y VALUES(0)\n)\nVALUES(FALSE)","locations":{"CommonTableExpr":[5],"WithClause":[0]}}
+{"sql":"SELECT JSON_ARRAY(WITH x AS (SELECT 1) VALUES (TRUE))","locations":{"CommonTableExpr":[23],"WithClause":[18],"JsonArrayQueryConstructor":[7]}}
+{"sql":"-- CTEs\nWITH foo AS (SELECT * FROM gtest1) SELECT * FROM foo","locations":{"CommonTableExpr":[13],"WithClause":[8]}}
+{"sql":"--\n-- error cases\n--\nWITH x(n, b) AS (SELECT 1)\nSELECT * FROM x","locations":{"CommonTableExpr":[26],"WithClause":[21]}}
+{"sql":"with recursive test as (\n  select 1 as x\n  union all\n  select x + 1\n  from test\n) search depth first by x set y\nselect * from test limit 5","locations":{"CTESearchClause":[82],"CommonTableExpr":[15],"WithClause":[0]}}
+{"sql":"with recursive test as (\n  select 1 as x\n  union all\n  select x + 1\n  from test\n) search breadth first by x set y\nselect * from test limit 5","locations":{"CTESearchClause":[82],"CommonTableExpr":[15],"WithClause":[0]}}
+{"sql":"explain (verbose, costs off)\nwith recursive test as (\n  select 1 as x\n  union all\n  select x + 1\n  from test\n) search breadth first by x set y\nselect * from test limit 5","locations":{"CTESearchClause":[111],"CommonTableExpr":[44],"WithClause":[29]}}
+{"sql":"-- star expansion\nwith recursive a as (\n\tselect 1 as b\n\tunion all\n\tselect * from a\n) cycle b set c using p\nselect * from a","locations":{"CTECycleClause":[85],"CommonTableExpr":[33],"WithClause":[18]}}
+{"sql":"with recursive test as (\n  select 0 as x\n  union all\n  select (x + 1) % 10\n  from test\n) cycle x set is_cycle using path\nselect * from test","locations":{"CTECycleClause":[89],"CommonTableExpr":[15],"WithClause":[0]}}
+{"sql":"explain (verbose, costs off)\nwith recursive test as (\n  select 0 as x\n  union all\n  select (x + 1) % 10\n  from test\n) cycle x set is_cycle using path\nselect * from test","locations":{"CTECycleClause":[118],"CommonTableExpr":[44],"WithClause":[29]}}
+{"sql":"-- check sane response to attempt to modify CTE relation\nWITH with_test AS (SELECT 42) INSERT INTO with_test VALUES (1)","locations":{"CommonTableExpr":[62],"WithClause":[57]}}
+{"sql":"-- data-modifying WITH in a modifying statement\nWITH t AS (\n    DELETE FROM y\n    WHERE a <= 10\n    RETURNING *\n)\nINSERT INTO y SELECT -a FROM t RETURNING *","locations":{"CommonTableExpr":[53],"WithClause":[48]}}
+{"sql":"CREATE RULE id_alw3_ins AS ON INSERT TO id_alw3 DO INSTEAD\n  WITH t1 AS (INSERT INTO id_alw1 DEFAULT VALUES RETURNING i)\n    INSERT INTO id_alw2_view DEFAULT VALUES RETURNING i","locations":{"CommonTableExpr":[66],"WithClause":[61]}}
+{"sql":"-- InitPlan\nWITH cte_init AS MATERIALIZED (SELECT 1 a, 'cte_init val' b)\nMERGE INTO m USING (select 1 k, 'merge source InitPlan' v offset 0) o ON m.k=o.k\nWHEN MATCHED THEN UPDATE SET v = (SELECT b || ' merge update' FROM cte_init WHERE a = 1 LIMIT 1)\nWHEN NOT MATCHED THEN INSERT VALUES(o.k, o.v)","locations":{"CommonTableExpr":[17],"WithClause":[12]}}
+{"sql":"-- Basic:\nWITH cte_basic AS MATERIALIZED (SELECT 1 a, 'cte_basic val' b)\nMERGE INTO m USING (select 0 k, 'merge source SubPlan' v offset 0) o ON m.k=o.k\nWHEN MATCHED THEN UPDATE SET v = (SELECT b || ' merge update' FROM cte_basic WHERE cte_basic.a = m.k LIMIT 1)\nWHEN NOT MATCHED THEN INSERT VALUES(o.k, o.v)","locations":{"CommonTableExpr":[15],"WithClause":[10]}}
+{"sql":"-- Basic:\nWITH cte_basic AS MATERIALIZED (SELECT 1 a, 'cte_basic val' b)\nMERGE INTO m USING (select 0 k, 'merge source SubPlan' v offset 0) o ON m.k=o.k\nWHEN MATCHED THEN UPDATE SET v = (SELECT b || ' merge update' FROM cte_basic WHERE cte_basic.a = m.k.x LIMIT 1)\nWHEN NOT MATCHED THEN INSERT VALUES(o.k, o.v)","locations":{"CommonTableExpr":[15],"WithClause":[10]}}
+{"sql":"-- and this\nWITH RECURSIVE x(n) AS (\n  WITH sub_cte AS (SELECT * FROM x)\n  DELETE FROM graph RETURNING f)\n\tSELECT  FROM x","locations":{"CommonTableExpr":[27,44],"WithClause":[12,39]}}
+{"sql":"-- and this\nWITH RECURSIVE x(n) AS (\n  WITH sub_cte AS (SELECT * FROM x)\n  DELETE FROM graph RETURNING f)\n\tSELECT * FROM x","locations":{"CommonTableExpr":[27,44],"WithClause":[12,39]}}
+{"sql":"-- check EXPLAIN VERBOSE for a wCTE with RETURNING\nEXPLAIN (VERBOSE, COSTS OFF)\nWITH wcte AS ( INSERT INTO int8_tbl VALUES ( 42, 47 ) RETURNING q2 )\nDELETE FROM a_star USING wcte WHERE aa = q2","locations":{"CommonTableExpr":[85],"WithClause":[80]}}
+{"sql":"CREATE RULE r2 AS ON UPDATE TO x DO INSTEAD\n    WITH t AS (SELECT OLD.*) UPDATE y SET a = t.n FROM t","locations":{"CommonTableExpr":[53],"WithClause":[48]}}
+{"sql":"-- Exercise code in ExecGetTriggerResultRel() as there's been previous issues\n-- with ResultRelInfos being returned with the incorrect ri_RootResultRelInfo\nWITH cte AS (\n  UPDATE fkpart13_t2_p1 SET part_id = part_id\n) UPDATE fkpart13_t1 SET a = 2 WHERE a = 1","locations":{"CommonTableExpr":[161],"WithClause":[156]}}
+{"sql":"with recursive a(x) as materialized (select 1) search depth first by x set s cycle x set c to true default false using p, b as not materialized (select 2) select 1","locations":{"CTECycleClause":[77],"CTESearchClause":[47],"CommonTableExpr":[15,122],"WithClause":[0]}}
+{"sql":"with a as (select 1) cycle x set c using p insert into t select 1","locations":{"CTECycleClause":[21],"CommonTableExpr":[5],"WithClause":[0]}}
+{"sql":"with a as (select 1) delete from t","locations":{"CommonTableExpr":[5],"WithClause":[0]}}
+{"sql":"with a as (select 1) update t set x = 1","locations":{"CommonTableExpr":[5],"WithClause":[0]}}
+{"sql":"with a as (select 1) merge into t using a on true when matched then do nothing","locations":{"CommonTableExpr":[5],"WithClause":[0]}}
+{"sql":"with a as (select 1) search breadth first by x set s select 1","locations":{"CTESearchClause":[21],"CommonTableExpr":[5],"WithClause":[0]}}
+{"sql":"INSERT INTO rw_view15 (a) VALUES (3) ON CONFLICT (a) DO NOTHING","locations":{"InferClause":[49],"OnConflictClause":[37]}}
+{"sql":"insert into selfconflict values (1,1), (1,2) on conflict do nothing","locations":{"OnConflictClause":[45]}}
+{"sql":"insert into selfconflict values (3,1), (3,2) on conflict do nothing","locations":{"OnConflictClause":[45]}}
+{"sql":"INSERT INTO atest5(two) VALUES (6) ON CONFLICT (two) DO UPDATE set one = 8","locations":{"InferClause":[47],"OnConflictClause":[35]}}
+{"sql":"INSERT INTO atest5(four) VALUES (4) ON CONFLICT (four) DO UPDATE set three = 3","locations":{"InferClause":[48],"OnConflictClause":[36]}}
+{"sql":"select null from pg_database group by grouping sets (()) for update","locations":{"GroupingSet":[38,53]}}
+{"sql":"select sum(ten) from onek group by rollup(four::text), two order by 1","locations":{"GroupingSet":[35]}}
+{"sql":"select sum(ten) from onek group by rollup(four::text[]), two order by 1","locations":{"GroupingSet":[35]}}
+{"sql":"select sum(v), count(*) from gstest_empty group by grouping sets ((),(),())","locations":{"GroupingSet":[51,66,69,72]}}
+{"sql":"insert into t values (1) on conflict do nothing","locations":{"OnConflictClause":[25]}}
+{"sql":"insert into t values (1) on conflict (a, (b+1)) where a > 0 do update set a = 1 where t.a > 1","locations":{"InferClause":[37],"OnConflictClause":[25]}}
+{"sql":"insert into t values (1) on conflict on constraint c do update set a = 1","locations":{"InferClause":[37],"OnConflictClause":[25]}}
+{"sql":"insert into t values (1) on conflict (a) do nothing","locations":{"InferClause":[37],"OnConflictClause":[25]}}
+{"sql":"select a from t group by grouping sets ((a), (), rollup (a, b), cube (b))","locations":{"GroupingSet":[25,45,49,64]}}
+{"sql":"select a from t group by ()","locations":{"GroupingSet":[25]}}
+{"sql":"SELECT xmlconcat(NULL)","locations":{"XmlExpr":[7]}}
+{"sql":"SELECT xmlpi(name foo)","locations":{"XmlExpr":[7]}}
+{"sql":"SELECT xmlconcat(1, 2)","locations":{"XmlExpr":[7]}}
+{"sql":"CREATE STATISTICS tst ON a FROM XMLTABLE('foo' PASSING 'bar' COLUMNS a text)","locations":{"RangeTableFunc":[32],"RangeTableFuncCol":[69]}}
+{"sql":"-- errors\nSELECT * FROM XMLTABLE (ROW () PASSING null COLUMNS v1 timestamp) AS f (v1, v2)","locations":{"RangeTableFunc":[24],"RangeTableFuncCol":[62]}}
+{"sql":"SELECT xmltable.* FROM xmltest2, LATERAL xmltable('/d/r' PASSING x COLUMNS a int PATH '' || lower(_path) || 'c')","locations":{"RangeTableFunc":[41],"RangeTableFuncCol":[75]}}
+{"sql":"SELECT * FROM XMLTABLE('.' PASSING XMLELEMENT(NAME a) columns a varchar(20) PATH '\"<foo/>\"', b xml PATH '\"<foo/>\"')","locations":{"RangeTableFunc":[14],"RangeTableFuncCol":[62,93],"XmlExpr":[35]}}
+{"sql":"select count(*) from person tablesample bernoulli (100)","locations":{"RangeTableSample":[40]}}
+{"sql":"SELECT id FROM test_tablesample TABLESAMPLE SYSTEM (-1)","locations":{"RangeTableSample":[44]}}
+{"sql":"SELECT id FROM test_tablesample TABLESAMPLE SYSTEM (200)","locations":{"RangeTableSample":[44]}}
+{"sql":"SELECT xmlserialize(document 'bad' as text)","locations":{"XmlSerialize":[7]}}
+{"sql":"SELECT xmlserialize(CONTENT  '' AS text INDENT)","locations":{"XmlSerialize":[7]}}
+{"sql":"SELECT xmlserialize(content 'good' as char(10))","locations":{"XmlSerialize":[7],"TypeName":[38]}}
+{"sql":"SELECT xmlelement(name element, xmlelement(name nested, 'stuff'))","locations":{"XmlExpr":[7,32]}}
+{"sql":"SELECT xmlelement(name employee, xmlforest(name, age, salary as pay)) FROM emp","locations":{"XmlExpr":[7,33]}}
+{"sql":"SELECT xmlroot(xmlroot(xml '<foo/>', version '1.0'), version '1.1', standalone no)","locations":{"XmlExpr":[7,15]}}
+{"sql":"SELECT xmlelement(name employees, xmlagg(xmlelement(name name, name))) FROM emp","locations":{"XmlExpr":[7,41]}}
+{"sql":"-- multi line xml test, result should be empty too\nWITH\n   x AS (SELECT proname, proowner, procost::numeric, pronargs,\n                array_to_string(proargnames,',') as proargnames,\n                case when proargtypes <> '' then array_to_string(proargtypes::oid[],',') end as proargtypes\n           FROM pg_proc),\n   y AS (SELECT xmlelement(name data,\n                           xmlagg(xmlelement(name proc,\n                                             xmlforest(proname, proowner, procost,\n                                                       pronargs, proargnames, proargtypes)))) as doc\n           FROM x),\n   z AS (SELECT xmltable.*\n           FROM y,\n                LATERAL xmltable('/data/proc' PASSING doc\n                                 COLUMNS proname name,\n                                         proowner oid,\n                                         procost float,\n                                         pronargs int,\n                                         proargnames text,\n                                         proargtypes text))\n   SELECT * FROM z\n   EXCEPT SELECT * FROM x","locations":{"RangeTableFunc":[686],"RangeTableFuncCol":[761,816,871,927,982,1041],"XmlExpr":[334,390,457]}}
+{"sql":"-- multi line xml test, result should be empty too\nWITH\n   x AS (SELECT proname, proowner, procost::numeric, pronargs,\n                array_to_string(proargnames,',') as proargnames,\n                case when proargtypes <> '' then array_to_string(proargtypes::oid[],',') end as proargtypes\n           FROM pg_proc),\n   y AS (SELECT xmlelement(name data,\n                           xmlagg(xmlelement(name proc,\n                                             xmlforest.x(proname, proowner, procost,\n                                                       pronargs, proargnames, proargtypes)))) as doc\n           FROM x),\n   z AS (SELECT xmltable.*\n           FROM y,\n                LATERAL xmltable('/data/proc' PASSING doc\n                                 COLUMNS proname name,\n                                         proowner oid,\n                                         procost float,\n                                         pronargs int,\n                                         proargnames text,\n                                         proargtypes text))\n   SELECT * FROM z\n   EXCEPT SELECT * FROM x","locations":{"RangeTableFunc":[688],"RangeTableFuncCol":[763,818,873,929,984,1043],"XmlExpr":[334,390]}}
+{"sql":"SELECT xmlserialize(CONTENT  '<foo><bar><val x=\"y\">42</val></bar></foo>' AS text) = xmlserialize(CONTENT '<foo><bar><val x=\"y\">42</val></bar></foo>' AS text  INDENT)","locations":{"XmlSerialize":[7,84]}}
+{"sql":"SELECT xmlserialize(CONTENT  '<foo><bar><val x=\"y\">42</val></bar></foo>' AS text) = xmlserialize(CONTENT '<foo><bar><val x=\"y\">42</val></bar></foo>' AS text NO INDENT)","locations":{"XmlSerialize":[7,84]}}
+{"sql":"-- 'no indent' = not using 'no indent'\nSELECT xmlserialize(DOCUMENT '<foo><bar><val x=\"y\">42</val></bar></foo>' AS text) = xmlserialize(DOCUMENT '<foo><bar><val x=\"y\">42</val></bar></foo>' AS text NO INDENT)","locations":{"XmlSerialize":[46,123]}}
+{"sql":"SELECT '<>' IS NOT DOCUMENT","locations":{"XmlExpr":[12]}}
+{"sql":"SELECT xml 'abc' IS NOT DOCUMENT","locations":{"XmlExpr":[17]}}
+{"sql":"SELECT xml '<abc/>' IS NOT DOCUMENT","locations":{"XmlExpr":[20]}}
+{"sql":"CREATE STATISTICS tst ON a FROM ext_stats_test s TABLESAMPLE system (x)","locations":{"RangeTableSample":[61]}}
+{"sql":"-- ok - conditional expressions are allowed\nALTER PUBLICATION testpub5 SET TABLE testpub_rf_tbl5 WHERE (a IS DOCUMENT)","locations":{"XmlExpr":[106]}}
+{"sql":"select xmlconcat('a', 'b'), xmlelement(name a, xmlattributes(1 as b), 'c'), xmlelement(name a, 'c'), xmlelement(name a, xmlattributes(1 as b)), xmlforest(1 as a), xmlparse(document 'x' preserve whitespace), xmlpi(name a), xmlpi(name a, 'b'), xmlroot('x', version '1.0', standalone yes)","locations":{"XmlExpr":[7,28,76,101,144,163,207,222,242]}}
+{"sql":"select xmlserialize(content 'x' as text no indent)","locations":{"XmlSerialize":[7]}}
+{"sql":"select 1 where 'x' is document and 'y' is not document","locations":{"XmlExpr":[19,39]}}
+{"sql":"select * from xmltable(xmlnamespaces('u' as a), '/x' passing 'y' columns a int path 'b' default 1 not null, b for ordinality, c text)","locations":{"RangeTableFunc":[14],"RangeTableFuncCol":[73,108,126]}}
+{"sql":"select * from t tablesample system (1) repeatable (2)","locations":{"RangeTableSample":[28]}}
+{"sql":"select ('x' is document) is not document","locations":{"XmlExpr":[12,25]}}
+{"sql":"SELECT JSON_OBJECT(NULL: 1)","locations":{"JsonObjectConstructor":[7]}}
+{"sql":"SELECT JSON_OBJECT('a': 2 + 3)","locations":{"JsonObjectConstructor":[7]}}
+{"sql":"SELECT JSON_OBJECT(RETURNING text)","locations":{"JsonObjectConstructor":[7]}}
+{"sql":"SELECT JSON_ARRAY(RETURNING text)","locations":{"JsonArrayConstructor":[7]}}
+{"sql":"SELECT JSON_ARRAY(RETURNING json)","locations":{"JsonArrayConstructor":[7]}}
+{"sql":"SELECT JSON_ARRAY(RETURNING bytea)","locations":{"JsonArrayConstructor":[7]}}
+{"sql":"SELECT JSON_OBJECTAGG(NULL: 1)","locations":{"JsonAggConstructor":[7]}}
+{"sql":"SELECT JSON_OBJECTAGG(NULL: 1 RETURNING jsonb)","locations":{"JsonAggConstructor":[7]}}
+{"sql":"SELECT JSON_OBJECT('a': JSON_OBJECTAGG('b': 1 RETURNING text) FORMAT JSON)","locations":{"JsonAggConstructor":[24],"JsonObjectConstructor":[7]}}
+{"sql":"SELECT JSON_ARRAYAGG(i::text::json)\nFROM generate_series(1, 5) i","locations":{"JsonAggConstructor":[7]}}
+{"sql":"SELECT JSON_ARRAYAGG(i::text(3)::json)\nFROM generate_series(1, 5) i","locations":{"JsonAggConstructor":[7]}}
+{"sql":"SELECT JSON_ARRAYAGG(i ORDER BY i DESC)\nFROM generate_series(1, 5) i","locations":{"JsonAggConstructor":[7]}}
+{"sql":"SELECT JSON_ARRAY(SELECT i, i FROM (VALUES (1)) foo(i))","locations":{"JsonArrayQueryConstructor":[7]}}
+{"sql":"SELECT JSON_ARRAY(SELECT * FROM (VALUES (1, 2)) foo(i, j))","locations":{"JsonArrayQueryConstructor":[7]}}
+{"sql":"SELECT JSON_OBJECT('a': JSON_OBJECT('b': 1 RETURNING text))","locations":{"JsonObjectConstructor":[7,24]}}
+{"sql":"SELECT JSON_OBJECT('a': JSON_OBJECT('b': 1 RETURNING bytea))","locations":{"JsonObjectConstructor":[7,24]}}
+{"sql":"SELECT JSON_OBJECT('a': JSON_OBJECT('b': 1 RETURNING varchar(2)))","locations":{"JsonObjectConstructor":[7,24]}}
+{"sql":"SELECT JSON_ARRAY(JSON_ARRAY('{ \"a\" : 123 }' RETURNING text))","locations":{"JsonArrayConstructor":[7,18]}}
+{"sql":"SELECT JSON_ARRAY(JSON_ARRAY('{ \"a\" : 123 }' RETURNING text(3)))","locations":{"JsonArrayConstructor":[7,18]}}
+{"sql":"SELECT JSON_ARRAY(JSON_ARRAY('{ \"a\" : 123 }' RETURNING varchar(2)))","locations":{"JsonArrayConstructor":[7,18]}}
+{"sql":"SELECT (JSON_OBJECT(RETURNING jsonb), '$')","locations":{"JsonObjectConstructor":[8]}}
+{"sql":"select json_object('a': 1 null on null with unique keys returning jsonb), json_object(returning text), json_array(1, 2 absent on null returning jsonb), json_array(select 1 format json returning jsonb), json_array(returning json)","locations":{"JsonArrayConstructor":[103,202],"JsonArrayQueryConstructor":[152],"JsonObjectConstructor":[7,74]}}
+{"sql":"select json_objectagg(k: v absent on null with unique keys returning jsonb) filter (where true) over (), json_arrayagg(v order by v null on null returning text) from t","locations":{"JsonAggConstructor":[7,105]}}
+{"sql":"select * from rtest_vcomp where size_in_cm > 10.0 order by size_in_cm using >","locations":{"SortBy":[76]}}
+{"sql":"SELECT DISTINCT ON (string4, ten) string4, ten, two\n   FROM onek\n   ORDER BY string4 using <, ten using >, two using <","locations":{"SortBy":[91,104,117]}}
+{"sql":"SELECT DISTINCT ON (string4, ten) string4, ten.x, two\n   FROM onek\n   ORDER BY string4 using <, ten using >, two using <","locations":{"SortBy":[93,106,119]}}
+{"sql":"select aggfns(distinct a,a,c order by c using ~<~)\n  from (values (1,3,'foo'),(0,null,null),(2,2,'bar'),(3,1,'baz')) v(a,b,c),\n       generate_series(1,2) i","locations":{"SortBy":[46]}}
+{"sql":"create or replace view agg_view1 as\n  select aggfns(a,b,c order by c using ~<~)\n    from (values (1,3,'foo'),(0,null,null),(2,2,'bar'),(3,1,'baz')) v(a,b,c)","locations":{"SortBy":[75]}}
+{"sql":"select aggfns(distinct a,b,c order by a,c using ~<~,b)\n  from (values (1,3,'foo'),(0,null,null),(2,2,'bar'),(3,1,'baz')) v(a,b,c),\n       generate_series(1,2) i","locations":{"SortBy":[-1,-1,48]}}
+{"sql":"select * from t order by a using operator(pg_catalog.<) nulls last, b using >=, c using ~<~","locations":{"SortBy":[33,76,88]}}
+{"sql":"select array_agg(a order by b using <) from t","locations":{"SortBy":[36]}}
+{"sql":"select rank() over (order by a using <) from t","locations":{"SortBy":[37]}}
+{"sql":"ALTER SEQUENCE sequence_test5 AS smallint","locations":{"TypeName":[33]}}
+{"sql":"CREATE SEQUENCE sequence_test6 AS smallint","locations":{"TypeName":[34]}}
+{"sql":"CREATE TABLE persons5 OF stuff","locations":{"TypeName":[25]}}
+{"sql":"CREATE TABLE ttable1 OF nothing","locations":{"TypeName":[24]}}
+{"sql":"CREATE TABLE fail_part OF mytype","locations":{"TypeName":[26]}}
+{"sql":"ALTER TABLE tt1 OF tt_t0","locations":{"TypeName":[19]}}
+{"sql":"ALTER TABLE tt2 OF tt_t0","locations":{"TypeName":[19]}}
+{"sql":"ALTER TABLE tt3 OF tt_t0","locations":{"TypeName":[19]}}
+{"sql":"SELECT xmlserialize(content data as character varying(20)) FROM xmltest","locations":{"TypeName":[36]}}
+{"sql":"CREATE VIEW xmlview8 AS SELECT xmlserialize(content 'good' as char(10))","locations":{"TypeName":[62]}}
+{"sql":"create sequence s as double precision","locations":{"TypeName":[21]}}
+{"sql":"alter sequence s as int","locations":{"TypeName":[20]}}
+{"sql":"select xmlserialize(document x as varchar(3) indent), xmlserialize(content x as interval(2))","locations":{"TypeName":[34,80]}}
+{"sql":"create table if not exists t of s.ty","locations":{"TypeName":[32]}}
+{"sql":"alter table t of ty","locations":{"TypeName":[17]}}
+{"sql":"CREATE PUBLICATION testpub4 FOR TABLES IN SCHEMA pub_test","locations":{"PublicationObjSpec":[49]}}
+{"sql":"-- ok\nCREATE PUBLICATION testpub3 FOR TABLES IN SCHEMA pub_test","locations":{"PublicationObjSpec":[55]}}
+{"sql":"CREATE PUBLICATION addr_pub_schema FOR TABLES IN SCHEMA addr_nsp","locations":{"PublicationObjSpec":[56]}}
+{"sql":"-- fail\nALTER PUBLICATION testpub3 ADD TABLES IN SCHEMA pub_test","locations":{"PublicationObjSpec":[56]}}
+{"sql":"ALTER PUBLICATION testpub3_forschema SET TABLES IN SCHEMA pub_test1","locations":{"PublicationObjSpec":[58]}}
+{"sql":"ALTER PUBLICATION testpub1_forschema SET TABLES IN SCHEMA pub_test1","locations":{"PublicationObjSpec":[58]}}
+{"sql":"create publication p for table t (a) where (a > 1), u, tables in schema s, current_schema, tables in schema current_schema","locations":{"PublicationObjSpec":[0,52,72,75,108]}}
+{"sql":"alter publication p add table only t, tables in schema s, s2","locations":{"PublicationObjSpec":[0,55,58]}}
+{"sql":"alter publication p drop tables in schema s","locations":{"PublicationObjSpec":[42]}}
+{"sql":"create publication p for tables in schema current_schema, s","locations":{"PublicationObjSpec":[42,58]}}
+{"sql":"create publication p for table a, only t where (e < 1)","locations":{"PublicationObjSpec":[0,0]}}
+{"sql":"create publication p for table a, b * (c)","locations":{"PublicationObjSpec":[0,0]}}
+{"sql":"create publication p for table a, b (c), tables in schema s, current_schema","locations":{"PublicationObjSpec":[0,34,58,61]}}
+{"sql":"ALTER TABLE fail_part ALTER b TYPE char (2) COLLATE \"POSIX\"","locations":{"CollateClause":[44]}}
+{"sql":"CREATE TYPE collate_dep_test2 AS (x int, y text COLLATE test0)","locations":{"CollateClause":[48]}}
+{"sql":"alter table t alter b type char(2) collate \"POSIX\"","locations":{"CollateClause":[35]}}
+{"sql":"create type ty as (x int, y text collate c)","locations":{"CollateClause":[33]}}
+{"sql":"select * from f() as (a text collate \"C\")","locations":{"CollateClause":[29]}}
+{"sql":"alter type ty alter attribute y type text collate \"C\"","locations":{"CollateClause":[42]}}

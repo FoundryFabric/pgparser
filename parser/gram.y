@@ -1177,7 +1177,7 @@ opt_on_conflict:
 		{
 			$$ = &nodes.OnConflictClause{
 				Action:   ONCONFLICT_NOTHING,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| ON CONFLICT DO UPDATE SET set_clause_list where_clause
@@ -1186,7 +1186,7 @@ opt_on_conflict:
 				Action:      ONCONFLICT_UPDATE,
 				TargetList:  $6,
 				WhereClause: $7,
-				Location:    -1,
+				Location:    $<loc>1,
 			}
 		}
 	| ON CONFLICT '(' index_params ')' DO NOTHING
@@ -1195,9 +1195,9 @@ opt_on_conflict:
 				Action:   ONCONFLICT_NOTHING,
 				Infer: &nodes.InferClause{
 					IndexElems: $4,
-					Location:   -1,
+					Location:   $<loc>3,
 				},
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| ON CONFLICT '(' index_params ')' DO UPDATE SET set_clause_list where_clause
@@ -1206,11 +1206,11 @@ opt_on_conflict:
 				Action:      ONCONFLICT_UPDATE,
 				Infer: &nodes.InferClause{
 					IndexElems: $4,
-					Location:   -1,
+					Location:   $<loc>3,
 				},
 				TargetList:  $9,
 				WhereClause: $10,
-				Location:    -1,
+				Location:    $<loc>1,
 			}
 		}
 	| ON CONFLICT '(' index_params ')' WHERE a_expr DO NOTHING
@@ -1220,9 +1220,9 @@ opt_on_conflict:
 				Infer: &nodes.InferClause{
 					IndexElems:  $4,
 					WhereClause: $7,
-					Location:    -1,
+					Location:    $<loc>3,
 				},
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| ON CONFLICT '(' index_params ')' WHERE a_expr DO UPDATE SET set_clause_list where_clause
@@ -1232,11 +1232,11 @@ opt_on_conflict:
 				Infer: &nodes.InferClause{
 					IndexElems:  $4,
 					WhereClause: $7,
-					Location:    -1,
+					Location:    $<loc>3,
 				},
 				TargetList:  $11,
 				WhereClause: $12,
-				Location:    -1,
+				Location:    $<loc>1,
 			}
 		}
 	| ON CONFLICT ON CONSTRAINT name DO NOTHING
@@ -1245,9 +1245,9 @@ opt_on_conflict:
 				Action:   ONCONFLICT_NOTHING,
 				Infer: &nodes.InferClause{
 					Conname:  $5,
-					Location: -1,
+					Location: $<loc>3,
 				},
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| ON CONFLICT ON CONSTRAINT name DO UPDATE SET set_clause_list where_clause
@@ -1256,11 +1256,11 @@ opt_on_conflict:
 				Action:      ONCONFLICT_UPDATE,
 				Infer: &nodes.InferClause{
 					Conname:  $5,
-					Location: -1,
+					Location: $<loc>3,
 				},
 				TargetList:  $9,
 				WhereClause: $10,
-				Location:    -1,
+				Location:    $<loc>1,
 			}
 		}
 	| /* EMPTY */
@@ -1516,6 +1516,7 @@ CreateStmt:
 			rv := makeRangeVar($4, $<loc>4)
 			rv.(*nodes.RangeVar).Relpersistence = relpersistenceForTemp($2)
 			tn := makeTypeNameFromNameList($6).(*nodes.TypeName)
+			tn.Location = $<loc>6
 			$$ = &nodes.CreateStmt{
 				Relation:       rv.(*nodes.RangeVar),
 				TableElts:      $7,
@@ -1531,6 +1532,7 @@ CreateStmt:
 			rv := makeRangeVar($7, $<loc>7)
 			rv.(*nodes.RangeVar).Relpersistence = relpersistenceForTemp($2)
 			tn := makeTypeNameFromNameList($9).(*nodes.TypeName)
+			tn.Location = $<loc>9
 			$$ = &nodes.CreateStmt{
 				Relation:       rv.(*nodes.RangeVar),
 				TableElts:      $10,
@@ -1597,7 +1599,7 @@ PartitionSpec_rule:
 			$$ = &nodes.PartitionSpec{
 				Strategy:   strategy,
 				PartParams: $5,
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 		}
 	;
@@ -1616,7 +1618,7 @@ part_elem:
 				Name:      $1,
 				Collation: $2,
 				Opclass:   $3,
-				Location:  -1,
+				Location:  $<loc>1,
 			}
 		}
 	| func_expr_windowless opt_collate opt_qualified_name
@@ -1625,7 +1627,7 @@ part_elem:
 				Expr:      $1,
 				Collation: $2,
 				Opclass:   $3,
-				Location:  -1,
+				Location:  $<loc>1,
 			}
 		}
 	| '(' a_expr ')' opt_collate opt_qualified_name
@@ -1634,7 +1636,7 @@ part_elem:
 				Expr:      $2,
 				Collation: $4,
 				Opclass:   $5,
-				Location:  -1,
+				Location:  $<loc>1,
 			}
 		}
 	;
@@ -1650,7 +1652,7 @@ ForValues:
 		{
 			$$ = &nodes.PartitionBoundSpec{
 				IsDefault: true,
-				Location:  -1,
+				Location:  $<loc>1,
 			}
 		}
 	;
@@ -1662,7 +1664,7 @@ PartitionBoundSpec:
 			$$ = &nodes.PartitionBoundSpec{
 				Strategy:   'l',
 				Listdatums: $5,
-				Location:   -1,
+				Location:   $<loc>3,
 			}
 		}
 	/* a RANGE partition */
@@ -1672,7 +1674,7 @@ PartitionBoundSpec:
 				Strategy:    'r',
 				Lowerdatums: $5,
 				Upperdatums: $9,
-				Location:    -1,
+				Location:    $<loc>3,
 			}
 		}
 	/* a HASH partition */
@@ -1682,7 +1684,7 @@ PartitionBoundSpec:
 				Strategy:  'h',
 				Modulus:   -1,
 				Remainder: -1,
-				Location:  -1,
+				Location:  $<loc>3,
 			}
 			for _, item := range $5.Items {
 				opt := item.(*nodes.DefElem)
@@ -1711,7 +1713,7 @@ hash_partbound:
 hash_partbound_elem:
 	NonReservedWord Iconst
 		{
-			$$ = makeDefElem($1, &nodes.Integer{Ival: $2})
+			$$ = makeDefElem($1, &nodes.Integer{Ival: $2}, $<loc>1)
 		}
 	;
 
@@ -1741,10 +1743,10 @@ columnOptions:
 	ColId opt_column_constraints
 		{
 			n := &nodes.ColumnDef{
-				Colname:     $1,
-				TypeName:    nil,
-				IsLocal:     true,
-				Location:    -1,
+				Colname:  $1,
+				TypeName: nil,
+				IsLocal:  true,
+				Location: $<loc>1,
 			}
 			if !splitColQualList(pglex, $2, n) {
 				return 1
@@ -1754,10 +1756,10 @@ columnOptions:
 	| ColId WITH OPTIONS opt_column_constraints
 		{
 			n := &nodes.ColumnDef{
-				Colname:     $1,
-				TypeName:    nil,
-				IsLocal:     true,
-				Location:    -1,
+				Colname:  $1,
+				TypeName: nil,
+				IsLocal:  true,
+				Location: $<loc>1,
 			}
 			if !splitColQualList(pglex, $4, n) {
 				return 1
@@ -1829,7 +1831,7 @@ columnDef:
 				Compression: $4,
 				Fdwoptions:  $5,
 				IsLocal:     true,
-				Location:    -1,
+				Location:    $<loc>1,
 			}
 			if !splitColQualList(pglex, $6, n) {
 				return 1
@@ -1855,6 +1857,7 @@ ColConstraint:
 		{
 			n := $3.(*nodes.Constraint)
 			n.Conname = $2
+			n.Location = $<loc>1
 			$$ = n
 		}
 	| ColConstraintElem { $$ = $1 }
@@ -1874,28 +1877,28 @@ ConstraintAttr:
 		{
 			$$ = &nodes.Constraint{
 				Contype:  nodes.CONSTR_ATTR_DEFERRABLE,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| NOT DEFERRABLE
 		{
 			$$ = &nodes.Constraint{
 				Contype:  nodes.CONSTR_ATTR_NOT_DEFERRABLE,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| INITIALLY DEFERRED
 		{
 			$$ = &nodes.Constraint{
 				Contype:  nodes.CONSTR_ATTR_DEFERRED,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| INITIALLY IMMEDIATE
 		{
 			$$ = &nodes.Constraint{
 				Contype:  nodes.CONSTR_ATTR_IMMEDIATE,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	;
@@ -1905,14 +1908,14 @@ ColConstraintElem:
 		{
 			$$ = &nodes.Constraint{
 				Contype:  nodes.CONSTR_NOTNULL,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| NULL_P
 		{
 			$$ = &nodes.Constraint{
 				Contype:  nodes.CONSTR_NULL,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| UNIQUE opt_unique_null_treatment opt_definition OptConsTableSpace
@@ -1922,7 +1925,7 @@ ColConstraintElem:
 				NullsNotDistinct:  $2,
 				Options:           $3,
 				Indexspace:        $4,
-				Location:          -1,
+				Location:          $<loc>1,
 			}
 		}
 	| PRIMARY KEY opt_definition OptConsTableSpace
@@ -1931,7 +1934,7 @@ ColConstraintElem:
 				Contype:    nodes.CONSTR_PRIMARY,
 				Options:    $3,
 				Indexspace:  $4,
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 		}
 	| CHECK '(' a_expr ')' no_inherit
@@ -1939,7 +1942,7 @@ ColConstraintElem:
 			n := &nodes.Constraint{
 				Contype:        nodes.CONSTR_CHECK,
 				RawExpr:        $3,
-				Location:       -1,
+				Location:       $<loc>1,
 				InitiallyValid: true,
 			}
 			n.IsNoInherit = $5
@@ -1950,7 +1953,7 @@ ColConstraintElem:
 			$$ = &nodes.Constraint{
 				Contype:  nodes.CONSTR_DEFAULT,
 				RawExpr:  $2,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| REFERENCES qualified_name opt_column_list key_match key_actions
@@ -1964,7 +1967,7 @@ ColConstraintElem:
 				FkUpdaction:    $5.UpdateAction.Action,
 				FkDelaction:    $5.DeleteAction.Action,
 				FkDelsetcols:   $5.DeleteAction.Cols,
-				Location:       -1,
+				Location:       $<loc>1,
 				InitiallyValid: true,
 			}
 			$$ = n
@@ -1975,7 +1978,7 @@ ColConstraintElem:
 				Contype:       nodes.CONSTR_IDENTITY,
 				GeneratedWhen: 'a',
 				Options:       $5,
-				Location:      -1,
+				Location:      $<loc>1,
 			}
 		}
 	| GENERATED BY DEFAULT AS IDENTITY_P OptParenthesizedSeqOptList
@@ -1984,7 +1987,7 @@ ColConstraintElem:
 				Contype:       nodes.CONSTR_IDENTITY,
 				GeneratedWhen: 'd',
 				Options:       $6,
-				Location:      -1,
+				Location:      $<loc>1,
 			}
 		}
 	| GENERATED ALWAYS AS '(' a_expr ')' STORED
@@ -1993,7 +1996,7 @@ ColConstraintElem:
 				Contype:       nodes.CONSTR_GENERATED,
 				GeneratedWhen: 'a',
 				RawExpr:       $5,
-				Location:      -1,
+				Location:      $<loc>1,
 			}
 		}
 	| GENERATED BY DEFAULT AS '(' a_expr ')' STORED
@@ -2008,6 +2011,7 @@ DomainConstraint:
 		{
 			n := $3.(*nodes.Constraint)
 			n.Conname = $2
+			n.Location = $<loc>1
 			$$ = n
 		}
 	| DomainConstraintElem
@@ -2022,7 +2026,7 @@ DomainConstraintElem:
 			n := &nodes.Constraint{
 				Contype:        nodes.CONSTR_CHECK,
 				RawExpr:        $3,
-				Location:       -1,
+				Location:       $<loc>1,
 				InitiallyValid: true,
 			}
 			if !checkConstraintAttrs(pglex, $5, "CHECK", false, true, true) {
@@ -2035,7 +2039,7 @@ DomainConstraintElem:
 		{
 			n := &nodes.Constraint{
 				Contype:        nodes.CONSTR_NOTNULL,
-				Location:       -1,
+				Location:       $<loc>1,
 				InitiallyValid: true,
 			}
 			applyConstraintAttrs(n, $3)
@@ -2048,6 +2052,7 @@ TableConstraint:
 		{
 			n := $3.(*nodes.Constraint)
 			n.Conname = $2
+			n.Location = $<loc>1
 			$$ = n
 		}
 	| ConstraintElem
@@ -2066,7 +2071,7 @@ ConstraintElem:
 				Including:        $6,
 				Options:          $7,
 				Indexspace:       $8,
-				Location:         -1,
+				Location:         $<loc>1,
 			}
 			if !checkConstraintAttrs(pglex, $9, "UNIQUE", true, false, false) {
 				return 1
@@ -2079,7 +2084,7 @@ ConstraintElem:
 			n := &nodes.Constraint{
 				Contype:    nodes.CONSTR_UNIQUE,
 				Indexname:  $2,
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 			if !checkConstraintAttrs(pglex, $3, "UNIQUE", true, false, false) {
 				return 1
@@ -2095,7 +2100,7 @@ ConstraintElem:
 				Including:  $6,
 				Options:    $7,
 				Indexspace:  $8,
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 			if !checkConstraintAttrs(pglex, $9, "PRIMARY KEY", true, false, false) {
 				return 1
@@ -2108,7 +2113,7 @@ ConstraintElem:
 			n := &nodes.Constraint{
 				Contype:    nodes.CONSTR_PRIMARY,
 				Indexname:  $3,
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 			if !checkConstraintAttrs(pglex, $4, "PRIMARY KEY", true, false, false) {
 				return 1
@@ -2121,7 +2126,7 @@ ConstraintElem:
 			n := &nodes.Constraint{
 				Contype:  nodes.CONSTR_CHECK,
 				RawExpr:  $3,
-				Location: -1,
+				Location: $<loc>1,
 				InitiallyValid: true,
 			}
 			if !checkConstraintAttrs(pglex, $5, "CHECK", false, true, true) {
@@ -2142,7 +2147,7 @@ ConstraintElem:
 				FkUpdaction:    $10.UpdateAction.Action,
 				FkDelaction:    $10.DeleteAction.Action,
 				FkDelsetcols:   $10.DeleteAction.Cols,
-				Location:       -1,
+				Location:       $<loc>1,
 				InitiallyValid: true,
 			}
 			if !checkConstraintAttrs(pglex, $11, "FOREIGN KEY", true, true, false) {
@@ -2161,7 +2166,7 @@ ConstraintElem:
 				Options:        $7,
 				Indexspace:      $8,
 				WhereClause:    $9,
-				Location:       -1,
+				Location:       $<loc>1,
 			}
 			if !checkConstraintAttrs(pglex, $10, "EXCLUDE", true, false, false) {
 				return 1
@@ -2608,7 +2613,7 @@ alter_table_cmd:
 		}
 	| ALTER opt_column ColId TYPE_P Typename opt_collate_clause
 		{
-			coldef := &nodes.ColumnDef{TypeName: $5}
+			coldef := &nodes.ColumnDef{TypeName: $5, Location: $<loc>3}
 			if $6 != nil {
 				coldef.CollClause = $6.(*nodes.CollateClause)
 			}
@@ -2652,7 +2657,7 @@ alter_table_cmd:
 	/* ALTER COLUMN ... TYPE ... USING */
 	| ALTER opt_column ColId SET DATA_P TYPE_P Typename opt_collate_clause
 		{
-			coldef := &nodes.ColumnDef{TypeName: $7}
+			coldef := &nodes.ColumnDef{TypeName: $7, Location: $<loc>3}
 			if $8 != nil {
 				coldef.CollClause = $8.(*nodes.CollateClause)
 			}
@@ -2664,7 +2669,7 @@ alter_table_cmd:
 		}
 	| ALTER opt_column ColId TYPE_P Typename opt_collate_clause USING a_expr
 		{
-			coldef := &nodes.ColumnDef{TypeName: $5, RawDefault: $8}
+			coldef := &nodes.ColumnDef{TypeName: $5, RawDefault: $8, Location: $<loc>3}
 			if $6 != nil {
 				coldef.CollClause = $6.(*nodes.CollateClause)
 			}
@@ -2676,7 +2681,7 @@ alter_table_cmd:
 		}
 	| ALTER opt_column ColId SET DATA_P TYPE_P Typename opt_collate_clause USING a_expr
 		{
-			coldef := &nodes.ColumnDef{TypeName: $7, RawDefault: $10}
+			coldef := &nodes.ColumnDef{TypeName: $7, RawDefault: $10, Location: $<loc>3}
 			if $8 != nil {
 				coldef.CollClause = $8.(*nodes.CollateClause)
 			}
@@ -3111,6 +3116,7 @@ alter_table_cmd:
 	| OF any_name
 		{
 			tn := makeTypeNameFromNameList($2)
+			tn.(*nodes.TypeName).Location = $<loc>2
 			$$ = &nodes.AlterTableCmd{
 				Subtype: int(nodes.AT_AddOf),
 				Def:     tn,
@@ -4354,29 +4360,33 @@ createfunc_opt_item:
 	AS func_as
 		{
 			$$ = &nodes.DefElem{
-				Defname: "as",
-				Arg:     $2,
+				Defname:  "as",
+				Arg:      $2,
+				Location: $<loc>1,
 			}
 		}
 	| LANGUAGE NonReservedWord_or_Sconst
 		{
 			$$ = &nodes.DefElem{
-				Defname: "language",
-				Arg:     &nodes.String{Str: $2},
+				Defname:  "language",
+				Arg:      &nodes.String{Str: $2},
+				Location: $<loc>1,
 			}
 		}
 	| TRANSFORM transform_type_list
 		{
 			$$ = &nodes.DefElem{
-				Defname: "transform",
-				Arg:     $2,
+				Defname:  "transform",
+				Arg:      $2,
+				Location: $<loc>1,
 			}
 		}
 	| WINDOW
 		{
 			$$ = &nodes.DefElem{
-				Defname: "window",
-				Arg:     &nodes.Boolean{Boolval: true},
+				Defname:  "window",
+				Arg:      &nodes.Boolean{Boolval: true},
+				Location: $<loc>1,
 			}
 		}
 	| common_func_opt_item { $$ = $1 }
@@ -4400,127 +4410,145 @@ common_func_opt_item:
 	IMMUTABLE
 		{
 			$$ = &nodes.DefElem{
-				Defname: "volatility",
-				Arg:     &nodes.String{Str: "immutable"},
+				Defname:  "volatility",
+				Arg:      &nodes.String{Str: "immutable"},
+				Location: $<loc>1,
 			}
 		}
 	| STABLE
 		{
 			$$ = &nodes.DefElem{
-				Defname: "volatility",
-				Arg:     &nodes.String{Str: "stable"},
+				Defname:  "volatility",
+				Arg:      &nodes.String{Str: "stable"},
+				Location: $<loc>1,
 			}
 		}
 	| VOLATILE
 		{
 			$$ = &nodes.DefElem{
-				Defname: "volatility",
-				Arg:     &nodes.String{Str: "volatile"},
+				Defname:  "volatility",
+				Arg:      &nodes.String{Str: "volatile"},
+				Location: $<loc>1,
 			}
 		}
 	| STRICT_P
 		{
 			$$ = &nodes.DefElem{
-				Defname: "strict",
-				Arg:     &nodes.Boolean{Boolval: true},
+				Defname:  "strict",
+				Arg:      &nodes.Boolean{Boolval: true},
+				Location: $<loc>1,
 			}
 		}
 	| CALLED ON NULL_P INPUT_P
 		{
 			$$ = &nodes.DefElem{
-				Defname: "strict",
-				Arg:     &nodes.Boolean{Boolval: false},
+				Defname:  "strict",
+				Arg:      &nodes.Boolean{Boolval: false},
+				Location: $<loc>1,
 			}
 		}
 	| RETURNS NULL_P ON NULL_P INPUT_P
 		{
 			$$ = &nodes.DefElem{
-				Defname: "strict",
-				Arg:     &nodes.Boolean{Boolval: true},
+				Defname:  "strict",
+				Arg:      &nodes.Boolean{Boolval: true},
+				Location: $<loc>1,
 			}
 		}
 	| SECURITY DEFINER
 		{
 			$$ = &nodes.DefElem{
-				Defname: "security",
-				Arg:     &nodes.Boolean{Boolval: true},
+				Defname:  "security",
+				Arg:      &nodes.Boolean{Boolval: true},
+				Location: $<loc>1,
 			}
 		}
 	| SECURITY INVOKER
 		{
 			$$ = &nodes.DefElem{
-				Defname: "security",
-				Arg:     &nodes.Boolean{Boolval: false},
+				Defname:  "security",
+				Arg:      &nodes.Boolean{Boolval: false},
+				Location: $<loc>1,
 			}
 		}
 	| EXTERNAL SECURITY DEFINER
 		{
 			$$ = &nodes.DefElem{
-				Defname: "security",
-				Arg:     &nodes.Boolean{Boolval: true},
+				Defname:  "security",
+				Arg:      &nodes.Boolean{Boolval: true},
+				Location: $<loc>1,
 			}
 		}
 	| EXTERNAL SECURITY INVOKER
 		{
 			$$ = &nodes.DefElem{
-				Defname: "security",
-				Arg:     &nodes.Boolean{Boolval: false},
+				Defname:  "security",
+				Arg:      &nodes.Boolean{Boolval: false},
+				Location: $<loc>1,
 			}
 		}
 	| LEAKPROOF
 		{
 			$$ = &nodes.DefElem{
-				Defname: "leakproof",
-				Arg:     &nodes.Boolean{Boolval: true},
+				Defname:  "leakproof",
+				Arg:      &nodes.Boolean{Boolval: true},
+				Location: $<loc>1,
 			}
 		}
 	| NOT LEAKPROOF
 		{
 			$$ = &nodes.DefElem{
-				Defname: "leakproof",
-				Arg:     &nodes.Boolean{Boolval: false},
+				Defname:  "leakproof",
+				Arg:      &nodes.Boolean{Boolval: false},
+				Location: $<loc>1,
 			}
 		}
 	| COST NumericOnly
 		{
 			$$ = &nodes.DefElem{
-				Defname: "cost",
-				Arg:     $2,
+				Defname:  "cost",
+				Arg:      $2,
+				Location: $<loc>1,
 			}
 		}
 	| ROWS NumericOnly
 		{
 			$$ = &nodes.DefElem{
-				Defname: "rows",
-				Arg:     $2,
+				Defname:  "rows",
+				Arg:      $2,
+				Location: $<loc>1,
 			}
 		}
 	| PARALLEL ColId
 		{
 			$$ = &nodes.DefElem{
-				Defname: "parallel",
-				Arg:     &nodes.String{Str: $2},
+				Defname:  "parallel",
+				Arg:      &nodes.String{Str: $2},
+				Location: $<loc>1,
 			}
 		}
 	| SET set_rest_more
 		{
 			$$ = &nodes.DefElem{
-				Defname: "set",
-				Arg:     $2,
+				Defname:  "set",
+				Arg:      $2,
+				Location: $<loc>1,
 			}
 		}
 	| VariableResetStmt
 		{
 			$$ = &nodes.DefElem{
-				Defname: "set",
-				Arg:     $1,
+				Defname:  "set",
+				Arg:      $1,
+				Location: $<loc>1,
 			}
 		}
 	| SUPPORT any_name
 		{
 			$$ = &nodes.DefElem{
-				Defname: "support",
-				Arg:     $2,
+				Defname:  "support",
+				Arg:      $2,
+				Location: $<loc>1,
 			}
 		}
 	;
@@ -4665,14 +4693,14 @@ ExplainStmt:
 		{
 			$$ = &nodes.ExplainStmt{
 				Query:   $3,
-				Options: makeList(&nodes.DefElem{Defname: "analyze"}),
+				Options: makeList(&nodes.DefElem{Defname: "analyze", Location: $<loc>2}),
 			}
 		}
 	| EXPLAIN VERBOSE ExplainableStmt
 		{
 			$$ = &nodes.ExplainStmt{
 				Query:   $3,
-				Options: makeList(&nodes.DefElem{Defname: "verbose"}),
+				Options: makeList(&nodes.DefElem{Defname: "verbose", Location: $<loc>2}),
 			}
 		}
 	| EXPLAIN ANALYZE VERBOSE ExplainableStmt
@@ -4680,8 +4708,8 @@ ExplainStmt:
 			$$ = &nodes.ExplainStmt{
 				Query: $4,
 				Options: &nodes.List{Items: []nodes.Node{
-					&nodes.DefElem{Defname: "analyze"},
-					&nodes.DefElem{Defname: "verbose"},
+					&nodes.DefElem{Defname: "analyze", Location: $<loc>2},
+					&nodes.DefElem{Defname: "verbose", Location: $<loc>3},
 				}},
 			}
 		}
@@ -4806,63 +4834,63 @@ copy_opt_list:
 copy_opt_item:
 	BINARY
 		{
-			$$ = &nodes.DefElem{Defname: "format", Arg: &nodes.String{Str: "binary"}}
+			$$ = &nodes.DefElem{Defname: "format", Arg: &nodes.String{Str: "binary"}, Location: $<loc>1}
 		}
 	| FREEZE
 		{
-			$$ = &nodes.DefElem{Defname: "freeze", Arg: &nodes.Boolean{Boolval: true}}
+			$$ = &nodes.DefElem{Defname: "freeze", Arg: &nodes.Boolean{Boolval: true}, Location: $<loc>1}
 		}
 	| DELIMITER opt_as Sconst
 		{
-			$$ = &nodes.DefElem{Defname: "delimiter", Arg: &nodes.String{Str: $3}}
+			$$ = &nodes.DefElem{Defname: "delimiter", Arg: &nodes.String{Str: $3}, Location: $<loc>1}
 		}
 	| NULL_P opt_as Sconst
 		{
-			$$ = &nodes.DefElem{Defname: "null", Arg: &nodes.String{Str: $3}}
+			$$ = &nodes.DefElem{Defname: "null", Arg: &nodes.String{Str: $3}, Location: $<loc>1}
 		}
 	| CSV
 		{
-			$$ = &nodes.DefElem{Defname: "format", Arg: &nodes.String{Str: "csv"}}
+			$$ = &nodes.DefElem{Defname: "format", Arg: &nodes.String{Str: "csv"}, Location: $<loc>1}
 		}
 	| HEADER_P
 		{
-			$$ = &nodes.DefElem{Defname: "header", Arg: &nodes.Boolean{Boolval: true}}
+			$$ = &nodes.DefElem{Defname: "header", Arg: &nodes.Boolean{Boolval: true}, Location: $<loc>1}
 		}
 	| QUOTE opt_as Sconst
 		{
-			$$ = &nodes.DefElem{Defname: "quote", Arg: &nodes.String{Str: $3}}
+			$$ = &nodes.DefElem{Defname: "quote", Arg: &nodes.String{Str: $3}, Location: $<loc>1}
 		}
 	| ESCAPE opt_as Sconst
 		{
-			$$ = &nodes.DefElem{Defname: "escape", Arg: &nodes.String{Str: $3}}
+			$$ = &nodes.DefElem{Defname: "escape", Arg: &nodes.String{Str: $3}, Location: $<loc>1}
 		}
 	| FORCE QUOTE columnList
 		{
-			$$ = &nodes.DefElem{Defname: "force_quote", Arg: $3}
+			$$ = &nodes.DefElem{Defname: "force_quote", Arg: $3, Location: $<loc>1}
 		}
 	| FORCE QUOTE '*'
 		{
-			$$ = &nodes.DefElem{Defname: "force_quote", Arg: &nodes.A_Star{}}
+			$$ = &nodes.DefElem{Defname: "force_quote", Arg: &nodes.A_Star{}, Location: $<loc>1}
 		}
 	| FORCE NOT NULL_P columnList
 		{
-			$$ = &nodes.DefElem{Defname: "force_not_null", Arg: $4}
+			$$ = &nodes.DefElem{Defname: "force_not_null", Arg: $4, Location: $<loc>1}
 		}
 	| FORCE NOT NULL_P pg17_star
 		{
-			$$ = &nodes.DefElem{Defname: "force_not_null", Arg: &nodes.A_Star{}}
+			$$ = &nodes.DefElem{Defname: "force_not_null", Arg: &nodes.A_Star{}, Location: $<loc>1}
 		}
 	| FORCE NULL_P columnList
 		{
-			$$ = &nodes.DefElem{Defname: "force_null", Arg: $3}
+			$$ = &nodes.DefElem{Defname: "force_null", Arg: $3, Location: $<loc>1}
 		}
 	| FORCE NULL_P pg17_star
 		{
-			$$ = &nodes.DefElem{Defname: "force_null", Arg: &nodes.A_Star{}}
+			$$ = &nodes.DefElem{Defname: "force_null", Arg: &nodes.A_Star{}, Location: $<loc>1}
 		}
 	| ENCODING Sconst
 		{
-			$$ = &nodes.DefElem{Defname: "encoding", Arg: &nodes.String{Str: $2}}
+			$$ = &nodes.DefElem{Defname: "encoding", Arg: &nodes.String{Str: $2}, Location: $<loc>1}
 		}
 	;
 
@@ -4871,7 +4899,7 @@ copy_opt_item:
 opt_binary:
 	BINARY
 		{
-			$$ = &nodes.DefElem{Defname: "format", Arg: &nodes.String{Str: "binary"}}
+			$$ = &nodes.DefElem{Defname: "format", Arg: &nodes.String{Str: "binary"}, Location: $<loc>1}
 		}
 	| /* EMPTY */ { $$ = nil }
 	;
@@ -4879,7 +4907,7 @@ opt_binary:
 copy_delimiter:
 	opt_using DELIMITERS Sconst
 		{
-			$$ = &nodes.DefElem{Defname: "delimiter", Arg: &nodes.String{Str: $3}}
+			$$ = &nodes.DefElem{Defname: "delimiter", Arg: &nodes.String{Str: $3}, Location: $<loc>1}
 		}
 	| /* EMPTY */ { $$ = nil }
 	;
@@ -4904,8 +4932,9 @@ utility_option_elem:
 	utility_option_name utility_option_arg
 		{
 			$$ = &nodes.DefElem{
-				Defname: $1,
-				Arg:     $2,
+				Defname:  $1,
+				Arg:      $2,
+				Location: $<loc>1,
 			}
 		}
 	;
@@ -4937,8 +4966,9 @@ copy_generic_opt_elem:
 	ColLabel copy_generic_opt_arg
 		{
 			$$ = &nodes.DefElem{
-				Defname: $1,
-				Arg:     $2,
+				Defname:  $1,
+				Arg:      $2,
+				Location: $<loc>1,
 			}
 		}
 	;
@@ -5851,7 +5881,7 @@ RoleSpec:
 		{
 			switch $1 {
 			case "public":
-				$$ = &nodes.RoleSpec{Roletype: int(nodes.ROLESPEC_PUBLIC)}
+				$$ = &nodes.RoleSpec{Roletype: int(nodes.ROLESPEC_PUBLIC), Location: $<loc>1}
 			case "none":
 				grammarError(pglex, "42939", "role name \"none\" is reserved", "", $<loc>1)
 				return 1
@@ -5859,6 +5889,7 @@ RoleSpec:
 				$$ = &nodes.RoleSpec{
 					Roletype: int(nodes.ROLESPEC_CSTRING),
 					Rolename: $1,
+					Location: $<loc>1,
 				}
 			}
 		}
@@ -5866,18 +5897,21 @@ RoleSpec:
 		{
 			$$ = &nodes.RoleSpec{
 				Roletype: int(nodes.ROLESPEC_CURRENT_ROLE),
+				Location: $<loc>1,
 			}
 		}
 	| CURRENT_USER
 		{
 			$$ = &nodes.RoleSpec{
 				Roletype: int(nodes.ROLESPEC_CURRENT_USER),
+				Location: $<loc>1,
 			}
 		}
 	| SESSION_USER
 		{
 			$$ = &nodes.RoleSpec{
 				Roletype: int(nodes.ROLESPEC_SESSION_USER),
+				Location: $<loc>1,
 			}
 		}
 	;
@@ -5928,7 +5962,7 @@ RevokeRoleStmt:
 		}
 	| REVOKE ColId OPTION FOR privilege_list FROM role_list opt_granted_by opt_drop_behavior
 		{
-			opt := makeDefElem($2, &nodes.Boolean{Boolval: false})
+			opt := makeDefElem($2, &nodes.Boolean{Boolval: false}, $<loc>2)
 			$$ = &nodes.GrantRoleStmt{
 				IsGrant:      false,
 				Opt:          makeList(opt),
@@ -5950,7 +5984,7 @@ grant_role_opt_list:
 grant_role_opt:
 	ColLabel grant_role_opt_value
 		{
-			$$ = makeDefElem($1, $2)
+			$$ = makeDefElem($1, $2, $<loc>1)
 		}
 	;
 
@@ -6035,15 +6069,15 @@ AlterOptRoleList:
 AlterOptRoleElem:
 	PASSWORD Sconst
 		{
-			$$ = makeDefElem("password", &nodes.String{Str: $2})
+			$$ = makeDefElem("password", &nodes.String{Str: $2}, $<loc>1)
 		}
 	| PASSWORD NULL_P
 		{
-			$$ = makeDefElem("password", nil)
+			$$ = makeDefElem("password", nil, $<loc>1)
 		}
 	| ENCRYPTED PASSWORD Sconst
 		{
-			$$ = makeDefElem("password", &nodes.String{Str: $3})
+			$$ = makeDefElem("password", &nodes.String{Str: $3}, $<loc>1)
 		}
 	| UNENCRYPTED PASSWORD Sconst
 		{
@@ -6052,49 +6086,49 @@ AlterOptRoleElem:
 		}
 	| INHERIT
 		{
-			$$ = makeDefElem("inherit", &nodes.Boolean{Boolval: true})
+			$$ = makeDefElem("inherit", &nodes.Boolean{Boolval: true}, $<loc>1)
 		}
 	| CONNECTION LIMIT SignedIconst
 		{
-			$$ = makeDefElem("connectionlimit", &nodes.Integer{Ival: int64($3)})
+			$$ = makeDefElem("connectionlimit", &nodes.Integer{Ival: int64($3)}, $<loc>1)
 		}
 	| VALID UNTIL Sconst
 		{
-			$$ = makeDefElem("validUntil", &nodes.String{Str: $3})
+			$$ = makeDefElem("validUntil", &nodes.String{Str: $3}, $<loc>1)
 		}
 	| USER role_list
 		{
-			$$ = makeDefElem("rolemembers", $2)
+			$$ = makeDefElem("rolemembers", $2, $<loc>1)
 		}
 	| IDENT
 		{
 			switch $1 {
 			case "superuser":
-				$$ = makeDefElem("superuser", &nodes.Boolean{Boolval: true})
+				$$ = makeDefElem("superuser", &nodes.Boolean{Boolval: true}, $<loc>1)
 			case "nosuperuser":
-				$$ = makeDefElem("superuser", &nodes.Boolean{Boolval: false})
+				$$ = makeDefElem("superuser", &nodes.Boolean{Boolval: false}, $<loc>1)
 			case "createrole":
-				$$ = makeDefElem("createrole", &nodes.Boolean{Boolval: true})
+				$$ = makeDefElem("createrole", &nodes.Boolean{Boolval: true}, $<loc>1)
 			case "nocreaterole":
-				$$ = makeDefElem("createrole", &nodes.Boolean{Boolval: false})
+				$$ = makeDefElem("createrole", &nodes.Boolean{Boolval: false}, $<loc>1)
 			case "replication":
-				$$ = makeDefElem("isreplication", &nodes.Boolean{Boolval: true})
+				$$ = makeDefElem("isreplication", &nodes.Boolean{Boolval: true}, $<loc>1)
 			case "noreplication":
-				$$ = makeDefElem("isreplication", &nodes.Boolean{Boolval: false})
+				$$ = makeDefElem("isreplication", &nodes.Boolean{Boolval: false}, $<loc>1)
 			case "createdb":
-				$$ = makeDefElem("createdb", &nodes.Boolean{Boolval: true})
+				$$ = makeDefElem("createdb", &nodes.Boolean{Boolval: true}, $<loc>1)
 			case "nocreatedb":
-				$$ = makeDefElem("createdb", &nodes.Boolean{Boolval: false})
+				$$ = makeDefElem("createdb", &nodes.Boolean{Boolval: false}, $<loc>1)
 			case "login":
-				$$ = makeDefElem("canlogin", &nodes.Boolean{Boolval: true})
+				$$ = makeDefElem("canlogin", &nodes.Boolean{Boolval: true}, $<loc>1)
 			case "nologin":
-				$$ = makeDefElem("canlogin", &nodes.Boolean{Boolval: false})
+				$$ = makeDefElem("canlogin", &nodes.Boolean{Boolval: false}, $<loc>1)
 			case "bypassrls":
-				$$ = makeDefElem("bypassrls", &nodes.Boolean{Boolval: true})
+				$$ = makeDefElem("bypassrls", &nodes.Boolean{Boolval: true}, $<loc>1)
 			case "nobypassrls":
-				$$ = makeDefElem("bypassrls", &nodes.Boolean{Boolval: false})
+				$$ = makeDefElem("bypassrls", &nodes.Boolean{Boolval: false}, $<loc>1)
 			case "noinherit":
-				$$ = makeDefElem("inherit", &nodes.Boolean{Boolval: false})
+				$$ = makeDefElem("inherit", &nodes.Boolean{Boolval: false}, $<loc>1)
 			default:
 				grammarError(pglex, codeSyntaxError, "unrecognized role option \""+$1+"\"", "", $<loc>1)
 				return 1
@@ -6109,23 +6143,23 @@ CreateOptRoleElem:
 		}
 	| SYSID Iconst
 		{
-			$$ = makeDefElem("sysid", &nodes.Integer{Ival: int64($2)})
+			$$ = makeDefElem("sysid", &nodes.Integer{Ival: int64($2)}, $<loc>1)
 		}
 	| ADMIN role_list
 		{
-			$$ = makeDefElem("adminmembers", $2)
+			$$ = makeDefElem("adminmembers", $2, $<loc>1)
 		}
 	| ROLE role_list
 		{
-			$$ = makeDefElem("rolemembers", $2)
+			$$ = makeDefElem("rolemembers", $2, $<loc>1)
 		}
 	| IN_P ROLE role_list
 		{
-			$$ = makeDefElem("addroleto", $3)
+			$$ = makeDefElem("addroleto", $3, $<loc>1)
 		}
 	| IN_P GROUP_P role_list
 		{
-			$$ = makeDefElem("addroleto", $3)
+			$$ = makeDefElem("addroleto", $3, $<loc>1)
 		}
 	;
 
@@ -6323,7 +6357,7 @@ AlterGroupStmt:
 			$$ = &nodes.AlterRoleStmt{
 				Role:   $3.(*nodes.RoleSpec),
 				Action: int($4),
-				Options: makeList(makeDefElem("rolemembers", $6)),
+				Options: makeList(makeDefElem("rolemembers", $6, $<loc>6)),
 			}
 		}
 	;
@@ -6366,15 +6400,15 @@ createdb_opt_items:
 createdb_opt_item:
 	createdb_opt_name opt_equal NumericOnly
 		{
-			$$ = makeDefElem($1, $3)
+			$$ = makeDefElem($1, $3, $<loc>1)
 		}
 	| createdb_opt_name opt_equal opt_boolean_or_string
 		{
-			$$ = makeDefElem($1, &nodes.String{Str: $3})
+			$$ = makeDefElem($1, &nodes.String{Str: $3}, $<loc>1)
 		}
 	| createdb_opt_name opt_equal DEFAULT
 		{
-			$$ = makeDefElem($1, nil)
+			$$ = makeDefElem($1, nil, $<loc>1)
 		}
 	;
 
@@ -6430,7 +6464,7 @@ AlterDatabaseStmt:
 		{
 			$$ = &nodes.AlterDatabaseStmt{
 				Dbname:  $3,
-				Options: makeList(makeDefElem("tablespace", &nodes.String{Str: $6})),
+				Options: makeList(makeDefElem("tablespace", &nodes.String{Str: $6}, $<loc>6)),
 			}
 		}
 	;
@@ -6501,7 +6535,7 @@ drop_option_list:
 drop_option:
 	FORCE
 		{
-			$$ = makeDefElem("force", nil)
+			$$ = makeDefElem("force", nil, $<loc>1)
 		}
 	;
 
@@ -6666,67 +6700,68 @@ SeqOptList:
 SeqOptElem:
 	AS SimpleTypename
 		{
-			$$ = makeDefElem("as", $2)
+			$2.Location = $<loc>2
+			$$ = makeDefElem("as", $2, $<loc>1)
 		}
 	| CACHE NumericOnly
 		{
-			$$ = makeDefElem("cache", $2)
+			$$ = makeDefElem("cache", $2, $<loc>1)
 		}
 	| CYCLE
 		{
-			$$ = makeDefElem("cycle", &nodes.Boolean{Boolval: true})
+			$$ = makeDefElem("cycle", &nodes.Boolean{Boolval: true}, $<loc>1)
 		}
 	| NO CYCLE
 		{
-			$$ = makeDefElem("cycle", &nodes.Boolean{Boolval: false})
+			$$ = makeDefElem("cycle", &nodes.Boolean{Boolval: false}, $<loc>1)
 		}
 	| INCREMENT opt_by NumericOnly
 		{
-			$$ = makeDefElem("increment", $3)
+			$$ = makeDefElem("increment", $3, $<loc>1)
 		}
 	| MAXVALUE NumericOnly
 		{
-			$$ = makeDefElem("maxvalue", $2)
+			$$ = makeDefElem("maxvalue", $2, $<loc>1)
 		}
 	| MINVALUE NumericOnly
 		{
-			$$ = makeDefElem("minvalue", $2)
+			$$ = makeDefElem("minvalue", $2, $<loc>1)
 		}
 	| NO MAXVALUE
 		{
-			$$ = makeDefElem("maxvalue", nil)
+			$$ = makeDefElem("maxvalue", nil, $<loc>1)
 		}
 	| NO MINVALUE
 		{
-			$$ = makeDefElem("minvalue", nil)
+			$$ = makeDefElem("minvalue", nil, $<loc>1)
 		}
 	| OWNED BY any_name
 		{
-			$$ = makeDefElem("owned_by", $3)
+			$$ = makeDefElem("owned_by", $3, $<loc>1)
 		}
 	| SEQUENCE NAME_P any_name
 		{
-			$$ = makeDefElem("sequence_name", $3)
+			$$ = makeDefElem("sequence_name", $3, $<loc>1)
 		}
 	| START opt_with NumericOnly
 		{
-			$$ = makeDefElem("start", $3)
+			$$ = makeDefElem("start", $3, $<loc>1)
 		}
 	| RESTART
 		{
-			$$ = makeDefElem("restart", nil)
+			$$ = makeDefElem("restart", nil, $<loc>1)
 		}
 	| RESTART opt_with NumericOnly
 		{
-			$$ = makeDefElem("restart", $3)
+			$$ = makeDefElem("restart", $3, $<loc>1)
 		}
 	| LOGGED
 		{
-			$$ = makeDefElem("logged", &nodes.Boolean{Boolval: true})
+			$$ = makeDefElem("logged", &nodes.Boolean{Boolval: true}, $<loc>1)
 		}
 	| UNLOGGED
 		{
-			$$ = makeDefElem("logged", &nodes.Boolean{Boolval: false})
+			$$ = makeDefElem("logged", &nodes.Boolean{Boolval: false}, $<loc>1)
 		}
 	;
 
@@ -6750,11 +6785,11 @@ alter_identity_column_option_list:
 alter_identity_column_option:
 	RESTART
 		{
-			$$ = makeDefElem("restart", nil)
+			$$ = makeDefElem("restart", nil, $<loc>1)
 		}
 	| RESTART opt_with NumericOnly
 		{
-			$$ = makeDefElem("restart", $3)
+			$$ = makeDefElem("restart", $3, $<loc>1)
 		}
 	| SET SeqOptElem
 		{
@@ -6762,7 +6797,7 @@ alter_identity_column_option:
 		}
 	| SET GENERATED generated_when
 		{
-			$$ = makeDefElem("generated", &nodes.Integer{Ival: $3})
+			$$ = makeDefElem("generated", &nodes.Integer{Ival: $3}, $<loc>1)
 		}
 	;
 
@@ -6982,7 +7017,7 @@ alter_type_cmd:
 		}
 	| ALTER ATTRIBUTE ColId SET DATA_P TYPE_P Typename opt_collate_clause opt_drop_behavior
 		{
-			coldef := &nodes.ColumnDef{TypeName: $7}
+			coldef := &nodes.ColumnDef{TypeName: $7, Location: $<loc>3}
 			if $8 != nil {
 				coldef.CollClause = $8.(*nodes.CollateClause)
 			}
@@ -6995,7 +7030,7 @@ alter_type_cmd:
 		}
 	| ALTER ATTRIBUTE ColId TYPE_P Typename opt_collate_clause opt_drop_behavior
 		{
-			coldef := &nodes.ColumnDef{TypeName: $5}
+			coldef := &nodes.ColumnDef{TypeName: $5, Location: $<loc>3}
 			if $6 != nil {
 				coldef.CollClause = $6.(*nodes.CollateClause)
 			}
@@ -7015,7 +7050,7 @@ TableFuncElement:
 				Colname:  $1,
 				TypeName: $2,
 				IsLocal:  true,
-				Location: -1,
+				Location: $<loc>1,
 			}
 			if $3 != nil {
 				coldef.CollClause = $3.(*nodes.CollateClause)
@@ -7029,7 +7064,7 @@ opt_collate_clause:
 		{
 			$$ = &nodes.CollateClause{
 				Collname: $2,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| /* EMPTY */
@@ -7144,7 +7179,7 @@ DefineStmt:
 			$$ = &nodes.DefineStmt{
 				Kind:       nodes.OBJECT_COLLATION,
 				Defnames:   $3,
-				Definition: makeList(makeDefElem("from", $5)),
+				Definition: makeList(makeDefElem("from", $5, $<loc>5)),
 			}
 		}
 	| CREATE COLLATION IF_P NOT EXISTS any_name FROM any_name
@@ -7152,7 +7187,7 @@ DefineStmt:
 			$$ = &nodes.DefineStmt{
 				Kind:        nodes.OBJECT_COLLATION,
 				Defnames:    $6,
-				Definition:  makeList(makeDefElem("from", $8)),
+				Definition:  makeList(makeDefElem("from", $8, $<loc>8)),
 				IfNotExists: true,
 			}
 		}
@@ -7212,11 +7247,11 @@ def_list:
 def_elem:
 	ColLabel '=' def_arg
 		{
-			$$ = makeDefElem($1, $3)
+			$$ = makeDefElem($1, $3, $<loc>1)
 		}
 	| ColLabel
 		{
-			$$ = makeDefElem($1, nil)
+			$$ = makeDefElem($1, nil, $<loc>1)
 		}
 	;
 
@@ -7274,7 +7309,7 @@ old_aggr_list:
 old_aggr_elem:
 	IDENT '=' def_arg
 		{
-			$$ = makeDefElem($1, $3)
+			$$ = makeDefElem($1, $3, $<loc>1)
 		}
 	;
 
@@ -7693,6 +7728,7 @@ with_clause:
 			$$ = &nodes.WithClause{
 				Ctes:      $2,
 				Recursive: false,
+				Location:  $<loc>1,
 			}
 		}
 	| WITH_LA cte_list
@@ -7700,6 +7736,7 @@ with_clause:
 			$$ = &nodes.WithClause{
 				Ctes:      $2,
 				Recursive: false,
+				Location:  $<loc>1,
 			}
 		}
 	| WITH RECURSIVE cte_list
@@ -7707,6 +7744,7 @@ with_clause:
 			$$ = &nodes.WithClause{
 				Ctes:      $3,
 				Recursive: true,
+				Location:  $<loc>1,
 			}
 		}
 	;
@@ -7730,6 +7768,7 @@ common_table_expr:
 				Aliascolnames:   $2,
 				Ctematerialized: int($4),
 				Ctequery:        $6,
+				Location:        $<loc>1,
 			}
 			if $8 != nil {
 				cte.SearchClause = $8
@@ -7754,7 +7793,7 @@ opt_search_clause:
 				SearchColList:      $5,
 				SearchBreadthFirst: false,
 				SearchSeqColumn:    $7,
-				Location:           -1,
+				Location:           $<loc>1,
 			}
 		}
 	| SEARCH BREADTH FIRST_P BY columnList SET ColId
@@ -7763,7 +7802,7 @@ opt_search_clause:
 				SearchColList:      $5,
 				SearchBreadthFirst: true,
 				SearchSeqColumn:    $7,
-				Location:           -1,
+				Location:           $<loc>1,
 			}
 		}
 	| /* EMPTY */ { $$ = nil }
@@ -7778,7 +7817,7 @@ opt_cycle_clause:
 				CycleMarkValue:   $6,
 				CycleMarkDefault: $8,
 				CyclePathColumn:  $10,
-				Location:         -1,
+				Location:         $<loc>1,
 			}
 		}
 	| CYCLE columnList SET ColId USING ColId
@@ -7789,7 +7828,7 @@ opt_cycle_clause:
 				CycleMarkValue:   makeBoolAConst(1, -1),
 				CycleMarkDefault: makeBoolAConst(0, -1),
 				CyclePathColumn:  $6,
-				Location:         -1,
+				Location:         $<loc>1,
 			}
 		}
 	| /* EMPTY */ { $$ = nil }
@@ -8208,10 +8247,10 @@ tablesample_clause:
 	TABLESAMPLE func_name '(' expr_list ')' opt_repeatable_clause
 		{
 			$$ = &nodes.RangeTableSample{
-				Method: $2,
-				Args:   $4,
+				Method:     $2,
+				Args:       $4,
 				Repeatable: $6,
-				Location: -1,
+				Location:   $<loc>2,
 			}
 		}
 	;
@@ -8271,28 +8310,28 @@ group_by_item:
 empty_grouping_set:
 	'(' ')'
 		{
-			$$ = &nodes.GroupingSet{Kind: nodes.GROUPING_SET_EMPTY, Location: -1}
+			$$ = &nodes.GroupingSet{Kind: nodes.GROUPING_SET_EMPTY, Location: $<loc>1}
 		}
 	;
 
 cube_clause:
 	CUBE '(' expr_list ')'
 		{
-			$$ = &nodes.GroupingSet{Kind: nodes.GROUPING_SET_CUBE, Content: $3, Location: -1}
+			$$ = &nodes.GroupingSet{Kind: nodes.GROUPING_SET_CUBE, Content: $3, Location: $<loc>1}
 		}
 	;
 
 rollup_clause:
 	ROLLUP '(' expr_list ')'
 		{
-			$$ = &nodes.GroupingSet{Kind: nodes.GROUPING_SET_ROLLUP, Content: $3, Location: -1}
+			$$ = &nodes.GroupingSet{Kind: nodes.GROUPING_SET_ROLLUP, Content: $3, Location: $<loc>1}
 		}
 	;
 
 grouping_sets_clause:
 	GROUPING SETS '(' group_by_list ')'
 		{
-			$$ = &nodes.GroupingSet{Kind: nodes.GROUPING_SET_SETS, Content: $4, Location: -1}
+			$$ = &nodes.GroupingSet{Kind: nodes.GROUPING_SET_SETS, Content: $4, Location: $<loc>1}
 		}
 	;
 
@@ -8331,6 +8370,7 @@ sortby:
 				SortbyDir:   nodes.SORTBY_USING,
 				SortbyNulls: nodes.SortByNulls($4),
 				UseOp:       $3,
+				Location:    $<loc>3,
 			}
 		}
 	| a_expr opt_asc_desc opt_nulls_order
@@ -8713,7 +8753,7 @@ a_expr:
 			$$ = &nodes.XmlExpr{
 				Op:       nodes.IS_DOCUMENT,
 				Args:     makeList($1),
-				Location: -1,
+				Location: $<loc>2,
 			}
 		}
 	| a_expr IS NOT DOCUMENT_P                         %prec IS
@@ -8721,7 +8761,7 @@ a_expr:
 			$$ = makeNotExpr(&nodes.XmlExpr{
 				Op:       nodes.IS_DOCUMENT,
 				Args:     makeList($1),
-				Location: -1,
+				Location: $<loc>2,
 			}, $<loc>2)
 		}
 	| a_expr IS json_predicate_type_constraint json_key_uniqueness_constraint_opt   %prec IS
@@ -9234,7 +9274,7 @@ b_expr:
 			$$ = &nodes.XmlExpr{
 				Op:       nodes.IS_DOCUMENT,
 				Args:     makeList($1),
-				Location: -1,
+				Location: $<loc>2,
 			}
 		}
 	| b_expr IS NOT DOCUMENT_P				%prec IS
@@ -9242,7 +9282,7 @@ b_expr:
 			$$ = makeNotExpr(&nodes.XmlExpr{
 				Op:       nodes.IS_DOCUMENT,
 				Args:     makeList($1),
-				Location: -1,
+				Location: $<loc>2,
 			}, $<loc>2)
 		}
 	| b_expr TYPECAST Typename
@@ -9424,7 +9464,7 @@ over_clause:
 			$$ = &nodes.WindowDef{
 				Name:         $2,
 				FrameOptions: nodes.FRAMEOPTION_DEFAULTS,
-				Location:     -1,
+				Location:     $<loc>2,
 			}
 		}
 	| /* EMPTY */				{ $$ = nil }
@@ -9460,7 +9500,7 @@ window_specification:
 			if $4 != nil {
 				n.OrderClause = $4
 			}
-			n.Location = -1
+			n.Location = $<loc>1
 			$$ = n
 		}
 	;
@@ -9886,7 +9926,7 @@ func_expr_common_subexpr:
 			$$ = &nodes.XmlExpr{
 				Op:       nodes.IS_XMLCONCAT,
 				Args:     $3,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| XMLELEMENT '(' NAME_P ColLabel ')'
@@ -9894,7 +9934,7 @@ func_expr_common_subexpr:
 			$$ = &nodes.XmlExpr{
 				Op:       nodes.IS_XMLELEMENT,
 				Name:     $4,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| XMLELEMENT '(' NAME_P ColLabel ',' xml_attributes ')'
@@ -9903,7 +9943,7 @@ func_expr_common_subexpr:
 				Op:        nodes.IS_XMLELEMENT,
 				Name:      $4,
 				NamedArgs: $6,
-				Location:  -1,
+				Location:  $<loc>1,
 			}
 		}
 	| XMLELEMENT '(' NAME_P ColLabel ',' expr_list ')'
@@ -9912,7 +9952,7 @@ func_expr_common_subexpr:
 				Op:       nodes.IS_XMLELEMENT,
 				Name:     $4,
 				Args:     $6,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| XMLELEMENT '(' NAME_P ColLabel ',' xml_attributes ',' expr_list ')'
@@ -9922,7 +9962,7 @@ func_expr_common_subexpr:
 				Name:      $4,
 				NamedArgs: $6,
 				Args:      $8,
-				Location:  -1,
+				Location:  $<loc>1,
 			}
 		}
 	| XMLEXISTS '(' c_expr xmlexists_argument ')'
@@ -9940,16 +9980,16 @@ func_expr_common_subexpr:
 			$$ = &nodes.XmlExpr{
 				Op:        nodes.IS_XMLFOREST,
 				NamedArgs: $3,
-				Location:  -1,
+				Location:  $<loc>1,
 			}
 		}
 	| XMLPARSE '(' document_or_content a_expr xml_whitespace_option ')'
 		{
 			x := &nodes.XmlExpr{
-				Op:       nodes.IS_XMLPARSE,
-				Args:     makeList2($4, makeBoolAConst($5, -1)),
+				Op:        nodes.IS_XMLPARSE,
+				Args:      makeList2($4, makeBoolAConst($5, -1)),
 				Xmloption: nodes.XmlOptionType($3),
-				Location: -1,
+				Location:  $<loc>1,
 			}
 			$$ = x
 		}
@@ -9958,7 +9998,7 @@ func_expr_common_subexpr:
 			$$ = &nodes.XmlExpr{
 				Op:       nodes.IS_XMLPI,
 				Name:     $4,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| XMLPI '(' NAME_P ColLabel ',' a_expr ')'
@@ -9967,7 +10007,7 @@ func_expr_common_subexpr:
 				Op:       nodes.IS_XMLPI,
 				Name:     $4,
 				Args:     makeList($6),
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| XMLROOT '(' a_expr ',' xml_root_version opt_xml_root_standalone ')'
@@ -9975,17 +10015,18 @@ func_expr_common_subexpr:
 			$$ = &nodes.XmlExpr{
 				Op:       nodes.IS_XMLROOT,
 				Args:     &nodes.List{Items: []nodes.Node{$3, $5, $6}},
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| XMLSERIALIZE '(' document_or_content a_expr AS SimpleTypename xml_indent_option ')'
 		{
+			$6.Location = $<loc>6
 			$$ = &nodes.XmlSerialize{
 				Xmloption: nodes.XmlOptionType($3),
 				Expr:      $4,
 				TypeName:  $6,
 				Indent:    $7 != 0,
-				Location:  -1,
+				Location:  $<loc>1,
 			}
 		}
 	/* SQL/JSON function expressions */
@@ -10007,14 +10048,14 @@ func_expr_common_subexpr:
 				Output:       asJsonOutput($6),
 				AbsentOnNull: $4 != 0,
 				UniqueKeys:   $5 != 0,
-				Location:     -1,
+				Location:     $<loc>1,
 			}
 		}
 	| JSON_OBJECT '(' json_returning_clause_opt ')'
 		{
 			$$ = &nodes.JsonObjectConstructor{
 				Output:   asJsonOutput($3),
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| JSON_ARRAY '(' json_value_expr_list json_array_constructor_null_clause_opt
@@ -10024,7 +10065,7 @@ func_expr_common_subexpr:
 				Exprs:        $3,
 				AbsentOnNull: $4 != 0,
 				Output:       asJsonOutput($5),
-				Location:     -1,
+				Location:     $<loc>1,
 			}
 		}
 	| JSON_ARRAY '(' select_no_parens json_format_clause_opt json_returning_clause_opt ')'
@@ -10035,7 +10076,7 @@ func_expr_common_subexpr:
 				Output:       asJsonOutput($5),
 				Format:       $4.(*nodes.JsonFormat),
 				AbsentOnNull: true,
-				Location:     -1,
+				Location:     $<loc>1,
 			}
 			$$ = n
 		}
@@ -10044,7 +10085,7 @@ func_expr_common_subexpr:
 			$$ = &nodes.JsonArrayConstructor{
 				Output:       asJsonOutput($3),
 				AbsentOnNull: true,
-				Location:     -1,
+				Location:     $<loc>1,
 			}
 		}
 	| JSON '(' json_value_expr json_key_uniqueness_constraint_opt ')'
@@ -10312,7 +10353,7 @@ xmltable:
 				Rowexpr:  $3,
 				Docexpr:  $4,
 				Columns:  $6,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| XMLTABLE '(' XMLNAMESPACES '(' xml_namespace_list ')' ','
@@ -10323,7 +10364,7 @@ xmltable:
 				Docexpr:    $9,
 				Columns:    $11,
 				Namespaces: $5,
-				Location:   -1,
+				Location:   $<loc>1,
 			}
 		}
 	;
@@ -10341,7 +10382,7 @@ xmltable_column_el:
 			$$ = &nodes.RangeTableFuncCol{
 				Colname:  $1,
 				TypeName: $2,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| ColId Typename xmltable_column_option_list
@@ -10349,7 +10390,7 @@ xmltable_column_el:
 			fc := &nodes.RangeTableFuncCol{
 				Colname:  $1,
 				TypeName: $2,
-				Location: -1,
+				Location: $<loc>1,
 			}
 			nullability := false
 			for _, item := range $3.Items {
@@ -10386,7 +10427,7 @@ xmltable_column_el:
 			$$ = &nodes.RangeTableFuncCol{
 				Colname:       $1,
 				ForOrdinality: true,
-				Location:      -1,
+				Location:      $<loc>1,
 			}
 		}
 	;
@@ -10686,7 +10727,7 @@ json_aggregate_func:
 			$$ = &nodes.JsonObjectAgg{
 				Constructor: &nodes.JsonAggConstructor{
 					Output:   asJsonOutput($6),
-					Location: -1,
+					Location: $<loc>1,
 				},
 				Arg:          $3.(*nodes.JsonKeyValue),
 				AbsentOnNull: $4 != 0,
@@ -10700,7 +10741,7 @@ json_aggregate_func:
 				Constructor: &nodes.JsonAggConstructor{
 					Output:    asJsonOutput($6),
 					Agg_order: $4,
-					Location:  -1,
+					Location:  $<loc>1,
 				},
 				Arg:          $3.(*nodes.JsonValueExpr),
 				AbsentOnNull: $5 != 0,
@@ -11970,23 +12011,23 @@ iso_level:
 transaction_mode_item:
 	ISOLATION LEVEL iso_level
 		{
-			$$ = makeDefElem("transaction_isolation", makeStringConst($3, $<loc>3))
+			$$ = makeDefElem("transaction_isolation", makeStringConst($3, $<loc>3), $<loc>1)
 		}
 	| READ ONLY
 		{
-			$$ = makeDefElem("transaction_read_only", makeIntConst(1, $<loc>1))
+			$$ = makeDefElem("transaction_read_only", makeIntConst(1, $<loc>1), $<loc>1)
 		}
 	| READ WRITE
 		{
-			$$ = makeDefElem("transaction_read_only", makeIntConst(0, $<loc>1))
+			$$ = makeDefElem("transaction_read_only", makeIntConst(0, $<loc>1), $<loc>1)
 		}
 	| DEFERRABLE
 		{
-			$$ = makeDefElem("transaction_deferrable", makeIntConst(1, $<loc>1))
+			$$ = makeDefElem("transaction_deferrable", makeIntConst(1, $<loc>1), $<loc>1)
 		}
 	| NOT DEFERRABLE
 		{
-			$$ = makeDefElem("transaction_deferrable", makeIntConst(0, $<loc>1))
+			$$ = makeDefElem("transaction_deferrable", makeIntConst(0, $<loc>1), $<loc>1)
 		}
 	;
 
@@ -12281,16 +12322,16 @@ VacuumStmt:
 			}
 			var opts []nodes.Node
 			if $2 {
-				opts = append(opts, makeDefElem("full", nil))
+				opts = append(opts, makeDefElem("full", nil, $<loc>2))
 			}
 			if $3 {
-				opts = append(opts, makeDefElem("freeze", nil))
+				opts = append(opts, makeDefElem("freeze", nil, $<loc>3))
 			}
 			if $4 {
-				opts = append(opts, makeDefElem("verbose", nil))
+				opts = append(opts, makeDefElem("verbose", nil, $<loc>4))
 			}
 			if $5 {
-				opts = append(opts, makeDefElem("analyze", nil))
+				opts = append(opts, makeDefElem("analyze", nil, $<loc>5))
 			}
 			if len(opts) > 0 {
 				n.Options = &nodes.List{Items: opts}
@@ -12315,7 +12356,7 @@ AnalyzeStmt:
 				Rels:        $3,
 			}
 			if $2 {
-				n.Options = &nodes.List{Items: []nodes.Node{makeDefElem("verbose", nil)}}
+				n.Options = &nodes.List{Items: []nodes.Node{makeDefElem("verbose", nil, $<loc>2)}}
 			}
 			$$ = n
 		}
@@ -12411,7 +12452,7 @@ ClusterStmt:
 				Indexname: $4,
 			}
 			if $2 {
-				n.Params = &nodes.List{Items: []nodes.Node{makeDefElem("verbose", nil)}}
+				n.Params = &nodes.List{Items: []nodes.Node{makeDefElem("verbose", nil, $<loc>2)}}
 			}
 			$$ = n
 		}
@@ -12419,7 +12460,7 @@ ClusterStmt:
 		{
 			n := &nodes.ClusterStmt{}
 			if $2 {
-				n.Params = &nodes.List{Items: []nodes.Node{makeDefElem("verbose", nil)}}
+				n.Params = &nodes.List{Items: []nodes.Node{makeDefElem("verbose", nil, $<loc>2)}}
 			}
 			$$ = n
 		}
@@ -12431,7 +12472,7 @@ ClusterStmt:
 				Indexname: $3,
 			}
 			if $2 {
-				n.Params = &nodes.List{Items: []nodes.Node{makeDefElem("verbose", nil)}}
+				n.Params = &nodes.List{Items: []nodes.Node{makeDefElem("verbose", nil, $<loc>2)}}
 			}
 			$$ = n
 		}
@@ -12457,7 +12498,7 @@ ReindexStmt:
 				Params:   $2,
 			}
 			if $4 {
-				n.Params = appendList(n.Params, makeDefElem("concurrently", nil))
+				n.Params = appendList(n.Params, makeDefElem("concurrently", nil, $<loc>4))
 			}
 			$$ = n
 		}
@@ -12469,7 +12510,7 @@ ReindexStmt:
 				Params: $2,
 			}
 			if $4 {
-				n.Params = appendList(n.Params, makeDefElem("concurrently", nil))
+				n.Params = appendList(n.Params, makeDefElem("concurrently", nil, $<loc>4))
 			}
 			$$ = n
 		}
@@ -12481,7 +12522,7 @@ ReindexStmt:
 				Params: $2,
 			}
 			if $4 {
-				n.Params = appendList(n.Params, makeDefElem("concurrently", nil))
+				n.Params = appendList(n.Params, makeDefElem("concurrently", nil, $<loc>4))
 			}
 			$$ = n
 		}
@@ -13253,15 +13294,17 @@ dostmt_opt_item:
 	Sconst
 		{
 			$$ = &nodes.DefElem{
-				Defname: "as",
-				Arg:     &nodes.String{Str: $1},
+				Defname:  "as",
+				Arg:      &nodes.String{Str: $1},
+				Location: $<loc>1,
 			}
 		}
 	| LANGUAGE NonReservedWord_or_Sconst
 		{
 			$$ = &nodes.DefElem{
-				Defname: "language",
-				Arg:     &nodes.String{Str: $2},
+				Defname:  "language",
+				Arg:      &nodes.String{Str: $2},
+				Location: $<loc>1,
 			}
 		}
 	;
@@ -13886,8 +13929,9 @@ event_trigger_when_item:
 	ColId IN_P '(' event_trigger_value_list ')'
 		{
 			$$ = &nodes.DefElem{
-				Defname: $1,
-				Arg:     $4,
+				Defname:  $1,
+				Arg:      $4,
+				Location: $<loc>1,
 			}
 		}
 	;
@@ -14071,19 +14115,19 @@ CreateFdwStmt:
 fdw_option:
 	HANDLER handler_name
 		{
-			$$ = makeDefElem("handler", $2)
+			$$ = makeDefElem("handler", $2, $<loc>1)
 		}
 	| NO HANDLER
 		{
-			$$ = makeDefElem("handler", nil)
+			$$ = makeDefElem("handler", nil, $<loc>1)
 		}
 	| VALIDATOR handler_name
 		{
-			$$ = makeDefElem("validator", $2)
+			$$ = makeDefElem("validator", $2, $<loc>1)
 		}
 	| NO VALIDATOR
 		{
-			$$ = makeDefElem("validator", nil)
+			$$ = makeDefElem("validator", nil, $<loc>1)
 		}
 	;
 
@@ -14177,7 +14221,7 @@ alter_generic_option_elem:
 			$$ = &nodes.DefElem{
 				Defname:   $2,
 				Defaction: int(nodes.DEFELEM_DROP),
-				Location:  -1,
+				Location:  $<loc>2,
 			}
 		}
 	;
@@ -14188,7 +14232,7 @@ generic_option_elem:
 			$$ = &nodes.DefElem{
 				Defname:  $1,
 				Arg:      $2,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	;
@@ -14443,6 +14487,7 @@ auth_ident:
 		{
 			$$ = &nodes.RoleSpec{
 				Roletype: int(nodes.ROLESPEC_CURRENT_USER),
+				Location: $<loc>1,
 			}
 		}
 	;
@@ -14560,11 +14605,11 @@ reloption_list:
 reloption_elem:
 	ColLabel '=' def_arg
 		{
-			$$ = makeDefElem($1, $3)
+			$$ = makeDefElem($1, $3, $<loc>1)
 		}
 	| ColLabel
 		{
-			$$ = makeDefElem($1, nil)
+			$$ = makeDefElem($1, nil, $<loc>1)
 		}
 	| ColLabel '.' ColLabel '=' def_arg
 		{
@@ -14572,7 +14617,7 @@ reloption_elem:
 				Defnamespace: $1,
 				Defname:      $3,
 				Arg:          $5,
-				Location:     -1,
+				Location:     $<loc>1,
 			}
 		}
 	| ColLabel '.' ColLabel
@@ -14580,7 +14625,7 @@ reloption_elem:
 			$$ = &nodes.DefElem{
 				Defnamespace: $1,
 				Defname:      $3,
-				Location:     -1,
+				Location:     $<loc>1,
 			}
 		}
 	;
@@ -14620,15 +14665,15 @@ create_extension_opt_list:
 create_extension_opt_item:
 	SCHEMA name
 		{
-			$$ = makeDefElem("schema", &nodes.String{Str: $2})
+			$$ = makeDefElem("schema", &nodes.String{Str: $2}, $<loc>1)
 		}
 	| VERSION_P NonReservedWord_or_Sconst
 		{
-			$$ = makeDefElem("new_version", &nodes.String{Str: $2})
+			$$ = makeDefElem("new_version", &nodes.String{Str: $2}, $<loc>1)
 		}
 	| CASCADE
 		{
-			$$ = makeDefElem("cascade", &nodes.Boolean{Boolval: true})
+			$$ = makeDefElem("cascade", &nodes.Boolean{Boolval: true}, $<loc>1)
 		}
 	;
 
@@ -14658,7 +14703,7 @@ alter_extension_opt_list:
 alter_extension_opt_item:
 	TO NonReservedWord_or_Sconst
 		{
-			$$ = makeDefElem("new_version", &nodes.String{Str: $2})
+			$$ = makeDefElem("new_version", &nodes.String{Str: $2}, $<loc>1)
 		}
 	;
 
@@ -15013,12 +15058,14 @@ PublicationObjSpec:
 			$$ = []pubObj{{spec: &nodes.PublicationObjSpec{
 				Pubobjtype: nodes.PUBLICATIONOBJ_TABLES_IN_SCHEMA,
 				Name:       $4,
+				Location:   $<loc>4,
 			}, loc: $<loc>1}}
 		}
 	| TABLES IN_P SCHEMA CURRENT_SCHEMA
 		{
 			$$ = []pubObj{{spec: &nodes.PublicationObjSpec{
 				Pubobjtype: nodes.PUBLICATIONOBJ_TABLES_IN_CUR_SCHEMA,
+				Location:   $<loc>4,
 			}, loc: $<loc>1}}
 		}
 	| qualified_name opt_column_list OptWhereClause
@@ -15033,6 +15080,7 @@ PublicationObjSpec:
 			$$ = []pubObj{{spec: &nodes.PublicationObjSpec{
 				Pubobjtype: nodes.PUBLICATIONOBJ_CONTINUATION,
 				Pubtable:   pt,
+				Location:   $<loc>1,
 			}, loc: $<loc>1, name: len($1.Items) == 1}}
 		}
 	| extended_relation_expr opt_column_list OptWhereClause
@@ -15053,6 +15101,7 @@ PublicationObjSpec:
 		{
 			$$ = []pubObj{{spec: &nodes.PublicationObjSpec{
 				Pubobjtype: nodes.PUBLICATIONOBJ_CONTINUATION,
+				Location:   $<loc>1,
 			}, loc: $<loc>1}}
 		}
 	;
@@ -15144,7 +15193,7 @@ AlterSubscriptionStmt:
 			$$ = &nodes.AlterSubscriptionStmt{
 				Kind:    nodes.ALTER_SUBSCRIPTION_ENABLED,
 				Subname: $3,
-				Options: makeList(makeDefElem("enabled", &nodes.Boolean{Boolval: true})),
+				Options: makeList(makeDefElem("enabled", &nodes.Boolean{Boolval: true}, $<loc>1)),
 			}
 		}
 	| ALTER SUBSCRIPTION name DISABLE_P
@@ -15152,7 +15201,7 @@ AlterSubscriptionStmt:
 			$$ = &nodes.AlterSubscriptionStmt{
 				Kind:    nodes.ALTER_SUBSCRIPTION_ENABLED,
 				Subname: $3,
-				Options: makeList(makeDefElem("enabled", &nodes.Boolean{Boolval: false})),
+				Options: makeList(makeDefElem("enabled", &nodes.Boolean{Boolval: false}, $<loc>1)),
 			}
 		}
 	| ALTER SUBSCRIPTION name SKIP definition
@@ -15520,7 +15569,7 @@ operator_def_elem:
 		{
 			$$ = &nodes.DefElem{
 				Defname:  $1,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| ColLabel '=' operator_def_arg
@@ -15528,7 +15577,7 @@ operator_def_elem:
 			$$ = &nodes.DefElem{
 				Defname:  $1,
 				Arg:      $3,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| ColLabel
@@ -15539,7 +15588,7 @@ operator_def_elem:
 			}
 			$$ = &nodes.DefElem{
 				Defname:  $1,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	;
@@ -15801,25 +15850,25 @@ DefACLOption:
 	IN_P SCHEMA name_list
 		{
 			$$ = &nodes.DefElem{
-				Defname: "schemas",
-				Arg:     $3,
-				Location: -1,
+				Defname:  "schemas",
+				Arg:      $3,
+				Location: $<loc>1,
 			}
 		}
 	| FOR ROLE role_list
 		{
 			$$ = &nodes.DefElem{
-				Defname: "roles",
-				Arg:     $3,
-				Location: -1,
+				Defname:  "roles",
+				Arg:      $3,
+				Location: $<loc>1,
 			}
 		}
 	| FOR USER role_list
 		{
 			$$ = &nodes.DefElem{
-				Defname: "roles",
-				Arg:     $3,
-				Location: -1,
+				Defname:  "roles",
+				Arg:      $3,
+				Location: $<loc>1,
 			}
 		}
 	;
@@ -17996,11 +18045,11 @@ func doNegateFloat(f *nodes.Float) {
 	}
 }
 
-func makeDefElem(name string, arg nodes.Node) nodes.Node {
+func makeDefElem(name string, arg nodes.Node, loc nodes.ParseLoc) nodes.Node {
 	return &nodes.DefElem{
 		Defname:  name,
 		Arg:      arg,
-		Location: -1,
+		Location: loc,
 	}
 }
 
