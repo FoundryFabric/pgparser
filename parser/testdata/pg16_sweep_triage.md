@@ -1331,6 +1331,21 @@ libpg_query's it is in locations, and in a recursive view's column
 reference, as they do for TEMP. `testdata/global_temp_pg16.jsonl` pins 34
 statements; all agree.
 
+### time-zone-interval (risk 2; fixed)
+
+| statement | PostgreSQL 16 | parser |
+|---|---|---|
+| `set time zone interval '1' hour` | accepts | 42601 syntax error at or near "interval" at 14 |
+| `set time zone interval(3) '1'` | accepts | 42601 syntax error at or near "interval" at 14 |
+| `set time zone interval '1' day` | 42601 time zone interval must be HOUR or HOUR TO MINUTE at 27 | 42601 syntax error at or near "interval" at 14 |
+
+`zone_value` lacked PostgreSQL 16's two interval forms. They are now its
+rules, with its check on the fields; the value is the string cast to
+`interval`, as an interval constant is. Where the trees differ from
+libpg_query's it is in DefElem and RoleSpec locations, as for any other
+SET in ALTER FUNCTION, CREATE FUNCTION and ALTER ROLE.
+`testdata/time_zone_interval_pg16.jsonl` pins 38 statements; all agree.
+
 ## Rerunning
 
 ```

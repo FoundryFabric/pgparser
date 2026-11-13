@@ -11987,6 +11987,27 @@ zone_value:
 		{
 			$$ = &nodes.A_Const{Val: $1, Location: $<loc>1}
 		}
+	| ConstInterval Sconst opt_interval
+		{
+			t := $1
+			t.Location = $<loc>1
+			if $3 != nil {
+				mask := $3.Items[0].(*nodes.A_Const).Val.(*nodes.Integer).Ival
+				if mask&^int64(nodes.INTERVAL_MASK_HOUR|nodes.INTERVAL_MASK_MINUTE) != 0 {
+					grammarError(pglex, "42601", "time zone interval must be HOUR or HOUR TO MINUTE", "", $<loc>3)
+					return 1
+				}
+				t.Typmods = $3
+			}
+			$$ = makeStringConstCast($2, $<loc>2, t)
+		}
+	| ConstInterval '(' Iconst ')' Sconst
+		{
+			t := $1
+			t.Location = $<loc>1
+			t.Typmods = makeList2(makeIntConst(int64(nodes.INTERVAL_FULL_RANGE), -1), makeIntConst($3, $<loc>3))
+			$$ = makeStringConstCast($5, $<loc>5, t)
+		}
 	| DEFAULT
 		{
 			$$ = nil

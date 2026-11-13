@@ -1,0 +1,38 @@
+{"sql":"set time zone interval '1'"}
+{"sql":"set time zone interval '1' hour"}
+{"sql":"set time zone interval '+1:00' hour to minute"}
+{"sql":"set time zone interval '-08:00' hour to minute"}
+{"sql":"set time zone interval(3) '1'"}
+{"sql":"set time zone interval (0) '-1:30'"}
+{"sql":"set local time zone interval '1' hour"}
+{"sql":"set session time zone interval '1' hour"}
+{"sql":"set time zone interval '1' day","code":"42601","message":"time zone interval must be HOUR or HOUR TO MINUTE","position":27}
+{"sql":"set time zone interval '1' minute"}
+{"sql":"set time zone interval '1' year","code":"42601","message":"time zone interval must be HOUR or HOUR TO MINUTE","position":27}
+{"sql":"set time zone interval '1' month","code":"42601","message":"time zone interval must be HOUR or HOUR TO MINUTE","position":27}
+{"sql":"set time zone interval '1' second","code":"42601","message":"time zone interval must be HOUR or HOUR TO MINUTE","position":27}
+{"sql":"set time zone interval '1' hour to second","code":"42601","message":"time zone interval must be HOUR or HOUR TO MINUTE","position":27}
+{"sql":"set time zone interval '1' day to hour","code":"42601","message":"time zone interval must be HOUR or HOUR TO MINUTE","position":27}
+{"sql":"set time zone interval '1' minute to second","code":"42601","message":"time zone interval must be HOUR or HOUR TO MINUTE","position":27}
+{"sql":"set time zone interval '1' second(3)","code":"42601","message":"time zone interval must be HOUR or HOUR TO MINUTE","position":27}
+{"sql":"set time zone interval '1' day to second(3)","code":"42601","message":"time zone interval must be HOUR or HOUR TO MINUTE","position":27}
+{"sql":"set time zone interval(3) '1' hour","code":"42601","message":"syntax error at or near \"hour\"","position":30}
+{"sql":"set time zone interval 1","code":"42601","message":"syntax error at or near \"1\"","position":23}
+{"sql":"set time zone interval","code":"42601","message":"syntax error at end of input","position":22}
+{"sql":"set time zone interval '1' hour, 'utc'","code":"42601","message":"syntax error at or near \",\"","position":31}
+{"sql":"alter database d set time zone interval '1' hour"}
+{"sql":"alter role r set time zone interval '+1' hour to minute"}
+{"sql":"alter function f() set time zone interval '1'"}
+{"sql":"create function f() returns int set time zone interval '1' hour as 'x' language sql"}
+{"sql":"set time zone 'utc'"}
+{"sql":"set time zone utc"}
+{"sql":"set time zone local"}
+{"sql":"set time zone default"}
+{"sql":"set time zone 1"}
+{"sql":"set time zone -1.5"}
+{"sql":"set time zone +8"}
+{"sql":"set local time zone 'utc'"}
+{"sql":"set timezone = 'utc'"}
+{"sql":"set timezone to interval '1' hour","code":"42601","message":"syntax error at or near \"'1'\"","position":25}
+{"sql":"reset time zone"}
+{"sql":"show time zone"}
