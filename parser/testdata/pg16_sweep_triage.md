@@ -919,6 +919,23 @@ that changed over the corpus and test data are those statements; the test
 it unset. `testdata/rename_constraint_pg16.jsonl` pins 10 statements; all
 agree.
 
+### type-relation-not-inherited (tree 112, 33, 33 and 4; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `create type t as (a int)` | `typevar` `inh` false | true |
+| `alter type t drop attribute c` | `relation` `inh` false, `relpersistence` `p` | `inh` true, `relpersistence` unset |
+| `alter type t rename attribute a to b` | `relation` `inh` false | true |
+
+PostgreSQL 16 names a composite type with `makeRangeVarFromAnyName`, which
+leaves `inh` false (a type has no children to scan) and sets a permanent
+`relpersistence`; the parser used its table-name helper, with `inh` true,
+and ALTER TYPE built its own RangeVar without a persistence. The three
+sites now share `makeTypeRangeVar`. The 167 trees that changed over the
+corpus and test data are CREATE TYPE ... AS, ALTER TYPE and RENAME
+ATTRIBUTE statements. `testdata/type_relation_pg16.jsonl` pins 15
+statements; all agree.
+
 ## Rerunning
 
 ```

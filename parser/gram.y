@@ -3476,7 +3476,7 @@ RenameStmt:
 			$$ = &nodes.RenameStmt{
 				RenameType:   nodes.OBJECT_ATTRIBUTE,
 				RelationType: nodes.OBJECT_TYPE,
-				Relation:     makeRangeVarFromAnyName($3, $<loc>3),
+				Relation:     makeTypeRangeVar($3, $<loc>3),
 				Subname:      $6,
 				Newname:      $8,
 				Behavior:     nodes.DropBehavior($9),
@@ -7095,27 +7095,8 @@ AlterCompositeTypeStmt:
 			if !checkRangeVarNames(pglex, $3, $<loc>3) {
 				return 1
 			}
-			rv := &nodes.RangeVar{
-				Inh:     true,
-				Location: $<loc>3,
-			}
-			/* Convert any_name to schema.rel */
-			names := $3
-			if names != nil && len(names.Items) > 0 {
-				switch len(names.Items) {
-				case 1:
-					rv.Relname = names.Items[0].(*nodes.String).Str
-				case 2:
-					rv.Schemaname = names.Items[0].(*nodes.String).Str
-					rv.Relname = names.Items[1].(*nodes.String).Str
-				case 3:
-					rv.Catalogname = names.Items[0].(*nodes.String).Str
-					rv.Schemaname = names.Items[1].(*nodes.String).Str
-					rv.Relname = names.Items[2].(*nodes.String).Str
-				}
-			}
 			$$ = &nodes.AlterTableStmt{
-				Relation: rv,
+				Relation: makeTypeRangeVar($3, $<loc>3),
 				Cmds:     $4,
 				ObjType:  int(nodes.OBJECT_TYPE),
 			}
@@ -7348,7 +7329,7 @@ CompositeTypeStmt:
 				return 1
 			}
 			$$ = &nodes.CompositeTypeStmt{
-				Typevar:    makeRangeVarFromAnyName($3, $<loc>3),
+				Typevar:    makeTypeRangeVar($3, $<loc>3),
 				Coldeflist: $6,
 			}
 		}
@@ -18728,6 +18709,15 @@ func makeRangeVarFromAnyName(names *nodes.List, location nodes.ParseLoc) *nodes.
 		rv.Schemaname = names.Items[1].(*nodes.String).Str
 		rv.Relname = names.Items[2].(*nodes.String).Str
 	}
+	return rv
+}
+
+// makeTypeRangeVar is PostgreSQL 16's makeRangeVarFromAnyName, which names
+// a composite type in CREATE TYPE ... AS, ALTER TYPE and RENAME ATTRIBUTE:
+// a permanent relation with inh false, where a table's name has inh true.
+func makeTypeRangeVar(names *nodes.List, location nodes.ParseLoc) *nodes.RangeVar {
+	rv := makeRangeVarFromAnyName(names, location)
+	rv.Inh = false
 	return rv
 }
 

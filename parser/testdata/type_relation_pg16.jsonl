@@ -1,0 +1,15 @@
+{"sql":"create type t as (a int)"}
+{"sql":"create type s.t as (a int, b text)"}
+{"sql":"create type t as ()"}
+{"sql":"alter type t add attribute c int"}
+{"sql":"alter type s.t drop attribute c"}
+{"sql":"alter type t drop attribute if exists c cascade"}
+{"sql":"alter type t alter attribute a type text"}
+{"sql":"alter type t rename attribute a to b"}
+{"sql":"alter type t rename attribute a to b cascade"}
+{"sql":"alter table t add column c int"}
+{"sql":"alter table t rename column a to b"}
+{"sql":"create type a.b.c.d as (a int)","code":"42601","message":"improper qualified name (too many dotted names): a.b.c.d","position":12}
+{"sql":"alter type t add attribute","code":"42601","message":"syntax error at end of input","position":26}
+{"sql":"create type t as (a)","code":"42601","message":"syntax error at or near \")\"","position":19}
+{"sql":"alter type t rename attribute a","code":"42601","message":"syntax error at end of input","position":31}
