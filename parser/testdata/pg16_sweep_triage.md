@@ -1183,6 +1183,20 @@ two arguments compared crosswise. The 7 trees that changed over the
 corpus and test data are TRIM with characters and FROM.
 `testdata/trim_args_pg16.jsonl` pins 10 statements; all agree.
 
+### overlaps (tree 23; verdict, probes only; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `select (time '00:00', interval '1 hour') overlaps (time '00:30', interval '1 hour')` | `pg_catalog.overlaps` | `overlaps` |
+| `select (1, 2, 3) overlaps (3, 4)` | `42601 wrong number of parameters on left side of OVERLAPS expression` at the row | accepted |
+
+PostgreSQL 16 calls `SystemFuncName("overlaps")`, which a schema named
+on the search path cannot capture, and refuses a row that is not a pair,
+left side first. The 26 trees that changed over the corpus and test data
+are OVERLAPS expressions; no corpus verdict changed, and the 5 that did
+are new probes, now PostgreSQL 16's. `testdata/overlaps_pg16.jsonl` pins
+10 statements; all agree.
+
 ## Rerunning
 
 ```

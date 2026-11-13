@@ -1,0 +1,10 @@
+{"sql":"select (1, 2) overlaps (3, 4)"}
+{"sql":"select row(1, 2) overlaps row(3, 4)"}
+{"sql":"select (1, 2, 3) overlaps (3, 4)","code":"42601","message":"wrong number of parameters on left side of OVERLAPS expression","position":7}
+{"sql":"select (1, 2) overlaps (3, 4, 5)","code":"42601","message":"wrong number of parameters on right side of OVERLAPS expression","position":23}
+{"sql":"select row(1) overlaps (3, 4)","code":"42601","message":"wrong number of parameters on left side of OVERLAPS expression","position":7}
+{"sql":"select row() overlaps (3, 4)","code":"42601","message":"wrong number of parameters on left side of OVERLAPS expression","position":7}
+{"sql":"select (1, 2) overlaps row(3, 4, 5, 6)","code":"42601","message":"wrong number of parameters on right side of OVERLAPS expression","position":23}
+{"sql":"select (1, 2) overlaps (3, 4) and true"}
+{"sql":"select (1, 2) overlaps 3","code":"42601","message":"syntax error at or near \"3\"","position":23}
+{"sql":"select (date '2001-01-01', interval '1 day') overlaps (date '2001-01-02', date '2001-01-03')"}

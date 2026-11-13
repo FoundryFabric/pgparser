@@ -8728,21 +8728,19 @@ a_expr:
 		}
 	| row OVERLAPS row
 		{
-			/* convert to a function call */
-			var args *nodes.List
-			if r1, ok := $1.(*nodes.RowExpr); ok {
-				args = r1.Args
-			} else {
-				args = makeList($1)
+			/* convert to pg_catalog.overlaps of the two pairs */
+			left, right := $1.(*nodes.RowExpr).Args, $3.(*nodes.RowExpr).Args
+			if len(left.Elems()) != 2 {
+				grammarError(pglex, codeSyntaxError, "wrong number of parameters on left side of OVERLAPS expression", "", $<loc>1)
+				return 1
 			}
-			if r2, ok := $3.(*nodes.RowExpr); ok {
-				args = concatLists(args, r2.Args)
-			} else {
-				args = appendList(args, $3)
+			if len(right.Elems()) != 2 {
+				grammarError(pglex, codeSyntaxError, "wrong number of parameters on right side of OVERLAPS expression", "", $<loc>3)
+				return 1
 			}
 			$$ = &nodes.FuncCall{
-				Funcname:       makeFuncName("overlaps"),
-				Args:           args,
+				Funcname:       makeFuncName("pg_catalog", "overlaps"),
+				Args:           concatLists(left, right),
 				FuncFormat:     int(nodes.COERCE_SQL_SYNTAX),
 				Location:       $<loc>2,
 			}
