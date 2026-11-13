@@ -26,7 +26,7 @@
 {"sql":"CREATE INDEX ON brin_hot_3 USING brin (a) WITH (pages_per_range = 1)","locations":{"DefElem":[48]}}
 {"sql":"create index on btree_bpchar(f1 bpchar_ops) WITH (deduplicate_items=on)","locations":{"DefElem":[50]}}
 {"sql":"create index btree_tall_idx on btree_tall_tbl (t, id) with (fillfactor = 10)","locations":{"DefElem":[60]}}
-{"sql":"alter group g add user verbose","locations":{"DefElem":[23]}}
+{"sql":"alter group g add user verbose","locations":{"DefElem":[23],"RoleSpec":[12,23]}}
 {"sql":"ALTER ROLE regress_createdb CREATEDB","locations":{"DefElem":[28]}}
 {"sql":"ALTER ROLE regress_createdb NOCREATEDB","locations":{"DefElem":[28]}}
 {"sql":"ALTER SUBSCRIPTION regress_testsub ENABLE","locations":{"DefElem":[0]}}
@@ -75,9 +75,9 @@
 {"sql":"ALTER FOREIGN DATA WRAPPER foo OPTIONS (a '2')","locations":{"DefElem":[40]}}
 {"sql":"ALTER FOREIGN DATA WRAPPER foo OPTIONS (b '4')","locations":{"DefElem":[40]}}
 {"sql":"ALTER FOREIGN DATA WRAPPER foo OPTIONS (ADD d '5')","locations":{"DefElem":[44]}}
-{"sql":"ALTER USER MAPPING FOR public SERVER s4 OPTIONS (ADD modified '1')","locations":{"DefElem":[53]}}
-{"sql":"-- ERROR\nALTER USER MAPPING FOR public SERVER t1 OPTIONS (ADD  '1')","locations":{"DefElem":[58]}}
-{"sql":"-- ERROR\nALTER USER MAPPING FOR user SERVER ss4 OPTIONS (gotcha 'true')","locations":{"DefElem":[57]}}
+{"sql":"ALTER USER MAPPING FOR public SERVER s4 OPTIONS (ADD modified '1')","locations":{"DefElem":[53],"RoleSpec":[23]}}
+{"sql":"-- ERROR\nALTER USER MAPPING FOR public SERVER t1 OPTIONS (ADD  '1')","locations":{"DefElem":[58],"RoleSpec":[32]}}
+{"sql":"-- ERROR\nALTER USER MAPPING FOR user SERVER ss4 OPTIONS (gotcha 'true')","locations":{"DefElem":[57],"RoleSpec":[32]}}
 {"sql":"CREATE FOREIGN TABLE ft2 () INHERITS (fd_pt1)\n  SERVER s0 OPTIONS (delimiter ',', quote '\"', \"be quoted\" 'value')","locations":{"DefElem":[67,82,93]}}
 {"sql":"CREATE FOREIGN TABLE ft2 (\n\tc1 integer NOT NULL,\n\tc2 text,\n\tc3 date\n) SERVER s0 OPTIONS (delimiter ',', quote '\"', \"be quoted\" 'value')","locations":{"DefElem":[89,104,115]}}
 {"sql":"ALTER SERVER s8 OPTIONS (foo '1')","locations":{"DefElem":[25]}}
@@ -140,10 +140,58 @@
 {"sql":"reindex system concurrently d","locations":{"DefElem":[15]}}
 {"sql":"create collation if not exists c from \"C\"","locations":{"DefElem":[38]}}
 {"sql":"alter database d set tablespace x","locations":{"DefElem":[32]}}
-{"sql":"alter group g drop user a, b","locations":{"DefElem":[24]}}
+{"sql":"alter group g drop user a, b","locations":{"DefElem":[24],"RoleSpec":[12,24,27]}}
 {"sql":"revoke inherit option for a from b","locations":{"DefElem":[7]}}
 {"sql":"alter role r with nosuperuser createdb password $$x$$ valid until $$y$$","locations":{"DefElem":[18,30,39,54]}}
 {"sql":"create role r sysid 4 admin a role b in role c in group d","locations":{"DefElem":[14,22,30,37,47]}}
 {"sql":"begin isolation level serializable, read only, not deferrable","locations":{"DefElem":[6,36,47]}}
 {"sql":"alter extension e update to $$2$$","locations":{"DefElem":[25]}}
 {"sql":"create extension e schema s version $$1$$ cascade","locations":{"DefElem":[19,28,42]}}
+{"sql":"GRANT ALL ON t2 TO public","locations":{"RoleSpec":[19]}}
+{"sql":"GRANT ALL ON x1 TO PUBLIC","locations":{"RoleSpec":[19]}}
+{"sql":"GRANT ALL ON t3 TO public","locations":{"RoleSpec":[19]}}
+{"sql":"DROP user clstr_4","locations":{"RoleSpec":[10]}}
+{"sql":"DROP group temptest","locations":{"RoleSpec":[11]}}
+{"sql":"DROP ROLE session_user","locations":{"RoleSpec":[10]}}
+{"sql":"ALTER COLLATION test11 OWNER TO nonsense","locations":{"RoleSpec":[32]}}
+{"sql":"grant r to authorization","locations":{"RoleSpec":[11]}}
+{"sql":"grant regress_alice to regress_bob","locations":{"RoleSpec":[23]}}
+{"sql":"REVOKE regress_priv_user1 FROM  CASCADE","locations":{"RoleSpec":[32]}}
+{"sql":"alter role r","locations":{"RoleSpec":[11]}}
+{"sql":"alter user r","locations":{"RoleSpec":[11]}}
+{"sql":"alter role r with","locations":{"RoleSpec":[11]}}
+{"sql":"ALTER TABLE t1 OWNER TO regress_rls_alice","locations":{"RoleSpec":[24]}}
+{"sql":"ALTER TABLE t1.x OWNER TO regress_rls_alice","locations":{"RoleSpec":[26]}}
+{"sql":"ALTER TABLE sro_tab OWNER TO regress_sro_user","locations":{"RoleSpec":[29]}}
+{"sql":"CREATE ROLE regress_monitor IN ROLE pg_monitor","locations":{"RoleSpec":[36]}}
+{"sql":"CREATE ROLE regress_maintain_all IN ROLE pg_maintain","locations":{"RoleSpec":[41]}}
+{"sql":"CREATE USER MAPPING FOR user SERVER s4","locations":{"RoleSpec":[24]}}
+{"sql":"CREATE USER MAPPING FOR public SERVER s6","locations":{"RoleSpec":[24]}}
+{"sql":"CREATE USER MAPPING FOR public SERVER s8","locations":{"RoleSpec":[24]}}
+{"sql":"create schema s authorization authorization","locations":{"RoleSpec":[30]}}
+{"sql":"CREATE SCHEMA schema_two authorization regress_evt_user","locations":{"RoleSpec":[39]}}
+{"sql":"CREATE SCHEMA audit_tbls authorization regress_evt_user","locations":{"RoleSpec":[39]}}
+{"sql":"REVOKE regress_priv_role FROM regress_priv_user1 GRANTED BY CURRENT_ROLE","locations":{"RoleSpec":[30,60]}}
+{"sql":"GRANT regress_priv_user1 TO regress_priv_user3 GRANTED BY regress_priv_user2","locations":{"RoleSpec":[28,58]}}
+{"sql":"GRANT regress_priv_user1 TO regress_priv_user4 GRANTED BY regress_priv_user3","locations":{"RoleSpec":[28,58]}}
+{"sql":"DROP OWNED BY regress_evt_user","locations":{"RoleSpec":[14]}}
+{"sql":"DROP OWNED BY regress_sro_user","locations":{"RoleSpec":[14]}}
+{"sql":"DROP OWNED BY regress_dep_user1","locations":{"RoleSpec":[14]}}
+{"sql":"CREATE POLICY p1 ON t1 FOR ALL TO PUBLIC USING (a % 2 = 0)","locations":{"RoleSpec":[34]}}
+{"sql":"CREATE POLICY p1 ON t1 TO regress_rls_bob USING ((a % 2) = 0)","locations":{"RoleSpec":[26]}}
+{"sql":"CREATE POLICY p1 ON z1 TO regress_rls_group1 USING (a % 2 = 0)","locations":{"RoleSpec":[26]}}
+{"sql":"DROP USER MAPPING FOR public SERVER s7","locations":{"RoleSpec":[22]}}
+{"sql":"DROP USER MAPPING FOR public SERVER s8","locations":{"RoleSpec":[22]}}
+{"sql":"DROP USER MAPPING FOR public SERVER s4","locations":{"RoleSpec":[22]}}
+{"sql":"REASSIGN OWNED BY regress_dep_user0 TO regress_dep_user1","locations":{"RoleSpec":[18,39]}}
+{"sql":"REASSIGN OWNED BY regress_dep_user1 TO regress_dep_user0","locations":{"RoleSpec":[18,39]}}
+{"sql":"REASSIGN OWNED BY regress_dep_user1 TO regress_dep_user2","locations":{"RoleSpec":[18,39]}}
+{"sql":"GRANT INSERT ON atest2 TO regress_priv_user4 GRANTED BY CURRENT_USER","locations":{"RoleSpec":[26,56]}}
+{"sql":"GRANT TRUNCATE ON atest2 TO regress_priv_user5 GRANTED BY CURRENT_ROLE","locations":{"RoleSpec":[28,58]}}
+{"sql":"REVOKE ALL ON LARGE OBJECT 2001, 2002 FROM PUBLIC GRANTED BY CURRENT_ROLE","locations":{"RoleSpec":[43,61]}}
+{"sql":"ALTER POLICY p1 ON event_trigger_test  TO p2","locations":{"RoleSpec":[42]}}
+{"sql":"ALTER ROLE regress_rol_lock1 SET search_path = lock_schema1","locations":{"RoleSpec":[11]}}
+{"sql":"revoke inherit option for a from b granted by current_role","locations":{"RoleSpec":[33,46]}}
+{"sql":"create user mapping for user server s","locations":{"RoleSpec":[24]}}
+{"sql":"alter policy p on t to public, session_user","locations":{"RoleSpec":[23,31]}}
+{"sql":"grant select on t to public, current_user with grant option granted by session_user","locations":{"RoleSpec":[21,29,71]}}

@@ -5875,7 +5875,7 @@ RoleSpec:
 		{
 			switch $1 {
 			case "public":
-				$$ = &nodes.RoleSpec{Roletype: int(nodes.ROLESPEC_PUBLIC)}
+				$$ = &nodes.RoleSpec{Roletype: int(nodes.ROLESPEC_PUBLIC), Location: $<loc>1}
 			case "none":
 				grammarError(pglex, "42939", "role name \"none\" is reserved", "", $<loc>1)
 				return 1
@@ -5883,6 +5883,7 @@ RoleSpec:
 				$$ = &nodes.RoleSpec{
 					Roletype: int(nodes.ROLESPEC_CSTRING),
 					Rolename: $1,
+					Location: $<loc>1,
 				}
 			}
 		}
@@ -5890,18 +5891,21 @@ RoleSpec:
 		{
 			$$ = &nodes.RoleSpec{
 				Roletype: int(nodes.ROLESPEC_CURRENT_ROLE),
+				Location: $<loc>1,
 			}
 		}
 	| CURRENT_USER
 		{
 			$$ = &nodes.RoleSpec{
 				Roletype: int(nodes.ROLESPEC_CURRENT_USER),
+				Location: $<loc>1,
 			}
 		}
 	| SESSION_USER
 		{
 			$$ = &nodes.RoleSpec{
 				Roletype: int(nodes.ROLESPEC_SESSION_USER),
+				Location: $<loc>1,
 			}
 		}
 	;
@@ -14470,6 +14474,7 @@ auth_ident:
 		{
 			$$ = &nodes.RoleSpec{
 				Roletype: int(nodes.ROLESPEC_CURRENT_USER),
+				Location: $<loc>1,
 			}
 		}
 	;
