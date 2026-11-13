@@ -394,3 +394,9 @@
 {"sql":"create publication p for table a, only t where (e < 1)","locations":{"PublicationObjSpec":[0,0]}}
 {"sql":"create publication p for table a, b * (c)","locations":{"PublicationObjSpec":[0,0]}}
 {"sql":"create publication p for table a, b (c), tables in schema s, current_schema","locations":{"PublicationObjSpec":[0,34,58,61]}}
+{"sql":"ALTER TABLE fail_part ALTER b TYPE char (2) COLLATE \"POSIX\"","locations":{"CollateClause":[44]}}
+{"sql":"CREATE TYPE collate_dep_test2 AS (x int, y text COLLATE test0)","locations":{"CollateClause":[48]}}
+{"sql":"alter table t alter b type char(2) collate \"POSIX\"","locations":{"CollateClause":[35]}}
+{"sql":"create type ty as (x int, y text collate c)","locations":{"CollateClause":[33]}}
+{"sql":"select * from f() as (a text collate \"C\")","locations":{"CollateClause":[29]}}
+{"sql":"alter type ty alter attribute y type text collate \"C\"","locations":{"CollateClause":[42]}}

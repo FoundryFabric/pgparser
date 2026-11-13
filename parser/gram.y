@@ -7064,7 +7064,7 @@ opt_collate_clause:
 		{
 			$$ = &nodes.CollateClause{
 				Collname: $2,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| /* EMPTY */

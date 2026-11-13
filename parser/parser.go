@@ -26820,7 +26820,7 @@ pgdefault:
 		{
 			pgVAL.node = &nodes.CollateClause{
 				Collname: pgDollar[2].list,
-				Location: -1,
+				Location: pgDollar[1].loc,
 			}
 		}
 	case 982:
