@@ -1385,6 +1385,28 @@ no rule, so the error was a syntax error. The rule and its error are
 added. `testdata/create_extension_from_pg16.jsonl` pins 23 statements; all
 agree.
 
+### object-type-name (risk 2; fixed)
+
+| statement | PostgreSQL 16 | parser |
+|---|---|---|
+| `comment on language x is 'c'` | accepts | 42601 syntax error at or near "language" at 11 |
+| `comment on procedural language x is 'c'` | accepts | 42601 syntax error at or near "procedural" at 11 |
+| `comment on extension x is 'c'` | accepts | 42601 syntax error at or near "extension" at 11 |
+| `security label on event trigger x is 'c'` | accepts | 42601 syntax error at or near "event" at 18 |
+| `alter extension e add foreign data wrapper x` | accepts | 42601 syntax error at or near "data" at 30 |
+
+PostgreSQL 16's `object_type_name` is `drop_type_name` (ACCESS METHOD,
+EVENT TRIGGER, EXTENSION, FOREIGN DATA WRAPPER, [PROCEDURAL] LANGUAGE,
+PUBLICATION, SCHEMA, SERVER) and DATABASE, ROLE, SUBSCRIPTION and
+TABLESPACE. The fork's lacked EVENT TRIGGER, EXTENSION, FOREIGN DATA
+WRAPPER and LANGUAGE, and COMMENT had rules of its own for EVENT TRIGGER
+and FOREIGN DATA WRAPPER only; they are added, and those two rules
+deleted. The trees match libpg_query's; ACCESS METHOD's, a one-name list
+where libpg_query has a `String`, is left to the drop-name class of the
+open tree-shape change (#38), which also makes DROP's names PostgreSQL
+16's. `testdata/object_type_name_pg16.jsonl` pins 68 statements; all
+agree.
+
 ## Rerunning
 
 ```

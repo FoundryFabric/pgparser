@@ -12757,28 +12757,12 @@ CommentStmt:
 				Comment: $7,
 			}
 		}
-	| COMMENT ON FOREIGN DATA_P WRAPPER name IS comment_text
-		{
-			$$ = &nodes.CommentStmt{
-				Objtype: nodes.OBJECT_FDW,
-				Object:  &nodes.String{Str: $6},
-				Comment: $8,
-			}
-		}
 	| COMMENT ON CAST '(' Typename AS Typename ')' IS comment_text
 		{
 			$$ = &nodes.CommentStmt{
 				Objtype: nodes.OBJECT_CAST,
 				Object:  &nodes.List{Items: []nodes.Node{$5, $7}},
 				Comment: $10,
-			}
-		}
-	| COMMENT ON EVENT TRIGGER name IS comment_text
-		{
-			$$ = &nodes.CommentStmt{
-				Objtype: nodes.OBJECT_EVENT_TRIGGER,
-				Object:  &nodes.String{Str: $5},
-				Comment: $7,
 			}
 		}
 	;
@@ -12791,6 +12775,10 @@ comment_text:
 object_type_name:
 	SCHEMA       { $$ = int64(nodes.OBJECT_SCHEMA) }
 	| DATABASE   { $$ = int64(nodes.OBJECT_DATABASE) }
+	| EVENT TRIGGER { $$ = int64(nodes.OBJECT_EVENT_TRIGGER) }
+	| EXTENSION  { $$ = int64(nodes.OBJECT_EXTENSION) }
+	| FOREIGN DATA_P WRAPPER { $$ = int64(nodes.OBJECT_FDW) }
+	| opt_procedural LANGUAGE { $$ = int64(nodes.OBJECT_LANGUAGE) }
 	| ROLE       { $$ = int64(nodes.OBJECT_ROLE) }
 	| TABLESPACE { $$ = int64(nodes.OBJECT_TABLESPACE) }
 	| SUBSCRIPTION { $$ = int64(nodes.OBJECT_SUBSCRIPTION) }
