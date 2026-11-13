@@ -1,0 +1,37 @@
+{"sql":"select boolean 'true'"}
+{"sql":"select boolean 'f'"}
+{"sql":"select boolean 'yes' and true"}
+{"sql":"select boolean ''"}
+{"sql":"select x = boolean 'on' from t"}
+{"sql":"insert into t values (boolean 'true')"}
+{"sql":"select boolean 'true'::int"}
+{"sql":"select boolean true"}
+{"sql":"select boolean 1","code":"42601","message":"syntax error at or near \"1\"","position":15}
+{"sql":"select boolean('true')","code":"42601","message":"syntax error at or near \"(\"","position":14}
+{"sql":"select boolean(1) 'true'","code":"42601","message":"syntax error at or near \"(\"","position":14}
+{"sql":"select boolean[] '{t}'","code":"42601","message":"syntax error at or near \"]\"","position":15}
+{"sql":"select int 'x'"}
+{"sql":"select integer '1'"}
+{"sql":"select smallint '1'"}
+{"sql":"select bigint '1'"}
+{"sql":"select real '1'"}
+{"sql":"select float '1'"}
+{"sql":"select float(3) '1'"}
+{"sql":"select double precision '1'"}
+{"sql":"select decimal '1'"}
+{"sql":"select decimal(5,2) '1'"}
+{"sql":"select dec '1'"}
+{"sql":"select numeric(3) '1'"}
+{"sql":"select char '1'"}
+{"sql":"select varchar(3) '1'"}
+{"sql":"select bit '1'"}
+{"sql":"select time '1:00'"}
+{"sql":"select json '{}'"}
+{"sql":"select 'true'::boolean"}
+{"sql":"select cast('t' as boolean)"}
+{"sql":"select '{t}'::boolean[]"}
+{"sql":"create table t (a boolean, b boolean[], c boolean default boolean 'f')"}
+{"sql":"create function f(boolean) returns boolean as 'x' language sql"}
+{"sql":"select boolean from t"}
+{"sql":"select a boolean from t"}
+{"sql":"select a as boolean from t"}

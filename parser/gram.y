@@ -11315,7 +11315,6 @@ SimpleTypename:
 			$$ = $1
 			$$.Typmods = makeList2(makeIntConst(int64(nodes.INTERVAL_FULL_RANGE), -1), makeIntConst($3, $<loc>3))
 		}
-	| BOOLEAN_P       { $$ = makeTypeName("bool") }
 	| JSON            { $$ = makeTypeName("json") }
 	;
 
@@ -11369,6 +11368,7 @@ Numeric:
 			$$ = makeTypeName("numeric")
 			$$.Typmods = $2
 		}
+	| BOOLEAN_P  { $$ = makeTypeName("bool") }
 	;
 
 opt_float:

@@ -1346,6 +1346,19 @@ libpg_query's it is in DefElem and RoleSpec locations, as for any other
 SET in ALTER FUNCTION, CREATE FUNCTION and ALTER ROLE.
 `testdata/time_zone_interval_pg16.jsonl` pins 38 statements; all agree.
 
+### boolean-const (risk 2; fixed)
+
+| statement | PostgreSQL 16 | parser |
+|---|---|---|
+| `select boolean 'true'` | accepts | 42601 syntax error at or near "'true'" at 15 |
+| `select boolean true` | 42601 syntax error at or near "true" at 15 | the same |
+
+PostgreSQL 16's `Numeric` has BOOLEAN, so `ConstTypename` and a typed
+constant take it; the fork had it in `SimpleTypename` only. It is moved to
+`Numeric`, which `SimpleTypename` takes, so BOOLEAN as a type is as it was.
+The constants' trees match libpg_query's.
+`testdata/boolean_const_pg16.jsonl` pins 37 statements; all agree.
+
 ## Rerunning
 
 ```
