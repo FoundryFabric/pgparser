@@ -1,0 +1,8 @@
+{"sql":"alter type t alter attribute a type text"}
+{"sql":"alter type t alter attribute a set data type text"}
+{"sql":"alter type t alter attribute a type text collate \"C\" cascade"}
+{"sql":"alter type t alter attribute a set data type int restrict"}
+{"sql":"alter type t alter a type text","code":"42601","message":"syntax error at or near \"a\"","position":19}
+{"sql":"alter type t alter attribute a type","code":"42601","message":"syntax error at end of input","position":35}
+{"sql":"alter type t alter attribute a set type text","code":"42601","message":"syntax error at or near \"type\"","position":35}
+{"sql":"alter type t alter attribute a type text using a","code":"42601","message":"syntax error at or near \"using\"","position":41}

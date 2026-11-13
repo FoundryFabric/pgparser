@@ -951,6 +951,18 @@ column a set data type a.b.c.d using a::a.b.c.d` now has the cast's
 `TypeName` too (at 68, as libpg_query has it).
 `testdata/alter_column_using_pg16.jsonl` pins 10 statements; all agree.
 
+### alter-attribute-column-name (tree 12; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `alter type t alter attribute b type varchar` | `def` `ColumnDef` unnamed, `name` `b` | `ColumnDef` named `b` too |
+
+PostgreSQL 16 names the attribute in the command and leaves the
+ColumnDef's `colname` empty, as ALTER TABLE's ALTER COLUMN TYPE already
+did here. The 18 trees that changed over the corpus and test data are
+ALTER ATTRIBUTE statements. `testdata/alter_attribute_pg16.jsonl` pins 8
+statements; all agree.
+
 ## Rerunning
 
 ```

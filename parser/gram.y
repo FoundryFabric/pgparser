@@ -7138,11 +7138,7 @@ alter_type_cmd:
 		}
 	| ALTER ATTRIBUTE ColId SET DATA_P TYPE_P Typename opt_collate_clause opt_drop_behavior
 		{
-			coldef := &nodes.ColumnDef{
-				Colname:    $3,
-				TypeName:   $7,
-				CollClause: nil,
-			}
+			coldef := &nodes.ColumnDef{TypeName: $7}
 			if $8 != nil {
 				coldef.CollClause = $8.(*nodes.CollateClause)
 			}
@@ -7155,11 +7151,7 @@ alter_type_cmd:
 		}
 	| ALTER ATTRIBUTE ColId TYPE_P Typename opt_collate_clause opt_drop_behavior
 		{
-			coldef := &nodes.ColumnDef{
-				Colname:    $3,
-				TypeName:   $5,
-				CollClause: nil,
-			}
+			coldef := &nodes.ColumnDef{TypeName: $5}
 			if $6 != nil {
 				coldef.CollClause = $6.(*nodes.CollateClause)
 			}
