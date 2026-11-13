@@ -132,6 +132,9 @@ type Lexer struct {
 	// noticeHandler, when non-nil, receives each notice the lexer raises, in
 	// source order. Only Parse sets it, from WithNoticeHandler.
 	noticeHandler func(Notice)
+
+	// version is the PostgreSQL version whose keywords the lexer knows.
+	version Version
 }
 
 // BackslashQuote values
@@ -150,6 +153,7 @@ func NewLexer(input string) *Lexer {
 		StandardConformingStrings: true,
 		BackslashQuote:            BackslashQuoteSafeEncoding,
 		EscapeStringWarning:       true,
+		version:                   PostgreSQL17,
 	}
 }
 
@@ -1177,7 +1181,7 @@ func (l *Lexer) lexIdent() Token {
 	ident := l.input[start:l.pos]
 
 	// Check if it's a keyword
-	kw := LookupKeyword(ident)
+	kw := LookupKeywordVersion(l.version, ident)
 	if kw != nil {
 		return Token{Type: kw.Token, Str: kw.Name, Loc: l.start}
 	}

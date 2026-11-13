@@ -82,6 +82,9 @@ import (
 %token <str> INTERSECT INTERVAL INTO INVOKER IS ISNULL ISOLATION
 %token <str> JOIN JSON JSON_ARRAY JSON_ARRAYAGG JSON_EXISTS JSON_OBJECT JSON_OBJECTAGG
 %token <str> JSON_QUERY JSON_SCALAR JSON_SERIALIZE JSON_TABLE JSON_VALUE
+/* json as PostgreSQL 16 has it, an unreserved keyword: the lexer returns
+ * JSON_PG16 for json when it lexes as PostgreSQL 16 */
+%token <str> JSON_PG16
 %token <str> KEEP KEY KEYS
 %token <str> LABEL LANGUAGE LARGE_P LAST_P LATERAL_P
 %token <str> LEADING LEAKPROOF LEAST LEFT LEVEL LIKE LIMIT LISTEN LOAD LOCAL
@@ -10634,14 +10637,14 @@ json_value_expr:
 	;
 
 json_format_clause:
-	FORMAT_LA JSON
+	FORMAT_LA json_word
 		{
 			$$ = &nodes.JsonFormat{
 				FormatType: nodes.JS_FORMAT_JSON,
 				Location:   $<loc>1,
 			}
 		}
-	| FORMAT_LA JSON ENCODING name
+	| FORMAT_LA json_word ENCODING name
 		{
 			var enc nodes.JsonEncoding
 			switch downcase($4) {
@@ -10761,11 +10764,17 @@ json_quotes_clause_opt:
 	;
 
 json_predicate_type_constraint:
-	JSON       %prec UNBOUNDED      { $$ = int64(nodes.JS_TYPE_ANY) }
-	| JSON VALUE_P                  { $$ = int64(nodes.JS_TYPE_ANY) }
-	| JSON ARRAY                    { $$ = int64(nodes.JS_TYPE_ARRAY) }
-	| JSON OBJECT_P                 { $$ = int64(nodes.JS_TYPE_OBJECT) }
-	| JSON SCALAR                   { $$ = int64(nodes.JS_TYPE_SCALAR) }
+	json_word  %prec UNBOUNDED      { $$ = int64(nodes.JS_TYPE_ANY) }
+	| json_word VALUE_P             { $$ = int64(nodes.JS_TYPE_ANY) }
+	| json_word ARRAY               { $$ = int64(nodes.JS_TYPE_ARRAY) }
+	| json_word OBJECT_P            { $$ = int64(nodes.JS_TYPE_OBJECT) }
+	| json_word SCALAR              { $$ = int64(nodes.JS_TYPE_SCALAR) }
+	;
+
+/* json in FORMAT JSON and IS JSON, as either version's keyword */
+json_word:
+	JSON
+	| JSON_PG16
 	;
 
 json_key_uniqueness_constraint_opt:
@@ -17052,6 +17061,7 @@ unreserved_keyword:
 	| INSTEAD
 	| INVOKER
 	| ISOLATION
+	| JSON_PG16
 	| KEEP
 	| KEY
 	| KEYS
@@ -17622,6 +17632,7 @@ bare_label_keyword:
 	| JSON_SERIALIZE
 	| JSON_TABLE
 	| JSON_VALUE
+	| JSON_PG16
 	| KEEP
 	| KEY
 	| KEYS

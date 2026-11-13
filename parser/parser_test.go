@@ -24,7 +24,7 @@ func TestLexerTokenMapping(t *testing.T) {
 func TestParserLexerMapping(t *testing.T) {
 	// Debug: Check what tokens the parserLexer produces for the parser
 	input := "SELECT 1"
-	pl := newParserLexer(input)
+	pl := newParserLexer(input, PostgreSQL17)
 
 	var lval pgSymType
 	tok1 := pl.Lex(&lval)

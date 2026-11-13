@@ -10,6 +10,56 @@ import (
 	"github.com/pgplex/pgparser/nodes"
 )
 
+// Version is a PostgreSQL major version whose parser a Parser answers as.
+type Version int
+
+// The PostgreSQL versions a Parser can answer as.
+const (
+	PostgreSQL16 Version = 16
+	PostgreSQL17 Version = 17
+)
+
+// LookupKeywordVersion looks up a keyword by name in PostgreSQL version v's
+// keyword list, ignoring ASCII case only: Token, Category and BareLabel are
+// that version's. It returns nil if the word is no keyword in v, or v is not
+// a version a Parser supports.
+func LookupKeywordVersion(v Version, name string) *Keyword {
+	switch v {
+	case PostgreSQL16:
+		return keywordMap16[downcase(name)]
+	case PostgreSQL17:
+		return keywordMap[downcase(name)]
+	}
+	return nil
+}
+
+// Parser parses SQL as one PostgreSQL version's parser does, the version
+// fixed when it is made. It holds no state between parses, so one Parser may
+// be used by several goroutines at once.
+type Parser struct {
+	version       Version
+	noticeHandler func(Notice)
+}
+
+// New makes a Parser that answers as PostgreSQL version v's parser, with
+// opts applied to every parse. v must be PostgreSQL16 or PostgreSQL17.
+func New(v Version, opts ...Option) (*Parser, error) {
+	if v != PostgreSQL16 && v != PostgreSQL17 {
+		return nil, fmt.Errorf("unsupported PostgreSQL version %d", int(v))
+	}
+	var cfg config
+	for _, opt := range opts {
+		opt(&cfg)
+	}
+	return &Parser{version: v, noticeHandler: cfg.noticeHandler}, nil
+}
+
+// Parse parses input as p's PostgreSQL version does and returns its
+// statements.
+func (p *Parser) Parse(input string) (*nodes.List, error) {
+	return parse(input, p.version, p.noticeHandler)
+}
+
 // ParseResult contains the result of parsing.
 type ParseResult struct {
 	Stmts []*nodes.RawStmt
@@ -35,11 +85,14 @@ type parserLexer struct {
 	lookaheadEnd     int
 }
 
-// newParserLexer creates a new lexer adapter for the parser.
-func newParserLexer(input string) *parserLexer {
-	return &parserLexer{
+// newParserLexer creates a new lexer adapter for the parser, lexing as
+// PostgreSQL version v.
+func newParserLexer(input string, v Version) *parserLexer {
+	l := &parserLexer{
 		lexer: NewLexer(input),
 	}
+	l.lexer.version = v
+	return l
 }
 
 // Lex implements pgLexer.Lex.
@@ -148,7 +201,7 @@ func (l *parserLexer) applyLookahead(curToken, nextToken int) int {
 	case FORMAT:
 		// Replace FORMAT by FORMAT_LA if followed by JSON
 		switch nextToken {
-		case JSON:
+		case JSON, JSON_PG16:
 			return FORMAT_LA
 		}
 	case WITHOUT:
@@ -313,31 +366,41 @@ func WithNoticeHandler(f func(Notice)) Option {
 	return func(c *config) { c.noticeHandler = f }
 }
 
-// Parse parses the given SQL input and returns a list of statements.
+// Parse parses the given SQL input as PostgreSQL 17 does and returns a list
+// of statements. New makes a Parser for another version.
 func Parse(input string, opts ...Option) (*nodes.List, error) {
 	var cfg config
 	for _, opt := range opts {
 		opt(&cfg)
 	}
+	return parse(input, PostgreSQL17, cfg.noticeHandler)
+}
 
-	lexer := newParserLexer(input)
-	lexer.lexer.noticeHandler = cfg.noticeHandler
-	ret := pgParse(lexer)
+// parse parses input as PostgreSQL version v, sending notices to
+// noticeHandler when it is non-nil.
+func parse(input string, v Version, noticeHandler func(Notice)) (*nodes.List, error) {
+	lexer := newParserLexer(input, v)
+	lexer.lexer.noticeHandler = noticeHandler
+	return lexer.finish(pgParse(lexer))
+}
 
+// finish is the parse's statements, or its error, once pgParse has returned
+// ret.
+func (l *parserLexer) finish(ret int) (*nodes.List, error) {
 	// A scanner error ends the token stream, so it comes before any syntax
 	// error the grammar raises at the end of the stream; PostgreSQL raises it
 	// first too, when the scanner reaches it.
-	if lexer.lexer.Err != nil {
-		return nil, lexer.lexer.Err
+	if l.lexer.Err != nil {
+		return nil, l.lexer.Err
 	}
 
-	if lexer.err != nil {
-		return nil, lexer.err
+	if l.err != nil {
+		return nil, l.err
 	}
 
 	if ret != 0 {
-		return nil, &ParseError{Code: codeSyntaxError, Message: fmt.Sprintf("parse error (ret=%d)", ret), Position: lexer.lastLoc}
+		return nil, &ParseError{Code: codeSyntaxError, Message: fmt.Sprintf("parse error (ret=%d)", ret), Position: l.lastLoc}
 	}
 
-	return lexer.result, nil
+	return l.result, nil
 }
