@@ -1230,6 +1230,18 @@ class `column-qualifier-order`, left for its own fix.
 `testdata/domain_collate_pg16.jsonl` pins 16 statements; the 14 without a
 class agree.
 
+### recursive-view-select (tree 3; overplaced 3 and 3; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `create recursive view nums (n) as values (1) union all ...` | `SELECT n FROM nums`, WITH and CTE at -1 | `SELECT * FROM nums`, WITH and CTE at 0 |
+
+PostgreSQL 16's `makeRecursiveViewSelect` selects the view's columns by
+name, not `*`, and leaves the WITH clause and the CTE unlocated. Both
+rules now share the parser's `makeRecursiveViewSelect`. The 3 trees that
+changed over the corpus and test data are recursive views.
+`testdata/recursive_view_pg16.jsonl` pins 8 statements; all agree.
+
 ## Rerunning
 
 ```

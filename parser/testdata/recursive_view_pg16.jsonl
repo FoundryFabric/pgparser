@@ -1,0 +1,8 @@
+{"sql":"create recursive view v (a) as select 1"}
+{"sql":"create recursive view v (a, b) as values (1, 2) union all select a + 1, b from v where a < 3"}
+{"sql":"create or replace recursive view s.v (n) as values (1)"}
+{"sql":"create temp recursive view v (a) as select 1"}
+{"sql":"create recursive view v (a) with (security_barrier) as select 1"}
+{"sql":"create recursive view v as select 1","code":"42601","message":"syntax error at or near \"as\"","position":24}
+{"sql":"create recursive view v (a) as select 1 with check option","code":"0A000","message":"WITH CHECK OPTION not supported on recursive views","position":40}
+{"sql":"create recursive view v () as select 1","code":"42601","message":"syntax error at or near \")\"","position":25}

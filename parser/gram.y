@@ -4068,27 +4068,7 @@ ViewStmt:
 			}
 			rv := makeRangeVar($5, $<loc>5).(*nodes.RangeVar)
 			rv.Relpersistence = relpersistenceForTemp($2)
-			/* Create a WITH RECURSIVE CTE wrapper */
-			cte := &nodes.CommonTableExpr{
-				Ctename:      rv.Relname,
-				Ctequery:     $11,
-				Aliascolnames:  $7,
-			}
-			wc := &nodes.WithClause{
-				Ctes:      makeList(cte),
-				Recursive: true,
-			}
-			cr := &nodes.ColumnRef{
-				Fields: &nodes.List{Items: []nodes.Node{&nodes.A_Star{}}},
-				Location: -1,
-			}
-			rt := &nodes.ResTarget{Val: cr, Location: -1}
-			fromRv := &nodes.RangeVar{Relname: rv.Relname, Inh: true, Relpersistence: 'p', Location: -1}
-			sel := &nodes.SelectStmt{
-				TargetList: makeList(rt),
-				FromClause: makeList(fromRv),
-				WithClause: wc,
-			}
+			sel := makeRecursiveViewSelect(rv.Relname, $7, $11)
 			$$ = &nodes.ViewStmt{
 				View:            rv,
 				Aliases:         $7,
@@ -4105,26 +4085,7 @@ ViewStmt:
 			}
 			rv := makeRangeVar($7, $<loc>7).(*nodes.RangeVar)
 			rv.Relpersistence = relpersistenceForTemp($4)
-			cte := &nodes.CommonTableExpr{
-				Ctename:      rv.Relname,
-				Ctequery:     $13,
-				Aliascolnames:  $9,
-			}
-			wc := &nodes.WithClause{
-				Ctes:      makeList(cte),
-				Recursive: true,
-			}
-			cr := &nodes.ColumnRef{
-				Fields: &nodes.List{Items: []nodes.Node{&nodes.A_Star{}}},
-				Location: -1,
-			}
-			rt := &nodes.ResTarget{Val: cr, Location: -1}
-			fromRv := &nodes.RangeVar{Relname: rv.Relname, Inh: true, Relpersistence: 'p', Location: -1}
-			sel := &nodes.SelectStmt{
-				TargetList: makeList(rt),
-				FromClause: makeList(fromRv),
-				WithClause: wc,
-			}
+			sel := makeRecursiveViewSelect(rv.Relname, $9, $13)
 			$$ = &nodes.ViewStmt{
 				View:            rv,
 				Aliases:         $9,
@@ -18525,6 +18486,30 @@ func makeTypeRangeVar(names *nodes.List, location nodes.ParseLoc) *nodes.RangeVa
 	rv := makeRangeVarFromAnyName(names, location)
 	rv.Inh = false
 	return rv
+}
+
+// makeRecursiveViewSelect is PostgreSQL 16's: CREATE RECURSIVE VIEW's query,
+// WITH RECURSIVE relname (aliases) AS (query) SELECT aliases FROM relname,
+// with no locations of its own.
+func makeRecursiveViewSelect(relname string, aliases *nodes.List, query nodes.Node) *nodes.SelectStmt {
+	cte := &nodes.CommonTableExpr{
+		Ctename:       relname,
+		Aliascolnames: aliases,
+		Ctequery:      query,
+		Location:      -1,
+	}
+	tl := &nodes.List{}
+	for _, a := range aliases.Items {
+		tl.Items = append(tl.Items, &nodes.ResTarget{
+			Val:      &nodes.ColumnRef{Fields: makeList(&nodes.String{Str: a.(*nodes.String).Str}), Location: -1},
+			Location: -1,
+		})
+	}
+	return &nodes.SelectStmt{
+		WithClause: &nodes.WithClause{Ctes: makeList(cte), Recursive: true, Location: -1},
+		TargetList: tl,
+		FromClause: makeList(&nodes.RangeVar{Relname: relname, Inh: true, Relpersistence: 'p', Location: -1}),
+	}
 }
 
 // pubObj is one object of a publication's list as the grammar read it, with
