@@ -1745,7 +1745,9 @@ columnOptions:
 				IsLocal:     true,
 				Location:    -1,
 			}
-			splitColQualList($2, n)
+			if !splitColQualList(pglex, $2, n) {
+				return 1
+			}
 			$$ = n
 		}
 	| ColId WITH OPTIONS opt_column_constraints
@@ -1756,7 +1758,9 @@ columnOptions:
 				IsLocal:     true,
 				Location:    -1,
 			}
-			splitColQualList($4, n)
+			if !splitColQualList(pglex, $4, n) {
+				return 1
+			}
 			$$ = n
 		}
 	;
@@ -1823,7 +1827,9 @@ columnDef:
 				IsLocal:     true,
 				Location:    -1,
 			}
-			splitColQualList($3, n)
+			if !splitColQualList(pglex, $3, n) {
+				return 1
+			}
 			$$ = n
 		}
 	;
@@ -1852,7 +1858,7 @@ ColConstraint:
 		{
 			$$ = &nodes.CollateClause{
 				Collname: $2,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| COMPRESSION ColId
@@ -6817,10 +6823,15 @@ alter_identity_column_option:
 CreateDomainStmt:
 	CREATE DOMAIN_P any_name opt_as Typename opt_column_constraints
 		{
+			constraints, coll, ok := splitDomainQualList(pglex, $6)
+			if !ok {
+				return 1
+			}
 			$$ = &nodes.CreateDomainStmt{
 				Domainname:  $3,
 				Typname:     $5,
-				Constraints: $6,
+				CollClause:  coll,
+				Constraints: constraints,
 			}
 		}
 	;
@@ -18165,14 +18176,16 @@ func applyConstraintAttrs(n *nodes.Constraint, attrs int64) {
 	}
 }
 
-func splitColQualList(qualList *nodes.List, coldef *nodes.ColumnDef) {
+func splitColQualList(lex pgLexer, qualList *nodes.List, coldef *nodes.ColumnDef) bool {
 	if qualList == nil {
-		return
+		return true
 	}
 	var constraints []nodes.Node
 	for _, item := range qualList.Items {
 		if cc, ok := item.(*nodes.CollateClause); ok {
-			coldef.CollClause = cc
+			if !takeCollate(lex, &coldef.CollClause, cc) {
+				return false
+			}
 		} else if de, ok := item.(*nodes.DefElem); ok && de.Defname == "compression" {
 			if s, ok := de.Arg.(*nodes.String); ok {
 				coldef.Compression = s.Str
@@ -18192,6 +18205,40 @@ func splitColQualList(qualList *nodes.List, coldef *nodes.ColumnDef) {
 	if len(constraints) > 0 {
 		coldef.Constraints = &nodes.List{Items: constraints}
 	}
+	return true
+}
+
+// splitDomainQualList is PostgreSQL 16's SplitColQualList for CREATE
+// DOMAIN: the domain's constraints, nil for none, and its COLLATE clause;
+// it reports false for a second COLLATE.
+func splitDomainQualList(lex pgLexer, qualList *nodes.List) (*nodes.List, *nodes.CollateClause, bool) {
+	var constraints []nodes.Node
+	var coll *nodes.CollateClause
+	for _, item := range qualList.Elems() {
+		if cc, ok := item.(*nodes.CollateClause); ok {
+			if !takeCollate(lex, &coll, cc) {
+				return nil, nil, false
+			}
+			continue
+		}
+		constraints = append(constraints, item)
+	}
+	if len(constraints) == 0 {
+		return nil, coll, true
+	}
+	return &nodes.List{Items: constraints}, coll, true
+}
+
+// takeCollate keeps a qualifier list's COLLATE clause in *have, refusing a
+// second as PostgreSQL 16's SplitColQualList does, at its COLLATE, and
+// reports whether it was the first.
+func takeCollate(lex pgLexer, have **nodes.CollateClause, cc *nodes.CollateClause) bool {
+	if *have != nil {
+		grammarError(lex, codeSyntaxError, "multiple COLLATE clauses not allowed", "", cc.Location)
+		return false
+	}
+	*have = cc
+	return true
 }
 
 // insertSelectOptions adds the clauses after a select_clause to its

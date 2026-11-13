@@ -1,0 +1,16 @@
+{"sql":"create domain d as text collate \"C\""}
+{"sql":"create domain d text collate \"C\" not null check (value <> '')"}
+{"sql":"create domain d as text not null collate \"C\""}
+{"sql":"create domain d as text collate \"C\" collate \"POSIX\"","code":"42601","message":"multiple COLLATE clauses not allowed","position":36}
+{"sql":"create domain d as int"}
+{"sql":"create domain d as int constraint c check (value > 0) default 1"}
+{"sql":"create domain d as text compression pglz","code":"42601","message":"syntax error at or near \"compression\"","position":24,"class":"column-qualifier-order"}
+{"sql":"create domain d as text storage plain","code":"42601","message":"syntax error at or near \"storage\"","position":24,"class":"column-qualifier-order"}
+{"sql":"create table t (a text collate \"C\" collate \"POSIX\")","code":"42601","message":"multiple COLLATE clauses not allowed","position":35}
+{"sql":"create table t (a text collate \"C\" not null collate \"POSIX\")","code":"42601","message":"multiple COLLATE clauses not allowed","position":44}
+{"sql":"alter table t add column a text collate \"C\" collate \"POSIX\"","code":"42601","message":"multiple COLLATE clauses not allowed","position":44}
+{"sql":"create domain d as text collate","code":"42601","message":"syntax error at end of input","position":31}
+{"sql":"create domain d as text collate s.c"}
+{"sql":"create table t of ty (a with options collate \"C\" collate \"POSIX\")","code":"42601","message":"multiple COLLATE clauses not allowed","position":49}
+{"sql":"create table p partition of q (a collate \"C\" not null collate \"POSIX\") for values in (1)","code":"42601","message":"multiple COLLATE clauses not allowed","position":54}
+{"sql":"create table t of ty (a with options collate \"C\" not null)"}

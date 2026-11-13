@@ -1209,6 +1209,27 @@ trees that changed over the corpus and test data are IS [NOT] NORMALIZED
 without a form. `testdata/normalized_pg16.jsonl` pins 8 statements; all
 agree.
 
+### domain-collate (tree 15 and 15; verdict, probes only; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `create domain d2 as text collate "C"` | `collClause` the `CollateClause`, no constraints | the `CollateClause` among the constraints |
+| `create table t (a text collate "C" collate "POSIX")` | `42601 multiple COLLATE clauses not allowed` at the second COLLATE | accepted, the last one kept |
+
+CREATE DOMAIN's qualifiers go through PostgreSQL 16's `SplitColQualList`,
+which keeps COLLATE apart from the constraints and refuses a second one
+at its COLLATE; a column's did not refuse it. A COLLATE clause now has its
+location, at COLLATE, which also clears 95 of the 100 statements of the
+`unlocated ColumnDef.collclause/CollateClause.location` class (the 5 left
+are COLLATE in other rules). The 135 trees that changed over the corpus
+and test data have a COLLATE qualifier; no corpus verdict changed, and the
+4 that did are new probes, now PostgreSQL 16's. A domain's COMPRESSION and
+STORAGE, which PostgreSQL 16 refuses (they are column options before the
+constraints, not qualifiers), are still taken: they are pinned with the
+class `column-qualifier-order`, left for its own fix.
+`testdata/domain_collate_pg16.jsonl` pins 16 statements; the 14 without a
+class agree.
+
 ## Rerunning
 
 ```
