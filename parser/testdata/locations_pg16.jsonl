@@ -195,3 +195,21 @@
 {"sql":"create user mapping for user server s","locations":{"RoleSpec":[24]}}
 {"sql":"alter policy p on t to public, session_user","locations":{"RoleSpec":[23,31]}}
 {"sql":"grant select on t to public, current_user with grant option granted by session_user","locations":{"RoleSpec":[21,29,71]}}
+{"sql":"CREATE TABLE m(id OID)","locations":{"ColumnDef":[15]}}
+{"sql":"create table p2(f2 int)","locations":{"ColumnDef":[16]}}
+{"sql":"CREATE TABLE tt8(a int)","locations":{"ColumnDef":[17]}}
+{"sql":"alter table p11 add a int","locations":{"ColumnDef":[20]}}
+{"sql":"ALTER TABLE leader ADD c int","locations":{"ColumnDef":[23]}}
+{"sql":"ALTER TABLE leader ADD int c","locations":{"ColumnDef":[23]}}
+{"sql":"create type testtype5 as (a int)","locations":{"ColumnDef":[26]}}
+{"sql":"create type jsb_ia2 as (a int[][])","locations":{"ColumnDef":[24]}}
+{"sql":"select * from testrngfunc() as (f1 int8,f2 int8)","locations":{"ColumnDef":[32,40]}}
+{"sql":"select * from testrngfunc() as t(f1 int8,f2 int8)","locations":{"ColumnDef":[33,41]}}
+{"sql":"SELECT * FROM ROWS FROM( getrngfunc6(1) AS (rngfuncid int, rngfuncsubid int, rngfuncname text) ) WITH ORDINALITY","locations":{"ColumnDef":[44,59,77]}}
+{"sql":"SELECT * FROM ROWS FROM( getrngfunc7(1) AS (rngfuncid int, rngfuncsubid int, rngfuncname text) ) WITH ORDINALITY","locations":{"ColumnDef":[44,59,77]}}
+{"sql":"CREATE VIEW vw_getrngfunc AS\n  SELECT * FROM ROWS FROM( getrngfunc6(1) AS (rngfuncid int, rngfuncsubid int, rngfuncname text) )\n                WITH ORDINALITY","locations":{"ColumnDef":[75,90,108]}}
+{"sql":"alter table t alter column a type int","locations":{"ColumnDef":[27]}}
+{"sql":"alter table t alter a set data type int collate \"C\" using a","locations":{"ColumnDef":[20]}}
+{"sql":"alter type ty alter attribute a type int","locations":{"ColumnDef":[30]}}
+{"sql":"alter type ty alter attribute a set data type int","locations":{"ColumnDef":[30]}}
+{"sql":"create table t of ty (a with options default 1)","locations":{"ColumnDef":[22]}}

@@ -1741,10 +1741,10 @@ columnOptions:
 	ColId opt_column_constraints
 		{
 			n := &nodes.ColumnDef{
-				Colname:     $1,
-				TypeName:    nil,
-				IsLocal:     true,
-				Location:    -1,
+				Colname:  $1,
+				TypeName: nil,
+				IsLocal:  true,
+				Location: $<loc>1,
 			}
 			if !splitColQualList(pglex, $2, n) {
 				return 1
@@ -1754,10 +1754,10 @@ columnOptions:
 	| ColId WITH OPTIONS opt_column_constraints
 		{
 			n := &nodes.ColumnDef{
-				Colname:     $1,
-				TypeName:    nil,
-				IsLocal:     true,
-				Location:    -1,
+				Colname:  $1,
+				TypeName: nil,
+				IsLocal:  true,
+				Location: $<loc>1,
 			}
 			if !splitColQualList(pglex, $4, n) {
 				return 1
@@ -1829,7 +1829,7 @@ columnDef:
 				Compression: $4,
 				Fdwoptions:  $5,
 				IsLocal:     true,
-				Location:    -1,
+				Location:    $<loc>1,
 			}
 			if !splitColQualList(pglex, $6, n) {
 				return 1
@@ -2608,7 +2608,7 @@ alter_table_cmd:
 		}
 	| ALTER opt_column ColId TYPE_P Typename opt_collate_clause
 		{
-			coldef := &nodes.ColumnDef{TypeName: $5}
+			coldef := &nodes.ColumnDef{TypeName: $5, Location: $<loc>3}
 			if $6 != nil {
 				coldef.CollClause = $6.(*nodes.CollateClause)
 			}
@@ -2652,7 +2652,7 @@ alter_table_cmd:
 	/* ALTER COLUMN ... TYPE ... USING */
 	| ALTER opt_column ColId SET DATA_P TYPE_P Typename opt_collate_clause
 		{
-			coldef := &nodes.ColumnDef{TypeName: $7}
+			coldef := &nodes.ColumnDef{TypeName: $7, Location: $<loc>3}
 			if $8 != nil {
 				coldef.CollClause = $8.(*nodes.CollateClause)
 			}
@@ -2664,7 +2664,7 @@ alter_table_cmd:
 		}
 	| ALTER opt_column ColId TYPE_P Typename opt_collate_clause USING a_expr
 		{
-			coldef := &nodes.ColumnDef{TypeName: $5, RawDefault: $8}
+			coldef := &nodes.ColumnDef{TypeName: $5, RawDefault: $8, Location: $<loc>3}
 			if $6 != nil {
 				coldef.CollClause = $6.(*nodes.CollateClause)
 			}
@@ -2676,7 +2676,7 @@ alter_table_cmd:
 		}
 	| ALTER opt_column ColId SET DATA_P TYPE_P Typename opt_collate_clause USING a_expr
 		{
-			coldef := &nodes.ColumnDef{TypeName: $7, RawDefault: $10}
+			coldef := &nodes.ColumnDef{TypeName: $7, RawDefault: $10, Location: $<loc>3}
 			if $8 != nil {
 				coldef.CollClause = $8.(*nodes.CollateClause)
 			}
@@ -7010,7 +7010,7 @@ alter_type_cmd:
 		}
 	| ALTER ATTRIBUTE ColId SET DATA_P TYPE_P Typename opt_collate_clause opt_drop_behavior
 		{
-			coldef := &nodes.ColumnDef{TypeName: $7}
+			coldef := &nodes.ColumnDef{TypeName: $7, Location: $<loc>3}
 			if $8 != nil {
 				coldef.CollClause = $8.(*nodes.CollateClause)
 			}
@@ -7023,7 +7023,7 @@ alter_type_cmd:
 		}
 	| ALTER ATTRIBUTE ColId TYPE_P Typename opt_collate_clause opt_drop_behavior
 		{
-			coldef := &nodes.ColumnDef{TypeName: $5}
+			coldef := &nodes.ColumnDef{TypeName: $5, Location: $<loc>3}
 			if $6 != nil {
 				coldef.CollClause = $6.(*nodes.CollateClause)
 			}
@@ -7043,7 +7043,7 @@ TableFuncElement:
 				Colname:  $1,
 				TypeName: $2,
 				IsLocal:  true,
-				Location: -1,
+				Location: $<loc>1,
 			}
 			if $3 != nil {
 				coldef.CollClause = $3.(*nodes.CollateClause)

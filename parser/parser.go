@@ -20072,7 +20072,7 @@ pgdefault:
 				Colname:  pgDollar[1].str,
 				TypeName: nil,
 				IsLocal:  true,
-				Location: -1,
+				Location: pgDollar[1].loc,
 			}
 			if !splitColQualList(pglex, pgDollar[2].list, n) {
 				return 1
@@ -20087,7 +20087,7 @@ pgdefault:
 				Colname:  pgDollar[1].str,
 				TypeName: nil,
 				IsLocal:  true,
-				Location: -1,
+				Location: pgDollar[1].loc,
 			}
 			if !splitColQualList(pglex, pgDollar[4].list, n) {
 				return 1
@@ -20236,7 +20236,7 @@ pgdefault:
 				Compression: pgDollar[4].str,
 				Fdwoptions:  pgDollar[5].list,
 				IsLocal:     true,
-				Location:    -1,
+				Location:    pgDollar[1].loc,
 			}
 			if !splitColQualList(pglex, pgDollar[6].list, n) {
 				return 1
@@ -21213,7 +21213,7 @@ pgdefault:
 		pgDollar = pgS[pgpt-6 : pgpt+1]
 //line gram.y:2610
 		{
-			coldef := &nodes.ColumnDef{TypeName: pgDollar[5].typename}
+			coldef := &nodes.ColumnDef{TypeName: pgDollar[5].typename, Location: pgDollar[3].loc}
 			if pgDollar[6].node != nil {
 				coldef.CollClause = pgDollar[6].node.(*nodes.CollateClause)
 			}
@@ -21266,7 +21266,7 @@ pgdefault:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
 //line gram.y:2654
 		{
-			coldef := &nodes.ColumnDef{TypeName: pgDollar[7].typename}
+			coldef := &nodes.ColumnDef{TypeName: pgDollar[7].typename, Location: pgDollar[3].loc}
 			if pgDollar[8].node != nil {
 				coldef.CollClause = pgDollar[8].node.(*nodes.CollateClause)
 			}
@@ -21280,7 +21280,7 @@ pgdefault:
 		pgDollar = pgS[pgpt-8 : pgpt+1]
 //line gram.y:2666
 		{
-			coldef := &nodes.ColumnDef{TypeName: pgDollar[5].typename, RawDefault: pgDollar[8].node}
+			coldef := &nodes.ColumnDef{TypeName: pgDollar[5].typename, RawDefault: pgDollar[8].node, Location: pgDollar[3].loc}
 			if pgDollar[6].node != nil {
 				coldef.CollClause = pgDollar[6].node.(*nodes.CollateClause)
 			}
@@ -21294,7 +21294,7 @@ pgdefault:
 		pgDollar = pgS[pgpt-10 : pgpt+1]
 //line gram.y:2678
 		{
-			coldef := &nodes.ColumnDef{TypeName: pgDollar[7].typename, RawDefault: pgDollar[10].node}
+			coldef := &nodes.ColumnDef{TypeName: pgDollar[7].typename, RawDefault: pgDollar[10].node, Location: pgDollar[3].loc}
 			if pgDollar[8].node != nil {
 				coldef.CollClause = pgDollar[8].node.(*nodes.CollateClause)
 			}
@@ -26766,7 +26766,7 @@ pgdefault:
 		pgDollar = pgS[pgpt-9 : pgpt+1]
 //line gram.y:7012
 		{
-			coldef := &nodes.ColumnDef{TypeName: pgDollar[7].typename}
+			coldef := &nodes.ColumnDef{TypeName: pgDollar[7].typename, Location: pgDollar[3].loc}
 			if pgDollar[8].node != nil {
 				coldef.CollClause = pgDollar[8].node.(*nodes.CollateClause)
 			}
@@ -26781,7 +26781,7 @@ pgdefault:
 		pgDollar = pgS[pgpt-7 : pgpt+1]
 //line gram.y:7025
 		{
-			coldef := &nodes.ColumnDef{TypeName: pgDollar[5].typename}
+			coldef := &nodes.ColumnDef{TypeName: pgDollar[5].typename, Location: pgDollar[3].loc}
 			if pgDollar[6].node != nil {
 				coldef.CollClause = pgDollar[6].node.(*nodes.CollateClause)
 			}
@@ -26800,7 +26800,7 @@ pgdefault:
 				Colname:  pgDollar[1].str,
 				TypeName: pgDollar[2].typename,
 				IsLocal:  true,
-				Location: -1,
+				Location: pgDollar[1].loc,
 			}
 			if pgDollar[3].node != nil {
 				coldef.CollClause = pgDollar[3].node.(*nodes.CollateClause)
