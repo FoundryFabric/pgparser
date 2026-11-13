@@ -10040,11 +10040,9 @@ func_expr_common_subexpr:
 			n := &nodes.JsonArrayQueryConstructor{
 				Query:        $3,
 				Output:       asJsonOutput($5),
+				Format:       $4.(*nodes.JsonFormat),
 				AbsentOnNull: true,
 				Location:     -1,
-			}
-			if $4 != nil {
-				n.Format = $4.(*nodes.JsonFormat)
 			}
 			$$ = n
 		}
@@ -10470,6 +10468,7 @@ json_value_expr:
 		{
 			$$ = &nodes.JsonValueExpr{
 				RawExpr: $1,
+				Format:  $2.(*nodes.JsonFormat),
 			}
 		}
 	;
@@ -10506,20 +10505,19 @@ json_format_clause:
 
 json_format_clause_opt:
 	json_format_clause      { $$ = $1 }
-	| /* EMPTY */           { $$ = nil }
+	| /* EMPTY */
+		{
+			/* no FORMAT is the default format, unlocated */
+			$$ = &nodes.JsonFormat{Location: -1}
+		}
 	;
 
 json_returning_clause_opt:
 	RETURNING Typename json_format_clause_opt
 		{
-			/* RETURNING without FORMAT has the default format. */
-			format := &nodes.JsonFormat{Location: -1}
-			if $3 != nil {
-				format = $3.(*nodes.JsonFormat)
-			}
 			$$ = &nodes.JsonOutput{
 				TypeName:  $2,
-				Returning: &nodes.JsonReturning{Format: format},
+				Returning: &nodes.JsonReturning{Format: $3.(*nodes.JsonFormat)},
 			}
 		}
 	| /* EMPTY */

@@ -1,0 +1,14 @@
+{"sql":"select json_array('1' format json)"}
+{"sql":"select json_array('1' format json encoding utf8, 2)"}
+{"sql":"select json_array(1, 2)"}
+{"sql":"select json_object('a' : '1' format json)"}
+{"sql":"select json_object('a' value 1)"}
+{"sql":"select json_arrayagg(a format json) from t"}
+{"sql":"select json_arrayagg(a) from t"}
+{"sql":"select json_objectagg(k : v format json) from t"}
+{"sql":"select json_array(select 1)"}
+{"sql":"select json_array(select 1 format json)"}
+{"sql":"select json_array(1 returning text)"}
+{"sql":"select json_array(1 returning bytea format json encoding utf16)"}
+{"sql":"select json_array('1' format)","code":"42601","message":"syntax error at or near \"format\"","position":22}
+{"sql":"select json_array('1' format jsonb)","code":"42601","message":"syntax error at or near \"format\"","position":22}

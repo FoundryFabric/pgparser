@@ -1242,6 +1242,23 @@ rules now share the parser's `makeRecursiveViewSelect`. The 3 trees that
 changed over the corpus and test data are recursive views.
 `testdata/recursive_view_pg16.jsonl` pins 8 statements; all agree.
 
+### json-value-format (tree 115 and 10; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `select json_array('1' format json)` | `JsonValueExpr` `format` JSON, at FORMAT | no format: **FORMAT JSON was dropped** |
+| `select json_array(1, 2)`, `select json_array(select 1)` | the default `JsonFormat`, location -1 | nil |
+
+`json_value_expr` read its FORMAT clause and dropped it, so a value
+declared JSON text was no different from a string; and PostgreSQL 16's
+`json_format_clause_opt` makes a default, unlocated `JsonFormat` when
+there is none, where the parser had nil. (The json-array section above
+took the nil for the same meaning; it was not: the explicit FORMAT was
+lost.) Every JSON value expression, the query form of JSON_ARRAY and
+RETURNING now have one. The 693 trees that changed over the corpus and
+test data have a SQL/JSON constructor or aggregate.
+`testdata/json_value_format_pg16.jsonl` pins 14 statements; all agree.
+
 ## Rerunning
 
 ```
