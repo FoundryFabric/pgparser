@@ -1177,7 +1177,7 @@ opt_on_conflict:
 		{
 			$$ = &nodes.OnConflictClause{
 				Action:   ONCONFLICT_NOTHING,
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| ON CONFLICT DO UPDATE SET set_clause_list where_clause
@@ -1186,7 +1186,7 @@ opt_on_conflict:
 				Action:      ONCONFLICT_UPDATE,
 				TargetList:  $6,
 				WhereClause: $7,
-				Location:    -1,
+				Location:    $<loc>1,
 			}
 		}
 	| ON CONFLICT '(' index_params ')' DO NOTHING
@@ -1195,9 +1195,9 @@ opt_on_conflict:
 				Action:   ONCONFLICT_NOTHING,
 				Infer: &nodes.InferClause{
 					IndexElems: $4,
-					Location:   -1,
+					Location:   $<loc>3,
 				},
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| ON CONFLICT '(' index_params ')' DO UPDATE SET set_clause_list where_clause
@@ -1206,11 +1206,11 @@ opt_on_conflict:
 				Action:      ONCONFLICT_UPDATE,
 				Infer: &nodes.InferClause{
 					IndexElems: $4,
-					Location:   -1,
+					Location:   $<loc>3,
 				},
 				TargetList:  $9,
 				WhereClause: $10,
-				Location:    -1,
+				Location:    $<loc>1,
 			}
 		}
 	| ON CONFLICT '(' index_params ')' WHERE a_expr DO NOTHING
@@ -1220,9 +1220,9 @@ opt_on_conflict:
 				Infer: &nodes.InferClause{
 					IndexElems:  $4,
 					WhereClause: $7,
-					Location:    -1,
+					Location:    $<loc>3,
 				},
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| ON CONFLICT '(' index_params ')' WHERE a_expr DO UPDATE SET set_clause_list where_clause
@@ -1232,11 +1232,11 @@ opt_on_conflict:
 				Infer: &nodes.InferClause{
 					IndexElems:  $4,
 					WhereClause: $7,
-					Location:    -1,
+					Location:    $<loc>3,
 				},
 				TargetList:  $11,
 				WhereClause: $12,
-				Location:    -1,
+				Location:    $<loc>1,
 			}
 		}
 	| ON CONFLICT ON CONSTRAINT name DO NOTHING
@@ -1245,9 +1245,9 @@ opt_on_conflict:
 				Action:   ONCONFLICT_NOTHING,
 				Infer: &nodes.InferClause{
 					Conname:  $5,
-					Location: -1,
+					Location: $<loc>3,
 				},
-				Location: -1,
+				Location: $<loc>1,
 			}
 		}
 	| ON CONFLICT ON CONSTRAINT name DO UPDATE SET set_clause_list where_clause
@@ -1256,11 +1256,11 @@ opt_on_conflict:
 				Action:      ONCONFLICT_UPDATE,
 				Infer: &nodes.InferClause{
 					Conname:  $5,
-					Location: -1,
+					Location: $<loc>3,
 				},
 				TargetList:  $9,
 				WhereClause: $10,
-				Location:    -1,
+				Location:    $<loc>1,
 			}
 		}
 	| /* EMPTY */
@@ -8306,28 +8306,28 @@ group_by_item:
 empty_grouping_set:
 	'(' ')'
 		{
-			$$ = &nodes.GroupingSet{Kind: nodes.GROUPING_SET_EMPTY, Location: -1}
+			$$ = &nodes.GroupingSet{Kind: nodes.GROUPING_SET_EMPTY, Location: $<loc>1}
 		}
 	;
 
 cube_clause:
 	CUBE '(' expr_list ')'
 		{
-			$$ = &nodes.GroupingSet{Kind: nodes.GROUPING_SET_CUBE, Content: $3, Location: -1}
+			$$ = &nodes.GroupingSet{Kind: nodes.GROUPING_SET_CUBE, Content: $3, Location: $<loc>1}
 		}
 	;
 
 rollup_clause:
 	ROLLUP '(' expr_list ')'
 		{
-			$$ = &nodes.GroupingSet{Kind: nodes.GROUPING_SET_ROLLUP, Content: $3, Location: -1}
+			$$ = &nodes.GroupingSet{Kind: nodes.GROUPING_SET_ROLLUP, Content: $3, Location: $<loc>1}
 		}
 	;
 
 grouping_sets_clause:
 	GROUPING SETS '(' group_by_list ')'
 		{
-			$$ = &nodes.GroupingSet{Kind: nodes.GROUPING_SET_SETS, Content: $4, Location: -1}
+			$$ = &nodes.GroupingSet{Kind: nodes.GROUPING_SET_SETS, Content: $4, Location: $<loc>1}
 		}
 	;
 

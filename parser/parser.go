@@ -19345,7 +19345,7 @@ pgdefault:
 		{
 			pgVAL.node = &nodes.OnConflictClause{
 				Action:   ONCONFLICT_NOTHING,
-				Location: -1,
+				Location: pgDollar[1].loc,
 			}
 		}
 	case 147:
@@ -19356,7 +19356,7 @@ pgdefault:
 				Action:      ONCONFLICT_UPDATE,
 				TargetList:  pgDollar[6].list,
 				WhereClause: pgDollar[7].node,
-				Location:    -1,
+				Location:    pgDollar[1].loc,
 			}
 		}
 	case 148:
@@ -19367,9 +19367,9 @@ pgdefault:
 				Action: ONCONFLICT_NOTHING,
 				Infer: &nodes.InferClause{
 					IndexElems: pgDollar[4].list,
-					Location:   -1,
+					Location:   pgDollar[3].loc,
 				},
-				Location: -1,
+				Location: pgDollar[1].loc,
 			}
 		}
 	case 149:
@@ -19380,11 +19380,11 @@ pgdefault:
 				Action: ONCONFLICT_UPDATE,
 				Infer: &nodes.InferClause{
 					IndexElems: pgDollar[4].list,
-					Location:   -1,
+					Location:   pgDollar[3].loc,
 				},
 				TargetList:  pgDollar[9].list,
 				WhereClause: pgDollar[10].node,
-				Location:    -1,
+				Location:    pgDollar[1].loc,
 			}
 		}
 	case 150:
@@ -19396,9 +19396,9 @@ pgdefault:
 				Infer: &nodes.InferClause{
 					IndexElems:  pgDollar[4].list,
 					WhereClause: pgDollar[7].node,
-					Location:    -1,
+					Location:    pgDollar[3].loc,
 				},
-				Location: -1,
+				Location: pgDollar[1].loc,
 			}
 		}
 	case 151:
@@ -19410,11 +19410,11 @@ pgdefault:
 				Infer: &nodes.InferClause{
 					IndexElems:  pgDollar[4].list,
 					WhereClause: pgDollar[7].node,
-					Location:    -1,
+					Location:    pgDollar[3].loc,
 				},
 				TargetList:  pgDollar[11].list,
 				WhereClause: pgDollar[12].node,
-				Location:    -1,
+				Location:    pgDollar[1].loc,
 			}
 		}
 	case 152:
@@ -19425,9 +19425,9 @@ pgdefault:
 				Action: ONCONFLICT_NOTHING,
 				Infer: &nodes.InferClause{
 					Conname:  pgDollar[5].str,
-					Location: -1,
+					Location: pgDollar[3].loc,
 				},
-				Location: -1,
+				Location: pgDollar[1].loc,
 			}
 		}
 	case 153:
@@ -19438,11 +19438,11 @@ pgdefault:
 				Action: ONCONFLICT_UPDATE,
 				Infer: &nodes.InferClause{
 					Conname:  pgDollar[5].str,
-					Location: -1,
+					Location: pgDollar[3].loc,
 				},
 				TargetList:  pgDollar[9].list,
 				WhereClause: pgDollar[10].node,
-				Location:    -1,
+				Location:    pgDollar[1].loc,
 			}
 		}
 	case 154:
@@ -28452,25 +28452,25 @@ pgdefault:
 		pgDollar = pgS[pgpt-2 : pgpt+1]
 //line gram.y:8308
 		{
-			pgVAL.node = &nodes.GroupingSet{Kind: nodes.GROUPING_SET_EMPTY, Location: -1}
+			pgVAL.node = &nodes.GroupingSet{Kind: nodes.GROUPING_SET_EMPTY, Location: pgDollar[1].loc}
 		}
 	case 1192:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
 //line gram.y:8315
 		{
-			pgVAL.node = &nodes.GroupingSet{Kind: nodes.GROUPING_SET_CUBE, Content: pgDollar[3].list, Location: -1}
+			pgVAL.node = &nodes.GroupingSet{Kind: nodes.GROUPING_SET_CUBE, Content: pgDollar[3].list, Location: pgDollar[1].loc}
 		}
 	case 1193:
 		pgDollar = pgS[pgpt-4 : pgpt+1]
 //line gram.y:8322
 		{
-			pgVAL.node = &nodes.GroupingSet{Kind: nodes.GROUPING_SET_ROLLUP, Content: pgDollar[3].list, Location: -1}
+			pgVAL.node = &nodes.GroupingSet{Kind: nodes.GROUPING_SET_ROLLUP, Content: pgDollar[3].list, Location: pgDollar[1].loc}
 		}
 	case 1194:
 		pgDollar = pgS[pgpt-5 : pgpt+1]
 //line gram.y:8329
 		{
-			pgVAL.node = &nodes.GroupingSet{Kind: nodes.GROUPING_SET_SETS, Content: pgDollar[4].list, Location: -1}
+			pgVAL.node = &nodes.GroupingSet{Kind: nodes.GROUPING_SET_SETS, Content: pgDollar[4].list, Location: pgDollar[1].loc}
 		}
 	case 1195:
 		pgDollar = pgS[pgpt-2 : pgpt+1]

@@ -286,3 +286,18 @@
 {"sql":"with a as (select 1) update t set x = 1","locations":{"CommonTableExpr":[5],"WithClause":[0]}}
 {"sql":"with a as (select 1) merge into t using a on true when matched then do nothing","locations":{"CommonTableExpr":[5],"WithClause":[0]}}
 {"sql":"with a as (select 1) search breadth first by x set s select 1","locations":{"CTESearchClause":[21],"CommonTableExpr":[5],"WithClause":[0]}}
+{"sql":"INSERT INTO rw_view15 (a) VALUES (3) ON CONFLICT (a) DO NOTHING","locations":{"InferClause":[49],"OnConflictClause":[37]}}
+{"sql":"insert into selfconflict values (1,1), (1,2) on conflict do nothing","locations":{"OnConflictClause":[45]}}
+{"sql":"insert into selfconflict values (3,1), (3,2) on conflict do nothing","locations":{"OnConflictClause":[45]}}
+{"sql":"INSERT INTO atest5(two) VALUES (6) ON CONFLICT (two) DO UPDATE set one = 8","locations":{"InferClause":[47],"OnConflictClause":[35]}}
+{"sql":"INSERT INTO atest5(four) VALUES (4) ON CONFLICT (four) DO UPDATE set three = 3","locations":{"InferClause":[48],"OnConflictClause":[36]}}
+{"sql":"select null from pg_database group by grouping sets (()) for update","locations":{"GroupingSet":[38,53]}}
+{"sql":"select sum(ten) from onek group by rollup(four::text), two order by 1","locations":{"GroupingSet":[35]}}
+{"sql":"select sum(ten) from onek group by rollup(four::text[]), two order by 1","locations":{"GroupingSet":[35]}}
+{"sql":"select sum(v), count(*) from gstest_empty group by grouping sets ((),(),())","locations":{"GroupingSet":[51,66,69,72]}}
+{"sql":"insert into t values (1) on conflict do nothing","locations":{"OnConflictClause":[25]}}
+{"sql":"insert into t values (1) on conflict (a, (b+1)) where a > 0 do update set a = 1 where t.a > 1","locations":{"InferClause":[37],"OnConflictClause":[25]}}
+{"sql":"insert into t values (1) on conflict on constraint c do update set a = 1","locations":{"InferClause":[37],"OnConflictClause":[25]}}
+{"sql":"insert into t values (1) on conflict (a) do nothing","locations":{"InferClause":[37],"OnConflictClause":[25]}}
+{"sql":"select a from t group by grouping sets ((a), (), rollup (a, b), cube (b))","locations":{"GroupingSet":[25,45,49,64]}}
+{"sql":"select a from t group by ()","locations":{"GroupingSet":[25]}}
