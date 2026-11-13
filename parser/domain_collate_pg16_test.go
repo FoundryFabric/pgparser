@@ -10,7 +10,7 @@ import (
 // CREATE DOMAIN, column and WITH OPTIONS or partition column definitions
 // with COLLATE beside constraints, one COLLATE too many, which PostgreSQL
 // 16 refuses at the second, and a domain's COMPRESSION and STORAGE, which
-// it refuses and the parser does not yet (class column-qualifier-order).
+// it refuses.
 func TestDomainCollateIsPostgreSQL16s(t *testing.T) {
 	checkPG16Answers(t, "testdata/domain_collate_pg16.jsonl", 16)
 }
