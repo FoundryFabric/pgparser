@@ -357,3 +357,12 @@
 {"sql":"SELECT (JSON_OBJECT(RETURNING jsonb), '$')","locations":{"JsonObjectConstructor":[8]}}
 {"sql":"select json_object('a': 1 null on null with unique keys returning jsonb), json_object(returning text), json_array(1, 2 absent on null returning jsonb), json_array(select 1 format json returning jsonb), json_array(returning json)","locations":{"JsonArrayConstructor":[103,202],"JsonArrayQueryConstructor":[152],"JsonObjectConstructor":[7,74]}}
 {"sql":"select json_objectagg(k: v absent on null with unique keys returning jsonb) filter (where true) over (), json_arrayagg(v order by v null on null returning text) from t","locations":{"JsonAggConstructor":[7,105]}}
+{"sql":"select * from rtest_vcomp where size_in_cm > 10.0 order by size_in_cm using >","locations":{"SortBy":[76]}}
+{"sql":"SELECT DISTINCT ON (string4, ten) string4, ten, two\n   FROM onek\n   ORDER BY string4 using <, ten using >, two using <","locations":{"SortBy":[91,104,117]}}
+{"sql":"SELECT DISTINCT ON (string4, ten) string4, ten.x, two\n   FROM onek\n   ORDER BY string4 using <, ten using >, two using <","locations":{"SortBy":[93,106,119]}}
+{"sql":"select aggfns(distinct a,a,c order by c using ~<~)\n  from (values (1,3,'foo'),(0,null,null),(2,2,'bar'),(3,1,'baz')) v(a,b,c),\n       generate_series(1,2) i","locations":{"SortBy":[46]}}
+{"sql":"create or replace view agg_view1 as\n  select aggfns(a,b,c order by c using ~<~)\n    from (values (1,3,'foo'),(0,null,null),(2,2,'bar'),(3,1,'baz')) v(a,b,c)","locations":{"SortBy":[75]}}
+{"sql":"select aggfns(distinct a,b,c order by a,c using ~<~,b)\n  from (values (1,3,'foo'),(0,null,null),(2,2,'bar'),(3,1,'baz')) v(a,b,c),\n       generate_series(1,2) i","locations":{"SortBy":[-1,-1,48]}}
+{"sql":"select * from t order by a using operator(pg_catalog.<) nulls last, b using >=, c using ~<~","locations":{"SortBy":[33,76,88]}}
+{"sql":"select array_agg(a order by b using <) from t","locations":{"SortBy":[36]}}
+{"sql":"select rank() over (order by a using <) from t","locations":{"SortBy":[37]}}

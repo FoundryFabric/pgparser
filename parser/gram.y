@@ -8366,6 +8366,7 @@ sortby:
 				SortbyDir:   nodes.SORTBY_USING,
 				SortbyNulls: nodes.SortByNulls($4),
 				UseOp:       $3,
+				Location:    $<loc>3,
 			}
 		}
 	| a_expr opt_asc_desc opt_nulls_order
