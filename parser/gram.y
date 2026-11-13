@@ -7043,6 +7043,7 @@ AlterEnumStmt:
 			$$ = &nodes.AlterEnumStmt{
 				Typname:            $3,
 				Newval:             $7,
+				NewvalIsAfter:      true,
 				SkipIfNewvalExists: $6,
 			}
 		}

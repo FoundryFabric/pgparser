@@ -894,6 +894,18 @@ text has its underscores taken out, where PostgreSQL keeps the literal's
 text for numeric's input to read. The value is the same either way; the
 classes stay until that divergence is reconsidered.
 
+### alter-enum-add-value-after (tree 9; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `alter type e add value 'x'` | `newValIsAfter` true | false |
+
+ADD VALUE without BEFORE or AFTER sets `newValIsAfter`, as PostgreSQL 16's
+grammar does; with no neighbour the value goes last either way, so only a
+consumer reading the flag saw a difference. The 10 trees that changed over
+the corpus and test data are those statements.
+`testdata/alter_enum_pg16.jsonl` pins 12 statements; all agree.
+
 ## Rerunning
 
 ```
