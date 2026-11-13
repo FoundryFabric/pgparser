@@ -7510,6 +7510,10 @@ aggr_args_list:
 aggr_arg:
 	func_arg
 		{
+			if m := $1.(*nodes.FunctionParameter).Mode; m != nodes.FUNC_PARAM_DEFAULT && m != nodes.FUNC_PARAM_IN && m != nodes.FUNC_PARAM_VARIADIC {
+				grammarError(pglex, "0A000", "aggregates cannot have output arguments", "", $<loc>1)
+				return 1
+			}
 			$$ = $1
 		}
 	;

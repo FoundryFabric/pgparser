@@ -992,6 +992,18 @@ written without a mode; `TestCreateFunctionWithParams` and
 `TestCreateFunctionUnnamedParam` expected IN for those and now expect
 DEFAULT. `testdata/param_mode_pg16.jsonl` pins 15 statements; all agree.
 
+### aggregate-output-arguments (verdict, probes only; fixed)
+
+| statement | PostgreSQL 16 | parser |
+|---|---|---|
+| `create aggregate a(out int) (sfunc = f, stype = int)` | `0A000 aggregates cannot have output arguments` at `out` | accepted |
+| `drop aggregate a(int, x out int)` | the same, at `x` | accepted |
+
+Found while pinning argument modes: PostgreSQL 16's `aggr_arg` refuses
+an OUT or INOUT argument. No statement of the corpus has one, so no tree
+or verdict there changed; the 8 probes that changed verdict are pinned.
+`testdata/aggregate_output_pg16.jsonl` pins 13 statements; all agree.
+
 ## Rerunning
 
 ```
