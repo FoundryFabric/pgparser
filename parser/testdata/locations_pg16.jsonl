@@ -1,0 +1,149 @@
+{"sql":"EXPLAIN (COSTS OFF) EXECUTE p1(2)","locations":{"DefElem":[9]}}
+{"sql":"EXPLAIN (COSTS OFF) EXECUTE p2(2)","locations":{"DefElem":[9]}}
+{"sql":"CREATE PROCEDURE addr_nsp.proc() LANGUAGE SQL AS $$ $$","locations":{"DefElem":[33,46]}}
+{"sql":"CREATE PROCEDURE testns.bar() AS 'select 1' LANGUAGE sql","locations":{"DefElem":[30,44]}}
+{"sql":"CREATE COLLATION test0 FROM \"C\"","locations":{"DefElem":[28]}}
+{"sql":"VACUUM (FULL) ","locations":{"DefElem":[8]}}
+{"sql":"VACUUM ANALYZE ","locations":{"DefElem":[7]}}
+{"sql":"alter table simple set (localtime = 2)","locations":{"DefElem":[24]}}
+{"sql":"alter table alterlock reset (fillfactor)","locations":{"DefElem":[29]}}
+{"sql":"alter table t alter column a reset (x.y)","locations":{"DefElem":[36]}}
+{"sql":"CREATE TABLE withoid() WITH (oids)","locations":{"DefElem":[29]}}
+{"sql":"CREATE TABLE withoid() WITH (oids = true)","locations":{"DefElem":[29]}}
+{"sql":"CREATE TEMP TABLE withoutoid() WITH (oids = false)","locations":{"DefElem":[37]}}
+{"sql":"COPY testeoc TO stdout CSV","locations":{"DefElem":[23]}}
+{"sql":"COPY testeoc FROM stdin CSV","locations":{"DefElem":[24]}}
+{"sql":"COPY vistest FROM stdin CSV","locations":{"DefElem":[24]}}
+{"sql":"CREATE ROLE regress_login LOGIN","locations":{"DefElem":[26]}}
+{"sql":"CREATE USER regress_rls_bob NOLOGIN","locations":{"DefElem":[28]}}
+{"sql":"CREATE ROLE regress_inherit INHERIT","locations":{"DefElem":[28]}}
+{"sql":"reindex (verbose) system","locations":{"DefElem":[9]}}
+{"sql":"REINDEX TABLE CONCURRENTLY sro_tab","locations":{"DefElem":[14]}}
+{"sql":"REINDEX INDEX CONCURRENTLY sro_pidx","locations":{"DefElem":[14]}}
+{"sql":"do $$\nbegin\n  assert 1=0;  -- should fail\nend;\n$$","locations":{"DefElem":[3]}}
+{"sql":"do $$\nbegin\n  assert NULL;  -- should fail\nend;\n$$","locations":{"DefElem":[3]}}
+{"sql":"do $$\nbegin\n  assert 1=0;  -- won't be tested\nend;\n$$","locations":{"DefElem":[3]}}
+{"sql":"CREATE INDEX ON brin_hot_3 USING brin (a) WITH (pages_per_range = 1)","locations":{"DefElem":[48]}}
+{"sql":"create index on btree_bpchar(f1 bpchar_ops) WITH (deduplicate_items=on)","locations":{"DefElem":[50]}}
+{"sql":"create index btree_tall_idx on btree_tall_tbl (t, id) with (fillfactor = 10)","locations":{"DefElem":[60]}}
+{"sql":"alter group g add user verbose","locations":{"DefElem":[23]}}
+{"sql":"ALTER ROLE regress_createdb CREATEDB","locations":{"DefElem":[28]}}
+{"sql":"ALTER ROLE regress_createdb NOCREATEDB","locations":{"DefElem":[28]}}
+{"sql":"ALTER SUBSCRIPTION regress_testsub ENABLE","locations":{"DefElem":[0]}}
+{"sql":"ALTER SUBSCRIPTION regress_testsub DISABLE","locations":{"DefElem":[0]}}
+{"sql":"CREATE VIEW rec1v WITH (security_barrier) AS SELECT * FROM rec1","locations":{"DefElem":[24]}}
+{"sql":"CREATE VIEW rec2v WITH (security_barrier) AS SELECT * FROM rec2","locations":{"DefElem":[24]}}
+{"sql":"CREATE VIEW v1 WITH (security_barrier = true) AS\n  SELECT * FROM t1","locations":{"DefElem":[21]}}
+{"sql":"START TRANSACTION READ ONLY","locations":{"DefElem":[18]}}
+{"sql":"GRANT regress_du_role2 TO regress_du_admin WITH ADMIN TRUE","locations":{"DefElem":[48]}}
+{"sql":"GRANT regress_du_role1 TO regress_du_admin WITH ADMIN TRUE","locations":{"DefElem":[48]}}
+{"sql":"GRANT regress_du_role0 TO regress_du_admin WITH ADMIN TRUE","locations":{"DefElem":[48]}}
+{"sql":"CREATE SEQUENCE sequence_testx CACHE 0","locations":{"DefElem":[31]}}
+{"sql":"CREATE SEQUENCE sequence_testx AS text","locations":{"DefElem":[31]}}
+{"sql":"CREATE SEQUENCE sequence_test7 AS bigint","locations":{"DefElem":[31]}}
+{"sql":"CREATE SUBSCRIPTION regress_testsub CONNECTION 'testconn' PUBLICATION testpub WITH (create_slot)","locations":{"DefElem":[84]}}
+{"sql":"CREATE SUBSCRIPTION regress_addr_sub CONNECTION '' PUBLICATION bar WITH (connect = false, slot_name = NONE)","locations":{"DefElem":[73,90]}}
+{"sql":"CREATE SUBSCRIPTION regress_testsub2 CONNECTION 'dbname=regress_doesnotexist' PUBLICATION foo WITH (connect = false)","locations":{"DefElem":[100]}}
+{"sql":"create type intr as range(subtype=int)","locations":{"DefElem":[26]}}
+{"sql":"create type intrange as range(subtype=int)","locations":{"DefElem":[30]}}
+{"sql":"CREATE TYPE deptest_range AS RANGE (SUBTYPE = int4)","locations":{"DefElem":[36]}}
+{"sql":"ALTER SEQUENCE serialTest1 CYCLE","locations":{"DefElem":[27]}}
+{"sql":"ALTER SEQUENCE sequence_test2 RESTART","locations":{"DefElem":[30]}}
+{"sql":"ALTER SEQUENCE ss1 OWNED BY deptest2.f1","locations":{"DefElem":[19]}}
+{"sql":"ALTER PROCEDURE ptest1(text) STRICT","locations":{"DefElem":[29]}}
+{"sql":"alter function myfunc(int) reset all","locations":{"DefElem":[27]}}
+{"sql":"ALTER FUNCTION ptest1(text) VOLATILE","locations":{"DefElem":[28]}}
+{"sql":"-- error cases\nCREATE PUBLICATION testpub_xxx WITH (foo)","locations":{"DefElem":[52]}}
+{"sql":"CREATE PUBLICATION testpib_ins_trunct WITH (publish = insert)","locations":{"DefElem":[44]}}
+{"sql":"CREATE PUBLICATION testpub_xxx WITH (order = 'cluster, vacuum')","locations":{"DefElem":[37]}}
+{"sql":"ALTER OPERATOR === (boolean, real) SET (NEGATOR = @!=)","locations":{"DefElem":[40]}}
+{"sql":"ALTER OPERATOR === (boolean, real) SET (HASHES = false)","locations":{"DefElem":[40]}}
+{"sql":"ALTER OPERATOR === (boolean, boolean) SET (JOIN = NONE)","locations":{"DefElem":[43]}}
+{"sql":"SET TRANSACTION READ ONLY","locations":{"DefElem":[16]}}
+{"sql":"create index on mcrparted4 (a abs(b), c)","locations":{"DefElem":[34]}}
+{"sql":"CREATE INDEX ON vaccluster(wrap_do_analyze wrap_do_analyze(i))","locations":{"DefElem":[59]}}
+{"sql":"CREATE INDEX wowidx2 ON test_tsvector USING gist (a tsvector_ops(siglen=1))","locations":{"DefElem":[65]}}
+{"sql":"-- no\nALTER DEFAULT PRIVILEGES IN SCHEMA testns GRANT USAGE ON TYPES to public","locations":{"DefElem":[31]}}
+{"sql":"-- no\nALTER DEFAULT PRIVILEGES IN SCHEMA testns GRANT EXECUTE ON ROUTINES to public","locations":{"DefElem":[31]}}
+{"sql":"ALTER DEFAULT PRIVILEGES FOR ROLE regress_priv_user1 REVOKE USAGE ON TYPES FROM public","locations":{"DefElem":[25]}}
+{"sql":"ALTER PUBLICATION testpub_default SET (publish = update)","locations":{"DefElem":[39]}}
+{"sql":"ALTER PUBLICATION testpub_forparted1 SET (publish='insert')","locations":{"DefElem":[42]}}
+{"sql":"ALTER PUBLICATION testpub_foralltables SET (publish = 'insert, update')","locations":{"DefElem":[44]}}
+{"sql":"CREATE EVENT TRIGGER sql_drop_command ON sql_drop\n    WHEN TAG IN ('DROP POLICY') EXECUTE PROCEDURE drop_sql_command()","locations":{"DefElem":[59]}}
+{"sql":"CREATE EVENT TRIGGER test_event_trigger_guc\n\tON sql_drop\n\tWHEN TAG IN ('DROP POLICY') EXECUTE FUNCTION test_event_trigger_guc()","locations":{"DefElem":[63]}}
+{"sql":"CREATE EVENT TRIGGER regress_reindex_end ON ddl_command_end\n    WHEN TAG IN ('REINDEX')\n    EXECUTE PROCEDURE reindex_end_command()","locations":{"DefElem":[69]}}
+{"sql":"ALTER FOREIGN DATA WRAPPER foo OPTIONS (a '2')","locations":{"DefElem":[40]}}
+{"sql":"ALTER FOREIGN DATA WRAPPER foo OPTIONS (b '4')","locations":{"DefElem":[40]}}
+{"sql":"ALTER FOREIGN DATA WRAPPER foo OPTIONS (ADD d '5')","locations":{"DefElem":[44]}}
+{"sql":"ALTER USER MAPPING FOR public SERVER s4 OPTIONS (ADD modified '1')","locations":{"DefElem":[53]}}
+{"sql":"-- ERROR\nALTER USER MAPPING FOR public SERVER t1 OPTIONS (ADD  '1')","locations":{"DefElem":[58]}}
+{"sql":"-- ERROR\nALTER USER MAPPING FOR user SERVER ss4 OPTIONS (gotcha 'true')","locations":{"DefElem":[57]}}
+{"sql":"CREATE FOREIGN TABLE ft2 () INHERITS (fd_pt1)\n  SERVER s0 OPTIONS (delimiter ',', quote '\"', \"be quoted\" 'value')","locations":{"DefElem":[67,82,93]}}
+{"sql":"CREATE FOREIGN TABLE ft2 (\n\tc1 integer NOT NULL,\n\tc2 text,\n\tc3 date\n) SERVER s0 OPTIONS (delimiter ',', quote '\"', \"be quoted\" 'value')","locations":{"DefElem":[89,104,115]}}
+{"sql":"ALTER SERVER s8 OPTIONS (foo '1')","locations":{"DefElem":[25]}}
+{"sql":"-- ERROR\nALTER SERVER s0 OPTIONS (a '1')","locations":{"DefElem":[34]}}
+{"sql":"ALTER SERVER s8 OPTIONS (localtimestamp '1')","locations":{"DefElem":[25]}}
+{"sql":"ALTER FOREIGN TABLE ft1 ADD COLUMN c10 integer OPTIONS (p1 'v1')","locations":{"DefElem":[56]}}
+{"sql":"ALTER FOREIGN TABLE IF EXISTS doesnt_exist_ft1 ADD COLUMN c10 integer OPTIONS (p1 'v1')","locations":{"DefElem":[79]}}
+{"sql":"ALTER FOREIGN TABLE IF EXISTS doesnt_exist_ft1 ADD COLUMN c10 integer[] OPTIONS (p1 'v1')","locations":{"DefElem":[81]}}
+{"sql":"CREATE FOREIGN DATA WRAPPER test_fdw HANDLER invalid_fdw_handler","locations":{"DefElem":[37]}}
+{"sql":"CREATE FOREIGN DATA WRAPPER foo VALIDATOR postgresql_fdw_validator","locations":{"DefElem":[32]}}
+{"sql":"-- ERROR\nCREATE FOREIGN DATA WRAPPER test_fdw HANDLER test_fdw_handler","locations":{"DefElem":[46]}}
+{"sql":"CREATE USER MAPPING FOR public SERVER s10 OPTIONS (user 'secret')","locations":{"DefElem":[51]}}
+{"sql":"CREATE USER MAPPING FOR current_user SERVER s6 OPTIONS (username 'test')","locations":{"DefElem":[56]}}
+{"sql":"CREATE USER MAPPING FOR user SERVER s8 OPTIONS (username 'test', password 'secret')","locations":{"DefElem":[48,65]}}
+{"sql":"-- ERROR\nALTER FOREIGN DATA WRAPPER foo NO VALIDATOR","locations":{"DefElem":[40]}}
+{"sql":"-- ERROR\nALTER FOREIGN DATA WRAPPER foo VALIDATOR bar","locations":{"DefElem":[40]}}
+{"sql":"-- ERROR\nALTER FOREIGN DATA WRAPPER foo HANDLER test_fdw_handler","locations":{"DefElem":[40]}}
+{"sql":"CREATE TABLE truncate_b (id int GENERATED ALWAYS AS IDENTITY (START WITH 44))","locations":{"DefElem":[62]}}
+{"sql":"ALTER TABLE ONLY pitest3\n            ALTER COLUMN f3 ADD GENERATED ALWAYS AS IDENTITY (START  3)","locations":{"DefElem":[87]}}
+{"sql":"ALTER TABLE ONLY pitest3\n            ALTER COLUMN f3 ADD GENERATED ALWAYS AS IDENTITY (START WITH 3)","locations":{"DefElem":[87]}}
+{"sql":"CREATE SERVER s8 FOREIGN DATA WRAPPER postgresql OPTIONS (foo '1')","locations":{"DefElem":[58]}}
+{"sql":"CREATE SERVER s4 TYPE 'oracle' FOREIGN DATA WRAPPER foo OPTIONS (host 'a', dbname 'b')","locations":{"DefElem":[65,75]}}
+{"sql":"CREATE SERVER s6 VERSION '16.0' FOREIGN DATA WRAPPER foo OPTIONS (host 'a', dbname 'b')","locations":{"DefElem":[66,76]}}
+{"sql":"ALTER TYPE myvarchar SET (storage = plain)","locations":{"DefElem":[26]}}
+{"sql":"-- not allowed\nALTER TYPE myvarchar SET (storage = extended)","locations":{"DefElem":[41]}}
+{"sql":"-- not allowed\nALTER TYPE myvarchar SET (storage = extended[])","locations":{"DefElem":[41]}}
+{"sql":"-- fail\nALTER TABLESPACE regress_tblspace RESET (random_page_cost = 2.0)","locations":{"DefElem":[49]}}
+{"sql":"ALTER TABLESPACE regress_tblspace SET (some_nonexistent_parameter = true)","locations":{"DefElem":[39]}}
+{"sql":"-- fail\nALTER TABLESPACE regress_tblspace RESET (random_page_cost, effective_io_concurrency)","locations":{"DefElem":[49,67]}}
+{"sql":"CREATE FOREIGN DATA WRAPPER foo OPTIONS (testing '1')","locations":{"DefElem":[41]}}
+{"sql":"CREATE FOREIGN DATA WRAPPER foo OPTIONS (testing '1', testing '2')","locations":{"DefElem":[41,54]}}
+{"sql":"-- ERROR\nCREATE FOREIGN DATA WRAPPER foo OPTIONS (\"test wrapper\" 'true')","locations":{"DefElem":[50]}}
+{"sql":"drop database test_database_exists with (force)","locations":{"DefElem":[41]}}
+{"sql":"drop database if exists test_database_exists (force)","locations":{"DefElem":[46]}}
+{"sql":"drop database if exists test_database_exists with (force)","locations":{"DefElem":[51]}}
+{"sql":"ALTER TEXT SEARCH DICTIONARY synonym (CaseSensitive = 1)","locations":{"DefElem":[38]}}
+{"sql":"ALTER TEXT SEARCH DICTIONARY synonym (CaseSensitive = 2)","locations":{"DefElem":[38]}}
+{"sql":"-- fail\nALTER TEXT SEARCH DICTIONARY synonym (CaseSensitive = off)","locations":{"DefElem":[46]}}
+{"sql":"ALTER DATABASE regression_utf8 CONNECTION_LIMIT 123","locations":{"DefElem":[31]}}
+{"sql":"ALTER DATABASE regression_utf8 SET TABLESPACE regress_tblspace","locations":{"DefElem":[46]}}
+{"sql":"-- fail\nCREATE TABLESPACE regress_tblspacewith LOCATION '' WITH (random_page_cost = 3.0)","locations":{"DefElem":[65]}}
+{"sql":"-- create a tablespace using WITH clause\nCREATE TABLESPACE regress_tblspacewith LOCATION '' WITH (some_nonexistent_parameter = true)","locations":{"DefElem":[98]}}
+{"sql":"CREATE DATABASE regression_tbd\n\tENCODING utf8 LC_COLLATE \"C\" LC_CTYPE \"C\" TEMPLATE template0","locations":{"DefElem":[32,46,61,74]}}
+{"sql":"CREATE DATABASE regression_tbd\n\tENCODING LC_COLLATE utf8 \"C\" LC_CTYPE \"C\" TEMPLATE template0","locations":{"DefElem":[32,52,61,74]}}
+{"sql":"-- ERROR\nIMPORT FOREIGN SCHEMA s1 EXCEPT (t1, t2) FROM SERVER s9 INTO public\nOPTIONS (option1 'value1', option2 'value2')","locations":{"DefElem":[86,104]}}
+{"sql":"-- invalid: non-lowercase quoted reloptions identifiers\nCREATE TABLE tas_case WITH (\"Fillfactor\" = 10) AS SELECT 1 a","locations":{"DefElem":[84]}}
+{"sql":"explain analyze select 1","locations":{"DefElem":[8]}}
+{"sql":"explain verbose select 1","locations":{"DefElem":[8]}}
+{"sql":"explain analyze verbose select 1","locations":{"DefElem":[8,16]}}
+{"sql":"alter server s options (drop a, set b $$x$$, add c $$y$$)","locations":{"DefElem":[29,36,49]}}
+{"sql":"cluster verbose t","locations":{"DefElem":[8]}}
+{"sql":"cluster verbose","locations":{"DefElem":[8]}}
+{"sql":"cluster verbose i on t","locations":{"DefElem":[8]}}
+{"sql":"analyze verbose t","locations":{"DefElem":[8]}}
+{"sql":"analyse verbose","locations":{"DefElem":[8]}}
+{"sql":"vacuum full freeze verbose analyze t","locations":{"DefElem":[7,12,19,27]}}
+{"sql":"vacuum freeze","locations":{"DefElem":[7]}}
+{"sql":"reindex schema concurrently s","locations":{"DefElem":[15]}}
+{"sql":"reindex database concurrently","locations":{"DefElem":[17]}}
+{"sql":"reindex system concurrently d","locations":{"DefElem":[15]}}
+{"sql":"create collation if not exists c from \"C\"","locations":{"DefElem":[38]}}
+{"sql":"alter database d set tablespace x","locations":{"DefElem":[32]}}
+{"sql":"alter group g drop user a, b","locations":{"DefElem":[24]}}
+{"sql":"revoke inherit option for a from b","locations":{"DefElem":[7]}}
+{"sql":"alter role r with nosuperuser createdb password $$x$$ valid until $$y$$","locations":{"DefElem":[18,30,39,54]}}
+{"sql":"create role r sysid 4 admin a role b in role c in group d","locations":{"DefElem":[14,22,30,37,47]}}
+{"sql":"begin isolation level serializable, read only, not deferrable","locations":{"DefElem":[6,36,47]}}
+{"sql":"alter extension e update to $$2$$","locations":{"DefElem":[25]}}
+{"sql":"create extension e schema s version $$1$$ cascade","locations":{"DefElem":[19,28,42]}}
