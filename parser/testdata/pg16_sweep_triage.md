@@ -1259,6 +1259,17 @@ RETURNING now have one. The 693 trees that changed over the corpus and
 test data have a SQL/JSON constructor or aggregate.
 `testdata/json_value_format_pg16.jsonl` pins 14 statements; all agree.
 
+### is-json-format (tree 20; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `select '1' is json` | `format` the default `JsonFormat`, -1 | nil |
+
+PostgreSQL 16's IS [NOT] JSON gives the predicate the default format,
+as `makeJsonFormat(JS_FORMAT_DEFAULT, JS_ENC_DEFAULT, -1)`. The 22 trees
+that changed over the corpus and test data are IS JSON predicates.
+`testdata/is_json_pg16.jsonl` pins 8 statements; all agree.
+
 ## Rerunning
 
 ```

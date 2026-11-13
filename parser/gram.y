@@ -8737,6 +8737,7 @@ a_expr:
 		{
 			$$ = &nodes.JsonIsPredicate{
 				Expr:       $1,
+				Format:     &nodes.JsonFormat{Location: -1},
 				ItemType:   nodes.JsonValueType($3),
 				UniqueKeys: $4 != 0,
 				Location:   $<loc>1,
@@ -8746,6 +8747,7 @@ a_expr:
 		{
 			$$ = makeNotExpr(&nodes.JsonIsPredicate{
 				Expr:       $1,
+				Format:     &nodes.JsonFormat{Location: -1},
 				ItemType:   nodes.JsonValueType($4),
 				UniqueKeys: $5 != 0,
 				Location:   $<loc>1,

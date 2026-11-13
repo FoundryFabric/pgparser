@@ -1,0 +1,8 @@
+{"sql":"select '1' is json"}
+{"sql":"select '1' is not json"}
+{"sql":"select '1' is json value"}
+{"sql":"select '1' is json array with unique keys"}
+{"sql":"select '1' is not json object without unique keys"}
+{"sql":"select '1' is json scalar"}
+{"sql":"select '1' is json with unique"}
+{"sql":"select '1' is json format json","code":"42601","message":"syntax error at or near \"format\"","position":19}
