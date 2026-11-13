@@ -1125,6 +1125,21 @@ are those DROP statements; no verdict of the corpus changed, and the 9
 that changed are new probes, now PostgreSQL 16's.
 `testdata/drop_name_pg16.jsonl` pins 42 statements; all agree.
 
+### grant-object-names (tree 73; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `grant usage on schema schema_op1 to public` | `objects` `String` `schema_op1` | a list holding it |
+
+PostgreSQL 16's `privilege_target` keeps the names of databases,
+languages, schemas, tablespaces, foreign data wrappers and servers, and of
+the schemas of ALL ... IN SCHEMA, as bare `String`s; the parser wrapped
+each in a list, as it had for DROP. With DROP fixed, the helper that did
+it (`makeNameListAsAnyNameList`) has no caller left and is gone. The 113
+trees that changed over the corpus and test data are those GRANT and
+REVOKE statements. `testdata/grant_name_pg16.jsonl` pins 18 statements;
+all agree.
+
 ## Rerunning
 
 ```
