@@ -1,0 +1,14 @@
+{"sql":"create table t (a char, b character, c varchar, d nchar, e national char, f national character)"}
+{"sql":"create table t (a char(3), b character(4), c varchar(5), d nchar(6), e national char(7), f national character(8))"}
+{"sql":"create table t (a char varying, b character varying(4), c nchar varying(5), d national char varying, e national character varying(9))"}
+{"sql":"select 'x'::char, 'x'::varchar, cast('x' as nchar), cast('x' as char(2))"}
+{"sql":"select char 'x', varchar 'x', character(3) 'x', nchar 'x', national character varying(2) 'x'"}
+{"sql":"select char(3) 'x', char varying 'x'"}
+{"sql":"alter table t alter a type char"}
+{"sql":"alter table t add column a national char varying(2)[]"}
+{"sql":"create function f(char) returns char language sql as ''"}
+{"sql":"select 'x'::char(x)","code":"42601","message":"syntax error at or near \"x\"","position":17}
+{"sql":"select 'x'::char(1, 2)","code":"42601","message":"syntax error at or near \",\"","position":18}
+{"sql":"select 'x'::varchar varying","code":"42601","message":"syntax error at or near \"varying\"","position":20}
+{"sql":"select 'x'::national varchar","code":"42601","message":"syntax error at or near \"varchar\"","position":21}
+{"sql":"select 'x'::char(-1)","code":"42601","message":"syntax error at or near \"-\"","position":17}

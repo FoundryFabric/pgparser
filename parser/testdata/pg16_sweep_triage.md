@@ -1080,6 +1080,27 @@ one of them. `node-type DefElem.arg` keeps 1, a `BUFFER_USAGE_LIMIT` past
 int32 (the integer-literal divergence). `testdata/int_option_pg16.jsonl`
 pins 10 statements; all agree.
 
+### character-typmods (tree 150, 29 and 3; fixed)
+
+| statement | libpg_query 16 | parser |
+|---|---|---|
+| `select a::varchar(3) from tt1` | typmod `A_Const` 3 | `Integer` 3 |
+| `alter table attmp add column i char` | typmod `A_Const` 1 (CHAR is CHAR(1)) | no typmod |
+| `select 'j'::char` | typmod `A_Const` 1 | no typmod |
+
+PostgreSQL 16's `CharacterWithLength` makes the length with
+`makeIntConst`, and `CharacterWithoutLength` makes CHAR, CHARACTER and
+NCHAR without a length CHAR(1); only a constant's type (`char 'x'`,
+`ConstCharacter`) drops that typmod. The rules are now PostgreSQL 16's
+(`character`, `CharacterWithLength`, `CharacterWithoutLength`) instead of
+twelve alternatives written out twice. The 250 trees that changed over the
+corpus and test data have a character type. `typename_sites_pg16.jsonl`'s
+`drop type nchar` recorded no typmod and now records 1, as libpg_query
+has it; `TestVarcharCast`, `TestCharCast`, `TestCharacterVaryingCast` and
+`TestCastStringToVarchar` expected an `Integer` typmod and now expect an
+`A_Const`. `testdata/character_type_pg16.jsonl` pins 14
+statements; all agree.
+
 ## Rerunning
 
 ```

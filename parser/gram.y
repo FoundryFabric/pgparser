@@ -190,7 +190,8 @@ import (
 %type <list>   when_clause_list
 %type <typename>  Typename SimpleTypename GenericType Numeric opt_float Character
 %type <typename>  ConstDatetime ConstInterval Bit BitWithLength BitWithoutLength
-%type <typename>  ConstTypename ConstBit ConstCharacter
+%type <typename>  ConstTypename ConstBit ConstCharacter CharacterWithLength CharacterWithoutLength
+%type <str>   character
 %type <boolean>  opt_timezone
 %type <list>  opt_interval
 %type <list>  interval_second
@@ -11506,100 +11507,36 @@ opt_float:
 	;
 
 Character:
-	CHARACTER opt_varying '(' Iconst ')'
+	CharacterWithLength		{ $$ = $1 }
+	| CharacterWithoutLength	{ $$ = $1 }
+	;
+
+CharacterWithLength:
+	character '(' Iconst ')'
 		{
-			if $2 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-			$$.Typmods = makeList(&nodes.Integer{Ival: $4})
+			$$ = makeTypeName($1)
+			$$.Typmods = makeList(makeIntConst($3, $<loc>3))
 		}
-	| CHARACTER opt_varying
+	;
+
+CharacterWithoutLength:
+	character
 		{
-			if $2 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-		}
-	| CHAR_P opt_varying '(' Iconst ')'
-		{
-			if $2 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-			$$.Typmods = makeList(&nodes.Integer{Ival: $4})
-		}
-	| CHAR_P opt_varying
-		{
-			if $2 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
+			$$ = makeTypeName($1)
+			/* char defaults to char(1), varchar to no limit */
+			if $1 == "bpchar" {
+				$$.Typmods = makeList(makeIntConst(1, -1))
 			}
 		}
-	| NATIONAL CHARACTER opt_varying '(' Iconst ')'
-		{
-			if $3 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-			$$.Typmods = makeList(&nodes.Integer{Ival: $5})
-		}
-	| NATIONAL CHARACTER opt_varying
-		{
-			if $3 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-		}
-	| NATIONAL CHAR_P opt_varying '(' Iconst ')'
-		{
-			if $3 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-			$$.Typmods = makeList(&nodes.Integer{Ival: $5})
-		}
-	| NATIONAL CHAR_P opt_varying
-		{
-			if $3 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-		}
-	| NCHAR opt_varying '(' Iconst ')'
-		{
-			if $2 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-			$$.Typmods = makeList(&nodes.Integer{Ival: $4})
-		}
-	| NCHAR opt_varying
-		{
-			if $2 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-		}
-	| VARCHAR '(' Iconst ')'
-		{
-			$$ = makeTypeName("varchar")
-			$$.Typmods = makeList(&nodes.Integer{Ival: $3})
-		}
-	| VARCHAR
-		{
-			$$ = makeTypeName("varchar")
-		}
+	;
+
+character:
+	CHARACTER opt_varying				{ $$ = characterType($2) }
+	| CHAR_P opt_varying				{ $$ = characterType($2) }
+	| VARCHAR							{ $$ = "varchar" }
+	| NATIONAL CHARACTER opt_varying	{ $$ = characterType($3) }
+	| NATIONAL CHAR_P opt_varying		{ $$ = characterType($3) }
+	| NCHAR opt_varying					{ $$ = characterType($2) }
 	;
 
 opt_varying:
@@ -11655,100 +11592,12 @@ ConstBit:
 	;
 
 ConstCharacter:
-	CHARACTER opt_varying '(' Iconst ')'
+	CharacterWithLength		{ $$ = $1 }
+	| CharacterWithoutLength
 		{
-			if $2 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-			$$.Typmods = makeList(&nodes.Integer{Ival: $4})
-		}
-	| CHARACTER opt_varying
-		{
-			if $2 {
-				$$ = makeTypeName("varchar")
-			} else {
-				/* ConstCharacter: CHAR without length defaults to unspecified */
-				$$ = makeTypeName("bpchar")
-			}
-		}
-	| CHAR_P opt_varying '(' Iconst ')'
-		{
-			if $2 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-			$$.Typmods = makeList(&nodes.Integer{Ival: $4})
-		}
-	| CHAR_P opt_varying
-		{
-			if $2 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-		}
-	| NATIONAL CHARACTER opt_varying '(' Iconst ')'
-		{
-			if $3 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-			$$.Typmods = makeList(&nodes.Integer{Ival: $5})
-		}
-	| NATIONAL CHARACTER opt_varying
-		{
-			if $3 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-		}
-	| NATIONAL CHAR_P opt_varying '(' Iconst ')'
-		{
-			if $3 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-			$$.Typmods = makeList(&nodes.Integer{Ival: $5})
-		}
-	| NATIONAL CHAR_P opt_varying
-		{
-			if $3 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-		}
-	| NCHAR opt_varying '(' Iconst ')'
-		{
-			if $2 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-			$$.Typmods = makeList(&nodes.Integer{Ival: $4})
-		}
-	| NCHAR opt_varying
-		{
-			if $2 {
-				$$ = makeTypeName("varchar")
-			} else {
-				$$ = makeTypeName("bpchar")
-			}
-		}
-	| VARCHAR '(' Iconst ')'
-		{
-			$$ = makeTypeName("varchar")
-			$$.Typmods = makeList(&nodes.Integer{Ival: $3})
-		}
-	| VARCHAR
-		{
-			$$ = makeTypeName("varchar")
+			/* A constant's length is unrestricted when not written; a column's CHAR is CHAR(1). */
+			$$ = $1
+			$$.Typmods = nil
 		}
 	;
 
@@ -18182,6 +18031,15 @@ func makeSetOp(op nodes.SetOperation, quantifier int64, larg, rarg nodes.Node) n
 		Rarg: rarg.(*nodes.SelectStmt),
 	}
 	return n
+}
+
+// characterType is the type PostgreSQL 16's character rule names: varchar
+// when VARYING is written, else bpchar.
+func characterType(varying bool) string {
+	if varying {
+		return "varchar"
+	}
+	return "bpchar"
 }
 
 func makeTypeName(typeName string) *nodes.TypeName {
