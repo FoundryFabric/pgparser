@@ -1270,6 +1270,26 @@ as `makeJsonFormat(JS_FORMAT_DEFAULT, JS_ENC_DEFAULT, -1)`. The 22 trees
 that changed over the corpus and test data are IS JSON predicates.
 `testdata/is_json_pg16.jsonl` pins 8 statements; all agree.
 
+### column-options-order (verdict, probes only; fixed)
+
+| statement | PostgreSQL 16 | parser |
+|---|---|---|
+| `create table t (a text not null compression pglz)` | `42601 syntax error at or near "compression"` | accepted |
+| `create table t (a text compression pglz storage plain)` | `42601 syntax error at or near "storage"` | accepted |
+| `create table t (a text storage default)` | accepted | `42601 syntax error at or near "default"` |
+| `create domain d as text compression pglz` | `42601 syntax error at or near "compression"` | accepted |
+
+PostgreSQL 16's `columnDef` is `ColId Typename opt_column_storage
+opt_column_compression create_generic_options ColQualList`: STORAGE, then
+COMPRESSION, then OPTIONS, each once, before the constraints, and STORAGE
+takes DEFAULT. The parser took all three among the constraints, in any
+order and anywhere that takes constraints (a domain, a partition's or
+typed table's column). No tree of the corpus and test data changed and no
+corpus verdict; the 10 that changed are new probes, now PostgreSQL 16's,
+and `domain_collate_pg16.jsonl`'s two `column-qualifier-order` rows lose
+their class. `testdata/column_options_order_pg16.jsonl` pins 20
+statements; all agree.
+
 ## Rerunning
 
 ```

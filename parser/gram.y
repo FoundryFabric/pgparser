@@ -307,6 +307,7 @@ import (
 %type <node>  vacuum_relation
 %type <ival>  opt_lock lock_type reindex_target_type reindex_target_multitable OptNoLog
 %type <str>   cluster_index_specification column_compression comment_text security_label opt_provider
+%type <str>   opt_column_compression opt_column_storage
 %type <ival>  object_type_name object_type_name_on_any_name
 %type <list>  opt_reindex_option_list
 %type <node>  DeclareCursorStmt FetchStmt MergeStmt CallStmt DoStmt
@@ -1819,15 +1820,18 @@ TableLikeOption:
 	;
 
 columnDef:
-	ColId Typename opt_column_constraints
+	ColId Typename opt_column_storage opt_column_compression create_generic_options opt_column_constraints
 		{
 			n := &nodes.ColumnDef{
 				Colname:     $1,
 				TypeName:    $2,
+				StorageName: $3,
+				Compression: $4,
+				Fdwoptions:  $5,
 				IsLocal:     true,
 				Location:    -1,
 			}
-			if !splitColQualList(pglex, $3, n) {
+			if !splitColQualList(pglex, $6, n) {
 				return 1
 			}
 			$$ = n
@@ -1859,30 +1863,6 @@ ColConstraint:
 			$$ = &nodes.CollateClause{
 				Collname: $2,
 				Location: $<loc>1,
-			}
-		}
-	| COMPRESSION ColId
-		{
-			/* COMPRESSION is stored directly on ColumnDef, use DefElem as carrier */
-			$$ = &nodes.DefElem{
-				Defname: "compression",
-				Arg:     &nodes.String{Str: $2},
-			}
-		}
-	| STORAGE ColId
-		{
-			/* STORAGE is stored directly on ColumnDef, use DefElem as carrier */
-			$$ = &nodes.DefElem{
-				Defname: "storage",
-				Arg:     &nodes.String{Str: $2},
-			}
-		}
-	| OPTIONS '(' generic_option_list ')'
-		{
-			/* OPTIONS for foreign table columns */
-			$$ = &nodes.DefElem{
-				Defname: "fdwoptions",
-				Arg:     $3,
 			}
 		}
 	| ConstraintAttr
@@ -3154,6 +3134,17 @@ opt_drop_behavior:
 column_compression:
 	COMPRESSION ColId      { $$ = $2 }
 	| COMPRESSION DEFAULT  { $$ = "default" }
+	;
+
+opt_column_compression:
+	column_compression     { $$ = $1 }
+	| /* EMPTY */          { $$ = "" }
+	;
+
+opt_column_storage:
+	STORAGE ColId          { $$ = $2 }
+	| STORAGE DEFAULT      { $$ = "default" }
+	| /* EMPTY */          { $$ = "" }
 	;
 
 /*****************************************************************************
@@ -18146,18 +18137,6 @@ func splitColQualList(lex pgLexer, qualList *nodes.List, coldef *nodes.ColumnDef
 		if cc, ok := item.(*nodes.CollateClause); ok {
 			if !takeCollate(lex, &coldef.CollClause, cc) {
 				return false
-			}
-		} else if de, ok := item.(*nodes.DefElem); ok && de.Defname == "compression" {
-			if s, ok := de.Arg.(*nodes.String); ok {
-				coldef.Compression = s.Str
-			}
-		} else if de, ok := item.(*nodes.DefElem); ok && de.Defname == "storage" {
-			if s, ok := de.Arg.(*nodes.String); ok {
-				coldef.StorageName = s.Str
-			}
-		} else if de, ok := item.(*nodes.DefElem); ok && de.Defname == "fdwoptions" {
-			if l, ok := de.Arg.(*nodes.List); ok {
-				coldef.Fdwoptions = l
 			}
 		} else {
 			constraints = append(constraints, item)
