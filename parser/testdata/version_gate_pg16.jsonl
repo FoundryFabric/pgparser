@@ -1,0 +1,27 @@
+{"sql":"merge into t using s on t.a = s.a when not matched by source then delete","code":"42601","message":"syntax error at or near \"by\"","position":51,"pg17":"pg17-merge"}
+{"sql":"merge into t using s on t.a = s.a when not matched by target then insert default values","code":"42601","message":"syntax error at or near \"by\"","position":51,"pg17":"pg17-merge"}
+{"sql":"merge into t using s on t.a = s.a when matched then delete when not matched by target then do nothing","code":"42601","message":"syntax error at or near \"by\"","position":76,"pg17":"pg17-merge"}
+{"sql":"merge into t using s on t.a = s.a when not matched by then delete","code":"42601","message":"syntax error at or near \"by\"","position":51,"pg17":"pg17-merge"}
+{"sql":"merge into t using s on t.a = s.a when matched then delete returning *","code":"42601","message":"syntax error at or near \"returning\"","position":59,"pg17":"pg17-merge"}
+{"sql":"merge into t using s on t.a = s.a when matched then delete returning merge_action(), t.a","code":"42601","message":"syntax error at or near \"returning\"","position":59,"pg17":"pg17-merge"}
+{"sql":"with m as (merge into t using s on t.a = s.a when matched then delete returning *) select * from m","code":"42601","message":"syntax error at or near \"returning\"","position":70,"pg17":"pg17-merge"}
+{"sql":"alter table t set access method default","code":"42601","message":"syntax error at or near \"default\"","position":32,"pg17":"pg17-ddl"}
+{"sql":"alter table t set access method default, set access method heap","code":"42601","message":"syntax error at or near \"default\"","position":32,"pg17":"pg17-ddl"}
+{"sql":"alter table t alter c set expression as (1)","code":"42601","message":"syntax error at or near \"expression\"","position":26,"pg17":"pg17-ddl"}
+{"sql":"alter table t alter column c set expression as (a * 2)","code":"42601","message":"syntax error at or near \"expression\"","position":33,"pg17":"pg17-ddl"}
+{"sql":"select now() at local","code":"42601","message":"syntax error at or near \"local\"","position":16,"pg17":"pg17-ddl"}
+{"sql":"select now() at local + 1","code":"42601","message":"syntax error at or near \"local\"","position":16,"pg17":"pg17-ddl"}
+{"sql":"select a from t where b at local > now()","code":"42601","message":"syntax error at or near \"local\"","position":27,"pg17":"pg17-ddl"}
+{"sql":"alter domain d add not null","code":"42601","message":"syntax error at or near \"not\"","position":19,"pg17":"pg17-ddl"}
+{"sql":"alter domain d add constraint c not null not valid","code":"42601","message":"syntax error at or near \"not\"","position":32,"pg17":"pg17-ddl"}
+{"sql":"alter domain d add constraint c not null","code":"42601","message":"syntax error at or near \"not\"","position":32,"pg17":"pg17-ddl"}
+{"sql":"alter operator === (int, int) set (merges)","code":"42601","message":"syntax error at or near \")\"","position":41,"pg17":"pg17-ddl"}
+{"sql":"alter operator === (int, int) set (merges, hashes)","code":"42601","message":"syntax error at or near \",\"","position":41,"pg17":"pg17-ddl"}
+{"sql":"alter operator === (int, int) set (hashes, merges = true)","code":"42601","message":"syntax error at or near \",\"","position":41,"pg17":"pg17-ddl"}
+{"sql":"cluster (verbose)","code":"42601","message":"syntax error at end of input","position":17,"pg17":"pg17-utility"}
+{"sql":"cluster (verbose);","code":"42601","message":"syntax error at or near \";\"","position":17,"pg17":"pg17-utility"}
+{"sql":"copy t from stdin csv force not null *","code":"42601","message":"syntax error at or near \"*\"","position":37,"pg17":"pg17-utility"}
+{"sql":"copy t from stdin csv force null *","code":"42601","message":"syntax error at or near \"*\"","position":33,"pg17":"pg17-utility"}
+{"sql":"copy t from stdin with csv force not null * force null *","code":"42601","message":"syntax error at or near \"*\"","position":42,"pg17":"pg17-utility"}
+{"sql":"alter statistics s set statistics default","code":"42601","message":"syntax error at or near \"default\"","position":34,"pg17":"pg17-ddl"}
+{"sql":"alter statistics if exists s set statistics default","code":"42601","message":"syntax error at or near \"default\"","position":44,"pg17":"pg17-ddl"}

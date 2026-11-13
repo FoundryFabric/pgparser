@@ -54,6 +54,20 @@ func New(v Version, opts ...Option) (*Parser, error) {
 	return &Parser{version: v, noticeHandler: cfg.noticeHandler}, nil
 }
 
+// sinceVersion reports whether the parse answers as version v or later, for
+// a grammar rule that v added. When it answers as an earlier version, it
+// records that version's syntax error at the token the lexer returned last,
+// where the earlier version's grammar went no further, and the action must
+// end the parse. A one-token rule reduces as soon as its token is shifted,
+// so that token is the one the lexer returned last.
+func sinceVersion(lex pgLexer, v Version) bool {
+	if lex.(*parserLexer).lexer.version >= v {
+		return true
+	}
+	grammarSyntaxError(lex, "syntax error")
+	return false
+}
+
 // Parse parses input as p's PostgreSQL version does and returns its
 // statements.
 func (p *Parser) Parse(input string) (*nodes.List, error) {

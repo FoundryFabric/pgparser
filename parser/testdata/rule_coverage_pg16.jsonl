@@ -56,7 +56,7 @@
 {"sql":"select bit varying '1'"}
 {"sql":"select bit varying(4) '1'"}
 {"sql":"select bit '1'"}
-{"sql":"cluster (verbose)","code":"42601","message":"syntax error at end of input","position":17,"class":"pg17-utility"}
+{"sql":"cluster (verbose)","code":"42601","message":"syntax error at end of input","position":17,"pg17":"pg17-utility"}
 {"sql":"cluster (verbose) t"}
 {"sql":"comment on operator class c using btree is 'x'"}
 {"sql":"comment on operator family f using hash is null"}
@@ -202,9 +202,9 @@
 {"sql":"copy t to stdout binary"}
 {"sql":"copy t from stdin csv escape as '\\'"}
 {"sql":"copy t from stdin csv escape '\\'"}
-{"sql":"copy t from stdin csv force not null *","code":"42601","message":"syntax error at or near \"*\"","position":37,"class":"pg17-utility"}
+{"sql":"copy t from stdin csv force not null *","code":"42601","message":"syntax error at or near \"*\"","position":37,"pg17":"pg17-utility"}
 {"sql":"copy t from stdin csv force not null a, b"}
-{"sql":"copy t from stdin csv force null *","code":"42601","message":"syntax error at or near \"*\"","position":33,"class":"pg17-utility"}
+{"sql":"copy t from stdin csv force null *","code":"42601","message":"syntax error at or near \"*\"","position":33,"pg17":"pg17-utility"}
 {"sql":"copy t from stdin csv force null a"}
 {"sql":"copy t to stdout csv force quote *"}
 {"sql":"copy t to stdout csv force quote a, b"}
@@ -309,6 +309,6 @@
 {"sql":"select '1'::national char varying"}
 {"sql":"alter operator === (int, int) set (restrict = 1)"}
 {"sql":"alter operator === (int, int) set (join = 'x', restrict = -1.5)"}
-{"sql":"alter statistics s set statistics default","code":"42601","message":"syntax error at or near \"default\"","position":34,"class":"pg17-ddl"}
-{"sql":"alter statistics if exists s set statistics default","code":"42601","message":"syntax error at or near \"default\"","position":44,"class":"pg17-ddl"}
+{"sql":"alter statistics s set statistics default","code":"42601","message":"syntax error at or near \"default\"","position":34,"pg17":"pg17-ddl"}
+{"sql":"alter statistics if exists s set statistics default","code":"42601","message":"syntax error at or near \"default\"","position":44,"pg17":"pg17-ddl"}
 {"sql":"alter statistics s set statistics 100"}
