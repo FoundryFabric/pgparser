@@ -1,0 +1,23 @@
+{"sql":"create extension e from '1'","code":"0A000","message":"CREATE EXTENSION ... FROM is no longer supported","position":19}
+{"sql":"create extension e from v1","code":"0A000","message":"CREATE EXTENSION ... FROM is no longer supported","position":19}
+{"sql":"create extension if not exists e from '1.0'","code":"0A000","message":"CREATE EXTENSION ... FROM is no longer supported","position":33}
+{"sql":"create extension e with from '1'","code":"0A000","message":"CREATE EXTENSION ... FROM is no longer supported","position":24}
+{"sql":"create extension e schema s from '1'","code":"0A000","message":"CREATE EXTENSION ... FROM is no longer supported","position":28}
+{"sql":"create extension e from '1' version '2'","code":"0A000","message":"CREATE EXTENSION ... FROM is no longer supported","position":19}
+{"sql":"create extension e version '2' from '1' cascade","code":"0A000","message":"CREATE EXTENSION ... FROM is no longer supported","position":31}
+{"sql":"create extension e from","code":"42601","message":"syntax error at end of input","position":23}
+{"sql":"create extension e from 1","code":"42601","message":"syntax error at or near \"1\"","position":24}
+{"sql":"create extension e from select","code":"42601","message":"syntax error at or near \"select\"","position":24}
+{"sql":"create extension e"}
+{"sql":"create extension if not exists e"}
+{"sql":"create extension e with schema s version '1' cascade"}
+{"sql":"create extension e schema s"}
+{"sql":"create extension e version '1'"}
+{"sql":"create extension e version v1"}
+{"sql":"create extension e cascade"}
+{"sql":"create extension e with cascade"}
+{"sql":"create extension \"e-x\" version '1.0'"}
+{"sql":"alter extension e update"}
+{"sql":"alter extension e update to '2'"}
+{"sql":"alter extension e update to v2"}
+{"sql":"alter extension e update from '1'","code":"42601","message":"syntax error at or near \"from\"","position":25}

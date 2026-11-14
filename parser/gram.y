@@ -1551,6 +1551,8 @@ OptTemp:
 	| TEMP          { $$ = 1 }
 	| LOCAL TEMPORARY { $$ = 1 }
 	| LOCAL TEMP    { $$ = 1 }
+	| GLOBAL TEMPORARY { $$ = 1 }
+	| GLOBAL TEMP   { $$ = 1 }
 	| UNLOGGED      { $$ = 2 }
 	| /* EMPTY */   { $$ = 0 }
 	;
@@ -3320,6 +3322,30 @@ RenameStmt:
 				Newname:      $7,
 			}
 		}
+	| ALTER VIEW IF_P EXISTS qualified_name RENAME COLUMN ColId TO name
+		{
+			rv := makeRangeVarFromAnyName($5, $<loc>5)
+			$$ = &nodes.RenameStmt{
+				RenameType:   nodes.OBJECT_COLUMN,
+				RelationType: nodes.OBJECT_VIEW,
+				Relation:     rv,
+				Subname:      $8,
+				Newname:      $10,
+				MissingOk:    true,
+			}
+		}
+	| ALTER VIEW IF_P EXISTS qualified_name RENAME ColId TO name
+		{
+			rv := makeRangeVarFromAnyName($5, $<loc>5)
+			$$ = &nodes.RenameStmt{
+				RenameType:   nodes.OBJECT_COLUMN,
+				RelationType: nodes.OBJECT_VIEW,
+				Relation:     rv,
+				Subname:      $7,
+				Newname:      $9,
+				MissingOk:    true,
+			}
+		}
 	/* RENAME MATERIALIZED VIEW */
 	| ALTER MATERIALIZED VIEW qualified_name RENAME TO name
 		{
@@ -3360,6 +3386,30 @@ RenameStmt:
 				Relation:     rv,
 				Subname:      $6,
 				Newname:      $8,
+			}
+		}
+	| ALTER MATERIALIZED VIEW IF_P EXISTS qualified_name RENAME COLUMN ColId TO name
+		{
+			rv := makeRangeVarFromAnyName($6, $<loc>6)
+			$$ = &nodes.RenameStmt{
+				RenameType:   nodes.OBJECT_COLUMN,
+				RelationType: nodes.OBJECT_MATVIEW,
+				Relation:     rv,
+				Subname:      $9,
+				Newname:      $11,
+				MissingOk:    true,
+			}
+		}
+	| ALTER MATERIALIZED VIEW IF_P EXISTS qualified_name RENAME ColId TO name
+		{
+			rv := makeRangeVarFromAnyName($6, $<loc>6)
+			$$ = &nodes.RenameStmt{
+				RenameType:   nodes.OBJECT_COLUMN,
+				RelationType: nodes.OBJECT_MATVIEW,
+				Relation:     rv,
+				Subname:      $8,
+				Newname:      $10,
+				MissingOk:    true,
 			}
 		}
 	/* RENAME FUNCTION / PROCEDURE / ROUTINE */
@@ -3655,6 +3705,16 @@ RenameStmt:
 				Relation:   makeRangeVarFromAnyName($5, $<loc>5),
 				Subname:    $3,
 				Newname:    $8,
+			}
+		}
+	| ALTER POLICY IF_P EXISTS name ON qualified_name RENAME TO name
+		{
+			$$ = &nodes.RenameStmt{
+				RenameType: nodes.OBJECT_POLICY,
+				Relation:   makeRangeVarFromAnyName($7, $<loc>7),
+				Subname:    $5,
+				Newname:    $10,
+				MissingOk:  true,
 			}
 		}
 	/* RENAME LANGUAGE / DATABASE / TABLESPACE / ROLE */
@@ -4689,7 +4749,7 @@ ExplainStmt:
 				Query: $2,
 			}
 		}
-	| EXPLAIN ANALYZE ExplainableStmt
+	| EXPLAIN analyze_keyword ExplainableStmt
 		{
 			$$ = &nodes.ExplainStmt{
 				Query:   $3,
@@ -4703,7 +4763,7 @@ ExplainStmt:
 				Options: makeList(&nodes.DefElem{Defname: "verbose", Location: $<loc>2}),
 			}
 		}
-	| EXPLAIN ANALYZE VERBOSE ExplainableStmt
+	| EXPLAIN analyze_keyword VERBOSE ExplainableStmt
 		{
 			$$ = &nodes.ExplainStmt{
 				Query: $4,
@@ -11313,7 +11373,6 @@ SimpleTypename:
 			$$ = $1
 			$$.Typmods = makeList2(makeIntConst(int64(nodes.INTERVAL_FULL_RANGE), -1), makeIntConst($3, $<loc>3))
 		}
-	| BOOLEAN_P       { $$ = makeTypeName("bool") }
 	| JSON            { $$ = makeTypeName("json") }
 	;
 
@@ -11367,6 +11426,7 @@ Numeric:
 			$$ = makeTypeName("numeric")
 			$$.Typmods = $2
 		}
+	| BOOLEAN_P  { $$ = makeTypeName("bool") }
 	;
 
 opt_float:
@@ -11984,6 +12044,27 @@ zone_value:
 	| NumericOnly
 		{
 			$$ = &nodes.A_Const{Val: $1, Location: $<loc>1}
+		}
+	| ConstInterval Sconst opt_interval
+		{
+			t := $1
+			t.Location = $<loc>1
+			if $3 != nil {
+				mask := $3.Items[0].(*nodes.A_Const).Val.(*nodes.Integer).Ival
+				if mask&^int64(nodes.INTERVAL_MASK_HOUR|nodes.INTERVAL_MASK_MINUTE) != 0 {
+					grammarError(pglex, "42601", "time zone interval must be HOUR or HOUR TO MINUTE", "", $<loc>3)
+					return 1
+				}
+				t.Typmods = $3
+			}
+			$$ = makeStringConstCast($2, $<loc>2, t)
+		}
+	| ConstInterval '(' Iconst ')' Sconst
+		{
+			t := $1
+			t.Location = $<loc>1
+			t.Typmods = makeList2(makeIntConst(int64(nodes.INTERVAL_FULL_RANGE), -1), makeIntConst($3, $<loc>3))
+			$$ = makeStringConstCast($5, $<loc>5, t)
 		}
 	| DEFAULT
 		{
@@ -12686,28 +12767,12 @@ CommentStmt:
 				Comment: $7,
 			}
 		}
-	| COMMENT ON FOREIGN DATA_P WRAPPER name IS comment_text
-		{
-			$$ = &nodes.CommentStmt{
-				Objtype: nodes.OBJECT_FDW,
-				Object:  &nodes.String{Str: $6},
-				Comment: $8,
-			}
-		}
 	| COMMENT ON CAST '(' Typename AS Typename ')' IS comment_text
 		{
 			$$ = &nodes.CommentStmt{
 				Objtype: nodes.OBJECT_CAST,
 				Object:  &nodes.List{Items: []nodes.Node{$5, $7}},
 				Comment: $10,
-			}
-		}
-	| COMMENT ON EVENT TRIGGER name IS comment_text
-		{
-			$$ = &nodes.CommentStmt{
-				Objtype: nodes.OBJECT_EVENT_TRIGGER,
-				Object:  &nodes.String{Str: $5},
-				Comment: $7,
 			}
 		}
 	;
@@ -12720,6 +12785,10 @@ comment_text:
 object_type_name:
 	SCHEMA       { $$ = int64(nodes.OBJECT_SCHEMA) }
 	| DATABASE   { $$ = int64(nodes.OBJECT_DATABASE) }
+	| EVENT TRIGGER { $$ = int64(nodes.OBJECT_EVENT_TRIGGER) }
+	| EXTENSION  { $$ = int64(nodes.OBJECT_EXTENSION) }
+	| FOREIGN DATA_P WRAPPER { $$ = int64(nodes.OBJECT_FDW) }
+	| opt_procedural LANGUAGE { $$ = int64(nodes.OBJECT_LANGUAGE) }
 	| ROLE       { $$ = int64(nodes.OBJECT_ROLE) }
 	| TABLESPACE { $$ = int64(nodes.OBJECT_TABLESPACE) }
 	| SUBSCRIPTION { $$ = int64(nodes.OBJECT_SUBSCRIPTION) }
@@ -14674,6 +14743,11 @@ create_extension_opt_item:
 	| CASCADE
 		{
 			$$ = makeDefElem("cascade", &nodes.Boolean{Boolval: true}, $<loc>1)
+		}
+	| FROM NonReservedWord_or_Sconst
+		{
+			grammarError(pglex, "0A000", "CREATE EXTENSION ... FROM is no longer supported", "", $<loc>1)
+			return 1
 		}
 	;
 

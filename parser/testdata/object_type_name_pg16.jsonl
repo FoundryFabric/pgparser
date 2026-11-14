@@ -1,0 +1,68 @@
+{"sql":"comment on event trigger x is 'c'"}
+{"sql":"security label on event trigger x is 'c'"}
+{"sql":"security label for p on event trigger x is null"}
+{"sql":"alter extension e add event trigger x"}
+{"sql":"alter extension e drop event trigger x"}
+{"sql":"comment on extension x is 'c'"}
+{"sql":"security label on extension x is 'c'"}
+{"sql":"security label for p on extension x is null"}
+{"sql":"alter extension e add extension x"}
+{"sql":"alter extension e drop extension x"}
+{"sql":"comment on foreign data wrapper x is 'c'"}
+{"sql":"security label on foreign data wrapper x is 'c'"}
+{"sql":"security label for p on foreign data wrapper x is null"}
+{"sql":"alter extension e add foreign data wrapper x"}
+{"sql":"alter extension e drop foreign data wrapper x"}
+{"sql":"comment on language x is 'c'"}
+{"sql":"security label on language x is 'c'"}
+{"sql":"security label for p on language x is null"}
+{"sql":"alter extension e add language x"}
+{"sql":"alter extension e drop language x"}
+{"sql":"comment on procedural language x is 'c'"}
+{"sql":"security label on procedural language x is 'c'"}
+{"sql":"security label for p on procedural language x is null"}
+{"sql":"alter extension e add procedural language x"}
+{"sql":"alter extension e drop procedural language x"}
+{"sql":"comment on event trigger a.b is 'c'","code":"42601","message":"syntax error at or near \".\"","position":26}
+{"sql":"alter extension e add event trigger a.b","code":"42601","message":"syntax error at or near \".\"","position":37}
+{"sql":"comment on extension a.b is 'c'","code":"42601","message":"syntax error at or near \".\"","position":22}
+{"sql":"alter extension e add extension a.b","code":"42601","message":"syntax error at or near \".\"","position":33}
+{"sql":"comment on foreign data wrapper a.b is 'c'","code":"42601","message":"syntax error at or near \".\"","position":33}
+{"sql":"alter extension e add foreign data wrapper a.b","code":"42601","message":"syntax error at or near \".\"","position":44}
+{"sql":"comment on procedural language a.b is 'c'","code":"42601","message":"syntax error at or near \".\"","position":32}
+{"sql":"alter extension e add procedural language a.b","code":"42601","message":"syntax error at or near \".\"","position":43}
+{"sql":"comment on schema x is 'c'"}
+{"sql":"security label on schema x is 'c'"}
+{"sql":"alter extension e add schema x"}
+{"sql":"comment on server x is 'c'"}
+{"sql":"security label on server x is 'c'"}
+{"sql":"alter extension e add server x"}
+{"sql":"comment on publication x is 'c'"}
+{"sql":"security label on publication x is 'c'"}
+{"sql":"alter extension e add publication x"}
+{"sql":"comment on database x is 'c'"}
+{"sql":"security label on database x is 'c'"}
+{"sql":"alter extension e add database x"}
+{"sql":"comment on role x is 'c'"}
+{"sql":"security label on role x is 'c'"}
+{"sql":"alter extension e add role x"}
+{"sql":"comment on subscription x is 'c'"}
+{"sql":"security label on subscription x is 'c'"}
+{"sql":"alter extension e add subscription x"}
+{"sql":"comment on tablespace x is 'c'"}
+{"sql":"security label on tablespace x is 'c'"}
+{"sql":"alter extension e add tablespace x"}
+{"sql":"comment on access method m is 'c'"}
+{"sql":"security label on access method m is 'c'"}
+{"sql":"alter extension e add access method m"}
+{"sql":"comment on procedural x is 'c'","code":"42601","message":"syntax error at or near \"x\"","position":22}
+{"sql":"comment on trusted language x is 'c'","code":"42601","message":"syntax error at or near \"trusted\"","position":11}
+{"sql":"comment on event x is 'c'","code":"42601","message":"syntax error at or near \"x\"","position":17}
+{"sql":"comment on foreign data x is 'c'","code":"42601","message":"syntax error at or near \"x\"","position":24}
+{"sql":"alter extension e add procedural x","code":"42601","message":"syntax error at or near \"x\"","position":33}
+{"sql":"comment on transform for int language sql is 'c'"}
+{"sql":"alter extension e add transform for int language sql"}
+{"sql":"comment on table t is 'c'"}
+{"sql":"comment on trigger tg on t is 'c'"}
+{"sql":"security label on table t is 'c'"}
+{"sql":"alter extension e add table t"}

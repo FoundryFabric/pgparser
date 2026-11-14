@@ -1,0 +1,34 @@
+{"sql":"create global temp table t (a int)"}
+{"sql":"create global temporary table t (a int)"}
+{"sql":"create global temp table t (a int) on commit drop"}
+{"sql":"create global temporary table if not exists t (a int)"}
+{"sql":"create global temp table t as select 1"}
+{"sql":"create global temporary table t (a) as select 1 with no data"}
+{"sql":"create global temp table t partition of p default"}
+{"sql":"create global temp table t of ty"}
+{"sql":"create global temp view v as select 1"}
+{"sql":"create or replace global temporary view v as select 1"}
+{"sql":"create global temp recursive view v (a) as select 1"}
+{"sql":"create global temp sequence s"}
+{"sql":"create global temporary sequence if not exists s"}
+{"sql":"create global unlogged table t (a int)","code":"42601","message":"syntax error at or near \"unlogged\"","position":14}
+{"sql":"create global table t (a int)","code":"42601","message":"syntax error at or near \"table\"","position":14}
+{"sql":"create global temp materialized view v as select 1","code":"42601","message":"syntax error at or near \"materialized\"","position":19}
+{"sql":"create temp table t (a int)"}
+{"sql":"create temporary table t (a int)"}
+{"sql":"create local temp table t (a int)"}
+{"sql":"create local temporary table t (a int)"}
+{"sql":"create unlogged table t (a int)"}
+{"sql":"create local temp table t as select 1"}
+{"sql":"create temp view v as select 1"}
+{"sql":"create local temp view v as select 1"}
+{"sql":"create temp sequence s"}
+{"sql":"create local temporary sequence s"}
+{"sql":"create unlogged sequence s"}
+{"sql":"select 1 into global temp t"}
+{"sql":"select 1 into global temporary table t"}
+{"sql":"select 1 into local temp t"}
+{"sql":"select 1 into temp table t"}
+{"sql":"select 1 into unlogged t"}
+{"sql":"create local temp materialized view v as select 1","code":"42601","message":"syntax error at or near \"materialized\"","position":18}
+{"sql":"create local unlogged table t (a int)","code":"42601","message":"syntax error at or near \"unlogged\"","position":13}
