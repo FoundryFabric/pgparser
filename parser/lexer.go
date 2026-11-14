@@ -1058,21 +1058,23 @@ func (l *Lexer) lexNumber() Token {
 		return l.failNear("trailing junk after numeric literal", start)
 	}
 
-	numStr := l.input[start:l.pos]
-	// Remove underscores for parsing
-	numStr = strings.ReplaceAll(numStr, "_", "")
-
+	text := l.input[start:l.pos]
 	if isFloat {
-		return Token{Type: lex_FCONST, Str: numStr, Loc: l.start}
+		return Token{Type: lex_FCONST, Str: text, Loc: l.start}
 	}
+	return integerToken(text, l.start)
+}
 
-	val, ok := integerLiteral(numStr, false)
+// integerToken is scan.l's process_integer_literal: an integer literal
+// whose value fits int32 is an ICONST, and any other is an FCONST holding
+// the literal's text, underscores and radix prefix kept.
+func integerToken(text string, loc int) Token {
+	digits := strings.ReplaceAll(text, "_", "")
+	val, ok := integerLiteral(digits)
 	if !ok {
-		// Too large, treat as float
-		return Token{Type: lex_FCONST, Str: numStr, Loc: l.start}
+		return Token{Type: lex_FCONST, Str: text, Loc: loc}
 	}
-
-	return Token{Type: lex_ICONST, Ival: val, Str: numStr, Loc: l.start}
+	return Token{Type: lex_ICONST, Ival: val, Str: digits, Loc: loc}
 }
 
 // scanDigits is the end of the integer at p, whose first byte is a digit:
@@ -1127,24 +1129,15 @@ func (l *Lexer) lexRadixNumber(digit func(byte) bool, invalid string) Token {
 		return l.failNear(invalid, start)
 	}
 
-	numStr := l.input[start:l.pos]
-	numStr = strings.ReplaceAll(numStr, "_", "")
-
-	val, ok := integerLiteral(numStr, false)
-	if !ok {
-		return Token{Type: lex_FCONST, Str: numStr, Loc: l.start}
-	}
-
-	return Token{Type: lex_ICONST, Ival: val, Str: numStr, Loc: l.start}
+	return integerToken(l.input[start:l.pos], l.start)
 }
 
 // integerLiteral is the value of an integer literal's text as the scanner
 // accepted it, underscores removed: decimal digits, or 0x, 0o or 0b (either
-// case) and digits of that radix. negative reads it as the literal's
-// negation, so the least int64 (-9223372036854775808, -0x8000000000000000)
-// has a value although its magnitude does not. ok is false when the value
-// does not fit int64, or the text is not an integer literal (1.5, 1e3).
-func integerLiteral(text string, negative bool) (val int64, ok bool) {
+// case) and digits of that radix. ok is false when the value does not fit
+// int32, as pg_strtoint32_safe has it, or the text is not an integer
+// literal (1.5, 1e3).
+func integerLiteral(text string) (val int64, ok bool) {
 	base, digits := 10, text
 	if len(text) > 2 && text[0] == '0' {
 		switch text[1] {
@@ -1159,10 +1152,7 @@ func integerLiteral(text string, negative bool) (val int64, ok bool) {
 	if digits == "" || digits[0] == '+' || digits[0] == '-' {
 		return 0, false
 	}
-	if negative {
-		digits = "-" + digits
-	}
-	val, err := strconv.ParseInt(digits, base, 64)
+	val, err := strconv.ParseInt(digits, base, 32)
 	if err != nil {
 		return 0, false
 	}

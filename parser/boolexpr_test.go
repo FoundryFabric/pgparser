@@ -418,9 +418,8 @@ func stmtOf(stmts *nodes.List) nodes.Node {
 // sign into a number rather than building an operator: NumericOnly
 // (sequence options) and SignedIconst (SET STATISTICS). A leading plus
 // leaves the number, and NumericOnly's minus over a Float keeps a Float,
-// int64's least value included (the Integer fold is doNegate's, in
-// expressions only); PostgreSQL 16.15's raw tree has 5, 1.5, the Float
-// -9223372036854775808 and 5.
+// as doNegate does in expressions; PostgreSQL 16.15's raw tree has 5, 1.5,
+// the Float -9223372036854775808 and 5.
 func TestNumericOnlyFoldsPlus(t *testing.T) {
 	stmts, err := Parse("create sequence s minvalue +5 increment -9223372036854775808 maxvalue +1.5")
 	if err != nil {
@@ -459,17 +458,11 @@ func TestNumericOnlyFoldsPlus(t *testing.T) {
 // TestNegatedLiteralShape pins minus over a constant: a number is folded
 // into a constant at the minus sign, as PostgreSQL 16 does, parenthesised
 // or not, and a string is not (it is an operator, though PostgreSQL still
-// moves the string to the minus sign). Where the negation of an integer
-// literal fits int64 the constant is an Integer: int64's least value in
-// every radix, which the scanner reads as a Float because its magnitude
-// does not fit. That is this fork's shape, not PostgreSQL's: PostgreSQL's
-// Integer is int32-sized, its raw tree keeps every one of these as a Float
-// with the literal's text, and analysis (make_const) reads the int8. One
-// past the least value, a positive magnitude, a decimal or an exponent
-// stays a Float; negating the least Integer again gives back a Float, as
-// int64 cannot hold its magnitude. Locations and the Float texts were read
-// as for TestUnaryPlusIsKept; the int rows are Floats with the same text
-// in PostgreSQL.
+// moves the string to the minus sign). An integer literal whose value does
+// not fit int32 is a Float holding the literal's text, and its negation a
+// Float with a minus before that text, in every radix, so -2147483648 is a
+// Float although int32 holds it; a double negation strips the minus again.
+// The shapes are libpg_query's, PostgreSQL 16's parser built as a library.
 func TestNegatedLiteralShape(t *testing.T) {
 	cases := []struct {
 		sql  string
@@ -477,50 +470,58 @@ func TestNegatedLiteralShape(t *testing.T) {
 	}{
 		{"select -9223372036854775808, -0x8000000000000000, -0o1000000000000000000000, " +
 			"-0b1000000000000000000000000000000000000000000000000000000000000000, -9_223_372_036_854_775_808", []string{
-			"int:-9223372036854775808@7",
-			"int:-9223372036854775808@29",
-			"int:-9223372036854775808@50",
-			"int:-9223372036854775808@77",
-			"int:-9223372036854775808@146",
+			"float:-9223372036854775808@7",
+			"float:-0x8000000000000000@29",
+			"float:-0o1000000000000000000000@50",
+			"float:-0b1000000000000000000000000000000000000000000000000000000000000000@77",
+			"float:-9_223_372_036_854_775_808@146",
 		}},
 		{"select -9223372036854775809, -0x8000000000000001, 9223372036854775808, - 9223372036854775808, " +
 			"- -1, -(9223372036854775808), -(1), -1.5, -1e3, -'1', - -9223372036854775808", []string{
 			"float:-9223372036854775809@7",
 			"float:-0x8000000000000001@29",
 			"float:9223372036854775808@50",
-			"int:-9223372036854775808@71",
+			"float:-9223372036854775808@71",
 			"int:1@94",
-			"int:-9223372036854775808@100",
+			"float:-9223372036854775808@100",
 			"int:-1@124",
 			"float:-1.5@130",
 			"float:-1e3@136",
 			"-@142(<>,str:1@142)",
 			"float:9223372036854775808@148",
 		}},
-		// Upper-case radix prefixes, and the greatest int64 either way.
+		// Upper-case radix prefixes keep their case.
 		{"select -0X8000000000000000, -0O1000000000000000000000, -0B1" + strings.Repeat("0", 63) +
 			", -9223372036854775807, 9223372036854775807", []string{
-			"int:-9223372036854775808@7",
-			"int:-9223372036854775808@28",
-			"int:-9223372036854775808@55",
-			"int:-9223372036854775807@124",
-			"int:9223372036854775807@146",
+			"float:-0X8000000000000000@7",
+			"float:-0O1000000000000000000000@28",
+			"float:-0B1" + strings.Repeat("0", 63) + "@55",
+			"float:-9223372036854775807@124",
+			"float:9223372036854775807@146",
 		}},
 		// -- starts a comment, so this is the constant 1 on the next line;
 		// with a space it is a double negation.
 		{"select --1\n 1, - -1", []string{"int:1@12", "int:1@15"}},
-		// Upper case one past the least stays a Float; leading zeros do not
-		// change the value, so they fold too (PostgreSQL: Floats with the
-		// literal's text).
+		// Leading zeros are kept in the text.
 		{"select -0X8000000000000001, -00009223372036854775808, -0x0008000000000000000", []string{
 			"float:-0X8000000000000001@7",
-			"int:-9223372036854775808@28",
-			"int:-9223372036854775808@54",
+			"float:-00009223372036854775808@28",
+			"float:-0x0008000000000000000@54",
 		}},
-		// A double negation that does not fit stays a Float with the
-		// decimal text: PostgreSQL keeps the inner literal's own text
-		// (0x8000000000000000).
-		{"select - -0x8000000000000000", []string{"float:9223372036854775808@7"}},
+		// A double negation gives back the inner literal's own text.
+		{"select - -0x8000000000000000", []string{"float:0x8000000000000000@7"}},
+		// int32's bounds: -2147483648 does not fold to an Integer.
+		{"select 2147483647, -2147483647, 2147483648, -2147483648, -0x80000000, -0x7fffffff, -0o20000000000, " +
+			"-0B1_0000000_00000000_00000000_00000000", []string{
+			"int:2147483647@7",
+			"int:-2147483647@19",
+			"float:2147483648@32",
+			"float:-2147483648@44",
+			"float:-0x80000000@57",
+			"int:-2147483647@70",
+			"float:-0o20000000000@83",
+			"float:-0B1_0000000_00000000_00000000_00000000@99",
+		}},
 	}
 	for _, c := range cases {
 		if got := targetShapes(t, c.sql); !reflect.DeepEqual(got, c.want) {

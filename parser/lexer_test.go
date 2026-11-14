@@ -110,10 +110,10 @@ func TestLexerDelimitedIdentifiers(t *testing.T) {
 
 func TestLexerNumbers(t *testing.T) {
 	tests := []struct {
-		input    string
-		tokType  int
-		ival     int64
-		str      string
+		input   string
+		tokType int
+		ival    int64
+		str     string
 	}{
 		{"0", lex_ICONST, 0, "0"},
 		{"42", lex_ICONST, 42, "42"},
@@ -128,11 +128,15 @@ func TestLexerNumbers(t *testing.T) {
 		{"1e10", lex_FCONST, 0, "1e10"},
 		{"1.5e-3", lex_FCONST, 0, "1.5e-3"},
 		{"0X1F", lex_ICONST, 31, "0X1F"},
-		{"9223372036854775807", lex_ICONST, 9223372036854775807, "9223372036854775807"},
-		{"0x7FFF_FFFF_FFFF_FFFF", lex_ICONST, 9223372036854775807, "0x7FFFFFFFFFFFFFFF"},
+		{"2147483647", lex_ICONST, 2147483647, "2147483647"},
+		{"0x7FFF_FFFF", lex_ICONST, 2147483647, "0x7FFFFFFF"},
+		{"2147483648", lex_FCONST, 0, "2147483648"},
+		{"2_147_483_648", lex_FCONST, 0, "2_147_483_648"},
+		{"0x8000_0000", lex_FCONST, 0, "0x8000_0000"},
 		{"9223372036854775808", lex_FCONST, 0, "9223372036854775808"},
-		{"0x8000000000000000", lex_FCONST, 0, "0x8000000000000000"},
-		{"0b1" + strings.Repeat("0", 63), lex_FCONST, 0, "0b1" + strings.Repeat("0", 63)},
+		{"0b1" + strings.Repeat("0", 31), lex_FCONST, 0, "0b1" + strings.Repeat("0", 31)},
+		{"1_000.5e0_1", lex_FCONST, 0, "1_000.5e0_1"},
+		{".000_005", lex_FCONST, 0, ".000_005"},
 	}
 
 	for _, tt := range tests {
@@ -160,12 +164,12 @@ func TestLexerStrings(t *testing.T) {
 	}{
 		{"'hello'", lex_SCONST, "hello"},
 		{"'hello world'", lex_SCONST, "hello world"},
-		{"'it''s'", lex_SCONST, "it's"},      // escaped quote
-		{"''", lex_SCONST, ""},               // empty string
+		{"'it''s'", lex_SCONST, "it's"},                  // escaped quote
+		{"''", lex_SCONST, ""},                           // empty string
 		{"E'hello\\nworld'", lex_SCONST, "hello\nworld"}, // escape string
 		{"E'tab\\there'", lex_SCONST, "tab\there"},
-		{"B'101'", lex_BCONST, "b101"},       // bit string
-		{"X'FF'", lex_XCONST, "xFF"},         // hex string
+		{"B'101'", lex_BCONST, "b101"}, // bit string
+		{"X'FF'", lex_XCONST, "xFF"},   // hex string
 	}
 
 	for _, tt := range tests {
@@ -374,7 +378,7 @@ type refToken struct {
 }
 
 // refLex is a plain reference lexer for TestLexerOperatorMatchesReference's
-// alphabet (whitespace, comments, '' strings, "" identifiers, "::", ":=", ':',
+// alphabet (whitespace, comments, ” strings, "" identifiers, "::", ":=", ':',
 // identifiers, digits, operators), applying the operator rule per token with
 // no caching. It returns the tokens and the expected error's 0-based position
 // and message, or -1.
@@ -802,49 +806,48 @@ func TestLexerErrors(t *testing.T) {
 	}
 }
 
-// TestIntegerLiteral pins the reading of an integer literal's text that the
-// scanner and doNegate share: each radix, either case of prefix, up to
-// int64's greatest value and, negated, its least; anything else (too
-// large, a decimal, an exponent, a sign already present, a bare prefix) is
-// not an integer.
+// TestIntegerLiteral pins the scanner's reading of an integer literal's
+// text: each radix, either case of prefix, leading zeros, up to int32's
+// greatest value; anything else (too large, a decimal, an exponent, a sign,
+// a bare prefix) is not an integer the scanner gives a value.
 func TestIntegerLiteral(t *testing.T) {
-	const least = -9223372036854775808
 	for _, c := range []struct {
-		text     string
-		negative bool
-		want     int64
-		ok       bool
+		text string
+		want int64
+		ok   bool
 	}{
-		{"0", false, 0, true},
-		{"0", true, 0, true},
-		{"42", true, -42, true},
-		{"0x1f", false, 31, true},
-		{"0XFF", true, -255, true},
-		{"0o17", false, 15, true},
-		{"0O17", true, -15, true},
-		{"0b101", false, 5, true},
-		{"0B101", true, -5, true},
-		{"9223372036854775807", false, 9223372036854775807, true},
-		{"9223372036854775808", false, 0, false},
-		{"9223372036854775808", true, least, true},
-		{"0x8000000000000000", true, least, true},
-		{"0o1000000000000000000000", true, least, true},
-		{"0b1" + strings.Repeat("0", 63), true, least, true},
-		{"9223372036854775809", true, 0, false},
-		{"0x8000000000000001", true, 0, false},
-		{"1.5", true, 0, false},
-		{"1e3", true, 0, false},
-		{".5", false, 0, false},
-		{"-1", true, 0, false},
-		{"+1", false, 0, false},
-		{"0x", false, 0, false},
-		{"0x-1", false, 0, false},
-		{"0b2", false, 0, false},
-		{"", false, 0, false},
+		{"0", 0, true},
+		{"42", 42, true},
+		{"0x1f", 31, true},
+		{"0XFF", 255, true},
+		{"0o17", 15, true},
+		{"0O17", 15, true},
+		{"0b101", 5, true},
+		{"0B101", 5, true},
+		{"2147483647", 2147483647, true},
+		{"00000000002147483647", 2147483647, true},
+		{"0x7fffffff", 2147483647, true},
+		{"0o17777777777", 2147483647, true},
+		{"0b" + strings.Repeat("1", 31), 2147483647, true},
+		{"2147483648", 0, false},
+		{"0x80000000", 0, false},
+		{"0o20000000000", 0, false},
+		{"0b1" + strings.Repeat("0", 31), 0, false},
+		{"0x00000000ffffffff", 0, false},
+		{"9223372036854775808", 0, false},
+		{"1.5", 0, false},
+		{"1e3", 0, false},
+		{".5", 0, false},
+		{"-1", 0, false},
+		{"+1", 0, false},
+		{"0x", 0, false},
+		{"0x-1", 0, false},
+		{"0b2", 0, false},
+		{"", 0, false},
 	} {
-		got, ok := integerLiteral(c.text, c.negative)
+		got, ok := integerLiteral(c.text)
 		if got != c.want || ok != c.ok {
-			t.Errorf("integerLiteral(%q, %v) = %d, %v; want %d, %v", c.text, c.negative, got, ok, c.want, c.ok)
+			t.Errorf("integerLiteral(%q) = %d, %v; want %d, %v", c.text, got, ok, c.want, c.ok)
 		}
 	}
 }
