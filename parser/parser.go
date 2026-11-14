@@ -31597,7 +31597,7 @@ pgdefault:
 			pgVAL.list = &nodes.List{Items: []nodes.Node{
 				pgDollar[1].node,
 				makeIntConst(1, -1),
-				pgDollar[3].node,
+				makeTypeCast(pgDollar[3].node, makeTypeName("int4"), -1),
 			}}
 		}
 	case 1517:

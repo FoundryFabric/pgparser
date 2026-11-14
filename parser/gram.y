@@ -10289,7 +10289,7 @@ substr_list:
 			$$ = &nodes.List{Items: []nodes.Node{
 				$1,
 				makeIntConst(1, -1),
-				$3,
+				makeTypeCast($3, makeTypeName("int4"), -1),
 			}}
 		}
 	| a_expr SIMILAR a_expr ESCAPE a_expr

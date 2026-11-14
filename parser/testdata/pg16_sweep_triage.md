@@ -899,6 +899,17 @@ of these classes and 97 probes at the bounds, in each radix and grammar
 spot, are pinned by `testdata/int_literal_pg16.jsonl`: PostgreSQL 16.15's
 verdicts and libpg_query 16's numeric constants. No corpus verdict changed.
 
+### substring-for (tree 8; fixed)
+
+| statement | libpg_query 16 | parser before |
+|---|---|---|
+| `select substring(d for 30)` | `substring(d, 1, 30::int4)` | `substring(d, 1, 30)` |
+
+`substr_list`'s FOR-only form casts the length to `pg_catalog.int4`, the
+cast and its type name unlocated, as PostgreSQL 16 does. The 7 corpus
+statements and 5 more SUBSTRING forms are pinned in
+`testdata/locations_pg16.jsonl`. No verdict changed.
+
 ### alter-enum-add-value-after (tree 9; fixed)
 
 | statement | libpg_query 16 | parser |

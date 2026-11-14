@@ -400,3 +400,15 @@
 {"sql":"create type ty as (x int, y text collate c)","locations":{"CollateClause":[33]}}
 {"sql":"select * from f() as (a text collate \"C\")","locations":{"CollateClause":[29]}}
 {"sql":"alter type ty alter attribute y type text collate \"C\"","locations":{"CollateClause":[42]}}
+{"sql":"SELECT a,b,c,substring(d for 30), length(d) from clstr_tst","locations":{"A_Const":[-1,29],"ColumnRef":[7,9,11,23,41],"FuncCall":[13,34],"TypeCast":[-1],"TypeName":[-1]}}
+{"sql":"SELECT a,b,c,substring(d for 30), length(d) from clstr_tst ORDER BY a","locations":{"A_Const":[-1,29],"ColumnRef":[7,9,11,23,41,68],"FuncCall":[13,34],"TypeCast":[-1],"TypeName":[-1]}}
+{"sql":"SELECT a(3),b,c,substring(d for 30), length(d) from clstr_tst ORDER BY a","locations":{"A_Const":[-1,9,32],"ColumnRef":[12,14,26,44,71],"FuncCall":[7,16,37],"TypeCast":[-1],"TypeName":[-1]}}
+{"sql":"SELECT a,b,c,substring(d for 30), length(d) from clstr_tst ORDER BY b","locations":{"A_Const":[-1,29],"ColumnRef":[7,9,11,23,41,68],"FuncCall":[13,34],"TypeCast":[-1],"TypeName":[-1]}}
+{"sql":"SELECT a,b,c,substring(d for 30), length()d from clstr_tst ORDER BY b","locations":{"A_Const":[-1,29],"ColumnRef":[7,9,11,23,68],"FuncCall":[13,34],"TypeCast":[-1],"TypeName":[-1]}}
+{"sql":"SELECT a,b,c,substring(d for 30), length(d) from clstr_tst ORDER BY c","locations":{"A_Const":[-1,29],"ColumnRef":[7,9,11,23,41,68],"FuncCall":[13,34],"TypeCast":[-1],"TypeName":[-1]}}
+{"sql":"SELECT a a,b,c,substring(d for 30), length(d) from clstr_tst ORDER BY c","locations":{"A_Const":[-1,31],"ColumnRef":[7,11,13,25,43,70],"FuncCall":[15,36],"TypeCast":[-1],"TypeName":[-1]}}
+{"sql":"SELECT substring(d FOR  n+1)","locations":{"A_Const":[-1,26],"ColumnRef":[17,24],"FuncCall":[7],"TypeCast":[-1],"TypeName":[-1]}}
+{"sql":"select substring('abc' for 0x80000000)","locations":{"A_Const":[-1,17,27],"FuncCall":[7],"TypeCast":[-1],"TypeName":[-1]}}
+{"sql":"select substring('abc' for -2)","locations":{"A_Const":[-1,17,27],"FuncCall":[7],"TypeCast":[-1],"TypeName":[-1]}}
+{"sql":"select substring('abc' for 2 from 1)","locations":{"A_Const":[17,27,34],"FuncCall":[7]}}
+{"sql":"select substring('abc' from 1 for 2)","locations":{"A_Const":[17,28,34],"FuncCall":[7]}}
