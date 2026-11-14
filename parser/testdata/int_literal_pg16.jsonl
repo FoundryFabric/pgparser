@@ -1,0 +1,249 @@
+{"sql":"SELECT avg(x::float8), var_pop(x::float8)\nFROM (VALUES (7000000000005), (7000000000007)) v(x)","numbers":["A_Const.Float 7000000000005@56","A_Const.Float 7000000000007@73"]}
+{"sql":"insert into arr_pk_tbl(pk, f1[-2147483648:2147483647]) values (2, '{}')","numbers":["A_Const.Float -2147483648@30","A_Const.Integer 2147483647@42","A_Const.Integer 2@63"]}
+{"sql":"-- nothing: page doesn't exist in table\nSELECT brin_summarize_range('brin_summarize_idx', 4294967295)","numbers":["A_Const.Float 4294967295@90"]}
+{"sql":"SELECT brin_summarize_range('brin_summarize_idx', 4294967296)","numbers":["A_Const.Float 4294967296@50"]}
+{"sql":"-- nothing: page doesn't exist in table\nSELECT brin_summarize_range('brin_summarize_bloom_idx', 4294967295)","numbers":["A_Const.Float 4294967295@96"]}
+{"sql":"SELECT brin_summarize_range('brin_summarize_bloom_idx', 4294967296)","numbers":["A_Const.Float 4294967296@56"]}
+{"sql":"-- nothing: page doesn't exist in table\nSELECT brin_summarize_range('brin_summarize_multi_idx', 4294967295)","numbers":["A_Const.Float 4294967295@96"]}
+{"sql":"SELECT brin_summarize_range('brin_summarize_multi_idx', 4294967296)","numbers":["A_Const.Float 4294967296@56"]}
+{"sql":"SELECT size, pg_size_pretty(size), pg_size_pretty(-1 * size) FROM\n    (VALUES (10::bigint), (1000::bigint), (1000000::bigint),\n            (1000000000::bigint), (1000000000000::bigint),\n            (1000000000000000::bigint)) x(size)","numbers":["A_Const.Float 1000000000000000@199","A_Const.Float 1000000000000@162","A_Const.Integer -1@50","A_Const.Integer 1000000000@140","A_Const.Integer 1000000@109","A_Const.Integer 1000@93","A_Const.Integer 10@79"]}
+{"sql":"SELECT size, pg_size_pretty(size), pg_size_pretty(-1 * size) FROM\n    (VALUES (10::numeric), (1000::numeric), (1000000::numeric),\n            (1000000000::numeric), (1000000000000::numeric),\n            (1000000000000000::numeric),\n            (10.5::numeric), (1000.5::numeric), (1000000.5::numeric),\n            (1000000000.5::numeric), (1000000000000.5::numeric),\n            (1000000000000000.5::numeric)) x(size)","numbers":["A_Const.Float 10.5@245","A_Const.Float 1000.5@262","A_Const.Float 1000000.5@281","A_Const.Float 1000000000.5@315","A_Const.Float 1000000000000.5@340","A_Const.Float 1000000000000000.5@380","A_Const.Float 1000000000000000@204","A_Const.Float 1000000000000@166","A_Const.Integer -1@50","A_Const.Integer 1000000000@143","A_Const.Integer 1000000@111","A_Const.Integer 1000@94","A_Const.Integer 10@79"]}
+{"sql":"SELECT size, pg_size_pretty(user), pg_size_pretty(-1 * size) FROM\n    (VALUES (10::numeric), (1000::numeric), (1000000::numeric),\n            (1000000000::numeric), (1000000000000::numeric),\n            (1000000000000000::numeric),\n            (10.5::numeric), (1000.5::numeric), (1000000.5::numeric),\n            (1000000000.5::numeric), (1000000000000.5::numeric),\n            (1000000000000000.5::numeric)) x(size)","numbers":["A_Const.Float 10.5@245","A_Const.Float 1000.5@262","A_Const.Float 1000000.5@281","A_Const.Float 1000000000.5@315","A_Const.Float 1000000000000.5@340","A_Const.Float 1000000000000000.5@380","A_Const.Float 1000000000000000@204","A_Const.Float 1000000000000@166","A_Const.Integer -1@50","A_Const.Integer 1000000000@143","A_Const.Integer 1000000@111","A_Const.Integer 1000@94","A_Const.Integer 10@79"]}
+{"sql":"-- test where units change up\nSELECT size, pg_size_pretty(size), pg_size_pretty(-1 * size) FROM\n    (VALUES (10239::bigint), (10240::bigint),\n            (10485247::bigint), (10485248::bigint),\n            (10736893951::bigint), (10736893952::bigint),\n            (10994579406847::bigint), (10994579406848::bigint),\n            (11258449312612351::bigint), (11258449312612352::bigint)) x(size)","numbers":["A_Const.Float 10736893951@207","A_Const.Float 10736893952@230","A_Const.Float 10994579406847@265","A_Const.Float 10994579406848@291","A_Const.Float 11258449312612351@329","A_Const.Float 11258449312612352@358","A_Const.Integer -1@80","A_Const.Integer 10239@109","A_Const.Integer 10240@126","A_Const.Integer 10485247@155","A_Const.Integer 10485248@175"]}
+{"sql":"-- test where units change up\nSELECT size, (pg_size_prettysize), pg_size_pretty(-1 * size) FROM\n    (VALUES (10239::bigint), (10240::bigint),\n            (10485247::bigint), (10485248::bigint),\n            (10736893951::bigint), (10736893952::bigint),\n            (10994579406847::bigint), (10994579406848::bigint),\n            (11258449312612351::bigint), (11258449312612352::bigint)) x(size)","numbers":["A_Const.Float 10736893951@207","A_Const.Float 10736893952@230","A_Const.Float 10994579406847@265","A_Const.Float 10994579406848@291","A_Const.Float 11258449312612351@329","A_Const.Float 11258449312612352@358","A_Const.Integer -1@80","A_Const.Integer 10239@109","A_Const.Integer 10240@126","A_Const.Integer 10485247@155","A_Const.Integer 10485248@175"]}
+{"sql":"SELECT size, pg_size_pretty(size), pg_size_pretty(-1 * size) FROM\n    (VALUES (10239::numeric), (10240::numeric),\n            (10485247::numeric), (10485248::numeric),\n            (10736893951::numeric), (10736893952::numeric),\n            (10994579406847::numeric), (10994579406848::numeric),\n            (11258449312612351::numeric), (11258449312612352::numeric),\n            (11528652096115048447::numeric), (11528652096115048448::numeric)) x(size)","numbers":["A_Const.Float 10736893951@181","A_Const.Float 10736893952@205","A_Const.Float 10994579406847@241","A_Const.Float 10994579406848@268","A_Const.Float 11258449312612351@307","A_Const.Float 11258449312612352@337","A_Const.Float 11528652096115048447@379","A_Const.Float 11528652096115048448@412","A_Const.Integer -1@50","A_Const.Integer 10239@79","A_Const.Integer 10240@97","A_Const.Integer 10485247@127","A_Const.Integer 10485248@148"]}
+{"sql":"SELECT size, pg_size_pretty(size), pg_size_pretty(-1 * size) FROM\n    (VALUES (10239::numeric), (10240::numeric),\n            (10485247::numeric), (10485248::numeric),\n            (10736893951::numeric), (10736893952::numeric),\n            (10994579406847::numeric), (10994579406848::numeric[]),\n            (11258449312612351::numeric), (11258449312612352::numeric),\n            (11528652096115048447::numeric), (11528652096115048448::numeric)) x(size)","numbers":["A_Const.Float 10736893951@181","A_Const.Float 10736893952@205","A_Const.Float 10994579406847@241","A_Const.Float 10994579406848@268","A_Const.Float 11258449312612351@309","A_Const.Float 11258449312612352@339","A_Const.Float 11528652096115048447@381","A_Const.Float 11528652096115048448@414","A_Const.Integer -1@50","A_Const.Integer 10239@79","A_Const.Integer 10240@97","A_Const.Integer 10485247@127","A_Const.Integer 10485248@148","TypeName.Integer -1"]}
+{"sql":"SELECT size, pg_size_pretty(size), pg_size_pretty(-1 * size) FROM\n    (VALUES (10239::numeric), (10240::numeric),\n            (10485247::numeric), (10485248::numeric),\n            (10736893951::numeric[]), (10736893952::numeric),\n            (10994579406847::numeric), (10994579406848::numeric),\n            (11258449312612351::numeric), (11258449312612352::numeric),\n            (11528652096115048447::numeric), (11528652096115048448::numeric)) x(size)","numbers":["A_Const.Float 10736893951@181","A_Const.Float 10736893952@207","A_Const.Float 10994579406847@243","A_Const.Float 10994579406848@270","A_Const.Float 11258449312612351@309","A_Const.Float 11258449312612352@339","A_Const.Float 11528652096115048447@381","A_Const.Float 11528652096115048448@414","A_Const.Integer -1@50","A_Const.Integer 10239@79","A_Const.Integer 10240@97","A_Const.Integer 10485247@127","A_Const.Integer 10485248@148","TypeName.Integer -1"]}
+{"sql":"ALTER TABLE T ADD COLUMN c_big BIGINT DEFAULT 180000000000018,\n              ALTER COLUMN c_small SET DEFAULT 9,\n              ALTER COLUMN c_small_null SET DEFAULT 13","numbers":["A_Const.Float 180000000000018@46","A_Const.Integer 13@165","A_Const.Integer 9@110"]}
+{"sql":"ALTER TABLE T ADD COLUMN c_num NUMERIC DEFAULT 1.00000000001,\n              ALTER COLUMN c_big SET DEFAULT -9999999999999999","numbers":["A_Const.Float -9999999999999999@107","A_Const.Float 1.00000000001@47"]}
+{"sql":"SELECT v as value, hash_numeric(v)::bit(32) as standard,\n       hash_numeric_extended(v, 0)::bit(32) as extended0,\n       hash_numeric_extended(v, 1)::bit(32) as extended1\nFROM   (VALUES (0), (1.149484958), (17.149484958), (42.149484958),\n        (149484958.550273), (2071124898672)) x(v)\nWHERE  hash_numeric(v)::bit(32) != hash_numeric_extended(v, 0)::bit(32)\n       OR hash_numeric(v)::bit(32) = hash_numeric_extended(v, 1)::bit(32)","numbers":["A_Const.Float 1.149484958@193","A_Const.Float 149484958.550273@248","A_Const.Float 17.149484958@208","A_Const.Float 2071124898672@268","A_Const.Float 42.149484958@224","A_Const.Integer 0@188","A_Const.Integer 0@349","A_Const.Integer 0@89","A_Const.Integer 1@147","A_Const.Integer 1@423","A_Const.Integer 32@155","A_Const.Integer 32@317","A_Const.Integer 32@357","A_Const.Integer 32@392","A_Const.Integer 32@40","A_Const.Integer 32@431","A_Const.Integer 32@97"]}
+{"sql":"-- these should give overflow errors:\nSELECT '127.0.0.1'::inet + 10000000000","numbers":["A_Const.Float 10000000000@65"]}
+{"sql":"SELECT '127.0.0.1'::inet - 10000000000","numbers":["A_Const.Float 10000000000@27"]}
+{"sql":"SELECT '127.0.0.1'::inet[] - 10000000000","numbers":["A_Const.Float 10000000000@29","TypeName.Integer -1"]}
+{"sql":"-- but not these\nSELECT '127::1'::inet + 10000000000","numbers":["A_Const.Float 10000000000@41"]}
+{"sql":"-- check sane handling of INT_MIN overflow cases\nSELECT (-2147483648)::int4 * (-1)::int4","numbers":["A_Const.Float -2147483648@57","A_Const.Integer -1@79"]}
+{"sql":"-- check sane handling of INT_MIN overflow cases\nSELECT (-2147483648)::int4 * (- -1)::int4","numbers":["A_Const.Float -2147483648@57","A_Const.Integer 1@79"]}
+{"sql":"SELECT (-2147483648)::int4 / (-1)::int4","numbers":["A_Const.Float -2147483648@8","A_Const.Integer -1@30"]}
+{"sql":"SELECT (-2147483648)::int4 % (-1)::int4","numbers":["A_Const.Float -2147483648@8","A_Const.Integer -1@30"]}
+{"sql":"SELECT (-2147483648)::int4 * (-1)::int2","numbers":["A_Const.Float -2147483648@8","A_Const.Integer -1@30"]}
+{"sql":"SELECT (-2147483648)::int4[1] * (-1)::int2","numbers":["A_Const.Float -2147483648@8","A_Const.Integer -1@33","TypeName.Integer 1"]}
+{"sql":"SELECT (-2147483648)::int4 / (-1)::int2","numbers":["A_Const.Float -2147483648@8","A_Const.Integer -1@30"]}
+{"sql":"SELECT (-2147483648)::int4[] / (-1)::int2","numbers":["A_Const.Float -2147483648@8","A_Const.Integer -1@32","TypeName.Integer -1"]}
+{"sql":"SELECT (-2147483648)::int4 % (-1)::int2","numbers":["A_Const.Float -2147483648@8","A_Const.Integer -1@30"]}
+{"sql":"SELECT (-2147483648)::int4 % (-1)::int2[]","numbers":["A_Const.Float -2147483648@8","A_Const.Integer -1@30","TypeName.Integer -1"]}
+{"sql":"-- test gcd()\nSELECT a, b, gcd(a, b), gcd(a, -b), gcd(b, a), gcd(-b, a)\nFROM (VALUES (0::int4, 0::int4),\n             (0::int4, 6410818::int4),\n             (61866666::int4, 6410818::int4),\n             (-61866666::int4, 6410818::int4),\n             ((-2147483648)::int4, 1::int4),\n             ((-2147483648)::int4, 2147483647::int4),\n             ((-2147483648)::int4, 1073741824::int4)) AS v(a, b)","numbers":["A_Const.Float -2147483648@252","A_Const.Float -2147483648@297","A_Const.Float -2147483648@351","A_Const.Integer 0@119","A_Const.Integer 0@86","A_Const.Integer 0@95","A_Const.Integer 1073741824@371","A_Const.Integer 1@272","A_Const.Integer 2147483647@317","A_Const.Integer 61866666@158","A_Const.Integer 61866666@205","A_Const.Integer 6410818@128","A_Const.Integer 6410818@174","A_Const.Integer 6410818@221"]}
+{"sql":"-- test gcd()\nSELECT a, b, gcd(a, b), gcd(a, -b), gcd(b, a), gcd(-b, a)\nFROM (VALUES (0::int4, 0::int4),\n             (0::int4, 6410818::int4(3)),\n             (61866666::int4, 6410818::int4),\n             (-61866666::int4, 6410818::int4),\n             ((-2147483648)::int4, 1::int4),\n             ((-2147483648)::int4, 2147483647::int4),\n             ((-2147483648)::int4, 1073741824::int4)) AS v(a, b)","numbers":["A_Const.Float -2147483648@255","A_Const.Float -2147483648@300","A_Const.Float -2147483648@354","A_Const.Integer 0@119","A_Const.Integer 0@86","A_Const.Integer 0@95","A_Const.Integer 1073741824@374","A_Const.Integer 1@275","A_Const.Integer 2147483647@320","A_Const.Integer 3@142","A_Const.Integer 61866666@161","A_Const.Integer 61866666@208","A_Const.Integer 6410818@128","A_Const.Integer 6410818@177","A_Const.Integer 6410818@224"]}
+{"sql":"SELECT gcd((-2147483648)::int4, 0::int4)","numbers":["A_Const.Float -2147483648@12","A_Const.Integer 0@32"]}
+{"sql":"SELECT gcd((-2147483648)::int4, 0::int4(3))","numbers":["A_Const.Float -2147483648@12","A_Const.Integer 0@32","A_Const.Integer 3@40"]}
+{"sql":"-- overflow\nSELECT gcd((-2147483648)::int4, (-2147483648)::int4)","numbers":["A_Const.Float -2147483648@24","A_Const.Float -2147483648@45"]}
+{"sql":"-- overflow\n-- test lcm()\nSELECT a, b, lcm(a, b), lcm(a, -b), lcm(b, a), lcm(-b, a)\nFROM (VALUES (0::int4, 0::int4),\n             (0::int4, 42::int4),\n             (42::int4, 42::int4),\n             (330::int4, 462::int4),\n             (-330::int4, 462::int4),\n             ((-2147483648)::int4, 0::int4)) AS v(a, b)","numbers":["A_Const.Float -2147483648@276","A_Const.Integer 0@107","A_Const.Integer 0@131","A_Const.Integer 0@296","A_Const.Integer 0@98","A_Const.Integer 330@200","A_Const.Integer 330@238","A_Const.Integer 42@140","A_Const.Integer 42@165","A_Const.Integer 42@175","A_Const.Integer 462@211","A_Const.Integer 462@249"]}
+{"sql":"SELECT lcm((-2147483648)::int4, 1::int4)","numbers":["A_Const.Float -2147483648@12","A_Const.Integer 1@32"]}
+{"sql":"SELECT lcm((-2147483648)::int4(3), 1::int4)","numbers":["A_Const.Float -2147483648@12","A_Const.Integer 1@35","A_Const.Integer 3@31"]}
+{"sql":"SELECT ((-2147483648)::int4, 1::int4)","numbers":["A_Const.Float -2147483648@9","A_Const.Integer 1@29"]}
+{"sql":"-- int8/int8 cmp\nSELECT * FROM INT8_TBL WHERE q2 = 4567890123456789","numbers":["A_Const.Float 4567890123456789@51"]}
+{"sql":"-- int8/int8 cmp\nSELECT * FROM INT8_TBL.x WHERE q2 = 4567890123456789","numbers":["A_Const.Float 4567890123456789@53"]}
+{"sql":"SELECT * FROM INT8_TBL WHERE q2 <> 4567890123456789","numbers":["A_Const.Float 4567890123456789@35"]}
+{"sql":"SELECT * FROM INT8_TBL INT8_TBL WHERE q2 <> 4567890123456789","numbers":["A_Const.Float 4567890123456789@44"]}
+{"sql":"SELECT * FROM INT8_TBL WHERE q2 < 4567890123456789","numbers":["A_Const.Float 4567890123456789@34"]}
+{"sql":"SELECT * FROM INT8_TBL WHERE q2 > 4567890123456789","numbers":["A_Const.Float 4567890123456789@34"]}
+{"sql":"SELECT * FROM INT8_TBL WHERE q2.x > 4567890123456789","numbers":["A_Const.Float 4567890123456789@36"]}
+{"sql":"SELECT * FROM INT8_TBL WHERE q2 <= 4567890123456789","numbers":["A_Const.Float 4567890123456789@35"]}
+{"sql":"SELECT * FROM INT8_TBL.x WHERE q2 <= 4567890123456789","numbers":["A_Const.Float 4567890123456789@37"]}
+{"sql":"SELECT * FROM INT8_TBL WHERE q2 >= 4567890123456789","numbers":["A_Const.Float 4567890123456789@35"]}
+{"sql":"-- check sane handling of INT64_MIN overflow cases\nSELECT (-9223372036854775808)::int8 * (-1)::int8","numbers":["A_Const.Float -9223372036854775808@59","A_Const.Integer -1@90"]}
+{"sql":"-- check sane handling of INT64_MIN overflow cases\nSELECT (-9223372036854775808)::int8  (-1)::int8","numbers":["A_Const.Float -9223372036854775808@59","A_Const.Integer -1@89"]}
+{"sql":"-- check sane handling of INT64_MIN overflow cases\nSELECT (-9223372036854775808)::int8 * (-1)::int8[]","numbers":["A_Const.Float -9223372036854775808@59","A_Const.Integer -1@90","TypeName.Integer -1"]}
+{"sql":"SELECT (-9223372036854775808)::int8 / (-1)::int8","numbers":["A_Const.Float -9223372036854775808@8","A_Const.Integer -1@39"]}
+{"sql":"SELECT (-9223372036854775808)::int8[] / (-1)::int8","numbers":["A_Const.Float -9223372036854775808@8","A_Const.Integer -1@41","TypeName.Integer -1"]}
+{"sql":"SELECT (-9223372036854775808)::int8 % (-1)::int8","numbers":["A_Const.Float -9223372036854775808@8","A_Const.Integer -1@39"]}
+{"sql":"SELECT (-9223372036854775808)::int8 % (-1)::int8.x","numbers":["A_Const.Float -9223372036854775808@8","A_Const.Integer -1@39"]}
+{"sql":"SELECT (-9223372036854775808)::int8 * (-1)::int4","numbers":["A_Const.Float -9223372036854775808@8","A_Const.Integer -1@39"]}
+{"sql":"SELECT (-9223372036854775808)::int8 / (-1)::int4","numbers":["A_Const.Float -9223372036854775808@8","A_Const.Integer -1@39"]}
+{"sql":"SELECT (-9223372036854775808)::int8(3) / (-1)::int4","numbers":["A_Const.Float -9223372036854775808@8","A_Const.Integer -1@42","A_Const.Integer 3@36"]}
+{"sql":"SELECT (-9223372036854775808)::int8[] / (-1)::int4","numbers":["A_Const.Float -9223372036854775808@8","A_Const.Integer -1@41","TypeName.Integer -1"]}
+{"sql":"SELECT (-9223372036854775808)::int8 % (-1)::int4","numbers":["A_Const.Float -9223372036854775808@8","A_Const.Integer -1@39"]}
+{"sql":"SELECT (-9223372036854775808)::int8.x % (-1)::int4","numbers":["A_Const.Float -9223372036854775808@8","A_Const.Integer -1@41"]}
+{"sql":"SELECT (-9223372036854775808)::int8 * (-1)::int2","numbers":["A_Const.Float -9223372036854775808@8","A_Const.Integer -1@39"]}
+{"sql":"SELECT (-9223372036854775808)::int8 / (-1)::int2","numbers":["A_Const.Float -9223372036854775808@8","A_Const.Integer -1@39"]}
+{"sql":"SELECT (-9223372036854775808)::int8 % (-1)::int2","numbers":["A_Const.Float -9223372036854775808@8","A_Const.Integer -1@39"]}
+{"sql":"SELECT (-9223372036854775808)::int8[] % (-1)::int2","numbers":["A_Const.Float -9223372036854775808@8","A_Const.Integer -1@41","TypeName.Integer -1"]}
+{"sql":"SELECT (-9223372036854775808)::int8(3) % (-1)::int2","numbers":["A_Const.Float -9223372036854775808@8","A_Const.Integer -1@42","A_Const.Integer 3@36"]}
+{"sql":"-- test gcd()\nSELECT a, b, gcd(a, b), gcd(a, -b), gcd(b, a), gcd(-b, a)\nFROM (VALUES (0::int8, 0::int8),\n             (0::int8, 29893644334::int8),\n             (288484263558::int8, 29893644334::int8),\n             (-288484263558::int8, 29893644334::int8),\n             ((-9223372036854775808)::int8, 1::int8),\n             ((-9223372036854775808)::int8, 9223372036854775807::int8),\n             ((-9223372036854775808)::int8, 4611686018427387904::int8)) AS v(a, b)","numbers":["A_Const.Float -9223372036854775808@272","A_Const.Float -9223372036854775808@326","A_Const.Float -9223372036854775808@398","A_Const.Float 288484263558@162","A_Const.Float 288484263558@217","A_Const.Float 29893644334@128","A_Const.Float 29893644334@182","A_Const.Float 29893644334@237","A_Const.Float 4611686018427387904@427","A_Const.Float 9223372036854775807@355","A_Const.Integer 0@119","A_Const.Integer 0@86","A_Const.Integer 0@95","A_Const.Integer 1@301"]}
+{"sql":"-- test gcd()\nSELECT a, b, gcd(a, b), gcd(a, -b), gcd(b, a), gcd(-b, a)\nFROM (VALUES (0::int8, 0::int8),\n             (0::int8, 29893644334::int8),\n             (288484263558::int8, 29893644334::int8(3)),\n             (-288484263558::int8, 29893644334::int8),\n             ((-9223372036854775808)::int8, 1::int8),\n             ((-9223372036854775808)::int8, 9223372036854775807::int8),\n             ((-9223372036854775808)::int8, 4611686018427387904::int8)) AS v(a, b)","numbers":["A_Const.Float -9223372036854775808@275","A_Const.Float -9223372036854775808@329","A_Const.Float -9223372036854775808@401","A_Const.Float 288484263558@162","A_Const.Float 288484263558@220","A_Const.Float 29893644334@128","A_Const.Float 29893644334@182","A_Const.Float 29893644334@240","A_Const.Float 4611686018427387904@430","A_Const.Float 9223372036854775807@358","A_Const.Integer 0@119","A_Const.Integer 0@86","A_Const.Integer 0@95","A_Const.Integer 1@304","A_Const.Integer 3@200"]}
+{"sql":"SELECT gcd((-9223372036854775808)::int8, 0::int8)","numbers":["A_Const.Float -9223372036854775808@12","A_Const.Integer 0@41"]}
+{"sql":"-- overflow\nSELECT gcd((-9223372036854775808)::int8, (-9223372036854775808)::int8)","numbers":["A_Const.Float -9223372036854775808@24","A_Const.Float -9223372036854775808@54"]}
+{"sql":"-- overflow\nSELECT gcd.x((-9223372036854775808)::int8, (-9223372036854775808)::int8)","numbers":["A_Const.Float -9223372036854775808@26","A_Const.Float -9223372036854775808@56"]}
+{"sql":"-- overflow\n-- test lcm()\nSELECT a, b, lcm(a, b), lcm(a, -b), lcm(b, a), lcm(-b, a)\nFROM (VALUES (0::int8, 0::int8),\n             (0::int8, 29893644334::int8),\n             (29893644334::int8, 29893644334::int8),\n             (288484263558::int8, 29893644334::int8),\n             (-288484263558::int8, 29893644334::int8),\n             ((-9223372036854775808)::int8, 0::int8)) AS v(a, b)","numbers":["A_Const.Float -9223372036854775808@337","A_Const.Float 288484263558@227","A_Const.Float 288484263558@282","A_Const.Float 29893644334@140","A_Const.Float 29893644334@174","A_Const.Float 29893644334@193","A_Const.Float 29893644334@247","A_Const.Float 29893644334@302","A_Const.Integer 0@107","A_Const.Integer 0@131","A_Const.Integer 0@366","A_Const.Integer 0@98"]}
+{"sql":"-- overflow\n-- test lcm()\nSELECT a, b, lcm(a, b), lcm(a, -b), lcm(b, a), lcm(-b, a)\nFROM (VALUES (0::int8, 0::int8),\n             (0::int8, 29893644334::int8(3)),\n             (29893644334::int8, 29893644334::int8),\n             (288484263558::int8, 29893644334::int8),\n             (-288484263558::int8, 29893644334::int8),\n             ((-9223372036854775808)::int8, 0::int8)) AS v(a, b)","numbers":["A_Const.Float -9223372036854775808@340","A_Const.Float 288484263558@230","A_Const.Float 288484263558@285","A_Const.Float 29893644334@140","A_Const.Float 29893644334@177","A_Const.Float 29893644334@196","A_Const.Float 29893644334@250","A_Const.Float 29893644334@305","A_Const.Integer 0@107","A_Const.Integer 0@131","A_Const.Integer 0@369","A_Const.Integer 0@98","A_Const.Integer 3@158"]}
+{"sql":"SELECT lcm((-9223372036854775808)::int8, 1::int8)","numbers":["A_Const.Float -9223372036854775808@12","A_Const.Integer 1@41"]}
+{"sql":"-- overflow\nSELECT lcm(9223372036854775807::int8, 9223372036854775806::int8)","numbers":["A_Const.Float 9223372036854775806@50","A_Const.Float 9223372036854775807@23"]}
+{"sql":"select make_interval(years := -1, months := -2147483648)","numbers":["A_Const.Float -2147483648@44","A_Const.Integer -1@30"]}
+{"sql":"select make_interval(weeks := -1, days := -2147483648)","numbers":["A_Const.Float -2147483648@42","A_Const.Integer -1@30"]}
+{"sql":"SELECT lo_lseek64(fd, 4294967296, 0) FROM lotest_stash_values","numbers":["A_Const.Float 4294967296@22","A_Const.Integer 0@34"]}
+{"sql":"SELECT lo_truncate64(fd, 5000000000) FROM lotest_stash_values","numbers":["A_Const.Float 5000000000@25"]}
+{"sql":"SELECT lo_truncate64(fd, 5000000000) FROM lotest_stash_values.x","numbers":["A_Const.Float 5000000000@25"]}
+{"sql":"SELECT lo_truncate64(fd, 3000000000) FROM lotest_stash_values","numbers":["A_Const.Float 3000000000@25"]}
+{"sql":"SELECT lo_truncate64(fd, 3000000000) FROM lotest_stash_values(3)","numbers":["A_Const.Float 3000000000@25","A_Const.Integer 3@62"]}
+{"sql":"SELECT 12345678901234567::money","numbers":["A_Const.Float 12345678901234567@7"]}
+{"sql":"SELECT (-12345678901234567)::money","numbers":["A_Const.Float -12345678901234567@8"]}
+{"sql":"SELECT (-12345678901234567)::money(3)","numbers":["A_Const.Float -12345678901234567@8","A_Const.Integer 3@35"]}
+{"sql":"SELECT 12345678901234567::int8::money","numbers":["A_Const.Float 12345678901234567@7"]}
+{"sql":"SELECT 12345678901234567::int8::money.x","numbers":["A_Const.Float 12345678901234567@7"]}
+{"sql":"SELECT 12345678901234567::numeric::money","numbers":["A_Const.Float 12345678901234567@7"]}
+{"sql":"SELECT (-12345678901234567)::int8::money","numbers":["A_Const.Float -12345678901234567@8"]}
+{"sql":"SELECT (-12345678901234567)::int8::money(3)","numbers":["A_Const.Float -12345678901234567@8","A_Const.Integer 3@41"]}
+{"sql":"SELECT (-12345678901234567)::numeric::money","numbers":["A_Const.Float -12345678901234567@8"]}
+{"sql":"SELECT (-12345678901234567)::numericmoney","numbers":["A_Const.Float -12345678901234567@8"]}
+{"sql":"--\n-- Test code path for raising to integer powers\n--\nselect 10.0 ^ -2147483648 as rounds_to_zero","numbers":["A_Const.Float -2147483648@68","A_Const.Float 10.0@61"]}
+{"sql":"--\n-- Test code path for raising to integer powers\n--\nselect 10.0 ^ -2147483648 as only","numbers":["A_Const.Float -2147483648@68","A_Const.Float 10.0@61"]}
+{"sql":"select 1.000000000123 ^ (-2147483648)","numbers":["A_Const.Float -2147483648@25","A_Const.Float 1.000000000123@7"]}
+{"sql":"select coalesce(nullif(0.9999999999 ^ 23300000000000, 0), 0) as rounds_to_zero","numbers":["A_Const.Float 0.9999999999@23","A_Const.Float 23300000000000@38","A_Const.Integer 0@54","A_Const.Integer 0@58"]}
+{"sql":"select coalescenullif((0.9999999999 ^ 23300000000000, 0), 0) as rounds_to_zero","numbers":["A_Const.Float 0.9999999999@23","A_Const.Float 23300000000000@38","A_Const.Integer 0@54","A_Const.Integer 0@58"]}
+{"sql":"select coalesce(nullif(0.9999999999 ^ 70000000000000, 0), 0) as underflows","numbers":["A_Const.Float 0.9999999999@23","A_Const.Float 70000000000000@38","A_Const.Integer 0@54","A_Const.Integer 0@58"]}
+{"sql":"select (-1.0) ^ 2147483648","numbers":["A_Const.Float -1.0@8","A_Const.Float 2147483648@16"]}
+{"sql":"select (-1.0) ^ 1000000000000000","numbers":["A_Const.Float -1.0@8","A_Const.Float 1000000000000000@16"]}
+{"sql":"select (-1.0) ^ 1000000000000001","numbers":["A_Const.Float -1.0@8","A_Const.Float 1000000000000001@16"]}
+{"sql":"SELECT 0b10000000000000000000000000000000","numbers":["A_Const.Float 0b10000000000000000000000000000000@7"]}
+{"sql":"SELECT 0o20000000000","numbers":["A_Const.Float 0o20000000000@7"]}
+{"sql":"SELECT 0x80000000","numbers":["A_Const.Float 0x80000000@7"]}
+{"sql":"SELECT -0b10000000000000000000000000000000","numbers":["A_Const.Float -0b10000000000000000000000000000000@7"]}
+{"sql":"SELECT -0b10000000000000000000000000000001","numbers":["A_Const.Float -0b10000000000000000000000000000001@7"]}
+{"sql":"SELECT -0o20000000000","numbers":["A_Const.Float -0o20000000000@7"]}
+{"sql":"SELECT -0o20000000001","numbers":["A_Const.Float -0o20000000001@7"]}
+{"sql":"SELECT(3) -0o20000000001","numbers":["A_Const.Float 0o20000000001@11","A_Const.Integer 3@7"]}
+{"sql":"SELECT -0x80000000","numbers":["A_Const.Float -0x80000000@7"]}
+{"sql":"SELECT(3) -0x80000000","numbers":["A_Const.Float 0x80000000@11","A_Const.Integer 3@7"]}
+{"sql":"SELECT -0x80000001","numbers":["A_Const.Float -0x80000001@7"]}
+{"sql":"-- cases near int8 overflow\nSELECT 0b111111111111111111111111111111111111111111111111111111111111111","numbers":["A_Const.Float 0b111111111111111111111111111111111111111111111111111111111111111@35"]}
+{"sql":"SELECT 0o777777777777777777777","numbers":["A_Const.Float 0o777777777777777777777@7"]}
+{"sql":"SELECT 0x7FFFFFFFFFFFFFFF","numbers":["A_Const.Float 0x7FFFFFFFFFFFFFFF@7"]}
+{"sql":"SELECT -0b1000000000000000000000000000000000000000000000000000000000000000","numbers":["A_Const.Float -0b1000000000000000000000000000000000000000000000000000000000000000@7"]}
+{"sql":"SELECT -0o1000000000000000000000","numbers":["A_Const.Float -0o1000000000000000000000@7"]}
+{"sql":"SELECT -0x8000000000000000","numbers":["A_Const.Float -0x8000000000000000@7"]}
+{"sql":"SELECT 1_000.000_005","numbers":["A_Const.Float 1_000.000_005@7"]}
+{"sql":"SELECT 1_000.","numbers":["A_Const.Float 1_000.@7"]}
+{"sql":"SELECT .000_005","numbers":["A_Const.Float .000_005@7"]}
+{"sql":"SELECT 1_000.5e0_1","numbers":["A_Const.Float 1_000.5e0_1@7"]}
+{"sql":"explain (costs off) select * from lparted_by_int2 where a = 100_000_000_000_000","numbers":["A_Const.Float 100_000_000_000_000@60"]}
+{"sql":"explain (costs off) select * from lparted_by_int2.x where a = 100_000_000_000_000","numbers":["A_Const.Float 100_000_000_000_000@62"]}
+{"sql":"-- all partitions pruned\nexplain (costs off) select * from rparted_by_int2 where a > 100_000_000_000_000","numbers":["A_Const.Float 100_000_000_000_000@85"]}
+{"sql":"-- all partitions but rparted_by_int2_maxvalue pruned\nexplain (costs off) select * from rparted_by_int2 where a > 100_000_000_000_000","numbers":["A_Const.Float 100_000_000_000_000@114"]}
+{"sql":"-- all partitions but rparted_by_int2_maxvalue pruned\nexplain (off costs) select * from rparted_by_int2 where a > 100_000_000_000_000","numbers":["A_Const.Float 100_000_000_000_000@114"]}
+{"sql":"SELECT random(1000000000001, 1000000000000)","numbers":["A_Const.Float 1000000000000@29","A_Const.Float 1000000000001@14"]}
+{"sql":"SELECT random.x(1000000000001, 1000000000000)","numbers":["A_Const.Float 1000000000000@31","A_Const.Float 1000000000001@16"]}
+{"sql":"SELECT random(1000000000001, 1000000000001)","numbers":["A_Const.Float 1000000000001@14","A_Const.Float 1000000000001@29"]}
+{"sql":"-- There should be no triple duplicates in 1000 full-range 32-bit random()\n-- values.  (Each of the C(1000, 3) choices of triplets from the 1000 values\n-- has a probability of 1/(2^32)^2 of being a triple duplicate, so the\n-- average number of triple duplicates is 1000 * 999 * 998 / 6 / 2^64, which\n-- is roughly 9e-12.)\nSELECT r, count(*)\nFROM (SELECT random(-2147483648, 2147483647) r\n      FROM generate_series(1, 1000)) ss\nGROUP BY r HAVING count(*) > 2","numbers":["A_Const.Float -2147483648@361","A_Const.Integer 1000@418","A_Const.Integer 1@415","A_Const.Integer 2147483647@374","A_Const.Integer 2@457"]}
+{"sql":"-- There should be no duplicates in 1000 full-range 64-bit random() values.\nSELECT r, count(*)\nFROM (SELECT random_normal(-9223372036854775808, 9223372036854775807) r\n      FROM generate_series(1, 1000)) ss\nGROUP BY r HAVING count(*) > 1","numbers":["A_Const.Float -9223372036854775808@122","A_Const.Float 9223372036854775807@144","A_Const.Integer 1000@197","A_Const.Integer 1@194","A_Const.Integer 1@236"]}
+{"sql":"-- There should be no duplicates in 1000 full-range 64-bit random() values.\nSELECT r, count(*)\nFROM (SELECT random_normal(9223372036854775808, 9223372036854775807) r\n      FROM generate_series(1, 1000)) ss\nGROUP BY r HAVING count(*) > 1","numbers":["A_Const.Float 9223372036854775807@143","A_Const.Float 9223372036854775808@122","A_Const.Integer 1000@196","A_Const.Integer 1@193","A_Const.Integer 1@235"]}
+{"sql":"-- Expect at least one out of 2000 random values to be in the lowest and\n-- highest 1% of the range.\nSELECT (count(*) FILTER (WHERE r < -2104533975)) > 0 AS has_small,\n       (count(*) FILTER (WHERE r > 2104533974)) > 0 AS has_large\nFROM (SELECT random(-2147483648, 2147483647) r FROM generate_series(1, 2000)) ss","numbers":["A_Const.Float -2147483648@253","A_Const.Integer -2104533975@136","A_Const.Integer 0@152","A_Const.Integer 0@218","A_Const.Integer 1@301","A_Const.Integer 2000@304","A_Const.Integer 2104533974@203","A_Const.Integer 2147483647@266"]}
+{"sql":"SELECT (count(*) FILTER (WHERE r < -9038904596117680292)) > 0 AS has_small,\n       (count(*) FILTER (WHERE r > 9038904596117680291)) > 0 AS has_large\nFROM (SELECT random(-9223372036854775808, 9223372036854775807) r\n      FROM generate_series(1, 2000)) ss","numbers":["A_Const.Float -9038904596117680292@35","A_Const.Float -9223372036854775808@170","A_Const.Float 9038904596117680291@111","A_Const.Float 9223372036854775807@192","A_Const.Integer 0@135","A_Const.Integer 0@60","A_Const.Integer 1@242","A_Const.Integer 2000@245"]}
+{"sql":"SELECT count(*) FILTER (WHERE r < -1500000000000000 OR r > 1500000000000000) AS out_of_range,\n       (count(*) FILTER (WHERE r < -1470000000000000)) > 0 AS has_small,\n       (count(*) FILTER (WHERE r > 1470000000000000)) > 0 AS has_large\nFROM (SELECT random(-1500000000000000, 1500000000000000) r\n      FROM generate_series(1, 2000)) ss","numbers":["A_Const.Float -1470000000000000@129","A_Const.Float -1500000000000000@258","A_Const.Float -1500000000000000@34","A_Const.Float 1470000000000000@202","A_Const.Float 1500000000000000@277","A_Const.Float 1500000000000000@59","A_Const.Integer 0@151","A_Const.Integer 0@223","A_Const.Integer 1@324","A_Const.Integer 2000@327"]}
+{"sql":"SELECT min(r), max(r), count(r) FROM (\n  SELECT DISTINCT random(123000000000, 123000000099) r\n  FROM generate_series(1, 2500))","numbers":["A_Const.Float 123000000000@64","A_Const.Float 123000000099@78","A_Const.Integer 1@117","A_Const.Integer 2500@120"]}
+{"sql":"SELECT random(-2147483648, 2147483647) FROM generate_series(1, 10)","numbers":["A_Const.Float -2147483648@14","A_Const.Integer 10@63","A_Const.Integer 1@60","A_Const.Integer 2147483647@27"]}
+{"sql":"SELECT random(-9223372036854775808, 9223372036854775807) FROM generate_series(1, 10)","numbers":["A_Const.Float -9223372036854775808@14","A_Const.Float 9223372036854775807@36","A_Const.Integer 10@81","A_Const.Integer 1@78"]}
+{"sql":"-- test bigint ranges\nselect int8range(10000000000::int8, 20000000000::int8,'(]')","numbers":["A_Const.Float 10000000000@39","A_Const.Float 20000000000@58"]}
+{"sql":"-- test bigint ranges\nselect int8range(10000000000::int8.x, 20000000000::int8,'(]')","numbers":["A_Const.Float 10000000000@39","A_Const.Float 20000000000@60"]}
+{"sql":"INSERT INTO serialTest2 (f1, f2, f3, f4, f5, f6)\n  VALUES ('test_max_vals', 2147483647, 32767, 32767, 9223372036854775807,\n          9223372036854775807),\n         ('test_min_vals', -2147483648, -32768, -32768, -9223372036854775808,\n          -9223372036854775808)","numbers":["A_Const.Float -2147483648@182","A_Const.Float -9223372036854775808@211","A_Const.Float -9223372036854775808@243","A_Const.Float 9223372036854775807@102","A_Const.Float 9223372036854775807@133","A_Const.Integer -32768@195","A_Const.Integer -32768@203","A_Const.Integer 2147483647@76","A_Const.Integer 32767@88","A_Const.Integer 32767@95"]}
+{"sql":"INSERT INTO serialTest2.x (f1, f2, f3, f4, f5, f6)\n  VALUES ('test_max_vals', 2147483647, 32767, 32767, 9223372036854775807,\n          9223372036854775807),\n         ('test_min_vals', -2147483648, -32768, -32768, -9223372036854775808,\n          -9223372036854775808)","numbers":["A_Const.Float -2147483648@184","A_Const.Float -9223372036854775808@213","A_Const.Float -9223372036854775808@245","A_Const.Float 9223372036854775807@104","A_Const.Float 9223372036854775807@135","A_Const.Integer -32768@197","A_Const.Integer -32768@205","A_Const.Integer 2147483647@78","A_Const.Integer 32767@90","A_Const.Integer 32767@97"]}
+{"sql":"INSERT INTO INT8_TBL VALUES\n  ('  123   ','  456'),\n  ('123   ','4567890123456789'),\n  ('4567890123456789','123'),\n  (+4567890123456789,'4567890123456789'),\n  ('+4567890123456789','-4567890123456789')","numbers":["A_Const.Float 4567890123456789@119"]}
+{"sql":"-- 2010-01-01 12:34:56.789012+00\n-- edge cases\nSELECT to_timestamp(-210866803200)","numbers":["A_Const.Float -210866803200@67"]}
+{"sql":"-- integer overflow error\nVACUUM (BUFFER_USAGE_LIMIT 10000000000) vac_option_tab","numbers":["DefElem.Float 10000000000"]}
+{"sql":"select x, last_value(x) over (order by x range between current row and 4 following)\nfrom generate_series(9223372036854775804, 9223372036854775806) x","numbers":["A_Const.Float 9223372036854775804@105","A_Const.Float 9223372036854775806@126","A_Const.Integer 4@71"]}
+{"sql":"select x, last_value(x) over (order by x desc range between current row and 5 following)\nfrom generate_series(-9223372036854775806, -9223372036854775804) x","numbers":["A_Const.Float -9223372036854775804@132","A_Const.Float -9223372036854775806@110","A_Const.Integer 5@76"]}
+{"sql":"SELECT 2147483647","numbers":["A_Const.Integer 2147483647@7"]}
+{"sql":"SELECT 2147483648","numbers":["A_Const.Float 2147483648@7"]}
+{"sql":"SELECT -2147483648","numbers":["A_Const.Float -2147483648@7"]}
+{"sql":"SELECT -2147483647","numbers":["A_Const.Integer -2147483647@7"]}
+{"sql":"SELECT -2147483649","numbers":["A_Const.Float -2147483649@7"]}
+{"sql":"SELECT 0x7fffffff","numbers":["A_Const.Integer 2147483647@7"]}
+{"sql":"SELECT 0X7FFF_FFFF","numbers":["A_Const.Integer 2147483647@7"]}
+{"sql":"SELECT 0o17777777777","numbers":["A_Const.Integer 2147483647@7"]}
+{"sql":"SELECT 0b1111111111111111111111111111111","numbers":["A_Const.Integer 2147483647@7"]}
+{"sql":"SELECT 2_147_483_647","numbers":["A_Const.Integer 2147483647@7"]}
+{"sql":"SELECT 2_147_483_648","numbers":["A_Const.Float 2_147_483_648@7"]}
+{"sql":"SELECT 0x8000_0000","numbers":["A_Const.Float 0x8000_0000@7"]}
+{"sql":"SELECT - 2147483648","numbers":["A_Const.Float -2147483648@7"]}
+{"sql":"SELECT -(2147483648)","numbers":["A_Const.Float -2147483648@7"]}
+{"sql":"SELECT +2147483648","numbers":["A_Const.Float 2147483648@8"]}
+{"sql":"SELECT - -2147483648","numbers":["A_Const.Float 2147483648@7"]}
+{"sql":"SELECT 9223372036854775808","numbers":["A_Const.Float 9223372036854775808@7"]}
+{"sql":"SELECT 99999999999999999999999","numbers":["A_Const.Float 99999999999999999999999@7"]}
+{"sql":"SELECT 1e10","numbers":["A_Const.Float 1e10@7"]}
+{"sql":"SELECT 00000000002147483647","numbers":["A_Const.Integer 2147483647@7"]}
+{"sql":"SELECT 0x00000000ffffffff","numbers":["A_Const.Float 0x00000000ffffffff@7"]}
+{"sql":"select -9223372036854775808, -0x8000000000000000, -0o1000000000000000000000, -0b1000000000000000000000000000000000000000000000000000000000000000, -9_223_372_036_854_775_808","numbers":["A_Const.Float -0b1000000000000000000000000000000000000000000000000000000000000000@77","A_Const.Float -0o1000000000000000000000@50","A_Const.Float -0x8000000000000000@29","A_Const.Float -9223372036854775808@7","A_Const.Float -9_223_372_036_854_775_808@146"]}
+{"sql":"select -9223372036854775809, -0x8000000000000001, 9223372036854775808, - 9223372036854775808, - -1, -(9223372036854775808), -(1), -1.5, -1e3, -'1', - -9223372036854775808","numbers":["A_Const.Float -0x8000000000000001@29","A_Const.Float -1.5@130","A_Const.Float -1e3@136","A_Const.Float -9223372036854775808@100","A_Const.Float -9223372036854775808@71","A_Const.Float -9223372036854775809@7","A_Const.Float 9223372036854775808@148","A_Const.Float 9223372036854775808@50","A_Const.Integer -1@124","A_Const.Integer 1@94"]}
+{"sql":"select -0X8000000000000000, -0O1000000000000000000000, -0B1000000000000000000000000000000000000000000000000000000000000000, -9223372036854775807, 9223372036854775807","numbers":["A_Const.Float -0B1000000000000000000000000000000000000000000000000000000000000000@55","A_Const.Float -0O1000000000000000000000@28","A_Const.Float -0X8000000000000000@7","A_Const.Float -9223372036854775807@124","A_Const.Float 9223372036854775807@146"]}
+{"sql":"select -0X8000000000000001, -00009223372036854775808, -0x0008000000000000000","numbers":["A_Const.Float -00009223372036854775808@28","A_Const.Float -0X8000000000000001@7","A_Const.Float -0x0008000000000000000@54"]}
+{"sql":"select - -0x8000000000000000","numbers":["A_Const.Float 0x8000000000000000@7"]}
+{"sql":"select 2147483647, -2147483647, 2147483648, -2147483648, -0x80000000, -0x7fffffff, -0o20000000000, -0B1_0000000_00000000_00000000_00000000","numbers":["A_Const.Float -0B1_0000000_00000000_00000000_00000000@99","A_Const.Float -0o20000000000@83","A_Const.Float -0x80000000@57","A_Const.Float -2147483648@44","A_Const.Float 2147483648@32","A_Const.Integer -2147483647@19","A_Const.Integer -2147483647@70","A_Const.Integer 2147483647@7"]}
+{"sql":"SELECT 1 FETCH FIRST -0x80000000 ROWS ONLY","numbers":["A_Const.Float -0x80000000@21","A_Const.Integer 1@7"]}
+{"sql":"SELECT 1 OFFSET - 2147483648 ROWS","numbers":["A_Const.Float -2147483648@16","A_Const.Integer 1@7"]}
+{"sql":"SELECT 1 FETCH FIRST +2147483648 ROWS ONLY","numbers":["A_Const.Float 2147483648@22","A_Const.Integer 1@7"]}
+{"sql":"CREATE SEQUENCE s MINVALUE -2147483648 MAXVALUE +2147483648 INCREMENT - 2147483647","numbers":["DefElem.Float -2147483648","DefElem.Float 2147483648","DefElem.Integer -2147483647"]}
+{"sql":"CREATE SEQUENCE s MINVALUE -0x8000_0000 START 2_147_483_648 CACHE 1_000","numbers":["DefElem.Float -0x8000_0000","DefElem.Float 2_147_483_648","DefElem.Integer 1000"]}
+{"sql":"ALTER TABLE t ALTER a SET STATISTICS -2147483647","numbers":["AlterTableCmd.Integer -2147483647"]}
+{"sql":"SELECT x::numeric(2147483648, -2147483648), x::bit(0x80000000) FROM t","numbers":["A_Const.Float -2147483648@30","A_Const.Float 0x80000000@51","A_Const.Float 2147483648@18"]}
+{"sql":"VALUES (2147483648), (-2147483648), (+2147483648)","numbers":["A_Const.Float -2147483648@22","A_Const.Float 2147483648@38","A_Const.Float 2147483648@8"]}
+{"sql":"SELECT * FROM t WHERE a IN (2147483647, 2147483648) AND b BETWEEN -2147483648 AND 0x7FFFFFFF","numbers":["A_Const.Float -2147483648@66","A_Const.Float 2147483648@40","A_Const.Integer 2147483647@28","A_Const.Integer 2147483647@82"]}
+{"sql":"SELECT 1.5, -1.5, 1_0.5, -.5e-1_0, - - 1_0.0","numbers":["A_Const.Float -.5e-1_0@25","A_Const.Float -1.5@12","A_Const.Float 1.5@7","A_Const.Float 1_0.0@35","A_Const.Float 1_0.5@18"]}
+{"sql":"FETCH 2147483648 FROM c","code":"42601","message":"syntax error at or near \"2147483648\"","position":6}
+{"sql":"FETCH 2147483647 FROM c","numbers":[]}
+{"sql":"FETCH -2147483648 FROM c","code":"42601","message":"syntax error at or near \"2147483648\"","position":7}
+{"sql":"FETCH -2147483647 FROM c","numbers":[]}
+{"sql":"FETCH FORWARD 0x80000000 FROM c","code":"42601","message":"syntax error at or near \"0x80000000\"","position":14}
+{"sql":"FETCH ABSOLUTE 2147483648 FROM c","code":"42601","message":"syntax error at or near \"2147483648\"","position":15}
+{"sql":"SELECT '1'::varchar(2147483648)","code":"42601","message":"syntax error at or near \"2147483648\"","position":20}
+{"sql":"SELECT current_time(2147483648)","code":"42601","message":"syntax error at or near \"2147483648\"","position":20}
+{"sql":"SELECT interval(2147483648) '1'","code":"42601","message":"syntax error at or near \"2147483648\"","position":16}
+{"sql":"SELECT '1'::interval second(2147483648)","code":"42601","message":"syntax error at or near \"2147483648\"","position":28}
+{"sql":"SELECT 1::int[2147483648]","code":"42601","message":"syntax error at or near \"2147483648\"","position":14}
+{"sql":"SELECT 1::int array[2147483648]","code":"42601","message":"syntax error at or near \"2147483648\"","position":20}
+{"sql":"CREATE TABLE t (a timestamp(2147483648))","code":"42601","message":"syntax error at or near \"2147483648\"","position":28}
+{"sql":"CREATE TABLE t (a char(2147483648))","code":"42601","message":"syntax error at or near \"2147483648\"","position":23}
+{"sql":"CREATE TABLE t (a bit(2147483648))","numbers":["A_Const.Float 2147483648@22"]}
+{"sql":"CREATE TABLE t (a numeric(2147483648, 2))","numbers":["A_Const.Float 2147483648@26","A_Const.Integer 2@38"]}
+{"sql":"CREATE ROLE r CONNECTION LIMIT 2147483648","code":"42601","message":"syntax error at or near \"2147483648\"","position":31}
+{"sql":"CREATE ROLE r CONNECTION LIMIT -2147483648","code":"42601","message":"syntax error at or near \"2147483648\"","position":32}
+{"sql":"CREATE ROLE r SYSID 2147483648","code":"42601","message":"syntax error at or near \"2147483648\"","position":20}
+{"sql":"ALTER TABLE t ALTER a SET STATISTICS 2147483648","code":"42601","message":"syntax error at or near \"2147483648\"","position":37}
+{"sql":"ALTER TABLE t ALTER a SET STATISTICS -2147483648","code":"42601","message":"syntax error at or near \"2147483648\"","position":38}
+{"sql":"ALTER TABLE t ALTER 2147483648 SET STATISTICS 1","code":"42601","message":"syntax error at or near \"2147483648\"","position":20}
+{"sql":"CREATE SEQUENCE s CACHE 2147483648 MAXVALUE 9223372036854775807 MINVALUE -9223372036854775808 START 0x80000000 INCREMENT -2147483648","numbers":["DefElem.Float -2147483648","DefElem.Float -9223372036854775808","DefElem.Float 0x80000000","DefElem.Float 2147483648","DefElem.Float 9223372036854775807"]}
+{"sql":"ALTER SEQUENCE s RESTART WITH 2147483648","numbers":["DefElem.Float 2147483648"]}
+{"sql":"VACUUM (BUFFER_USAGE_LIMIT 10000000000) t","numbers":["DefElem.Float 10000000000"]}
+{"sql":"VACUUM (BUFFER_USAGE_LIMIT -2147483648) t","numbers":["DefElem.Float -2147483648"]}
+{"sql":"COPY t FROM stdin (x 2147483648)","numbers":["DefElem.Float 2147483648"]}
+{"sql":"EXPLAIN (x -2147483648) SELECT 1","numbers":["A_Const.Integer 1@31","DefElem.Float -2147483648"]}
+{"sql":"COMMENT ON LARGE OBJECT 2147483648 IS 'x'","numbers":["CommentStmt.Float 2147483648"]}
+{"sql":"COMMENT ON LARGE OBJECT -2147483648 IS 'x'","numbers":["CommentStmt.Float -2147483648"]}
+{"sql":"ALTER LARGE OBJECT 4294967295 OWNER TO r","numbers":["AlterOwnerStmt.Float 4294967295"]}
+{"sql":"SECURITY LABEL ON LARGE OBJECT 2147483648 IS 'x'","numbers":["SecLabelStmt.Float 2147483648"]}
+{"sql":"CREATE TRIGGER tr BEFORE INSERT ON t FOR EACH ROW EXECUTE FUNCTION f(2147483648, 0x80000000, 1_000, 0x10)","numbers":[]}
+{"sql":"CREATE OPERATOR CLASS c FOR TYPE int USING btree AS OPERATOR 2147483648 <","code":"42601","message":"syntax error at or near \"2147483648\"","position":61}
+{"sql":"CREATE OPERATOR CLASS c FOR TYPE int USING btree AS FUNCTION 2147483648 f(int)","code":"42601","message":"syntax error at or near \"2147483648\"","position":61}
+{"sql":"ALTER OPERATOR FAMILY f USING btree DROP OPERATOR 2147483648 (int, int)","code":"42601","message":"syntax error at or near \"2147483648\"","position":50}
+{"sql":"SELECT 1 LIMIT 2147483648","numbers":["A_Const.Float 2147483648@15","A_Const.Integer 1@7"]}
+{"sql":"SELECT 1 OFFSET -2147483648","numbers":["A_Const.Float -2147483648@16","A_Const.Integer 1@7"]}
+{"sql":"SELECT 1 FETCH FIRST 2147483648 ROWS ONLY","numbers":["A_Const.Float 2147483648@21","A_Const.Integer 1@7"]}
+{"sql":"SELECT 1 FETCH FIRST -2147483648 ROWS ONLY","numbers":["A_Const.Float -2147483648@21","A_Const.Integer 1@7"]}
+{"sql":"SELECT 1 OFFSET -2147483648 ROWS","numbers":["A_Const.Float -2147483648@16","A_Const.Integer 1@7"]}
+{"sql":"SELECT a[2147483648], a[-2147483648:2147483648] FROM t","numbers":["A_Const.Float -2147483648@24","A_Const.Float 2147483648@36","A_Const.Float 2147483648@9"]}
+{"sql":"CREATE FUNCTION f() RETURNS int LANGUAGE sql COST 2147483648 ROWS 1e10 AS 'select 1'","numbers":["DefElem.Float 1e10","DefElem.Float 2147483648"]}
+{"sql":"CREATE DATABASE d CONNECTION LIMIT 2147483648","numbers":["DefElem.Float 2147483648"]}
+{"sql":"ALTER DATABASE d CONNECTION LIMIT 2147483648","numbers":["DefElem.Float 2147483648"]}
+{"sql":"CREATE DATABASE d CONNECTION_LIMIT = 2147483648","numbers":["DefElem.Float 2147483648"]}
+{"sql":"SET x = 2147483648","numbers":["A_Const.Float 2147483648@8"]}
+{"sql":"SET x = -2147483648","numbers":["A_Const.Float -2147483648@8"]}
+{"sql":"SET x TO 0x80000000, -0x80000001","numbers":["A_Const.Float -0x80000001@21","A_Const.Float 0x80000000@9"]}
+{"sql":"ALTER SYSTEM SET x = 2147483648","numbers":["A_Const.Float 2147483648@21"]}
+{"sql":"SELECT * FROM t TABLESAMPLE system (2147483648) REPEATABLE (2147483648)","numbers":["A_Const.Float 2147483648@36","A_Const.Float 2147483648@60"]}
+{"sql":"CREATE TABLE t (a int) PARTITION BY HASH (a)","numbers":[]}
+{"sql":"CREATE TABLE p PARTITION OF t FOR VALUES WITH (MODULUS 2147483648, REMAINDER 0)","code":"42601","message":"syntax error at or near \"2147483648\"","position":55}
+{"sql":"CREATE TABLE p PARTITION OF t FOR VALUES FROM (2147483648) TO (-2147483649)","numbers":["A_Const.Float -2147483649@63","A_Const.Float 2147483648@47"]}
+{"sql":"SELECT $1","numbers":[]}
+{"sql":"CREATE STATISTICS s ON a, b FROM t","numbers":[]}
+{"sql":"ALTER STATISTICS s SET STATISTICS 2147483648","code":"42601","message":"syntax error at or near \"2147483648\"","position":34}
+{"sql":"ALTER INDEX i ALTER COLUMN 2147483648 SET STATISTICS 1","code":"42601","message":"syntax error at or near \"2147483648\"","position":27}
+{"sql":"CREATE TEXT SEARCH DICTIONARY d (TEMPLATE = simple, x = 2147483648)","numbers":["DefElem.Float 2147483648"]}
+{"sql":"CREATE AGGREGATE a (sfunc = f, stype = int, initcond = 2147483648)","numbers":["DefElem.Float 2147483648"]}

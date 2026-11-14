@@ -11,7 +11,6 @@ import (
 	"fmt"
 	"math"
 	"reflect"
-	"strconv"
 	"strings"
 
 	"github.com/pgplex/pgparser/nodes"
@@ -10290,7 +10289,7 @@ substr_list:
 			$$ = &nodes.List{Items: []nodes.Node{
 				$1,
 				makeIntConst(1, -1),
-				$3,
+				makeTypeCast($3, makeTypeName("int4"), -1),
 			}}
 		}
 	| a_expr SIMILAR a_expr ESCAPE a_expr
@@ -17932,10 +17931,8 @@ func makeBetweenArgs(lower, upper nodes.Node) nodes.Node {
 
 // doNegate is PostgreSQL's: a negated numeric constant takes the minus
 // sign's location; anything else is a unary minus at location. A Float
-// whose negation fits int64 becomes an Integer (int64's least value is
-// scanned as a Float, its magnitude being one past int64's greatest), and
-// negating that Integer gives the Float back, as int64 cannot hold its
-// magnitude.
+// stays a Float with a minus before its text (doNegateFloat), so
+// -2147483648, whose magnitude the scanner reads as a Float, is a Float.
 func doNegate(n nodes.Node, location nodes.ParseLoc) nodes.Node {
 	if ac, ok := n.(*nodes.A_Const); ok {
 		// PostgreSQL moves any constant to the minus sign, a string
@@ -17943,18 +17940,10 @@ func doNegate(n nodes.Node, location nodes.ParseLoc) nodes.Node {
 		ac.Location = location
 		switch v := ac.Val.(type) {
 		case *nodes.Integer:
-			if v.Ival == math.MinInt64 {
-				ac.Val = &nodes.Float{Fval: strconv.FormatUint(1<<63, 10)}
-			} else {
-				v.Ival = -v.Ival
-			}
+			v.Ival = -v.Ival
 			return ac
 		case *nodes.Float:
-			if i, ok := integerLiteral(v.Fval, true); ok {
-				ac.Val = &nodes.Integer{Ival: i}
-			} else {
-				doNegateFloat(v)
-			}
+			doNegateFloat(v)
 			return ac
 		}
 	}

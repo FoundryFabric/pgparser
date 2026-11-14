@@ -879,20 +879,36 @@ JSON_ARRAY and JSON_TABLE columns, now located); no verdict changed.
 `testdata/json_returning_format_pg16.jsonl` pins 40 statements; all agree,
 3 of them PostgreSQL 17 functions marked `pg17-sqljson`.
 
-### integer-literal-width (tree 145, 66, 33, 24, 15, 4, 2, 1, 1, 1 and 4; left)
+### integer-literal-width (tree 147, 66, 33, 26, 15, 4, 2, 1, 1, 1, 1 and 4; fixed)
 
-| statement | libpg_query 16 | parser |
+| statement | libpg_query 16 | parser before |
 |---|---|---|
 | `select 0x80000000` | `Float` `0x80000000` | `Integer` 2147483648 |
 | `select 12345678901234567::money` | `Float` `12345678901234567` | `Integer` 12345678901234567 |
+| `select -2147483648` | `Float` `-2147483648` | `Integer` -2147483648 |
 | `select 1_000.` | `Float` `1_000.` | `Float` `1000.` |
+| `vacuum (buffer_usage_limit 10000000000) t` | `DefElem.arg` `Float` | `Integer` |
 
-These are the deliberate divergence FORK.md records: `Integer` holds an
-`int64`, and a literal that fits one is an `Integer`, where PostgreSQL 16's
-is a `Float` past `int32` and `make_const` reads an int8 from it. A Float's
-text has its underscores taken out, where PostgreSQL keeps the literal's
-text for numeric's input to read. The value is the same either way; the
-classes stay until that divergence is reconsidered.
+The scanner follows PostgreSQL 16's `process_integer_literal`: an integer
+literal whose value fits int32 is an `Integer`, any other a `Float` holding
+the literal's text, prefix and underscores kept; a decimal keeps its
+underscores. A minus puts a minus before a `Float`'s text and no longer
+folds it into an `Integer`. Where the grammar takes an `Iconst` a literal
+past int32 is now PostgreSQL 16's syntax error. The 152 corpus statements
+of these classes and 97 probes at the bounds, in each radix and grammar
+spot, are pinned by `testdata/int_literal_pg16.jsonl`: PostgreSQL 16.15's
+verdicts and libpg_query 16's numeric constants. No corpus verdict changed.
+
+### substring-for (tree 8; fixed)
+
+| statement | libpg_query 16 | parser before |
+|---|---|---|
+| `select substring(d for 30)` | `substring(d, 1, 30::int4)` | `substring(d, 1, 30)` |
+
+`substr_list`'s FOR-only form casts the length to `pg_catalog.int4`, the
+cast and its type name unlocated, as PostgreSQL 16 does. The 7 corpus
+statements and 5 more SUBSTRING forms are pinned in
+`testdata/locations_pg16.jsonl`. No verdict changed.
 
 ### alter-enum-add-value-after (tree 9; fixed)
 
